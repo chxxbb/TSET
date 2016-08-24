@@ -3,6 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="#ffffff"
     android:orientation="vertical">
 
     <RelativeLayout
@@ -49,13 +50,14 @@
             android:src="@drawable/register_04" />
 
         <EditText
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:cursorVisible="false"
             android:layout_marginLeft="@dimen/x20"
             android:background="@null"
             android:hint="请输入手机号"
             android:maxLength="11"
-            android:phoneNumber="true"
+            android:inputType="phone"
             android:textColorHint="#ffffff" />
     </LinearLayout>
 
@@ -79,13 +81,14 @@
                 android:src="@drawable/register_07" />
 
             <EditText
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="@dimen/x20"
                 android:background="@null"
                 android:hint="输入验证码"
                 android:maxLength="4"
-                android:phoneNumber="true"
+                android:cursorVisible="false"
+                android:inputType="phone"
                 android:textColorHint="#ffffff" />
         </LinearLayout>
 
@@ -116,13 +119,14 @@
             android:src="@drawable/register_06" />
 
         <EditText
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginLeft="@dimen/x20"
             android:background="@null"
             android:hint="请输入密码"
             android:maxLength="16"
-            android:password="true"
+            android:inputType="numberPassword"
+            android:cursorVisible="false"
             android:textColorHint="#ffffff" />
     </LinearLayout>
 
@@ -143,13 +147,14 @@
             android:src="@drawable/register_06" />
 
         <EditText
+            android:cursorVisible="false"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginLeft="@dimen/x20"
             android:background="@null"
             android:hint="请确认密码"
             android:maxLength="16"
-            android:password="true"
+            android:inputType="phone"
             android:textColorHint="#ffffff" />
     </LinearLayout>
 

@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#ffffff"
+    android:orientation="vertical">
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/y350"
+        android:src="@drawable/set_data"/>
+    <LinearLayout
+        android:gravity="center_vertical"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/y90"
+        android:orientation="horizontal">
+        <TextView
+            android:layout_marginLeft="@dimen/x30"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="昵称"
+            android:textSize="@dimen/x32"
+            android:textColor="#323232"
+            />
+        <EditText
+            android:cursorVisible="false"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/x60"
+            android:background="@null"
+            android:hint="请填写您的昵称"
+            android:textColorHint="#bbbbbb"
+            android:textSize="@dimen/x32"
+            android:textColor="#323232"/>/>
+
+    </LinearLayout>
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="#e0e0e0"></View>
+    <LinearLayout
+        android:gravity="center_vertical"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/x90"
+        android:orientation="horizontal">
+        <TextView
+            android:layout_marginLeft="@dimen/x30"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="性别"
+            android:textSize="@dimen/x32"
+            android:textColor="#323232"
+            />
+        <RadioGroup
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+            <RadioButton
+                android:checked="true"
+                android:id="@+id/rbtn_man"
+                android:gravity="center"
+                android:button="@null"
+                android:layout_marginLeft="@dimen/x60"
+                android:background="@drawable/setdata_btn_onclick"
+                android:textColor="@drawable/setdata_btn_color"
+                android:layout_width="@dimen/x200"
+                android:layout_height="@dimen/y60"
+                android:text="男士" />
+            <RadioButton
+                android:gravity="center"
+                android:button="@null"
+                android:layout_marginLeft="@dimen/x40"
+                android:background="@drawable/setdata_btn_onclick"
+                android:textColor="@drawable/setdata_btn_color"
+                android:layout_width="@dimen/x200"
+                android:layout_height="@dimen/y60"
+                android:text="女士" />
+        </RadioGroup>
+
+    </LinearLayout>
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="#e0e0e0"></View>
+    <Button
+        android:textStyle="bold"
+        android:textColor="#ffffff"
+        android:layout_marginLeft="@dimen/x30"
+        android:layout_marginRight="@dimen/x30"
+        android:background="@drawable/countersign_btn_case"
+        android:layout_marginTop="@dimen/y60"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/y80"
+        android:text="完  成"
+        />
+    
+
+</LinearLayout>
