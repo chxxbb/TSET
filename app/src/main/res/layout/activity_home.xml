@@ -62,6 +62,13 @@
                         android:textColor="@drawable/encyclopedia_color"
                         />
 
+                </RadioGroup>
+                <RadioGroup
+                    android:layout_alignParentRight="true"
+                    android:layout_alignParentBottom="true"
+                    android:layout_width="wrap_content"
+                    android:layout_height="@dimen/y96"
+                    android:orientation="horizontal">
                     <RadioButton
                         android:layout_marginRight="@dimen/x100"
                         android:layout_marginTop="@dimen/y12"

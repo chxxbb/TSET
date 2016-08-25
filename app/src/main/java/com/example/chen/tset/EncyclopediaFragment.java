@@ -22,9 +22,7 @@ public class EncyclopediaFragment extends Fragment {
     List<Fragment> flist;
     //标题栏集合
     DiseaselibFragment diseaselibFragment1;
-    DiseaselibFragment diseaselibFragment2;
-    DiseaselibFragment diseaselibFragment3;
-    DiseaselibFragment diseaselibFragment4;
+    CharactersafeFragment charactersafeFragment;
     private TabLayout tabLayout;
     private ViewPager vp_encyclopedia;
     View view1,view2,view3,view4;
@@ -57,13 +55,11 @@ public class EncyclopediaFragment extends Fragment {
     private void init() {
         flist=new ArrayList<Fragment>();
         diseaselibFragment1=new DiseaselibFragment();
-        diseaselibFragment2=new DiseaselibFragment();
-        diseaselibFragment3=new DiseaselibFragment();
-        diseaselibFragment4=new DiseaselibFragment();
         flist.add(diseaselibFragment1);
-        flist.add(diseaselibFragment2);
-        flist.add(diseaselibFragment3);
-        flist.add(diseaselibFragment4);
+        for(int i=0;i<3;i++){
+            charactersafeFragment=new CharactersafeFragment();
+            flist.add(charactersafeFragment);
+        }
         adapter=new EncyclopediaAdapter(getChildFragmentManager(),flist);
         tabLayout.setTabsFromPagerAdapter(adapter);
         vp_encyclopedia.setAdapter(adapter);
