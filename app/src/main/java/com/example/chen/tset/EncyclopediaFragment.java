@@ -27,6 +27,9 @@ public class EncyclopediaFragment extends Fragment {
     DiseaselibFragment diseaselibFragment4;
     private TabLayout tabLayout;
     private ViewPager vp_encyclopedia;
+    View view1,view2,view3,view4;
+
+
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -40,6 +43,15 @@ public class EncyclopediaFragment extends Fragment {
     private void findView() {
         tabLayout= (TabLayout) view.findViewById(R.id.tabLayout);
         vp_encyclopedia= (ViewPager) view.findViewById(R.id.vp_encyclopedia);
+        vp_encyclopedia.addOnPageChangeListener(listener);
+        view1=view.findViewById(R.id.view1);
+        view2=view.findViewById(R.id.view2);
+        view3=view.findViewById(R.id.view3);
+        view4=view.findViewById(R.id.view4);
+        view1.setVisibility(View.VISIBLE);
+        view2.setVisibility(View.GONE);
+        view3.setVisibility(View.GONE);
+        view4.setVisibility(View.GONE);
     }
 
     private void init() {
@@ -61,4 +73,41 @@ public class EncyclopediaFragment extends Fragment {
         tabLayout.setSelectedTabIndicatorColor(android.graphics.Color.parseColor("#6fc9e6"));
         tabLayout.setTabMode(TabLayout.MODE_FIXED);
     }
+    private ViewPager.OnPageChangeListener listener=new ViewPager.OnPageChangeListener() {
+        @Override
+        public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
+
+        }
+
+        @Override
+        public void onPageSelected(int position) {
+            if(position==0){
+                view1.setVisibility(View.VISIBLE);
+                view2.setVisibility(View.GONE);
+                view3.setVisibility(View.GONE);
+                view4.setVisibility(View.GONE);
+            }else if(position==1){
+                view1.setVisibility(View.GONE);
+                view2.setVisibility(View.VISIBLE);
+                view3.setVisibility(View.GONE);
+                view4.setVisibility(View.GONE);
+            }else if(position==2){
+                view1.setVisibility(View.GONE);
+                view2.setVisibility(View.GONE);
+                view3.setVisibility(View.VISIBLE);
+                view4.setVisibility(View.GONE);
+            }
+            else if(position==3){
+                view1.setVisibility(View.GONE);
+                view2.setVisibility(View.GONE);
+                view3.setVisibility(View.GONE);
+                view4.setVisibility(View.VISIBLE);
+            }
+        }
+
+        @Override
+        public void onPageScrollStateChanged(int state) {
+
+        }
+    };
 }

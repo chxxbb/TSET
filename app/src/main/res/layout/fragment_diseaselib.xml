@@ -12,7 +12,8 @@
             android:id="@+id/listview_dise"
             android:layout_width="@dimen/x180"
             android:layout_height="match_parent"
-            android:fastScrollEnabled="false"></ListView>
+            android:fastScrollEnabled="false"
+            android:divider="@null" ></ListView>
             <ListView
                 android:layout_marginLeft="@dimen/x30"
                 android:layout_marginRight="@dimen/x30"

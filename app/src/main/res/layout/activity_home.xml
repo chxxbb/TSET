@@ -62,13 +62,6 @@
                         android:textColor="@drawable/encyclopedia_color"
                         />
 
-                </RadioGroup>
-                <LinearLayout
-                    android:layout_alignParentRight="true"
-                    android:layout_alignParentBottom="true"
-                    android:layout_width="wrap_content"
-                    android:layout_height="@dimen/y96"
-                    android:orientation="horizontal">
                     <RadioButton
                         android:layout_marginRight="@dimen/x100"
                         android:layout_marginTop="@dimen/y12"
@@ -95,15 +88,14 @@
                         android:textSize="12sp"
                         android:textColor="@drawable/encyclopedia_color"
                         />
-
-                </LinearLayout>
+                </RadioGroup>
 
             </RelativeLayout>
 
         </RelativeLayout>
     </LinearLayout>
     <FrameLayout
-
+        android:layout_centerInParent="true"
         android:layout_alignParentBottom="true"
         android:layout_marginBottom="@dimen/y12"
         android:layout_width="@dimen/x120"
@@ -117,8 +109,8 @@
             android:text="问诊"
             android:textSize="@dimen/x32"
             android:layout_gravity="center"
+            android:textColor="#ffffff"
             />
     </FrameLayout>
-
 
 </RelativeLayout>
