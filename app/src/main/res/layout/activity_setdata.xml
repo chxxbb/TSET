@@ -23,6 +23,7 @@
             android:textColor="#323232"
             />
         <EditText
+            android:id="@+id/et_nickname"
             android:cursorVisible="false"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -67,6 +68,7 @@
                 android:layout_height="@dimen/y60"
                 android:text="男士" />
             <RadioButton
+                android:id="@+id/rb_madam"
                 android:gravity="center"
                 android:button="@null"
                 android:layout_marginLeft="@dimen/x40"
@@ -83,6 +85,7 @@
         android:layout_height="1dp"
         android:background="#e0e0e0"></View>
     <Button
+        android:id="@+id/btn"
         android:textStyle="bold"
         android:textColor="#ffffff"
         android:layout_marginLeft="@dimen/x30"

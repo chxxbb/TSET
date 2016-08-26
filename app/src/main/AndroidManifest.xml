@@ -18,9 +18,10 @@
             </intent-filter>
         </activity>
         <activity android:name=".View.HomeActivity" />
-        <activity android:name=".View.RegisterActivity"></activity>
+        <activity android:name=".View.RegisterActivity" />
+        <activity android:name=".View.FeedbackActivity" />
+        <activity android:name=".View.FindpawActivity" />
         <activity android:name=".View.SetdataActivity"></activity>
-        <activity android:name=".View.FindpawActivity"></activity>
     </application>
 
 </manifest>
