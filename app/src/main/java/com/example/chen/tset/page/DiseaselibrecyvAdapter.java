@@ -16,12 +16,12 @@ import java.util.List;
 /**
  * Created by Administrator on 2016/8/25 0025.
  */
-public class DiseaselibrecyvAdapter extends BaseAdapter{
+public class DiseaselibrecyvAdapter extends BaseAdapter {
     private final List<String> list;
     Context context;
 
-    public DiseaselibrecyvAdapter(Context context,List<String> list) {
-        this.context=context;
+    public DiseaselibrecyvAdapter(Context context, List<String> list) {
+        this.context = context;
         this.list = list;
     }
 
@@ -43,22 +43,24 @@ public class DiseaselibrecyvAdapter extends BaseAdapter{
 
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
-        if(convertView==null){
-            LayoutInflater inflater=LayoutInflater.from(parent.getContext());
-            convertView=inflater.inflate(R.layout.disease_recyv_item,parent,false);
+        if (convertView == null) {
+            LayoutInflater inflater = LayoutInflater.from(parent.getContext());
+            convertView = inflater.inflate(R.layout.disease_recyv_item, parent, false);
             convertView.setTag(new ViewHolder(convertView));
         }
-        ViewHolder viewHolder= (ViewHolder) convertView.getTag();
+        ViewHolder viewHolder = (ViewHolder) convertView.getTag();
         viewHolder.dise_tv1.setText(list.get(position));
         viewHolder.dise_tv1.setText(list.get(position));
         return convertView;
     }
-    static class ViewHolder{
+
+    static class ViewHolder {
         private TextView dise_tv1;
         private TextView dise_tv2;
-        ViewHolder(View v){
-            dise_tv1= (TextView) v.findViewById(R.id.dise_tv1);
-            dise_tv2= (TextView) v.findViewById(R.id.dise_tv2);
+
+        ViewHolder(View v) {
+            dise_tv1 = (TextView) v.findViewById(R.id.dise_tv1);
+            dise_tv2 = (TextView) v.findViewById(R.id.dise_tv2);
         }
     }
 

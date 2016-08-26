@@ -15,13 +15,13 @@ import java.util.List;
 /**
  * Created by Administrator on 2016/8/26 0026.
  */
-public class LectureroomAdapter extends BaseAdapter{
+public class LectureroomAdapter extends BaseAdapter {
     List<String> list;
     Context context;
 
     public LectureroomAdapter(Context context, List<String> list) {
         this.context = context;
-        this.list=list;
+        this.list = list;
     }
 
     @Override
@@ -40,19 +40,21 @@ public class LectureroomAdapter extends BaseAdapter{
     }
 
     public View getView(int position, View convertView, ViewGroup parent) {
-        if(convertView==null){
-            LayoutInflater inflater=LayoutInflater.from(parent.getContext());
-            convertView=inflater.inflate(R.layout.lectureroom_item,parent,false);
+        if (convertView == null) {
+            LayoutInflater inflater = LayoutInflater.from(parent.getContext());
+            convertView = inflater.inflate(R.layout.lectureroom_item, parent, false);
             convertView.setTag(new ViewHolder(convertView));
         }
-        ViewHolder viewHolder= (ViewHolder) convertView.getTag();
+        ViewHolder viewHolder = (ViewHolder) convertView.getTag();
         viewHolder.tv_lectr.setText(list.get(position));
         return convertView;
     }
-    static class ViewHolder{
+
+    static class ViewHolder {
         private TextView tv_lectr;
-        ViewHolder(View v){
-            tv_lectr= (TextView) v.findViewById(R.id.tv_lectr);
+
+        ViewHolder(View v) {
+            tv_lectr = (TextView) v.findViewById(R.id.tv_lectr);
         }
     }
 }

@@ -25,20 +25,20 @@ public class DiseaselibFragment extends Fragment {
     View view;
     DiseaseliblistvAdapter adapter;
     DiseaselibrecyvAdapter diseaselibrecyvAdapter;
-    ListView listview_dise,recyv_dise;
+    ListView listview_dise, recyv_dise;
     //左边listview集合
     List<String> list;
     //右边RecyclerView集合
     List<String> list1;
-    private LinearLayout dise_ll=null;
-    private TextView tv_dislistv=null;
+    private LinearLayout dise_ll = null;
+    private TextView tv_dislistv = null;
     private ImageView iv_dislistv;
 
 
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        view=inflater.inflate(R.layout.fragment_diseaselib,null);
+        view = inflater.inflate(R.layout.fragment_diseaselib, null);
         findView();
         listviewinit();
         recyclerViewinit();
@@ -46,14 +46,15 @@ public class DiseaselibFragment extends Fragment {
     }
 
     private void findView() {
-        listview_dise= (ListView) view.findViewById(R.id.listview_dise);
-        recyv_dise= (ListView) view.findViewById(R.id.recyv_dise);
+        listview_dise = (ListView) view.findViewById(R.id.listview_dise);
+        recyv_dise = (ListView) view.findViewById(R.id.recyv_dise);
         listview_dise.setOnItemClickListener(listener);
         listview_dise.setVerticalScrollBarEnabled(false);
         recyv_dise.setVerticalScrollBarEnabled(false);
     }
+
     private void listviewinit() {
-        list=new ArrayList<>();
+        list = new ArrayList<>();
         list.add("行为发育");
         list.add("小儿神经");
         list.add("内分泌");
@@ -64,12 +65,13 @@ public class DiseaselibFragment extends Fragment {
         list.add("小儿外科");
         list.add("小儿外科");
         list.add("小儿外科");
-        adapter=new DiseaseliblistvAdapter(getContext(),list);
+        adapter = new DiseaseliblistvAdapter(getContext(), list);
         listview_dise.setAdapter(adapter);
         adapter.notifyDataSetChanged();
     }
+
     private void recyclerViewinit() {
-        list1=new ArrayList<>();
+        list1 = new ArrayList<>();
         list1.add("多动症");
         list1.add("多动症1");
         list1.add("多动症2");
@@ -88,29 +90,29 @@ public class DiseaselibFragment extends Fragment {
         list1.add("多动症7");
         list1.add("多动症7");
 
-        diseaselibrecyvAdapter=new DiseaselibrecyvAdapter(getContext(),list1);
+        diseaselibrecyvAdapter = new DiseaselibrecyvAdapter(getContext(), list1);
         recyv_dise.setAdapter(diseaselibrecyvAdapter);
         diseaselibrecyvAdapter.notifyDataSetChanged();
 
     }
 
 
-    private AdapterView.OnItemClickListener listener=new AdapterView.OnItemClickListener() {
+    private AdapterView.OnItemClickListener listener = new AdapterView.OnItemClickListener() {
         @Override
         public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                if(dise_ll==null){
-                    dise_ll= (LinearLayout) view.findViewById(R.id.dise_ll);
-                    dise_ll.setBackgroundColor(android.graphics.Color.parseColor("#6fc9e6"));
-                    tv_dislistv= (TextView) view.findViewById(R.id.tv_dislistv);
-                    tv_dislistv.setTextColor(0xffffffff);
-                }else {
-                    dise_ll.setBackgroundColor(android.graphics.Color.parseColor("#e0e0e0"));
-                    tv_dislistv.setTextColor(android.graphics.Color.parseColor("#323232"));
-                    dise_ll = (LinearLayout) view.findViewById(R.id.dise_ll);
-                    dise_ll.setBackgroundColor(android.graphics.Color.parseColor("#6fc9e6"));
-                    tv_dislistv= (TextView) view.findViewById(R.id.tv_dislistv);
-                    tv_dislistv.setTextColor(0xffffffff);
-                }
+            if (dise_ll == null) {
+                dise_ll = (LinearLayout) view.findViewById(R.id.dise_ll);
+                dise_ll.setBackgroundColor(android.graphics.Color.parseColor("#6fc9e6"));
+                tv_dislistv = (TextView) view.findViewById(R.id.tv_dislistv);
+                tv_dislistv.setTextColor(0xffffffff);
+            } else {
+                dise_ll.setBackgroundColor(android.graphics.Color.parseColor("#e0e0e0"));
+                tv_dislistv.setTextColor(android.graphics.Color.parseColor("#323232"));
+                dise_ll = (LinearLayout) view.findViewById(R.id.dise_ll);
+                dise_ll.setBackgroundColor(android.graphics.Color.parseColor("#6fc9e6"));
+                tv_dislistv = (TextView) view.findViewById(R.id.tv_dislistv);
+                tv_dislistv.setTextColor(0xffffffff);
+            }
         }
     };
 }

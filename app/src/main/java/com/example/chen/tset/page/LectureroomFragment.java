@@ -16,7 +16,7 @@ import java.util.List;
 /**
  * Created by Administrator on 2016/8/25 0025.
  */
-public class LectureroomFragment extends Fragment{
+public class LectureroomFragment extends Fragment {
     View view;
     private ListView listView;
     private LectureroomAdapter adapter;
@@ -25,18 +25,19 @@ public class LectureroomFragment extends Fragment{
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        view=inflater.inflate(R.layout.fragment_lectureroom,null);
+        view = inflater.inflate(R.layout.fragment_lectureroom, null);
         findView();
         init();
         return view;
     }
 
     private void findView() {
-        listView= (ListView) view.findViewById(R.id.listView);
+        listView = (ListView) view.findViewById(R.id.listView);
         listView.setVerticalScrollBarEnabled(false);
     }
+
     private void init() {
-        list=new ArrayList<>();
+        list = new ArrayList<>();
         list.add("张老师为你讲解膝盖积水的处理和治疗");
         list.add("张老师为你讲解膝盖积水的处理和治疗1");
         list.add("张老师为你讲解膝盖积水的处理和治疗2");
@@ -44,7 +45,7 @@ public class LectureroomFragment extends Fragment{
         list.add("张老师为你讲解膝盖积水的处理和治疗4");
         list.add("张老师为你讲解膝盖积水的处理和治疗5");
         list.add("张老师为你讲解膝盖积水的处理和治疗6");
-        adapter=new LectureroomAdapter(getContext(),list);
+        adapter = new LectureroomAdapter(getContext(), list);
         listView.setAdapter(adapter);
         adapter.notifyDataSetChanged();
     }

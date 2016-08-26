@@ -22,12 +22,12 @@ import okhttp3.Call;
 
 public class SetdataActivity extends AppCompatActivity {
     private EditText et_nickname;
-    private RadioButton rbtn_man,rb_madam;
+    private RadioButton rbtn_man, rb_madam;
     private Button btn;
     private int editStart;
     private int editEnd;
     private int maxLen = 10; // the max byte
-    String gender=null;
+    String gender = null;
 
 
     @Override
@@ -38,17 +38,17 @@ public class SetdataActivity extends AppCompatActivity {
     }
 
     private void finView() {
-        et_nickname= (EditText) findViewById(R.id.et_nickname);
-        rbtn_man= (RadioButton) findViewById(R.id.rbtn_man);
-        rb_madam= (RadioButton) findViewById(R.id.rb_madam);
-        btn= (Button) findViewById(R.id.btn);
-        if (rbtn_man.isChecked()){
-            gender="男士";
-        }else if (rb_madam.isChecked()){
-            gender="女士";
+        et_nickname = (EditText) findViewById(R.id.et_nickname);
+        rbtn_man = (RadioButton) findViewById(R.id.rbtn_man);
+        rb_madam = (RadioButton) findViewById(R.id.rb_madam);
+        btn = (Button) findViewById(R.id.btn);
+        if (rbtn_man.isChecked()) {
+            gender = "男士";
+        } else if (rb_madam.isChecked()) {
+            gender = "女士";
         }
         btn.setOnClickListener(listener);
-        et_nickname .addTextChangedListener(new TextWatcher() {
+        et_nickname.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
 
@@ -85,15 +85,16 @@ public class SetdataActivity extends AppCompatActivity {
             }
         });
     }
-    private View.OnClickListener listener=new View.OnClickListener() {
+
+    private View.OnClickListener listener = new View.OnClickListener() {
         @Override
         public void onClick(View v) {
 
             OkHttpUtils
                     .post()
-                    .url(Http_data.nickname_uri+"/ChangeNameAndSex"+"?1")
-                    .addParams("nickname",et_nickname.getText().toString())
-                    .addParams("gender",gender)
+                    .url(Http_data.nickname_uri + "/ChangeNameAndSex" + "?1")
+                    .addParams("nickname", et_nickname.getText().toString())
+                    .addParams("gender", gender)
                     .build()
                     .execute(new StringCallback() {
                         @Override
@@ -105,12 +106,13 @@ public class SetdataActivity extends AppCompatActivity {
                                 }
                             });
                         }
+
                         @Override
                         public void onResponse(String response, int id) {
-                            if(response.equals("0")){
-                                Intent intent=new Intent(SetdataActivity.this,HomeActivity.class);
+                            if (response.equals("0")) {
+                                Intent intent = new Intent(SetdataActivity.this, HomeActivity.class);
                                 startActivity(intent);
-                            }else if(response.equals("1")){
+                            } else if (response.equals("1")) {
                                 Toast.makeText(SetdataActivity.this, "注册失败", Toast.LENGTH_SHORT).show();
                             }
                         }

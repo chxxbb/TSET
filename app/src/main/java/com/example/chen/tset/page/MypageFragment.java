@@ -15,7 +15,7 @@ import com.example.chen.tset.View.SetPageActivity;
 /**
  * Created by Administrator on 2016/8/26 0026.
  */
-public class MypageFragment extends Fragment{
+public class MypageFragment extends Fragment {
     View view;
     private LinearLayout iv_set;
 
@@ -23,19 +23,20 @@ public class MypageFragment extends Fragment{
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        view=inflater.inflate(R.layout.fragment_mypage,null);
+        view = inflater.inflate(R.layout.fragment_mypage, null);
         findView();
         return view;
     }
 
     private void findView() {
-        iv_set= (LinearLayout) view.findViewById(R.id.iv_set);
+        iv_set = (LinearLayout) view.findViewById(R.id.iv_set);
         iv_set.setOnClickListener(listerer);
     }
-    private View.OnClickListener listerer=new View.OnClickListener() {
+
+    private View.OnClickListener listerer = new View.OnClickListener() {
         @Override
         public void onClick(View v) {
-            Intent intent=new Intent(getContext(), SetPageActivity.class);
+            Intent intent = new Intent(getContext(), SetPageActivity.class);
             startActivity(intent);
         }
     };

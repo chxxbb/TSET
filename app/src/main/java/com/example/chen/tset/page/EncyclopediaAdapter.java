@@ -10,14 +10,15 @@ import java.util.List;
 /**
  * Created by Administrator on 2016/8/25 0025.
  */
-public class EncyclopediaAdapter extends FragmentPagerAdapter{
+public class EncyclopediaAdapter extends FragmentPagerAdapter {
     List<Fragment> flist;
     //Talout标题集合
     List<String> slist;
-    public EncyclopediaAdapter(FragmentManager fm,List<Fragment> flist) {
+
+    public EncyclopediaAdapter(FragmentManager fm, List<Fragment> flist) {
         super(fm);
-        this.flist=flist;
-        slist=new ArrayList<String>();
+        this.flist = flist;
+        slist = new ArrayList<String>();
         slist.add("疾病库");
         slist.add("品格与安全");
         slist.add("营养保健");
@@ -33,6 +34,7 @@ public class EncyclopediaAdapter extends FragmentPagerAdapter{
     public int getCount() {
         return flist.size();
     }
+
     @Override
     public CharSequence getPageTitle(int position) {
         return slist.get(position);

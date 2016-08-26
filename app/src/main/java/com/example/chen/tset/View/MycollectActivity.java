@@ -25,10 +25,11 @@ public class MycollectActivity extends AppCompatActivity {
     }
 
     private void findView() {
-        lv_collect= (ListView) findViewById(R.id.lv_collect);
+        lv_collect = (ListView) findViewById(R.id.lv_collect);
     }
+
     private void init() {
-        list=new ArrayList<>();
+        list = new ArrayList<>();
         list.add("1");
         list.add("2");
         list.add("3");
@@ -36,7 +37,7 @@ public class MycollectActivity extends AppCompatActivity {
         list.add("5");
         list.add("6");
         list.add("7");
-        adapter=new CharactersafeAdapter(this,list);
+        adapter = new CharactersafeAdapter(this, list);
         lv_collect.setAdapter(adapter);
         adapter.notifyDataSetChanged();
     }

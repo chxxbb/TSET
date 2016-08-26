@@ -15,13 +15,13 @@ import java.util.List;
 /**
  * Created by Administrator on 2016/8/25 0025.
  */
-public class CharactersafeAdapter extends BaseAdapter{
+public class CharactersafeAdapter extends BaseAdapter {
     Context context;
     List<String> list;
 
-    public CharactersafeAdapter(Context context,List<String> list) {
+    public CharactersafeAdapter(Context context, List<String> list) {
         this.context = context;
-        this.list=list;
+        this.list = list;
     }
 
     @Override
@@ -41,19 +41,21 @@ public class CharactersafeAdapter extends BaseAdapter{
 
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
-        if(convertView==null){
-            LayoutInflater inflater=LayoutInflater.from(parent.getContext());
-            convertView=inflater.inflate(R.layout.encyclopedia_item,parent,false);
+        if (convertView == null) {
+            LayoutInflater inflater = LayoutInflater.from(parent.getContext());
+            convertView = inflater.inflate(R.layout.encyclopedia_item, parent, false);
             convertView.setTag(new ViewHolder(convertView));
         }
-        ViewHolder viewHolder= (ViewHolder) convertView.getTag();
+        ViewHolder viewHolder = (ViewHolder) convertView.getTag();
         viewHolder.tv.setText(list.get(position));
         return convertView;
     }
-    static class ViewHolder{
+
+    static class ViewHolder {
         private TextView tv;
-        ViewHolder(View v){
-            tv= (TextView) v.findViewById(R.id.tv);
+
+        ViewHolder(View v) {
+            tv = (TextView) v.findViewById(R.id.tv);
         }
     }
 }
