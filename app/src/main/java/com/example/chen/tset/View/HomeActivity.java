@@ -14,12 +14,17 @@ import com.example.chen.tset.R;
 import com.example.chen.tset.page.LectureroomFragment;
 import com.example.chen.tset.page.MypageFragment;
 
-public class HomeActivity extends AppCompatActivity {
+public class HomeActivity extends AppCompatActivity implements View.OnClickListener{
     FragmentManager fm;
     FragmentTransaction ft;
     private RadioButton rb_encyclopedia, rb_lectureroom, rb_mypage, rb_diagnosis;
     private RadioGroup radioGroup_right, radioGroup_left;
     private FrameLayout framelayout;
+    private EncyclopediaFragment encyclopediaFragment;
+    private LectureroomFragment lectureroomFragment;
+    private MypageFragment mypageFragment;
+    HomeActivity homeActivity;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,47 +43,61 @@ public class HomeActivity extends AppCompatActivity {
         radioGroup_left = (RadioGroup) findViewById(R.id.radioGroup_left);
         radioGroup_right = (RadioGroup) findViewById(R.id.radioGroup_right);
         rb_encyclopedia.setChecked(true);
-        rb_encyclopedia.setOnClickListener(listener);
-        rb_lectureroom.setOnClickListener(listener);
-        rb_mypage.setOnClickListener(listener);
-        rb_diagnosis.setOnClickListener(listener);
+        rb_encyclopedia.setOnClickListener(this);
+        rb_lectureroom.setOnClickListener(this);
+        rb_mypage.setOnClickListener(this);
+        rb_diagnosis.setOnClickListener(this);
     }
 
     private void init() {
         fm = getSupportFragmentManager();
-        ft = fm.beginTransaction();
-        ft.replace(R.id.framelayout, new EncyclopediaFragment());
-        ft.commit();
+        rb_encyclopedia.performClick();
     }
 
-    private View.OnClickListener listener = new View.OnClickListener() {
-        @Override
-        public void onClick(View v) {
-            switch (v.getId()) {
-                case R.id.rb_encyclopedia:
-                    radioGroup_right.clearCheck();
-                    FragmentTransaction ft1 = fm.beginTransaction();
-                    ft1.replace(R.id.framelayout, new EncyclopediaFragment());
-                    ft1.commit();
-                    break;
-                case R.id.rb_lectureroom:
-                    radioGroup_left.clearCheck();
-                    FragmentTransaction ft2 = fm.beginTransaction();
-                    ft2.replace(R.id.framelayout, new LectureroomFragment());
-                    ft2.commit();
-                    break;
-                case R.id.rb_mypage:
-                    radioGroup_left.clearCheck();
-                    FragmentTransaction ft3 = fm.beginTransaction();
-                    ft3.replace(R.id.framelayout, new MypageFragment());
-                    ft3.commit();
-                    break;
-                case R.id.rb_diagnosis:
-                    radioGroup_right.clearCheck();
-                    break;
-            }
+    private void hideAllFragment(FragmentTransaction fragmentTransaction) {
+        if (encyclopediaFragment != null) fragmentTransaction.hide(encyclopediaFragment);
+//        if (fg2 != null) fragmentTransaction.hide(fg2);
+        if (lectureroomFragment != null) fragmentTransaction.hide(lectureroomFragment);
+        if (mypageFragment != null) fragmentTransaction.hide(mypageFragment);
+    }
+
+
+    @Override
+    public void onClick(View v) {
+        ft = fm.beginTransaction();
+        hideAllFragment(ft);
+        switch (v.getId()) {
+            case R.id.rb_encyclopedia:
+                radioGroup_right.clearCheck();
+                if(encyclopediaFragment==null){
+                    encyclopediaFragment=new EncyclopediaFragment();
+                    ft.add(R.id.framelayout,encyclopediaFragment);
+                }else {
+                    ft.show(encyclopediaFragment);
+                }
+                break;
+            case R.id.rb_lectureroom:
+                radioGroup_left.clearCheck();
+                if(lectureroomFragment==null){
+                    lectureroomFragment=new LectureroomFragment();
+                    ft.add(R.id.framelayout,lectureroomFragment);
+                }else {
+                    ft.show(lectureroomFragment);
+                }
+                break;
+            case R.id.rb_mypage:
+                radioGroup_left.clearCheck();
+                if(mypageFragment==null){
+                    mypageFragment=new MypageFragment();
+                    ft.add(R.id.framelayout,mypageFragment);
+                }else {
+                    ft.show(mypageFragment);
+                }
+                break;
+            case R.id.rb_diagnosis:
+                radioGroup_right.clearCheck();
+                break;
         }
-    };
-
-
+        ft.commit();
+    }
 }
