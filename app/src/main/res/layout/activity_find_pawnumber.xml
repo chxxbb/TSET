@@ -52,12 +52,12 @@
         <EditText
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:cursorVisible="false"
             android:layout_marginLeft="@dimen/x20"
             android:background="@null"
+            android:cursorVisible="false"
             android:hint="请输入手机号"
-            android:maxLength="11"
             android:inputType="phone"
+            android:maxLength="11"
             android:textColorHint="#ffffff" />
     </LinearLayout>
 
@@ -85,10 +85,10 @@
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="@dimen/x20"
                 android:background="@null"
-                android:hint="输入验证码"
-                android:maxLength="4"
                 android:cursorVisible="false"
+                android:hint="输入验证码"
                 android:inputType="phone"
+                android:maxLength="4"
                 android:textColorHint="#ffffff" />
         </LinearLayout>
 
@@ -123,10 +123,10 @@
             android:layout_height="wrap_content"
             android:layout_marginLeft="@dimen/x20"
             android:background="@null"
-            android:hint="请输入密码"
-            android:maxLength="16"
-            android:inputType="numberPassword"
             android:cursorVisible="false"
+            android:hint="请输入密码"
+            android:inputType="numberPassword"
+            android:maxLength="16"
             android:textColorHint="#ffffff" />
     </LinearLayout>
 
@@ -147,14 +147,14 @@
             android:src="@drawable/register_06" />
 
         <EditText
-            android:cursorVisible="false"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginLeft="@dimen/x20"
             android:background="@null"
+            android:cursorVisible="false"
             android:hint="请确认密码"
-            android:maxLength="16"
             android:inputType="phone"
+            android:maxLength="16"
             android:textColorHint="#ffffff" />
     </LinearLayout>
 

@@ -22,12 +22,13 @@ public class PasswordSettingActivity extends AppCompatActivity {
 
     private void findView() {
         tv_pas = (TextView) findViewById(R.id.tv_pas);
-        et_newpassword= (EditText) findViewById(R.id.et_newpassword);
-        et_forpassword= (EditText) findViewById(R.id.et_forpassword);
+        et_newpassword = (EditText) findViewById(R.id.et_newpassword);
+        et_forpassword = (EditText) findViewById(R.id.et_forpassword);
         et_newpassword.addTextChangedListener(textchangelisterer);
         et_forpassword.addTextChangedListener(textchangelisterer);
     }
-    private TextWatcher textchangelisterer=new TextWatcher() {
+
+    private TextWatcher textchangelisterer = new TextWatcher() {
         @Override
         public void beforeTextChanged(CharSequence s, int start, int count, int after) {
 
@@ -35,9 +36,9 @@ public class PasswordSettingActivity extends AppCompatActivity {
 
         @Override
         public void onTextChanged(CharSequence s, int start, int before, int count) {
-            if(et_newpassword.getText().toString().length()!=0&&et_forpassword.getText().toString().length()!=0){
+            if (et_newpassword.getText().toString().length() != 0 && et_forpassword.getText().toString().length() != 0) {
                 tv_pas.setTextColor(android.graphics.Color.parseColor("#6fc9e6"));
-            }else {
+            } else {
                 tv_pas.setTextColor(android.graphics.Color.parseColor("#e0e0e0"));
             }
         }

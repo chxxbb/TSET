@@ -22,11 +22,12 @@ public class FeedbackActivity extends AppCompatActivity {
     }
 
     private void findView() {
-        tv_feedback= (TextView) findViewById(R.id.tv_feedback);
-        et_feedback= (EditText) findViewById(R.id.et_feedback);
+        tv_feedback = (TextView) findViewById(R.id.tv_feedback);
+        et_feedback = (EditText) findViewById(R.id.et_feedback);
         et_feedback.addTextChangedListener(textchanglistener);
     }
-    private TextWatcher textchanglistener=new TextWatcher() {
+
+    private TextWatcher textchanglistener = new TextWatcher() {
         @Override
         public void beforeTextChanged(CharSequence s, int start, int count, int after) {
 
@@ -35,7 +36,7 @@ public class FeedbackActivity extends AppCompatActivity {
         @Override
         public void onTextChanged(CharSequence s, int start, int before, int count) {
             tv_feedback.setTextColor(android.graphics.Color.parseColor("#6fc9e6"));
-            if(et_feedback.getText().toString().length()==0){
+            if (et_feedback.getText().toString().length() == 0) {
                 tv_feedback.setTextColor(android.graphics.Color.parseColor("#e0e0e0"));
             }
         }

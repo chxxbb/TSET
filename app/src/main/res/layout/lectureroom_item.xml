@@ -2,55 +2,59 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:layout_marginTop="@dimen/y20"
     android:layout_marginBottom="@dimen/y80"
+    android:layout_marginLeft="@dimen/x30"
     android:layout_marginRight="@dimen/x30"
-    android:layout_marginLeft="@dimen/x30">
+    android:layout_marginTop="@dimen/y20">
 
     <LinearLayout
-        android:layout_marginLeft="@dimen/x30"
-        android:layout_marginRight="@dimen/x14"
-        android:layout_weight="1"
-        android:layout_marginTop="@dimen/y20"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/x30"
+        android:layout_marginRight="@dimen/x14"
+        android:layout_marginTop="@dimen/y20"
+        android:layout_weight="1"
         android:orientation="vertical">
+
         <com.example.chen.tset.page.RoundCornerImageView
             android:layout_width="match_parent"
             android:layout_height="@dimen/y196"
             android:scaleType="centerCrop"
-            android:src="#e90d0d"/>
+            android:src="#e90d0d" />
+
         <TextView
             android:id="@+id/tv_lectr"
-            android:layout_marginLeft="@dimen/x32"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/x32"
             android:text="张老师为你讲解膝盖积水的处理和治疗"
-            android:textSize="@dimen/x24"
-            android:textColor="#323232"/>
+            android:textColor="#323232"
+            android:textSize="@dimen/x24" />
     </LinearLayout>
 
     <LinearLayout
-        android:layout_marginLeft="@dimen/x14"
-        android:layout_marginRight="@dimen/x30"
-        android:layout_weight="1"
-        android:layout_marginTop="@dimen/y20"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/x14"
+        android:layout_marginRight="@dimen/x30"
+        android:layout_marginTop="@dimen/y20"
+        android:layout_weight="1"
         android:orientation="vertical">
+
         <com.example.chen.tset.page.RoundCornerImageView
             android:layout_width="match_parent"
             android:layout_height="@dimen/y196"
             android:scaleType="centerCrop"
-            android:src="#e90d0d"/>
+            android:src="#e90d0d" />
+
         <TextView
             android:id="@+id/tv_lectr1"
-            android:layout_marginLeft="@dimen/x32"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/x32"
             android:text="张老师为你讲解膝盖积水的处理和治疗"
-            android:textSize="@dimen/x24"
-            android:textColor="#323232"/>
+            android:textColor="#323232"
+            android:textSize="@dimen/x24" />
     </LinearLayout>
 
 

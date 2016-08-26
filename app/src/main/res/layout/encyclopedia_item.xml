@@ -1,83 +1,92 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:orientation="vertical"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
     <LinearLayout
-        android:orientation="horizontal"
         android:layout_width="match_parent"
-        android:layout_height="@dimen/y150">
+        android:layout_height="@dimen/y150"
+        android:orientation="horizontal">
+
         <com.example.chen.tset.page.RoundCornerImageView
-            android:layout_marginTop="@dimen/y30"
-            android:layout_marginLeft="@dimen/x30"
-            android:layout_marginBottom="@dimen/y20"
             android:layout_width="@dimen/x120"
             android:layout_height="@dimen/y110"
-            android:src="#d21010"
-            android:scaleType="centerCrop"
-            android:adjustViewBounds="true"
-            />
-        <LinearLayout
-            android:layout_marginTop="@dimen/y30"
+            android:layout_marginBottom="@dimen/y20"
             android:layout_marginLeft="@dimen/x30"
+            android:layout_marginTop="@dimen/y30"
+            android:adjustViewBounds="true"
+            android:scaleType="centerCrop"
+            android:src="#d21010" />
+
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/x30"
+            android:layout_marginTop="@dimen/y30"
             android:orientation="vertical">
+
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="吃喝拉撒无小事"
-                android:textSize="@dimen/x28"
                 android:textColor="#323232"
-                />
+                android:textSize="@dimen/x28" />
+
             <TextView
-                android:layout_marginTop="@dimen/y9"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="很多人认为，他是健身是一种有益的运动动方法方法发"
-                android:textSize="@dimen/x24"
-                android:textColor="#999999"
                 android:layout_marginRight="@dimen/x30"
-                android:lines="1"
-                android:ellipsize="end"/>
-            <RelativeLayout
                 android:layout_marginTop="@dimen/y9"
+                android:ellipsize="end"
+                android:lines="1"
+                android:text="很多人认为，他是健身是一种有益的运动动方法方法发"
+                android:textColor="#999999"
+                android:textSize="@dimen/x24" />
+
+            <RelativeLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/y9">
+
                 <TextView
                     android:id="@+id/tv"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
                     android:layout_alignParentLeft="true"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:textSize="@dimen/x22"
                     android:text="08-25"
-                    android:textColor="#bbbbbb"/>
+                    android:textColor="#bbbbbb"
+                    android:textSize="@dimen/x22" />
+
                 <LinearLayout
-                    android:layout_alignParentRight="true"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
                     android:orientation="horizontal">
+
                     <ImageView
                         android:layout_width="@dimen/x26"
                         android:layout_height="@dimen/y26"
-                        android:src="@drawable/encyclopedialike"/>
+                        android:src="@drawable/encyclopedialike" />
+
                     <TextView
-                        android:layout_marginLeft="@dimen/x14"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:layout_marginLeft="@dimen/x14"
                         android:layout_marginRight="@dimen/x42"
                         android:text="21"
-                        android:textSize="@dimen/x22"
-                        android:textColor="#bbbbbb"/>
+                        android:textColor="#bbbbbb"
+                        android:textSize="@dimen/x22" />
                 </LinearLayout>
             </RelativeLayout>
         </LinearLayout>
     </LinearLayout>
+
     <View
-        android:layout_marginTop="@dimen/y12"
         android:layout_width="match_parent"
         android:layout_height="1dp"
-        android:background="#e0e0e0"/>
+        android:layout_marginTop="@dimen/y12"
+        android:background="#e0e0e0" />
 
 </LinearLayout>

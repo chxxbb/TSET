@@ -3,125 +3,132 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".View.HomeActivity"
     android:background="#ffffff"
-    >
+    tools:context=".View.HomeActivity">
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical">
+
         <FrameLayout
             android:id="@+id/framelayout"
-            android:layout_weight="1"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"></FrameLayout>
+            android:layout_height="wrap_content"
+            android:layout_weight="1"></FrameLayout>
+
         <View
             android:layout_width="match_parent"
             android:layout_height="1dp"
-            android:background="#bbbbbb"
-            android:layout_alignTop="@+id/relativelaout"></View>
+            android:layout_alignTop="@+id/relativelaout"
+            android:background="#bbbbbb"></View>
+
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="@dimen/y96">
 
             <RelativeLayout
                 android:id="@+id/relativelaout"
-                android:layout_alignParentBottom="true"
                 android:layout_width="match_parent"
-                android:layout_height="@dimen/y96">
+                android:layout_height="@dimen/y96"
+                android:layout_alignParentBottom="true">
+
                 <RadioGroup
                     android:id="@+id/radioGroup_left"
-                    android:layout_alignParentBottom="true"
                     android:layout_width="wrap_content"
                     android:layout_height="@dimen/y96"
+                    android:layout_alignParentBottom="true"
                     android:orientation="horizontal">
+
                     <RadioButton
                         android:id="@+id/rb_encyclopedia"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="@dimen/y12"
                         android:layout_marginLeft="@dimen/x50"
                         android:layout_marginTop="@dimen/y12"
-                        android:layout_marginBottom="@dimen/y12"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:drawableTop="@drawable/encyclopedia_onclick"
-                        android:text="百科"
                         android:button="@null"
+                        android:drawableTop="@drawable/encyclopedia_onclick"
                         android:gravity="center"
-                        android:textSize="@dimen/x24"
+                        android:text="百科"
                         android:textColor="@drawable/encyclopedia_color"
-                        />
+                        android:textSize="@dimen/x24" />
+
                     <RadioButton
                         android:id="@+id/rb_diagnosis"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="@dimen/y12"
                         android:layout_marginLeft="@dimen/x100"
                         android:layout_marginTop="@dimen/y12"
-                        android:layout_marginBottom="@dimen/y12"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:drawableTop="@drawable/diagnosis_onclick"
-                        android:text="诊疗"
                         android:button="@null"
+                        android:drawableTop="@drawable/diagnosis_onclick"
                         android:gravity="center"
-                        android:textSize="12sp"
+                        android:text="诊疗"
                         android:textColor="@drawable/encyclopedia_color"
-                        />
+                        android:textSize="12sp" />
 
                 </RadioGroup>
+
                 <RadioGroup
                     android:id="@+id/radioGroup_right"
-                    android:layout_alignParentRight="true"
-                    android:layout_alignParentBottom="true"
                     android:layout_width="wrap_content"
                     android:layout_height="@dimen/y96"
+                    android:layout_alignParentBottom="true"
+                    android:layout_alignParentRight="true"
                     android:orientation="horizontal">
+
                     <RadioButton
                         android:id="@+id/rb_lectureroom"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="@dimen/y12"
                         android:layout_marginRight="@dimen/x100"
                         android:layout_marginTop="@dimen/y12"
-                        android:layout_marginBottom="@dimen/y12"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:drawableTop="@drawable/lecture_onclick"
-                        android:text="讲堂"
                         android:button="@null"
+                        android:drawableTop="@drawable/lecture_onclick"
                         android:gravity="center"
-                        android:textSize="@dimen/x24"
+                        android:text="讲堂"
                         android:textColor="@drawable/encyclopedia_color"
-                        />
+                        android:textSize="@dimen/x24" />
+
                     <RadioButton
                         android:id="@+id/rb_mypage"
-                        android:layout_marginRight="@dimen/x50"
-                        android:layout_marginTop="@dimen/y12"
-                        android:layout_marginBottom="@dimen/y12"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:drawableTop="@drawable/my_onclick"
-                        android:text="我的"
+                        android:layout_marginBottom="@dimen/y12"
+                        android:layout_marginRight="@dimen/x50"
+                        android:layout_marginTop="@dimen/y12"
                         android:button="@null"
+                        android:drawableTop="@drawable/my_onclick"
                         android:gravity="center"
-                        android:textSize="12sp"
+                        android:text="我的"
                         android:textColor="@drawable/encyclopedia_color"
-                        />
+                        android:textSize="12sp" />
                 </RadioGroup>
             </RelativeLayout>
 
         </RelativeLayout>
     </LinearLayout>
+
     <FrameLayout
-        android:layout_centerInParent="true"
-        android:layout_alignParentBottom="true"
-        android:layout_marginBottom="@dimen/y12"
         android:layout_width="@dimen/x120"
-        android:layout_height="@dimen/y120">
+        android:layout_height="@dimen/y120"
+        android:layout_alignParentBottom="true"
+        android:layout_centerInParent="true"
+        android:layout_marginBottom="@dimen/y12">
+
         <com.example.chen.tset.page.InquiryView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" />
+
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="问诊"
-            android:textSize="@dimen/x32"
             android:layout_gravity="center"
+            android:text="问诊"
             android:textColor="#ffffff"
-            />
+            android:textSize="@dimen/x32" />
     </FrameLayout>
 
 </RelativeLayout>
