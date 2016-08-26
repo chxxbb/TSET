@@ -3,9 +3,10 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
     android:background="#f4f4f4"
+    android:orientation="vertical"
     tools:context="com.example.chen.tset.View.ThemeselectActivity">
+
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="@dimen/y96"
@@ -41,97 +42,110 @@
             android:textColor="#323232"
             android:textSize="@dimen/x36" />
     </RelativeLayout>
+
     <View
         android:layout_width="wrap_content"
         android:layout_height="1dp"
-        android:background="#e0e0e0"/>
+        android:background="#e0e0e0" />
+
     <View
+        android:layout_width="wrap_content"
+        android:layout_height="1dp"
         android:layout_marginTop="@dimen/y30"
-        android:layout_width="wrap_content"
-        android:layout_height="1dp"
-        android:background="#e0e0e0"/>
+        android:background="#e0e0e0" />
+
     <RelativeLayout
-        android:background="#ffffff"
         android:layout_width="match_parent"
-        android:layout_height="@dimen/y90">
+        android:layout_height="@dimen/y90"
+        android:background="#ffffff">
+
         <LinearLayout
-            android:gravity="center_vertical"
-            android:layout_marginLeft="@dimen/x30"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
+            android:layout_marginLeft="@dimen/x30"
+            android:gravity="center_vertical"
             android:orientation="horizontal">
+
             <ImageView
                 android:layout_width="@dimen/x40"
                 android:layout_height="@dimen/y40" />
+
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="简洁白"
                 android:textColor="#999999"
-                android:textSize="@dimen/x32"
-                />
+                android:textSize="@dimen/x32" />
         </LinearLayout>
+
         <LinearLayout
-            android:layout_alignParentRight="true"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
+            android:layout_alignParentRight="true"
             android:layout_marginRight="@dimen/x30">
+
             <Button
-                android:layout_gravity="center_vertical"
                 android:layout_width="@dimen/x120"
                 android:layout_height="@dimen/y60"
+                android:layout_gravity="center_vertical"
                 android:background="@drawable/themeselect_btn_onclick"
                 android:text="使用"
-                android:textSize="@dimen/x32"/>
+                android:textSize="@dimen/x32" />
         </LinearLayout>
 
     </RelativeLayout>
+
     <View
-        android:layout_marginLeft="@dimen/x30"
         android:layout_width="wrap_content"
         android:layout_height="1dp"
-        android:background="#e0e0e0"/>
+        android:layout_marginLeft="@dimen/x30"
+        android:background="#e0e0e0" />
+
     <RelativeLayout
-        android:background="#ffffff"
         android:layout_width="match_parent"
-        android:layout_height="@dimen/y90">
+        android:layout_height="@dimen/y90"
+        android:background="#ffffff">
+
         <LinearLayout
-            android:gravity="center_vertical"
-            android:layout_marginLeft="@dimen/x30"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
+            android:layout_marginLeft="@dimen/x30"
+            android:gravity="center_vertical"
             android:orientation="horizontal">
+
             <ImageView
                 android:layout_width="@dimen/x40"
                 android:layout_height="@dimen/y40" />
+
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="水花蓝"
                 android:textColor="#999999"
-                android:textSize="@dimen/x32"/>
+                android:textSize="@dimen/x32" />
         </LinearLayout>
+
         <LinearLayout
-            android:layout_alignParentRight="true"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
+            android:layout_alignParentRight="true"
             android:layout_marginRight="@dimen/x30">
+
             <Button
-                android:background="@drawable/themeselect_btn_onclick"
-                android:layout_gravity="center_vertical"
                 android:layout_width="@dimen/x120"
                 android:layout_height="@dimen/y60"
+                android:layout_gravity="center_vertical"
+                android:background="@drawable/themeselect_btn_onclick"
                 android:text="使用"
-                android:textSize="@dimen/x32"/>
+                android:textSize="@dimen/x32" />
         </LinearLayout>
 
     </RelativeLayout>
+
     <View
         android:layout_width="wrap_content"
         android:layout_height="1dp"
-        android:background="#e0e0e0"/>
-
-
+        android:background="#e0e0e0" />
 
 
 </LinearLayout>

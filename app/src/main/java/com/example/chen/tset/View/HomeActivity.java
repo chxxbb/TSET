@@ -14,7 +14,7 @@ import com.example.chen.tset.R;
 import com.example.chen.tset.page.LectureroomFragment;
 import com.example.chen.tset.page.MypageFragment;
 
-public class HomeActivity extends AppCompatActivity implements View.OnClickListener{
+public class HomeActivity extends AppCompatActivity implements View.OnClickListener {
     FragmentManager fm;
     FragmentTransaction ft;
     private RadioButton rb_encyclopedia, rb_lectureroom, rb_mypage, rb_diagnosis;
@@ -69,28 +69,28 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
         switch (v.getId()) {
             case R.id.rb_encyclopedia:
                 radioGroup_right.clearCheck();
-                if(encyclopediaFragment==null){
-                    encyclopediaFragment=new EncyclopediaFragment();
-                    ft.add(R.id.framelayout,encyclopediaFragment);
-                }else {
+                if (encyclopediaFragment == null) {
+                    encyclopediaFragment = new EncyclopediaFragment();
+                    ft.add(R.id.framelayout, encyclopediaFragment);
+                } else {
                     ft.show(encyclopediaFragment);
                 }
                 break;
             case R.id.rb_lectureroom:
                 radioGroup_left.clearCheck();
-                if(lectureroomFragment==null){
-                    lectureroomFragment=new LectureroomFragment();
-                    ft.add(R.id.framelayout,lectureroomFragment);
-                }else {
+                if (lectureroomFragment == null) {
+                    lectureroomFragment = new LectureroomFragment();
+                    ft.add(R.id.framelayout, lectureroomFragment);
+                } else {
                     ft.show(lectureroomFragment);
                 }
                 break;
             case R.id.rb_mypage:
                 radioGroup_left.clearCheck();
-                if(mypageFragment==null){
-                    mypageFragment=new MypageFragment();
-                    ft.add(R.id.framelayout,mypageFragment);
-                }else {
+                if (mypageFragment == null) {
+                    mypageFragment = new MypageFragment();
+                    ft.add(R.id.framelayout, mypageFragment);
+                } else {
                     ft.show(mypageFragment);
                 }
                 break;
