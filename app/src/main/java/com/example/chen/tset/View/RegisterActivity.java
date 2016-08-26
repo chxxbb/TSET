@@ -1,13 +1,15 @@
-package com.example.chen.tset;
+package com.example.chen.tset.View;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 
-public class LoginActivity extends AppCompatActivity {
+import com.example.chen.tset.R;
+
+public class RegisterActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.login_page);
+        setContentView(R.layout.activity_register);
     }
 }

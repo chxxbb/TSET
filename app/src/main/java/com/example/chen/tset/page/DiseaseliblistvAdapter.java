@@ -1,4 +1,4 @@
-package com.example.chen.tset;
+package com.example.chen.tset.page;
 
 import android.content.Context;
 import android.view.LayoutInflater;
@@ -8,19 +8,22 @@ import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.example.chen.tset.R;
+
 import java.util.List;
 
 /**
  * Created by Administrator on 2016/8/25 0025.
  */
-public class CharactersafeAdapter extends BaseAdapter{
+public class DiseaseliblistvAdapter extends BaseAdapter{
+    private final List<String> list;
     Context context;
-    List<String> list;
 
-    public CharactersafeAdapter(Context context,List<String> list) {
-        this.context = context;
-        this.list=list;
+    public DiseaseliblistvAdapter(Context context,List<String> list) {
+        this.context=context;
+        this.list = list;
     }
+
 
     @Override
     public int getCount() {
@@ -28,7 +31,7 @@ public class CharactersafeAdapter extends BaseAdapter{
     }
 
     @Override
-    public Object getItem(int position) {
+    public String getItem(int position) {
         return list.get(position);
     }
 
@@ -41,17 +44,20 @@ public class CharactersafeAdapter extends BaseAdapter{
     public View getView(int position, View convertView, ViewGroup parent) {
         if(convertView==null){
             LayoutInflater inflater=LayoutInflater.from(parent.getContext());
-            convertView=inflater.inflate(R.layout.encyclopedia_item,parent,false);
+            convertView=inflater.inflate(R.layout.disease_listv_item,parent,false);
             convertView.setTag(new ViewHolder(convertView));
         }
         ViewHolder viewHolder= (ViewHolder) convertView.getTag();
-        viewHolder.tv.setText(list.get(position));
+        viewHolder.tv_dislistv.setText(list.get(position));
         return convertView;
     }
     static class ViewHolder{
-        private TextView tv;
+        private TextView tv_dislistv;
+        private ImageView iv_dislistv;
         ViewHolder(View v){
-            tv= (TextView) v.findViewById(R.id.tv);
+            tv_dislistv= (TextView) v.findViewById(R.id.tv_dislistv);
+            iv_dislistv= (ImageView) v.findViewById(R.id.iv_dislistv);
         }
     }
+
 }

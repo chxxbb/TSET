@@ -1,4 +1,4 @@
-package com.example.chen.tset;
+package com.example.chen.tset.page;
 
 import android.content.Context;
 import android.graphics.Canvas;
@@ -6,6 +6,8 @@ import android.graphics.Paint;
 import android.graphics.RectF;
 import android.util.AttributeSet;
 import android.view.View;
+
+import com.example.chen.tset.R;
 
 public class InquiryView extends View{
     private Paint paint;

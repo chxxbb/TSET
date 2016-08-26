@@ -6,7 +6,7 @@
     android:background="@android:color/white"
     android:paddingLeft="@dimen/x30"
     android:paddingRight="@dimen/x30"
-    tools:context=".LoginActivity">
+    tools:context=".View.LoginActivity">
 
     <RelativeLayout
         android:id="@+id/login_phone_relayout"
@@ -25,6 +25,7 @@
             android:src="@mipmap/login_page_phone" />
 
         <EditText
+            android:id="@+id/login_phone_edittext"
             android:layout_width="match_parent"
             android:layout_height="@dimen/y80"
             android:layout_centerVertical="true"
@@ -66,6 +67,7 @@
         <!--android:src="@mipmap/login_page_ice" />-->
 
         <EditText
+            android:id="@+id/login_password_edittext"
             android:layout_width="match_parent"
             android:layout_height="@dimen/y80"
             android:layout_centerVertical="true"

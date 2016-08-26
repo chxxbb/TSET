@@ -1,4 +1,4 @@
-package com.example.chen.tset;
+package com.example.chen.tset.page;
 
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;

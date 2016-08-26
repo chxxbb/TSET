@@ -1,4 +1,4 @@
-package com.example.chen.tset;
+package com.example.chen.tset.View;
 
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
@@ -7,6 +7,9 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.FrameLayout;
 import android.widget.RadioButton;
+
+import com.example.chen.tset.page.EncyclopediaFragment;
+import com.example.chen.tset.R;
 
 public class HomeActivity extends AppCompatActivity {
     FragmentManager fm;
