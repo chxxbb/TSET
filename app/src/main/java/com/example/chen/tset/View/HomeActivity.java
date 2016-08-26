@@ -11,6 +11,7 @@ import android.widget.RadioGroup;
 
 import com.example.chen.tset.page.EncyclopediaFragment;
 import com.example.chen.tset.R;
+import com.example.chen.tset.page.LectureroomFragment;
 
 public class HomeActivity extends AppCompatActivity {
     FragmentManager fm;

@@ -16,6 +16,9 @@
             </intent-filter>
         </activity>
         <activity android:name=".View.HomeActivity"></activity>
+        <activity android:name=".View.RegisterActivity"></activity>
+        <activity android:name=".View.SetdataActivity"></activity>
+        <activity android:name=".View.FindpawActivity"></activity>
     </application>
 
     <uses-permission android:name="android.permission.INTERNET"></uses-permission>
