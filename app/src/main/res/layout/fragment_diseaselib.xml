@@ -5,15 +5,24 @@
     android:layout_height="match_parent"
     android:background="#ffffff">
     <LinearLayout
-        android:layout_marginTop="@dimen/y10"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
-        <ListView
-            android:id="@+id/listview_dise"
+        <LinearLayout
             android:layout_width="@dimen/x180"
             android:layout_height="match_parent"
-            android:fastScrollEnabled="false"
-            android:divider="@null" ></ListView>
+            android:orientation="vertical">
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/y10"
+                android:background="#e0e0e0"/>
+            <ListView
+                android:id="@+id/listview_dise"
+                android:layout_width="@dimen/x180"
+                android:layout_height="wrap_content"
+                android:fastScrollEnabled="false"
+                android:divider="@null" ></ListView>
+        </LinearLayout>
+
             <ListView
                 android:layout_marginLeft="@dimen/x30"
                 android:layout_marginRight="@dimen/x30"
