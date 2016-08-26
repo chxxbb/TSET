@@ -8,7 +8,7 @@
         android:orientation="horizontal"
         android:layout_width="match_parent"
         android:layout_height="@dimen/y150">
-        <ImageView
+        <com.example.chen.tset.RoundCornerImageView
             android:layout_marginTop="@dimen/y30"
             android:layout_marginLeft="@dimen/x30"
             android:layout_marginBottom="@dimen/y20"
@@ -17,7 +17,6 @@
             android:src="#d21010"
             android:scaleType="centerCrop"
             android:adjustViewBounds="true"
-            android:background="@drawable/charactersafe_img_case"
             />
         <LinearLayout
             android:layout_marginTop="@dimen/y30"

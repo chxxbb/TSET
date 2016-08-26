@@ -24,6 +24,7 @@
         android:id="@+id/tabLayout"
         app:tabIndicatorHeight="0dp"
         >
+
     </android.support.design.widget.TabLayout>
     <LinearLayout
         android:layout_marginTop="@dimen/y17"
@@ -45,7 +46,6 @@
             android:layout_weight="1"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content">
-
         <View
             android:layout_centerInParent="true"
             android:background="@color/inquirycolor"

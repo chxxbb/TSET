@@ -30,6 +30,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/y96">
                 <RadioGroup
+                    android:id="@+id/radioGroup_left"
                     android:layout_alignParentBottom="true"
                     android:layout_width="wrap_content"
                     android:layout_height="@dimen/y96"
@@ -64,12 +65,14 @@
 
                 </RadioGroup>
                 <RadioGroup
+                    android:id="@+id/radioGroup_right"
                     android:layout_alignParentRight="true"
                     android:layout_alignParentBottom="true"
                     android:layout_width="wrap_content"
                     android:layout_height="@dimen/y96"
                     android:orientation="horizontal">
                     <RadioButton
+                        android:id="@+id/rb_lectureroom"
                         android:layout_marginRight="@dimen/x100"
                         android:layout_marginTop="@dimen/y12"
                         android:layout_marginBottom="@dimen/y12"
