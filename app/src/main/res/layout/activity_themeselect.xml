@@ -68,11 +68,13 @@
 
             <ImageView
                 android:layout_width="@dimen/x40"
-                android:layout_height="@dimen/y40" />
+                android:layout_height="@dimen/y40"
+                android:src="@drawable/themeselect1" />
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/x8"
                 android:text="简洁白"
                 android:textColor="#999999"
                 android:textSize="@dimen/x32" />
@@ -88,8 +90,9 @@
                 android:layout_width="@dimen/x120"
                 android:layout_height="@dimen/y60"
                 android:layout_gravity="center_vertical"
-                android:background="@drawable/themeselect_btn_onclick"
-                android:text="使用"
+                android:background="@drawable/themeselect_btn_unmep_case"
+                android:text="使用中"
+                android:textColor="#ffffff"
                 android:textSize="@dimen/x32" />
         </LinearLayout>
 
@@ -115,13 +118,15 @@
 
             <ImageView
                 android:layout_width="@dimen/x40"
-                android:layout_height="@dimen/y40" />
+                android:layout_height="@dimen/y40"
+                android:src="@drawable/themeselect2" />
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/x8"
                 android:text="水花蓝"
-                android:textColor="#999999"
+                android:textColor="#6fc9e6"
                 android:textSize="@dimen/x32" />
         </LinearLayout>
 
@@ -135,8 +140,9 @@
                 android:layout_width="@dimen/x120"
                 android:layout_height="@dimen/y60"
                 android:layout_gravity="center_vertical"
-                android:background="@drawable/themeselect_btn_onclick"
+                android:background="@drawable/countersign_btn_case"
                 android:text="使用"
+                android:textColor="#ffffff"
                 android:textSize="@dimen/x32" />
         </LinearLayout>
 
