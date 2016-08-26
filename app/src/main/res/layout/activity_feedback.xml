@@ -34,13 +34,14 @@
             android:layout_width="wrap_content"
             android:layout_height="match_parent">
             <TextView
+                android:id="@+id/tv_feedback"
                 android:layout_marginRight="@dimen/x30"
                 android:layout_gravity="center_vertical"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="提交"
                 android:textSize="@dimen/x32"
-                android:textColor="#6fc9e6"/>
+                android:textColor="#e0e0e0"/>
         </LinearLayout>
 
     </RelativeLayout>
@@ -49,6 +50,7 @@
         android:layout_height="1dp"
         android:background="#e0e0e0"/>
     <EditText
+        android:id="@+id/et_feedback"
         android:background="@null"
         android:cursorVisible="false"
         android:layout_marginLeft="@dimen/x30"

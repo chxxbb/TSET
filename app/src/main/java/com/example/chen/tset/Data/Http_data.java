@@ -6,8 +6,7 @@ package com.example.chen.tset.Data;
 public class Http_data {
 
 //    public static final String http_data = "http://api.children91.com:8080/ApplicationService";
-
-    public static final String http_data = "http://192.168.1.35:8080/AppService";
-    public static final String nickname_uri = "http://192.168.1.230:8080/AppService";
+//    public static final String http_data = "http://192.168.1.35:8080/AppService";
+    public static final String http_data = "http://192.168.1.230:8080/AppService";
 
 }

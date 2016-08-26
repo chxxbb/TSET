@@ -56,7 +56,6 @@ public class SetdataActivity extends AppCompatActivity {
 
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
-
             }
 
             @Override
@@ -92,7 +91,7 @@ public class SetdataActivity extends AppCompatActivity {
 
             OkHttpUtils
                     .post()
-                    .url(Http_data.nickname_uri + "/ChangeNameAndSex" + "?1")
+                    .url(Http_data.http_data + "/ChangeNameAndSex" + "?1")
                     .addParams("nickname", et_nickname.getText().toString())
                     .addParams("gender", gender)
                     .build()
