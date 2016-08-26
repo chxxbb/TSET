@@ -1,5 +1,6 @@
 package com.example.chen.tset.View;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.text.Editable;
@@ -41,6 +42,11 @@ public class SetdataActivity extends AppCompatActivity {
         rbtn_man= (RadioButton) findViewById(R.id.rbtn_man);
         rb_madam= (RadioButton) findViewById(R.id.rb_madam);
         btn= (Button) findViewById(R.id.btn);
+        if (rbtn_man.isChecked()){
+            gender="男士";
+        }else if (rb_madam.isChecked()){
+            gender="女士";
+        }
         btn.setOnClickListener(listener);
         et_nickname .addTextChangedListener(new TextWatcher() {
             @Override
@@ -86,8 +92,8 @@ public class SetdataActivity extends AppCompatActivity {
             OkHttpUtils
                     .post()
                     .url(Http_data.nickname_uri+"/ChangeNameAndSex"+"?1")
-                    .addParams("nickname","啊啊")
-                    .addParams("gender", "男")
+                    .addParams("nickname",et_nickname.getText().toString())
+                    .addParams("gender",gender)
                     .build()
                     .execute(new StringCallback() {
                         @Override
@@ -101,7 +107,12 @@ public class SetdataActivity extends AppCompatActivity {
                         }
                         @Override
                         public void onResponse(String response, int id) {
-                            Toast.makeText(SetdataActivity.this, response, Toast.LENGTH_SHORT).show();
+                            if(response.equals("0")){
+                                Intent intent=new Intent(SetdataActivity.this,HomeActivity.class);
+                                startActivity(intent);
+                            }else if(response.equals("1")){
+                                Toast.makeText(SetdataActivity.this, "注册失败", Toast.LENGTH_SHORT).show();
+                            }
                         }
                     });
         }

@@ -21,7 +21,8 @@
         <activity android:name=".View.RegisterActivity" />
         <activity android:name=".View.FeedbackActivity" />
         <activity android:name=".View.FindpawActivity" />
-        <activity android:name=".View.SetdataActivity"></activity>
+        <activity android:name=".View.SetdataActivity" />
+        <activity android:name=".View.MycollectActivity"></activity>
     </application>
 
 </manifest>
