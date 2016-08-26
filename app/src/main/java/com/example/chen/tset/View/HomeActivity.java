@@ -17,8 +17,8 @@ import com.example.chen.tset.page.MypageFragment;
 public class HomeActivity extends AppCompatActivity {
     FragmentManager fm;
     FragmentTransaction ft;
-    private RadioButton rb_encyclopedia,rb_lectureroom,rb_mypage,rb_diagnosis;
-    private RadioGroup radioGroup_right,radioGroup_left;
+    private RadioButton rb_encyclopedia, rb_lectureroom, rb_mypage, rb_diagnosis;
+    private RadioGroup radioGroup_right, radioGroup_left;
     private FrameLayout framelayout;
 
     @Override
@@ -30,13 +30,13 @@ public class HomeActivity extends AppCompatActivity {
     }
 
     private void findView() {
-        rb_encyclopedia= (RadioButton) findViewById(R.id.rb_encyclopedia);
-        framelayout= (FrameLayout) findViewById(R.id.framelayout);
-        rb_lectureroom= (RadioButton) findViewById(R.id.rb_lectureroom);
-        rb_mypage= (RadioButton) findViewById(R.id.rb_mypage);
-        rb_diagnosis= (RadioButton) findViewById(R.id.rb_diagnosis);
-        radioGroup_left= (RadioGroup) findViewById(R.id.radioGroup_left);
-        radioGroup_right= (RadioGroup) findViewById(R.id.radioGroup_right);
+        rb_encyclopedia = (RadioButton) findViewById(R.id.rb_encyclopedia);
+        framelayout = (FrameLayout) findViewById(R.id.framelayout);
+        rb_lectureroom = (RadioButton) findViewById(R.id.rb_lectureroom);
+        rb_mypage = (RadioButton) findViewById(R.id.rb_mypage);
+        rb_diagnosis = (RadioButton) findViewById(R.id.rb_diagnosis);
+        radioGroup_left = (RadioGroup) findViewById(R.id.radioGroup_left);
+        radioGroup_right = (RadioGroup) findViewById(R.id.radioGroup_right);
         rb_encyclopedia.setChecked(true);
         rb_encyclopedia.setOnClickListener(listener);
         rb_lectureroom.setOnClickListener(listener);
@@ -45,31 +45,32 @@ public class HomeActivity extends AppCompatActivity {
     }
 
     private void init() {
-        fm=getSupportFragmentManager();
-        ft=fm.beginTransaction();
-        ft.replace(R.id.framelayout,new EncyclopediaFragment());
+        fm = getSupportFragmentManager();
+        ft = fm.beginTransaction();
+        ft.replace(R.id.framelayout, new EncyclopediaFragment());
         ft.commit();
     }
-    private View.OnClickListener listener=new View.OnClickListener() {
+
+    private View.OnClickListener listener = new View.OnClickListener() {
         @Override
         public void onClick(View v) {
-            switch (v.getId()){
+            switch (v.getId()) {
                 case R.id.rb_encyclopedia:
                     radioGroup_right.clearCheck();
-                    FragmentTransaction ft1=fm.beginTransaction();
-                    ft1.replace(R.id.framelayout,new EncyclopediaFragment());
+                    FragmentTransaction ft1 = fm.beginTransaction();
+                    ft1.replace(R.id.framelayout, new EncyclopediaFragment());
                     ft1.commit();
                     break;
                 case R.id.rb_lectureroom:
                     radioGroup_left.clearCheck();
-                    FragmentTransaction ft2=fm.beginTransaction();
-                    ft2.replace(R.id.framelayout,new LectureroomFragment());
+                    FragmentTransaction ft2 = fm.beginTransaction();
+                    ft2.replace(R.id.framelayout, new LectureroomFragment());
                     ft2.commit();
                     break;
                 case R.id.rb_mypage:
                     radioGroup_left.clearCheck();
-                    FragmentTransaction ft3=fm.beginTransaction();
-                    ft3.replace(R.id.framelayout,new MypageFragment());
+                    FragmentTransaction ft3 = fm.beginTransaction();
+                    ft3.replace(R.id.framelayout, new MypageFragment());
                     ft3.commit();
                     break;
                 case R.id.rb_diagnosis:
