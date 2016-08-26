@@ -86,6 +86,7 @@
                         android:textColor="@drawable/encyclopedia_color"
                         />
                     <RadioButton
+                        android:id="@+id/rb_mypage"
                         android:layout_marginRight="@dimen/x50"
                         android:layout_marginTop="@dimen/y12"
                         android:layout_marginBottom="@dimen/y12"

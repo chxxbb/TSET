@@ -11,11 +11,13 @@ import android.widget.RadioGroup;
 
 import com.example.chen.tset.page.EncyclopediaFragment;
 import com.example.chen.tset.R;
+import com.example.chen.tset.page.LectureroomFragment;
+import com.example.chen.tset.page.MypageFragment;
 
 public class HomeActivity extends AppCompatActivity {
     FragmentManager fm;
     FragmentTransaction ft;
-    private RadioButton rb_encyclopedia,rb_lectureroom;
+    private RadioButton rb_encyclopedia,rb_lectureroom,rb_mypage;
     private RadioGroup radioGroup_right,radioGroup_left;
     private FrameLayout framelayout;
 
@@ -33,8 +35,11 @@ public class HomeActivity extends AppCompatActivity {
         rb_lectureroom= (RadioButton) findViewById(R.id.rb_lectureroom);
         radioGroup_left= (RadioGroup) findViewById(R.id.radioGroup_left);
         radioGroup_right= (RadioGroup) findViewById(R.id.radioGroup_right);
+        rb_mypage= (RadioButton) findViewById(R.id.rb_mypage);
+        rb_encyclopedia.setChecked(true);
         rb_encyclopedia.setOnClickListener(listener);
         rb_lectureroom.setOnClickListener(listener);
+        rb_mypage.setOnClickListener(listener);
     }
 
     private void init() {
@@ -58,6 +63,12 @@ public class HomeActivity extends AppCompatActivity {
                     FragmentTransaction ft2=fm.beginTransaction();
                     ft2.replace(R.id.framelayout,new LectureroomFragment());
                     ft2.commit();
+                    break;
+                case R.id.rb_mypage:
+                    radioGroup_left.clearCheck();
+                    FragmentTransaction ft3=fm.beginTransaction();
+                    ft3.replace(R.id.framelayout,new MypageFragment());
+                    ft3.commit();
                     break;
             }
         }
