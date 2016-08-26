@@ -15,7 +15,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="vertical">
-        <com.example.chen.tset.RoundCornerImageView
+        <com.example.chen.tset.page.RoundCornerImageView
             android:layout_width="match_parent"
             android:layout_height="@dimen/y196"
             android:scaleType="centerCrop"
@@ -38,7 +38,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="vertical">
-        <com.example.chen.tset.RoundCornerImageView
+        <com.example.chen.tset.page.RoundCornerImageView
             android:layout_width="match_parent"
             android:layout_height="@dimen/y196"
             android:scaleType="centerCrop"

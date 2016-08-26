@@ -1,4 +1,4 @@
-package com.example.chen.tset;
+package com.example.chen.tset.page;
 
 import android.content.Context;
 import android.graphics.Canvas;

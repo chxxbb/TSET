@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.chen.tset.Data.Http_data;
@@ -22,6 +23,9 @@ public class LoginActivity extends AppCompatActivity {
 
     EditText login_phone_edittext = null, login_password_edittext = null;
     Button login_button = null;
+    TextView login_new_user = null, login_find_password = null;
+
+
     Gson gson = new Gson();
     Activity activity = this;
 
@@ -32,10 +36,16 @@ public class LoginActivity extends AppCompatActivity {
 
         initview();
 
+        initOnclick();
+
+
+    }
+
+    private void initOnclick() {
 
         login_button.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View v) {
+            public void onClick(View v) {           //点击登录后的触发
                 OkHttpUtils
                         .post()
                         .url(Http_data.http_data + "/login")
@@ -70,11 +80,29 @@ public class LoginActivity extends AppCompatActivity {
             }
         });
 
+        login_new_user.setOnClickListener(new View.OnClickListener() {          //点击新用户后的触发
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(activity, RegisterActivity.class);
+                startActivity(intent);
+            }
+        });
+
+        login_find_password.setOnClickListener(new View.OnClickListener() {     //点击忘记密码后的交互
+            @Override
+            public void onClick(View v) {
+
+            }
+        });
+
     }
 
     private void initview() {
         login_phone_edittext = (EditText) findViewById(R.id.login_phone_edittext);
         login_password_edittext = (EditText) findViewById(R.id.login_password_edittext);
         login_button = (Button) findViewById(R.id.login_button);
+
+        login_new_user = (TextView) findViewById(R.id.login_new_user);
+        login_find_password = (TextView) findViewById(R.id.login_find_password);
     }
 }

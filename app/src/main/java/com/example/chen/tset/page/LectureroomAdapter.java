@@ -1,4 +1,4 @@
-package com.example.chen.tset;
+package com.example.chen.tset.page;
 
 import android.content.Context;
 import android.support.v7.widget.RecyclerView;
@@ -7,6 +7,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.TextView;
+
+import com.example.chen.tset.R;
 
 import java.util.List;
 
