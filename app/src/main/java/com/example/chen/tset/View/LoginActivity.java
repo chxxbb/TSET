@@ -83,7 +83,7 @@ public class LoginActivity extends AppCompatActivity {
         login_new_user.setOnClickListener(new View.OnClickListener() {          //点击新用户后的触发
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(activity, RegisterActivity.class);
+                Intent intent = new Intent(LoginActivity.this, RegisterActivity.class);
                 startActivity(intent);
             }
         });
