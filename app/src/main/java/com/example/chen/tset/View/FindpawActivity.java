@@ -1,4 +1,4 @@
-package com.example.chen.tset;
+package com.example.chen.tset.View;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
