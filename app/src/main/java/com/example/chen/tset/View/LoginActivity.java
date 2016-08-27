@@ -55,12 +55,7 @@ public class LoginActivity extends AppCompatActivity {
                         .execute(new StringCallback() {
                             @Override
                             public void onError(Call call, Exception e, int id) {
-                                runOnUiThread(new Runnable() {
-                                    @Override
-                                    public void run() {
-                                        Toast.makeText(activity, "网络连接失败", Toast.LENGTH_LONG).show();
-                                    }
-                                });
+                                Toast.makeText(activity, "网络连接失败", Toast.LENGTH_LONG).show();
                             }
 
                             @Override
@@ -91,7 +86,8 @@ public class LoginActivity extends AppCompatActivity {
         login_find_password.setOnClickListener(new View.OnClickListener() {     //点击忘记密码后的交互
             @Override
             public void onClick(View v) {
-
+                Intent intent = new Intent(LoginActivity.this, FindpawActivity.class);
+                startActivity(intent);
             }
         });
 
