@@ -14,6 +14,7 @@
         android:orientation="vertical">
 
         <com.example.chen.tset.page.RoundCornerImageView
+            android:id="@+id/rcImageView"
             android:layout_width="match_parent"
             android:layout_height="@dimen/y196"
             android:scaleType="centerCrop"

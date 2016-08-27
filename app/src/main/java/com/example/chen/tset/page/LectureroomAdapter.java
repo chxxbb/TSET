@@ -8,7 +8,9 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.TextView;
 
+import com.example.chen.tset.Data.Lecture;
 import com.example.chen.tset.R;
+import com.nostra13.universalimageloader.core.ImageLoader;
 
 import java.util.List;
 
@@ -16,11 +18,11 @@ import java.util.List;
  * Created by Administrator on 2016/8/26 0026.
  */
 public class LectureroomAdapter extends RecyclerView.Adapter {
-    List<String> list;
+    List<Lecture> list;
     Context context;
     LayoutInflater inflater;
 
-    public LectureroomAdapter(Context context, List<String> list) {
+    public LectureroomAdapter(Context context, List<Lecture> list) {
         this.context = context;
         this.list = list;
         this.inflater = LayoutInflater.from(context);
@@ -28,10 +30,11 @@ public class LectureroomAdapter extends RecyclerView.Adapter {
 
     class Viewholder extends RecyclerView.ViewHolder {
         private TextView tv_lectr;
-
+        private RoundCornerImageView rcImageView;
         public Viewholder(View itemView) {
             super(itemView);
             tv_lectr = (TextView) itemView.findViewById(R.id.tv_lectr);
+            rcImageView= (RoundCornerImageView) itemView.findViewById(R.id.rcImageView);
         }
     }
 
@@ -44,8 +47,9 @@ public class LectureroomAdapter extends RecyclerView.Adapter {
     @Override
     public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
         Viewholder viewholder = (Viewholder) holder;
-        viewholder.tv_lectr.setText(list.get(position));
-
+        viewholder.tv_lectr.setText(list.get(position).getTitle());
+        String uri=list.get(position).getCover();
+        ImageLoader.getInstance().displayImage(uri, viewholder.rcImageView);
     }
 
     @Override
@@ -53,45 +57,5 @@ public class LectureroomAdapter extends RecyclerView.Adapter {
         return list.size();
     }
 
-//    List<String> list;
-//    Context context;
-//
-//    public LectureroomAdapter(Context context, List<String> list) {
-//        this.context = context;
-//        this.list = list;
-//    }
-//
-//    @Override
-//    public int getCount() {
-//        return list.size();
-//    }
-//
-//    @Override
-//    public String getItem(int position) {
-//        return list.get(position);
-//    }
-//
-//    @Override
-//    public long getItemId(int position) {
-//        return position;
-//    }
-//
-//    public View getView(int position, View convertView, ViewGroup parent) {
-//        if (convertView == null) {
-//            LayoutInflater inflater = LayoutInflater.from(parent.getContext());
-//            convertView = inflater.inflate(R.layout.lectureroom_item, parent, false);
-//            convertView.setTag(new ViewHolder(convertView));
-//        }
-//        ViewHolder viewHolder = (ViewHolder) convertView.getTag();
-//        viewHolder.tv_lectr.setText(list.get(position));
-//        return convertView;
-//    }
-//
-//    static class ViewHolder {
-//        private TextView tv_lectr;
-//
-//        ViewHolder(View v) {
-//            tv_lectr = (TextView) v.findViewById(R.id.tv_lectr);
-//        }
-//    }
+
 }

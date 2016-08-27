@@ -85,9 +85,9 @@
                     android:layout_alignParentRight="true"
                     android:layout_marginRight="@dimen/x20"
                     android:layout_marginTop="@dimen/x8"
-                    android:text="详情 >"
-                    android:textColor="#999999"
-                    android:textSize="@dimen/y22" />
+                    android:text="¥ 25"
+                    android:textColor="#fc3d5a"
+                    android:textSize="@dimen/y28" />
 
             </RelativeLayout>
         </LinearLayout>
