@@ -157,4 +157,24 @@ public class User {
         bitmap_icon = user.getBitmap_icon();
     }
 
+    public User(){
+
+    }
+
+    public User(User user){
+        id = user.getId();
+        phone = user.getPhone();
+        name = user.getName();
+        password = user.getPassword();
+        sex = user.getSex();
+        age = user.getAge();
+        icon = user.getIcon();
+        qq = user.getQq();
+        weibo = user.getWeibo();
+        wechat = user.getWechat();
+        email = user.getEmail();
+        role = user.getRole();
+        bitmap_icon = user.getBitmap_icon();
+    }
+
 }

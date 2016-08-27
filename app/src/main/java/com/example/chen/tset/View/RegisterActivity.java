@@ -1,6 +1,7 @@
 package com.example.chen.tset.View;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.TextUtils;
@@ -124,12 +125,14 @@ public class RegisterActivity extends AppCompatActivity {
                                 @Override
                                 public void onResponse(String response, int id) {
                                     System.out.println(response);
-                                    if ("1".equals(response)) {
-                                        Toast.makeText(activity, "注册失败", Toast.LENGTH_LONG).show();
+                                    if ("3".equals(response)) {
+                                        Toast.makeText(activity, "用户已注册", Toast.LENGTH_LONG).show();
                                     } else if ("2".equals(response)) {
                                         Toast.makeText(activity, "请发送验证码", Toast.LENGTH_LONG).show();
                                     } else {
                                         Toast.makeText(activity, "注册成功", Toast.LENGTH_LONG).show();
+                                        Intent intent=new Intent(RegisterActivity.this,LoginActivity.class);
+                                        startActivity(intent);
                                         finish();
                                     }
                                 }

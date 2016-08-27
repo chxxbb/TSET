@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -12,6 +13,7 @@ import android.widget.Toast;
 
 import com.example.chen.tset.Data.Http_data;
 import com.example.chen.tset.Data.User;
+import com.example.chen.tset.Data.User_Http;
 import com.example.chen.tset.R;
 import com.google.gson.Gson;
 import com.zhy.http.okhttp.OkHttpUtils;
@@ -60,13 +62,24 @@ public class LoginActivity extends AppCompatActivity {
 
                             @Override
                             public void onResponse(String response, int id) {
+                                Log.e("返回",response);
+
                                 if (response.equals("1")) {
                                     System.out.println("失败");
                                 } else {
                                     User user = gson.fromJson(response, User.class);
-                                    System.out.println(user.toString());
-                                    Intent intent = new Intent(activity, HomeActivity.class);
-                                    startActivity(intent);
+                                    Log.e("user",user.toString());
+                                    User_Http.user.setUser(user);
+                                    System.out.println(user.getName()+"-----------1---------");
+                                    if (user.getName()!=null && !"".equals(user.getName())){
+                                        System.out.println(user.toString());
+                                        Intent intent = new Intent(activity, HomeActivity.class);
+                                        startActivity(intent);
+
+                                    }else {
+                                        Intent intent=new Intent(LoginActivity.this,SetdataActivity.class);
+                                        startActivity(intent);
+                                    }
                                     finish();
                                 }
 

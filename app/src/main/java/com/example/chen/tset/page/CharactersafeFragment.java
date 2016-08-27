@@ -3,15 +3,27 @@ package com.example.chen.tset.page;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ListView;
+import android.widget.Toast;
 
+import com.example.chen.tset.Data.Http_data;
+import com.example.chen.tset.Data.Lecture;
 import com.example.chen.tset.R;
+import com.google.gson.reflect.TypeToken;
+import com.zhy.http.okhttp.OkHttpUtils;
+import com.zhy.http.okhttp.callback.StringCallback;
 
+import java.lang.reflect.Type;
 import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.LinkedList;
 import java.util.List;
+
+import okhttp3.Call;
 
 /**
  * Created by Administrator on 2016/8/25 0025.
@@ -46,5 +58,22 @@ public class CharactersafeFragment extends Fragment {
         adapter = new CharactersafeAdapter(getContext(), list);
         lv_charactersafe.setAdapter(adapter);
         adapter.notifyDataSetChanged();
+//        OkHttpUtils
+//                .post()
+//                .url(Http_data.http_data + "/findDiseaseList"+"?1")
+//                .build()
+//                .execute(new StringCallback() {
+//                    @Override
+//                    public void onError(Call call, Exception e, int id) {
+//                        Toast.makeText(getContext(), "失败", Toast.LENGTH_SHORT).show();
+//                    }
+//                    @Override
+//                    public void onResponse(String response, int id) {
+//                        Log.e("返回", response);
+//
+//
+//
+//                    }
+//                });
     }
 }

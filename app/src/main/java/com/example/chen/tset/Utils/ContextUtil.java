@@ -37,6 +37,7 @@ public class ContextUtil extends Application {
         ImageLoaderConfiguration config = new ImageLoaderConfiguration.Builder(this)
                 .memoryCacheSize(5 * 1024 * 1024) // 内存缓存
                 .defaultDisplayImageOptions(options) // 设置显示选项
+                .threadPoolSize(3)
                 .build();
 
         // 初始化ImageLoad

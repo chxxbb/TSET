@@ -14,6 +14,8 @@ import android.widget.RadioButton;
 import android.widget.Toast;
 
 import com.example.chen.tset.Data.Http_data;
+import com.example.chen.tset.Data.User;
+import com.example.chen.tset.Data.User_Http;
 import com.example.chen.tset.R;
 import com.zhy.http.okhttp.OkHttpUtils;
 import com.zhy.http.okhttp.callback.StringCallback;
@@ -28,6 +30,7 @@ public class SetdataActivity extends AppCompatActivity {
     private int editEnd;
     private int maxLen = 10; // the max byte
     String gender = null;
+    User user= new User(User_Http.user);
 
 
     @Override
@@ -42,6 +45,7 @@ public class SetdataActivity extends AppCompatActivity {
         rbtn_man = (RadioButton) findViewById(R.id.rbtn_man);
         rb_madam = (RadioButton) findViewById(R.id.rb_madam);
         btn = (Button) findViewById(R.id.btn);
+        rbtn_man.performClick();
         if (rbtn_man.isChecked()) {
             gender = "男士";
         } else if (rb_madam.isChecked()) {
@@ -91,8 +95,8 @@ public class SetdataActivity extends AppCompatActivity {
 
             OkHttpUtils
                     .post()
-                    .url(Http_data.http_data + "/ChangeNameAndSex" + "?1")
-                    .addParams("nickname", et_nickname.getText().toString())
+                    .url(Http_data.http_data + "/ChangeNameAndSex" + "?"+user.getId())
+                    .addParams("name", et_nickname.getText().toString())
                     .addParams("gender", gender)
                     .build()
                     .execute(new StringCallback() {
@@ -105,10 +109,10 @@ public class SetdataActivity extends AppCompatActivity {
                                 }
                             });
                         }
-
                         @Override
                         public void onResponse(String response, int id) {
                             if (response.equals("0")) {
+                                Toast.makeText(SetdataActivity.this, "修改成功", Toast.LENGTH_SHORT).show();
                                 Intent intent = new Intent(SetdataActivity.this, HomeActivity.class);
                                 startActivity(intent);
                             } else if (response.equals("1")) {

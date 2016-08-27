@@ -22,6 +22,15 @@ public class LectureroomAdapter extends RecyclerView.Adapter {
     Context context;
     LayoutInflater inflater;
 
+    public List<Lecture> getList() {
+        return list;
+    }
+
+    public void setList(List<Lecture> list) {
+        this.list = list;
+        notifyDataSetChanged();
+    }
+
     public LectureroomAdapter(Context context, List<Lecture> list) {
         this.context = context;
         this.list = list;
@@ -31,10 +40,11 @@ public class LectureroomAdapter extends RecyclerView.Adapter {
     class Viewholder extends RecyclerView.ViewHolder {
         private TextView tv_lectr;
         private RoundCornerImageView rcImageView;
+
         public Viewholder(View itemView) {
             super(itemView);
             tv_lectr = (TextView) itemView.findViewById(R.id.tv_lectr);
-            rcImageView= (RoundCornerImageView) itemView.findViewById(R.id.rcImageView);
+            rcImageView = (RoundCornerImageView) itemView.findViewById(R.id.rcImageView);
         }
     }
 
@@ -48,7 +58,7 @@ public class LectureroomAdapter extends RecyclerView.Adapter {
     public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
         Viewholder viewholder = (Viewholder) holder;
         viewholder.tv_lectr.setText(list.get(position).getTitle());
-        String uri=list.get(position).getCover();
+        String uri = list.get(position).getCover();
         ImageLoader.getInstance().displayImage(uri, viewholder.rcImageView);
     }
 

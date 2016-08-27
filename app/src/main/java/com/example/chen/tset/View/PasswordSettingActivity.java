@@ -4,26 +4,47 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.view.View;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import com.example.chen.tset.Data.Http_data;
+import com.example.chen.tset.Data.Lecture;
 import com.example.chen.tset.R;
+import com.google.gson.reflect.TypeToken;
+import com.zhy.http.okhttp.OkHttpUtils;
+import com.zhy.http.okhttp.callback.StringCallback;
 
-public class PasswordSettingActivity extends AppCompatActivity {
+import java.lang.reflect.Type;
+import java.util.Iterator;
+import java.util.LinkedList;
+
+import okhttp3.Call;
+
+public class PasswordSettingActivity extends AppCompatActivity implements View.OnClickListener{
     private TextView tv_pas;
     private EditText et_newpassword, et_forpassword;
+    String forpas;
+    String newpas;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_password_setting);
         findView();
+        init();
     }
+
+
 
     private void findView() {
         tv_pas = (TextView) findViewById(R.id.tv_pas);
         et_newpassword = (EditText) findViewById(R.id.et_newpassword);
         et_forpassword = (EditText) findViewById(R.id.et_forpassword);
+        forpas=et_forpassword.getText().toString();
+        newpas=et_newpassword.getText().toString();
+        tv_pas.setOnClickListener(this);
         et_newpassword.addTextChangedListener(textchangelisterer);
         et_forpassword.addTextChangedListener(textchangelisterer);
     }
@@ -48,4 +69,12 @@ public class PasswordSettingActivity extends AppCompatActivity {
 
         }
     };
+    private void init() {
+
+    }
+
+    @Override
+    public void onClick(View v) {
+
+    }
 }

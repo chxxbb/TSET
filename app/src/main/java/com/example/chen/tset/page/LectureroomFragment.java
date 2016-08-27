@@ -51,15 +51,17 @@ public class LectureroomFragment extends Fragment {
     private LectureroomAdapter adapter;
     List<Lecture> list;
     Gson gson;
+
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         view = inflater.inflate(R.layout.fragment_lectureroom, null);
         findView();
         init();
-        gson=new Gson();
+        gson = new Gson();
         return view;
     }
+
 
     private void findView() {
         recyclerView = (RecyclerView) view.findViewById(R.id.recyclerView);
@@ -73,30 +75,27 @@ public class LectureroomFragment extends Fragment {
         recyclerView.setAdapter(adapter);
         OkHttpUtils
                 .post()
-                .url(Http_data.http_data + "/findKnowledgeLectureList" + "?1")
+                .url(Http_data.http_data + "/findKnowledgeLectureList" + "?categoryId")
                 .build()
                 .execute(new StringCallback() {
                     @Override
                     public void onError(Call call, Exception e, int id) {
-                        Toast.makeText(getContext(), "失败", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(getContext(), "网络连接失败", Toast.LENGTH_SHORT).show();
                     }
 
                     @Override
                     public void onResponse(String response, int id) {
-                        Log.e("返回",response);
-                        Type listtype=new TypeToken<LinkedList<Lecture>>(){}.getType();
-                        LinkedList<Lecture> leclist=gson.fromJson(response,listtype);
-                        for(Iterator it=leclist.iterator();it.hasNext();){
-                            Lecture lecture= (Lecture) it.next();
+                        Type listtype = new TypeToken<LinkedList<Lecture>>() {
+                        }.getType();
+                        LinkedList<Lecture> leclist = gson.fromJson(response, listtype);
+                        for (Iterator it = leclist.iterator(); it.hasNext(); ) {
+                            Lecture lecture = (Lecture) it.next();
                             list.add(lecture);
                         }
-                        adapter.notifyDataSetChanged();
-
-
-
-
-
+                        adapter.setList(list);
                     }
                 });
+
     }
+
 }
