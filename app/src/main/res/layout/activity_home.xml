@@ -42,11 +42,11 @@
 
                     <RadioButton
                         android:id="@+id/rb_encyclopedia"
-                        android:layout_width="wrap_content"
+                        android:layout_width="@dimen/x148"
                         android:layout_height="wrap_content"
                         android:layout_marginBottom="@dimen/y12"
-                        android:layout_marginLeft="@dimen/x50"
                         android:layout_marginTop="@dimen/y12"
+                        android:background="@null"
                         android:button="@null"
                         android:drawableTop="@drawable/encyclopedia_onclick"
                         android:gravity="center"
@@ -56,11 +56,11 @@
 
                     <RadioButton
                         android:id="@+id/rb_diagnosis"
-                        android:layout_width="wrap_content"
+                        android:layout_width="@dimen/x148"
                         android:layout_height="wrap_content"
                         android:layout_marginBottom="@dimen/y12"
-                        android:layout_marginLeft="@dimen/x100"
                         android:layout_marginTop="@dimen/y12"
+                        android:background="@null"
                         android:button="@null"
                         android:drawableTop="@drawable/diagnosis_onclick"
                         android:gravity="center"
@@ -80,11 +80,11 @@
 
                     <RadioButton
                         android:id="@+id/rb_lectureroom"
-                        android:layout_width="wrap_content"
+                        android:layout_width="@dimen/x148"
                         android:layout_height="wrap_content"
                         android:layout_marginBottom="@dimen/y12"
-                        android:layout_marginRight="@dimen/x100"
                         android:layout_marginTop="@dimen/y12"
+                        android:background="@null"
                         android:button="@null"
                         android:drawableTop="@drawable/lecture_onclick"
                         android:gravity="center"
@@ -94,11 +94,11 @@
 
                     <RadioButton
                         android:id="@+id/rb_mypage"
-                        android:layout_width="wrap_content"
+                        android:layout_width="@dimen/x148"
                         android:layout_height="wrap_content"
                         android:layout_marginBottom="@dimen/y12"
-                        android:layout_marginRight="@dimen/x50"
                         android:layout_marginTop="@dimen/y12"
+                        android:background="@null"
                         android:button="@null"
                         android:drawableTop="@drawable/my_onclick"
                         android:gravity="center"
