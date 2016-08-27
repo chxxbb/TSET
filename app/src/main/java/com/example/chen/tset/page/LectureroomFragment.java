@@ -3,6 +3,8 @@ package com.example.chen.tset.page;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.StaggeredGridLayoutManager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -18,7 +20,7 @@ import java.util.List;
  */
 public class LectureroomFragment extends Fragment {
     View view;
-    private ListView listView;
+    private RecyclerView recyclerView;
     private LectureroomAdapter adapter;
     List<String> list;
 
@@ -32,8 +34,11 @@ public class LectureroomFragment extends Fragment {
     }
 
     private void findView() {
-        listView = (ListView) view.findViewById(R.id.listView);
-        listView.setVerticalScrollBarEnabled(false);
+        recyclerView = (RecyclerView) view.findViewById(R.id.recyclerView);
+        recyclerView.setVerticalScrollBarEnabled(false);
+        //        recyclerView.setLayoutManager(new StaggeredGridLayoutManager(2, LinearLayout.VERTICAL));
+//        recyclerView.setLayoutManager(new GridLayoutManager(getContext(),2,LinearLayoutManager.VERTICAL,false));
+        recyclerView.setLayoutManager(new StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL));
     }
 
     private void init() {
@@ -46,7 +51,7 @@ public class LectureroomFragment extends Fragment {
         list.add("张老师为你讲解膝盖积水的处理和治疗5");
         list.add("张老师为你讲解膝盖积水的处理和治疗6");
         adapter = new LectureroomAdapter(getContext(), list);
-        listView.setAdapter(adapter);
+        recyclerView.setAdapter(adapter);
         adapter.notifyDataSetChanged();
     }
 }
