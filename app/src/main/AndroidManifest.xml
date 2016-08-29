@@ -21,14 +21,15 @@
         <activity android:name=".View.RegisterActivity" />
         <activity android:name=".View.SetdataActivity" />
         <activity android:name=".View.FindpawActivity" />
-        <activity android:name=".View.HomeActivity" />
+        <activity android:name=".View.ReservationlistActivity" />
         <activity android:name=".View.MycollectActivity" />
         <activity android:name=".View.ReservationActivity" />
         <activity android:name=".View.PasswordSettingActivity" />
         <activity android:name=".View.ThemeselectActivity" />
         <activity android:name=".View.SetPageActivity" />
         <activity android:name=".View.FeedbackActivity" />
-        <activity android:name=".View.AboutusActivity"></activity>
+        <activity android:name=".View.AboutusActivity" />
+        <activity android:name=".View.HomeActivity"></activity>
     </application>
 
 </manifest>

@@ -64,9 +64,9 @@ public class FeedbackActivity extends AppCompatActivity implements View.OnClickL
                 } else {
                     OkHttpUtils
                             .post()
-                            .url(Http_data.http_data + "/addadvise" + "?1")
+                            .url(Http_data.http_data + "/addadvise" )
+                            .addParams("user_id","1")
                             .addParams("content", et_feedback.getText().toString())
-                            .addParams("time", "时间")
                             .build()
                             .execute(new StringCallback() {
                                 @Override
@@ -76,11 +76,12 @@ public class FeedbackActivity extends AppCompatActivity implements View.OnClickL
 
                                 @Override
                                 public void onResponse(String response, int id) {
-                                    if (response.equals("0")) {
-                                        Toast.makeText(FeedbackActivity.this, "提交成功", Toast.LENGTH_SHORT).show();
-                                    } else if (response.equals("1")) {
-                                        Toast.makeText(FeedbackActivity.this, "提交失败", Toast.LENGTH_SHORT).show();
-                                    }
+                                    Toast.makeText(FeedbackActivity.this, response, Toast.LENGTH_SHORT).show();
+//                                    if (response.equals("0")) {
+//                                        Toast.makeText(FeedbackActivity.this, "提交成功", Toast.LENGTH_SHORT).show();
+//                                    } else if (response.equals("1")) {
+//                                        Toast.makeText(FeedbackActivity.this, "提交失败", Toast.LENGTH_SHORT).show();
+//                                    }
                                 }
                             });
                 }

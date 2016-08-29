@@ -58,7 +58,9 @@
             android:layout_width="@dimen/x120"
             android:layout_height="@dimen/y120"
             android:layout_marginTop="@dimen/y60"
-            android:background="@color/inquirycolor" />
+            android:src="@color/inquirycolor"
+            android:adjustViewBounds="true"
+            android:scaleType="centerCrop"/>
 
         <TextView
             android:layout_width="wrap_content"
