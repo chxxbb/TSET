@@ -4,12 +4,19 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.view.View;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import com.example.chen.tset.Data.Http_data;
 import com.example.chen.tset.R;
+import com.zhy.http.okhttp.OkHttpUtils;
+import com.zhy.http.okhttp.callback.StringCallback;
 
-public class FeedbackActivity extends AppCompatActivity {
+import okhttp3.Call;
+
+public class FeedbackActivity extends AppCompatActivity implements View.OnClickListener{
     private TextView tv_feedback;
     private EditText et_feedback;
 
@@ -25,6 +32,7 @@ public class FeedbackActivity extends AppCompatActivity {
         tv_feedback = (TextView) findViewById(R.id.tv_feedback);
         et_feedback = (EditText) findViewById(R.id.et_feedback);
         et_feedback.addTextChangedListener(textchanglistener);
+        tv_feedback.setOnClickListener(this);
     }
 
     private TextWatcher textchanglistener = new TextWatcher() {
@@ -46,4 +54,32 @@ public class FeedbackActivity extends AppCompatActivity {
 
         }
     };
+
+    @Override
+    public void onClick(View v) {
+        switch (v.getId()){
+            case R.id.tv_feedback:
+                OkHttpUtils
+                        .post()
+                        .url(Http_data.http_data + "/addadvise"+"?1")
+                        .addParams("content",et_feedback.getText().toString())
+                        .addParams("time","时间")
+                        .build()
+                        .execute(new StringCallback() {
+                            @Override
+                            public void onError(Call call, Exception e, int id) {
+                                Toast.makeText(FeedbackActivity.this, "网络连接失败", Toast.LENGTH_SHORT).show();
+                            }
+
+                            @Override
+                            public void onResponse(String response, int id) {
+                                if(response.equals("0")){
+                                    Toast.makeText(FeedbackActivity.this, "提交成功", Toast.LENGTH_SHORT).show();
+                                }else if(response.equals("1")){
+                                    Toast.makeText(FeedbackActivity.this, "提交失败", Toast.LENGTH_SHORT).show();
+                                }
+                            }
+                        });
+        }
+    }
 }
