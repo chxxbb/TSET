@@ -11,7 +11,7 @@
         android:label="@string/app_name"
         android:supportsRtl="true"
         android:theme="@style/Theme.AppCompat.NoActionBar">
-        <activity android:name=".View.FeedbackActivity">
+        <activity android:name=".View.LoginActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -21,13 +21,14 @@
         <activity android:name=".View.RegisterActivity" />
         <activity android:name=".View.SetdataActivity" />
         <activity android:name=".View.FindpawActivity" />
-        <activity android:name=".View.LoginActivity" />
+        <activity android:name=".View.HomeActivity" />
         <activity android:name=".View.MycollectActivity" />
         <activity android:name=".View.ReservationActivity" />
         <activity android:name=".View.PasswordSettingActivity" />
         <activity android:name=".View.ThemeselectActivity" />
         <activity android:name=".View.SetPageActivity" />
-        <activity android:name=".View.HomeActivity"></activity>
+        <activity android:name=".View.FeedbackActivity" />
+        <activity android:name=".View.AboutusActivity"></activity>
     </application>
 
 </manifest>

@@ -5,4 +5,5 @@
     <color name="colorAccent">#323232</color>
     <color name="inquirycolor">#6fc9e6</color>
     <color name="diseaselicolor">#e0e0e0</color>
+    <color name="xmgray">#999999</color>
 </resources>

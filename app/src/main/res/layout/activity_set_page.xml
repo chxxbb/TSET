@@ -61,6 +61,7 @@
         android:background="#e0e0e0" />
 
     <RelativeLayout
+        android:id="@+id/rl_feedback"
         android:layout_width="match_parent"
         android:layout_height="@dimen/y90"
         android:background="#ffffff">
@@ -176,6 +177,7 @@
         android:background="#e0e0e0" />
 
     <RelativeLayout
+        android:id="@+id/rl_aboutus"
         android:layout_width="match_parent"
         android:layout_height="@dimen/y90"
         android:background="#ffffff">

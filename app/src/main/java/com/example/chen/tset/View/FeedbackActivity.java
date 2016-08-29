@@ -16,7 +16,7 @@ import com.zhy.http.okhttp.callback.StringCallback;
 
 import okhttp3.Call;
 
-public class FeedbackActivity extends AppCompatActivity implements View.OnClickListener{
+public class FeedbackActivity extends AppCompatActivity implements View.OnClickListener {
     private TextView tv_feedback;
     private EditText et_feedback;
 
@@ -57,29 +57,35 @@ public class FeedbackActivity extends AppCompatActivity implements View.OnClickL
 
     @Override
     public void onClick(View v) {
-        switch (v.getId()){
+        switch (v.getId()) {
             case R.id.tv_feedback:
-                OkHttpUtils
-                        .post()
-                        .url(Http_data.http_data + "/addadvise"+"?1")
-                        .addParams("content",et_feedback.getText().toString())
-                        .addParams("time","时间")
-                        .build()
-                        .execute(new StringCallback() {
-                            @Override
-                            public void onError(Call call, Exception e, int id) {
-                                Toast.makeText(FeedbackActivity.this, "网络连接失败", Toast.LENGTH_SHORT).show();
-                            }
-
-                            @Override
-                            public void onResponse(String response, int id) {
-                                if(response.equals("0")){
-                                    Toast.makeText(FeedbackActivity.this, "提交成功", Toast.LENGTH_SHORT).show();
-                                }else if(response.equals("1")){
-                                    Toast.makeText(FeedbackActivity.this, "提交失败", Toast.LENGTH_SHORT).show();
+                if (et_feedback.getText().toString().length() < 2) {
+                    Toast.makeText(FeedbackActivity.this, "必须大于2个字", Toast.LENGTH_SHORT).show();
+                } else {
+                    OkHttpUtils
+                            .post()
+                            .url(Http_data.http_data + "/addadvise" + "?1")
+                            .addParams("content", et_feedback.getText().toString())
+                            .addParams("time", "时间")
+                            .build()
+                            .execute(new StringCallback() {
+                                @Override
+                                public void onError(Call call, Exception e, int id) {
+                                    Toast.makeText(FeedbackActivity.this, "网络连接失败", Toast.LENGTH_SHORT).show();
                                 }
-                            }
-                        });
+
+                                @Override
+                                public void onResponse(String response, int id) {
+                                    if (response.equals("0")) {
+                                        Toast.makeText(FeedbackActivity.this, "提交成功", Toast.LENGTH_SHORT).show();
+                                    } else if (response.equals("1")) {
+                                        Toast.makeText(FeedbackActivity.this, "提交失败", Toast.LENGTH_SHORT).show();
+                                    }
+                                }
+                            });
+                }
+
+
         }
     }
 }
