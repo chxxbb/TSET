@@ -76,12 +76,11 @@ public class FeedbackActivity extends AppCompatActivity implements View.OnClickL
 
                                 @Override
                                 public void onResponse(String response, int id) {
-                                    Toast.makeText(FeedbackActivity.this, response, Toast.LENGTH_SHORT).show();
-//                                    if (response.equals("0")) {
-//                                        Toast.makeText(FeedbackActivity.this, "提交成功", Toast.LENGTH_SHORT).show();
-//                                    } else if (response.equals("1")) {
-//                                        Toast.makeText(FeedbackActivity.this, "提交失败", Toast.LENGTH_SHORT).show();
-//                                    }
+                                    if (response.equals("3")) {
+                                        Toast.makeText(FeedbackActivity.this, "提交成功", Toast.LENGTH_SHORT).show();
+                                    } else  {
+                                        Toast.makeText(FeedbackActivity.this, "提交失败", Toast.LENGTH_SHORT).show();
+                                    }
                                 }
                             });
                 }
