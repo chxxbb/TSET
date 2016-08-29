@@ -4,31 +4,31 @@ import android.graphics.Bitmap;
 
 public class User {
 
-    private Integer id;//用户id
+    private Integer id = null;//用户id
 
-    private String phone;//手机号
+    private String phone = null;//手机号
 
-    private String name;//名称
+    private String name = null;//名称
 
-    private String password;//密码
+    private String password = null;//密码
 
-    private String sex;//性别
+    private String sex = null;//性别
 
-    private Integer age;//年龄
+    private Integer age = null;//年龄
 
-    private String icon;//头像
+    private String icon = null;//头像
 
-    private String qq;//QQ号
+    private String qq = null;//QQ号
 
-    private String weibo;//微博
+    private String weibo = null;//微博
 
-    private String wechat;//微信
+    private String wechat = null;//微信
 
-    private String email;//邮箱
+    private String email = null;//邮箱
 
-    private Integer role;//角色
+    private Integer role = null;//角色
 
-    private Bitmap bitmap_icon;//头像
+    private Bitmap bitmap_icon = null;//头像
 
     @Override
     public String toString() {
