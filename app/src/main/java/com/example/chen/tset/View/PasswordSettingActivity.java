@@ -1,11 +1,14 @@
 package com.example.chen.tset.View;
 
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -25,6 +28,7 @@ import okhttp3.Call;
 public class PasswordSettingActivity extends AppCompatActivity implements View.OnClickListener{
     private TextView tv_pas;
     private EditText et_newpassword, et_forpassword;
+    private LinearLayout linearlayout;
     String forpas;
     String newpas;
 
@@ -42,11 +46,13 @@ public class PasswordSettingActivity extends AppCompatActivity implements View.O
         tv_pas = (TextView) findViewById(R.id.tv_pas);
         et_newpassword = (EditText) findViewById(R.id.et_newpassword);
         et_forpassword = (EditText) findViewById(R.id.et_forpassword);
+        linearlayout= (LinearLayout) findViewById(R.id.linearlayout);
         forpas=et_forpassword.getText().toString();
         newpas=et_newpassword.getText().toString();
         tv_pas.setOnClickListener(this);
         et_newpassword.addTextChangedListener(textchangelisterer);
         et_forpassword.addTextChangedListener(textchangelisterer);
+        linearlayout.setOnClickListener(this);
     }
 
     private TextWatcher textchangelisterer = new TextWatcher() {
@@ -75,6 +81,34 @@ public class PasswordSettingActivity extends AppCompatActivity implements View.O
 
     @Override
     public void onClick(View v) {
+        switch (v.getId()){
+            case R.id.tv_pas:
+                OkHttpUtils
+                        .post()
+                        .url(Http_data.http_data + "/changeP")
+                        .addParams("id","4")
+                        .addParams("old",et_forpassword.getText().toString())
+                        .addParams("new",et_newpassword.getText().toString())
+                        .build()
+                        .execute(new StringCallback() {
+                            @Override
+                            public void onError(Call call, Exception e, int id) {
+                                Toast.makeText(PasswordSettingActivity.this, "失败", Toast.LENGTH_SHORT).show();
+                            }
 
+                            @Override
+                            public void onResponse(String response, int id) {
+                                if(response.equals("1")){
+                                    Toast.makeText(PasswordSettingActivity.this, "修改失败", Toast.LENGTH_SHORT).show();
+                                }else {
+                                    Toast.makeText(PasswordSettingActivity.this, "修改成功", Toast.LENGTH_SHORT).show();
+                                    Intent intent=new Intent(PasswordSettingActivity.this,HomeActivity.class);
+                                    startActivity(intent);
+                                }
+                            }
+                        });
+                break;
+
+        }
     }
 }

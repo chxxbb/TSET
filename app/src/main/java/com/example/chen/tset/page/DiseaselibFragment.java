@@ -55,16 +55,21 @@ public class DiseaselibFragment extends Fragment {
 
     private void listviewinit() {
         list = new ArrayList<>();
+        list.add("小儿呼吸");
+        list.add("小儿消化");
         list.add("行为发育");
         list.add("小儿神经");
-        list.add("内分泌");
-        list.add("儿童保健");
+        list.add("儿童内分泌");
         list.add("儿童皮肤");
-        list.add("耳鼻喉");
-        list.add("过敏反应");
+        list.add("小儿眼科");
+        list.add("儿童耳鼻喉");
+        list.add("小儿口腔");
         list.add("小儿外科");
-        list.add("小儿外科");
-        list.add("小儿外科");
+        list.add("小儿泌尿");
+        list.add("小儿肾病");
+        list.add("新生儿科");
+        list.add("小儿保健");
+        list.add("儿童心理");
         adapter = new DiseaseliblistvAdapter(getContext(), list);
         listview_dise.setAdapter(adapter);
         adapter.notifyDataSetChanged();

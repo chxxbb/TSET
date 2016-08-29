@@ -22,6 +22,7 @@
     </RelativeLayout>
 
     <RelativeLayout
+        android:id="@+id/rl_remidset"
         android:layout_width="match_parent"
         android:layout_height="@dimen/y90"
         android:layout_marginTop="@dimen/y30"
@@ -100,6 +101,7 @@
         android:background="#e0e0e0" />
 
     <RelativeLayout
+        android:id="@+id/rl_setpass"
         android:layout_width="match_parent"
         android:layout_height="@dimen/y90"
         android:background="#ffffff">

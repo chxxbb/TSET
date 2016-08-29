@@ -1,5 +1,6 @@
 package com.example.chen.tset.page;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -7,12 +8,14 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.Toast;
 
 import com.example.chen.tset.Data.Http_data;
 import com.example.chen.tset.Data.Lecture;
 import com.example.chen.tset.R;
+import com.example.chen.tset.View.ConsultPageActivity;
 import com.google.gson.reflect.TypeToken;
 import com.zhy.http.okhttp.OkHttpUtils;
 import com.zhy.http.okhttp.callback.StringCallback;
@@ -28,7 +31,7 @@ import okhttp3.Call;
 /**
  * Created by Administrator on 2016/8/25 0025.
  */
-public class CharactersafeFragment extends Fragment {
+public class CharactersafeFragment extends Fragment{
     View view;
     CharactersafeAdapter adapter;
     private ListView lv_charactersafe;
@@ -45,6 +48,7 @@ public class CharactersafeFragment extends Fragment {
 
     private void findView() {
         lv_charactersafe = (ListView) view.findViewById(R.id.lv_charactersafe);
+        lv_charactersafe.setOnItemClickListener(listener);
     }
 
     private void init() {
@@ -58,22 +62,13 @@ public class CharactersafeFragment extends Fragment {
         adapter = new CharactersafeAdapter(getContext(), list);
         lv_charactersafe.setAdapter(adapter);
         adapter.notifyDataSetChanged();
-//        OkHttpUtils
-//                .post()
-//                .url(Http_data.http_data + "/findDiseaseList"+"?1")
-//                .build()
-//                .execute(new StringCallback() {
-//                    @Override
-//                    public void onError(Call call, Exception e, int id) {
-//                        Toast.makeText(getContext(), "失败", Toast.LENGTH_SHORT).show();
-//                    }
-//                    @Override
-//                    public void onResponse(String response, int id) {
-//                        Log.e("返回", response);
-//
-//
-//
-//                    }
-//                });
     }
+    private AdapterView.OnItemClickListener listener=new AdapterView.OnItemClickListener() {
+        @Override
+        public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+            Intent intent=new Intent(getContext(), ConsultPageActivity.class);
+            startActivity(intent);
+        }
+    };
+
 }
