@@ -1,0 +1,150 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#ffffff"
+    tools:context="com.example.chen.tset.View.ConsultPageActivity">
+
+    <ScrollView
+        android:id="@+id/scrollview"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/y96"
+                android:background="#ffffff">
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:orientation="horizontal">
+
+                    <ImageView
+                        android:layout_width="@dimen/x20"
+                        android:layout_height="@dimen/y36"
+                        android:layout_gravity="center_vertical"
+                        android:layout_marginLeft="@dimen/x30"
+                        android:src="@drawable/opinion_return" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_vertical"
+                        android:layout_marginLeft="@dimen/x8"
+                        android:text="返回"
+                        android:textColor="#6fc9e6"
+                        android:textSize="@dimen/x32" />
+                </LinearLayout>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerInParent="true"
+                    android:text="咨询详情"
+                    android:textColor="#323232"
+                    android:textSize="@dimen/x36" />
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_alignParentRight="true">
+
+                    <ImageView
+                        android:layout_width="@dimen/x36"
+                        android:layout_height="@dimen/y38"
+                        android:layout_gravity="center_vertical"
+                        android:layout_marginRight="@dimen/x30"
+                        android:src="@drawable/consult_share" />
+                </LinearLayout>
+            </RelativeLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="#e0e0e0" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/x30"
+                android:layout_marginRight="@dimen/x30"
+                android:layout_marginTop="@dimen/y50"
+                android:text="宝宝挑食你无计可施？这些妙招学起来"
+                android:textColor="#323232"
+                android:textSize="@dimen/y40" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/x30"
+                android:layout_marginTop="@dimen/y40"
+                android:text="天使资讯  06-14  11:00"
+                android:textColor="#999999"
+                android:textSize="@dimen/y24" />
+
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/y300"
+                android:layout_marginLeft="@dimen/x30"
+                android:layout_marginRight="@dimen/x30"
+                android:layout_marginTop="@dimen/y50"
+                android:background="@color/inquirycolor" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/x30"
+                android:layout_marginRight="@dimen/x30"
+                android:layout_marginTop="@dimen/y40"
+                android:text="据统计据统计据统计据统计据统计据统计据统计据统计据统计据统计据统计据统计据统计据统计据统计据统计据统计据统计据统计据统计据统计据统计据统计据统计据统计据统计据统计据统计据统计据统计据统计据统计据统计据统计据统计据统计据统计据统计据统计据统计据统计据统计据统计据统计据统计据统计据统计据统计据统计据统计据统计据统计据统计据统计据统计据统计据统计据统计据统计据统计据统计据统计据统计据统计据统计据统计据统计据统计据统计据统计据统计据统计据统计据统计据统计据统计据统计据统计据统计据统计据统计据统计据统计据统计据统计据统计据统计据统计据统计据统计据统计据统计据统计据统计据统计据统计据统计据统计据统计据统计据统计据统计据统计据统计据统计据统计据统计据统计据统计据统计据统计据统计据统计据统计据统计据统计据统计据统计据统计据统计据统计据统计据统计据统计据统计据统计据统计据统计据统计据统计据统计据统计据统计据统计据统计据统计据统计据统计据统计据统计据统计据统计据统计据统计据统计据统计据统计据统计据统计据统计据统计据统计据统计据统计据统计据统计据统计据统计据统计据统计据统计据统计据统计据统计据统计据统计据统计据统计据统计据统计据统计据统计据统计据统计据统计据统计据统计据统计据统计据统计据统计据统计据统计据统计据统计据统计据统计据统计据统计据统计据统计据统计"
+                android:textColor="#666666"
+                android:textSize="@dimen/y32" />
+        </LinearLayout>
+
+    </ScrollView>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:background="#ffffff">
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_alignParentTop="true"
+            android:background="#bbbbbb" />
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:orientation="vertical">
+
+            <ImageView
+                android:layout_width="@dimen/x44"
+                android:layout_height="@dimen/y44"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="@dimen/y12"
+                android:src="@drawable/consult_isonclickpraise" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginBottom="@dimen/y12"
+                android:text="赞"
+                android:textColor="@color/inquirycolor"
+                android:textSize="@dimen/y24" />
+        </LinearLayout>
+    </RelativeLayout>
+
+
+</RelativeLayout>
