@@ -4,6 +4,8 @@ package com.example.chen.tset.page;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.StaggeredGridLayoutManager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,6 +14,7 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.chen.tset.R;
 
@@ -25,7 +28,8 @@ public class DiseaselibFragment extends Fragment {
     View view;
     DiseaseliblistvAdapter adapter;
     DiseaselibrecyvAdapter diseaselibrecyvAdapter;
-    ListView listview_dise, recyv_dise;
+    ListView listview_dise;
+    RecyclerView recyv_dise;
     //左边listview集合
     List<String> list;
     //右边RecyclerView集合
@@ -47,8 +51,9 @@ public class DiseaselibFragment extends Fragment {
 
     private void findView() {
         listview_dise = (ListView) view.findViewById(R.id.listview_dise);
-        recyv_dise = (ListView) view.findViewById(R.id.recyv_dise);
+        recyv_dise = (RecyclerView) view.findViewById(R.id.recyv_dise);
         listview_dise.setOnItemClickListener(listener);
+        recyv_dise.setLayoutManager(new StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL));
         listview_dise.setVerticalScrollBarEnabled(false);
         recyv_dise.setVerticalScrollBarEnabled(false);
     }
@@ -94,7 +99,15 @@ public class DiseaselibFragment extends Fragment {
         list1.add("多动症7");
         list1.add("多动症7");
         list1.add("多动症7");
-
+        list1.add("多动症7");
+        list1.add("多动症7");
+        list1.add("多动症7");
+        list1.add("多动症7");
+        list1.add("多动症7");
+        list1.add("多动症7");
+        list1.add("多动症7");
+        list1.add("多动症7");
+        list1.add("多动症7");
         diseaselibrecyvAdapter = new DiseaselibrecyvAdapter(getContext(), list1);
         recyv_dise.setAdapter(diseaselibrecyvAdapter);
         diseaselibrecyvAdapter.notifyDataSetChanged();
