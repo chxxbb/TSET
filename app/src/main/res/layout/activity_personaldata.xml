@@ -13,6 +13,7 @@
         android:background="#ffffff">
 
         <LinearLayout
+            android:id="@+id/ll_rutmypage"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:orientation="horizontal">
@@ -94,6 +95,7 @@
         android:background="#e0e0e0" />
 
     <RelativeLayout
+        android:id="@+id/rl_name"
         android:layout_width="match_parent"
         android:layout_height="@dimen/y90"
         android:background="#ffffff">
@@ -142,6 +144,7 @@
         android:background="#e0e0e0" />
 
     <RelativeLayout
+        android:id="@+id/rl_gender"
         android:layout_width="match_parent"
         android:layout_height="@dimen/y90"
         android:background="#ffffff">
@@ -190,6 +193,7 @@
         android:background="#e0e0e0" />
 
     <RelativeLayout
+        android:id="@+id/rl_phone"
         android:layout_width="match_parent"
         android:layout_height="@dimen/y90"
         android:background="#ffffff">
