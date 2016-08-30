@@ -31,7 +31,7 @@ import okhttp3.Call;
 /**
  * Created by Administrator on 2016/8/25 0025.
  */
-public class CharactersafeFragment extends Fragment{
+public class CharactersafeFragment extends Fragment {
     View view;
     CharactersafeAdapter adapter;
     private ListView lv_charactersafe;
@@ -59,14 +59,15 @@ public class CharactersafeFragment extends Fragment{
         list.add("4");
         list.add("5");
         list.add("6");
-        adapter = new CharactersafeAdapter(getContext(), list);
-        lv_charactersafe.setAdapter(adapter);
-        adapter.notifyDataSetChanged();
+//        adapter = new CharactersafeAdapter(getContext(), list);
+//        lv_charactersafe.setAdapter(adapter);
+//        adapter.notifyDataSetChanged();
     }
-    private AdapterView.OnItemClickListener listener=new AdapterView.OnItemClickListener() {
+
+    private AdapterView.OnItemClickListener listener = new AdapterView.OnItemClickListener() {
         @Override
         public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-            Intent intent=new Intent(getContext(), ConsultPageActivity.class);
+            Intent intent = new Intent(getContext(), ConsultPageActivity.class);
             startActivity(intent);
         }
     };

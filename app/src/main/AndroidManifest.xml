@@ -11,7 +11,7 @@
         android:label="@string/app_name"
         android:supportsRtl="true"
         android:theme="@style/Theme.AppCompat.NoActionBar">
-        <activity android:name=".View.HomeActivity">
+        <activity android:name=".View.DiseaseActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -31,7 +31,8 @@
         <activity android:name=".View.AboutusActivity" />
         <activity android:name=".View.LoginActivity" />
         <activity android:name=".View.ConsultPageActivity" />
-        <activity android:name=".View.RemindsetActivity"></activity>
+        <activity android:name=".View.RemindsetActivity" />
+        <activity android:name=".View.HomeActivity"></activity>
     </application>
 
 </manifest>

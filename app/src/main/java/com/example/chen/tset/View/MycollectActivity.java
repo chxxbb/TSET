@@ -3,6 +3,7 @@ package com.example.chen.tset.View;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.LinearLayout;
@@ -10,12 +11,19 @@ import android.widget.ListView;
 import android.widget.Toast;
 
 import com.example.chen.tset.Data.Http_data;
+import com.example.chen.tset.Data.Information;
+import com.example.chen.tset.Data.Lecture;
 import com.example.chen.tset.R;
 import com.example.chen.tset.page.CharactersafeAdapter;
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
 import com.zhy.http.okhttp.OkHttpUtils;
 import com.zhy.http.okhttp.callback.StringCallback;
 
+import java.lang.reflect.Type;
 import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.LinkedList;
 import java.util.List;
 
 import okhttp3.Call;
@@ -23,8 +31,9 @@ import okhttp3.Call;
 public class MycollectActivity extends AppCompatActivity {
     private ListView lv_collect;
     CharactersafeAdapter adapter;
-    List<String> list;
+    List<Information> list;
     private LinearLayout ll_collectretur;
+    Gson gson;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -45,17 +54,11 @@ public class MycollectActivity extends AppCompatActivity {
     }
 
     private void init() {
+        gson = new Gson();
         list = new ArrayList<>();
-        list.add("1");
-        list.add("2");
-        list.add("3");
-        list.add("4");
-        list.add("5");
-        list.add("6");
-        list.add("7");
         adapter = new CharactersafeAdapter(this, list);
         lv_collect.setAdapter(adapter);
-        adapter.notifyDataSetChanged();
+
     }
 
     private void initHttp() {
@@ -72,7 +75,15 @@ public class MycollectActivity extends AppCompatActivity {
 
                     @Override
                     public void onResponse(String response, int id) {
-                        Toast.makeText(MycollectActivity.this, response, Toast.LENGTH_SHORT).show();
+                        Log.e("返回", response);
+                        Type listtype = new TypeToken<LinkedList<Information>>() {
+                        }.getType();
+                        LinkedList<Information> leclist = gson.fromJson(response, listtype);
+                        for (Iterator it = leclist.iterator(); it.hasNext(); ) {
+                            Information information = (Information) it.next();
+                            list.add(information);
+                        }
+                        adapter.notifyDataSetChanged();
 
                     }
                 });

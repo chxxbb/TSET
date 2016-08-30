@@ -8,7 +8,9 @@ import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.example.chen.tset.Data.Information;
 import com.example.chen.tset.R;
+import com.nostra13.universalimageloader.core.ImageLoader;
 
 import java.util.List;
 
@@ -17,9 +19,9 @@ import java.util.List;
  */
 public class CharactersafeAdapter extends BaseAdapter {
     Context context;
-    List<String> list;
+    List<Information> list;
 
-    public CharactersafeAdapter(Context context, List<String> list) {
+    public CharactersafeAdapter(Context context, List<Information> list) {
         this.context = context;
         this.list = list;
     }
@@ -30,7 +32,7 @@ public class CharactersafeAdapter extends BaseAdapter {
     }
 
     @Override
-    public Object getItem(int position) {
+    public Information getItem(int position) {
         return list.get(position);
     }
 
@@ -47,15 +49,18 @@ public class CharactersafeAdapter extends BaseAdapter {
             convertView.setTag(new ViewHolder(convertView));
         }
         ViewHolder viewHolder = (ViewHolder) convertView.getTag();
-        viewHolder.tv.setText(list.get(position));
+        viewHolder.tv_title.setText(list.get(position).getTitle());
+        ImageLoader.getInstance().displayImage(list.get(position).getImgurl(), viewHolder.iv_img);
         return convertView;
     }
 
     static class ViewHolder {
-        private TextView tv;
+        private TextView tv_title;
+        private ImageView iv_img;
 
         ViewHolder(View v) {
-            tv = (TextView) v.findViewById(R.id.tv);
+            tv_title = (TextView) v.findViewById(R.id.tv_title);
+            iv_img = (ImageView) v.findViewById(R.id.iv_img);
         }
     }
 }

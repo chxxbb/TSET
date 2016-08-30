@@ -12,6 +12,7 @@ import android.widget.RelativeLayout;
 
 import com.example.chen.tset.R;
 import com.example.chen.tset.View.MycollectActivity;
+import com.example.chen.tset.View.ReservationActivity;
 import com.example.chen.tset.View.SetPageActivity;
 
 /**
@@ -20,7 +21,7 @@ import com.example.chen.tset.View.SetPageActivity;
 public class MypageFragment extends Fragment {
     View view;
     private LinearLayout iv_set;
-    private RelativeLayout rl_mycollect;
+    private RelativeLayout rl_mycollect, rl_myreservation;
 
 
     @Nullable
@@ -33,22 +34,28 @@ public class MypageFragment extends Fragment {
 
     private void findView() {
         iv_set = (LinearLayout) view.findViewById(R.id.iv_set);
-        rl_mycollect= (RelativeLayout) view.findViewById(R.id.rl_mycollect);
+        rl_mycollect = (RelativeLayout) view.findViewById(R.id.rl_mycollect);
+        rl_myreservation = (RelativeLayout) view.findViewById(R.id.rl_myreservation);
         iv_set.setOnClickListener(listerer);
         rl_mycollect.setOnClickListener(listerer);
+        rl_myreservation.setOnClickListener(listerer);
     }
 
     private View.OnClickListener listerer = new View.OnClickListener() {
         @Override
         public void onClick(View v) {
-            switch (v.getId()){
+            switch (v.getId()) {
                 case R.id.iv_set:
                     Intent intent = new Intent(getContext(), SetPageActivity.class);
                     startActivity(intent);
                     break;
                 case R.id.rl_mycollect:
-                    Intent intent1=new Intent(getContext(), MycollectActivity.class);
+                    Intent intent1 = new Intent(getContext(), MycollectActivity.class);
                     startActivity(intent1);
+                    break;
+                case R.id.rl_myreservation:
+                    Intent intent2 = new Intent(getContext(), ReservationActivity.class);
+                    startActivity(intent2);
                     break;
 
             }
