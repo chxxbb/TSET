@@ -87,15 +87,14 @@ public class PasswordSettingActivity extends AppCompatActivity implements View.O
             case R.id.tv_pas:
                 OkHttpUtils
                         .post()
-                        .url(Http_data.http_data + "/changeP")
-                        .addParams("id", "4")
-                        .addParams("old", et_forpassword.getText().toString())
-                        .addParams("new", et_newpassword.getText().toString())
+                        .url(Http_data.http_data + "/changeP" + "?4")
+                        .addParams("oldPassword", et_forpassword.getText().toString())
+                        .addParams("newPassword", et_newpassword.getText().toString())
                         .build()
                         .execute(new StringCallback() {
                             @Override
                             public void onError(Call call, Exception e, int id) {
-                                Toast.makeText(PasswordSettingActivity.this, "失败", Toast.LENGTH_SHORT).show();
+                                Toast.makeText(PasswordSettingActivity.this, "网络连接失败", Toast.LENGTH_SHORT).show();
                             }
 
                             @Override
