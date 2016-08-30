@@ -34,7 +34,7 @@
         <activity android:name=".View.RemindsetActivity" />
         <activity android:name=".View.PersonaldataActivity" />
         <activity android:name=".View.DiseaseActivity" />
-        <activity android:name=".View.GenderpageActivity" />
+        <activity android:name=".View.SexpageActivity" />
         <activity android:name=".View.PhonechangeActivity" />
         <activity android:name=".View.ConsultPageActivity"></activity>
     </application>

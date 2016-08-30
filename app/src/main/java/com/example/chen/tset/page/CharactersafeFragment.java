@@ -12,10 +12,12 @@ import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.Toast;
 
+import com.example.chen.tset.Data.Consult;
 import com.example.chen.tset.Data.Http_data;
 import com.example.chen.tset.Data.Lecture;
 import com.example.chen.tset.R;
 import com.example.chen.tset.View.ConsultPageActivity;
+import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import com.zhy.http.okhttp.OkHttpUtils;
 import com.zhy.http.okhttp.callback.StringCallback;
@@ -33,9 +35,10 @@ import okhttp3.Call;
  */
 public class CharactersafeFragment extends Fragment {
     View view;
-    CharactersafeAdapter adapter;
+    CharactersafeAdapter1 adapter;
     private ListView lv_charactersafe;
-    List<String> list;
+    List<Consult> list;
+    Gson gson;
 
     @Nullable
     @Override
@@ -52,16 +55,35 @@ public class CharactersafeFragment extends Fragment {
     }
 
     private void init() {
+        gson = new Gson();
         list = new ArrayList<>();
-        list.add("1");
-        list.add("2");
-        list.add("3");
-        list.add("4");
-        list.add("5");
-        list.add("6");
-//        adapter = new CharactersafeAdapter(getContext(), list);
-//        lv_charactersafe.setAdapter(adapter);
+        adapter = new CharactersafeAdapter1(getContext(), list);
+        lv_charactersafe.setAdapter(adapter);
 //        adapter.notifyDataSetChanged();
+        OkHttpUtils
+                .post()
+                .url(Http_data.http_data + "/findCyclopediaList")
+                .addParams("categoryId", "1")
+                .build()
+                .execute(new StringCallback() {
+                    @Override
+                    public void onError(Call call, Exception e, int id) {
+                        Toast.makeText(getContext(), "网络连接失败", Toast.LENGTH_SHORT).show();
+                    }
+
+                    @Override
+                    public void onResponse(String response, int id) {
+                        Log.e("品格与安全返回", response);
+                        Type listtype = new TypeToken<LinkedList<Consult>>() {
+                        }.getType();
+                        LinkedList<Consult> leclist = gson.fromJson(response, listtype);
+                        for (Iterator it = leclist.iterator(); it.hasNext(); ) {
+                            Consult consult = (Consult) it.next();
+                            list.add(consult);
+                        }
+                        adapter.notifyDataSetChanged();
+                    }
+                });
     }
 
     private AdapterView.OnItemClickListener listener = new AdapterView.OnItemClickListener() {

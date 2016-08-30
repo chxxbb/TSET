@@ -1,5 +1,9 @@
 package com.example.chen.tset.View;
 
+import android.content.Intent;
+import android.net.Uri;
+import android.os.Environment;
+import android.provider.MediaStore;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -13,9 +17,11 @@ import com.example.chen.tset.R;
 import com.zhy.http.okhttp.OkHttpUtils;
 import com.zhy.http.okhttp.callback.StringCallback;
 
+import java.io.File;
+
 import okhttp3.Call;
 
-public class GenderpageActivity extends AppCompatActivity {
+public class SexpageActivity extends AppCompatActivity {
     private LinearLayout ll_rutgender;
     private RadioButton rb_man, rb_nman;
 
@@ -25,6 +31,8 @@ public class GenderpageActivity extends AppCompatActivity {
         setContentView(R.layout.activity_genderpage);
         findView();
     }
+
+
 
     private void findView() {
         ll_rutgender = (LinearLayout) findViewById(R.id.ll_rutgender);
@@ -43,27 +51,35 @@ public class GenderpageActivity extends AppCompatActivity {
                     finish();
                     break;
                 case R.id.rb_man:
-                    OkHttpUtils
-                            .post()
-                            .url(Http_data.http_data + "/changeSex")
-                            .addParams("id", "2")
-                            .addParams("sex", "男")
-                            .build()
-                            .execute(new StringCallback() {
-                                @Override
-                                public void onError(Call call, Exception e, int id) {
-                                    Toast.makeText(GenderpageActivity.this, "网络连接失败", Toast.LENGTH_SHORT).show();
-                                }
-
-                                @Override
-                                public void onResponse(String response, int id) {
-                                    Log.e("性别修改返回", response);
-                                }
-                            });
+                    httpinit("nan");
                     break;
                 case R.id.rb_nman:
+                    httpinit("女");
                     break;
             }
         }
     };
+    private void httpinit(String sex) {
+        OkHttpUtils
+                .post()
+                .url(Http_data.http_data + "/changeNameAndSex"+"?4")
+                .addParams("gender", sex)
+                .build()
+                .execute(new StringCallback() {
+                    @Override
+                    public void onError(Call call, Exception e, int id) {
+                        Toast.makeText(SexpageActivity.this, "网络连接失败", Toast.LENGTH_SHORT).show();
+                    }
+
+                    @Override
+                    public void onResponse(String response, int id) {
+                        if(response.equals("0")){
+                            finish();
+                        }else {
+                            Toast.makeText(SexpageActivity.this, "修改失败", Toast.LENGTH_SHORT).show();
+                        }
+                    }
+                });
+    }
+
 }

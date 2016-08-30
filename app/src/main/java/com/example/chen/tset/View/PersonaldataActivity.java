@@ -40,7 +40,7 @@ public class PersonaldataActivity extends AppCompatActivity {
                     startActivity(intent);
                     break;
                 case R.id.rl_gender:
-                    Intent intent1 = new Intent(PersonaldataActivity.this, GenderpageActivity.class);
+                    Intent intent1 = new Intent(PersonaldataActivity.this, SexpageActivity.class);
                     startActivity(intent1);
                     break;
                 case R.id.rl_phone:
