@@ -7,7 +7,7 @@ import android.widget.LinearLayout;
 
 import com.example.chen.tset.R;
 
-public class ThemeselectActivity extends AppCompatActivity implements View.OnClickListener{
+public class ThemeselectActivity extends AppCompatActivity implements View.OnClickListener {
     private LinearLayout ll_set;
 
     @Override
@@ -18,12 +18,16 @@ public class ThemeselectActivity extends AppCompatActivity implements View.OnCli
     }
 
     private void finView() {
-        ll_set= (LinearLayout) findViewById(R.id.ll_set);
+        ll_set = (LinearLayout) findViewById(R.id.ll_set);
         ll_set.setOnClickListener(this);
     }
 
     @Override
     public void onClick(View v) {
-
+        switch (v.getId()) {
+            case R.id.ll_set:
+                finish();
+                break;
+        }
     }
 }

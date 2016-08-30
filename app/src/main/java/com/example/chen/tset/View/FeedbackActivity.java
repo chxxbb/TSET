@@ -17,7 +17,7 @@ import com.zhy.http.okhttp.callback.StringCallback;
 import okhttp3.Call;
 
 public class FeedbackActivity extends AppCompatActivity implements View.OnClickListener {
-    private TextView tv_feedback;
+    private TextView tv_feedback, tv_cancel;
     private EditText et_feedback;
 
 
@@ -31,8 +31,10 @@ public class FeedbackActivity extends AppCompatActivity implements View.OnClickL
     private void findView() {
         tv_feedback = (TextView) findViewById(R.id.tv_feedback);
         et_feedback = (EditText) findViewById(R.id.et_feedback);
+        tv_cancel = (TextView) findViewById(R.id.tv_cancel);
         et_feedback.addTextChangedListener(textchanglistener);
         tv_feedback.setOnClickListener(this);
+        tv_cancel.setOnClickListener(this);
     }
 
     private TextWatcher textchanglistener = new TextWatcher() {
@@ -64,8 +66,8 @@ public class FeedbackActivity extends AppCompatActivity implements View.OnClickL
                 } else {
                     OkHttpUtils
                             .post()
-                            .url(Http_data.http_data + "/addadvise" )
-                            .addParams("user_id","1")
+                            .url(Http_data.http_data + "/addadvise")
+                            .addParams("user_id", "1")
                             .addParams("content", et_feedback.getText().toString())
                             .build()
                             .execute(new StringCallback() {
@@ -76,14 +78,19 @@ public class FeedbackActivity extends AppCompatActivity implements View.OnClickL
 
                                 @Override
                                 public void onResponse(String response, int id) {
-                                    if (response.equals("3")) {
+                                    if (response.equals("0")) {
                                         Toast.makeText(FeedbackActivity.this, "提交成功", Toast.LENGTH_SHORT).show();
-                                    } else  {
+                                        finish();
+                                    } else {
                                         Toast.makeText(FeedbackActivity.this, "提交失败", Toast.LENGTH_SHORT).show();
                                     }
                                 }
                             });
                 }
+                break;
+            case R.id.tv_cancel:
+                finish();
+                break;
 
 
         }

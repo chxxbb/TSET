@@ -9,7 +9,7 @@ import android.widget.ScrollView;
 
 import com.example.chen.tset.R;
 
-public class ConsultPageActivity extends AppCompatActivity implements View.OnClickListener{
+public class ConsultPageActivity extends AppCompatActivity implements View.OnClickListener {
     private ScrollView scrollview;
     private LinearLayout ll_consult_return;
 
@@ -22,17 +22,16 @@ public class ConsultPageActivity extends AppCompatActivity implements View.OnCli
 
     private void findview() {
         scrollview = (ScrollView) findViewById(R.id.scrollview);
-        ll_consult_return= (LinearLayout) findViewById(R.id.ll_consult_return);
+        ll_consult_return = (LinearLayout) findViewById(R.id.ll_consult_return);
         scrollview.setVerticalScrollBarEnabled(false);
         ll_consult_return.setOnClickListener(this);
     }
 
     @Override
     public void onClick(View v) {
-        switch (v.getId()){
+        switch (v.getId()) {
             case R.id.ll_consult_return:
-                Intent intent=new Intent(ConsultPageActivity.this,HomeActivity.class);
-                startActivity(intent);
+                finish();
                 break;
 
 

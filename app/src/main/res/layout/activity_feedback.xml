@@ -17,6 +17,7 @@
             android:layout_height="match_parent">
 
             <TextView
+                android:id="@+id/tv_cancel"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_vertical"
@@ -56,16 +57,17 @@
         android:layout_width="match_parent"
         android:layout_height="1dp"
         android:background="#e0e0e0" />
-        <EditText
-            android:id="@+id/et_feedback"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="@dimen/x30"
-            android:layout_marginTop="@dimen/x30"
-            android:background="@null"
-            android:cursorVisible="false"
-            android:hint="您的意见和建议，对我们很重要"
-            android:textColor="#323232"
-            android:textColorHint="#e0e0e0" />
+
+    <EditText
+        android:id="@+id/et_feedback"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/x30"
+        android:layout_marginTop="@dimen/x30"
+        android:background="@null"
+        android:cursorVisible="false"
+        android:hint="您的意见和建议，对我们很重要"
+        android:textColor="#323232"
+        android:textColorHint="#e0e0e0" />
 
 </LinearLayout>

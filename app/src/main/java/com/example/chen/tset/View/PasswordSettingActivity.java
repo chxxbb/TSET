@@ -25,8 +25,8 @@ import java.util.LinkedList;
 
 import okhttp3.Call;
 
-public class PasswordSettingActivity extends AppCompatActivity implements View.OnClickListener{
-    private TextView tv_pas;
+public class PasswordSettingActivity extends AppCompatActivity implements View.OnClickListener {
+    private TextView tv_pas, tv_passet;
     private EditText et_newpassword, et_forpassword;
     private LinearLayout linearlayout;
     String forpas;
@@ -41,18 +41,19 @@ public class PasswordSettingActivity extends AppCompatActivity implements View.O
     }
 
 
-
     private void findView() {
         tv_pas = (TextView) findViewById(R.id.tv_pas);
         et_newpassword = (EditText) findViewById(R.id.et_newpassword);
         et_forpassword = (EditText) findViewById(R.id.et_forpassword);
-        linearlayout= (LinearLayout) findViewById(R.id.linearlayout);
-        forpas=et_forpassword.getText().toString();
-        newpas=et_newpassword.getText().toString();
+        linearlayout = (LinearLayout) findViewById(R.id.linearlayout);
+        tv_passet = (TextView) findViewById(R.id.tv_passet);
+        forpas = et_forpassword.getText().toString();
+        newpas = et_newpassword.getText().toString();
         tv_pas.setOnClickListener(this);
+        linearlayout.setOnClickListener(this);
+        tv_passet.setOnClickListener(this);
         et_newpassword.addTextChangedListener(textchangelisterer);
         et_forpassword.addTextChangedListener(textchangelisterer);
-        linearlayout.setOnClickListener(this);
     }
 
     private TextWatcher textchangelisterer = new TextWatcher() {
@@ -75,20 +76,21 @@ public class PasswordSettingActivity extends AppCompatActivity implements View.O
 
         }
     };
+
     private void init() {
 
     }
 
     @Override
     public void onClick(View v) {
-        switch (v.getId()){
+        switch (v.getId()) {
             case R.id.tv_pas:
                 OkHttpUtils
                         .post()
                         .url(Http_data.http_data + "/changeP")
-                        .addParams("id","4")
-                        .addParams("old",et_forpassword.getText().toString())
-                        .addParams("new",et_newpassword.getText().toString())
+                        .addParams("id", "4")
+                        .addParams("old", et_forpassword.getText().toString())
+                        .addParams("new", et_newpassword.getText().toString())
                         .build()
                         .execute(new StringCallback() {
                             @Override
@@ -98,15 +100,17 @@ public class PasswordSettingActivity extends AppCompatActivity implements View.O
 
                             @Override
                             public void onResponse(String response, int id) {
-                                if(response.equals("1")){
+                                if (response.equals("1")) {
                                     Toast.makeText(PasswordSettingActivity.this, "修改失败", Toast.LENGTH_SHORT).show();
-                                }else {
+                                } else {
                                     Toast.makeText(PasswordSettingActivity.this, "修改成功", Toast.LENGTH_SHORT).show();
-                                    Intent intent=new Intent(PasswordSettingActivity.this,HomeActivity.class);
-                                    startActivity(intent);
+                                    finish();
                                 }
                             }
                         });
+                break;
+            case R.id.tv_passet:
+                finish();
                 break;
 
         }

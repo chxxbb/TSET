@@ -13,6 +13,7 @@
         android:background="#ffffff">
 
         <LinearLayout
+            android:id="@+id/ll_aboutus"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:orientation="horizontal">
@@ -58,9 +59,9 @@
             android:layout_width="@dimen/x120"
             android:layout_height="@dimen/y120"
             android:layout_marginTop="@dimen/y60"
-            android:src="@color/inquirycolor"
             android:adjustViewBounds="true"
-            android:scaleType="centerCrop"/>
+            android:scaleType="centerCrop"
+            android:src="@color/inquirycolor" />
 
         <TextView
             android:layout_width="wrap_content"
