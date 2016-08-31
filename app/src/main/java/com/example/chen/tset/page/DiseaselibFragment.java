@@ -6,6 +6,7 @@ import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.StaggeredGridLayoutManager;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -16,10 +17,21 @@ import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.chen.tset.Data.DiseaseDepartment;
+import com.example.chen.tset.Data.Http_data;
 import com.example.chen.tset.R;
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
+import com.zhy.http.okhttp.OkHttpUtils;
+import com.zhy.http.okhttp.callback.StringCallback;
 
+import java.lang.reflect.Type;
 import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.LinkedList;
 import java.util.List;
+
+import okhttp3.Call;
 
 /**
  * Created by Administrator on 2016/8/25 0025.
@@ -31,12 +43,14 @@ public class DiseaselibFragment extends Fragment {
     ListView listview_dise;
     RecyclerView recyv_dise;
     //左边listview集合
-    List<String> list;
+    List<DiseaseDepartment> list;
     //右边RecyclerView集合
     List<String> list1;
     private LinearLayout dise_ll = null;
     private TextView tv_dislistv = null;
     private ImageView iv_dislistv;
+    Gson gson;
+    String[] a = null;
 
 
     @Nullable
@@ -46,8 +60,10 @@ public class DiseaselibFragment extends Fragment {
         findView();
         listviewinit();
         recyclerViewinit();
+        httpinit(0);
         return view;
     }
+
 
     private void findView() {
         listview_dise = (ListView) view.findViewById(R.id.listview_dise);
@@ -56,61 +72,40 @@ public class DiseaselibFragment extends Fragment {
         recyv_dise.setLayoutManager(new StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL));
         listview_dise.setVerticalScrollBarEnabled(false);
         recyv_dise.setVerticalScrollBarEnabled(false);
+        gson = new Gson();
     }
 
     private void listviewinit() {
         list = new ArrayList<>();
-        list.add("小儿呼吸");
-        list.add("小儿消化");
-        list.add("行为发育");
-        list.add("小儿神经");
-        list.add("儿童内分泌");
-        list.add("儿童皮肤");
-        list.add("小儿眼科");
-        list.add("儿童耳鼻喉");
-        list.add("小儿口腔");
-        list.add("小儿外科");
-        list.add("小儿泌尿");
-        list.add("小儿肾病");
-        list.add("新生儿科");
-        list.add("小儿保健");
-        list.add("儿童心理");
         adapter = new DiseaseliblistvAdapter(getContext(), list);
         listview_dise.setAdapter(adapter);
-        adapter.notifyDataSetChanged();
+        OkHttpUtils
+                .post()
+                .url(Http_data.http_data + "/findSectionList")
+                .build()
+                .execute(new StringCallback() {
+                    @Override
+                    public void onError(Call call, Exception e, int id) {
+                        Toast.makeText(getContext(), "失败", Toast.LENGTH_SHORT).show();
+                    }
+
+                    @Override
+                    public void onResponse(String response, int id) {
+                        Log.e("百科疾病库", response);
+                        Type listtype = new TypeToken<LinkedList<DiseaseDepartment>>() {
+                        }.getType();
+                        LinkedList<DiseaseDepartment> leclist = gson.fromJson(response, listtype);
+                        for (Iterator it = leclist.iterator(); it.hasNext(); ) {
+                            DiseaseDepartment dd = (DiseaseDepartment) it.next();
+                            list.add(dd);
+                        }
+                        adapter.notifyDataSetChanged();
+                    }
+                });
     }
 
     private void recyclerViewinit() {
-        list1 = new ArrayList<>();
-        list1.add("多动症");
-        list1.add("多动症1");
-        list1.add("多动症2");
-        list1.add("多动症3");
-        list1.add("多动症4");
-        list1.add("多动症5");
-        list1.add("多动症6");
-        list1.add("多动症7");
-        list1.add("多动症7");
-        list1.add("多动症7");
-        list1.add("多动症7");
-        list1.add("多动症7");
-        list1.add("多动症7");
-        list1.add("多动症7");
-        list1.add("多动症7");
-        list1.add("多动症7");
-        list1.add("多动症7");
-        list1.add("多动症7");
-        list1.add("多动症7");
-        list1.add("多动症7");
-        list1.add("多动症7");
-        list1.add("多动症7");
-        list1.add("多动症7");
-        list1.add("多动症7");
-        list1.add("多动症7");
-        list1.add("多动症7");
-        diseaselibrecyvAdapter = new DiseaselibrecyvAdapter(getContext(), list1);
-        recyv_dise.setAdapter(diseaselibrecyvAdapter);
-        diseaselibrecyvAdapter.notifyDataSetChanged();
+
 
     }
 
@@ -131,6 +126,33 @@ public class DiseaselibFragment extends Fragment {
                 tv_dislistv = (TextView) view.findViewById(R.id.tv_dislistv);
                 tv_dislistv.setTextColor(0xffffffff);
             }
+            httpinit(position);
         }
+
     };
+
+    private void httpinit(int sectionid) {
+        OkHttpUtils
+                .post()
+                .url(Http_data.http_data + "/findDiseaseList")
+                .addParams("sectionId", sectionid + "")
+                .build()
+                .execute(new StringCallback() {
+                    @Override
+                    public void onError(Call call, Exception e, int id) {
+                        Toast.makeText(getContext(), "失败", Toast.LENGTH_SHORT).show();
+                    }
+
+                    @Override
+                    public void onResponse(String response, int id) {
+                        list1 = gson.fromJson(response, new TypeToken<List<String>>() {
+                        }.getType());
+                        diseaselibrecyvAdapter = new DiseaselibrecyvAdapter(getContext(), list1);
+                        recyv_dise.setAdapter(diseaselibrecyvAdapter);
+                        diseaselibrecyvAdapter.notifyDataSetChanged();
+//                        }
+                    }
+                });
+
+    }
 }

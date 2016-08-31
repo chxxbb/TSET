@@ -10,7 +10,7 @@ import android.widget.RelativeLayout;
 import com.example.chen.tset.R;
 
 public class PersonaldataActivity extends AppCompatActivity {
-    private RelativeLayout rl_name, rl_gender, rl_phone;
+    private RelativeLayout rl_name, rl_gender, rl_phone, rl_icon;
     private LinearLayout ll_rutmypage;
 
     @Override
@@ -25,10 +25,12 @@ public class PersonaldataActivity extends AppCompatActivity {
         ll_rutmypage = (LinearLayout) findViewById(R.id.ll_rutmypage);
         rl_gender = (RelativeLayout) findViewById(R.id.rl_gender);
         rl_phone = (RelativeLayout) findViewById(R.id.rl_phone);
+        rl_icon = (RelativeLayout) findViewById(R.id.rl_icon);
         rl_name.setOnClickListener(listener);
         ll_rutmypage.setOnClickListener(listener);
         rl_gender.setOnClickListener(listener);
         rl_phone.setOnClickListener(listener);
+        rl_icon.setOnClickListener(listener);
     }
 
     private View.OnClickListener listener = new View.OnClickListener() {
@@ -46,6 +48,10 @@ public class PersonaldataActivity extends AppCompatActivity {
                 case R.id.rl_phone:
                     Intent intent2 = new Intent(PersonaldataActivity.this, PhonechangeActivity.class);
                     startActivity(intent2);
+                    break;
+                case R.id.rl_icon:
+                    Intent intent3 = new Intent(PersonaldataActivity.this, IconmanageActivity.class);
+                    startActivity(intent3);
                     break;
                 case R.id.ll_rutmypage:
                     finish();

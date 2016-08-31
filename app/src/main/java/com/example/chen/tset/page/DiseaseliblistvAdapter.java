@@ -6,9 +6,12 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.example.chen.tset.Data.DiseaseDepartment;
 import com.example.chen.tset.R;
+import com.nostra13.universalimageloader.core.ImageLoader;
 
 import java.util.List;
 
@@ -16,10 +19,10 @@ import java.util.List;
  * Created by Administrator on 2016/8/25 0025.
  */
 public class DiseaseliblistvAdapter extends BaseAdapter {
-    private final List<String> list;
+    private final List<DiseaseDepartment> list;
     Context context;
 
-    public DiseaseliblistvAdapter(Context context, List<String> list) {
+    public DiseaseliblistvAdapter(Context context, List<DiseaseDepartment> list) {
         this.context = context;
         this.list = list;
     }
@@ -31,7 +34,7 @@ public class DiseaseliblistvAdapter extends BaseAdapter {
     }
 
     @Override
-    public String getItem(int position) {
+    public DiseaseDepartment getItem(int position) {
         return list.get(position);
     }
 
@@ -48,17 +51,21 @@ public class DiseaseliblistvAdapter extends BaseAdapter {
             convertView.setTag(new ViewHolder(convertView));
         }
         ViewHolder viewHolder = (ViewHolder) convertView.getTag();
-        viewHolder.tv_dislistv.setText(list.get(position));
+        viewHolder.tv_dislistv.setText(list.get(position).getName());
+        ImageLoader.getInstance().displayImage(list.get(position).getIcon(), viewHolder.iv_dislistv);
+
         return convertView;
     }
 
     static class ViewHolder {
         private TextView tv_dislistv;
         private ImageView iv_dislistv;
+        private LinearLayout dise_ll;
 
         ViewHolder(View v) {
             tv_dislistv = (TextView) v.findViewById(R.id.tv_dislistv);
             iv_dislistv = (ImageView) v.findViewById(R.id.iv_dislistv);
+            dise_ll = (LinearLayout) v.findViewById(R.id.dise_ll);
         }
     }
 

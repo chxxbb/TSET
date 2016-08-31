@@ -39,6 +39,15 @@ public class CharactersafeFragment extends Fragment {
     private ListView lv_charactersafe;
     List<Consult> list;
     Gson gson;
+    int i;
+
+    public int getI() {
+        return i;
+    }
+
+    public void setI(int i) {
+        this.i = i;
+    }
 
     @Nullable
     @Override
@@ -63,17 +72,15 @@ public class CharactersafeFragment extends Fragment {
         OkHttpUtils
                 .post()
                 .url(Http_data.http_data + "/findCyclopediaList")
-                .addParams("categoryId", "1")
+                .addParams("categoryId", getI() + "")
                 .build()
                 .execute(new StringCallback() {
                     @Override
                     public void onError(Call call, Exception e, int id) {
-                        Toast.makeText(getContext(), "网络连接失败", Toast.LENGTH_SHORT).show();
                     }
 
                     @Override
                     public void onResponse(String response, int id) {
-                        Log.e("品格与安全返回", response);
                         Type listtype = new TypeToken<LinkedList<Consult>>() {
                         }.getType();
                         LinkedList<Consult> leclist = gson.fromJson(response, listtype);

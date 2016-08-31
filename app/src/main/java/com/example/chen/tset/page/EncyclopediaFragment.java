@@ -58,8 +58,9 @@ public class EncyclopediaFragment extends Fragment {
         flist = new ArrayList<Fragment>();
         diseaselibFragment1 = new DiseaselibFragment();
         flist.add(diseaselibFragment1);
-        for (int i = 0; i < 3; i++) {
+        for (int i = 1; i < 4; i++) {
             charactersafeFragment = new CharactersafeFragment();
+            charactersafeFragment.setI(i);
             flist.add(charactersafeFragment);
         }
         adapter = new EncyclopediaAdapter(getChildFragmentManager(), flist);

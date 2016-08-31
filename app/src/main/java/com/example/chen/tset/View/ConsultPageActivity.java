@@ -100,9 +100,8 @@ public class ConsultPageActivity extends AppCompatActivity implements View.OnCli
                 OkHttpUtils
                         .post()
                         .url(Http_data.http_data + "/addCollect")
-                        .addParams("id", "1")
-                        .addParams("title", "衣服")
-                        .addParams("imgurl", "http://i2.piimg.com/570489/7e384f44eccaabf6t.jpg")
+                        .addParams("userId", "1")
+                        .addParams("cyclopedia", "1")
                         .build()
                         .execute(new StringCallback() {
                             @Override
@@ -112,7 +111,8 @@ public class ConsultPageActivity extends AppCompatActivity implements View.OnCli
 
                             @Override
                             public void onResponse(String response, int id) {
-                                Log.e("咨询详情返回", response);
+                                Log.e("咨询详情收藏返回", response);
+                                Toast.makeText(ConsultPageActivity.this, "收藏成功", Toast.LENGTH_SHORT).show();
 
                             }
                         });

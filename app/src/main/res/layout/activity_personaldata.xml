@@ -45,6 +45,7 @@
     </RelativeLayout>
 
     <RelativeLayout
+        android:id="@+id/rl_icon"
         android:layout_width="match_parent"
         android:layout_height="@dimen/y178"
         android:layout_marginTop="@dimen/y30"

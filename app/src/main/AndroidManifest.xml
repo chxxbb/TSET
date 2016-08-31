@@ -3,6 +3,11 @@
     package="com.example.chen.tset">
 
     <uses-permission android:name="android.permission.INTERNET" />
+    <!-- 往sdcard中写入数据的权限 -->
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+
+    <!-- 在sdcard中创建/删除文件的权限 -->
+    <uses-permission android:name="android.permission.MOUNT_UNMOUNT_FILESYSTEMS" />
 
     <application
         android:name=".Utils.ContextUtil"
@@ -36,7 +41,8 @@
         <activity android:name=".View.DiseaseActivity" />
         <activity android:name=".View.SexpageActivity" />
         <activity android:name=".View.PhonechangeActivity" />
-        <activity android:name=".View.ConsultPageActivity"></activity>
+        <activity android:name=".View.ConsultPageActivity" />
+        <activity android:name=".View.IconmanageActivity"></activity>
     </application>
 
 </manifest>
