@@ -21,10 +21,18 @@ import java.util.List;
 public class DiseaseliblistvAdapter extends BaseAdapter {
     private final List<DiseaseDepartment> list;
     Context context;
+    int mSelect = 0;
 
     public DiseaseliblistvAdapter(Context context, List<DiseaseDepartment> list) {
         this.context = context;
         this.list = list;
+    }
+
+    public void changeSelected(int positon) { //刷新方法
+        if (positon != mSelect) {
+            mSelect = positon;
+            notifyDataSetChanged();
+        }
     }
 
 
@@ -53,7 +61,13 @@ public class DiseaseliblistvAdapter extends BaseAdapter {
         ViewHolder viewHolder = (ViewHolder) convertView.getTag();
         viewHolder.tv_dislistv.setText(list.get(position).getName());
         ImageLoader.getInstance().displayImage(list.get(position).getIcon(), viewHolder.iv_dislistv);
-
+        if (mSelect == position) {
+            viewHolder.dise_ll.setBackgroundColor(android.graphics.Color.parseColor("#6fc9e6"));
+            viewHolder.tv_dislistv.setTextColor(0xffffffff);
+        } else {
+            viewHolder.dise_ll.setBackgroundColor(android.graphics.Color.parseColor("#e0e0e0"));
+            viewHolder.tv_dislistv.setTextColor(android.graphics.Color.parseColor("#323232"));
+        }
         return convertView;
     }
 

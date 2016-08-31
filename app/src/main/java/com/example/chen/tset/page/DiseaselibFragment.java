@@ -59,7 +59,6 @@ public class DiseaselibFragment extends Fragment {
         view = inflater.inflate(R.layout.fragment_diseaselib, null);
         findView();
         listviewinit();
-        recyclerViewinit();
         httpinit(0);
         return view;
     }
@@ -69,6 +68,7 @@ public class DiseaselibFragment extends Fragment {
         listview_dise = (ListView) view.findViewById(R.id.listview_dise);
         recyv_dise = (RecyclerView) view.findViewById(R.id.recyv_dise);
         listview_dise.setOnItemClickListener(listener);
+        listview_dise.setOnItemSelectedListener(slistener);
         recyv_dise.setLayoutManager(new StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL));
         listview_dise.setVerticalScrollBarEnabled(false);
         recyv_dise.setVerticalScrollBarEnabled(false);
@@ -104,31 +104,38 @@ public class DiseaselibFragment extends Fragment {
                 });
     }
 
-    private void recyclerViewinit() {
-
-
-    }
-
-
     private AdapterView.OnItemClickListener listener = new AdapterView.OnItemClickListener() {
         @Override
         public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-            if (dise_ll == null) {
-                dise_ll = (LinearLayout) view.findViewById(R.id.dise_ll);
-                dise_ll.setBackgroundColor(android.graphics.Color.parseColor("#6fc9e6"));
-                tv_dislistv = (TextView) view.findViewById(R.id.tv_dislistv);
-                tv_dislistv.setTextColor(0xffffffff);
-            } else {
-                dise_ll.setBackgroundColor(android.graphics.Color.parseColor("#e0e0e0"));
-                tv_dislistv.setTextColor(android.graphics.Color.parseColor("#323232"));
-                dise_ll = (LinearLayout) view.findViewById(R.id.dise_ll);
-                dise_ll.setBackgroundColor(android.graphics.Color.parseColor("#6fc9e6"));
-                tv_dislistv = (TextView) view.findViewById(R.id.tv_dislistv);
-                tv_dislistv.setTextColor(0xffffffff);
-            }
+            adapter.changeSelected(position);
+//            if (dise_ll == null) {
+//                dise_ll = (LinearLayout) view.findViewById(R.id.dise_ll);
+//                dise_ll.setBackgroundColor(android.graphics.Color.parseColor("#6fc9e6"));
+//                tv_dislistv = (TextView) view.findViewById(R.id.tv_dislistv);
+//                tv_dislistv.setTextColor(0xffffffff);
+//            } else{
+//                dise_ll.setBackgroundColor(android.graphics.Color.parseColor("#e0e0e0"));
+//                tv_dislistv.setTextColor(android.graphics.Color.parseColor("#323232"));
+//                dise_ll = (LinearLayout) view.findViewById(R.id.dise_ll);
+//                dise_ll.setBackgroundColor(android.graphics.Color.parseColor("#6fc9e6"));
+//                tv_dislistv = (TextView) view.findViewById(R.id.tv_dislistv);
+//                tv_dislistv.setTextColor(0xffffffff);
+//            }
+
             httpinit(position);
         }
 
+    };
+    private AdapterView.OnItemSelectedListener slistener = new AdapterView.OnItemSelectedListener() {
+        @Override
+        public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+            adapter.changeSelected(position);
+        }
+
+        @Override
+        public void onNothingSelected(AdapterView<?> parent) {
+
+        }
     };
 
     private void httpinit(int sectionid) {
