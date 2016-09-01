@@ -131,7 +131,7 @@ public class RegisterActivity extends AppCompatActivity {
                                         Toast.makeText(activity, "请发送验证码", Toast.LENGTH_LONG).show();
                                     } else {
                                         Toast.makeText(activity, "注册成功", Toast.LENGTH_LONG).show();
-                                        Intent intent=new Intent(RegisterActivity.this,LoginActivity.class);
+                                        Intent intent = new Intent(RegisterActivity.this, LoginActivity.class);
                                         startActivity(intent);
                                         finish();
                                     }

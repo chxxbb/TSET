@@ -62,22 +62,22 @@ public class LoginActivity extends AppCompatActivity {
 
                             @Override
                             public void onResponse(String response, int id) {
-                                Log.e("返回",response);
+                                Log.e("返回", response);
 
                                 if (response.equals("1")) {
                                     System.out.println("失败");
                                 } else {
                                     User user = gson.fromJson(response, User.class);
-                                    Log.e("user",user.toString());
+                                    Log.e("user", user.toString());
                                     User_Http.user.setUser(user);
-                                    System.out.println(user.getName()+"-----------1---------");
-                                    if (user.getName()!=null && !"".equals(user.getName())){
+                                    System.out.println(user.getName() + "-----------1---------");
+                                    if (user.getName() != null && !"".equals(user.getName())) {
                                         System.out.println(user.toString());
                                         Intent intent = new Intent(activity, HomeActivity.class);
                                         startActivity(intent);
 
-                                    }else {
-                                        Intent intent=new Intent(LoginActivity.this,SetdataActivity.class);
+                                    } else {
+                                        Intent intent = new Intent(LoginActivity.this, SetdataActivity.class);
                                         startActivity(intent);
                                     }
                                     finish();

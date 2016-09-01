@@ -30,7 +30,7 @@ public class SetdataActivity extends AppCompatActivity {
     private int editEnd;
     private int maxLen = 10; // the max byte
     String gender = null;
-    User user= new User(User_Http.user);
+    User user = new User(User_Http.user);
 
 
     @Override
@@ -95,7 +95,7 @@ public class SetdataActivity extends AppCompatActivity {
 
             OkHttpUtils
                     .post()
-                    .url(Http_data.http_data + "/ChangeNameAndSex" + "?"+user.getId())
+                    .url(Http_data.http_data + "/ChangeNameAndSex" + "?" + user.getId())
                     .addParams("name", et_nickname.getText().toString())
                     .addParams("gender", gender)
                     .build()
@@ -109,6 +109,7 @@ public class SetdataActivity extends AppCompatActivity {
                                 }
                             });
                         }
+
                         @Override
                         public void onResponse(String response, int id) {
                             if (response.equals("0")) {

@@ -15,7 +15,7 @@ import com.example.chen.tset.page.ReservationlistvAdapter;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ReservationActivity extends AppCompatActivity implements View.OnClickListener{
+public class ReservationActivity extends AppCompatActivity implements View.OnClickListener {
     private LinearLayout ll_reservationreturn;
     ReservationlistvAdapter adapter;
     private ListView lv_reser;
@@ -33,7 +33,7 @@ public class ReservationActivity extends AppCompatActivity implements View.OnCli
 
     private void findView() {
         lv_reser = (ListView) findViewById(R.id.lv_reser);
-        ll_reservationreturn= (LinearLayout) findViewById(R.id.ll_reservationreturn);
+        ll_reservationreturn = (LinearLayout) findViewById(R.id.ll_reservationreturn);
         ll_reservationreturn.setOnClickListener(this);
         lv_reser.setOnItemClickListener(listener);
     }
@@ -57,10 +57,11 @@ public class ReservationActivity extends AppCompatActivity implements View.OnCli
     public void onClick(View v) {
         finish();
     }
-    private AdapterView.OnItemClickListener listener=new AdapterView.OnItemClickListener() {
+
+    private AdapterView.OnItemClickListener listener = new AdapterView.OnItemClickListener() {
         @Override
         public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-            Intent intent=new Intent(ReservationActivity.this,ReservationlistActivity.class);
+            Intent intent = new Intent(ReservationActivity.this, ReservationlistActivity.class);
             startActivity(intent);
         }
     };

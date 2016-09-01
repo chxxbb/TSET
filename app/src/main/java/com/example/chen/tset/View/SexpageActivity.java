@@ -33,7 +33,6 @@ public class SexpageActivity extends AppCompatActivity {
     }
 
 
-
     private void findView() {
         ll_rutgender = (LinearLayout) findViewById(R.id.ll_rutgender);
         rb_man = (RadioButton) findViewById(R.id.rb_man);
@@ -59,10 +58,11 @@ public class SexpageActivity extends AppCompatActivity {
             }
         }
     };
+
     private void httpinit(String sex) {
         OkHttpUtils
                 .post()
-                .url(Http_data.http_data + "/changeNameAndSex"+"?4")
+                .url(Http_data.http_data + "/changeNameAndSex" + "?4")
                 .addParams("gender", sex)
                 .build()
                 .execute(new StringCallback() {
@@ -73,9 +73,9 @@ public class SexpageActivity extends AppCompatActivity {
 
                     @Override
                     public void onResponse(String response, int id) {
-                        if(response.equals("0")){
+                        if (response.equals("0")) {
                             finish();
-                        }else {
+                        } else {
                             Toast.makeText(SexpageActivity.this, "修改失败", Toast.LENGTH_SHORT).show();
                         }
                     }

@@ -68,8 +68,8 @@ public class NamepageActivity extends AppCompatActivity {
                 case R.id.tv_pas:
                     OkHttpUtils
                             .post()
-                            .url(Http_data.http_data + "/changeNameAndSex"+"?4")
-                            .addParams("name",et_name_save.getText().toString())
+                            .url(Http_data.http_data + "/changeNameAndSex" + "?4")
+                            .addParams("name", et_name_save.getText().toString())
                             .build()
                             .execute(new StringCallback() {
                                 @Override
@@ -79,9 +79,9 @@ public class NamepageActivity extends AppCompatActivity {
 
                                 @Override
                                 public void onResponse(String response, int id) {
-                                    if(response.equals("0")){
+                                    if (response.equals("0")) {
                                         finish();
-                                    }else {
+                                    } else {
                                         Toast.makeText(NamepageActivity.this, "修改失败", Toast.LENGTH_SHORT).show();
                                     }
                                 }

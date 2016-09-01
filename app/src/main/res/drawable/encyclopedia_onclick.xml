@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <selector xmlns:android="http://schemas.android.com/apk/res/android">
-    <item  android:state_checked="true" android:drawable="@drawable/encyclopedia_isclick"></item>
-    <item  android:state_checked="false" android:drawable="@drawable/encyclopedia_unmep"></item>
+    <item android:drawable="@drawable/encyclopedia_isclick" android:state_checked="true"></item>
+    <item android:drawable="@drawable/encyclopedia_unmep" android:state_checked="false"></item>
 </selector>
