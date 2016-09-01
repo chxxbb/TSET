@@ -3,7 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#ffffff"
+    android:background="@color/white"
     android:orientation="vertical">
 
     <RelativeLayout
@@ -28,7 +28,7 @@
                 android:layout_height="wrap_content"
                 android:gravity="center"
                 android:text="忘记密码"
-                android:textColor="#bbbbbb"
+                android:textColor="@color/linegray1"
                 android:textSize="@dimen/x36" />
         </LinearLayout>
     </RelativeLayout>
@@ -59,7 +59,7 @@
             android:hint="请输入手机号"
             android:inputType="phone"
             android:maxLength="11"
-            android:textColorHint="#ffffff" />
+            android:textColorHint="@color/white" />
     </LinearLayout>
 
     <LinearLayout
@@ -91,7 +91,7 @@
                 android:hint="输入验证码"
                 android:inputType="phone"
                 android:maxLength="6"
-                android:textColorHint="#ffffff" />
+                android:textColorHint="@color/white" />
         </LinearLayout>
 
         <Button
@@ -101,7 +101,7 @@
             android:layout_marginLeft="@dimen/x20"
             android:background="@drawable/verification_btn_case"
             android:text="获取验证码"
-            android:textColor="#6fc9e6"
+            android:textColor="@color/backgroundblue"
             android:textSize="@dimen/x32" />
     </LinearLayout>
 
@@ -131,7 +131,7 @@
             android:hint="请输入密码"
             android:inputType="numberPassword"
             android:maxLength="16"
-            android:textColorHint="#ffffff" />
+            android:textColorHint="@color/white" />
     </LinearLayout>
 
     <LinearLayout
@@ -160,7 +160,7 @@
             android:hint="请确认密码"
             android:inputType="textPassword"
             android:maxLength="16"
-            android:textColorHint="#ffffff" />
+            android:textColorHint="@color/white" />
     </LinearLayout>
 
     <Button
@@ -172,7 +172,7 @@
         android:layout_marginTop="@dimen/y40"
         android:background="@drawable/countersign_btn_case"
         android:text="完  成"
-        android:textColor="#ffffff"
+        android:textColor="@color/white"
         android:textStyle="bold" />
 
 

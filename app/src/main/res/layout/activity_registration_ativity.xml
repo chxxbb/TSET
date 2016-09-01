@@ -3,14 +3,14 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#f4f4f4"
+    android:background="@color/backgroundgray"
     android:orientation="vertical"
     tools:context="com.example.chen.tset.View.RegistrationAtivity">
 
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="@dimen/y96"
-        android:background="#ffffff">
+        android:background="@color/white">
 
         <LinearLayout
             android:id="@+id/ll_rutgender"
@@ -31,7 +31,7 @@
                 android:layout_gravity="center_vertical"
                 android:layout_marginLeft="@dimen/x8"
                 android:text="问诊"
-                android:textColor="#6fc9e6"
+                android:textColor="@color/backgroundblue"
                 android:textSize="@dimen/x32" />
         </LinearLayout>
 
@@ -40,7 +40,7 @@
             android:layout_height="wrap_content"
             android:layout_centerInParent="true"
             android:text="一键挂号"
-            android:textColor="#323232"
+            android:textColor="@color/fontcolor"
             android:textSize="@dimen/x36" />
     </RelativeLayout>
 
@@ -71,7 +71,7 @@
                         android:layout_gravity="center_vertical"
                         android:layout_marginLeft="@dimen/x16"
                         android:text="请选择城市"
-                        android:textColor="#bbbbbb"
+                        android:textColor="@color/linegray1"
                         android:textSize="@dimen/y32" />
                 </LinearLayout>
 
@@ -84,7 +84,7 @@
                     <View
                         android:layout_width="@dimen/x2"
                         android:layout_height="@dimen/y50"
-                        android:background="#e0e0e0" />
+                        android:background="@color/linegray" />
 
                     <ImageView
                         android:layout_width="@dimen/x28"
@@ -113,7 +113,7 @@
                         android:layout_gravity="center_vertical"
                         android:layout_marginLeft="@dimen/x16"
                         android:text="选择科室"
-                        android:textColor="#bbbbbb"
+                        android:textColor="@color/linegray1"
                         android:textSize="@dimen/y32" />
                 </LinearLayout>
 
@@ -126,7 +126,7 @@
                     <View
                         android:layout_width="@dimen/x2"
                         android:layout_height="@dimen/y50"
-                        android:background="#e0e0e0" />
+                        android:background="@color/linegray" />
 
                     <ImageView
                         android:layout_width="@dimen/x28"
@@ -155,7 +155,7 @@
                         android:layout_gravity="center_vertical"
                         android:layout_marginLeft="@dimen/x16"
                         android:text="选择职称"
-                        android:textColor="#bbbbbb"
+                        android:textColor="@color/linegray1"
                         android:textSize="@dimen/y32" />
                 </LinearLayout>
 
@@ -168,7 +168,7 @@
                     <View
                         android:layout_width="@dimen/x2"
                         android:layout_height="@dimen/y50"
-                        android:background="#e0e0e0" />
+                        android:background="@color/linegray" />
 
                     <ImageView
                         android:layout_width="@dimen/x28"
@@ -197,7 +197,7 @@
                         android:layout_gravity="center_vertical"
                         android:layout_marginLeft="@dimen/x16"
                         android:text="选择预约时间"
-                        android:textColor="#bbbbbb"
+                        android:textColor="@color/linegray1"
                         android:textSize="@dimen/y32" />
                 </LinearLayout>
 
@@ -210,7 +210,7 @@
                     <View
                         android:layout_width="@dimen/x2"
                         android:layout_height="@dimen/y50"
-                        android:background="#e0e0e0" />
+                        android:background="@color/linegray" />
 
                     <ImageView
                         android:layout_width="@dimen/x28"
@@ -241,8 +241,8 @@
                         android:background="@null"
                         android:cursorVisible="false"
                         android:hint="患者姓名"
-                        android:textColor="#323232"
-                        android:textColorHint="#bbbbbb"
+                        android:textColor="@color/fontcolor"
+                        android:textColorHint="@color/linegray1"
                         android:textSize="@dimen/y32" />
                 </LinearLayout>
 
@@ -279,7 +279,7 @@
                         android:layout_gravity="center_vertical"
                         android:layout_marginLeft="@dimen/x16"
                         android:text="患者性别"
-                        android:textColor="#bbbbbb"
+                        android:textColor="@color/linegray1"
                         android:textSize="@dimen/y32" />
                 </LinearLayout>
 
@@ -292,7 +292,7 @@
                     <View
                         android:layout_width="@dimen/x2"
                         android:layout_height="@dimen/y50"
-                        android:background="#e0e0e0" />
+                        android:background="@color/linegray" />
 
                     <ImageView
                         android:layout_width="@dimen/x28"
@@ -321,7 +321,7 @@
                         android:layout_gravity="center_vertical"
                         android:layout_marginLeft="@dimen/x16"
                         android:text="患者年龄"
-                        android:textColor="#bbbbbb"
+                        android:textColor="@color/linegray1"
                         android:textSize="@dimen/y32" />
                 </LinearLayout>
 
@@ -334,7 +334,7 @@
                     <View
                         android:layout_width="@dimen/x2"
                         android:layout_height="@dimen/y50"
-                        android:background="#e0e0e0" />
+                        android:background="@color/linegray" />
 
                     <ImageView
                         android:layout_width="@dimen/x28"
@@ -365,8 +365,8 @@
                         android:background="@null"
                         android:cursorVisible="false"
                         android:hint="联系方式"
-                        android:textColor="#323232"
-                        android:textColorHint="#bbbbbb"
+                        android:textColor="@color/fontcolor"
+                        android:textColorHint="@color/linegray1"
                         android:textSize="@dimen/y32" />
                 </LinearLayout>
 
@@ -409,8 +409,8 @@
                     android:background="@null"
                     android:cursorVisible="false"
                     android:hint="病情描述"
-                    android:textColor="#323232"
-                    android:textColorHint="#bbbbbb"
+                    android:textColor="@color/fontcolor"
+                    android:textColorHint="@color/linegray1"
                     android:textSize="@dimen/x28" />
             </LinearLayout>
 
@@ -426,14 +426,14 @@
             android:layout_width="match_parent"
             android:layout_height="1dp"
             android:layout_alignTop="@+id/rl"
-            android:background="#e0e0e0" />
+            android:background="@color/linegray" />
 
         <RelativeLayout
             android:id="@+id/rl"
             android:layout_width="match_parent"
             android:layout_height="@dimen/y80"
             android:layout_alignParentBottom="true"
-            android:background="#ffffff"
+            android:background="@color/white"
             android:gravity="center_horizontal"
             android:orientation="horizontal">
 
@@ -448,14 +448,14 @@
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="@dimen/x30"
                     android:text="挂号金额 ："
-                    android:textColor="#323232"
+                    android:textColor="@color/fontcolor"
                     android:textSize="@dimen/y32" />
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="￥25"
-                    android:textColor="@color/inquirycolor"
+                    android:textColor="@color/backgroundblue"
                     android:textSize="@dimen/y36" />
             </LinearLayout>
 
@@ -465,7 +465,7 @@
                 android:layout_alignParentRight="true"
                 android:background="@drawable/registration_btn"
                 android:text="去支付"
-                android:textColor="#ffffff"
+                android:textColor="@color/white"
                 android:textSize="@dimen/y32" />
 
         </RelativeLayout>

@@ -3,7 +3,12 @@
     <color name="colorPrimary">#3F51B5</color>
     <color name="colorPrimaryDark">#303F9F</color>
     <color name="colorAccent">#323232</color>
-    <color name="inquirycolor">#6fc9e6</color>
-    <color name="diseaselicolor">#e0e0e0</color>
+    <color name="white">#ffffff</color>
+    <color name="backgroundblue">#6fc9e6</color>
+    <color name="backgroundgray">#f4f4f4</color>
     <color name="xmgray">#999999</color>
+    <color name="fontcolor">#323232</color>
+    <color name="linegray">#e0e0e0</color>
+    <color name="linegray1">#bbbbbb</color>
+    <color name="fontgray">#666666</color>
 </resources>

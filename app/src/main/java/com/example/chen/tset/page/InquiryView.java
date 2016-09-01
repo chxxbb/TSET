@@ -17,7 +17,7 @@ public class InquiryView extends View {
     public InquiryView(Context context, AttributeSet attrs) {
         super(context, attrs);
         paint = new Paint();
-        baseColor = getResources().getColor(R.color.inquirycolor);
+        baseColor = getResources().getColor(R.color.backgroundblue);
 
     }
 

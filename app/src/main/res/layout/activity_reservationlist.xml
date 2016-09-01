@@ -3,14 +3,14 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#f4f4f4"
+    android:background="@color/backgroundgray"
     android:orientation="vertical"
     tools:context="com.example.chen.tset.View.ReservationlistActivity">
 
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="@dimen/y96"
-        android:background="#ffffff">
+        android:background="@color/white">
 
         <LinearLayout
             android:id="@+id/ll_myreservationg"
@@ -31,7 +31,7 @@
                 android:layout_gravity="center_vertical"
                 android:layout_marginLeft="@dimen/x8"
                 android:text="我的预约"
-                android:textColor="#6fc9e6"
+                android:textColor="@color/backgroundblue"
                 android:textSize="@dimen/x32" />
         </LinearLayout>
 
@@ -40,7 +40,7 @@
             android:layout_height="wrap_content"
             android:layout_centerInParent="true"
             android:text="预约详情"
-            android:textColor="#323232"
+            android:textColor="@color/fontcolor"
             android:textSize="@dimen/x36" />
     </RelativeLayout>
 
@@ -61,7 +61,7 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="#ffffff"
+        android:background="@color/white"
         android:orientation="vertical">
 
         <TextView
@@ -70,7 +70,7 @@
             android:layout_marginLeft="@dimen/x30"
             android:layout_marginTop="@dimen/y36"
             android:text="深圳天使儿童医院"
-            android:textColor="#323232"
+            android:textColor="@color/fontcolor"
             android:textSize="@dimen/y28" />
 
         <TextView
@@ -79,7 +79,7 @@
             android:layout_marginLeft="@dimen/x30"
             android:layout_marginTop="@dimen/y30"
             android:text="科室 ：小二外科"
-            android:textColor="#999999"
+            android:textColor="@color/xmgray"
             android:textSize="@dimen/y24" />
 
         <TextView
@@ -88,7 +88,7 @@
             android:layout_marginLeft="@dimen/x30"
             android:layout_marginTop="@dimen/y30"
             android:text="职称 ：主治医生"
-            android:textColor="#999999"
+            android:textColor="@color/xmgray"
             android:textSize="@dimen/y24" />
 
         <TextView
@@ -97,7 +97,7 @@
             android:layout_marginLeft="@dimen/x30"
             android:layout_marginTop="@dimen/y30"
             android:text="姓名 ：尧舜禹"
-            android:textColor="#999999"
+            android:textColor="@color/xmgray"
             android:textSize="@dimen/y24" />
 
         <TextView
@@ -106,7 +106,7 @@
             android:layout_marginLeft="@dimen/x30"
             android:layout_marginTop="@dimen/y30"
             android:text="日期 ：2016-7-6"
-            android:textColor="#999999"
+            android:textColor="@color/xmgray"
             android:textSize="@dimen/y24" />
 
         <View
@@ -114,7 +114,7 @@
             android:layout_height="1dp"
             android:layout_marginLeft="@dimen/x30"
             android:layout_marginTop="@dimen/y24"
-            android:background="#e0e0e0" />
+            android:background="@color/linegray" />
 
         <TextView
             android:layout_width="wrap_content"
@@ -122,7 +122,7 @@
             android:layout_marginLeft="@dimen/x30"
             android:layout_marginTop="@dimen/y22"
             android:text="地址 ：深圳市龙华新区工业西路97号"
-            android:textColor="#999999"
+            android:textColor="@color/xmgray"
             android:textSize="@dimen/y24" />
 
         <View
@@ -130,7 +130,7 @@
             android:layout_height="1dp"
             android:layout_marginLeft="@dimen/x30"
             android:layout_marginTop="@dimen/y22"
-            android:background="#e0e0e0" />
+            android:background="@color/linegray" />
 
         <TextView
             android:layout_width="wrap_content"
@@ -139,7 +139,7 @@
             android:layout_marginLeft="@dimen/x30"
             android:layout_marginTop="@dimen/y22"
             android:text="电话号码 ：1234567891011"
-            android:textColor="#999999"
+            android:textColor="@color/xmgray"
             android:textSize="@dimen/y24" />
     </LinearLayout>
 
@@ -150,7 +150,7 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="#ffffff"
+        android:background="@color/white"
         android:orientation="vertical">
 
         <TextView
@@ -159,7 +159,7 @@
             android:layout_marginLeft="@dimen/x30"
             android:layout_marginTop="@dimen/y36"
             android:text="预约挂单订号"
-            android:textColor="#323232"
+            android:textColor="@color/fontcolor"
             android:textSize="@dimen/y28" />
 
         <TextView
@@ -168,7 +168,7 @@
             android:layout_marginLeft="@dimen/x30"
             android:layout_marginTop="@dimen/y30"
             android:text="订单号 ：123456789000000"
-            android:textColor="#999999"
+            android:textColor="@color/xmgray"
             android:textSize="@dimen/y24" />
 
         <TextView
@@ -177,7 +177,7 @@
             android:layout_marginLeft="@dimen/x30"
             android:layout_marginTop="@dimen/y30"
             android:text="有效期 ：2016-7-6"
-            android:textColor="#999999"
+            android:textColor="@color/xmgray"
             android:textSize="@dimen/y24" />
 
         <View
@@ -185,7 +185,7 @@
             android:layout_height="1dp"
             android:layout_marginLeft="@dimen/x30"
             android:layout_marginTop="@dimen/y24"
-            android:background="#e0e0e0" />
+            android:background="@color/linegray" />
 
         <RelativeLayout
             android:layout_width="match_parent"
@@ -201,7 +201,7 @@
                     android:layout_marginLeft="@dimen/x30"
                     android:layout_marginTop="@dimen/y22"
                     android:text="价格 ：￥25"
-                    android:textColor="#999999"
+                    android:textColor="@color/xmgray"
                     android:textSize="@dimen/y24" />
             </LinearLayout>
 

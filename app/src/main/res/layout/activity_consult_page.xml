@@ -3,7 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#ffffff"
+    android:background="@color/white"
     tools:context="com.example.chen.tset.View.ConsultPageActivity">
 
     <ScrollView
@@ -19,7 +19,7 @@
             <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/y96"
-                android:background="#ffffff">
+                android:background="@color/white">
 
                 <LinearLayout
                     android:id="@+id/ll_consult_return"
@@ -40,7 +40,7 @@
                         android:layout_gravity="center_vertical"
                         android:layout_marginLeft="@dimen/x8"
                         android:text="返回"
-                        android:textColor="#6fc9e6"
+                        android:textColor="@color/backgroundblue"
                         android:textSize="@dimen/x32" />
                 </LinearLayout>
 
@@ -49,7 +49,7 @@
                     android:layout_height="wrap_content"
                     android:layout_centerInParent="true"
                     android:text="咨询详情"
-                    android:textColor="#323232"
+                    android:textColor="@color/fontcolor"
                     android:textSize="@dimen/x36" />
 
                 <LinearLayout
@@ -69,7 +69,7 @@
             <View
                 android:layout_width="match_parent"
                 android:layout_height="1dp"
-                android:background="#e0e0e0" />
+                android:background="@color/linegray" />
 
             <TextView
                 android:id="@+id/tv_title"
@@ -79,7 +79,7 @@
                 android:layout_marginRight="@dimen/x30"
                 android:layout_marginTop="@dimen/y50"
                 android:text="宝宝挑食你无计可施？这些妙招学起来"
-                android:textColor="#323232"
+                android:textColor="@color/fontcolor"
                 android:textSize="@dimen/y40" />
 
             <TextView
@@ -89,7 +89,7 @@
                 android:layout_marginLeft="@dimen/x30"
                 android:layout_marginTop="@dimen/y40"
                 android:text="天使资讯  06-14  11:00"
-                android:textColor="#999999"
+                android:textColor="@color/xmgray"
                 android:textSize="@dimen/y24" />
 
             <ImageView
@@ -99,7 +99,7 @@
                 android:layout_marginLeft="@dimen/x30"
                 android:layout_marginRight="@dimen/x30"
                 android:layout_marginTop="@dimen/y50"
-                android:src="@color/inquirycolor" />
+                android:src="@color/backgroundblue" />
 
             <TextView
                 android:id="@+id/tv_content"
@@ -109,7 +109,7 @@
                 android:layout_marginRight="@dimen/x30"
                 android:layout_marginTop="@dimen/y40"
                 android:text="据统计据统计据统计据统计据统计据统计据统计据统计据统计据统计据统计据统计据统计据统计据统计据统计据统计据统计据统计据统计据统计据统计据统计据统计据统计据统计据统计据统计据统计据统计据统计据统计据统计据统计据统计据统计据统计据统计据统计据统计据统计据统计据统计据统计据统计据统计据统计据统计据统计据统计据统计据统计据统计据统计据统计据统计据统计据统计据统计据统计据统计据统计据统计据统计据统计据统计据统计据统计据统计据统计据统计据统计据统计据统计据统计据统计据统计据统计据统计据统计据统计据统计据统计据统计据统计据统计据统计据统计据统计据统计据统计据统计据统计据统计据统计据统计据统计据统计据统计据统计据统计据统计据统计据统计据统计据统计据统计据统计据统计据统计据统计据统计据统计据统计据统计据统计据统计据统计据统计据统计据统计据统计据统计据统计据统计据统计据统计据统计据统计据统计据统计据统计据统计据统计据统计据统计据统计据统计据统计据统计据统计据统计据统计据统计据统计据统计据统计据统计据统计据统计据统计据统计据统计据统计据统计据统计据统计据统计据统计据统计据统计据统计据统计据统计据统计据统计据统计据统计据统计据统计据统计据统计据统计据统计据统计据统计据统计据统计据统计据统计据统计据统计据统计据统计据统计据统计据统计据统计据统计据统计据统计据统计"
-                android:textColor="#666666"
+                android:textColor="@color/fontgray"
                 android:textSize="@dimen/y32" />
         </LinearLayout>
 
@@ -119,13 +119,13 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
-        android:background="#ffffff">
+        android:background="@color/white">
 
         <View
             android:layout_width="match_parent"
             android:layout_height="1dp"
             android:layout_alignParentTop="true"
-            android:background="#bbbbbb" />
+            android:background="@color/linegray1" />
 
         <LinearLayout
             android:id="@+id/ll_consult_collect"
@@ -147,7 +147,7 @@
                 android:layout_gravity="center_horizontal"
                 android:layout_marginBottom="@dimen/y12"
                 android:text="赞"
-                android:textColor="@color/inquirycolor"
+                android:textColor="@color/backgroundblue"
                 android:textSize="@dimen/y24" />
         </LinearLayout>
     </RelativeLayout>

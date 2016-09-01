@@ -11,7 +11,7 @@
         android:layout_marginLeft="@dimen/x30"
         android:layout_marginRight="@dimen/x30"
         android:layout_marginTop="@dimen/y30"
-        app:cardBackgroundColor="#ffffff"
+        app:cardBackgroundColor="@color/white"
         app:cardCornerRadius="@dimen/x10"
         app:cardElevation="0px"
         app:cardMaxElevation="2px"
@@ -34,7 +34,7 @@
                     android:layout_height="wrap_content"
                     android:layout_alignParentLeft="true"
                     android:text="预约挂号订单"
-                    android:textColor="#323232"
+                    android:textColor="@color/fontcolor"
                     android:textSize="@dimen/y28" />
 
                 <TextView
@@ -42,7 +42,7 @@
                     android:layout_height="wrap_content"
                     android:layout_alignParentRight="true"
                     android:text="已完成"
-                    android:textColor="#6fc9e6"
+                    android:textColor="@color/backgroundblue"
                     android:textSize="@dimen/y24" />
             </RelativeLayout>
 
@@ -50,7 +50,7 @@
             <View
                 android:layout_width="match_parent"
                 android:layout_height="1dp"
-                android:background="#e0e0e0" />
+                android:background="@color/linegray" />
 
 
             <TextView
@@ -62,7 +62,7 @@
                 android:layout_marginTop="@dimen/y16"
                 android:padding="0px"
                 android:text="订单号 : 123456789000000000"
-                android:textColor="#999999"
+                android:textColor="@color/xmgray"
                 android:textSize="@dimen/y24" />
 
 
@@ -76,7 +76,7 @@
                     android:layout_marginLeft="@dimen/x20"
                     android:layout_marginTop="@dimen/y8"
                     android:text="有效期 ：2016-7-5"
-                    android:textColor="#999999"
+                    android:textColor="@color/xmgray"
                     android:textSize="@dimen/y24" />
 
                 <TextView

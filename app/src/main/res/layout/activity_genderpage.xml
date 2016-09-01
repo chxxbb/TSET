@@ -3,14 +3,14 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#f4f4f4"
+    android:background="@color/backgroundgray"
     android:orientation="vertical"
     tools:context=".View.SexpageActivity">
 
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="@dimen/y96"
-        android:background="#ffffff">
+        android:background="@color/white">
 
         <LinearLayout
             android:id="@+id/ll_rutgender"
@@ -31,7 +31,7 @@
                 android:layout_gravity="center_vertical"
                 android:layout_marginLeft="@dimen/x8"
                 android:text="个人资料"
-                android:textColor="#6fc9e6"
+                android:textColor="@color/backgroundblue"
                 android:textSize="@dimen/x32" />
         </LinearLayout>
 
@@ -40,7 +40,7 @@
             android:layout_height="wrap_content"
             android:layout_centerInParent="true"
             android:text="性别"
-            android:textColor="#323232"
+            android:textColor="@color/fontcolor"
             android:textSize="@dimen/x36" />
     </RelativeLayout>
 
@@ -48,7 +48,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/y30"
-        android:background="#ffffff"
+        android:background="@color/white"
         android:orientation="vertical">
 
         <RadioButton
@@ -61,14 +61,14 @@
             android:button="@null"
             android:drawableRight="@drawable/gender_rb_onclick"
             android:text="男"
-            android:textColor="#323232"
+            android:textColor="@color/fontcolor"
             android:textSize="@dimen/y32" />
 
         <View
             android:layout_width="match_parent"
             android:layout_height="1dp"
             android:layout_marginLeft="@dimen/x30"
-            android:background="#e0e0e0" />
+            android:background="@color/linegray" />
 
         <RadioButton
             android:id="@+id/rb_nman"
@@ -80,7 +80,7 @@
             android:button="@null"
             android:drawableRight="@drawable/gender_rb_onclick"
             android:text="女"
-            android:textColor="#323232"
+            android:textColor="@color/fontcolor"
             android:textSize="@dimen/y32" />
     </RadioGroup>
 

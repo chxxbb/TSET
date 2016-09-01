@@ -3,7 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#ffffff"
+    android:background="@color/white"
     android:orientation="vertical">
 
     <ImageView
@@ -22,7 +22,7 @@
             android:layout_height="wrap_content"
             android:layout_marginLeft="@dimen/x30"
             android:text="昵称"
-            android:textColor="#323232"
+            android:textColor="@color/fontcolor"
             android:textSize="@dimen/x32" />
 
         <EditText
@@ -33,8 +33,8 @@
             android:background="@null"
             android:cursorVisible="false"
             android:hint="请填写您的昵称"
-            android:textColor="#323232"
-            android:textColorHint="#bbbbbb"
+            android:textColor="@color/fontcolor"
+            android:textColorHint="@color/linegray1"
             android:textSize="@dimen/x32" />/>
 
     </LinearLayout>
@@ -42,7 +42,7 @@
     <View
         android:layout_width="match_parent"
         android:layout_height="1dp"
-        android:background="#e0e0e0"></View>
+        android:background="@color/linegray"></View>
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -55,7 +55,7 @@
             android:layout_height="wrap_content"
             android:layout_marginLeft="@dimen/x30"
             android:text="性别"
-            android:textColor="#323232"
+            android:textColor="@color/fontcolor"
             android:textSize="@dimen/x32" />
 
         <RadioGroup
@@ -92,7 +92,7 @@
     <View
         android:layout_width="match_parent"
         android:layout_height="1dp"
-        android:background="#e0e0e0"></View>
+        android:background="@color/linegray"></View>
 
     <Button
         android:id="@+id/btn"
@@ -103,7 +103,7 @@
         android:layout_marginTop="@dimen/y60"
         android:background="@drawable/countersign_btn_case"
         android:text="完  成"
-        android:textColor="#ffffff"
+        android:textColor="@color/white"
         android:textStyle="bold" />
 
 

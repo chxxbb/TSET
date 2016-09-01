@@ -3,7 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#ffffff"
+    android:background="@color/white"
     tools:context=".View.HomeActivity">
 
     <LinearLayout
@@ -21,7 +21,7 @@
             android:layout_width="match_parent"
             android:layout_height="1dp"
             android:layout_alignTop="@+id/relativelaout"
-            android:background="#bbbbbb"></View>
+            android:background="@color/linegray1"></View>
 
         <RelativeLayout
             android:layout_width="match_parent"
@@ -127,7 +127,7 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:text="问诊"
-            android:textColor="#ffffff"
+            android:textColor="@color/white"
             android:textSize="@dimen/x32" />
     </FrameLayout>
 

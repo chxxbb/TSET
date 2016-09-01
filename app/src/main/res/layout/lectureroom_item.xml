@@ -18,7 +18,7 @@
             android:layout_width="match_parent"
             android:layout_height="@dimen/y196"
             android:scaleType="centerCrop"
-            android:src="#6fc9e6" />
+            android:src="@color/backgroundblue" />
 
         <FrameLayout
             android:layout_width="match_parent"
@@ -30,7 +30,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="@dimen/x4"
                 android:text="张老师为你讲解膝盖积水的处理和治疗"
-                android:textColor="#323232"
+                android:textColor="@color/fontcolor"
                 android:textSize="@dimen/x24" />
 
             <View

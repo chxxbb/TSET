@@ -4,19 +4,19 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#f4f4f4"
+    android:background="@color/backgroundgray"
     tools:context="com.example.chen.tset.View.DiseaseActivity">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="#f4f4f4"
+        android:background="@color/backgroundgray"
         android:orientation="vertical">
 
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="@dimen/y96"
-            android:background="#ffffff">
+            android:background="@color/white">
 
             <LinearLayout
                 android:layout_width="wrap_content"
@@ -36,7 +36,7 @@
                     android:layout_gravity="center_vertical"
                     android:layout_marginLeft="@dimen/x8"
                     android:text="百科"
-                    android:textColor="#6fc9e6"
+                    android:textColor="@color/backgroundblue"
                     android:textSize="@dimen/x32" />
             </LinearLayout>
 
@@ -45,7 +45,7 @@
                 android:layout_height="wrap_content"
                 android:layout_centerInParent="true"
                 android:text="下丘脑垂体综合征"
-                android:textColor="#323232"
+                android:textColor="@color/fontcolor"
                 android:textSize="@dimen/x36" />
         </RelativeLayout>
 
@@ -55,7 +55,7 @@
             android:layout_marginLeft="@dimen/x30"
             android:layout_marginRight="@dimen/x30"
             android:layout_marginTop="@dimen/y30"
-            app:cardBackgroundColor="#ffffff"
+            app:cardBackgroundColor="@color/white"
             app:cardCornerRadius="@dimen/x10"
             app:cardElevation="0px"
             app:cardMaxElevation="2px"
@@ -75,7 +75,7 @@
                         android:layout_height="@dimen/y80"
                         android:layout_marginLeft="@dimen/x20"
                         android:layout_marginTop="@dimen/y24"
-                        android:src="@color/inquirycolor" />
+                        android:src="@color/backgroundblue" />
                 </LinearLayout>
 
                 <LinearLayout
@@ -89,7 +89,7 @@
                         android:layout_marginLeft="@dimen/x20"
                         android:layout_marginTop="@dimen/y36"
                         android:text="8岁孩子妈妈 张XX"
-                        android:textColor="#999999"
+                        android:textColor="@color/xmgray"
                         android:textSize="@dimen/y24" />
 
                     <TextView
@@ -99,7 +99,7 @@
                         android:layout_marginLeft="@dimen/x20"
                         android:layout_marginTop="@dimen/y12"
                         android:text="医生，医生，医生，医生，医生，医生，医生，医生，医生，医生，医生，医生，医生，医生，医生，医生，医生，医生，医生，医生，医生，"
-                        android:textColor="#323232"
+                        android:textColor="@color/fontcolor"
                         android:textSize="@dimen/y28" />
                 </LinearLayout>
             </LinearLayout>
@@ -115,7 +115,7 @@
             android:layout_marginLeft="@dimen/x30"
             android:layout_marginRight="@dimen/x30"
             android:layout_marginTop="@dimen/y30"
-            app:cardBackgroundColor="#ffffff"
+            app:cardBackgroundColor="@color/white"
             app:cardCornerRadius="@dimen/x10"
             app:cardElevation="0px"
             app:cardMaxElevation="2px"
@@ -140,7 +140,7 @@
                             android:layout_height="@dimen/y80"
                             android:layout_marginLeft="@dimen/x20"
                             android:layout_marginTop="@dimen/y24"
-                            android:src="@color/inquirycolor" />
+                            android:src="@color/backgroundblue" />
                     </LinearLayout>
 
                     <LinearLayout
@@ -154,7 +154,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="张医生"
-                            android:textColor="#999999"
+                            android:textColor="@color/xmgray"
                             android:textSize="@dimen/y24" />
 
                         <TextView
@@ -162,7 +162,7 @@
                             android:layout_height="wrap_content"
                             android:layout_marginTop="@dimen/y8"
                             android:text="XXXXXX科"
-                            android:textColor="#999999"
+                            android:textColor="@color/xmgray"
                             android:textSize="@dimen/y24" />
                     </LinearLayout>
                 </LinearLayout>
@@ -173,7 +173,7 @@
                     android:layout_marginLeft="@dimen/x20"
                     android:layout_marginTop="@dimen/y20"
                     android:text="经本医生诊断，你的孩子没救了"
-                    android:textColor="#323232"
+                    android:textColor="@color/fontcolor"
                     android:textSize="@dimen/y28" />
 
                 <LinearLayout
@@ -187,14 +187,14 @@
                         android:layout_width="@dimen/x8"
                         android:layout_height="@dimen/y36"
                         android:layout_marginLeft="@dimen/x20"
-                        android:background="@color/inquirycolor" />
+                        android:background="@color/backgroundblue" />
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="@dimen/x10"
                         android:text="症状"
-                        android:textColor="#323232"
+                        android:textColor="@color/fontcolor"
                         android:textSize="@dimen/y32" />
 
                 </LinearLayout>
@@ -206,7 +206,7 @@
                     android:layout_marginRight="@dimen/x20"
                     android:layout_marginTop="@dimen/y10"
                     android:text="首发症状,首发症状,首发症状,首发症状,首发症状,首发症状,首发症状,首发症状,首发症状,首发症状,首发症状,首发症状,首发症状,首发症状,首发症状,首发症状,首发症状,首发症状,首发症状,首发症状,首发症状,首发症状,首发症状,首发症状,首发症状,首发症状,"
-                    android:textColor="#323232"
+                    android:textColor="@color/fontcolor"
                     android:textSize="@dimen/y28" />
 
                 <LinearLayout
@@ -220,14 +220,14 @@
                         android:layout_width="@dimen/x8"
                         android:layout_height="@dimen/y36"
                         android:layout_marginLeft="@dimen/x20"
-                        android:background="@color/inquirycolor" />
+                        android:background="@color/backgroundblue" />
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="@dimen/x10"
                         android:text="症状"
-                        android:textColor="#323232"
+                        android:textColor="@color/fontcolor"
                         android:textSize="@dimen/y32" />
 
                 </LinearLayout>
@@ -239,7 +239,7 @@
                     android:layout_marginRight="@dimen/x20"
                     android:layout_marginTop="@dimen/y10"
                     android:text="首发症状与本病病因密切有关"
-                    android:textColor="#323232"
+                    android:textColor="@color/fontcolor"
                     android:textSize="@dimen/y28" />
 
                 <LinearLayout
@@ -253,7 +253,7 @@
                         android:layout_width="@dimen/x8"
                         android:layout_height="@dimen/y36"
                         android:layout_marginLeft="@dimen/x20"
-                        android:background="@color/inquirycolor" />
+                        android:background="@color/backgroundblue" />
 
                     <TextView
                         android:layout_width="wrap_content"
@@ -261,7 +261,7 @@
                         android:layout_gravity="center_vertical"
                         android:layout_marginLeft="@dimen/x10"
                         android:text="治疗"
-                        android:textColor="#323232"
+                        android:textColor="@color/fontcolor"
                         android:textSize="@dimen/y32" />
 
                 </LinearLayout>
@@ -274,7 +274,7 @@
                     android:layout_marginRight="@dimen/x20"
                     android:layout_marginTop="@dimen/y10"
                     android:text="首发症状与本病病因密切有关"
-                    android:textColor="#323232"
+                    android:textColor="@color/fontcolor"
                     android:textSize="@dimen/y28" />
 
             </LinearLayout>

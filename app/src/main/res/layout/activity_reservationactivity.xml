@@ -3,14 +3,14 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#f4f4f4"
+    android:background="@color/backgroundgray"
     android:orientation="vertical"
     tools:context=".View.ReservationActivity">
 
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="@dimen/y96"
-        android:background="#ffffff">
+        android:background="@color/white">
 
         <LinearLayout
             android:id="@+id/ll_reservationreturn"
@@ -31,7 +31,7 @@
                 android:layout_gravity="center_vertical"
                 android:layout_marginLeft="@dimen/x8"
                 android:text="我的"
-                android:textColor="#6fc9e6"
+                android:textColor="@color/backgroundblue"
                 android:textSize="@dimen/x32" />
         </LinearLayout>
 
@@ -40,7 +40,7 @@
             android:layout_height="wrap_content"
             android:layout_centerInParent="true"
             android:text="我的预约"
-            android:textColor="#323232"
+            android:textColor="@color/fontcolor"
             android:textSize="@dimen/x36" />
     </RelativeLayout>
 

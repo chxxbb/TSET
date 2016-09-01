@@ -3,14 +3,14 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#f4f4f4"
+    android:background="@color/backgroundgray"
     android:orientation="vertical"
     tools:context="com.example.chen.tset.View.NamepageActivity">
 
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="@dimen/y96"
-        android:background="#ffffff">
+        android:background="@color/white">
 
         <LinearLayout
             android:id="@+id/ll_rutname"
@@ -24,7 +24,7 @@
                 android:layout_gravity="center_vertical"
                 android:layout_marginLeft="@dimen/x30"
                 android:text="取消"
-                android:textColor="#6fc9e6"
+                android:textColor="@color/backgroundblue"
                 android:textSize="@dimen/x32" />
         </LinearLayout>
 
@@ -33,7 +33,7 @@
             android:layout_height="wrap_content"
             android:layout_centerInParent="true"
             android:text="昵称"
-            android:textColor="#323232"
+            android:textColor="@color/fontcolor"
             android:textSize="@dimen/x36" />
 
         <LinearLayout
@@ -49,7 +49,7 @@
                 android:layout_gravity="center_vertical"
                 android:layout_marginRight="@dimen/x30"
                 android:text="保存"
-                android:textColor="#e0e0e0"
+                android:textColor="@color/linegray"
                 android:textSize="@dimen/x32" />
         </LinearLayout>
     </RelativeLayout>
@@ -58,7 +58,7 @@
         android:layout_width="match_parent"
         android:layout_height="@dimen/y90"
         android:layout_marginTop="@dimen/y30"
-        android:background="#ffffff"
+        android:background="@color/white"
         android:gravity="center_vertical">
 
         <LinearLayout
@@ -73,8 +73,8 @@
                 android:background="@null"
                 android:cursorVisible="false"
                 android:hint="请输入你的昵称"
-                android:textColor="#323232"
-                android:textColorHint="#e0e0e0"
+                android:textColor="@color/fontcolor"
+                android:textColorHint="@color/linegray"
                 android:textSize="@dimen/y32" />
         </LinearLayout>
 

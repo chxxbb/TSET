@@ -33,7 +33,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="吃喝拉撒无小事"
-                android:textColor="#323232"
+                android:textColor="@color/fontcolor"
                 android:textSize="@dimen/x28" />
 
             <TextView
@@ -45,7 +45,7 @@
                 android:ellipsize="end"
                 android:lines="1"
                 android:text="很多人认为，他是健身是一种有益的运动动方法方法发"
-                android:textColor="#999999"
+                android:textColor="@color/xmgray"
                 android:textSize="@dimen/x24" />
 
             <RelativeLayout
@@ -59,7 +59,7 @@
                     android:layout_height="wrap_content"
                     android:layout_alignParentLeft="true"
                     android:text="08-25"
-                    android:textColor="#bbbbbb"
+                    android:textColor="@color/linegray1"
                     android:textSize="@dimen/x22" />
 
                 <LinearLayout
@@ -79,7 +79,7 @@
                         android:layout_marginLeft="@dimen/x14"
                         android:layout_marginRight="@dimen/x42"
                         android:text="21"
-                        android:textColor="#bbbbbb"
+                        android:textColor="@color/linegray1"
                         android:textSize="@dimen/x22" />
                 </LinearLayout>
             </RelativeLayout>
@@ -90,6 +90,6 @@
         android:layout_width="match_parent"
         android:layout_height="1dp"
         android:layout_marginTop="@dimen/y12"
-        android:background="#e0e0e0" />
+        android:background="@color/linegray" />
 
 </LinearLayout>
