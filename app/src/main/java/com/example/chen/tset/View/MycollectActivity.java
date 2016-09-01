@@ -65,7 +65,7 @@ public class MycollectActivity extends AppCompatActivity {
         OkHttpUtils
                 .post()
                 .url(Http_data.http_data + "/findCollectList")
-                .addParams("id", "1")
+                .addParams("userId", "1")
                 .build()
                 .execute(new StringCallback() {
                     @Override

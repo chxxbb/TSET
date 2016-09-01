@@ -99,9 +99,9 @@ public class ConsultPageActivity extends AppCompatActivity implements View.OnCli
             case R.id.ll_consult_collect:
                 OkHttpUtils
                         .post()
-                        .url(Http_data.http_data + "/addCollect")
-                        .addParams("user_id", "1")
-                        .addParams("cyclopedia_id", "2")
+                        .url(Http_data.http_data + "/AddCollect")
+                        .addParams("userId", "1")
+                        .addParams("cyclopediaId", "1")
                         .build()
                         .execute(new StringCallback() {
                             @Override
