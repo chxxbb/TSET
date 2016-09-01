@@ -43,7 +43,7 @@
         <activity android:name=".View.PhonechangeActivity" />
         <activity android:name=".View.ConsultPageActivity" />
         <activity android:name=".View.IconmanageActivity" />
-        <activity android:name=".View.RegistrationAtivity"></activity>
+        <activity android:name=".View.RegistrationAtivity" />
     </application>
 
 </manifest>

@@ -119,8 +119,10 @@
         android:layout_marginBottom="@dimen/y12">
 
         <com.example.chen.tset.page.InquiryView
+            android:id="@+id/iv_inquiry"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
+            android:layout_height="wrap_content"
+            android:src="@color/backgroundblue" />
 
         <TextView
             android:layout_width="wrap_content"

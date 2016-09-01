@@ -11,6 +11,8 @@ import android.widget.RadioGroup;
 
 import com.example.chen.tset.page.EncyclopediaFragment;
 import com.example.chen.tset.R;
+import com.example.chen.tset.page.InquiryFragment;
+import com.example.chen.tset.page.InquiryView;
 import com.example.chen.tset.page.LectureroomFragment;
 import com.example.chen.tset.page.MypageFragment;
 
@@ -23,6 +25,8 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
     private EncyclopediaFragment encyclopediaFragment;
     private LectureroomFragment lectureroomFragment;
     private MypageFragment mypageFragment;
+    private InquiryFragment inquiryFragment;
+    private InquiryView iv_inquiry;
     HomeActivity homeActivity;
 
 
@@ -42,11 +46,13 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
         rb_diagnosis = (RadioButton) findViewById(R.id.rb_diagnosis);
         radioGroup_left = (RadioGroup) findViewById(R.id.radioGroup_left);
         radioGroup_right = (RadioGroup) findViewById(R.id.radioGroup_right);
+        iv_inquiry = (InquiryView) findViewById(R.id.iv_inquiry);
         rb_encyclopedia.setChecked(true);
         rb_encyclopedia.setOnClickListener(this);
         rb_lectureroom.setOnClickListener(this);
         rb_mypage.setOnClickListener(this);
         rb_diagnosis.setOnClickListener(this);
+        iv_inquiry.setOnClickListener(this);
     }
 
     private void init() {
@@ -56,9 +62,9 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
 
     private void hideAllFragment(FragmentTransaction fragmentTransaction) {
         if (encyclopediaFragment != null) fragmentTransaction.hide(encyclopediaFragment);
-//        if (fg2 != null) fragmentTransaction.hide(fg2);
         if (lectureroomFragment != null) fragmentTransaction.hide(lectureroomFragment);
         if (mypageFragment != null) fragmentTransaction.hide(mypageFragment);
+        if (inquiryFragment != null) fragmentTransaction.hide(inquiryFragment);
     }
 
 
@@ -96,6 +102,15 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
                 break;
             case R.id.rb_diagnosis:
                 radioGroup_right.clearCheck();
+                break;
+            case R.id.iv_inquiry:
+                radioGroup_right.clearCheck();
+                if (inquiryFragment == null) {
+                    inquiryFragment = new InquiryFragment();
+                    ft.add(R.id.framelayout, inquiryFragment);
+                } else {
+                    ft.show(inquiryFragment);
+                }
                 break;
         }
         ft.commit();

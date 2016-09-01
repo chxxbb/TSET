@@ -14,6 +14,7 @@ public class InquiryView extends View {
     private RectF oval;
     private int baseColor;
 
+
     public InquiryView(Context context, AttributeSet attrs) {
         super(context, attrs);
         paint = new Paint();

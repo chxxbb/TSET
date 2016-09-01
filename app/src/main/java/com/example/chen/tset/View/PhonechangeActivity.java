@@ -4,12 +4,19 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import com.example.chen.tset.Data.Http_data;
 import com.example.chen.tset.R;
+import com.zhy.http.okhttp.OkHttpUtils;
+import com.zhy.http.okhttp.callback.StringCallback;
+
+import okhttp3.Call;
 
 public class PhonechangeActivity extends AppCompatActivity {
     private EditText et_verificationcode, et_phone;
@@ -31,6 +38,7 @@ public class PhonechangeActivity extends AppCompatActivity {
         et_verificationcode.addTextChangedListener(textListener);
         et_phone.addTextChangedListener(textListener);
         ll_rutphone.setOnClickListener(listener);
+        tv_pas.setOnClickListener(listener);
     }
 
     private TextWatcher textListener = new TextWatcher() {
@@ -59,6 +67,27 @@ public class PhonechangeActivity extends AppCompatActivity {
             switch (v.getId()) {
                 case R.id.ll_rutphone:
                     finish();
+                    break;
+                case R.id.tv_pas:
+                    OkHttpUtils
+                            .post()
+                            .url(Http_data.http_data + "/bingding")
+                            .addParams("id", "13")
+                            .addParams("phone", et_phone.getText().toString())
+                            .addParams("code", et_verificationcode.getText().toString())
+                            .build()
+                            .execute(new StringCallback() {
+                                @Override
+                                public void onError(Call call, Exception e, int id) {
+                                    Toast.makeText(PhonechangeActivity.this, "网络连接失败", Toast.LENGTH_SHORT).show();
+                                }
+
+                                @Override
+                                public void onResponse(String response, int id) {
+                                    Log.e("修改手机号返回", response);
+
+                                }
+                            });
                     break;
             }
         }
