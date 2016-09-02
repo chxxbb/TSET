@@ -41,6 +41,7 @@ public class ReservationActivity extends AppCompatActivity implements View.OnCli
     private void findView() {
         lv_reser = (ListView) findViewById(R.id.lv_reser);
         ll_reservationreturn = (LinearLayout) findViewById(R.id.ll_reservationreturn);
+        lv_reser.setVerticalScrollBarEnabled(false);
         ll_reservationreturn.setOnClickListener(this);
         lv_reser.setOnItemClickListener(listener);
     }
