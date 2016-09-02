@@ -44,6 +44,7 @@
         <activity android:name=".View.ConsultPageActivity" />
         <activity android:name=".View.IconmanageActivity" />
         <activity android:name=".View.RegistrationAtivity" />
+        <activity android:name=".View.HealthconditionActivity"></activity>
     </application>
 
 </manifest>

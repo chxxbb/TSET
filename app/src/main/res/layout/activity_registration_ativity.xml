@@ -182,6 +182,7 @@
             </RelativeLayout>
 
             <RelativeLayout
+                android:id="@+id/rl_time"
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/y80"
                 android:layout_marginLeft="@dimen/x30"
@@ -194,6 +195,7 @@
                     android:layout_height="match_parent">
 
                     <TextView
+                        android:id="@+id/tv_time"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center_vertical"
@@ -264,6 +266,7 @@
             </RelativeLayout>
 
             <RelativeLayout
+                android:id="@+id/rl_gender"
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/y80"
                 android:layout_marginLeft="@dimen/x30"
@@ -276,6 +279,7 @@
                     android:layout_height="match_parent">
 
                     <TextView
+                        android:id="@+id/tv_gender"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center_vertical"
@@ -306,6 +310,7 @@
             </RelativeLayout>
 
             <RelativeLayout
+                android:id="@+id/rl_age"
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/y80"
                 android:layout_marginLeft="@dimen/x30"
@@ -318,6 +323,7 @@
                     android:layout_height="match_parent">
 
                     <TextView
+                        android:id="@+id/tv_age"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center_vertical"
