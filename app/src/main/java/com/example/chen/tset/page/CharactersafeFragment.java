@@ -97,6 +97,7 @@ public class CharactersafeFragment extends Fragment {
         @Override
         public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
             Intent intent = new Intent(getContext(), ConsultPageActivity.class);
+            intent.putExtra("collect", "0");
             startActivity(intent);
         }
     };

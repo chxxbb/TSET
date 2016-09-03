@@ -50,17 +50,21 @@ public class CharactersafeAdapter extends BaseAdapter {
         }
         ViewHolder viewHolder = (ViewHolder) convertView.getTag();
         viewHolder.tv_title.setText(list.get(position).getTitle());
-        ImageLoader.getInstance().displayImage(list.get(position).getImgurl(), viewHolder.iv_img);
+        viewHolder.tv_content.setText(list.get(position).getContent());
+        viewHolder.tv_time.setText(list.get(position).getTime());
+        ImageLoader.getInstance().displayImage(list.get(position).getIcon(), viewHolder.iv_img);
         return convertView;
     }
 
     static class ViewHolder {
-        private TextView tv_title;
+        private TextView tv_title, tv_content, tv_time;
         private ImageView iv_img;
 
         ViewHolder(View v) {
             tv_title = (TextView) v.findViewById(R.id.tv_title);
             iv_img = (ImageView) v.findViewById(R.id.iv_img);
+            tv_content = (TextView) v.findViewById(R.id.tv_content);
+            tv_time = (TextView) v.findViewById(R.id.tv_time);
         }
     }
 }

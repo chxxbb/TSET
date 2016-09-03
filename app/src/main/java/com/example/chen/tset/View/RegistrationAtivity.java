@@ -8,6 +8,7 @@ import android.text.format.DateFormat;
 import android.util.Log;
 import android.view.Display;
 import android.view.View;
+import android.view.Window;
 import android.view.WindowManager;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -19,37 +20,54 @@ import android.app.AlertDialog.Builder;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.chen.tset.Data.Consult;
 import com.example.chen.tset.Data.Http_data;
+import com.example.chen.tset.Data.Registration;
 import com.example.chen.tset.R;
 import com.example.chen.tset.page.RegistrationageAdapter;
+import com.example.chen.tset.page.RegistrationdivisionAdapter;
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
 import com.zhy.http.okhttp.OkHttpUtils;
 import com.zhy.http.okhttp.callback.StringCallback;
 
+import java.lang.reflect.Type;
 import java.sql.Time;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Iterator;
+import java.util.LinkedList;
 import java.util.List;
 
 import okhttp3.Call;
 
 public class RegistrationAtivity extends AppCompatActivity {
-    private RelativeLayout rl_city, rl_gender, rl_time, rl_age;
+    private RelativeLayout rl_city, rl_gender, rl_time, rl_age, rl_professionaltitle, rl_departments;
     private Dialog setHeadDialog;
     private View dialogView;
-    private TextView tv_city, tv_gender, tv_time, tv_age;
+    private TextView tv_city, tv_gender, tv_time, tv_age, tv_professionaltitle, tv_departments;
+    private Button btn_pay;
     Calendar c;
     int myear, mmonth, mday;
     DatePickerDialog dialog;
+    //年龄数据
     List<String> list;
+    //职称
+    List<Registration> data;
+    //科室
+    List<Registration> data1;
     RegistrationageAdapter adapter;
+    RegistrationdivisionAdapter divisionAdapter;
+    RegistrationdivisionAdapter divisionAdapter1;
+    Gson gson;
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        requestWindowFeature(Window.FEATURE_NO_TITLE);
         setContentView(R.layout.activity_registration_ativity);
         findView();
-        init();
     }
 
 
@@ -62,38 +80,164 @@ public class RegistrationAtivity extends AppCompatActivity {
         tv_time = (TextView) findViewById(R.id.tv_time);
         tv_age = (TextView) findViewById(R.id.tv_age);
         rl_age = (RelativeLayout) findViewById(R.id.rl_age);
+        rl_professionaltitle = (RelativeLayout) findViewById(R.id.rl_professionaltitle);
+        tv_professionaltitle = (TextView) findViewById(R.id.tv_professionaltitle);
+        rl_departments = (RelativeLayout) findViewById(R.id.rl_departments);
+        tv_departments = (TextView) findViewById(R.id.tv_departments);
+        btn_pay = (Button) findViewById(R.id.btn_pay);
+        rl_departments.setOnClickListener(listener);
         rl_city.setOnClickListener(listener);
         rl_gender.setOnClickListener(listener);
         rl_age.setOnClickListener(listener);
         rl_time.setOnClickListener(listener);
+        rl_professionaltitle.setOnClickListener(listener);
+        btn_pay.setOnClickListener(listener);
         //获取当前时间
         c = Calendar.getInstance();
         myear = c.get(Calendar.YEAR);
         mmonth = c.get(Calendar.MONTH);
         mday = c.get(Calendar.DAY_OF_MONTH);
+        data = new ArrayList<>();
+        data1 = new ArrayList<>();
+        gson = new Gson();
+        professionaltitleinit();
+        divisioninit();
     }
 
     private View.OnClickListener listener = new View.OnClickListener() {
         @Override
         public void onClick(View v) {
             switch (v.getId()) {
+                //城市
                 case R.id.rl_city:
                     cityshowDialog();
                     break;
+                //性别
                 case R.id.rl_gender:
                     gendershowDialog();
                     break;
+                //时间
                 case R.id.rl_time:
                     selectiontime();
                     break;
+                //年龄
                 case R.id.rl_age:
                     ageshowDialog();
                     break;
+                //职称
+                case R.id.rl_professionaltitle:
+                    professionaltitleshowDialog();
+                    break;
+                //科室
+                case R.id.rl_departments:
+                    departmentsshowDialog();
+                    break;
+                case R.id.btn_pay:
+                    pay();
+                    break;
+
             }
 
 
         }
     };
+
+    private void pay() {
+        OkHttpUtils
+                .post()
+                .url(Http_data.http_data + "/addRegistration")
+                .addParams("city", tv_city.getText().toString())
+                .addParams("section", tv_departments.getText().toString())
+                .addParams("title", tv_professionaltitle.getText().toString())
+                .addParams("time", tv_time.getText().toString())
+                .addParams("sex", tv_gender.getText().toString())
+                .addParams("age", tv_age.getText().toString())
+                .addParams("name", "李狗蛋")
+                .addParams("phone", "12345678901")
+                .addParams("content", "要死了")
+                .addParams("money", "1")
+                .build()
+                .execute(new StringCallback() {
+                    @Override
+                    public void onError(Call call, Exception e, int id) {
+                        Toast.makeText(RegistrationAtivity.this, "失败", Toast.LENGTH_SHORT).show();
+                    }
+
+                    @Override
+                    public void onResponse(String response, int id) {
+                        Log.e("一键挂号支付返回", response);
+
+                    }
+                });
+    }
+
+    private void departmentsshowDialog() {
+        setHeadDialog = new Builder(this).create();
+        setHeadDialog.show();
+        dialogView = View.inflate(getApplicationContext(), R.layout.registration_dialog, null);
+        ListView lv_registration = (ListView) dialogView.findViewById(R.id.lv_registration);
+        lv_registration.setVerticalScrollBarEnabled(false);
+
+        lv_registration.setAdapter(divisionAdapter1);
+        setHeadDialog.getWindow().setContentView(dialogView);
+        WindowManager.LayoutParams lp = setHeadDialog.getWindow().getAttributes();
+        setHeadDialog.getWindow().setAttributes(lp);
+        departmentsdialogclick();
+    }
+
+    public void departmentsdialogclick() {
+        Button btn_cancel = (Button) dialogView.findViewById(R.id.btn_cancel);
+        ListView lv_registration = (ListView) dialogView.findViewById(R.id.lv_registration);
+        lv_registration.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                tv_departments.setText(data1.get(position).getName());
+                tv_departments.setTextColor(android.graphics.Color.parseColor("#323232"));
+                setHeadDialog.dismiss();
+            }
+        });
+
+        btn_cancel.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                setHeadDialog.dismiss();
+            }
+        });
+    }
+
+    private void professionaltitleshowDialog() {
+        setHeadDialog = new Builder(this).create();
+        setHeadDialog.show();
+        dialogView = View.inflate(getApplicationContext(), R.layout.registration_dialog, null);
+        ListView lv_registration = (ListView) dialogView.findViewById(R.id.lv_registration);
+        lv_registration.setVerticalScrollBarEnabled(false);
+        lv_registration.setAdapter(divisionAdapter);
+        setHeadDialog.getWindow().setContentView(dialogView);
+        WindowManager.LayoutParams lp = setHeadDialog.getWindow().getAttributes();
+        setHeadDialog.getWindow().setAttributes(lp);
+        professionaltitleclick();
+
+    }
+
+    private void professionaltitleclick() {
+        Button btn_cancel = (Button) dialogView.findViewById(R.id.btn_cancel);
+        ListView lv_registration = (ListView) dialogView.findViewById(R.id.lv_registration);
+        lv_registration.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                tv_professionaltitle.setText(data.get(position).getName());
+                tv_professionaltitle.setTextColor(android.graphics.Color.parseColor("#323232"));
+                setHeadDialog.dismiss();
+            }
+        });
+
+        btn_cancel.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                setHeadDialog.dismiss();
+            }
+        });
+    }
 
     private void ageshowDialog() {
         setHeadDialog = new Builder(this).create();
@@ -246,7 +390,7 @@ public class RegistrationAtivity extends AppCompatActivity {
         });
     }
 
-    private void init() {
+    private void professionaltitleinit() {
         OkHttpUtils
                 .post()
                 .url(Http_data.http_data + "/resulter")
@@ -259,8 +403,47 @@ public class RegistrationAtivity extends AppCompatActivity {
 
                     @Override
                     public void onResponse(String response, int id) {
-                        Log.e("一键挂号返回", response);
+                        Log.e("一键挂号职称返回", response);
+                        Type listtype = new TypeToken<LinkedList<Registration>>() {
+                        }.getType();
+                        LinkedList<Registration> leclist = gson.fromJson(response, listtype);
+                        for (Iterator it = leclist.iterator(); it.hasNext(); ) {
+                            Registration registration = (Registration) it.next();
+                            data.add(registration);
+                        }
+                        divisionAdapter = new RegistrationdivisionAdapter(RegistrationAtivity.this, data);
+                        divisionAdapter.notifyDataSetChanged();
+
                     }
+                });
+    }
+
+    private void divisioninit() {
+        OkHttpUtils
+                .post()
+                .url(Http_data.http_data + "/resulters")
+                .build()
+                .execute(new StringCallback() {
+                    @Override
+                    public void onError(Call call, Exception e, int id) {
+                        Toast.makeText(RegistrationAtivity.this, "失败", Toast.LENGTH_SHORT).show();
+                    }
+
+                    @Override
+                    public void onResponse(String response, int id) {
+                        Log.e("一键挂号科室返回", response);
+                        Type listtype = new TypeToken<LinkedList<Registration>>() {
+                        }.getType();
+                        LinkedList<Registration> leclist = gson.fromJson(response, listtype);
+                        for (Iterator it = leclist.iterator(); it.hasNext(); ) {
+                            Registration registration = (Registration) it.next();
+                            data1.add(registration);
+                        }
+                        divisionAdapter1 = new RegistrationdivisionAdapter(RegistrationAtivity.this, data1);
+                        divisionAdapter1.notifyDataSetChanged();
+
+                    }
+
                 });
     }
 }

@@ -55,6 +55,10 @@ public class ConsultPageActivity extends AppCompatActivity implements View.OnCli
         scrollview.setVerticalScrollBarEnabled(false);
         ll_consult_return.setOnClickListener(this);
         ll_consult_collect.setOnClickListener(this);
+        String collect = getIntent().getStringExtra("collect");
+        if (collect.equals("1")) {
+            ll_consult_collect.setVisibility(View.GONE);
+        }
     }
 
     private void httpinit() {
@@ -63,7 +67,7 @@ public class ConsultPageActivity extends AppCompatActivity implements View.OnCli
         OkHttpUtils
                 .post()
                 .url(Http_data.http_data + "/findCyclopediaList")
-                .addParams("categoryId", "1")
+                .addParams("categoryId", "2")
                 .build()
                 .execute(new StringCallback() {
                     @Override
@@ -112,6 +116,9 @@ public class ConsultPageActivity extends AppCompatActivity implements View.OnCli
                             @Override
                             public void onResponse(String response, int id) {
                                 Log.e("咨询详情收藏返回", response);
+                                if (response.equals("1")) {
+                                    Toast.makeText(ConsultPageActivity.this, "收藏成功", Toast.LENGTH_SHORT).show();
+                                }
                             }
                         });
                 break;

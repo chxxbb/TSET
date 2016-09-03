@@ -6,22 +6,32 @@ import java.lang.ref.PhantomReference;
  * Created by Administrator on 2016/8/30 0030.
  */
 public class Information {
-    private int id;
+    private String content;
+    private String icon;
     private String title;
-    private String imgurl;
+    private String time;
 
-    public Information(int id, String title, String imgurl) {
-        this.id = id;
+    public Information(String content, String icon, String title, String time) {
+        this.content = content;
+        this.icon = icon;
         this.title = title;
-        this.imgurl = imgurl;
+        this.time = time;
     }
 
-    public int getId() {
-        return id;
+    public String getContent() {
+        return content;
     }
 
-    public void setId(int id) {
-        this.id = id;
+    public void setContent(String content) {
+        this.content = content;
+    }
+
+    public String getIcon() {
+        return icon;
+    }
+
+    public void setIcon(String icon) {
+        this.icon = icon;
     }
 
     public String getTitle() {
@@ -32,20 +42,11 @@ public class Information {
         this.title = title;
     }
 
-    public String getImgurl() {
-        return imgurl;
+    public String getTime() {
+        return time;
     }
 
-    public void setImgurl(String imgurl) {
-        this.imgurl = imgurl;
-    }
-
-    @Override
-    public String toString() {
-        return "Information{" +
-                "id=" + id +
-                ", title='" + title + '\'' +
-                ", imgurl='" + imgurl + '\'' +
-                '}';
+    public void setTime(String time) {
+        this.time = time;
     }
 }

@@ -93,6 +93,7 @@ public class MycollectActivity extends AppCompatActivity {
         @Override
         public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
             Intent intent = new Intent(MycollectActivity.this, ConsultPageActivity.class);
+            intent.putExtra("collect", "1");
             startActivity(intent);
         }
     };

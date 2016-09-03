@@ -16,7 +16,7 @@
         android:label="@string/app_name"
         android:supportsRtl="true"
         android:theme="@style/Theme.AppCompat.NoActionBar">
-        <activity android:name=".View.ReservationlistActivity">
+        <activity android:name=".View.CompileremindActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -26,7 +26,7 @@
         <activity android:name=".View.RegisterActivity" />
         <activity android:name=".View.SetdataActivity" />
         <activity android:name=".View.FindpawActivity" />
-        <activity android:name=".View.HomeActivity" />
+        <activity android:name=".View.ReservationlistActivity" />
         <activity android:name=".View.MycollectActivity" />
         <activity android:name=".View.ReservationActivity" />
         <activity android:name=".View.PasswordSettingActivity" />
@@ -44,7 +44,8 @@
         <activity android:name=".View.ConsultPageActivity" />
         <activity android:name=".View.IconmanageActivity" />
         <activity android:name=".View.RegistrationAtivity" />
-        <activity android:name=".View.HealthconditionActivity"></activity>
+        <activity android:name=".View.HealthconditionActivity" />
+        <activity android:name=".View.HomeActivity"></activity>
     </application>
 
 </manifest>

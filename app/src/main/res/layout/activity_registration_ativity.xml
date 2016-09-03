@@ -98,6 +98,7 @@
             </RelativeLayout>
 
             <RelativeLayout
+                android:id="@+id/rl_departments"
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/y80"
                 android:layout_marginLeft="@dimen/x30"
@@ -110,6 +111,7 @@
                     android:layout_height="match_parent">
 
                     <TextView
+                        android:id="@+id/tv_departments"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center_vertical"
@@ -140,6 +142,7 @@
             </RelativeLayout>
 
             <RelativeLayout
+                android:id="@+id/rl_professionaltitle"
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/y80"
                 android:layout_marginLeft="@dimen/x30"
@@ -152,6 +155,7 @@
                     android:layout_height="match_parent">
 
                     <TextView
+                        android:id="@+id/tv_professionaltitle"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center_vertical"
@@ -468,6 +472,7 @@
             </LinearLayout>
 
             <Button
+                android:id="@+id/btn_pay"
                 android:layout_width="@dimen/x240"
                 android:layout_height="match_parent"
                 android:layout_alignParentRight="true"
