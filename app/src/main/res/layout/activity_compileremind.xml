@@ -56,6 +56,7 @@
     </RelativeLayout>
 
     <View
+        android:id="@+id/v1"
         android:layout_width="match_parent"
         android:layout_height="@dimen/y30" />
 
@@ -97,6 +98,7 @@
     </RelativeLayout>
 
     <View
+        android:id="@+id/view"
         android:layout_width="match_parent"
         android:layout_height="1dp"
         android:layout_marginLeft="@dimen/x30"
@@ -154,6 +156,7 @@
             android:layout_height="match_parent">
 
             <TextView
+                android:id="@+id/tv_remind_set"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_vertical"
@@ -169,6 +172,7 @@
             android:layout_alignParentRight="true">
 
             <TextView
+                android:id="@+id/tv_time_complete"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_vertical"
@@ -185,6 +189,7 @@
         android:background="@color/backgroundgray" />
 
     <FrameLayout
+        android:id="@+id/frameLayout"
         android:layout_width="match_parent"
         android:layout_height="@dimen/y400">
 
@@ -227,11 +232,39 @@
         android:background="@color/backgroundgray" />
 
     <LinearLayout
+        android:id="@+id/ll_et"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/white"
+        android:visibility="gone">
+
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/y30"
+            android:layout_marginLeft="@dimen/x30"
+            android:layout_marginRight="@dimen/x30"
+            android:layout_marginTop="@dimen/y30"
+            android:background="@null"
+            android:cursorVisible="false"
+            android:hint="请输入添加内容"
+            android:textColor="@color/fontcolor"
+            android:textColorHint="@color/linegray"
+            android:textSize="@dimen/y32" />
+    </LinearLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/y30" />
+
+    <LinearLayout
+        android:id="@+id/ll_remind_content"
         android:layout_width="match_parent"
         android:layout_height="@dimen/y90"
         android:background="@color/white">
 
         <TextView
+            android:id="@+id/tv_remind_content"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center_vertical"
@@ -241,6 +274,25 @@
             android:textSize="@dimen/y32" />
     </LinearLayout>
 
+    <LinearLayout
+        android:id="@+id/ll_add_remind"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/y90"
+        android:background="@color/white"
+        android:visibility="gone">
+
+        <TextView
+            android:id="@+id/tv_add_remind"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:layout_marginLeft="@dimen/x30"
+            android:text="添加提醒"
+            android:textColor="@color/fontcolor"
+            android:textSize="@dimen/y32" />
+    </LinearLayout>
+
+
     <View
         android:layout_width="match_parent"
         android:layout_height="1dp"
@@ -248,11 +300,13 @@
         android:background="@color/backgroundgray" />
 
     <LinearLayout
+        android:id="@+id/ll_pharmacy_compile"
         android:layout_width="match_parent"
         android:layout_height="@dimen/y190"
         android:background="@color/white">
 
         <TextView
+            android:id="@+id/tv_pharmacy_compile"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="@dimen/x30"
@@ -261,6 +315,24 @@
             android:textColor="@color/linegray1"
             android:textSize="@dimen/y32" />
     </LinearLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/y30"
+        android:visibility="gone" />
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/y90"
+        android:visibility="gone">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="删除事件"
+            android:textColor="#fc3f5a"
+            android:textSize="@dimen/y32" />
+    </RelativeLayout>
 
 
 </LinearLayout>
