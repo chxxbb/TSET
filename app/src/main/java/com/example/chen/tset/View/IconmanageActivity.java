@@ -8,13 +8,20 @@ import android.os.SystemClock;
 import android.provider.MediaStore;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.Toast;
 
+import com.example.chen.tset.Data.Http_data;
 import com.example.chen.tset.R;
+import com.zhy.http.okhttp.OkHttpUtils;
+import com.zhy.http.okhttp.callback.StringCallback;
 
 import java.io.File;
+
+import okhttp3.Call;
 
 public class IconmanageActivity extends AppCompatActivity {
     private ImageView iv_manage, iv_ico;
@@ -55,7 +62,24 @@ public class IconmanageActivity extends AppCompatActivity {
                     startActivityForResult(intent, 100);
                     break;
                 case R.id.ll_rutgender:
-                    finish();
+                    OkHttpUtils
+                            .postFile()
+                            .url(Http_data.http_data + "/changeIcon" +"?1")
+                            .file(sdcardTempFile)
+                            .build()
+                            .execute(new StringCallback() {
+                                @Override
+                                public void onError(Call call, Exception e, int id) {
+                                    Toast.makeText(IconmanageActivity.this, "失败", Toast.LENGTH_SHORT).show();
+                                }
+
+                                @Override
+                                public void onResponse(String response, int id) {
+                                    Log.e("头像返回",response);
+
+                                }
+                            });
+//                    finish();
                     break;
             }
         }

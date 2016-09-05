@@ -16,7 +16,7 @@
         android:label="@string/app_name"
         android:supportsRtl="true"
         android:theme="@style/Theme.AppCompat.NoActionBar">
-        <activity android:name=".View.PharmacyremindActivity">
+        <activity android:name=".View.DoctorparticularsActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -46,6 +46,7 @@
         <activity android:name=".View.RegistrationAtivity" />
         <activity android:name=".View.HealthconditionActivity" />
         <activity android:name=".View.CompileremindActivity" />
+        <activity android:name=".View.PharmacyremindActivity" />
         <activity android:name=".View.HomeActivity"></activity>
     </application>
 

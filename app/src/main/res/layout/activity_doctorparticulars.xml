@@ -1,0 +1,188 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/linegray"
+    android:orientation="vertical"
+    tools:context="com.example.chen.tset.View.DoctorparticularsActivity">
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/y220"
+                android:background="@drawable/doctorparticulars_background"
+                android:orientation="horizontal">
+
+                <ImageView
+                    android:layout_width="@dimen/x20"
+                    android:layout_height="@dimen/y36"
+                    android:layout_marginLeft="@dimen/x30"
+                    android:layout_marginTop="@dimen/y33"
+                    android:src="@drawable/doctorparticulars_return" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/x8"
+                    android:layout_marginTop="@dimen/y30"
+                    android:text="返回"
+                    android:textColor="@color/white"
+                    android:textSize="@dimen/y32" />
+            </LinearLayout>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/y284"
+                android:background="@color/white">
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:orientation="vertical">
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="@dimen/x30"
+                        android:layout_marginTop="@dimen/y100"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="张薇薇"
+                            android:textColor="@color/fontcolor"
+                            android:textSize="@dimen/y36" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="@dimen/x26"
+                            android:text="9.9分"
+                            android:textColor="#fa898e"
+                            android:textSize="@dimen/y34" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="@dimen/x30"
+                            android:layout_marginTop="@dimen/y15"
+                            android:text="主治医生"
+                            android:textColor="@color/xmgray"
+                            android:textSize="@dimen/y28" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="@dimen/x36"
+                            android:layout_marginTop="@dimen/y15"
+                            android:text="行为发育科"
+                            android:textColor="@color/xmgray"
+                            android:textSize="@dimen/y28" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginBottom="@dimen/y30"
+                            android:layout_marginLeft="@dimen/x30"
+                            android:layout_marginTop="@dimen/y16"
+                            android:text="深圳天使儿童医院"
+                            android:textColor="@color/xmgray"
+                            android:textSize="@dimen/y28" />
+                    </LinearLayout>
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentBottom="true"
+                    android:layout_alignParentRight="true"
+                    android:orientation="vertical">
+
+                    <FrameLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content">
+
+                        <Button
+                            android:layout_width="@dimen/x180"
+                            android:layout_height="@dimen/y60"
+                            android:layout_marginLeft="@dimen/x25"
+                            android:layout_marginRight="@dimen/x30"
+                            android:layout_marginTop="@dimen/y10"
+                            android:background="@drawable/doctorparticulars_registration_btn_case"
+                            android:text="￥ 25/次"
+                            android:textColor="@color/white"
+                            android:textSize="@dimen/y25" />
+
+                        <ImageView
+                            android:layout_width="@dimen/x40"
+                            android:layout_height="@dimen/y42"
+                            android:src="@drawable/doctorparticulars_registration" />
+                    </FrameLayout>
+
+                    <FrameLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="@dimen/y30"
+                        android:layout_marginRight="@dimen/x30"
+                        android:layout_marginTop="@dimen/y18">
+
+                        <Button
+                            android:layout_width="@dimen/x180"
+                            android:layout_height="@dimen/y60"
+                            android:layout_marginLeft="@dimen/x25"
+                            android:layout_marginTop="@dimen/y10"
+                            android:background="@drawable/deoctorprticulars_phone_btn_case"
+                            android:text="￥ 25/10分钟"
+                            android:textColor="@color/white"
+                            android:textSize="@dimen/y25" />
+
+                        <ImageView
+                            android:layout_width="@dimen/x40"
+                            android:layout_height="@dimen/y42"
+                            android:src="@drawable/deoctorprticulars_phone" />
+                    </FrameLayout>
+                </LinearLayout>
+            </RelativeLayout>
+        </LinearLayout>
+
+        <de.hdodenhof.circleimageview.CircleImageView
+            android:layout_width="@dimen/x160"
+            android:layout_height="@dimen/y160"
+            android:layout_marginLeft="@dimen/x30"
+            android:layout_marginTop="@dimen/y145"
+            android:src="@color/backgroundblue"
+            app:civ_border_color="@color/white"
+            app:civ_border_width="@dimen/x5" />
+    </FrameLayout>
+
+    <ListView
+        android:id="@+id/lv_docttorparticulas"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+
+        ></ListView>
+
+
+</LinearLayout>

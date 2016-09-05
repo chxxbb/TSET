@@ -1,0 +1,158 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    android:orientation="vertical">
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/y20"
+        android:background="@color/backgroundgray" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/white"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/x30"
+                android:layout_marginTop="@dimen/y24"
+                android:text="我的资历"
+                android:textColor="@color/fontcolor"
+                android:textSize="@dimen/y30" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/x30"
+                android:layout_marginTop="@dimen/y26"
+                android:orientation="horizontal">
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="@dimen/y32"
+                    android:background="@drawable/doctorparticulars_qualifications_case">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_vertical"
+                        android:layout_marginLeft="@dimen/x16"
+                        android:layout_marginRight="@dimen/x16"
+                        android:text="哈尔滨三甲医院超声波主任"
+                        android:textColor="@color/xmgray"
+                        android:textSize="@dimen/y25" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="@dimen/y32"
+                    android:layout_marginLeft="@dimen/x24"
+                    android:background="@drawable/doctorparticulars_qualifications_case">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_vertical"
+                        android:layout_marginLeft="@dimen/x16"
+                        android:layout_marginRight="@dimen/x16"
+                        android:text="国内知名超声专家组会员"
+                        android:textColor="@color/xmgray"
+                        android:textSize="@dimen/y25" />
+                </LinearLayout>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/x30"
+                android:layout_marginTop="@dimen/y16"
+                android:orientation="horizontal">
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="@dimen/y32"
+                    android:background="@drawable/doctorparticulars_qualifications_case">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_vertical"
+                        android:layout_marginLeft="@dimen/x16"
+                        android:layout_marginRight="@dimen/x16"
+                        android:text="黑龙江超声医学分会委员"
+                        android:textColor="@color/xmgray"
+                        android:textSize="@dimen/y25" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="@dimen/y32"
+                    android:layout_marginLeft="@dimen/x48"
+                    android:background="@drawable/doctorparticulars_qualifications_case">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_vertical"
+                        android:layout_marginLeft="@dimen/x16"
+                        android:layout_marginRight="@dimen/x16"
+                        android:text="中华医学超声学会会员"
+                        android:textColor="@color/xmgray"
+                        android:textSize="@dimen/y25" />
+                </LinearLayout>
+
+            </LinearLayout>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/x30"
+                android:layout_marginTop="@dimen/y30"
+                android:text="擅长领域"
+                android:textColor="@color/fontcolor"
+                android:textSize="@dimen/y30" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="@dimen/y30"
+                android:layout_marginLeft="@dimen/x30"
+                android:layout_marginTop="@dimen/y19"
+                android:text="儿童多动症，孤独症和情绪障碍的治疗。儿童多动症，孤独症和情绪障碍的治疗。"
+                android:textColor="@color/xmgray"
+                android:textSize="@dimen/y28" />
+
+        </LinearLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/y30"
+            android:background="@color/backgroundgray" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/y26"
+            android:layout_marginLeft="@dimen/x30"
+            android:layout_marginTop="@dimen/y24"
+            android:text="用户评价（101人）"
+            android:textColor="@color/fontcolor"
+            android:textSize="@dimen/y30" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp" />
+    </LinearLayout>
+
+</LinearLayout>
