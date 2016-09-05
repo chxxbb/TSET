@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/backgroundgray"
+    android:orientation="vertical"
+    tools:context="com.example.chen.tset.View.PharmacyremindActivity">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/y96"
+        android:background="@color/white"
+        android:gravity="center_vertical">
+
+        <LinearLayout
+            android:id="@+id/ll_rutgender"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:orientation="horizontal">
+
+            <ImageView
+                android:layout_width="@dimen/x20"
+                android:layout_height="@dimen/y36"
+                android:layout_gravity="center_vertical"
+                android:layout_marginLeft="@dimen/x30"
+                android:src="@drawable/opinion_return" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:layout_marginLeft="@dimen/x8"
+                android:text="问诊"
+                android:textColor="@color/backgroundblue"
+                android:textSize="@dimen/x32" />
+        </LinearLayout>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:text="用药提醒"
+            android:textColor="@color/fontcolor"
+            android:textSize="@dimen/x36" />
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_alignParentRight="true">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:layout_marginRight="@dimen/x30"
+                android:text="添加"
+                android:textColor="@color/backgroundblue"
+                android:textSize="@dimen/y32" />
+        </LinearLayout>
+    </RelativeLayout>
+
+    <ListView
+        android:id="@+id/lv_pharmacy_remind"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"></ListView>
+
+</LinearLayout>
