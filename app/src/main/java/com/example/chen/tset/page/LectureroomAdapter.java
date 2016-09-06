@@ -21,6 +21,7 @@ public class LectureroomAdapter extends RecyclerView.Adapter {
     List<Lecture> list;
     Context context;
     LayoutInflater inflater;
+    private RecylerViewListener listener;
 
     public List<Lecture> getList() {
         return list;
@@ -65,6 +66,15 @@ public class LectureroomAdapter extends RecyclerView.Adapter {
     @Override
     public int getItemCount() {
         return list.size();
+    }
+
+    //给RecyclerView设置点击事件
+    public interface RecylerViewListener {
+        void onClick(View v, int position);
+    }
+
+    public void setRecylerViewListener(RecylerViewListener listener) {
+        this.listener = listener;
     }
 
 

@@ -16,6 +16,7 @@
         android:background="@color/white">
 
         <TextView
+            android:id="@+id/tv_startendtime"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center_vertical"
@@ -56,6 +57,7 @@
             android:layout_alignParentRight="true">
 
             <TextView
+                android:id="@+id/tv_amtime"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_vertical"
@@ -78,6 +80,7 @@
         android:background="@color/white">
 
         <TextView
+            android:id="@+id/tv_amcontent"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginBottom="@dimen/y20"
@@ -120,6 +123,7 @@
             android:layout_alignParentRight="true">
 
             <TextView
+                android:id="@+id/tv_pmtime"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_vertical"
@@ -142,6 +146,7 @@
         android:background="@color/white">
 
         <TextView
+            android:id="@+id/tv_pmcontent"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginBottom="@dimen/y20"
@@ -184,6 +189,7 @@
             android:layout_alignParentRight="true">
 
             <TextView
+                android:id="@+id/tv_nighttime"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_vertical"
@@ -206,6 +212,7 @@
         android:background="@color/white">
 
         <TextView
+            android:id="@+id/tv_nightcontent"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginBottom="@dimen/y20"

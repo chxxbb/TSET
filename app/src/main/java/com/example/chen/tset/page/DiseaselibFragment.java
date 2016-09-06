@@ -108,20 +108,6 @@ public class DiseaselibFragment extends Fragment {
         @Override
         public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
             adapter.changeSelected(position);
-//            if (dise_ll == null) {
-//                dise_ll = (LinearLayout) view.findViewById(R.id.dise_ll);
-//                dise_ll.setBackgroundColor(android.graphics.Color.parseColor("#6fc9e6"));
-//                tv_dislistv = (TextView) view.findViewById(R.id.tv_dislistv);
-//                tv_dislistv.setTextColor(0xffffffff);
-//            } else{
-//                dise_ll.setBackgroundColor(android.graphics.Color.parseColor("#e0e0e0"));
-//                tv_dislistv.setTextColor(android.graphics.Color.parseColor("#323232"));
-//                dise_ll = (LinearLayout) view.findViewById(R.id.dise_ll);
-//                dise_ll.setBackgroundColor(android.graphics.Color.parseColor("#6fc9e6"));
-//                tv_dislistv = (TextView) view.findViewById(R.id.tv_dislistv);
-//                tv_dislistv.setTextColor(0xffffffff);
-//            }
-
             httpinit(position);
         }
 
@@ -139,6 +125,7 @@ public class DiseaselibFragment extends Fragment {
     };
 
     private void httpinit(int sectionid) {
+        list1 = new ArrayList<>();
         OkHttpUtils
                 .post()
                 .url(Http_data.http_data + "/findDiseaseList")
@@ -157,9 +144,9 @@ public class DiseaselibFragment extends Fragment {
                         diseaselibrecyvAdapter = new DiseaselibrecyvAdapter(getContext(), list1);
                         recyv_dise.setAdapter(diseaselibrecyvAdapter);
                         diseaselibrecyvAdapter.notifyDataSetChanged();
-//                        }
                     }
                 });
+
 
     }
 }

@@ -10,12 +10,19 @@ import android.widget.ListView;
 import android.widget.Toast;
 
 import com.example.chen.tset.Data.Http_data;
+import com.example.chen.tset.Data.Information;
+import com.example.chen.tset.Data.Pharmacyremind;
 import com.example.chen.tset.R;
 import com.example.chen.tset.page.PharmacyremindAdapter;
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
 import com.zhy.http.okhttp.OkHttpUtils;
 import com.zhy.http.okhttp.callback.StringCallback;
 
+import java.lang.reflect.Type;
 import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.LinkedList;
 import java.util.List;
 
 import okhttp3.Call;
@@ -24,7 +31,8 @@ public class PharmacyremindActivity extends AppCompatActivity {
     private ListView lv_pharmacy_remind;
     private LinearLayout ll_add_remind;
     PharmacyremindAdapter adapter;
-    List<String> list;
+    List<Pharmacyremind> list;
+    Gson gson = new Gson();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,14 +48,9 @@ public class PharmacyremindActivity extends AppCompatActivity {
         ll_add_remind = (LinearLayout) findViewById(R.id.ll_add_remind);
         ll_add_remind.setOnClickListener(listener);
         list = new ArrayList<>();
-        list.add("1");
-        list.add("2");
-        list.add("3");
-        list.add("4");
-        list.add("5");
         adapter = new PharmacyremindAdapter(this, list);
         lv_pharmacy_remind.setAdapter(adapter);
-        adapter.notifyDataSetChanged();
+
         lv_pharmacy_remind.setVerticalScrollBarEnabled(false);
 
     }
@@ -78,8 +81,16 @@ public class PharmacyremindActivity extends AppCompatActivity {
 
                     @Override
                     public void onResponse(String response, int id) {
-                        Log.e("用药提醒返回", response);
+                        Type listtype = new TypeToken<LinkedList<Pharmacyremind>>() {
+                        }.getType();
+                        LinkedList<Pharmacyremind> leclist = gson.fromJson(response, listtype);
+                        for (Iterator it = leclist.iterator(); it.hasNext(); ) {
+                            Pharmacyremind pharmacyremind = (Pharmacyremind) it.next();
+                            list.add(pharmacyremind);
+                        }
+                        adapter.notifyDataSetChanged();
                     }
+
                 });
     }
 }
