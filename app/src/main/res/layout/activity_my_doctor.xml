@@ -13,16 +13,23 @@
         android:background="@color/white">
 
         <LinearLayout
-            android:id="@+id/ll_rutphone"
+            android:id="@+id/ll_rut"
             android:layout_width="wrap_content"
-            android:layout_height="match_parent">
+            android:layout_height="match_parent"
+            android:orientation="horizontal">
+
+            <ImageView
+                android:layout_width="@dimen/x20"
+                android:layout_height="@dimen/y36"
+                android:layout_gravity="center_vertical"
+                android:layout_marginLeft="@dimen/x30"
+                android:src="@drawable/opinion_return" />
 
             <TextView
-                android:id="@+id/tv_passet"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_vertical"
-                android:layout_marginLeft="@dimen/x30"
+                android:layout_marginLeft="@dimen/x8"
                 android:text="我的"
                 android:textColor="@color/backgroundblue"
                 android:textSize="@dimen/x32" />
@@ -35,9 +42,7 @@
             android:text="我的医生"
             android:textColor="@color/fontcolor"
             android:textSize="@dimen/x36" />
-
     </RelativeLayout>
-
     <VideoView
         android:layout_width="match_parent"
         android:layout_height="@dimen/y20"

@@ -11,6 +11,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.chen.tset.Data.Doctor;
+import com.example.chen.tset.Data.Doctorcomment;
 import com.example.chen.tset.Data.Http_data;
 import com.example.chen.tset.Data.Information;
 import com.example.chen.tset.R;
@@ -35,7 +36,7 @@ public class DoctorparticularsActivity extends AppCompatActivity {
     private DoctorparticularsAdapter adapter;
     private LinearLayout ll_return;
     private View view;
-    List<String> list;
+    List<Doctorcomment> list;
     List<Doctor> list1;
     Gson gson = new Gson();
     private TextView tv_title, tv_name, tv_hospital, tv_bioo, tv_bis, tv_bit, tv_bif, tv_sum, tv_adept;
@@ -49,6 +50,7 @@ public class DoctorparticularsActivity extends AppCompatActivity {
         setContentView(R.layout.activity_doctorparticulars);
         findView();
         httpinit();
+        comment();
     }
 
 
@@ -70,18 +72,10 @@ public class DoctorparticularsActivity extends AppCompatActivity {
         tv_bis = (TextView) view.findViewById(R.id.tv_bis);
         tv_sum = (TextView) view.findViewById(R.id.tv_sum);
         tv_adept = (TextView) view.findViewById(R.id.tv_adept);
+        lv_docttorparticulas.setVerticalScrollBarEnabled(false);
         list = new ArrayList<>();
-        list.add("1");
-        list.add("2");
-        list.add("3");
-        list.add("4");
-        list.add("5");
-        list.add("6");
-        list.add("7");
-        list.add("8");
         adapter = new DoctorparticularsAdapter(this, list);
         lv_docttorparticulas.setAdapter(adapter);
-        adapter.notifyDataSetChanged();
         ll_return.setOnClickListener(listener);
     }
 
@@ -123,6 +117,34 @@ public class DoctorparticularsActivity extends AppCompatActivity {
                     }
                 });
     }
+
+    private void comment() {
+        OkHttpUtils
+                .post()
+                .url(Http_data.http_data + "/findUserComment")
+                .addParams("user_id", "1")
+                .build()
+                .execute(new StringCallback() {
+                    @Override
+                    public void onError(Call call, Exception e, int id) {
+                        Toast.makeText(DoctorparticularsActivity.this, "网络连接失败", Toast.LENGTH_SHORT).show();
+                    }
+
+                    @Override
+                    public void onResponse(String response, int id) {
+                        Log.e("医生详情评论返回", response);
+                        Type listtype = new TypeToken<LinkedList<Doctorcomment>>() {
+                        }.getType();
+                        LinkedList<Doctorcomment> leclist = gson.fromJson(response, listtype);
+                        for (Iterator it = leclist.iterator(); it.hasNext(); ) {
+                            Doctorcomment doctorcomment = (Doctorcomment) it.next();
+                            list.add(doctorcomment);
+                        }
+                        adapter.notifyDataSetChanged();
+                    }
+                });
+    }
+
 
     private View.OnClickListener listener = new View.OnClickListener() {
         @Override

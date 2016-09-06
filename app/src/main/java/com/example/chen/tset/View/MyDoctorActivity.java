@@ -3,6 +3,8 @@ package com.example.chen.tset.View;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
+import android.widget.LinearLayout;
 import android.widget.ListView;
 
 import com.example.chen.tset.Data.Http_data;
@@ -27,6 +29,7 @@ public class MyDoctorActivity extends AppCompatActivity {
     Gson gson;
     InquiryAdapter adapter;
     List<Inquiry> list;
+    private LinearLayout ll_rut;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,6 +42,8 @@ public class MyDoctorActivity extends AppCompatActivity {
 
     private void findView() {
         lv_mydoctor = (ListView) findViewById(R.id.lv_mydoctor);
+        ll_rut = (LinearLayout) findViewById(R.id.ll_rut);
+        ll_rut.setOnClickListener(listener);
         lv_mydoctor.setVerticalScrollBarEnabled(false);
     }
 
@@ -52,7 +57,7 @@ public class MyDoctorActivity extends AppCompatActivity {
         gson = new Gson();
         OkHttpUtils
                 .post()
-                .url(Http_data.http_data + "/findInquiryList")
+                .url(Http_data.http_data + "/findMyDoctor")
                 .build()
                 .execute(new StringCallback() {
                     @Override
@@ -61,7 +66,7 @@ public class MyDoctorActivity extends AppCompatActivity {
 
                     @Override
                     public void onResponse(String response, int id) {
-                        Log.e("问诊返回", response);
+                        Log.e("我的医生返回", response);
                         Type listtype = new TypeToken<LinkedList<Inquiry>>() {
                         }.getType();
                         LinkedList<Inquiry> leclist = gson.fromJson(response, listtype);
@@ -73,4 +78,11 @@ public class MyDoctorActivity extends AppCompatActivity {
                     }
                 });
     }
+
+    private View.OnClickListener listener = new View.OnClickListener() {
+        @Override
+        public void onClick(View v) {
+            finish();
+        }
+    };
 }
