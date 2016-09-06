@@ -47,7 +47,7 @@
         <activity android:name=".View.HealthconditionActivity" />
         <activity android:name=".View.CompileremindActivity" />
         <activity android:name=".View.PharmacyremindActivity" />
-        <activity android:name=".View.DoctorparticularsActivity"></activity>
+        <activity android:name=".View.DoctorparticularsActivity" />
     </application>
 
 </manifest>

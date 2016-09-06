@@ -1,11 +1,13 @@
 package com.example.chen.tset.page;
 
 import android.content.Context;
+import android.content.Intent;
+import android.net.Uri;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.BaseAdapter;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.example.chen.tset.Data.Lecture;
@@ -41,11 +43,13 @@ public class LectureroomAdapter extends RecyclerView.Adapter {
     class Viewholder extends RecyclerView.ViewHolder {
         private TextView tv_lectr;
         private RoundCornerImageView rcImageView;
+        private LinearLayout linearLayout;
 
         public Viewholder(View itemView) {
             super(itemView);
             tv_lectr = (TextView) itemView.findViewById(R.id.tv_lectr);
             rcImageView = (RoundCornerImageView) itemView.findViewById(R.id.rcImageView);
+            linearLayout = (LinearLayout) itemView.findViewById(R.id.linearLayout);
         }
     }
 
@@ -56,11 +60,19 @@ public class LectureroomAdapter extends RecyclerView.Adapter {
     }
 
     @Override
-    public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
+    public void onBindViewHolder(RecyclerView.ViewHolder holder, final int position) {
         Viewholder viewholder = (Viewholder) holder;
         viewholder.tv_lectr.setText(list.get(position).getTitle());
         String uri = list.get(position).getCover();
         ImageLoader.getInstance().displayImage(uri, viewholder.rcImageView);
+        viewholder.linearLayout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(Intent.ACTION_VIEW);
+                intent.setDataAndType(Uri.parse(list.get(position).getVideo()), "video/mp4");
+                context.startActivity(intent);
+            }
+        });
     }
 
     @Override
