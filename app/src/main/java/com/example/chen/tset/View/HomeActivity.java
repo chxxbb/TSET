@@ -1,5 +1,6 @@
 package com.example.chen.tset.View;
 
+import android.content.Intent;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
@@ -8,6 +9,7 @@ import android.view.View;
 import android.widget.FrameLayout;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
+import android.widget.Toast;
 
 import com.example.chen.tset.page.EncyclopediaFragment;
 import com.example.chen.tset.R;
@@ -21,7 +23,7 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
     FragmentTransaction ft;
     private RadioButton rb_encyclopedia, rb_lectureroom, rb_mypage, rb_diagnosis;
     private RadioGroup radioGroup_right, radioGroup_left;
-    private FrameLayout framelayout;
+    private FrameLayout framelayout, fl_registration;
     private EncyclopediaFragment encyclopediaFragment;
     private LectureroomFragment lectureroomFragment;
     private MypageFragment mypageFragment;
@@ -47,12 +49,14 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
         radioGroup_left = (RadioGroup) findViewById(R.id.radioGroup_left);
         radioGroup_right = (RadioGroup) findViewById(R.id.radioGroup_right);
         iv_inquiry = (InquiryView) findViewById(R.id.iv_inquiry);
+        fl_registration = (FrameLayout) findViewById(R.id.fl_registration);
         rb_encyclopedia.setChecked(true);
         rb_encyclopedia.setOnClickListener(this);
         rb_lectureroom.setOnClickListener(this);
         rb_mypage.setOnClickListener(this);
         rb_diagnosis.setOnClickListener(this);
         iv_inquiry.setOnClickListener(this);
+        fl_registration.setOnClickListener(listener);
     }
 
     private void init() {
@@ -75,6 +79,7 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
         switch (v.getId()) {
             case R.id.rb_encyclopedia:
                 radioGroup_right.clearCheck();
+                fl_registration.setVisibility(View.GONE);
                 if (encyclopediaFragment == null) {
                     encyclopediaFragment = new EncyclopediaFragment();
                     ft.add(R.id.framelayout, encyclopediaFragment);
@@ -83,6 +88,7 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
                 }
                 break;
             case R.id.rb_lectureroom:
+                fl_registration.setVisibility(View.GONE);
                 radioGroup_left.clearCheck();
                 if (lectureroomFragment == null) {
                     lectureroomFragment = new LectureroomFragment();
@@ -92,6 +98,7 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
                 }
                 break;
             case R.id.rb_mypage:
+                fl_registration.setVisibility(View.GONE);
                 radioGroup_left.clearCheck();
                 if (mypageFragment == null) {
                     mypageFragment = new MypageFragment();
@@ -101,10 +108,13 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
                 }
                 break;
             case R.id.rb_diagnosis:
+                fl_registration.setVisibility(View.GONE);
                 radioGroup_right.clearCheck();
                 break;
             case R.id.iv_inquiry:
                 radioGroup_right.clearCheck();
+                radioGroup_left.clearCheck();
+                fl_registration.setVisibility(View.VISIBLE);
                 if (inquiryFragment == null) {
                     inquiryFragment = new InquiryFragment();
                     ft.add(R.id.framelayout, inquiryFragment);
@@ -114,5 +124,14 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
                 break;
         }
         ft.commit();
+
     }
+
+    private View.OnClickListener listener = new View.OnClickListener() {
+        @Override
+        public void onClick(View v) {
+            Intent intent = new Intent(HomeActivity.this, RegistrationAtivity.class);
+            startActivity(intent);
+        }
+    };
 }

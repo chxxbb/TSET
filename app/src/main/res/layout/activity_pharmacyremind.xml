@@ -44,6 +44,7 @@
             android:textSize="@dimen/x36" />
 
         <LinearLayout
+            android:id="@+id/ll_add_remind"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:layout_alignParentRight="true">

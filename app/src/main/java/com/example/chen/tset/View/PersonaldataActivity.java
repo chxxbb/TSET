@@ -35,7 +35,7 @@ public class PersonaldataActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_personaldata);
-        sdcardTempFile = new File("/mnt/sdcard/", "tmp_pic_" + SystemClock.currentThreadTimeMillis() + ".jpg");
+        sdcardTempFile = new File("/sdcard/", "tmp_pic_" + SystemClock.currentThreadTimeMillis() + ".jpg");
         findView();
     }
 
@@ -45,7 +45,7 @@ public class PersonaldataActivity extends AppCompatActivity {
         rl_gender = (RelativeLayout) findViewById(R.id.rl_gender);
         rl_phone = (RelativeLayout) findViewById(R.id.rl_phone);
         rl_icon = (RelativeLayout) findViewById(R.id.rl_icon);
-        iv_icon= (ImageView) findViewById(R.id.iv_icon);
+        iv_icon = (ImageView) findViewById(R.id.iv_icon);
         rl_name.setOnClickListener(listener);
         ll_rutmypage.setOnClickListener(listener);
         rl_gender.setOnClickListener(listener);
@@ -97,7 +97,7 @@ public class PersonaldataActivity extends AppCompatActivity {
         }
         OkHttpUtils
                 .postFile()
-                .url(Http_data.http_data + "/changeIcon" +"?1")
+                .url(Http_data.http_data + "/changeIcon" + "?1")
                 .file(sdcardTempFile)
                 .build()
                 .execute(new StringCallback() {
@@ -108,7 +108,7 @@ public class PersonaldataActivity extends AppCompatActivity {
 
                     @Override
                     public void onResponse(String response, int id) {
-                        Log.e("头像返回",response);
+                        Log.e("头像返回", response);
 
                     }
                 });

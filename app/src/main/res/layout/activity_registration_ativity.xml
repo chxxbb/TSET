@@ -13,7 +13,7 @@
         android:background="@color/white">
 
         <LinearLayout
-            android:id="@+id/ll_rutgender"
+            android:id="@+id/ll_rutregistration"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:orientation="horizontal">

@@ -8,15 +8,15 @@ public class Inquiry {
     private String title;
     private String name;
     private String money;
-    private String intro;
+    private String adept;
     private String section;
 
-    public Inquiry(String icon, String title, String name, String money, String intro, String section) {
+    public Inquiry(String icon, String title, String name, String money, String adept, String section) {
         this.icon = icon;
         this.title = title;
         this.name = name;
         this.money = money;
-        this.intro = intro;
+        this.adept = adept;
         this.section = section;
     }
 
@@ -52,12 +52,12 @@ public class Inquiry {
         this.money = money;
     }
 
-    public String getIntro() {
-        return intro;
+    public String getAdept() {
+        return adept;
     }
 
-    public void setIntro(String intro) {
-        this.intro = intro;
+    public void setAdept(String adept) {
+        this.adept = adept;
     }
 
     public String getSection() {

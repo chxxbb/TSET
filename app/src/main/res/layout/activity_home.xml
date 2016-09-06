@@ -110,27 +110,52 @@
 
         </RelativeLayout>
     </LinearLayout>
-
     <FrameLayout
         android:layout_width="@dimen/x120"
         android:layout_height="@dimen/y120"
         android:layout_alignParentBottom="true"
         android:layout_centerInParent="true"
         android:layout_marginBottom="@dimen/y12">
+        <FrameLayout
+            android:layout_width="@dimen/x120"
+            android:layout_height="@dimen/y120"
+            android:layout_centerInParent="true">
 
-        <com.example.chen.tset.page.InquiryView
-            android:id="@+id/iv_inquiry"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:src="@color/backgroundblue" />
+            <com.example.chen.tset.page.InquiryView
+                android:id="@+id/iv_inquiry"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@color/backgroundblue" />
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:text="问诊"
-            android:textColor="@color/white"
-            android:textSize="@dimen/x32" />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:text="问诊"
+                android:textColor="@color/white"
+                android:textSize="@dimen/x32" />
+        </FrameLayout>
+        <FrameLayout
+            android:visibility="gone"
+            android:id="@+id/fl_registration"
+            android:layout_width="@dimen/x120"
+            android:layout_height="@dimen/y120"
+            android:layout_centerInParent="true">
+            <com.example.chen.tset.page.RegistrationView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@color/backgroundblue" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:text="挂号"
+                android:textColor="@color/white"
+                android:textSize="@dimen/x32" />
+        </FrameLayout>
     </FrameLayout>
+
+
 
 </RelativeLayout>

@@ -102,6 +102,9 @@
                                 android:layout_height="@dimen/y60"
                                 android:layout_centerInParent="true"
                                 android:background="@drawable/inquiry_btn_case"
+                                android:clickable="false"
+                                android:focusable="false"
+                                android:focusableInTouchMode="false"
                                 android:text="￥25.00"
                                 android:textColor="#fb878f"
                                 android:textSize="@dimen/y26" />

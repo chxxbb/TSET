@@ -3,6 +3,7 @@ package com.example.chen.tset.page;
 import android.app.AlertDialog;
 import android.app.Dialog;
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -11,6 +12,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.WindowManager;
+import android.widget.AdapterView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.Toast;
@@ -19,6 +21,7 @@ import com.example.chen.tset.Data.Http_data;
 import com.example.chen.tset.Data.Inquiry;
 import com.example.chen.tset.Data.Lecture;
 import com.example.chen.tset.R;
+import com.example.chen.tset.View.DoctorparticularsActivity;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import com.zhy.http.okhttp.OkHttpUtils;
@@ -60,6 +63,13 @@ public class InquiryFragment extends Fragment {
         ll_city = (LinearLayout) view.findViewById(R.id.ll_city);
         lv_inquiry.setVerticalScrollBarEnabled(false);
         ll_city.setOnClickListener(listener);
+        lv_inquiry.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                Intent intent = new Intent(getContext(), DoctorparticularsActivity.class);
+                startActivity(intent);
+            }
+        });
     }
 
     private void init() {
@@ -111,4 +121,5 @@ public class InquiryFragment extends Fragment {
                 .getAttributes();
         setHeadDialog.getWindow().setAttributes(lp);
     }
+
 }

@@ -14,6 +14,7 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.DatePicker;
+import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.RelativeLayout;
 import android.app.AlertDialog.Builder;
@@ -43,6 +44,7 @@ import okhttp3.Call;
 
 public class RegistrationAtivity extends AppCompatActivity {
     private RelativeLayout rl_city, rl_gender, rl_time, rl_age, rl_professionaltitle, rl_departments;
+    private LinearLayout ll_rutregistration;
     private Dialog setHeadDialog;
     private View dialogView;
     private TextView tv_city, tv_gender, tv_time, tv_age, tv_professionaltitle, tv_departments;
@@ -85,6 +87,7 @@ public class RegistrationAtivity extends AppCompatActivity {
         rl_departments = (RelativeLayout) findViewById(R.id.rl_departments);
         tv_departments = (TextView) findViewById(R.id.tv_departments);
         btn_pay = (Button) findViewById(R.id.btn_pay);
+        ll_rutregistration = (LinearLayout) findViewById(R.id.ll_rutregistration);
         rl_departments.setOnClickListener(listener);
         rl_city.setOnClickListener(listener);
         rl_gender.setOnClickListener(listener);
@@ -92,6 +95,7 @@ public class RegistrationAtivity extends AppCompatActivity {
         rl_time.setOnClickListener(listener);
         rl_professionaltitle.setOnClickListener(listener);
         btn_pay.setOnClickListener(listener);
+        ll_rutregistration.setOnClickListener(listener);
         //获取当前时间
         c = Calendar.getInstance();
         myear = c.get(Calendar.YEAR);
@@ -134,6 +138,9 @@ public class RegistrationAtivity extends AppCompatActivity {
                     break;
                 case R.id.btn_pay:
                     pay();
+                    break;
+                case R.id.ll_rutregistration:
+                    finish();
                     break;
 
             }

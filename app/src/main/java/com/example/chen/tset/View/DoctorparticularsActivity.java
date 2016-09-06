@@ -3,6 +3,7 @@ package com.example.chen.tset.View;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.LinearLayout;
 import android.widget.ListView;
 
 import com.example.chen.tset.R;
@@ -14,8 +15,10 @@ import java.util.List;
 public class DoctorparticularsActivity extends AppCompatActivity {
     private ListView lv_docttorparticulas;
     private DoctorparticularsAdapter adapter;
+    private LinearLayout ll_return;
     private View view;
     List<String> list;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -26,6 +29,7 @@ public class DoctorparticularsActivity extends AppCompatActivity {
 
     private void findView() {
         lv_docttorparticulas = (ListView) findViewById(R.id.lv_docttorparticulas);
+        ll_return = (LinearLayout) findViewById(R.id.ll_return);
         view = View.inflate(this, R.layout.doctorparticulars_listv_headerview, null);
         lv_docttorparticulas.addHeaderView(view);
         list = new ArrayList<>();
@@ -40,5 +44,13 @@ public class DoctorparticularsActivity extends AppCompatActivity {
         adapter = new DoctorparticularsAdapter(this, list);
         lv_docttorparticulas.setAdapter(adapter);
         adapter.notifyDataSetChanged();
+        ll_return.setOnClickListener(listener);
     }
+
+    private View.OnClickListener listener = new View.OnClickListener() {
+        @Override
+        public void onClick(View v) {
+            finish();
+        }
+    };
 }
