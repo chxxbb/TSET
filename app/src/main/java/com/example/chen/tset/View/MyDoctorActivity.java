@@ -1,0 +1,76 @@
+package com.example.chen.tset.View;
+
+import android.support.v7.app.AppCompatActivity;
+import android.os.Bundle;
+import android.util.Log;
+import android.widget.ListView;
+
+import com.example.chen.tset.Data.Http_data;
+import com.example.chen.tset.Data.Inquiry;
+import com.example.chen.tset.R;
+import com.example.chen.tset.page.InquiryAdapter;
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
+import com.zhy.http.okhttp.OkHttpUtils;
+import com.zhy.http.okhttp.callback.StringCallback;
+
+import java.lang.reflect.Type;
+import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.LinkedList;
+import java.util.List;
+
+import okhttp3.Call;
+
+public class MyDoctorActivity extends AppCompatActivity {
+    private ListView lv_mydoctor;
+    Gson gson;
+    InquiryAdapter adapter;
+    List<Inquiry> list;
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_my_doctor);
+        findView();
+        init();
+        httpinit();
+    }
+
+    private void findView() {
+        lv_mydoctor = (ListView) findViewById(R.id.lv_mydoctor);
+        lv_mydoctor.setVerticalScrollBarEnabled(false);
+    }
+
+    private void init() {
+        list = new ArrayList<>();
+        adapter = new InquiryAdapter(MyDoctorActivity.this, list);
+        lv_mydoctor.setAdapter(adapter);
+    }
+
+    private void httpinit() {
+        gson = new Gson();
+        OkHttpUtils
+                .post()
+                .url(Http_data.http_data + "/findInquiryList")
+                .build()
+                .execute(new StringCallback() {
+                    @Override
+                    public void onError(Call call, Exception e, int id) {
+                    }
+
+                    @Override
+                    public void onResponse(String response, int id) {
+                        Log.e("问诊返回", response);
+                        Type listtype = new TypeToken<LinkedList<Inquiry>>() {
+                        }.getType();
+                        LinkedList<Inquiry> leclist = gson.fromJson(response, listtype);
+                        for (Iterator it = leclist.iterator(); it.hasNext(); ) {
+                            Inquiry inquiry = (Inquiry) it.next();
+                            list.add(inquiry);
+                        }
+                        adapter.notifyDataSetChanged();
+                    }
+                });
+    }
+}

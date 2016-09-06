@@ -59,6 +59,7 @@
                         android:orientation="horizontal">
 
                         <TextView
+                            android:id="@+id/tv_name"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="张薇薇"
@@ -80,6 +81,7 @@
                         android:orientation="horizontal">
 
                         <TextView
+                            android:id="@+id/tv_title"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginLeft="@dimen/x30"
@@ -89,6 +91,7 @@
                             android:textSize="@dimen/y28" />
 
                         <TextView
+                            android:id="@+id/tv_section"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginLeft="@dimen/x36"
@@ -103,6 +106,7 @@
                         android:layout_height="wrap_content">
 
                         <TextView
+                            android:id="@+id/tv_hospital"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginBottom="@dimen/y30"
@@ -126,6 +130,7 @@
                         android:layout_height="wrap_content">
 
                         <Button
+                            android:id="@+id/btn_chatmoney"
                             android:layout_width="@dimen/x180"
                             android:layout_height="@dimen/y60"
                             android:layout_marginLeft="@dimen/x25"
@@ -150,6 +155,7 @@
                         android:layout_marginTop="@dimen/y18">
 
                         <Button
+                            android:id="@+id/btn_callmoney"
                             android:layout_width="@dimen/x180"
                             android:layout_height="@dimen/y60"
                             android:layout_marginLeft="@dimen/x25"
@@ -169,6 +175,7 @@
         </LinearLayout>
 
         <de.hdodenhof.circleimageview.CircleImageView
+            android:id="@+id/iv_icon"
             android:layout_width="@dimen/x160"
             android:layout_height="@dimen/y160"
             android:layout_marginLeft="@dimen/x30"

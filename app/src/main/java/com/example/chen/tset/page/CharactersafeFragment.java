@@ -77,6 +77,7 @@ public class CharactersafeFragment extends Fragment {
                 .execute(new StringCallback() {
                     @Override
                     public void onError(Call call, Exception e, int id) {
+
                     }
 
                     @Override

@@ -167,7 +167,7 @@ public class RegistrationAtivity extends AppCompatActivity {
                 .execute(new StringCallback() {
                     @Override
                     public void onError(Call call, Exception e, int id) {
-                        Toast.makeText(RegistrationAtivity.this, "失败", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(RegistrationAtivity.this, "网络连接失败", Toast.LENGTH_SHORT).show();
                     }
 
                     @Override
@@ -405,7 +405,7 @@ public class RegistrationAtivity extends AppCompatActivity {
                 .execute(new StringCallback() {
                     @Override
                     public void onError(Call call, Exception e, int id) {
-                        Toast.makeText(RegistrationAtivity.this, "失败", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(RegistrationAtivity.this, "网络连接失败", Toast.LENGTH_SHORT).show();
                     }
 
                     @Override

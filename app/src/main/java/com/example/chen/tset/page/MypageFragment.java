@@ -11,6 +11,7 @@ import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 
 import com.example.chen.tset.R;
+import com.example.chen.tset.View.MyDoctorActivity;
 import com.example.chen.tset.View.MycollectActivity;
 import com.example.chen.tset.View.PersonaldataActivity;
 import com.example.chen.tset.View.ReservationActivity;
@@ -22,7 +23,7 @@ import com.example.chen.tset.View.SetPageActivity;
 public class MypageFragment extends Fragment {
     View view;
     private LinearLayout iv_set;
-    private RelativeLayout rl_mycollect, rl_myreservation, rl_personaldata;
+    private RelativeLayout rl_mycollect, rl_myreservation, rl_personaldata, rl_mydpctor;
 
 
     @Nullable
@@ -38,10 +39,12 @@ public class MypageFragment extends Fragment {
         rl_mycollect = (RelativeLayout) view.findViewById(R.id.rl_mycollect);
         rl_myreservation = (RelativeLayout) view.findViewById(R.id.rl_myreservation);
         rl_personaldata = (RelativeLayout) view.findViewById(R.id.rl_personaldata);
+        rl_mydpctor = (RelativeLayout) view.findViewById(R.id.rl_mydpctor);
         iv_set.setOnClickListener(listerer);
         rl_mycollect.setOnClickListener(listerer);
         rl_myreservation.setOnClickListener(listerer);
         rl_personaldata.setOnClickListener(listerer);
+        rl_mydpctor.setOnClickListener(listerer);
     }
 
     private View.OnClickListener listerer = new View.OnClickListener() {
@@ -63,6 +66,10 @@ public class MypageFragment extends Fragment {
                 case R.id.rl_personaldata:
                     Intent intent3 = new Intent(getContext(), PersonaldataActivity.class);
                     startActivity(intent3);
+                    break;
+                case R.id.rl_mydpctor:
+                    Intent intent4 = new Intent(getContext(), MyDoctorActivity.class);
+                    startActivity(intent4);
                     break;
 
             }

@@ -80,7 +80,6 @@ public class LectureroomFragment extends Fragment {
                 .execute(new StringCallback() {
                     @Override
                     public void onError(Call call, Exception e, int id) {
-                        Toast.makeText(getContext(), "网络连接失败", Toast.LENGTH_SHORT).show();
                     }
 
                     @Override

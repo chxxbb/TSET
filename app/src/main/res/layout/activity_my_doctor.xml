@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/backgroundgray"
+    android:orientation="vertical"
+    tools:context=".View.MyDoctorActivity">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/y96"
+        android:background="@color/white">
+
+        <LinearLayout
+            android:id="@+id/ll_rutphone"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent">
+
+            <TextView
+                android:id="@+id/tv_passet"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:layout_marginLeft="@dimen/x30"
+                android:text="我的"
+                android:textColor="@color/backgroundblue"
+                android:textSize="@dimen/x32" />
+        </LinearLayout>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:text="我的医生"
+            android:textColor="@color/fontcolor"
+            android:textSize="@dimen/x36" />
+
+    </RelativeLayout>
+
+    <VideoView
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/y20"
+        android:background="@color/backgroundgray" />
+
+    <ListView
+        android:id="@+id/lv_mydoctor"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"></ListView>
+</LinearLayout>

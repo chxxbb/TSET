@@ -1,16 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/scrollView"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:background="@color/backgroundgray"
     tools:context="com.example.chen.tset.View.ReservationlistActivity">
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="@color/backgroundgray"
         android:orientation="vertical">
+
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="@dimen/y96"
@@ -227,57 +230,66 @@
 
             </RelativeLayout>
         </LinearLayout>
+
         <View
             android:layout_width="match_parent"
             android:layout_height="@dimen/y30" />
+
         <RelativeLayout
-            android:background="@color/white"
             android:layout_width="match_parent"
-            android:layout_height="@dimen/y80">
+            android:layout_height="@dimen/y80"
+            android:background="@color/white">
+
             <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent">
+
                 <TextView
-                    android:layout_gravity="center_vertical"
-                    android:layout_marginLeft="@dimen/x30"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginLeft="@dimen/x30"
                     android:text="医生嘱咐"
-                    android:textSize="@dimen/y28"
-                    android:textColor="#eb686c"/>
+                    android:textColor="#eb686c"
+                    android:textSize="@dimen/y28" />
             </LinearLayout>
+
             <LinearLayout
-                android:layout_alignParentRight="true"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content">
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true">
+
                 <ImageView
-                    android:layout_marginRight="@dimen/x30"
                     android:layout_width="@dimen/x34"
                     android:layout_height="@dimen/y64"
-                    android:src="@drawable/reservation_particulars"/>
+                    android:layout_marginRight="@dimen/x30"
+                    android:src="@drawable/reservation_particulars" />
             </LinearLayout>
         </RelativeLayout>
+
         <View
             android:layout_width="match_parent"
             android:layout_height="1dp"
-            android:background="@color/linegray"/>
+            android:background="@color/linegray" />
+
         <LinearLayout
-            android:background="@color/white"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:background="@color/white"
             android:orientation="horizontal">
+
             <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent">
+
                 <de.hdodenhof.circleimageview.CircleImageView
                     android:layout_width="@dimen/x84"
                     android:layout_height="@dimen/y84"
-                    app:civ_border_color="@color/linegray"
-                    android:src="@color/backgroundblue"
-                    app:civ_border_width="@dimen/x2"
                     android:layout_marginLeft="@dimen/x30"
                     android:layout_marginTop="@dimen/x30"
-                    ></de.hdodenhof.circleimageview.CircleImageView>
+                    android:src="@color/backgroundblue"
+                    app:civ_border_color="@color/linegray"
+                    app:civ_border_width="@dimen/x2"></de.hdodenhof.circleimageview.CircleImageView>
             </LinearLayout>
 
             <FrameLayout
@@ -285,59 +297,61 @@
                 android:layout_height="wrap_content">
 
                 <LinearLayout
-                    android:layout_marginLeft="@dimen/x16"
-                    android:layout_marginTop="@dimen/y34"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/x16"
+                    android:layout_marginTop="@dimen/y34"
                     android:orientation="vertical">
+
                     <LinearLayout
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:orientation="horizontal">
+
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="张三疯"
-                            android:textSize="@dimen/y22"
-                            android:textColor="@color/xmgray"/>
+                            android:textColor="@color/xmgray"
+                            android:textSize="@dimen/y22" />
+
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginLeft="@dimen/x20"
                             android:text="行为发育科"
-                            android:textSize="@dimen/y22"
                             android:textColor="@color/xmgray"
-                            />
+                            android:textSize="@dimen/y22" />
                     </LinearLayout>
+
                     <TextView
-                        android:background="@drawable/reservationlist_background"
-                        android:layout_marginTop="@dimen/y16"
                         android:layout_width="@dimen/y474"
                         android:layout_height="wrap_content"
                         android:layout_marginRight="@dimen/x112"
-                        android:text="你死定了你死定了你死定了你死定了你死定了你死定了你死定了你死定了你死定了你死定了你死定了你死定了"
-                        android:textSize="@dimen/y28"
-                        android:textColor="@color/fontcolor"
+                        android:layout_marginTop="@dimen/y16"
+                        android:background="@drawable/reservationlist_background"
+                        android:paddingBottom="@dimen/x26"
                         android:paddingLeft="@dimen/x20"
                         android:paddingRight="@dimen/x20"
                         android:paddingTop="@dimen/x16"
-                        android:paddingBottom="@dimen/x26"
-                        >
-                    </TextView>
+                        android:text="你死定了你死定了你死定了你死定了你死定了你死定了你死定了你死定了你死定了你死定了你死定了你死定了"
+                        android:textColor="@color/fontcolor"
+                        android:textSize="@dimen/y28"></TextView>
                 </LinearLayout>
+
                 <ImageView
-                    android:layout_marginTop="@dimen/y110"
                     android:layout_width="@dimen/x20"
                     android:layout_height="wrap_content"
-                    android:src="@drawable/reservation_arrows"
-                    />
+                    android:layout_marginTop="@dimen/y110"
+                    android:src="@drawable/reservation_arrows" />
             </FrameLayout>
 
         </LinearLayout>
+
         <View
             android:layout_width="wrap_content"
             android:layout_height="@dimen/y30"
-            android:background="@color/white"/>
+            android:background="@color/white" />
     </LinearLayout>
 
 </ScrollView>

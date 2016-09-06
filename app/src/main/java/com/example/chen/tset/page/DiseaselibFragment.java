@@ -51,6 +51,7 @@ public class DiseaselibFragment extends Fragment {
     private ImageView iv_dislistv;
     Gson gson;
     String[] a = null;
+    private View view1;
 
 
     @Nullable
@@ -67,6 +68,7 @@ public class DiseaselibFragment extends Fragment {
     private void findView() {
         listview_dise = (ListView) view.findViewById(R.id.listview_dise);
         recyv_dise = (RecyclerView) view.findViewById(R.id.recyv_dise);
+        view1 = view.findViewById(R.id.view1);
         listview_dise.setOnItemClickListener(listener);
         listview_dise.setOnItemSelectedListener(slistener);
         recyv_dise.setLayoutManager(new StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL));
@@ -86,7 +88,8 @@ public class DiseaselibFragment extends Fragment {
                 .execute(new StringCallback() {
                     @Override
                     public void onError(Call call, Exception e, int id) {
-                        Toast.makeText(getContext(), "失败", Toast.LENGTH_SHORT).show();
+                        view1.setVisibility(View.GONE);
+                        Toast.makeText(getContext(), "网络连接失败", Toast.LENGTH_SHORT).show();
                     }
 
                     @Override
@@ -134,7 +137,7 @@ public class DiseaselibFragment extends Fragment {
                 .execute(new StringCallback() {
                     @Override
                     public void onError(Call call, Exception e, int id) {
-                        Toast.makeText(getContext(), "失败", Toast.LENGTH_SHORT).show();
+
                     }
 
                     @Override

@@ -43,6 +43,7 @@
                     android:background="@drawable/doctorparticulars_qualifications_case">
 
                     <TextView
+                        android:id="@+id/tv_bioo"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center_vertical"
@@ -60,6 +61,7 @@
                     android:background="@drawable/doctorparticulars_qualifications_case">
 
                     <TextView
+                        android:id="@+id/tv_bis"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center_vertical"
@@ -85,6 +87,7 @@
                     android:background="@drawable/doctorparticulars_qualifications_case">
 
                     <TextView
+                        android:id="@+id/tv_bit"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center_vertical"
@@ -102,6 +105,7 @@
                     android:background="@drawable/doctorparticulars_qualifications_case">
 
                     <TextView
+                        android:id="@+id/tv_bif"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center_vertical"
@@ -124,6 +128,7 @@
                 android:textSize="@dimen/y30" />
 
             <TextView
+                android:id="@+id/tv_adept"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="@dimen/y30"
@@ -141,6 +146,7 @@
             android:background="@color/backgroundgray" />
 
         <TextView
+            android:id="@+id/tv_sum"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginBottom="@dimen/y26"
