@@ -50,7 +50,6 @@ public class PharmacyremindActivity extends AppCompatActivity {
         list = new ArrayList<>();
         adapter = new PharmacyremindAdapter(this, list);
         lv_pharmacy_remind.setAdapter(adapter);
-
         lv_pharmacy_remind.setVerticalScrollBarEnabled(false);
 
     }

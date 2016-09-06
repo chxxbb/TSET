@@ -12,12 +12,19 @@ import android.widget.RelativeLayout;
 import android.widget.Toast;
 
 import com.example.chen.tset.Data.Http_data;
+import com.example.chen.tset.Data.Information;
+import com.example.chen.tset.Data.Reservation;
 import com.example.chen.tset.R;
 import com.example.chen.tset.page.ReservationlistvAdapter;
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
 import com.zhy.http.okhttp.OkHttpUtils;
 import com.zhy.http.okhttp.callback.StringCallback;
 
+import java.lang.reflect.Type;
 import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.LinkedList;
 import java.util.List;
 
 import okhttp3.Call;
@@ -26,7 +33,8 @@ public class ReservationActivity extends AppCompatActivity implements View.OnCli
     private LinearLayout ll_reservationreturn;
     ReservationlistvAdapter adapter;
     private ListView lv_reser;
-    List<String> list;
+    List<Reservation> list;
+    Gson gson = new Gson();
 
     //233
 
@@ -48,17 +56,32 @@ public class ReservationActivity extends AppCompatActivity implements View.OnCli
 
     private void init() {
         list = new ArrayList<>();
-        list.add("12324");
-        list.add("12324");
-        list.add("12324");
-        list.add("12324");
-        list.add("12324");
-        list.add("12324");
-        list.add("12324");
-        list.add("12324");
         adapter = new ReservationlistvAdapter(this, list);
         lv_reser.setAdapter(adapter);
-        adapter.notifyDataSetChanged();
+        OkHttpUtils
+                .post()
+                .url(Http_data.http_data + "/findReservation")
+                .addParams("user_id", "1")
+                .build()
+                .execute(new StringCallback() {
+                    @Override
+                    public void onError(Call call, Exception e, int id) {
+                        Toast.makeText(ReservationActivity.this, "失败", Toast.LENGTH_SHORT).show();
+                    }
+
+                    @Override
+                    public void onResponse(String response, int id) {
+                        Log.e("我的预约返回", response);
+                        Type listtype = new TypeToken<LinkedList<Reservation>>() {
+                        }.getType();
+                        LinkedList<Reservation> leclist = gson.fromJson(response, listtype);
+                        for (Iterator it = leclist.iterator(); it.hasNext(); ) {
+                            Reservation reservation = (Reservation) it.next();
+                            list.add(reservation);
+                        }
+                        adapter.notifyDataSetChanged();
+                    }
+                });
     }
 
     @Override
