@@ -5,6 +5,7 @@
     android:layout_height="match_parent"
     android:background="@color/backgroundgray"
     android:orientation="vertical"
+    android:padding="0px"
     tools:context="com.example.chen.tset.View.RegistrationAtivity">
 
     <RelativeLayout

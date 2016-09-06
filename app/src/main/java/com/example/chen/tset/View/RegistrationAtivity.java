@@ -16,6 +16,8 @@ import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.LinearLayout;
 import android.widget.ListView;
+import android.widget.ProgressBar;
+import android.widget.RadioButton;
 import android.widget.RelativeLayout;
 import android.app.AlertDialog.Builder;
 import android.widget.TextView;
@@ -44,10 +46,11 @@ import okhttp3.Call;
 
 public class RegistrationAtivity extends AppCompatActivity {
     private RelativeLayout rl_city, rl_gender, rl_time, rl_age, rl_professionaltitle, rl_departments;
-    private LinearLayout ll_rutregistration;
+    private LinearLayout ll_rutregistration, ll_cancel;
     private Dialog setHeadDialog;
     private View dialogView;
     private TextView tv_city, tv_gender, tv_time, tv_age, tv_professionaltitle, tv_departments;
+    private ProgressBar progressBar;
     private Button btn_pay;
     Calendar c;
     int myear, mmonth, mday;
@@ -61,6 +64,7 @@ public class RegistrationAtivity extends AppCompatActivity {
     RegistrationageAdapter adapter;
     RegistrationdivisionAdapter divisionAdapter;
     RegistrationdivisionAdapter divisionAdapter1;
+    private RadioButton rb_zhifb, rb_wenx;
     Gson gson;
 
 
@@ -150,32 +154,88 @@ public class RegistrationAtivity extends AppCompatActivity {
     };
 
     private void pay() {
-        OkHttpUtils
-                .post()
-                .url(Http_data.http_data + "/addRegistration")
-                .addParams("city", tv_city.getText().toString())
-                .addParams("section", tv_departments.getText().toString())
-                .addParams("title", tv_professionaltitle.getText().toString())
-                .addParams("time", tv_time.getText().toString())
-                .addParams("sex", tv_gender.getText().toString())
-                .addParams("age", tv_age.getText().toString())
-                .addParams("name", "李狗蛋")
-                .addParams("phone", "12345678901")
-                .addParams("content", "要死了")
-                .addParams("money", "1")
-                .build()
-                .execute(new StringCallback() {
-                    @Override
-                    public void onError(Call call, Exception e, int id) {
-                        Toast.makeText(RegistrationAtivity.this, "网络连接失败", Toast.LENGTH_SHORT).show();
+//        OkHttpUtils
+//                .post()
+//                .url(Http_data.http_data + "/addRegistration")
+//                .addParams("city", tv_city.getText().toString())
+//                .addParams("section", tv_departments.getText().toString())
+//                .addParams("title", tv_professionaltitle.getText().toString())
+//                .addParams("time", tv_time.getText().toString())
+//                .addParams("sex", tv_gender.getText().toString())
+//                .addParams("age", tv_age.getText().toString())
+//                .addParams("name", "李狗蛋")
+//                .addParams("phone", "12345678901")
+//                .addParams("content", "要死了")
+//                .addParams("money", "1")
+//                .build()
+//                .execute(new StringCallback() {
+//                    @Override
+//                    public void onError(Call call, Exception e, int id) {
+//                        Toast.makeText(RegistrationAtivity.this, "网络连接失败", Toast.LENGTH_SHORT).show();
+//                    }
+//
+//                    @Override
+//                    public void onResponse(String response, int id) {
+//                        Log.e("一键挂号支付返回", response);
+//
+//                    }
+//                });
+        setHeadDialog = new Builder(this).create();
+        setHeadDialog.show();
+        WindowManager windowManager = getWindowManager();
+        Display display = windowManager.getDefaultDisplay();
+        dialogView = View.inflate(getApplicationContext(), R.layout.payment_dialog, null);
+        rb_wenx = (RadioButton) dialogView.findViewById(R.id.rb_wenx);
+        rb_zhifb = (RadioButton) dialogView.findViewById(R.id.rb_zhifb);
+        ll_cancel = (LinearLayout) dialogView.findViewById(R.id.ll_cancel);
+        rb_wenx.setChecked(true);
+        progressBar = (ProgressBar) dialogView.findViewById(R.id.progressBar);
+        setHeadDialog.getWindow().setContentView(dialogView);
+        WindowManager.LayoutParams lp = setHeadDialog.getWindow().getAttributes();
+        lp.width = display.getWidth();
+        setHeadDialog.getWindow().setAttributes(lp);
+        Thread thread = new Thread(new Runnable() {
+            @Override
+            public void run() {
+                int progressBarMax = progressBar.getMax();
+                try {
+                    while (progressBarMax != progressBar.getProgress()) {
+                        int stepProgress = progressBarMax / 1000;
+                        int currentprogress = progressBar.getProgress();
+                        progressBar.setProgress(currentprogress + stepProgress);
+                        Thread.sleep(180);
                     }
+                    finish();
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
 
-                    @Override
-                    public void onResponse(String response, int id) {
-                        Log.e("一键挂号支付返回", response);
+                }
+            }
+        });
+        thread.start();
+        payonclick();
 
-                    }
-                });
+    }
+
+    private void payonclick() {
+        rb_zhifb.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                rb_wenx.setChecked(false);
+            }
+        });
+        rb_wenx.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                rb_zhifb.setChecked(false);
+            }
+        });
+        ll_cancel.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                setHeadDialog.dismiss();
+            }
+        });
     }
 
     private void departmentsshowDialog() {
