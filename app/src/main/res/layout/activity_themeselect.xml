@@ -67,10 +67,12 @@
             android:gravity="center_vertical"
             android:orientation="horizontal">
 
-            <ImageView
+            <RadioButton
+                android:id="@+id/rbtn_white_front"
                 android:layout_width="@dimen/x40"
                 android:layout_height="@dimen/y40"
-                android:src="@drawable/themeselect1" />
+                android:background="@drawable/themeselect_rbtn_select"
+                android:button="@null"/>
 
             <TextView
                 android:layout_width="wrap_content"
@@ -88,13 +90,14 @@
             android:layout_marginRight="@dimen/x30">
 
             <RadioButton
+                android:id="@+id/rbtn_white_queen"
                 android:layout_width="@dimen/x120"
                 android:layout_height="@dimen/y60"
                 android:layout_gravity="center_vertical"
                 android:background="@drawable/themeselect_btn_onclick"
                 android:button="@null"
                 android:gravity="center"
-                android:text="使用中"
+                android:text="使用"
                 android:textColor="@color/white"
                 android:textSize="@dimen/x32" />
         </LinearLayout>
@@ -118,11 +121,12 @@
             android:layout_marginLeft="@dimen/x30"
             android:gravity="center_vertical"
             android:orientation="horizontal">
-
-            <ImageView
+            <RadioButton
+                android:id="@+id/rbtn_blue_front"
                 android:layout_width="@dimen/x40"
                 android:layout_height="@dimen/y40"
-                android:src="@drawable/themeselect2" />
+                android:background="@drawable/themeselect_rbtn_select"
+                android:button="@null"/>
 
             <TextView
                 android:layout_width="wrap_content"
@@ -139,7 +143,9 @@
             android:layout_alignParentRight="true"
             android:layout_marginRight="@dimen/x30">
 
+
             <RadioButton
+                android:id="@+id/rbtn_blue_queen"
                 android:layout_width="@dimen/x120"
                 android:layout_height="@dimen/y60"
                 android:layout_gravity="center_vertical"
