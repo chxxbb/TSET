@@ -1,6 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <selector xmlns:android="http://schemas.android.com/apk/res/android">
-    <item  android:state_checked="true" android:drawable="@drawable/healthcondition_rbtn_isclick_yellowcase"></item>
-    <item  android:state_checked="false" android:drawable="@drawable/healthcondition_rbtn_unmep_yellowcase"></item>
+    <!--<item  android:state_checked="true" android:drawable="@drawable/healthcondition_rbtn_isclick_yellowcase"></item>-->
+    <!--<item  android:state_checked="false" android:drawable="@drawable/healthcondition_rbtn_unmep_yellowcase"></item>-->
+    <item android:state_checked="true" android:drawable="@drawable/healthcondition_rbtn_isclick_yellowcase" />
+    <item android:drawable="@drawable/healthcondition_rbtn_unmep_yellowcase" />
 
 </selector>

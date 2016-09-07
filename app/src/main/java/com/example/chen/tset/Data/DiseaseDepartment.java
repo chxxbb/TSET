@@ -6,10 +6,20 @@ package com.example.chen.tset.Data;
 public class DiseaseDepartment {
     private String icon;
     private String name;
+    private String iconn;
 
-    public DiseaseDepartment(String icon, String name) {
+    public DiseaseDepartment(String icon, String name, String iconn) {
         this.icon = icon;
         this.name = name;
+        this.iconn = iconn;
+    }
+
+    public String getIconn() {
+        return iconn;
+    }
+
+    public void setIconn(String iconn) {
+        this.iconn = iconn;
     }
 
     public String getIcon() {

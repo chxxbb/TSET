@@ -10,14 +10,27 @@
         android:layout_width="@dimen/x180"
         android:layout_height="@dimen/y120"
         android:orientation="vertical">
-
-        <ImageView
-            android:id="@+id/iv_dislistv"
-            android:layout_width="@dimen/x50"
-            android:layout_height="@dimen/y50"
+        <FrameLayout
             android:layout_gravity="center_horizontal"
-            android:layout_marginTop="@dimen/y10"
-            android:src="@drawable/action_listv" />
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+            <ImageView
+                android:id="@+id/iv_dislistv"
+                android:layout_width="@dimen/x50"
+                android:layout_height="@dimen/y50"
+                android:layout_marginTop="@dimen/y10"
+                android:src="@drawable/action_listv" />
+            <ImageView
+                android:id="@+id/iv_dislistv1"
+                android:visibility="gone"
+                android:layout_width="@dimen/x50"
+                android:layout_height="@dimen/y50"
+                android:layout_marginTop="@dimen/y10"
+                android:src="@drawable/action_listv" />
+
+        </FrameLayout>
+
+
 
         <TextView
             android:id="@+id/tv_dislistv"

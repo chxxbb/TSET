@@ -119,28 +119,28 @@
             android:layout_marginTop="@dimen/y40"
             android:orientation="horizontal">
 
-            <RadioButton
+            <ToggleButton
                 android:layout_width="wrap_content"
                 android:layout_height="@dimen/y70"
                 android:layout_marginRight="@dimen/x20"
                 android:background="@drawable/healthcondition_rbtn_onclick_greencase"
                 android:button="@null"
-                android:paddingLeft="@dimen/x20"
-                android:paddingRight="@dimen/x20"
-                android:text="流涕"
+                android:textOff="流涕"
+                android:textOn="流涕"
                 android:textColor="@drawable/healthcondition_font_green" />
 
-            <RadioButton
+            <ToggleButton
                 android:layout_width="wrap_content"
                 android:layout_height="@dimen/y70"
                 android:background="@drawable/healthcondition_rbtn_onclick_greencase"
                 android:button="@null"
                 android:paddingLeft="@dimen/x20"
                 android:paddingRight="@dimen/x20"
-                android:text="咳嗽"
+                android:textOff="咳嗽"
+                android:textOn="咳嗽"
                 android:textColor="@drawable/healthcondition_font_green" />
 
-            <RadioButton
+            <ToggleButton
                 android:layout_width="wrap_content"
                 android:layout_height="@dimen/y70"
                 android:layout_marginLeft="@dimen/x20"
@@ -148,7 +148,8 @@
                 android:button="@null"
                 android:paddingLeft="@dimen/x20"
                 android:paddingRight="@dimen/x20"
-                android:text="腹泻"
+                android:textOff="腹泻"
+                android:textOn="腹泻"
                 android:textColor="@drawable/healthcondition_font_green" />
         </LinearLayout>
 
@@ -158,7 +159,7 @@
             android:layout_marginTop="@dimen/y26"
             android:orientation="horizontal">
 
-            <RadioButton
+            <ToggleButton
                 android:layout_width="wrap_content"
                 android:layout_height="@dimen/y70"
                 android:layout_marginRight="@dimen/x20"
@@ -166,10 +167,11 @@
                 android:button="@null"
                 android:paddingLeft="@dimen/x20"
                 android:paddingRight="@dimen/x20"
-                android:text="呕吐"
+                android:textOff="呕吐"
+                android:textOn="呕吐"
                 android:textColor="@drawable/healthcondition_font_yollow" />
 
-            <RadioButton
+            <ToggleButton
                 android:layout_width="wrap_content"
                 android:layout_height="@dimen/y70"
                 android:layout_marginRight="@dimen/x20"
@@ -177,10 +179,11 @@
                 android:button="@null"
                 android:paddingLeft="@dimen/x20"
                 android:paddingRight="@dimen/x20"
-                android:text="食欲不振"
+                android:textOff="食欲不振"
+                android:textOn="食欲不振"
                 android:textColor="@drawable/healthcondition_font_yollow" />
 
-            <RadioButton
+            <ToggleButton
                 android:layout_width="wrap_content"
                 android:layout_height="@dimen/y70"
                 android:layout_marginRight="@dimen/x20"
@@ -188,17 +191,19 @@
                 android:button="@null"
                 android:paddingLeft="@dimen/x20"
                 android:paddingRight="@dimen/x20"
-                android:text="重感冒"
+                android:textOff="重感冒"
+                android:textOn="重感冒"
                 android:textColor="@drawable/healthcondition_font_yollow" />
 
-            <RadioButton
+            <ToggleButton
                 android:layout_width="wrap_content"
                 android:layout_height="@dimen/y70"
                 android:background="@drawable/healthcondition_rbtn_onclick_yellowcase"
                 android:button="@null"
                 android:paddingLeft="@dimen/x20"
                 android:paddingRight="@dimen/x20"
-                android:text="发烧"
+                android:textOff="发烧"
+                android:textOn="发烧"
                 android:textColor="@drawable/healthcondition_font_yollow" />
         </LinearLayout>
 
@@ -208,7 +213,7 @@
             android:layout_marginTop="@dimen/y26"
             android:orientation="horizontal">
 
-            <RadioButton
+            <ToggleButton
                 android:layout_width="wrap_content"
                 android:layout_height="@dimen/y70"
                 android:layout_marginRight="@dimen/x20"
@@ -216,10 +221,11 @@
                 android:button="@null"
                 android:paddingLeft="@dimen/x20"
                 android:paddingRight="@dimen/x20"
-                android:text="发烧"
+                android:textOff="发烧"
+                android:textOn="发烧"
                 android:textColor="@drawable/healthcondition_font_red" />
 
-            <RadioButton
+            <ToggleButton
                 android:layout_width="wrap_content"
                 android:layout_height="@dimen/y70"
                 android:layout_marginRight="@dimen/x20"
@@ -227,10 +233,11 @@
                 android:button="@null"
                 android:paddingLeft="@dimen/x20"
                 android:paddingRight="@dimen/x20"
-                android:text="重感冒"
+                android:textOff="重感冒"
+                android:textOn="重感冒"
                 android:textColor="@drawable/healthcondition_font_red" />
 
-            <RadioButton
+            <ToggleButton
                 android:layout_width="wrap_content"
                 android:layout_height="@dimen/y70"
                 android:layout_marginRight="@dimen/x20"
@@ -238,17 +245,19 @@
                 android:button="@null"
                 android:paddingLeft="@dimen/x20"
                 android:paddingRight="@dimen/x20"
-                android:text="重感冒"
+                android:textOff="重感冒"
+                android:textOn="重感冒"
                 android:textColor="@drawable/healthcondition_font_red" />
 
-            <RadioButton
+            <ToggleButton
                 android:layout_width="wrap_content"
                 android:layout_height="@dimen/y70"
                 android:background="@drawable/healthcondition_rbtn_onclick_redcase"
                 android:button="@null"
                 android:paddingLeft="@dimen/x20"
                 android:paddingRight="@dimen/x20"
-                android:text="发烧"
+                android:textOff="发烧"
+                android:textOn="发烧"
                 android:textColor="@drawable/healthcondition_font_red" />
         </LinearLayout>
 
@@ -258,7 +267,7 @@
             android:layout_marginTop="@dimen/y26"
             android:orientation="horizontal">
 
-            <RadioButton
+            <ToggleButton
                 android:layout_width="wrap_content"
                 android:layout_height="@dimen/y70"
                 android:layout_marginRight="@dimen/x20"
@@ -266,20 +275,22 @@
                 android:button="@null"
                 android:paddingLeft="@dimen/x20"
                 android:paddingRight="@dimen/x20"
-                android:text="发烧"
+                android:textOff="发烧"
+                android:textOn="发烧"
                 android:textColor="@drawable/healthcondition_font_red" />
 
-            <RadioButton
+            <ToggleButton
                 android:layout_width="wrap_content"
                 android:layout_height="@dimen/y70"
                 android:background="@drawable/healthcondition_rbtn_onclick_redcase"
                 android:button="@null"
                 android:paddingLeft="@dimen/x20"
                 android:paddingRight="@dimen/x20"
-                android:text="重感冒"
+                android:textOff="重感冒"
+                android:textOn="重感冒"
                 android:textColor="@drawable/healthcondition_font_red" />
 
-            <RadioButton
+            <ToggleButton
                 android:layout_width="wrap_content"
                 android:layout_height="@dimen/y70"
                 android:layout_marginLeft="@dimen/x20"
@@ -287,7 +298,8 @@
                 android:button="@null"
                 android:paddingLeft="@dimen/x20"
                 android:paddingRight="@dimen/x20"
-                android:text="发烧"
+                android:textOff="发烧"
+                android:textOn="发烧"
                 android:textColor="@drawable/healthcondition_font_red" />
         </LinearLayout>
     </LinearLayout>

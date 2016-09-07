@@ -61,25 +61,31 @@ public class DiseaseliblistvAdapter extends BaseAdapter {
         ViewHolder viewHolder = (ViewHolder) convertView.getTag();
         viewHolder.tv_dislistv.setText(list.get(position).getName());
         ImageLoader.getInstance().displayImage(list.get(position).getIcon(), viewHolder.iv_dislistv);
+        ImageLoader.getInstance().displayImage(list.get(position).getIconn(), viewHolder.iv_dislistv1);
         if (mSelect == position) {
+            viewHolder.iv_dislistv1.setVisibility(View.VISIBLE);
+            viewHolder.iv_dislistv.setVisibility(View.GONE);
             viewHolder.dise_ll.setBackgroundColor(android.graphics.Color.parseColor("#6fc9e6"));
             viewHolder.tv_dislistv.setTextColor(0xffffffff);
         } else {
-            viewHolder.dise_ll.setBackgroundColor(android.graphics.Color.parseColor("#e0e0e0"));
-            viewHolder.tv_dislistv.setTextColor(android.graphics.Color.parseColor("#323232"));
+            viewHolder.iv_dislistv1.setVisibility(View.GONE);
+            viewHolder.iv_dislistv.setVisibility(View.VISIBLE);
+            viewHolder.dise_ll.setBackgroundColor(android.graphics.Color.parseColor("#f4f4f4"));
+            viewHolder.tv_dislistv.setTextColor(android.graphics.Color.parseColor("#666666"));
         }
         return convertView;
     }
 
     static class ViewHolder {
         private TextView tv_dislistv;
-        private ImageView iv_dislistv;
+        private ImageView iv_dislistv, iv_dislistv1;
         private LinearLayout dise_ll;
 
         ViewHolder(View v) {
             tv_dislistv = (TextView) v.findViewById(R.id.tv_dislistv);
             iv_dislistv = (ImageView) v.findViewById(R.id.iv_dislistv);
             dise_ll = (LinearLayout) v.findViewById(R.id.dise_ll);
+            iv_dislistv1 = (ImageView) v.findViewById(R.id.iv_dislistv1);
         }
     }
 

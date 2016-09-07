@@ -18,7 +18,7 @@
                 android:id="@+id/view1"
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/y10"
-                android:background="@color/linegray" />
+                android:background="@color/backgroundgray" />
 
             <ListView
                 android:id="@+id/listview_dise"

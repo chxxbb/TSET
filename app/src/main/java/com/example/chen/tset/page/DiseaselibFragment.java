@@ -46,9 +46,6 @@ public class DiseaselibFragment extends Fragment {
     List<DiseaseDepartment> list;
     //右边RecyclerView集合
     List<String> list1;
-    private LinearLayout dise_ll = null;
-    private TextView tv_dislistv = null;
-    private ImageView iv_dislistv;
     Gson gson;
     String[] a = null;
     private View view1;
@@ -95,6 +92,7 @@ public class DiseaselibFragment extends Fragment {
                     @Override
                     public void onResponse(String response, int id) {
                         Log.e("百科疾病库", response);
+                        view1.setVisibility(View.GONE);
                         Type listtype = new TypeToken<LinkedList<DiseaseDepartment>>() {
                         }.getType();
                         LinkedList<DiseaseDepartment> leclist = gson.fromJson(response, listtype);
@@ -103,6 +101,7 @@ public class DiseaselibFragment extends Fragment {
                             list.add(dd);
                         }
                         adapter.notifyDataSetChanged();
+                        view1.setVisibility(View.VISIBLE);
                     }
                 });
     }
