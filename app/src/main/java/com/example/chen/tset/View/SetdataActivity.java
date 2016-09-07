@@ -46,11 +46,6 @@ public class SetdataActivity extends AppCompatActivity {
         rb_madam = (RadioButton) findViewById(R.id.rb_madam);
         btn = (Button) findViewById(R.id.btn);
         rbtn_man.performClick();
-        if (rbtn_man.isChecked()) {
-            gender = "男士";
-        } else if (rb_madam.isChecked()) {
-            gender = "女士";
-        }
         btn.setOnClickListener(listener);
         et_nickname.addTextChangedListener(new TextWatcher() {
             @Override
@@ -92,7 +87,11 @@ public class SetdataActivity extends AppCompatActivity {
     private View.OnClickListener listener = new View.OnClickListener() {
         @Override
         public void onClick(View v) {
-
+            if (rbtn_man.isChecked()) {
+                gender = "男";
+            } else {
+                gender = "女";
+            }
             OkHttpUtils
                     .post()
                     .url(Http_data.http_data + "/ChangeNameAndSex" + "?" + user.getId())

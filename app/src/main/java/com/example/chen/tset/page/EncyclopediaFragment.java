@@ -9,6 +9,8 @@ import android.support.v4.view.ViewPager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.RelativeLayout;
+import android.widget.TextView;
 
 import com.example.chen.tset.R;
 
@@ -25,9 +27,10 @@ public class EncyclopediaFragment extends Fragment {
     //标题栏集合
     DiseaselibFragment diseaselibFragment1;
     CharactersafeFragment charactersafeFragment;
-    private TabLayout tabLayout;
     private ViewPager vp_encyclopedia;
     View view1, view2, view3, view4;
+    private RelativeLayout rl_tab1, rl_tab2, rl_tab3, rl_tab4;
+    private TextView tv_tab1, tv_tab2, tv_tab3, tv_tab4;
 
 
     @Nullable
@@ -41,13 +44,29 @@ public class EncyclopediaFragment extends Fragment {
 
 
     private void findView() {
-        tabLayout = (TabLayout) view.findViewById(R.id.tabLayout);
+
         vp_encyclopedia = (ViewPager) view.findViewById(R.id.vp_encyclopedia);
         vp_encyclopedia.addOnPageChangeListener(listener);
         view1 = view.findViewById(R.id.view1);
         view2 = view.findViewById(R.id.view2);
         view3 = view.findViewById(R.id.view3);
         view4 = view.findViewById(R.id.view4);
+        rl_tab1 = (RelativeLayout) view.findViewById(R.id.rl_tab1);
+        rl_tab2 = (RelativeLayout) view.findViewById(R.id.rl_tab2);
+        rl_tab3 = (RelativeLayout) view.findViewById(R.id.rl_tab3);
+        rl_tab4 = (RelativeLayout) view.findViewById(R.id.rl_tab4);
+        tv_tab1 = (TextView) view.findViewById(R.id.tv_tab1);
+        tv_tab2 = (TextView) view.findViewById(R.id.tv_tab2);
+        tv_tab3 = (TextView) view.findViewById(R.id.tv_tab3);
+        tv_tab4 = (TextView) view.findViewById(R.id.tv_tab4);
+        tv_tab1.setTextColor(android.graphics.Color.parseColor("#6fc9e6"));
+        tv_tab2.setTextColor(android.graphics.Color.parseColor("#999999"));
+        tv_tab3.setTextColor(android.graphics.Color.parseColor("#999999"));
+        tv_tab4.setTextColor(android.graphics.Color.parseColor("#999999"));
+        rl_tab1.setOnClickListener(rllistener);
+        rl_tab2.setOnClickListener(rllistener);
+        rl_tab3.setOnClickListener(rllistener);
+        rl_tab4.setOnClickListener(rllistener);
         view1.setVisibility(View.VISIBLE);
         view2.setVisibility(View.GONE);
         view3.setVisibility(View.GONE);
@@ -64,19 +83,14 @@ public class EncyclopediaFragment extends Fragment {
             flist.add(charactersafeFragment);
         }
         adapter = new EncyclopediaAdapter(getChildFragmentManager(), flist);
-        tabLayout.setTabsFromPagerAdapter(adapter);
         vp_encyclopedia.setAdapter(adapter);
         vp_encyclopedia.setOffscreenPageLimit(flist.size());
-        tabLayout.setupWithViewPager(vp_encyclopedia);
-        tabLayout.setTabTextColors(android.graphics.Color.parseColor("#999999"), android.graphics.Color.parseColor("#6fc9e6"));
-        tabLayout.setSelectedTabIndicatorColor(android.graphics.Color.parseColor("#6fc9e6"));
-        tabLayout.setTabMode(TabLayout.MODE_FIXED);
+
     }
 
     private ViewPager.OnPageChangeListener listener = new ViewPager.OnPageChangeListener() {
         @Override
         public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
-
         }
 
         @Override
@@ -86,27 +100,63 @@ public class EncyclopediaFragment extends Fragment {
                 view2.setVisibility(View.GONE);
                 view3.setVisibility(View.GONE);
                 view4.setVisibility(View.GONE);
+                tv_tab1.setTextColor(android.graphics.Color.parseColor("#6fc9e6"));
+                tv_tab2.setTextColor(android.graphics.Color.parseColor("#999999"));
+                tv_tab3.setTextColor(android.graphics.Color.parseColor("#999999"));
+                tv_tab4.setTextColor(android.graphics.Color.parseColor("#999999"));
+
             } else if (position == 1) {
                 view1.setVisibility(View.GONE);
                 view2.setVisibility(View.VISIBLE);
                 view3.setVisibility(View.GONE);
                 view4.setVisibility(View.GONE);
+                tv_tab2.setTextColor(android.graphics.Color.parseColor("#6fc9e6"));
+                tv_tab1.setTextColor(android.graphics.Color.parseColor("#999999"));
+                tv_tab3.setTextColor(android.graphics.Color.parseColor("#999999"));
+                tv_tab4.setTextColor(android.graphics.Color.parseColor("#999999"));
             } else if (position == 2) {
                 view1.setVisibility(View.GONE);
                 view2.setVisibility(View.GONE);
                 view3.setVisibility(View.VISIBLE);
                 view4.setVisibility(View.GONE);
+                tv_tab3.setTextColor(android.graphics.Color.parseColor("#6fc9e6"));
+                tv_tab2.setTextColor(android.graphics.Color.parseColor("#999999"));
+                tv_tab1.setTextColor(android.graphics.Color.parseColor("#999999"));
+                tv_tab4.setTextColor(android.graphics.Color.parseColor("#999999"));
             } else if (position == 3) {
                 view1.setVisibility(View.GONE);
                 view2.setVisibility(View.GONE);
                 view3.setVisibility(View.GONE);
                 view4.setVisibility(View.VISIBLE);
+                tv_tab4.setTextColor(android.graphics.Color.parseColor("#6fc9e6"));
+                tv_tab2.setTextColor(android.graphics.Color.parseColor("#999999"));
+                tv_tab3.setTextColor(android.graphics.Color.parseColor("#999999"));
+                tv_tab1.setTextColor(android.graphics.Color.parseColor("#999999"));
             }
         }
 
         @Override
         public void onPageScrollStateChanged(int state) {
 
+        }
+    };
+    private View.OnClickListener rllistener = new View.OnClickListener() {
+        @Override
+        public void onClick(View v) {
+            switch (v.getId()) {
+                case R.id.rl_tab1:
+                    vp_encyclopedia.setCurrentItem(0, true);
+                    break;
+                case R.id.rl_tab2:
+                    vp_encyclopedia.setCurrentItem(1, true);
+                    break;
+                case R.id.rl_tab3:
+                    vp_encyclopedia.setCurrentItem(2, true);
+                    break;
+                case R.id.rl_tab4:
+                    vp_encyclopedia.setCurrentItem(3, true);
+                    break;
+            }
         }
     };
 }

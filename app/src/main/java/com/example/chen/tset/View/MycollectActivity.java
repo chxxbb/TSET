@@ -48,6 +48,7 @@ public class MycollectActivity extends AppCompatActivity {
     private void findView() {
         lv_collect = (ListView) findViewById(R.id.lv_collect);
         ll_collectretur = (LinearLayout) findViewById(R.id.ll_collectretur);
+        lv_collect.setVerticalScrollBarEnabled(false);
         ll_collectretur.setOnClickListener(listener);
         lv_collect.setOnItemClickListener(lvlitener);
 

@@ -50,7 +50,7 @@ public class SexpageActivity extends AppCompatActivity {
                     finish();
                     break;
                 case R.id.rb_man:
-                    httpinit("nan");
+                    httpinit("男");
                     break;
                 case R.id.rb_nman:
                     httpinit("女");

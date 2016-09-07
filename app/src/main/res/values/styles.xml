@@ -17,5 +17,9 @@
     <style name="Widget.EditText.White" parent="@android:style/Widget.EditText">
         <item name="android:textColor">@color/fontcolor</item>
     </style>
+    <style name="MyTabLayoutTextAppearance" parent="TextAppearance.AppCompat.Widget.ActionBar.Title">
+        <item name="android:textSize">@dimen/y28</item>
+    </style>
+
 
 </resources>

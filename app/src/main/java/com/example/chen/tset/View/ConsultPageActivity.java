@@ -12,7 +12,9 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.chen.tset.Data.Consult;
+import com.example.chen.tset.Data.Consultparticulars;
 import com.example.chen.tset.Data.Http_data;
+import com.example.chen.tset.Data.Reservationlist;
 import com.example.chen.tset.R;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
@@ -33,7 +35,6 @@ public class ConsultPageActivity extends AppCompatActivity implements View.OnCli
     private LinearLayout ll_consult_return, ll_consult_collect;
     private TextView tv_title, tv_time, tv_content;
     private ImageView iv_icon;
-    private List<Consult> list;
     Gson gson;
 
     @Override
@@ -62,12 +63,11 @@ public class ConsultPageActivity extends AppCompatActivity implements View.OnCli
     }
 
     private void httpinit() {
-        list = new ArrayList<>();
         gson = new Gson();
         OkHttpUtils
                 .post()
-                .url(Http_data.http_data + "/findCyclopediaList")
-                .addParams("categoryId", "2")
+                .url(Http_data.http_data + "/findCollect")
+                .addParams("id", "1")
                 .build()
                 .execute(new StringCallback() {
                     @Override
@@ -78,17 +78,15 @@ public class ConsultPageActivity extends AppCompatActivity implements View.OnCli
                     @Override
                     public void onResponse(String response, int id) {
                         Log.e("咨询详情返回", response);
-                        Type listtype = new TypeToken<LinkedList<Consult>>() {
+                        Type listtype = new TypeToken<LinkedList<Consultparticulars>>() {
                         }.getType();
-                        LinkedList<Consult> leclist = gson.fromJson(response, listtype);
-                        for (Iterator it = leclist.iterator(); it.hasNext(); ) {
-                            Consult consult = (Consult) it.next();
-                            list.add(consult);
-                        }
-                        tv_title.setText(list.get(1).getTitle());
-                        tv_time.setText("天使资讯  " + list.get(1).getTime());
-                        tv_content.setText(list.get(1).getContent());
-                        ImageLoader.getInstance().displayImage(list.get(1).getIcon(), iv_icon);
+                        LinkedList<Consultparticulars> leclist = gson.fromJson(response, listtype);
+                        Iterator it = leclist.iterator();
+                        Consultparticulars consultparticulars = (Consultparticulars) it.next();
+                        tv_title.setText(consultparticulars.getTitle());
+                        tv_time.setText("天使资讯  " + consultparticulars.getTime());
+                        tv_content.setText(consultparticulars.getContent());
+                        ImageLoader.getInstance().displayImage(consultparticulars.getIcon(), iv_icon);
                     }
                 });
     }
