@@ -87,11 +87,13 @@
             android:layout_alignParentRight="true"
             android:layout_marginRight="@dimen/x30">
 
-            <Button
+            <RadioButton
                 android:layout_width="@dimen/x120"
                 android:layout_height="@dimen/y60"
                 android:layout_gravity="center_vertical"
-                android:background="@drawable/themeselect_btn_unmep_case"
+                android:background="@drawable/themeselect_btn_onclick"
+                android:button="@null"
+                android:gravity="center"
                 android:text="使用中"
                 android:textColor="@color/white"
                 android:textSize="@dimen/x32" />
@@ -137,11 +139,13 @@
             android:layout_alignParentRight="true"
             android:layout_marginRight="@dimen/x30">
 
-            <Button
+            <RadioButton
                 android:layout_width="@dimen/x120"
                 android:layout_height="@dimen/y60"
                 android:layout_gravity="center_vertical"
-                android:background="@drawable/countersign_btn_case"
+                android:background="@drawable/themeselect_btn_onclick"
+                android:button="@null"
+                android:gravity="center"
                 android:text="使用"
                 android:textColor="@color/white"
                 android:textSize="@dimen/x32" />

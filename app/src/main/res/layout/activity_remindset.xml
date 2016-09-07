@@ -84,24 +84,13 @@
             android:layout_alignParentRight="true"
             android:orientation="horizontal">
 
-            <FrameLayout
-                android:layout_width="wrap_content"
+            <ToggleButton
+                android:layout_width="@dimen/x100"
                 android:layout_height="@dimen/y50"
                 android:layout_gravity="center_vertical"
-                android:background="@drawable/remindset_imgcase_onclick">
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center_vertical">
-
-                    <ImageView
-                        android:layout_width="@dimen/x40"
-                        android:layout_height="@dimen/y40"
-                        android:layout_marginLeft="@dimen/x5"
-                        android:src="@drawable/remind_circle_unmep" />
-                </LinearLayout>
-            </FrameLayout>
+                android:background="@drawable/remindset_togglebutton"
+                android:textOff=""
+                android:textOn="" />
 
             <View
                 android:layout_width="@dimen/x30"
@@ -142,24 +131,13 @@
             android:layout_alignParentRight="true"
             android:orientation="horizontal">
 
-            <FrameLayout
-                android:layout_width="wrap_content"
+            <ToggleButton
+                android:layout_width="@dimen/x100"
                 android:layout_height="@dimen/y50"
                 android:layout_gravity="center_vertical"
-                android:background="@drawable/remindset_imgcase_onclick">
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center_vertical">
-
-                    <ImageView
-                        android:layout_width="@dimen/x40"
-                        android:layout_height="@dimen/y40"
-                        android:layout_marginLeft="@dimen/x5"
-                        android:src="@drawable/remind_circle_unmep" />
-                </LinearLayout>
-            </FrameLayout>
+                android:background="@drawable/remindset_togglebutton"
+                android:textOff=""
+                android:textOn="" />
 
             <View
                 android:layout_width="@dimen/x30"
@@ -197,24 +175,13 @@
             android:layout_alignParentRight="true"
             android:orientation="horizontal">
 
-            <FrameLayout
-                android:layout_width="wrap_content"
+            <ToggleButton
+                android:layout_width="@dimen/x100"
                 android:layout_height="@dimen/y50"
                 android:layout_gravity="center_vertical"
-                android:background="@drawable/remindset_imgcase_onclick">
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center_vertical">
-
-                    <ImageView
-                        android:layout_width="@dimen/x40"
-                        android:layout_height="@dimen/y40"
-                        android:layout_marginLeft="@dimen/x5"
-                        android:src="@drawable/remind_circle_unmep" />
-                </LinearLayout>
-            </FrameLayout>
+                android:background="@drawable/remindset_togglebutton"
+                android:textOff=""
+                android:textOn="" />
 
             <View
                 android:layout_width="@dimen/x30"
@@ -246,49 +213,24 @@
                 android:textSize="@dimen/y32" />
         </LinearLayout>
 
-        <FrameLayout
+        <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:layout_alignParentRight="true"
-            android:gravity="center_vertical">
+            android:orientation="horizontal">
 
-            <RelativeLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center_vertical">
+            <ToggleButton
+                android:layout_width="@dimen/x100"
+                android:layout_height="@dimen/y50"
+                android:layout_gravity="center_vertical"
+                android:background="@drawable/remindset_togglebutton"
+                android:textOff=""
+                android:textOn="" />
 
-                <LinearLayout
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_alignParentRight="true">
-
-                    <ImageView
-                        android:layout_width="wrap_content"
-                        android:layout_height="@dimen/y50"
-                        android:layout_marginRight="@dimen/x30"
-                        android:background="@drawable/remind_case_isoclick"
-                        android:clickable="true" />
-                </LinearLayout>
-            </RelativeLayout>
-
-            <RelativeLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center_vertical">
-
-                <LinearLayout
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_alignParentRight="true">
-
-                    <ImageView
-                        android:layout_width="@dimen/x40"
-                        android:layout_height="@dimen/y40"
-                        android:layout_marginRight="@dimen/x35"
-                        android:src="@drawable/remind_circle_isonclilc" />
-                </LinearLayout>
-            </RelativeLayout>
-        </FrameLayout>
+            <View
+                android:layout_width="@dimen/x30"
+                android:layout_height="match_parent" />
+        </LinearLayout>
 
     </RelativeLayout>
 
