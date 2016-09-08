@@ -1,9 +1,11 @@
 package com.example.chen.tset.View;
 
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 
@@ -44,6 +46,7 @@ public class MyDoctorActivity extends AppCompatActivity {
         lv_mydoctor = (ListView) findViewById(R.id.lv_mydoctor);
         ll_rut = (LinearLayout) findViewById(R.id.ll_rut);
         ll_rut.setOnClickListener(listener);
+        lv_mydoctor.setOnItemClickListener(lvlistener);
         lv_mydoctor.setVerticalScrollBarEnabled(false);
     }
 
@@ -78,6 +81,14 @@ public class MyDoctorActivity extends AppCompatActivity {
                     }
                 });
     }
+    private AdapterView.OnItemClickListener lvlistener=new AdapterView.OnItemClickListener() {
+        @Override
+        public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+            Intent intent=new Intent(MyDoctorActivity.this,DoctorparticularsActivity.class);
+            startActivity(intent);
+        }
+    };
+
 
     private View.OnClickListener listener = new View.OnClickListener() {
         @Override
