@@ -244,7 +244,6 @@ public class RegistrationAtivity extends AppCompatActivity {
         dialogView = View.inflate(getApplicationContext(), R.layout.registration_dialog, null);
         ListView lv_registration = (ListView) dialogView.findViewById(R.id.lv_registration);
         lv_registration.setVerticalScrollBarEnabled(false);
-
         lv_registration.setAdapter(divisionAdapter1);
         setHeadDialog.getWindow().setContentView(dialogView);
         WindowManager.LayoutParams lp = setHeadDialog.getWindow().getAttributes();

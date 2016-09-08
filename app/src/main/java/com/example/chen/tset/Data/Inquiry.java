@@ -10,14 +10,24 @@ public class Inquiry {
     private String money;
     private String adept;
     private String section;
+    private String hospital;
 
-    public Inquiry(String icon, String title, String name, String money, String adept, String section) {
+    public Inquiry(String icon, String title, String name, String money, String adept, String section, String hospital) {
         this.icon = icon;
         this.title = title;
         this.name = name;
         this.money = money;
         this.adept = adept;
         this.section = section;
+        this.hospital = hospital;
+    }
+
+    public String getHospital() {
+        return hospital;
+    }
+
+    public void setHospital(String hospital) {
+        this.hospital = hospital;
     }
 
     public String getIcon() {

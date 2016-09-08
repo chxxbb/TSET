@@ -13,8 +13,10 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.WindowManager;
 import android.widget.AdapterView;
+import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.ListView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.chen.tset.Data.Http_data;
@@ -40,19 +42,30 @@ public class InquiryFragment extends Fragment {
     View view;
     InquiryAdapter adapter;
     private ListView lv_inquiry;
+    //全部医生列表
     List<Inquiry> list;
-    private LinearLayout ll_city;
+    //科室列表
+    List<Inquiry> selectlist;
+    //城市列表
+    List<Inquiry> citylist;
+    //职称裂变
+    List<Inquiry> titlelist;
+    List<String> data;
+    private LinearLayout ll_city, ll_development, ll_sort;
     private Dialog setHeadDialog;
     private View dialogView;
     Gson gson;
+    InquirylistAdapter listadapter;
+    private TextView tv_section, tv_city;
 
 
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         view = inflater.inflate(R.layout.fragment_inquiry, null);
+        list = new ArrayList<>();
         findView();
-        init();
+        listinit(list);
         httpinit();
         return view;
     }
@@ -61,8 +74,14 @@ public class InquiryFragment extends Fragment {
     private void findView() {
         lv_inquiry = (ListView) view.findViewById(R.id.lv_inquiry);
         ll_city = (LinearLayout) view.findViewById(R.id.ll_city);
+        ll_development = (LinearLayout) view.findViewById(R.id.ll_development);
+        ll_sort = (LinearLayout) view.findViewById(R.id.ll_sort);
+        tv_section = (TextView) view.findViewById(R.id.tv_section);
+        tv_city = (TextView) view.findViewById(R.id.tv_city);
         lv_inquiry.setVerticalScrollBarEnabled(false);
         ll_city.setOnClickListener(listener);
+        ll_development.setOnClickListener(listener);
+        ll_sort.setOnClickListener(listener);
         lv_inquiry.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
@@ -72,8 +91,7 @@ public class InquiryFragment extends Fragment {
         });
     }
 
-    private void init() {
-        list = new ArrayList<>();
+    private void listinit(List<Inquiry> list) {
         adapter = new InquiryAdapter(getContext(), list);
         lv_inquiry.setAdapter(adapter);
     }
@@ -107,18 +125,206 @@ public class InquiryFragment extends Fragment {
     private View.OnClickListener listener = new View.OnClickListener() {
         @Override
         public void onClick(View v) {
-            showDialog();
+            switch (v.getId()) {
+                case R.id.ll_city:
+                    cityshowDialog();
+                    break;
+                case R.id.ll_development:
+                    developmentshowDialog();
+                    break;
+                case R.id.ll_sort:
+                    sortshowDialog();
+                    break;
+            }
+
         }
     };
 
-    public void showDialog() {
+    private void sortshowDialog() {
         setHeadDialog = new AlertDialog.Builder(getContext()).create();
         setHeadDialog.show();
-        dialogView = View.inflate(getContext(), R.layout.registration_city_case, null);
+        dialogView = View.inflate(getContext(), R.layout.inquiry_sort_dialog, null);
         setHeadDialog.getWindow().setContentView(dialogView);
         WindowManager.LayoutParams lp = setHeadDialog.getWindow()
                 .getAttributes();
         setHeadDialog.getWindow().setAttributes(lp);
+        sortdialogclick();
+    }
+
+    private void sortdialogclick() {
+        titlelist = new ArrayList<>();
+        Button btn_sortcancel = (Button) dialogView.findViewById(R.id.btn_sortcancel);
+        Button btn_default = (Button) dialogView.findViewById(R.id.btn_default);
+        Button btn_title = (Button) dialogView.findViewById(R.id.btn_title);
+        btn_sortcancel.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                setHeadDialog.dismiss();
+            }
+        });
+        btn_default.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                listinit(list);
+                setHeadDialog.dismiss();
+            }
+        });
+        btn_title.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                for (int i = 0; i < list.size(); i++) {
+                    if (list.get(i).getTitle().equals("主任医师")) {
+                        titlelist.add(list.get(i));
+                    }
+                }
+                for (int i = 0; i < list.size(); i++) {
+                    if (list.get(i).getTitle().equals("副主任医师")) {
+                        titlelist.add(list.get(i));
+                    }
+                }
+                for (int i = 0; i < list.size(); i++) {
+                    if (list.get(i).getTitle().equals("主治医师")) {
+                        titlelist.add(list.get(i));
+                    }
+                }
+                for (int i = 0; i < list.size(); i++) {
+                    if (list.get(i).getTitle().equals("执业医师")) {
+                        titlelist.add(list.get(i));
+                    }
+                }
+                listinit(titlelist);
+                setHeadDialog.dismiss();
+            }
+
+        });
+
+    }
+
+    //科室弹出框
+    private void developmentshowDialog() {
+        setHeadDialog = new AlertDialog.Builder(getContext()).create();
+        setHeadDialog.show();
+        dialogView = View.inflate(getContext(), R.layout.registration_dialog, null);
+        ListView lv_registration = (ListView) dialogView.findViewById(R.id.lv_registration);
+        data = new ArrayList<>();
+        data.add("全部科室");
+        data.add("行为发育");
+        data.add("小儿神经");
+        data.add("内分泌");
+        data.add("儿童皮肤");
+        data.add("耳鼻喉");
+        data.add("小儿外科");
+        data.add("眼科");
+        data.add("儿童口腔");
+        data.add("小儿呼吸");
+        data.add("儿童保健");
+        data.add("小儿消化");
+        data.add("其他");
+        lv_registration.setVerticalScrollBarEnabled(false);
+        listadapter = new InquirylistAdapter(getContext(), data);
+        lv_registration.setAdapter(listadapter);
+        listadapter.notifyDataSetChanged();
+        setHeadDialog.getWindow().setContentView(dialogView);
+        WindowManager.LayoutParams lp = setHeadDialog.getWindow().getAttributes();
+        setHeadDialog.getWindow().setAttributes(lp);
+        developmentdialogclick();
+    }
+
+    private void developmentdialogclick() {
+        selectlist = new ArrayList<>();
+        Button btn_cancel = (Button) dialogView.findViewById(R.id.btn_cancel);
+        btn_cancel.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                setHeadDialog.dismiss();
+            }
+        });
+        ListView lv_registration = (ListView) dialogView.findViewById(R.id.lv_registration);
+        lv_registration.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                if (position == 0) {
+                    listinit(list);
+                    setHeadDialog.dismiss();
+                } else {
+                    for (int i = 0; i < list.size(); i++) {
+                        //在集合中查找所点击科室的医生
+                        if ((data.get(position)).equals(list.get(i).getSection())) {
+                            selectlist.add(list.get(i));
+                        }
+                    }
+                    if (selectlist.size() == 0) {
+                        Toast.makeText(getContext(), "没有此科室的医生", Toast.LENGTH_SHORT).show();
+                    } else {
+                        listinit(selectlist);
+                    }
+                    tv_section.setText(data.get(position));
+                }
+                setHeadDialog.dismiss();
+            }
+        });
+
+    }
+
+    //城市弹出框
+    public void cityshowDialog() {
+        setHeadDialog = new AlertDialog.Builder(getContext()).create();
+        setHeadDialog.show();
+        dialogView = View.inflate(getContext(), R.layout.inquiry_city_dialog, null);
+        setHeadDialog.getWindow().setContentView(dialogView);
+        WindowManager.LayoutParams lp = setHeadDialog.getWindow()
+                .getAttributes();
+        setHeadDialog.getWindow().setAttributes(lp);
+        citydialogclick();
+    }
+
+    //城市点击事件
+    private void citydialogclick() {
+        citylist = new ArrayList<>();
+        Button btn_region = (Button) dialogView.findViewById(R.id.btn_region);
+        Button btn_cancel = (Button) dialogView.findViewById(R.id.btn_cancel);
+        Button btn_chnegdu = (Button) dialogView.findViewById(R.id.btn_chengdu);
+        Button btn_shenzheng = (Button) dialogView.findViewById(R.id.btn_shenzheng);
+        btn_cancel.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                setHeadDialog.dismiss();
+            }
+        });
+        btn_region.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                tv_city.setText("全部地区");
+                listinit(list);
+                setHeadDialog.dismiss();
+            }
+        });
+        btn_chnegdu.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                tv_city.setText("成都");
+                for (int i = 0; i < list.size(); i++) {
+                    if (list.get(i).getHospital().equals("成都天使儿童医院")) {
+                        citylist.add(list.get(i));
+                    }
+                }
+                listinit(citylist);
+                setHeadDialog.dismiss();
+            }
+        });
+        btn_shenzheng.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                tv_city.setText("深圳");
+                for (int i = 0; i < list.size(); i++) {
+                    if (list.get(i).getHospital().equals("深圳天使儿童医院")) {
+                        citylist.add(list.get(i));
+                    }
+                }
+                listinit(citylist);
+                setHeadDialog.dismiss();
+            }
+        });
     }
 
 }

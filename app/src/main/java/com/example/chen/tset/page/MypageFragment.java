@@ -23,7 +23,7 @@ import com.example.chen.tset.View.SetPageActivity;
  */
 public class MypageFragment extends Fragment {
     View view;
-    private LinearLayout iv_set;
+    private RelativeLayout rl_set;
     private RelativeLayout rl_mycollect, rl_myreservation, rl_personaldata, rl_mydpctor, rl_inquiryrecord;
 
 
@@ -36,13 +36,13 @@ public class MypageFragment extends Fragment {
     }
 
     private void findView() {
-        iv_set = (LinearLayout) view.findViewById(R.id.iv_set);
+        rl_set = (RelativeLayout) view.findViewById(R.id.rl_set);
         rl_mycollect = (RelativeLayout) view.findViewById(R.id.rl_mycollect);
         rl_myreservation = (RelativeLayout) view.findViewById(R.id.rl_myreservation);
         rl_personaldata = (RelativeLayout) view.findViewById(R.id.rl_personaldata);
         rl_mydpctor = (RelativeLayout) view.findViewById(R.id.rl_mydpctor);
         rl_inquiryrecord = (RelativeLayout) view.findViewById(R.id.rl_inquiryrecord);
-        iv_set.setOnClickListener(listerer);
+        rl_set.setOnClickListener(listerer);
         rl_mycollect.setOnClickListener(listerer);
         rl_myreservation.setOnClickListener(listerer);
         rl_personaldata.setOnClickListener(listerer);
@@ -54,7 +54,7 @@ public class MypageFragment extends Fragment {
         @Override
         public void onClick(View v) {
             switch (v.getId()) {
-                case R.id.iv_set:
+                case R.id.rl_set:
                     Intent intent = new Intent(getContext(), SetPageActivity.class);
                     startActivity(intent);
                     break;

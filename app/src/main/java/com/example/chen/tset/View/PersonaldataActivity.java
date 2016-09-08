@@ -21,6 +21,10 @@ import com.zhy.http.okhttp.OkHttpUtils;
 import com.zhy.http.okhttp.callback.StringCallback;
 
 import java.io.File;
+import java.io.FileOutputStream;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.Locale;
 
 import okhttp3.Call;
 
@@ -51,6 +55,7 @@ public class PersonaldataActivity extends AppCompatActivity {
         rl_gender.setOnClickListener(listener);
         rl_phone.setOnClickListener(listener);
         rl_icon.setOnClickListener(listener);
+
     }
 
     private View.OnClickListener listener = new View.OnClickListener() {
@@ -78,6 +83,9 @@ public class PersonaldataActivity extends AppCompatActivity {
                     intent3.putExtra("aspectY", 1);
                     intent3.putExtra("outputX", crop);// 输出图片大小
                     intent3.putExtra("outputY", crop);
+                    intent3.putExtra("return-data", true);
+                    intent3.putExtra("outputFormat", Bitmap.CompressFormat.JPEG.toString());
+                    intent3.putExtra("noFaceDetection", true);
                     startActivityForResult(intent3, 100);
 //                    Intent intent3 = new Intent(PersonaldataActivity.this, IconmanageActivity.class);
 //                    startActivity(intent3);
@@ -113,4 +121,9 @@ public class PersonaldataActivity extends AppCompatActivity {
                     }
                 });
     }
+
+
+
 }
+
+

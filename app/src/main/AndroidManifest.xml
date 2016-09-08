@@ -16,7 +16,7 @@
         android:label="@string/app_name"
         android:supportsRtl="true"
         android:theme="@style/Theme.AppCompat.NoActionBar">
-        <activity android:name=".View.EvaluatepageActivity">
+        <activity android:name=".View.HomeActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -50,7 +50,7 @@
         <activity android:name=".View.DoctorparticularsActivity" />
         <activity android:name=".View.MyDoctorActivity" />
         <activity android:name=".View.InquiryrecordActivity" />
-        <activity android:name=".View.HomeActivity"></activity>
+        <activity android:name=".View.EvaluatepageActivity"></activity>
     </application>
 
 </manifest>

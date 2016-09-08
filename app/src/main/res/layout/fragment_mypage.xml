@@ -51,20 +51,27 @@
             </LinearLayout>
         </LinearLayout>
 
-        <LinearLayout
-            android:id="@+id/iv_set"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+        <RelativeLayout
+            android:id="@+id/rl_set"
+            android:layout_width="@dimen/x108"
+            android:layout_height="@dimen/y96"
             android:layout_alignParentRight="true">
 
-            <ImageView
-                android:layout_width="@dimen/x48"
-                android:layout_height="@dimen/y46"
-                android:layout_marginRight="@dimen/x30"
-                android:layout_marginTop="@dimen/y25"
-                android:src="@drawable/mypage_set" />
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true">
 
-        </LinearLayout>
+                <ImageView
+                    android:layout_width="@dimen/x48"
+                    android:layout_height="@dimen/y46"
+                    android:layout_marginRight="@dimen/x30"
+                    android:layout_marginTop="@dimen/y25"
+                    android:src="@drawable/mypage_set" />
+
+            </LinearLayout>
+        </RelativeLayout>
+
 
         <LinearLayout
             android:layout_width="wrap_content"
