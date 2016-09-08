@@ -14,6 +14,7 @@ import android.widget.AdapterView;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -48,6 +49,7 @@ public class DiseaselibFragment extends Fragment {
     List<String> list1;
     Gson gson;
     String[] a = null;
+    private RelativeLayout rl_nonetwork;
     private View view1;
 
 
@@ -66,6 +68,7 @@ public class DiseaselibFragment extends Fragment {
         listview_dise = (ListView) view.findViewById(R.id.listview_dise);
         recyv_dise = (RecyclerView) view.findViewById(R.id.recyv_dise);
         view1 = view.findViewById(R.id.view1);
+        rl_nonetwork= (RelativeLayout) view.findViewById(R.id.rl_nonetwork);
         listview_dise.setOnItemClickListener(listener);
         listview_dise.setOnItemSelectedListener(slistener);
         recyv_dise.setLayoutManager(new StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL));
@@ -86,6 +89,7 @@ public class DiseaselibFragment extends Fragment {
                     @Override
                     public void onError(Call call, Exception e, int id) {
                         view1.setVisibility(View.GONE);
+                        rl_nonetwork.setVisibility(View.VISIBLE);
                         Toast.makeText(getContext(), "网络连接失败", Toast.LENGTH_SHORT).show();
                     }
 

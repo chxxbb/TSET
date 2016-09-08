@@ -4,42 +4,60 @@
     android:layout_height="match_parent"
     android:background="@color/white"
     android:orientation="horizontal">
-
-    <LinearLayout
+    <FrameLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
-
         <LinearLayout
-            android:layout_width="@dimen/x180"
-            android:layout_height="match_parent"
-            android:orientation="vertical">
-
-            <View
-                android:id="@+id/view1"
-                android:layout_width="match_parent"
-                android:layout_height="@dimen/y10"
-                android:background="@color/backgroundgray" />
-
-            <ListView
-                android:id="@+id/listview_dise"
-                android:layout_width="@dimen/x180"
-                android:layout_height="wrap_content"
-                android:divider="@null"
-                android:fastScrollEnabled="false"
-                android:overScrollMode="never"></ListView>
-        </LinearLayout>
-
-        <android.support.v7.widget.RecyclerView
-            android:id="@+id/recyv_dise"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="@dimen/x38"
-            android:layout_marginRight="@dimen/x30"
-            android:divider="@color/linegray"
-            android:dividerHeight="1dp"
-            android:overScrollMode="never"></android.support.v7.widget.RecyclerView>
+            android:layout_height="match_parent">
 
-    </LinearLayout>
+            <LinearLayout
+                android:layout_width="@dimen/x180"
+                android:layout_height="match_parent"
+                android:orientation="vertical">
+
+                <View
+                    android:id="@+id/view1"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/y10"
+                    android:background="@color/backgroundgray" />
+
+                <ListView
+                    android:id="@+id/listview_dise"
+                    android:layout_width="@dimen/x180"
+                    android:layout_height="wrap_content"
+                    android:divider="@null"
+                    android:fastScrollEnabled="false"
+                    android:overScrollMode="never"></ListView>
+            </LinearLayout>
+
+            <android.support.v7.widget.RecyclerView
+                android:id="@+id/recyv_dise"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/x38"
+                android:layout_marginRight="@dimen/x30"
+                android:divider="@color/linegray"
+                android:dividerHeight="1dp"
+                android:overScrollMode="never"></android.support.v7.widget.RecyclerView>
+
+        </LinearLayout>
+        <RelativeLayout
+            android:visibility="gone"
+            android:id="@+id/rl_nonetwork"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:text="没网啊"
+                android:textSize="@dimen/y32"
+                android:textColor="@color/linegray"/>
+        </RelativeLayout>
+    </FrameLayout>
+
+
 
 
 </LinearLayout>

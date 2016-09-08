@@ -67,7 +67,7 @@ public class ConsultPageActivity extends AppCompatActivity implements View.OnCli
         OkHttpUtils
                 .post()
                 .url(Http_data.http_data + "/findCollect")
-                .addParams("id", "1")
+                .addParams("id", "15")
                 .build()
                 .execute(new StringCallback() {
                     @Override

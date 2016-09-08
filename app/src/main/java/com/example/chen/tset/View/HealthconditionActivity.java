@@ -11,6 +11,8 @@ import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.daimajia.androidanimations.library.Techniques;
+import com.daimajia.androidanimations.library.YoYo;
 import com.example.chen.tset.R;
 
 public class HealthconditionActivity extends AppCompatActivity {
@@ -32,6 +34,7 @@ public class HealthconditionActivity extends AppCompatActivity {
         ll_describe = (LinearLayout) findViewById(R.id.ll_describe);
         linearLayout = (LinearLayout) findViewById(R.id.linearLayout);
         btn_else = (Button) findViewById(R.id.btn_else);
+        ll_henlth.setOnClickListener(listener);
         btn_helth.setOnClickListener(listener);
         btn_else.setOnClickListener(listener);
     }
@@ -41,27 +44,26 @@ public class HealthconditionActivity extends AppCompatActivity {
         public void onClick(View v) {
             switch (v.getId()) {
                 case R.id.btn_helth:
+                    ll_henlth.setVisibility(View.GONE);
                     ll_describe.setVisibility(View.VISIBLE);
-//                    linearLayout.setVisibility(View.VISIBLE);
-                    AnimationSet animationSet = new AnimationSet(true);
-                    AlphaAnimation alphaAnimation = new AlphaAnimation(0, 1);
-                    alphaAnimation.setDuration(500);
-                    animationSet.addAnimation(alphaAnimation);
-                    animationSet.setFillAfter(true);
-                    ll_describe.startAnimation(animationSet);
-                    linearLayout.startAnimation(animationSet);
-
-//            btn_helth.setVisibility(View.GONE);
-//            tv_henlth.setVisibility(View.GONE);
-//            ll_henlth.setVisibility(View.GONE);
+                    linearLayout.setVisibility(View.VISIBLE);
+                    YoYo.with(Techniques.Landing)
+                            .duration(500)
+                            .playOn(findViewById(R.id.ll_describe));
+                    YoYo.with(Techniques.Landing)
+                            .duration(500)
+                            .playOn(findViewById(R.id.linearLayout));
 
                     break;
                 case R.id.btn_else:
-                    tv_henlth.setVisibility(View.VISIBLE);
+                    YoYo.with(Techniques.Landing)
+                            .duration(500)
+                            .playOn(findViewById(R.id.ll_describe));
+                    YoYo.with(Techniques.Landing)
+                            .duration(500)
+                            .playOn(findViewById(R.id.ll_henlth));
                     ll_henlth.setVisibility(View.VISIBLE);
-                    btn_helth.setVisibility(View.VISIBLE);
-                    btn_helth.setText("添加我的症状");
-                    btn_else.setText("取消");
+                    break;
             }
         }
 

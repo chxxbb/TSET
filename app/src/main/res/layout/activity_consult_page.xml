@@ -100,6 +100,7 @@
                 android:layout_marginLeft="@dimen/x30"
                 android:layout_marginRight="@dimen/x30"
                 android:layout_marginTop="@dimen/y50"
+                android:scaleType="fitXY"
                 android:src="@color/backgroundblue" />
 
             <TextView
