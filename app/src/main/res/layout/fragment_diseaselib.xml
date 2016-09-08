@@ -25,7 +25,8 @@
                 android:layout_width="@dimen/x180"
                 android:layout_height="wrap_content"
                 android:divider="@null"
-                android:fastScrollEnabled="false"></ListView>
+                android:fastScrollEnabled="false"
+                android:overScrollMode="never"></ListView>
         </LinearLayout>
 
         <android.support.v7.widget.RecyclerView
@@ -35,7 +36,8 @@
             android:layout_marginLeft="@dimen/x38"
             android:layout_marginRight="@dimen/x30"
             android:divider="@color/linegray"
-            android:dividerHeight="1dp"></android.support.v7.widget.RecyclerView>
+            android:dividerHeight="1dp"
+            android:overScrollMode="never"></android.support.v7.widget.RecyclerView>
 
     </LinearLayout>
 

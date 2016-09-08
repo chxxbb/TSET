@@ -78,7 +78,7 @@
                 android:id="@+id/iv_icon"
                 android:layout_width="@dimen/x130"
                 android:layout_height="@dimen/y130"
-                android:src="@color/backgroundblue" />
+                android:src="@drawable/default_icon" />
 
             <ImageView
                 android:layout_width="@dimen/x18"

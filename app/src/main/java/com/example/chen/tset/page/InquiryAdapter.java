@@ -66,22 +66,17 @@ public class InquiryAdapter extends BaseAdapter {
         viewHolder.textView.setText(9.9 + "分");
         viewHolder.tv_title.setText(list.get(position).getTitle());
         viewHolder.tv_name.setText(list.get(position).getName());
-        viewHolder.btn_money.setText("￥"+list.get(position).getMoney());
-        viewHolder.tv_intro.setText("擅长："+list.get(position).getAdept());
+        viewHolder.btn_money.setText("￥" + list.get(position).getMoney());
+        viewHolder.tv_intro.setText("擅长：" + list.get(position).getAdept());
         viewHolder.tv_section.setText(list.get(position).getSection());
-        DisplayImageOptions options = new DisplayImageOptions.Builder()
-                .cacheInMemory(true)
-                .cacheOnDisk(true)
-                .displayer(new CircleBitmapDisplayer())
-                .build();
-        ImageLoader.getInstance().displayImage(list.get(position).getIcon(), viewHolder.iv_icon,options);
+        ImageLoader.getInstance().displayImage(list.get(position).getIcon(), viewHolder.iv_icon);
 
         return convertView;
     }
 
     static class ViewHolder {
         private TextView textView;
-        private ImageView iv_icon;
+        private CircleImageView iv_icon;
         private TextView tv_title;
         private TextView tv_name;
         private Button btn_money;
@@ -90,7 +85,7 @@ public class InquiryAdapter extends BaseAdapter {
 
         ViewHolder(View v) {
             textView = (TextView) v.findViewById(R.id.textView);
-            iv_icon = (ImageView) v.findViewById(R.id.iv_icon);
+            iv_icon = (CircleImageView) v.findViewById(R.id.iv_icon);
             tv_title = (TextView) v.findViewById(R.id.tv_title);
             tv_name = (TextView) v.findViewById(R.id.tv_name);
             btn_money = (Button) v.findViewById(R.id.btn_money);

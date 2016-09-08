@@ -31,9 +31,7 @@ public class ContextUtil extends Application {
                 .cacheInMemory(true) // 打开内存缓存
                 .cacheOnDisk(true) // 打开硬盘缓存
                 .resetViewBeforeLoading(true) // 在ImageView加载前清除它上面的图片
-                .displayer(new RoundedBitmapDisplayer(getResources().getDimensionPixelOffset(R.dimen.dp_10)))
                 .build();
-
         // ImageLoader配置
         ImageLoaderConfiguration config = new ImageLoaderConfiguration.Builder(this)
                 .memoryCacheSize(5 * 1024 * 1024) // 内存缓存

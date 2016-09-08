@@ -21,14 +21,15 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@color/linegray">
+        android:background="@color/backgroundgray">
 
         <android.support.v7.widget.RecyclerView
             android:id="@+id/recyclerView"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_marginLeft="@dimen/x16"
-            android:layout_marginRight="@dimen/x16"></android.support.v7.widget.RecyclerView>
+            android:layout_marginRight="@dimen/x16"
+            android:overScrollMode="never"></android.support.v7.widget.RecyclerView>
     </LinearLayout>
 
 

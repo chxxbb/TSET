@@ -55,7 +55,7 @@
                 android:layout_height="@dimen/y44"
                 android:layout_gravity="center_vertical"
                 android:layout_marginRight="@dimen/x30"
-                android:src="@drawable/icon_select" />
+                android:src="@drawable/default_icon" />
         </LinearLayout>
     </RelativeLayout>
 

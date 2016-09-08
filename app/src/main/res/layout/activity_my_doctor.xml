@@ -43,6 +43,7 @@
             android:textColor="@color/fontcolor"
             android:textSize="@dimen/x36" />
     </RelativeLayout>
+
     <VideoView
         android:layout_width="match_parent"
         android:layout_height="@dimen/y20"
@@ -51,5 +52,6 @@
     <ListView
         android:id="@+id/lv_mydoctor"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"></ListView>
+        android:layout_height="match_parent"
+        android:overScrollMode="never"></ListView>
 </LinearLayout>

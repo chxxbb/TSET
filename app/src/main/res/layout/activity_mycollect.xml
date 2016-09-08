@@ -53,6 +53,7 @@
     <ListView
         android:id="@+id/lv_collect"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"></ListView>
+        android:layout_height="wrap_content"
+        android:overScrollMode="never"></ListView>
 
 </LinearLayout>

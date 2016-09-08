@@ -51,7 +51,6 @@ public class DiseaselibrecyvAdapter extends RecyclerView.Adapter {
             linearLayout.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    Toast.makeText(context, list.get(getLayoutPosition()), Toast.LENGTH_SHORT).show();
                     Intent intent = new Intent(context, DiseaseActivity.class);
                     context.startActivity(intent);
                 }

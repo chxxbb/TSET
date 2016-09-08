@@ -38,8 +38,8 @@
                 android:layout_alignParentRight="true">
 
                 <ImageView
-                    android:layout_width="@dimen/x36"
-                    android:layout_height="@dimen/y36"
+                    android:layout_width="@dimen/x30"
+                    android:layout_height="@dimen/y30"
                     android:layout_marginRight="@dimen/x36"
                     android:layout_marginTop="@dimen/y26"
                     android:src="@drawable/payment_cancel" />
