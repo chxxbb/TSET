@@ -1,10 +1,13 @@
 package com.example.chen.tset.View;
 
+import android.os.Handler;
+import android.os.Message;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 import android.widget.ScrollView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -33,6 +36,7 @@ public class ReservationlistActivity extends AppCompatActivity implements View.O
     private ScrollView scrollView;
     private TextView tv_content, tv_doctor_name, tv_title, tv_appointment_time, tv_valid_time, tv_address, tv_patient_name, tv_money, tv_patient_phone, tv_order_no, tv_hospital, tv_section, tv_doctor_section;
     private CircleImageView iv_icon;
+    private RelativeLayout rl_nonetwork, rl_loading;
     Gson gson = new Gson();
 
     @Override
@@ -62,9 +66,23 @@ public class ReservationlistActivity extends AppCompatActivity implements View.O
         tv_section = (TextView) findViewById(R.id.tv_section);
         tv_doctor_section = (TextView) findViewById(R.id.tv_doctor_section);
         iv_icon = (CircleImageView) findViewById(R.id.iv_icon);
+        rl_nonetwork = (RelativeLayout) findViewById(R.id.rl_nonetwork);
+        rl_loading = (RelativeLayout) findViewById(R.id.rl_loading);
         ll_myreservationg.setOnClickListener(this);
 
     }
+
+    private Handler handler = new Handler() {
+        @Override
+        public void handleMessage(Message msg) {
+            if (msg.what == 0) {
+                rl_loading.setVisibility(View.GONE);
+
+            }
+
+        }
+
+    };
 
     private void httpinit() {
         OkHttpUtils
@@ -76,6 +94,8 @@ public class ReservationlistActivity extends AppCompatActivity implements View.O
                     @Override
                     public void onError(Call call, Exception e, int id) {
                         Toast.makeText(ReservationlistActivity.this, "网络连接失败", Toast.LENGTH_SHORT).show();
+                        rl_loading.setVisibility(View.GONE);
+                        rl_nonetwork.setVisibility(View.VISIBLE);
                     }
 
                     @Override
@@ -99,6 +119,20 @@ public class ReservationlistActivity extends AppCompatActivity implements View.O
                         tv_hospital.setText(reservationlist.getHospital());
                         tv_section.setText("科室：" + reservationlist.getSection());
                         tv_doctor_section.setText(reservationlist.getSection());
+                        final Thread thread = new Thread(new Runnable() {
+                            @Override
+                            public void run() {
+                                try {
+                                    Thread.sleep(1000);
+                                    handler.sendEmptyMessage(0);
+
+
+                                } catch (InterruptedException e) {
+                                    e.printStackTrace();
+                                }
+                            }
+                        });
+                        thread.start();
                     }
                 });
     }

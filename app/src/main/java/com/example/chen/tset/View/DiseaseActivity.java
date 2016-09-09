@@ -1,10 +1,13 @@
 package com.example.chen.tset.View;
 
+import android.os.Handler;
+import android.os.Message;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 import android.widget.ScrollView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -31,6 +34,7 @@ public class DiseaseActivity extends AppCompatActivity {
     private ScrollView scrollView;
     private TextView tv_content, tv_acontent, tv_acontent1, tv_title, tv_title1, tv_bcontent, tv_dcontent, tv_dname, tv_uname, tv_section, tv_ucontent;
     private CircleImageView iv_icon, iv_dicon;
+    private RelativeLayout rl_nonetwork, rl_loading;
     Gson gson = new Gson();
 
     @Override
@@ -57,6 +61,8 @@ public class DiseaseActivity extends AppCompatActivity {
         tv_ucontent = (TextView) findViewById(R.id.tv_ucontent);
         iv_icon = (CircleImageView) findViewById(R.id.iv_icon);
         iv_dicon = (CircleImageView) findViewById(R.id.iv_dicon);
+        rl_nonetwork = (RelativeLayout) findViewById(R.id.rl_nonetwork);
+        rl_loading = (RelativeLayout) findViewById(R.id.rl_loading);
         scrollView.setVerticalScrollBarEnabled(false);
         ll_return.setOnClickListener(listener);
     }
@@ -66,6 +72,17 @@ public class DiseaseActivity extends AppCompatActivity {
         public void onClick(View v) {
             finish();
         }
+    };
+    private Handler handler = new Handler() {
+        @Override
+        public void handleMessage(Message msg) {
+            if (msg.what == 0) {
+                rl_loading.setVisibility(View.GONE);
+
+            }
+
+        }
+
     };
 
     private void httpinit() {
@@ -78,6 +95,8 @@ public class DiseaseActivity extends AppCompatActivity {
                     @Override
                     public void onError(Call call, Exception e, int id) {
                         Toast.makeText(DiseaseActivity.this, "网络连接失败", Toast.LENGTH_SHORT).show();
+                        rl_loading.setVisibility(View.GONE);
+                        rl_nonetwork.setVisibility(View.VISIBLE);
                     }
 
                     @Override
@@ -101,6 +120,20 @@ public class DiseaseActivity extends AppCompatActivity {
                         tv_ucontent.setText(disease.getUcontent());
                         ImageLoader.getInstance().displayImage(disease.getIcon(), iv_icon);
                         ImageLoader.getInstance().displayImage(disease.getDicon(), iv_dicon);
+                        final Thread thread = new Thread(new Runnable() {
+                            @Override
+                            public void run() {
+                                try {
+                                    Thread.sleep(1000);
+                                    handler.sendEmptyMessage(0);
+
+
+                                } catch (InterruptedException e) {
+                                    e.printStackTrace();
+                                }
+                            }
+                        });
+                        thread.start();
                     }
                 });
     }

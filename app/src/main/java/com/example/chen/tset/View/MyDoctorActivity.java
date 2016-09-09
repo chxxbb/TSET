@@ -1,6 +1,8 @@
 package com.example.chen.tset.View;
 
 import android.content.Intent;
+import android.os.Handler;
+import android.os.Message;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -8,6 +10,7 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
+import android.widget.RelativeLayout;
 
 import com.example.chen.tset.Data.Http_data;
 import com.example.chen.tset.Data.Inquiry;
@@ -32,6 +35,7 @@ public class MyDoctorActivity extends AppCompatActivity {
     InquiryAdapter adapter;
     List<Inquiry> list;
     private LinearLayout ll_rut;
+    private RelativeLayout rl_nonetwork, rl_loading;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -45,6 +49,8 @@ public class MyDoctorActivity extends AppCompatActivity {
     private void findView() {
         lv_mydoctor = (ListView) findViewById(R.id.lv_mydoctor);
         ll_rut = (LinearLayout) findViewById(R.id.ll_rut);
+        rl_nonetwork = (RelativeLayout) findViewById(R.id.rl_nonetwork);
+        rl_loading = (RelativeLayout) findViewById(R.id.rl_loading);
         ll_rut.setOnClickListener(listener);
         lv_mydoctor.setOnItemClickListener(lvlistener);
         lv_mydoctor.setVerticalScrollBarEnabled(false);
@@ -56,6 +62,18 @@ public class MyDoctorActivity extends AppCompatActivity {
         lv_mydoctor.setAdapter(adapter);
     }
 
+    private Handler handler = new Handler() {
+        @Override
+        public void handleMessage(Message msg) {
+            if (msg.what == 0) {
+                rl_loading.setVisibility(View.GONE);
+
+            }
+
+        }
+
+    };
+
     private void httpinit() {
         gson = new Gson();
         OkHttpUtils
@@ -65,6 +83,8 @@ public class MyDoctorActivity extends AppCompatActivity {
                 .execute(new StringCallback() {
                     @Override
                     public void onError(Call call, Exception e, int id) {
+                        rl_loading.setVisibility(View.GONE);
+                        rl_nonetwork.setVisibility(View.VISIBLE);
                     }
 
                     @Override
@@ -78,13 +98,28 @@ public class MyDoctorActivity extends AppCompatActivity {
                             list.add(inquiry);
                         }
                         adapter.notifyDataSetChanged();
+                        final Thread thread = new Thread(new Runnable() {
+                            @Override
+                            public void run() {
+                                try {
+                                    Thread.sleep(1000);
+                                    handler.sendEmptyMessage(0);
+
+
+                                } catch (InterruptedException e) {
+                                    e.printStackTrace();
+                                }
+                            }
+                        });
+                        thread.start();
                     }
                 });
     }
-    private AdapterView.OnItemClickListener lvlistener=new AdapterView.OnItemClickListener() {
+
+    private AdapterView.OnItemClickListener lvlistener = new AdapterView.OnItemClickListener() {
         @Override
         public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-            Intent intent=new Intent(MyDoctorActivity.this,DoctorparticularsActivity.class);
+            Intent intent = new Intent(MyDoctorActivity.this, DoctorparticularsActivity.class);
             startActivity(intent);
         }
     };

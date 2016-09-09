@@ -2,6 +2,8 @@ package com.example.chen.tset.page;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.RecyclerView;
@@ -11,6 +13,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ListView;
+import android.widget.RelativeLayout;
 import android.widget.Toast;
 
 import com.example.chen.tset.Data.Http_data;
@@ -49,6 +52,7 @@ public class LectureroomFragment extends Fragment {
     View view;
     private RecyclerView recyclerView;
     private LectureroomAdapter adapter;
+    private RelativeLayout rl_nonetwork, rl_loading;
     List<Lecture> list;
     Gson gson;
 
@@ -65,9 +69,22 @@ public class LectureroomFragment extends Fragment {
 
     private void findView() {
         recyclerView = (RecyclerView) view.findViewById(R.id.recyclerView);
+        rl_nonetwork = (RelativeLayout) view.findViewById(R.id.rl_nonetwork);
+        rl_loading = (RelativeLayout) view.findViewById(R.id.rl_loading);
         recyclerView.setVerticalScrollBarEnabled(false);
         recyclerView.setLayoutManager(new StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL));
     }
+
+    private Handler handler = new Handler() {
+        @Override
+        public void handleMessage(Message msg) {
+            if (msg.what == 0) {
+                rl_loading.setVisibility(View.GONE);
+            }
+
+        }
+
+    };
 
     private void init() {
         list = new ArrayList<>();
@@ -80,6 +97,8 @@ public class LectureroomFragment extends Fragment {
                 .execute(new StringCallback() {
                     @Override
                     public void onError(Call call, Exception e, int id) {
+                        rl_loading.setVisibility(View.GONE);
+                        rl_nonetwork.setVisibility(View.VISIBLE);
                     }
 
                     @Override
@@ -93,6 +112,19 @@ public class LectureroomFragment extends Fragment {
                             list.add(lecture);
                         }
                         adapter.setList(list);
+                        final Thread thread = new Thread(new Runnable() {
+                            @Override
+                            public void run() {
+                                try {
+                                    Thread.sleep(1000);
+                                    handler.sendEmptyMessage(0);
+
+                                } catch (InterruptedException e) {
+                                    e.printStackTrace();
+                                }
+                            }
+                        });
+                        thread.start();
                     }
                 });
 

@@ -70,12 +70,16 @@ public class IconmanageActivity extends AppCompatActivity {
                             .execute(new StringCallback() {
                                 @Override
                                 public void onError(Call call, Exception e, int id) {
-                                    Toast.makeText(IconmanageActivity.this, "修改头像失败", Toast.LENGTH_SHORT).show();
+
                                 }
 
                                 @Override
                                 public void onResponse(String response, int id) {
-                                    Log.e("头像返回", response);
+                                    if (response.equals("0")) {
+                                        Toast.makeText(IconmanageActivity.this, "修改头像成功", Toast.LENGTH_SHORT).show();
+                                    } else {
+                                        Toast.makeText(IconmanageActivity.this, "修改头像失败", Toast.LENGTH_SHORT).show();
+                                    }
 
                                 }
                             });

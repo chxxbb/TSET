@@ -9,7 +9,9 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
+import android.widget.TextView;
 
+import com.example.chen.tset.Data.User_Http;
 import com.example.chen.tset.R;
 import com.example.chen.tset.View.InquiryrecordActivity;
 import com.example.chen.tset.View.MyDoctorActivity;
@@ -17,6 +19,9 @@ import com.example.chen.tset.View.MycollectActivity;
 import com.example.chen.tset.View.PersonaldataActivity;
 import com.example.chen.tset.View.ReservationActivity;
 import com.example.chen.tset.View.SetPageActivity;
+import com.nostra13.universalimageloader.core.ImageLoader;
+
+import de.hdodenhof.circleimageview.CircleImageView;
 
 /**
  * Created by Administrator on 2016/8/26 0026.
@@ -25,6 +30,8 @@ public class MypageFragment extends Fragment {
     View view;
     private RelativeLayout rl_set;
     private RelativeLayout rl_mycollect, rl_myreservation, rl_personaldata, rl_mydpctor, rl_inquiryrecord;
+    private CircleImageView iv_ico;
+    private TextView tv_name;
 
 
     @Nullable
@@ -42,12 +49,21 @@ public class MypageFragment extends Fragment {
         rl_personaldata = (RelativeLayout) view.findViewById(R.id.rl_personaldata);
         rl_mydpctor = (RelativeLayout) view.findViewById(R.id.rl_mydpctor);
         rl_inquiryrecord = (RelativeLayout) view.findViewById(R.id.rl_inquiryrecord);
+        iv_ico = (CircleImageView) view.findViewById(R.id.iv_icon);
+        tv_name = (TextView) view.findViewById(R.id.tv_name);
         rl_set.setOnClickListener(listerer);
         rl_mycollect.setOnClickListener(listerer);
         rl_myreservation.setOnClickListener(listerer);
         rl_personaldata.setOnClickListener(listerer);
         rl_mydpctor.setOnClickListener(listerer);
         rl_inquiryrecord.setOnClickListener(listerer);
+    }
+
+    @Override
+    public void onStart() {
+        super.onStart();
+        ImageLoader.getInstance().displayImage(User_Http.user.getIcon(), iv_ico);
+        tv_name.setText(User_Http.user.getName());
     }
 
     private View.OnClickListener listerer = new View.OnClickListener() {

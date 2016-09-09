@@ -45,452 +45,489 @@
             android:textSize="@dimen/x36" />
     </RelativeLayout>
 
-    <ScrollView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical">
-
-            <RelativeLayout
-                android:id="@+id/rl_city"
-                android:layout_width="match_parent"
-                android:layout_height="@dimen/y80"
-                android:layout_marginLeft="@dimen/x30"
-                android:layout_marginRight="@dimen/x30"
-                android:layout_marginTop="@dimen/y30"
-                android:background="@drawable/registrtion_case">
-
-                <LinearLayout
-                    android:layout_width="wrap_content"
-                    android:layout_height="match_parent">
-
-                    <TextView
-                        android:id="@+id/tv_city"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center_vertical"
-                        android:layout_marginLeft="@dimen/x16"
-                        android:text="请选择城市"
-                        android:textColor="@color/linegray1"
-                        android:textSize="@dimen/y32" />
-                </LinearLayout>
-
-                <LinearLayout
-                    android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
-                    android:layout_alignParentRight="true"
-                    android:gravity="center_vertical">
-
-                    <View
-                        android:layout_width="@dimen/x2"
-                        android:layout_height="@dimen/y50"
-                        android:background="@color/linegray" />
-
-                    <ImageView
-                        android:layout_width="@dimen/x28"
-                        android:layout_height="@dimen/y16"
-                        android:layout_marginLeft="@dimen/x20"
-                        android:layout_marginRight="@dimen/x26"
-                        android:src="@drawable/registration_select" />
-                </LinearLayout>
-            </RelativeLayout>
-
-            <RelativeLayout
-                android:id="@+id/rl_departments"
-                android:layout_width="match_parent"
-                android:layout_height="@dimen/y80"
-                android:layout_marginLeft="@dimen/x30"
-                android:layout_marginRight="@dimen/x30"
-                android:layout_marginTop="@dimen/y20"
-                android:background="@drawable/registrtion_case">
-
-                <LinearLayout
-                    android:layout_width="wrap_content"
-                    android:layout_height="match_parent">
-
-                    <TextView
-                        android:id="@+id/tv_departments"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center_vertical"
-                        android:layout_marginLeft="@dimen/x16"
-                        android:text="选择科室"
-                        android:textColor="@color/linegray1"
-                        android:textSize="@dimen/y32" />
-                </LinearLayout>
-
-                <LinearLayout
-                    android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
-                    android:layout_alignParentRight="true"
-                    android:gravity="center_vertical">
-
-                    <View
-                        android:layout_width="@dimen/x2"
-                        android:layout_height="@dimen/y50"
-                        android:background="@color/linegray" />
-
-                    <ImageView
-                        android:layout_width="@dimen/x28"
-                        android:layout_height="@dimen/y16"
-                        android:layout_marginLeft="@dimen/x20"
-                        android:layout_marginRight="@dimen/x26"
-                        android:src="@drawable/registration_select" />
-                </LinearLayout>
-            </RelativeLayout>
-
-            <RelativeLayout
-                android:id="@+id/rl_professionaltitle"
-                android:layout_width="match_parent"
-                android:layout_height="@dimen/y80"
-                android:layout_marginLeft="@dimen/x30"
-                android:layout_marginRight="@dimen/x30"
-                android:layout_marginTop="@dimen/y20"
-                android:background="@drawable/registrtion_case">
-
-                <LinearLayout
-                    android:layout_width="wrap_content"
-                    android:layout_height="match_parent">
-
-                    <TextView
-                        android:id="@+id/tv_professionaltitle"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center_vertical"
-                        android:layout_marginLeft="@dimen/x16"
-                        android:text="选择职称"
-                        android:textColor="@color/linegray1"
-                        android:textSize="@dimen/y32" />
-                </LinearLayout>
-
-                <LinearLayout
-                    android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
-                    android:layout_alignParentRight="true"
-                    android:gravity="center_vertical">
-
-                    <View
-                        android:layout_width="@dimen/x2"
-                        android:layout_height="@dimen/y50"
-                        android:background="@color/linegray" />
-
-                    <ImageView
-                        android:layout_width="@dimen/x28"
-                        android:layout_height="@dimen/y16"
-                        android:layout_marginLeft="@dimen/x20"
-                        android:layout_marginRight="@dimen/x26"
-                        android:src="@drawable/registration_select" />
-                </LinearLayout>
-            </RelativeLayout>
-
-            <RelativeLayout
-                android:id="@+id/rl_time"
-                android:layout_width="match_parent"
-                android:layout_height="@dimen/y80"
-                android:layout_marginLeft="@dimen/x30"
-                android:layout_marginRight="@dimen/x30"
-                android:layout_marginTop="@dimen/y20"
-                android:background="@drawable/registrtion_case">
-
-                <LinearLayout
-                    android:layout_width="wrap_content"
-                    android:layout_height="match_parent">
-
-                    <TextView
-                        android:id="@+id/tv_time"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center_vertical"
-                        android:layout_marginLeft="@dimen/x16"
-                        android:text="选择预约时间"
-                        android:textColor="@color/linegray1"
-                        android:textSize="@dimen/y32" />
-                </LinearLayout>
-
-                <LinearLayout
-                    android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
-                    android:layout_alignParentRight="true"
-                    android:gravity="center_vertical">
-
-                    <View
-                        android:layout_width="@dimen/x2"
-                        android:layout_height="@dimen/y50"
-                        android:background="@color/linegray" />
-
-                    <ImageView
-                        android:layout_width="@dimen/x28"
-                        android:layout_height="@dimen/y16"
-                        android:layout_marginLeft="@dimen/x20"
-                        android:layout_marginRight="@dimen/x26"
-                        android:src="@drawable/registration_select" />
-                </LinearLayout>
-            </RelativeLayout>
-
-            <RelativeLayout
-                android:layout_width="match_parent"
-                android:layout_height="@dimen/y80"
-                android:layout_marginLeft="@dimen/x30"
-                android:layout_marginRight="@dimen/x30"
-                android:layout_marginTop="@dimen/y20"
-                android:background="@drawable/registrtion_case">
-
-                <LinearLayout
-                    android:focusable="true"
-                    android:focusableInTouchMode="true"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent">
-
-                    <EditText
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center_vertical"
-                        android:layout_marginLeft="@dimen/x16"
-                        android:background="@null"
-                        android:cursorVisible="false"
-                        android:hint="患者姓名"
-                        android:textColor="@color/fontcolor"
-                        android:textColorHint="@color/linegray1"
-                        android:textSize="@dimen/y32" />
-                </LinearLayout>
-
-                <LinearLayout
-                    android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
-                    android:layout_alignParentRight="true"
-                    android:gravity="center_vertical">
-
-                    <ImageView
-                        android:layout_width="@dimen/x36"
-                        android:layout_height="@dimen/y36"
-                        android:layout_marginLeft="@dimen/x20"
-                        android:layout_marginRight="@dimen/x26"
-                        android:src="@drawable/registration_import1" />
-                </LinearLayout>
-            </RelativeLayout>
-
-            <RelativeLayout
-                android:id="@+id/rl_gender"
-                android:layout_width="match_parent"
-                android:layout_height="@dimen/y80"
-                android:layout_marginLeft="@dimen/x30"
-                android:layout_marginRight="@dimen/x30"
-                android:layout_marginTop="@dimen/y20"
-                android:background="@drawable/registrtion_case">
-
-                <LinearLayout
-                    android:layout_width="wrap_content"
-                    android:layout_height="match_parent">
-
-                    <TextView
-                        android:id="@+id/tv_gender"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center_vertical"
-                        android:layout_marginLeft="@dimen/x16"
-                        android:text="患者性别"
-                        android:textColor="@color/linegray1"
-                        android:textSize="@dimen/y32" />
-                </LinearLayout>
-
-                <LinearLayout
-                    android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
-                    android:layout_alignParentRight="true"
-                    android:gravity="center_vertical">
-
-                    <View
-                        android:layout_width="@dimen/x2"
-                        android:layout_height="@dimen/y50"
-                        android:background="@color/linegray" />
-
-                    <ImageView
-                        android:layout_width="@dimen/x28"
-                        android:layout_height="@dimen/y16"
-                        android:layout_marginLeft="@dimen/x20"
-                        android:layout_marginRight="@dimen/x26"
-                        android:src="@drawable/registration_select" />
-                </LinearLayout>
-            </RelativeLayout>
-
-            <RelativeLayout
-                android:id="@+id/rl_age"
-                android:layout_width="match_parent"
-                android:layout_height="@dimen/y80"
-                android:layout_marginLeft="@dimen/x30"
-                android:layout_marginRight="@dimen/x30"
-                android:layout_marginTop="@dimen/y20"
-                android:background="@drawable/registrtion_case">
-
-                <LinearLayout
-                    android:layout_width="wrap_content"
-                    android:layout_height="match_parent">
-
-                    <TextView
-                        android:id="@+id/tv_age"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center_vertical"
-                        android:layout_marginLeft="@dimen/x16"
-                        android:text="患者年龄"
-                        android:textColor="@color/linegray1"
-                        android:textSize="@dimen/y32" />
-                </LinearLayout>
-
-                <LinearLayout
-                    android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
-                    android:layout_alignParentRight="true"
-                    android:gravity="center_vertical">
-
-                    <View
-                        android:layout_width="@dimen/x2"
-                        android:layout_height="@dimen/y50"
-                        android:background="@color/linegray" />
-
-                    <ImageView
-                        android:layout_width="@dimen/x28"
-                        android:layout_height="@dimen/y16"
-                        android:layout_marginLeft="@dimen/x20"
-                        android:layout_marginRight="@dimen/x26"
-                        android:src="@drawable/registration_select" />
-                </LinearLayout>
-            </RelativeLayout>
-
-            <RelativeLayout
-                android:layout_width="match_parent"
-                android:layout_height="@dimen/y80"
-                android:layout_marginLeft="@dimen/x30"
-                android:layout_marginRight="@dimen/x30"
-                android:layout_marginTop="@dimen/y20"
-                android:background="@drawable/registrtion_case">
-
-                <LinearLayout
-                    android:focusable="true"
-                    android:focusableInTouchMode="true"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent">
-
-                    <EditText
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center_vertical"
-                        android:layout_marginLeft="@dimen/x16"
-                        android:background="@null"
-                        android:cursorVisible="false"
-                        android:hint="联系方式"
-                        android:textColor="@color/fontcolor"
-                        android:textColorHint="@color/linegray1"
-                        android:textSize="@dimen/y32" />
-                </LinearLayout>
-
-                <LinearLayout
-                    android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
-                    android:layout_alignParentRight="true"
-                    android:gravity="center_vertical">
-
-                    <ImageView
-                        android:layout_width="@dimen/x36"
-                        android:layout_height="@dimen/y36"
-                        android:layout_marginLeft="@dimen/x20"
-                        android:layout_marginRight="@dimen/x26"
-                        android:src="@drawable/registration_import1" />
-                </LinearLayout>
-            </RelativeLayout>
-
-            <LinearLayout
-                android:focusable="true"
-                android:focusableInTouchMode="true"
-                android:layout_width="match_parent"
-                android:layout_height="@dimen/y200"
-                android:layout_marginLeft="@dimen/x30"
-                android:layout_marginRight="@dimen/x30"
-                android:layout_marginTop="@dimen/y20"
-                android:background="@drawable/registrtion_case"
-                android:orientation="horizontal">
-
-                <ImageView
-                    android:layout_width="@dimen/x28"
-                    android:layout_height="@dimen/y28"
-                    android:layout_marginLeft="@dimen/x16"
-                    android:layout_marginTop="@dimen/y23"
-                    android:src="@drawable/registration_import2" />
-
-                <EditText
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="@dimen/x16"
-                    android:layout_marginTop="@dimen/y18"
-                    android:background="@null"
-                    android:cursorVisible="false"
-                    android:hint="病情描述"
-                    android:textColor="@color/fontcolor"
-                    android:textColorHint="@color/linegray1"
-                    android:textSize="@dimen/x28" />
-            </LinearLayout>
-
-
-        </LinearLayout>
-    </ScrollView>
-
-    <RelativeLayout
+    <FrameLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <View
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="1dp"
-            android:layout_alignTop="@+id/rl"
-            android:background="@color/linegray" />
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <ScrollView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+                    <RelativeLayout
+                        android:id="@+id/rl_city"
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/y80"
+                        android:layout_marginLeft="@dimen/x30"
+                        android:layout_marginRight="@dimen/x30"
+                        android:layout_marginTop="@dimen/y30"
+                        android:background="@drawable/registrtion_case">
+
+                        <LinearLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="match_parent">
+
+                            <TextView
+                                android:id="@+id/tv_city"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center_vertical"
+                                android:layout_marginLeft="@dimen/x16"
+                                android:text="请选择城市"
+                                android:textColor="@color/linegray1"
+                                android:textSize="@dimen/y32" />
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="match_parent"
+                            android:layout_alignParentRight="true"
+                            android:gravity="center_vertical">
+
+                            <View
+                                android:layout_width="@dimen/x2"
+                                android:layout_height="@dimen/y50"
+                                android:background="@color/linegray" />
+
+                            <ImageView
+                                android:layout_width="@dimen/x28"
+                                android:layout_height="@dimen/y16"
+                                android:layout_marginLeft="@dimen/x20"
+                                android:layout_marginRight="@dimen/x26"
+                                android:src="@drawable/registration_select" />
+                        </LinearLayout>
+                    </RelativeLayout>
+
+                    <RelativeLayout
+                        android:id="@+id/rl_departments"
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/y80"
+                        android:layout_marginLeft="@dimen/x30"
+                        android:layout_marginRight="@dimen/x30"
+                        android:layout_marginTop="@dimen/y20"
+                        android:background="@drawable/registrtion_case">
+
+                        <LinearLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="match_parent">
+
+                            <TextView
+                                android:id="@+id/tv_departments"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center_vertical"
+                                android:layout_marginLeft="@dimen/x16"
+                                android:text="选择科室"
+                                android:textColor="@color/linegray1"
+                                android:textSize="@dimen/y32" />
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="match_parent"
+                            android:layout_alignParentRight="true"
+                            android:gravity="center_vertical">
+
+                            <View
+                                android:layout_width="@dimen/x2"
+                                android:layout_height="@dimen/y50"
+                                android:background="@color/linegray" />
+
+                            <ImageView
+                                android:layout_width="@dimen/x28"
+                                android:layout_height="@dimen/y16"
+                                android:layout_marginLeft="@dimen/x20"
+                                android:layout_marginRight="@dimen/x26"
+                                android:src="@drawable/registration_select" />
+                        </LinearLayout>
+                    </RelativeLayout>
+
+                    <RelativeLayout
+                        android:id="@+id/rl_professionaltitle"
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/y80"
+                        android:layout_marginLeft="@dimen/x30"
+                        android:layout_marginRight="@dimen/x30"
+                        android:layout_marginTop="@dimen/y20"
+                        android:background="@drawable/registrtion_case">
+
+                        <LinearLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="match_parent">
+
+                            <TextView
+                                android:id="@+id/tv_professionaltitle"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center_vertical"
+                                android:layout_marginLeft="@dimen/x16"
+                                android:text="选择职称"
+                                android:textColor="@color/linegray1"
+                                android:textSize="@dimen/y32" />
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="match_parent"
+                            android:layout_alignParentRight="true"
+                            android:gravity="center_vertical">
+
+                            <View
+                                android:layout_width="@dimen/x2"
+                                android:layout_height="@dimen/y50"
+                                android:background="@color/linegray" />
+
+                            <ImageView
+                                android:layout_width="@dimen/x28"
+                                android:layout_height="@dimen/y16"
+                                android:layout_marginLeft="@dimen/x20"
+                                android:layout_marginRight="@dimen/x26"
+                                android:src="@drawable/registration_select" />
+                        </LinearLayout>
+                    </RelativeLayout>
+
+                    <RelativeLayout
+                        android:id="@+id/rl_time"
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/y80"
+                        android:layout_marginLeft="@dimen/x30"
+                        android:layout_marginRight="@dimen/x30"
+                        android:layout_marginTop="@dimen/y20"
+                        android:background="@drawable/registrtion_case">
+
+                        <LinearLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="match_parent">
+
+                            <TextView
+                                android:id="@+id/tv_time"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center_vertical"
+                                android:layout_marginLeft="@dimen/x16"
+                                android:text="选择预约时间"
+                                android:textColor="@color/linegray1"
+                                android:textSize="@dimen/y32" />
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="match_parent"
+                            android:layout_alignParentRight="true"
+                            android:gravity="center_vertical">
+
+                            <View
+                                android:layout_width="@dimen/x2"
+                                android:layout_height="@dimen/y50"
+                                android:background="@color/linegray" />
+
+                            <ImageView
+                                android:layout_width="@dimen/x28"
+                                android:layout_height="@dimen/y16"
+                                android:layout_marginLeft="@dimen/x20"
+                                android:layout_marginRight="@dimen/x26"
+                                android:src="@drawable/registration_select" />
+                        </LinearLayout>
+                    </RelativeLayout>
+
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/y80"
+                        android:layout_marginLeft="@dimen/x30"
+                        android:layout_marginRight="@dimen/x30"
+                        android:layout_marginTop="@dimen/y20"
+                        android:background="@drawable/registrtion_case">
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:focusable="true"
+                            android:focusableInTouchMode="true">
+
+                            <EditText
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center_vertical"
+                                android:layout_marginLeft="@dimen/x16"
+                                android:background="@null"
+                                android:cursorVisible="false"
+                                android:hint="患者姓名"
+                                android:textColor="@color/fontcolor"
+                                android:textColorHint="@color/linegray1"
+                                android:textSize="@dimen/y32" />
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="match_parent"
+                            android:layout_alignParentRight="true"
+                            android:gravity="center_vertical">
+
+                            <ImageView
+                                android:layout_width="@dimen/x36"
+                                android:layout_height="@dimen/y36"
+                                android:layout_marginLeft="@dimen/x20"
+                                android:layout_marginRight="@dimen/x26"
+                                android:src="@drawable/registration_import1" />
+                        </LinearLayout>
+                    </RelativeLayout>
+
+                    <RelativeLayout
+                        android:id="@+id/rl_gender"
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/y80"
+                        android:layout_marginLeft="@dimen/x30"
+                        android:layout_marginRight="@dimen/x30"
+                        android:layout_marginTop="@dimen/y20"
+                        android:background="@drawable/registrtion_case">
+
+                        <LinearLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="match_parent">
+
+                            <TextView
+                                android:id="@+id/tv_gender"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center_vertical"
+                                android:layout_marginLeft="@dimen/x16"
+                                android:text="患者性别"
+                                android:textColor="@color/linegray1"
+                                android:textSize="@dimen/y32" />
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="match_parent"
+                            android:layout_alignParentRight="true"
+                            android:gravity="center_vertical">
+
+                            <View
+                                android:layout_width="@dimen/x2"
+                                android:layout_height="@dimen/y50"
+                                android:background="@color/linegray" />
+
+                            <ImageView
+                                android:layout_width="@dimen/x28"
+                                android:layout_height="@dimen/y16"
+                                android:layout_marginLeft="@dimen/x20"
+                                android:layout_marginRight="@dimen/x26"
+                                android:src="@drawable/registration_select" />
+                        </LinearLayout>
+                    </RelativeLayout>
+
+                    <RelativeLayout
+                        android:id="@+id/rl_age"
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/y80"
+                        android:layout_marginLeft="@dimen/x30"
+                        android:layout_marginRight="@dimen/x30"
+                        android:layout_marginTop="@dimen/y20"
+                        android:background="@drawable/registrtion_case">
+
+                        <LinearLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="match_parent">
+
+                            <TextView
+                                android:id="@+id/tv_age"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center_vertical"
+                                android:layout_marginLeft="@dimen/x16"
+                                android:text="患者年龄"
+                                android:textColor="@color/linegray1"
+                                android:textSize="@dimen/y32" />
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="match_parent"
+                            android:layout_alignParentRight="true"
+                            android:gravity="center_vertical">
+
+                            <View
+                                android:layout_width="@dimen/x2"
+                                android:layout_height="@dimen/y50"
+                                android:background="@color/linegray" />
+
+                            <ImageView
+                                android:layout_width="@dimen/x28"
+                                android:layout_height="@dimen/y16"
+                                android:layout_marginLeft="@dimen/x20"
+                                android:layout_marginRight="@dimen/x26"
+                                android:src="@drawable/registration_select" />
+                        </LinearLayout>
+                    </RelativeLayout>
+
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/y80"
+                        android:layout_marginLeft="@dimen/x30"
+                        android:layout_marginRight="@dimen/x30"
+                        android:layout_marginTop="@dimen/y20"
+                        android:background="@drawable/registrtion_case">
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:focusable="true"
+                            android:focusableInTouchMode="true">
+
+                            <EditText
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center_vertical"
+                                android:layout_marginLeft="@dimen/x16"
+                                android:background="@null"
+                                android:cursorVisible="false"
+                                android:hint="联系方式"
+                                android:textColor="@color/fontcolor"
+                                android:textColorHint="@color/linegray1"
+                                android:textSize="@dimen/y32" />
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="match_parent"
+                            android:layout_alignParentRight="true"
+                            android:gravity="center_vertical">
+
+                            <ImageView
+                                android:layout_width="@dimen/x36"
+                                android:layout_height="@dimen/y36"
+                                android:layout_marginLeft="@dimen/x20"
+                                android:layout_marginRight="@dimen/x26"
+                                android:src="@drawable/registration_import1" />
+                        </LinearLayout>
+                    </RelativeLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/y200"
+                        android:layout_marginLeft="@dimen/x30"
+                        android:layout_marginRight="@dimen/x30"
+                        android:layout_marginTop="@dimen/y20"
+                        android:background="@drawable/registrtion_case"
+                        android:focusable="true"
+                        android:focusableInTouchMode="true"
+                        android:orientation="horizontal">
+
+                        <ImageView
+                            android:layout_width="@dimen/x28"
+                            android:layout_height="@dimen/y28"
+                            android:layout_marginLeft="@dimen/x16"
+                            android:layout_marginTop="@dimen/y23"
+                            android:src="@drawable/registration_import2" />
+
+                        <EditText
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="@dimen/x16"
+                            android:layout_marginTop="@dimen/y18"
+                            android:background="@null"
+                            android:cursorVisible="false"
+                            android:hint="病情描述"
+                            android:textColor="@color/fontcolor"
+                            android:textColorHint="@color/linegray1"
+                            android:textSize="@dimen/x28" />
+                    </LinearLayout>
+
+
+                </LinearLayout>
+            </ScrollView>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:layout_alignTop="@+id/rl"
+                    android:background="@color/linegray" />
+
+                <RelativeLayout
+                    android:id="@+id/rl"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/y80"
+                    android:layout_alignParentBottom="true"
+                    android:background="@color/white"
+                    android:gravity="center_horizontal"
+                    android:orientation="horizontal">
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:gravity="center_vertical"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="@dimen/x30"
+                            android:text="挂号金额 ："
+                            android:textColor="@color/fontcolor"
+                            android:textSize="@dimen/y32" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="￥25"
+                            android:textColor="@color/backgroundblue"
+                            android:textSize="@dimen/y36" />
+                    </LinearLayout>
+
+                    <Button
+                        android:id="@+id/btn_pay"
+                        android:layout_width="@dimen/x240"
+                        android:layout_height="match_parent"
+                        android:layout_alignParentRight="true"
+                        android:background="@drawable/registration_btn"
+                        android:text="去支付"
+                        android:textColor="@color/white"
+                        android:textSize="@dimen/y32" />
+
+                </RelativeLayout>
+            </RelativeLayout>
+        </LinearLayout>
 
         <RelativeLayout
-            android:id="@+id/rl"
+            android:id="@+id/rl_nonetwork"
             android:layout_width="match_parent"
-            android:layout_height="@dimen/y80"
-            android:layout_alignParentBottom="true"
+            android:layout_height="match_parent"
             android:background="@color/white"
-            android:gravity="center_horizontal"
-            android:orientation="horizontal">
+            android:visibility="gone">
 
             <LinearLayout
                 android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:gravity="center_vertical"
-                android:orientation="horizontal">
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:orientation="vertical">
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/loadfail" />
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginLeft="@dimen/x30"
-                    android:text="挂号金额 ："
-                    android:textColor="@color/fontcolor"
+                    android:layout_marginTop="@dimen/y50"
+                    android:text="内容被外星人劫持了"
+                    android:textColor="@color/linegray"
                     android:textSize="@dimen/y32" />
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="￥25"
-                    android:textColor="@color/backgroundblue"
-                    android:textSize="@dimen/y36" />
             </LinearLayout>
-
-            <Button
-                android:id="@+id/btn_pay"
-                android:layout_width="@dimen/x240"
-                android:layout_height="match_parent"
-                android:layout_alignParentRight="true"
-                android:background="@drawable/registration_btn"
-                android:text="去支付"
-                android:textColor="@color/white"
-                android:textSize="@dimen/y32" />
-
         </RelativeLayout>
-
-    </RelativeLayout>
-
+    </FrameLayout>
 
 </LinearLayout>

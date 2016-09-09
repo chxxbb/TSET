@@ -12,6 +12,8 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.chen.tset.Data.Http_data;
+import com.example.chen.tset.Data.User;
+import com.example.chen.tset.Data.User_Http;
 import com.example.chen.tset.R;
 import com.zhy.http.okhttp.OkHttpUtils;
 import com.zhy.http.okhttp.callback.StringCallback;
@@ -68,18 +70,20 @@ public class NamepageActivity extends AppCompatActivity {
                 case R.id.tv_pas:
                     OkHttpUtils
                             .post()
-                            .url(Http_data.http_data + "/changeNameAndSex" + "?4")
+                            .url(Http_data.http_data + "/changeName" + "?" + User_Http.user.getId())
                             .addParams("name", et_name_save.getText().toString())
                             .build()
                             .execute(new StringCallback() {
                                 @Override
                                 public void onError(Call call, Exception e, int id) {
                                     Toast.makeText(NamepageActivity.this, "网络连接失败", Toast.LENGTH_SHORT).show();
+                                    finish();
                                 }
 
                                 @Override
                                 public void onResponse(String response, int id) {
                                     if (response.equals("0")) {
+                                        User_Http.user.setName(et_name_save.getText().toString());
                                         finish();
                                     } else {
                                         Toast.makeText(NamepageActivity.this, "修改失败", Toast.LENGTH_SHORT).show();

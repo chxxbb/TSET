@@ -10,6 +10,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ListView;
+import android.widget.RelativeLayout;
 import android.widget.Toast;
 
 import com.example.chen.tset.Data.Consult;
@@ -37,6 +38,7 @@ public class CharactersafeFragment extends Fragment {
     View view;
     CharactersafeAdapter1 adapter;
     private ListView lv_charactersafe;
+    private RelativeLayout rl_nonetwork;
     List<Consult> list;
     Gson gson;
     int i;
@@ -60,6 +62,7 @@ public class CharactersafeFragment extends Fragment {
 
     private void findView() {
         lv_charactersafe = (ListView) view.findViewById(R.id.lv_charactersafe);
+        rl_nonetwork = (RelativeLayout) view.findViewById(R.id.rl_nonetwork);
         lv_charactersafe.setOnItemClickListener(listener);
     }
 
@@ -77,7 +80,7 @@ public class CharactersafeFragment extends Fragment {
                 .execute(new StringCallback() {
                     @Override
                     public void onError(Call call, Exception e, int id) {
-
+                        rl_nonetwork.setVisibility(View.VISIBLE);
                     }
 
                     @Override

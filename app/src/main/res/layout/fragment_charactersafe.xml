@@ -4,10 +4,43 @@
     android:layout_height="match_parent"
     android:orientation="vertical">
 
-    <ListView
-        android:id="@+id/lv_charactersafe"
+    <FrameLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:overScrollMode="never"></ListView>
+        android:layout_height="match_parent">
+
+        <ListView
+            android:id="@+id/lv_charactersafe"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:overScrollMode="never"></ListView>
+
+        <RelativeLayout
+            android:id="@+id/rl_nonetwork"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:visibility="gone">
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:orientation="vertical">
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/loadfail" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/y50"
+                    android:text="内容被外星人劫持了"
+                    android:textColor="@color/linegray"
+                    android:textSize="@dimen/y32" />
+            </LinearLayout>
+        </RelativeLayout>
+    </FrameLayout>
+
 
 </LinearLayout>

@@ -1,12 +1,15 @@
 package com.example.chen.tset.View;
 
 import android.content.Intent;
+import android.os.Handler;
+import android.os.Message;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 import android.widget.ScrollView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -35,6 +38,7 @@ public class ConsultPageActivity extends AppCompatActivity implements View.OnCli
     private LinearLayout ll_consult_return, ll_consult_collect;
     private TextView tv_title, tv_time, tv_content;
     private ImageView iv_icon;
+    private RelativeLayout rl_nonetwork, rl_loading;
     Gson gson;
 
     @Override
@@ -53,6 +57,8 @@ public class ConsultPageActivity extends AppCompatActivity implements View.OnCli
         tv_time = (TextView) findViewById(R.id.tv_time);
         tv_title = (TextView) findViewById(R.id.tv_title);
         iv_icon = (ImageView) findViewById(R.id.iv_icon);
+        rl_nonetwork = (RelativeLayout) findViewById(R.id.rl_nonetwork);
+        rl_loading = (RelativeLayout) findViewById(R.id.rl_loading);
         scrollview.setVerticalScrollBarEnabled(false);
         ll_consult_return.setOnClickListener(this);
         ll_consult_collect.setOnClickListener(this);
@@ -61,6 +67,18 @@ public class ConsultPageActivity extends AppCompatActivity implements View.OnCli
             ll_consult_collect.setVisibility(View.GONE);
         }
     }
+
+    private Handler handler = new Handler() {
+        @Override
+        public void handleMessage(Message msg) {
+            if (msg.what == 0) {
+                rl_loading.setVisibility(View.GONE);
+
+            }
+
+        }
+
+    };
 
     private void httpinit() {
         gson = new Gson();
@@ -73,6 +91,8 @@ public class ConsultPageActivity extends AppCompatActivity implements View.OnCli
                     @Override
                     public void onError(Call call, Exception e, int id) {
                         Toast.makeText(ConsultPageActivity.this, "网络连接失败", Toast.LENGTH_SHORT).show();
+                        rl_loading.setVisibility(View.GONE);
+                        rl_nonetwork.setVisibility(View.VISIBLE);
                     }
 
                     @Override
@@ -87,6 +107,19 @@ public class ConsultPageActivity extends AppCompatActivity implements View.OnCli
                         tv_time.setText("天使资讯  " + consultparticulars.getTime());
                         tv_content.setText(consultparticulars.getContent());
                         ImageLoader.getInstance().displayImage(consultparticulars.getIcon(), iv_icon);
+                        final Thread thread = new Thread(new Runnable() {
+                            @Override
+                            public void run() {
+                                try {
+                                    Thread.sleep(1000);
+                                    handler.sendEmptyMessage(0);
+
+                                } catch (InterruptedException e) {
+                                    e.printStackTrace();
+                                }
+                            }
+                        });
+                        thread.start();
                     }
                 });
     }

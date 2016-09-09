@@ -1,5 +1,7 @@
 package com.example.chen.tset.View;
 
+import android.os.Handler;
+import android.os.Message;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -7,6 +9,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.ListView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -42,6 +45,7 @@ public class DoctorparticularsActivity extends AppCompatActivity {
     private TextView tv_title, tv_name, tv_hospital, tv_bioo, tv_bis, tv_bit, tv_bif, tv_sum, tv_adept;
     private Button btn_chatmoney, btn_callmoney;
     private CircleImageView iv_icon;
+    private RelativeLayout rl_nonetwork, rl_loading;
 
 
     @Override
@@ -72,12 +76,26 @@ public class DoctorparticularsActivity extends AppCompatActivity {
         tv_bis = (TextView) view.findViewById(R.id.tv_bis);
         tv_sum = (TextView) view.findViewById(R.id.tv_sum);
         tv_adept = (TextView) view.findViewById(R.id.tv_adept);
+        rl_nonetwork = (RelativeLayout) findViewById(R.id.rl_nonetwork);
+        rl_loading = (RelativeLayout) findViewById(R.id.rl_loading);
         lv_docttorparticulas.setVerticalScrollBarEnabled(false);
         list = new ArrayList<>();
         adapter = new DoctorparticularsAdapter(this, list);
         lv_docttorparticulas.setAdapter(adapter);
         ll_return.setOnClickListener(listener);
     }
+
+    private Handler handler = new Handler() {
+        @Override
+        public void handleMessage(Message msg) {
+            if (msg.what == 0) {
+                rl_loading.setVisibility(View.GONE);
+
+            }
+
+        }
+
+    };
 
     private void httpinit() {
         list1 = new ArrayList<>();
@@ -90,6 +108,8 @@ public class DoctorparticularsActivity extends AppCompatActivity {
                     @Override
                     public void onError(Call call, Exception e, int id) {
                         Toast.makeText(DoctorparticularsActivity.this, "网络连接失败", Toast.LENGTH_SHORT).show();
+                        rl_loading.setVisibility(View.GONE);
+                        rl_nonetwork.setVisibility(View.VISIBLE);
                     }
 
                     @Override
@@ -114,6 +134,20 @@ public class DoctorparticularsActivity extends AppCompatActivity {
                         tv_bif.setText(list1.get(0).getBif());
                         tv_sum.setText("用户评论 （" + list1.get(0).getSum() + "人）");
                         tv_adept.setText(list1.get(0).getAdept());
+                        final Thread thread = new Thread(new Runnable() {
+                            @Override
+                            public void run() {
+                                try {
+                                    Thread.sleep(1000);
+                                    handler.sendEmptyMessage(0);
+
+
+                                } catch (InterruptedException e) {
+                                    e.printStackTrace();
+                                }
+                            }
+                        });
+                        thread.start();
                     }
                 });
     }

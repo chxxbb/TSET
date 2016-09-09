@@ -1,368 +1,446 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/scrollView"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/white"
-    android:overScrollMode="never"
+    android:orientation="vertical"
     tools:context="com.example.chen.tset.View.DiseaseActivity">
 
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/y96"
+        android:background="@color/white">
 
-    <LinearLayout
+        <LinearLayout
+            android:id="@+id/ll_return"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:orientation="horizontal">
+
+            <ImageView
+                android:layout_width="@dimen/x20"
+                android:layout_height="@dimen/y36"
+                android:layout_gravity="center_vertical"
+                android:layout_marginLeft="@dimen/x30"
+                android:src="@drawable/opinion_return" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:layout_marginLeft="@dimen/x8"
+                android:text="百科"
+                android:textColor="@color/backgroundblue"
+                android:textSize="@dimen/x32" />
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/tv_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:text="疾病详情"
+            android:textColor="@color/fontcolor"
+            android:textSize="@dimen/x36" />
+    </RelativeLayout>
+
+    <ScrollView
+        android:id="@+id/scrollView"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@color/white"
-        android:orientation="vertical">
-
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="@dimen/y96"
-            android:background="@color/white">
-
-            <LinearLayout
-                android:id="@+id/ll_return"
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:orientation="horizontal">
-
-                <ImageView
-                    android:layout_width="@dimen/x20"
-                    android:layout_height="@dimen/y36"
-                    android:layout_gravity="center_vertical"
-                    android:layout_marginLeft="@dimen/x30"
-                    android:src="@drawable/opinion_return" />
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center_vertical"
-                    android:layout_marginLeft="@dimen/x8"
-                    android:text="百科"
-                    android:textColor="@color/backgroundblue"
-                    android:textSize="@dimen/x32" />
-            </LinearLayout>
-
-            <TextView
-                android:id="@+id/tv_title"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_centerInParent="true"
-                android:text="下丘脑垂体综合征"
-                android:textColor="@color/fontcolor"
-                android:textSize="@dimen/x36" />
-        </RelativeLayout>
-
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="@dimen/y20"
-            android:background="@color/backgroundgray" />
+        android:overScrollMode="never">
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="@dimen/y80"
-            android:background="@color/white">
+            android:layout_height="match_parent"
+            android:background="@color/white"
+            android:orientation="vertical">
 
-            <TextView
-                android:id="@+id/tv_title1"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center_vertical"
-                android:layout_marginLeft="@dimen/x30"
-                android:text="下丘脑垂体综合征"
-                android:textColor="@color/fontcolor"
-                android:textSize="@dimen/y30" />
-        </LinearLayout>
-
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="1dp"
-            android:background="@color/linegray" />
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="@color/white">
-
-            <TextView
-                android:id="@+id/tv_content"
+            <View
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="@dimen/y30"
-                android:layout_marginLeft="@dimen/x30"
-                android:layout_marginRight="@dimen/x30"
-                android:layout_marginTop="@dimen/y30"
-                android:text="下丘脑垂体综合征是由于站位，外伤，感染等多种病因累计下丘脑，导致感染等多种病因累计下丘脑感染等多种病因累计下丘脑感染等多种病因累计下丘脑感染等多种病因累计下丘脑感染等多种病因累计下丘脑"
-                android:textColor="@color/fontcolor"
-                android:textSize="@dimen/y28" />
-        </LinearLayout>
+                android:layout_height="@dimen/y20"
+                android:background="@color/backgroundgray" />
 
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="@dimen/y20"
-            android:background="@color/backgroundgray" />
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="@dimen/y80">
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center_vertical"
-                android:layout_marginLeft="@dimen/x30"
-                android:text="患者提问"
-                android:textColor="@color/fontcolor"
-                android:textSize="@dimen/y28" />
-        </LinearLayout>
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="1dp"
-            android:background="@color/linegray"/>
-
-        <android.support.v7.widget.CardView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="@dimen/x30"
-            android:layout_marginRight="@dimen/x30"
-            android:layout_marginTop="@dimen/y30"
-            app:cardBackgroundColor="@color/linegray"
-            app:cardCornerRadius="@dimen/x20"
-            app:cardElevation="0px"
-            app:cardMaxElevation="2px"
-            app:cardUseCompatPadding="false">
-
-            <LinearLayout
+            <FrameLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal">
+                android:layout_height="match_parent">
 
                 <LinearLayout
-                    android:layout_width="wrap_content"
-                    android:layout_height="match_parent">
-
-                    <de.hdodenhof.circleimageview.CircleImageView
-                        android:id="@+id/iv_icon"
-                        android:layout_width="@dimen/x80"
-                        android:layout_height="@dimen/y80"
-                        android:layout_marginLeft="@dimen/x20"
-                        android:layout_marginTop="@dimen/y24"
-                        android:src="@color/backgroundblue" />
-                </LinearLayout>
-
-                <LinearLayout
-                    android:layout_width="wrap_content"
+                    android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:orientation="vertical">
 
-                    <TextView
-                        android:id="@+id/tv_uname"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginLeft="@dimen/x20"
-                        android:layout_marginTop="@dimen/y36"
-                        android:text="8岁孩子妈妈 张XX"
-                        android:textColor="@color/xmgray"
-                        android:textSize="@dimen/y24" />
-
-                    <TextView
-                        android:id="@+id/tv_ucontent"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginBottom="@dimen/y26"
-                        android:layout_marginLeft="@dimen/x20"
-                        android:layout_marginTop="@dimen/y12"
-                        android:text="医生，医生，医生，医生，医生，医生，医生，医生，医生，医生，医生，医生，医生，医生，医生，医生，医生，医生，医生，医生，医生，"
-                        android:textColor="@color/fontcolor"
-                        android:textSize="@dimen/y28" />
-                </LinearLayout>
-            </LinearLayout>
-        </android.support.v7.widget.CardView>
-
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="@dimen/y10" />
-
-        <android.support.v7.widget.CardView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="@dimen/x30"
-            android:layout_marginRight="@dimen/x30"
-            android:layout_marginTop="@dimen/y30"
-            android:layout_marginBottom="@dimen/y20"
-            app:cardBackgroundColor="@color/linegray"
-            app:cardCornerRadius="@dimen/x20"
-            app:cardElevation="0px"
-            app:cardMaxElevation="2px"
-            app:cardUseCompatPadding="false">
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:orientation="vertical">
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal">
-
                     <LinearLayout
-                        android:layout_width="wrap_content"
-                        android:layout_height="match_parent">
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/y80"
+                        android:background="@color/white">
 
-                        <de.hdodenhof.circleimageview.CircleImageView
-                            android:id="@+id/iv_dicon"
-                            android:layout_width="@dimen/x80"
-                            android:layout_height="@dimen/y80"
-                            android:layout_marginLeft="@dimen/x20"
-                            android:layout_marginTop="@dimen/y24"
-                            android:src="@color/backgroundblue" />
+                        <TextView
+                            android:id="@+id/tv_title1"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center_vertical"
+                            android:layout_marginLeft="@dimen/x30"
+                            android:text="下丘脑垂体综合征"
+                            android:textColor="@color/fontcolor"
+                            android:textSize="@dimen/y30" />
                     </LinearLayout>
 
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="1dp"
+                        android:layout_marginLeft="@dimen/x30"
+                        android:background="@color/linegray" />
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="@color/white">
+
+                        <TextView
+                            android:id="@+id/tv_content"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginBottom="@dimen/y30"
+                            android:layout_marginLeft="@dimen/x30"
+                            android:layout_marginRight="@dimen/x30"
+                            android:layout_marginTop="@dimen/y30"
+                            android:text="下丘脑垂体综合征是由于站位，外伤，感染等多种病因累计下丘脑，导致感染等多种病因累计下丘脑感染等多种病因累计下丘脑感染等多种病因累计下丘脑感染等多种病因累计下丘脑感染等多种病因累计下丘脑"
+                            android:textColor="@color/fontcolor"
+                            android:textSize="@dimen/y28" />
+                    </LinearLayout>
+
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/y20"
+                        android:background="@color/backgroundgray" />
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/y80">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center_vertical"
+                            android:layout_marginLeft="@dimen/x30"
+                            android:text="患者提问"
+                            android:textColor="@color/fontcolor"
+                            android:textSize="@dimen/y28" />
+                    </LinearLayout>
+
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="1dp"
+                        android:layout_marginLeft="@dimen/x30"
+                        android:background="@color/linegray" />
+
+                    <android.support.v7.widget.CardView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="@dimen/x30"
+                        android:layout_marginRight="@dimen/x30"
+                        android:layout_marginTop="@dimen/y30"
+                        app:cardBackgroundColor="@color/backgroundgray"
+                        app:cardCornerRadius="@dimen/x20"
+                        app:cardElevation="0px"
+                        app:cardMaxElevation="2px"
+                        app:cardUseCompatPadding="false">
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal">
+
+                            <LinearLayout
+                                android:layout_width="wrap_content"
+                                android:layout_height="match_parent">
+
+                                <de.hdodenhof.circleimageview.CircleImageView
+                                    android:id="@+id/iv_icon"
+                                    android:layout_width="@dimen/x80"
+                                    android:layout_height="@dimen/y80"
+                                    android:layout_marginLeft="@dimen/x20"
+                                    android:layout_marginTop="@dimen/y24"
+                                    android:src="@color/backgroundblue" />
+                            </LinearLayout>
+
+                            <LinearLayout
+                                android:layout_width="wrap_content"
+                                android:layout_height="match_parent"
+                                android:orientation="vertical">
+
+                                <TextView
+                                    android:id="@+id/tv_uname"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginLeft="@dimen/x20"
+                                    android:layout_marginTop="@dimen/y36"
+                                    android:text="8岁孩子妈妈 张XX"
+                                    android:textColor="@color/xmgray"
+                                    android:textSize="@dimen/y24" />
+
+                                <TextView
+                                    android:id="@+id/tv_ucontent"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginBottom="@dimen/y26"
+                                    android:layout_marginLeft="@dimen/x20"
+                                    android:layout_marginTop="@dimen/y12"
+                                    android:text="医生，医生，医生，医生，医生，医生，医生，医生，医生，医生，医生，医生，医生，医生，医生，医生，医生，医生，医生，医生，医生，"
+                                    android:textColor="@color/fontcolor"
+                                    android:textSize="@dimen/y28" />
+                            </LinearLayout>
+                        </LinearLayout>
+                    </android.support.v7.widget.CardView>
+
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/y10" />
+
+                    <android.support.v7.widget.CardView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="@dimen/y20"
+                        android:layout_marginLeft="@dimen/x30"
+                        android:layout_marginRight="@dimen/x30"
+                        android:layout_marginTop="@dimen/y30"
+                        app:cardBackgroundColor="@color/backgroundgray"
+                        app:cardCornerRadius="@dimen/x20"
+                        app:cardElevation="0px"
+                        app:cardMaxElevation="2px"
+                        app:cardUseCompatPadding="false">
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:orientation="vertical">
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:orientation="horizontal">
+
+                                <LinearLayout
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="match_parent">
+
+                                    <de.hdodenhof.circleimageview.CircleImageView
+                                        android:id="@+id/iv_dicon"
+                                        android:layout_width="@dimen/x80"
+                                        android:layout_height="@dimen/y80"
+                                        android:layout_marginLeft="@dimen/x20"
+                                        android:layout_marginTop="@dimen/y24"
+                                        android:src="@color/backgroundblue" />
+                                </LinearLayout>
+
+                                <LinearLayout
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginLeft="@dimen/x20"
+                                    android:layout_marginTop="@dimen/y36"
+                                    android:orientation="vertical">
+
+                                    <TextView
+                                        android:id="@+id/tv_dname"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:text="张医生"
+                                        android:textColor="@color/xmgray"
+                                        android:textSize="@dimen/y24" />
+
+                                    <TextView
+                                        android:id="@+id/tv_section"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:layout_marginTop="@dimen/y8"
+                                        android:text="XXXXXX科"
+                                        android:textColor="@color/xmgray"
+                                        android:textSize="@dimen/y24" />
+                                </LinearLayout>
+                            </LinearLayout>
+
+                            <TextView
+                                android:id="@+id/tv_dcontent"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginLeft="@dimen/x20"
+                                android:layout_marginTop="@dimen/y20"
+                                android:text="经本医生诊断，你的孩子没救了"
+                                android:textColor="@color/fontcolor"
+                                android:textSize="@dimen/y28" />
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="@dimen/y24"
+                                android:gravity="center_vertical"
+                                android:orientation="horizontal">
+
+                                <View
+                                    android:layout_width="@dimen/x8"
+                                    android:layout_height="@dimen/y36"
+                                    android:layout_marginLeft="@dimen/x20"
+                                    android:background="@color/backgroundblue" />
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginLeft="@dimen/x10"
+                                    android:text="症状"
+                                    android:textColor="@color/fontcolor"
+                                    android:textSize="@dimen/y32" />
+
+                            </LinearLayout>
+
+                            <TextView
+                                android:id="@+id/tv_bcontent"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginLeft="@dimen/x20"
+                                android:layout_marginRight="@dimen/x20"
+                                android:layout_marginTop="@dimen/y10"
+                                android:text="首发症状,首发症状,首发症状,首发症状,首发症状,首发症状,首发症状,首发症状,首发症状,首发症状,首发症状,首发症状,首发症状,首发症状,首发症状,首发症状,首发症状,首发症状,首发症状,首发症状,首发症状,首发症状,首发症状,首发症状,首发症状,首发症状,"
+                                android:textColor="@color/fontcolor"
+                                android:textSize="@dimen/y28" />
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="@dimen/y26"
+                                android:gravity="center_vertical"
+                                android:orientation="horizontal">
+
+                                <View
+                                    android:layout_width="@dimen/x8"
+                                    android:layout_height="@dimen/y36"
+                                    android:layout_marginLeft="@dimen/x20"
+                                    android:background="@color/backgroundblue" />
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginLeft="@dimen/x10"
+                                    android:text="症状"
+                                    android:textColor="@color/fontcolor"
+                                    android:textSize="@dimen/y32" />
+
+                            </LinearLayout>
+
+                            <TextView
+                                android:id="@+id/tv_acontent"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginLeft="@dimen/x20"
+                                android:layout_marginRight="@dimen/x20"
+                                android:layout_marginTop="@dimen/y10"
+                                android:text="首发症状与本病病因密切有关"
+                                android:textColor="@color/fontcolor"
+                                android:textSize="@dimen/y28" />
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="@dimen/y26"
+                                android:gravity="center_vertical"
+                                android:orientation="horizontal">
+
+                                <View
+                                    android:layout_width="@dimen/x8"
+                                    android:layout_height="@dimen/y36"
+                                    android:layout_marginLeft="@dimen/x20"
+                                    android:background="@color/backgroundblue" />
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_gravity="center_vertical"
+                                    android:layout_marginLeft="@dimen/x10"
+                                    android:text="治疗"
+                                    android:textColor="@color/fontcolor"
+                                    android:textSize="@dimen/y32" />
+
+                            </LinearLayout>
+
+                            <TextView
+                                android:id="@+id/tv_acontent1"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginBottom="@dimen/y40"
+                                android:layout_marginLeft="@dimen/x20"
+                                android:layout_marginRight="@dimen/x20"
+                                android:layout_marginTop="@dimen/y10"
+                                android:text="首发症状与本病病因密切有关"
+                                android:textColor="@color/fontcolor"
+                                android:textSize="@dimen/y28" />
+
+                        </LinearLayout>
+
+                    </android.support.v7.widget.CardView>
+                </LinearLayout>
+
+                <RelativeLayout
+                    android:id="@+id/rl_nonetwork"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="@color/white"
+                    android:visibility="gone">
+
                     <LinearLayout
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginLeft="@dimen/x20"
-                        android:layout_marginTop="@dimen/y36"
+                        android:layout_centerInParent="true"
                         android:orientation="vertical">
 
-                        <TextView
-                            android:id="@+id/tv_dname"
+                        <ImageView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="张医生"
-                            android:textColor="@color/xmgray"
-                            android:textSize="@dimen/y24" />
+                            android:src="@drawable/loadfail" />
 
                         <TextView
-                            android:id="@+id/tv_section"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:layout_marginTop="@dimen/y8"
-                            android:text="XXXXXX科"
-                            android:textColor="@color/xmgray"
-                            android:textSize="@dimen/y24" />
+                            android:layout_marginTop="@dimen/y50"
+                            android:text="内容被外星人劫持了"
+                            android:textColor="@color/linegray"
+                            android:textSize="@dimen/y32" />
                     </LinearLayout>
-                </LinearLayout>
+                </RelativeLayout>
 
-                <TextView
-                    android:id="@+id/tv_dcontent"
+                <RelativeLayout
+                    android:id="@+id/rl_loading"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="@dimen/x20"
-                    android:layout_marginTop="@dimen/y20"
-                    android:text="经本医生诊断，你的孩子没救了"
-                    android:textColor="@color/fontcolor"
-                    android:textSize="@dimen/y28" />
+                    android:layout_height="match_parent"
+                    android:background="@color/white">
 
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/y24"
-                    android:gravity="center_vertical"
-                    android:orientation="horizontal">
-
-                    <View
-                        android:layout_width="@dimen/x8"
-                        android:layout_height="@dimen/y36"
-                        android:layout_marginLeft="@dimen/x20"
-                        android:background="@color/backgroundblue" />
-
-                    <TextView
+                    <LinearLayout
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginLeft="@dimen/x10"
-                        android:text="症状"
-                        android:textColor="@color/fontcolor"
-                        android:textSize="@dimen/y32" />
+                        android:layout_centerInParent="true"
+                        android:orientation="vertical">
 
-                </LinearLayout>
+                        <ImageView
+                            android:id="@+id/iv_lading"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:src="@drawable/loading" />
 
-                <TextView
-                    android:id="@+id/tv_bcontent"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="@dimen/x20"
-                    android:layout_marginRight="@dimen/x20"
-                    android:layout_marginTop="@dimen/y10"
-                    android:text="首发症状,首发症状,首发症状,首发症状,首发症状,首发症状,首发症状,首发症状,首发症状,首发症状,首发症状,首发症状,首发症状,首发症状,首发症状,首发症状,首发症状,首发症状,首发症状,首发症状,首发症状,首发症状,首发症状,首发症状,首发症状,首发症状,"
-                    android:textColor="@color/fontcolor"
-                    android:textSize="@dimen/y28" />
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center_horizontal"
+                            android:layout_marginTop="@dimen/y50"
+                            android:text="内容加载中"
+                            android:textColor="@color/linegray"
+                            android:textSize="@dimen/y32" />
+                    </LinearLayout>
+                </RelativeLayout>
+            </FrameLayout>
 
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/y26"
-                    android:gravity="center_vertical"
-                    android:orientation="horizontal">
+        </LinearLayout>
+    </ScrollView>
 
-                    <View
-                        android:layout_width="@dimen/x8"
-                        android:layout_height="@dimen/y36"
-                        android:layout_marginLeft="@dimen/x20"
-                        android:background="@color/backgroundblue" />
 
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginLeft="@dimen/x10"
-                        android:text="症状"
-                        android:textColor="@color/fontcolor"
-                        android:textSize="@dimen/y32" />
-
-                </LinearLayout>
-
-                <TextView
-                    android:id="@+id/tv_acontent"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="@dimen/x20"
-                    android:layout_marginRight="@dimen/x20"
-                    android:layout_marginTop="@dimen/y10"
-                    android:text="首发症状与本病病因密切有关"
-                    android:textColor="@color/fontcolor"
-                    android:textSize="@dimen/y28" />
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/y26"
-                    android:gravity="center_vertical"
-                    android:orientation="horizontal">
-
-                    <View
-                        android:layout_width="@dimen/x8"
-                        android:layout_height="@dimen/y36"
-                        android:layout_marginLeft="@dimen/x20"
-                        android:background="@color/backgroundblue" />
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center_vertical"
-                        android:layout_marginLeft="@dimen/x10"
-                        android:text="治疗"
-                        android:textColor="@color/fontcolor"
-                        android:textSize="@dimen/y32" />
-
-                </LinearLayout>
-
-                <TextView
-                    android:id="@+id/tv_acontent1"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginBottom="@dimen/y40"
-                    android:layout_marginLeft="@dimen/x20"
-                    android:layout_marginRight="@dimen/x20"
-                    android:layout_marginTop="@dimen/y10"
-                    android:text="首发症状与本病病因密切有关"
-                    android:textColor="@color/fontcolor"
-                    android:textSize="@dimen/y28" />
-
-            </LinearLayout>
-
-        </android.support.v7.widget.CardView>
-    </LinearLayout>
-
-</ScrollView>
+</LinearLayout>

@@ -5,6 +5,8 @@ import android.app.Dialog;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.util.Log;
@@ -16,6 +18,7 @@ import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.ListView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -54,6 +57,7 @@ public class InquiryFragment extends Fragment {
     private LinearLayout ll_city, ll_development, ll_sort;
     private Dialog setHeadDialog;
     private View dialogView;
+    private RelativeLayout rl_nonetwork, rl_loading;
     Gson gson;
     InquirylistAdapter listadapter;
     private TextView tv_section, tv_city;
@@ -78,6 +82,8 @@ public class InquiryFragment extends Fragment {
         ll_sort = (LinearLayout) view.findViewById(R.id.ll_sort);
         tv_section = (TextView) view.findViewById(R.id.tv_section);
         tv_city = (TextView) view.findViewById(R.id.tv_city);
+        rl_nonetwork = (RelativeLayout) view.findViewById(R.id.rl_nonetwork);
+        rl_loading = (RelativeLayout) view.findViewById(R.id.rl_loading);
         lv_inquiry.setVerticalScrollBarEnabled(false);
         ll_city.setOnClickListener(listener);
         ll_development.setOnClickListener(listener);
@@ -90,6 +96,15 @@ public class InquiryFragment extends Fragment {
             }
         });
     }
+
+    private Handler handler = new Handler() {
+        @Override
+        public void handleMessage(Message msg) {
+            if (msg.what == 0) {
+                rl_loading.setVisibility(View.GONE);
+            }
+        }
+    };
 
     private void listinit(List<Inquiry> list) {
         adapter = new InquiryAdapter(getContext(), list);
@@ -105,6 +120,8 @@ public class InquiryFragment extends Fragment {
                 .execute(new StringCallback() {
                     @Override
                     public void onError(Call call, Exception e, int id) {
+                        rl_loading.setVisibility(View.GONE);
+                        rl_nonetwork.setVisibility(View.VISIBLE);
                     }
 
                     @Override
@@ -118,6 +135,20 @@ public class InquiryFragment extends Fragment {
                             list.add(inquiry);
                         }
                         adapter.notifyDataSetChanged();
+                        final Thread thread = new Thread(new Runnable() {
+                            @Override
+                            public void run() {
+                                try {
+                                    Thread.sleep(1000);
+                                    handler.sendEmptyMessage(0);
+
+
+                                } catch (InterruptedException e) {
+                                    e.printStackTrace();
+                                }
+                            }
+                        });
+                        thread.start();
                     }
                 });
     }

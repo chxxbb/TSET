@@ -34,7 +34,7 @@
         <activity android:name=".View.SetPageActivity" />
         <activity android:name=".View.FeedbackActivity" />
         <activity android:name=".View.AboutusActivity" />
-        <activity android:name=".View.LoginActivity" />
+        <activity android:name=".View.EvaluatepageActivity" />
         <activity android:name=".View.NamepageActivity" />
         <activity android:name=".View.HealthconditionActivity" />
         <activity android:name=".View.IconmanageActivity" />
@@ -50,7 +50,7 @@
         <activity android:name=".View.DoctorparticularsActivity" />
         <activity android:name=".View.MyDoctorActivity" />
         <activity android:name=".View.InquiryrecordActivity" />
-        <activity android:name=".View.EvaluatepageActivity"></activity>
+        <activity android:name=".View.LoginActivity"></activity>
     </application>
 
 </manifest>

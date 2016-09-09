@@ -12,6 +12,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.chen.tset.Data.Http_data;
+import com.example.chen.tset.Data.User_Http;
 import com.example.chen.tset.R;
 import com.zhy.http.okhttp.OkHttpUtils;
 import com.zhy.http.okhttp.callback.StringCallback;
@@ -72,7 +73,7 @@ public class PhonechangeActivity extends AppCompatActivity {
                     OkHttpUtils
                             .post()
                             .url(Http_data.http_data + "/bingding")
-                            .addParams("id", "13")
+                            .addParams("id", User_Http.user.getId() + "")
                             .addParams("phone", et_phone.getText().toString())
                             .addParams("code", et_verificationcode.getText().toString())
                             .build()

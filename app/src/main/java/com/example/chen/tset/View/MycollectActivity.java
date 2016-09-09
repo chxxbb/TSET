@@ -1,6 +1,8 @@
 package com.example.chen.tset.View;
 
 import android.content.Intent;
+import android.os.Handler;
+import android.os.Message;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -8,6 +10,7 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
+import android.widget.RelativeLayout;
 import android.widget.Toast;
 
 import com.example.chen.tset.Data.Http_data;
@@ -33,6 +36,7 @@ public class MycollectActivity extends AppCompatActivity {
     CharactersafeAdapter adapter;
     List<Information> list;
     private LinearLayout ll_collectretur;
+    private RelativeLayout rl_nonetwork, rl_loading;
     Gson gson;
 
     @Override
@@ -48,6 +52,8 @@ public class MycollectActivity extends AppCompatActivity {
     private void findView() {
         lv_collect = (ListView) findViewById(R.id.lv_collect);
         ll_collectretur = (LinearLayout) findViewById(R.id.ll_collectretur);
+        rl_nonetwork = (RelativeLayout) findViewById(R.id.rl_nonetwork);
+        rl_loading = (RelativeLayout) findViewById(R.id.rl_loading);
         lv_collect.setVerticalScrollBarEnabled(false);
         ll_collectretur.setOnClickListener(listener);
         lv_collect.setOnItemClickListener(lvlitener);
@@ -62,6 +68,18 @@ public class MycollectActivity extends AppCompatActivity {
 
     }
 
+    private Handler handler = new Handler() {
+        @Override
+        public void handleMessage(Message msg) {
+            if (msg.what == 0) {
+                rl_loading.setVisibility(View.GONE);
+
+            }
+
+        }
+
+    };
+
     private void initHttp() {
         OkHttpUtils
                 .post()
@@ -72,6 +90,8 @@ public class MycollectActivity extends AppCompatActivity {
                     @Override
                     public void onError(Call call, Exception e, int id) {
                         Toast.makeText(MycollectActivity.this, "网络连接失败", Toast.LENGTH_SHORT).show();
+                        rl_loading.setVisibility(View.GONE);
+                        rl_nonetwork.setVisibility(View.VISIBLE);
                     }
 
                     @Override
@@ -85,6 +105,20 @@ public class MycollectActivity extends AppCompatActivity {
                             list.add(information);
                         }
                         adapter.notifyDataSetChanged();
+                        final Thread thread = new Thread(new Runnable() {
+                            @Override
+                            public void run() {
+                                try {
+                                    Thread.sleep(1000);
+                                    handler.sendEmptyMessage(0);
+
+
+                                } catch (InterruptedException e) {
+                                    e.printStackTrace();
+                                }
+                            }
+                        });
+                        thread.start();
 
                     }
                 });

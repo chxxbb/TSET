@@ -1,6 +1,8 @@
 package com.example.chen.tset.View;
 
 import android.content.Intent;
+import android.os.Handler;
+import android.os.Message;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -33,6 +35,7 @@ public class ReservationActivity extends AppCompatActivity implements View.OnCli
     private LinearLayout ll_reservationreturn;
     ReservationlistvAdapter adapter;
     private ListView lv_reser;
+    private RelativeLayout rl_nonetwork, rl_loading;
     List<Reservation> list;
     Gson gson = new Gson();
 
@@ -49,10 +52,24 @@ public class ReservationActivity extends AppCompatActivity implements View.OnCli
     private void findView() {
         lv_reser = (ListView) findViewById(R.id.lv_reser);
         ll_reservationreturn = (LinearLayout) findViewById(R.id.ll_reservationreturn);
+        rl_nonetwork = (RelativeLayout) findViewById(R.id.rl_nonetwork);
+        rl_loading = (RelativeLayout) findViewById(R.id.rl_loading);
         lv_reser.setVerticalScrollBarEnabled(false);
         ll_reservationreturn.setOnClickListener(this);
         lv_reser.setOnItemClickListener(listener);
     }
+
+    private Handler handler = new Handler() {
+        @Override
+        public void handleMessage(Message msg) {
+            if (msg.what == 0) {
+                rl_loading.setVisibility(View.GONE);
+
+            }
+
+        }
+
+    };
 
     private void init() {
         list = new ArrayList<>();
@@ -67,6 +84,8 @@ public class ReservationActivity extends AppCompatActivity implements View.OnCli
                     @Override
                     public void onError(Call call, Exception e, int id) {
                         Toast.makeText(ReservationActivity.this, "网络连接失败", Toast.LENGTH_SHORT).show();
+                        rl_loading.setVisibility(View.GONE);
+                        rl_nonetwork.setVisibility(View.VISIBLE);
                     }
 
                     @Override
@@ -80,6 +99,20 @@ public class ReservationActivity extends AppCompatActivity implements View.OnCli
                             list.add(reservation);
                         }
                         adapter.notifyDataSetChanged();
+                        final Thread thread = new Thread(new Runnable() {
+                            @Override
+                            public void run() {
+                                try {
+                                    Thread.sleep(1000);
+                                    handler.sendEmptyMessage(0);
+
+
+                                } catch (InterruptedException e) {
+                                    e.printStackTrace();
+                                }
+                            }
+                        });
+                        thread.start();
                     }
                 });
     }

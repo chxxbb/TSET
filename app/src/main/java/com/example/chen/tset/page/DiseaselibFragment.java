@@ -2,6 +2,8 @@ package com.example.chen.tset.page;
 
 
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.RecyclerView;
@@ -18,6 +20,8 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.daimajia.androidanimations.library.Techniques;
+import com.daimajia.androidanimations.library.YoYo;
 import com.example.chen.tset.Data.DiseaseDepartment;
 import com.example.chen.tset.Data.Http_data;
 import com.example.chen.tset.R;
@@ -49,7 +53,7 @@ public class DiseaselibFragment extends Fragment {
     List<String> list1;
     Gson gson;
     String[] a = null;
-    private RelativeLayout rl_nonetwork;
+    private RelativeLayout rl_nonetwork, rl_loading;
     private View view1;
 
 
@@ -68,7 +72,8 @@ public class DiseaselibFragment extends Fragment {
         listview_dise = (ListView) view.findViewById(R.id.listview_dise);
         recyv_dise = (RecyclerView) view.findViewById(R.id.recyv_dise);
         view1 = view.findViewById(R.id.view1);
-        rl_nonetwork= (RelativeLayout) view.findViewById(R.id.rl_nonetwork);
+        rl_nonetwork = (RelativeLayout) view.findViewById(R.id.rl_nonetwork);
+        rl_loading = (RelativeLayout) view.findViewById(R.id.rl_loading);
         listview_dise.setOnItemClickListener(listener);
         listview_dise.setOnItemSelectedListener(slistener);
         recyv_dise.setLayoutManager(new StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL));
@@ -76,6 +81,19 @@ public class DiseaselibFragment extends Fragment {
         recyv_dise.setVerticalScrollBarEnabled(false);
         gson = new Gson();
     }
+
+    private Handler handler = new Handler() {
+        @Override
+        public void handleMessage(Message msg) {
+            if (msg.what == 0) {
+                rl_loading.setVisibility(View.GONE);
+                view1.setVisibility(View.VISIBLE);
+
+            }
+
+        }
+
+    };
 
     private void listviewinit() {
         list = new ArrayList<>();
@@ -89,6 +107,7 @@ public class DiseaselibFragment extends Fragment {
                     @Override
                     public void onError(Call call, Exception e, int id) {
                         view1.setVisibility(View.GONE);
+                        rl_loading.setVisibility(View.GONE);
                         rl_nonetwork.setVisibility(View.VISIBLE);
                         Toast.makeText(getContext(), "网络连接失败", Toast.LENGTH_SHORT).show();
                     }
@@ -105,7 +124,20 @@ public class DiseaselibFragment extends Fragment {
                             list.add(dd);
                         }
                         adapter.notifyDataSetChanged();
-                        view1.setVisibility(View.VISIBLE);
+                        final Thread thread = new Thread(new Runnable() {
+                            @Override
+                            public void run() {
+                                try {
+                                    Thread.sleep(1000);
+                                    handler.sendEmptyMessage(0);
+
+
+                                } catch (InterruptedException e) {
+                                    e.printStackTrace();
+                                }
+                            }
+                        });
+                        thread.start();
                     }
                 });
     }

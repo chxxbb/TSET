@@ -13,10 +13,13 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.chen.tset.Data.Http_data;
+import com.example.chen.tset.Data.User_Http;
 import com.example.chen.tset.R;
+import com.nostra13.universalimageloader.core.ImageLoader;
 import com.zhy.http.okhttp.OkHttpUtils;
 import com.zhy.http.okhttp.callback.StringCallback;
 
@@ -31,6 +34,7 @@ import okhttp3.Call;
 public class PersonaldataActivity extends AppCompatActivity {
     private RelativeLayout rl_name, rl_gender, rl_phone, rl_icon;
     private ImageView iv_icon;
+    private TextView tv_name, tv_phone, tv_sex;
     private LinearLayout ll_rutmypage;
     private File sdcardTempFile;
     private int crop = 180;
@@ -50,12 +54,28 @@ public class PersonaldataActivity extends AppCompatActivity {
         rl_phone = (RelativeLayout) findViewById(R.id.rl_phone);
         rl_icon = (RelativeLayout) findViewById(R.id.rl_icon);
         iv_icon = (ImageView) findViewById(R.id.iv_icon);
+        tv_name = (TextView) findViewById(R.id.tv_name);
+        tv_phone = (TextView) findViewById(R.id.tv_phone);
+        tv_sex = (TextView) findViewById(R.id.tv_sex);
+        iv_icon = (ImageView) findViewById(R.id.iv_icon);
         rl_name.setOnClickListener(listener);
         ll_rutmypage.setOnClickListener(listener);
         rl_gender.setOnClickListener(listener);
         rl_phone.setOnClickListener(listener);
         rl_icon.setOnClickListener(listener);
+    }
 
+    @Override
+    protected void onStart() {
+        super.onStart();
+        tv_sex.setText(User_Http.user.getSex());
+        tv_name.setText(User_Http.user.getName());
+        if (User_Http.user.getPhone() == null) {
+            tv_phone.setText("未验证");
+        } else {
+            tv_phone.setText(User_Http.user.getPhone());
+        }
+        ImageLoader.getInstance().displayImage(User_Http.user.getIcon(), iv_icon);
     }
 
     private View.OnClickListener listener = new View.OnClickListener() {
@@ -105,7 +125,7 @@ public class PersonaldataActivity extends AppCompatActivity {
         }
         OkHttpUtils
                 .postFile()
-                .url(Http_data.http_data + "/changeIcon" + "?1")
+                .url(Http_data.http_data + "/changeIcon" + "?" + User_Http.user.getId())
                 .file(sdcardTempFile)
                 .build()
                 .execute(new StringCallback() {
@@ -121,7 +141,6 @@ public class PersonaldataActivity extends AppCompatActivity {
                     }
                 });
     }
-
 
 
 }

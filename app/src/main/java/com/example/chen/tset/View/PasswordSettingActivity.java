@@ -14,6 +14,7 @@ import android.widget.Toast;
 
 import com.example.chen.tset.Data.Http_data;
 import com.example.chen.tset.Data.Lecture;
+import com.example.chen.tset.Data.User_Http;
 import com.example.chen.tset.R;
 import com.google.gson.reflect.TypeToken;
 import com.zhy.http.okhttp.OkHttpUtils;
@@ -87,7 +88,7 @@ public class PasswordSettingActivity extends AppCompatActivity implements View.O
             case R.id.tv_pas:
                 OkHttpUtils
                         .post()
-                        .url(Http_data.http_data + "/changeP" + "?4")
+                        .url(Http_data.http_data + "/changeP" + "?" + User_Http.user.getId())
                         .addParams("oldPassword", et_forpassword.getText().toString())
                         .addParams("newPassword", et_newpassword.getText().toString())
                         .build()
@@ -107,6 +108,8 @@ public class PasswordSettingActivity extends AppCompatActivity implements View.O
                                 }
                             }
                         });
+
+
                 break;
             case R.id.tv_passet:
                 finish();

@@ -11,6 +11,7 @@ import com.example.chen.tset.R;
 
 public class SetPageActivity extends AppCompatActivity implements View.OnClickListener {
     private RelativeLayout rl_themese, rl_feedback, rl_aboutus, rl_remidset, rl_setpass;
+    private LinearLayout ll_return;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -25,6 +26,8 @@ public class SetPageActivity extends AppCompatActivity implements View.OnClickLi
         rl_aboutus = (RelativeLayout) findViewById(R.id.rl_aboutus);
         rl_remidset = (RelativeLayout) findViewById(R.id.rl_remidset);
         rl_setpass = (RelativeLayout) findViewById(R.id.rl_setpass);
+        ll_return= (LinearLayout) findViewById(R.id.ll_return);
+        ll_return.setOnClickListener(this);
         rl_themese.setOnClickListener(this);
         rl_feedback.setOnClickListener(this);
         rl_aboutus.setOnClickListener(this);
@@ -54,6 +57,9 @@ public class SetPageActivity extends AppCompatActivity implements View.OnClickLi
             case R.id.rl_setpass:
                 Intent intent4 = new Intent(SetPageActivity.this, PasswordSettingActivity.class);
                 startActivity(intent4);
+                break;
+            case R.id.ll_return:
+                finish();
                 break;
         }
     }

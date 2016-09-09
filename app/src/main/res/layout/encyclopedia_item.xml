@@ -6,6 +6,7 @@
     android:orientation="vertical">
 
     <LinearLayout
+
         android:layout_width="match_parent"
         android:layout_height="@dimen/y150"
         android:orientation="horizontal">
@@ -90,6 +91,7 @@
         android:layout_width="match_parent"
         android:layout_height="1dp"
         android:layout_marginTop="@dimen/y12"
-        android:background="@color/linegray" />
+        android:background="@color/linegray"
+        android:layout_marginLeft="@dimen/x30"/>
 
 </LinearLayout>

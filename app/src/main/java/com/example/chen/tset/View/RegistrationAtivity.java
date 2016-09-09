@@ -45,7 +45,7 @@ import java.util.List;
 import okhttp3.Call;
 
 public class RegistrationAtivity extends AppCompatActivity {
-    private RelativeLayout rl_city, rl_gender, rl_time, rl_age, rl_professionaltitle, rl_departments;
+    private RelativeLayout rl_city, rl_gender, rl_time, rl_age, rl_professionaltitle, rl_departments, rl_nonetwork;
     private LinearLayout ll_rutregistration, ll_cancel;
     private Dialog setHeadDialog;
     private View dialogView;
@@ -92,6 +92,7 @@ public class RegistrationAtivity extends AppCompatActivity {
         tv_departments = (TextView) findViewById(R.id.tv_departments);
         btn_pay = (Button) findViewById(R.id.btn_pay);
         ll_rutregistration = (LinearLayout) findViewById(R.id.ll_rutregistration);
+        rl_nonetwork = (RelativeLayout) findViewById(R.id.rl_nonetwork);
         rl_departments.setOnClickListener(listener);
         rl_city.setOnClickListener(listener);
         rl_gender.setOnClickListener(listener);
@@ -464,7 +465,7 @@ public class RegistrationAtivity extends AppCompatActivity {
                 .execute(new StringCallback() {
                     @Override
                     public void onError(Call call, Exception e, int id) {
-                        Toast.makeText(RegistrationAtivity.this, "网络连接失败", Toast.LENGTH_SHORT).show();
+                        rl_nonetwork.setVisibility(View.VISIBLE);
                     }
 
                     @Override

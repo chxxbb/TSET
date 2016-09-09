@@ -25,9 +25,9 @@ public class ContextUtil extends Application {
         super.onCreate();
         instance = this;
         DisplayImageOptions options = new DisplayImageOptions.Builder()
-                .showImageOnLoading(R.mipmap.ic_launcher)
-                .showImageOnFail(R.mipmap.ic_launcher)
-                .showImageForEmptyUri(R.mipmap.ic_launcher)
+                .showImageOnLoading(R.color.a)
+                .showImageOnFail(R.color.a)
+                .showImageForEmptyUri(R.color.a)
                 .cacheInMemory(true) // 打开内存缓存
                 .cacheOnDisk(true) // 打开硬盘缓存
                 .resetViewBeforeLoading(true) // 在ImageView加载前清除它上面的图片

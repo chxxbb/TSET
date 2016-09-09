@@ -13,6 +13,7 @@ import android.widget.RadioButton;
 import android.widget.Toast;
 
 import com.example.chen.tset.Data.Http_data;
+import com.example.chen.tset.Data.User_Http;
 import com.example.chen.tset.R;
 import com.zhy.http.okhttp.OkHttpUtils;
 import com.zhy.http.okhttp.callback.StringCallback;
@@ -40,6 +41,11 @@ public class SexpageActivity extends AppCompatActivity {
         ll_rutgender.setOnClickListener(listener);
         rb_man.setOnClickListener(listener);
         rb_nman.setOnClickListener(listener);
+        if (User_Http.user.getSex().equals("男")) {
+            rb_man.setChecked(true);
+        } else {
+            rb_nman.setChecked(true);
+        }
     }
 
     private View.OnClickListener listener = new View.OnClickListener() {
@@ -59,10 +65,10 @@ public class SexpageActivity extends AppCompatActivity {
         }
     };
 
-    private void httpinit(String sex) {
+    private void httpinit(final String sex) {
         OkHttpUtils
                 .post()
-                .url(Http_data.http_data + "/changeNameAndSex" + "?4")
+                .url(Http_data.http_data + "/changeSex" + "?" + User_Http.user.getId())
                 .addParams("gender", sex)
                 .build()
                 .execute(new StringCallback() {
@@ -74,6 +80,7 @@ public class SexpageActivity extends AppCompatActivity {
                     @Override
                     public void onResponse(String response, int id) {
                         if (response.equals("0")) {
+                            User_Http.user.setSex(sex);
                             finish();
                         } else {
                             Toast.makeText(SexpageActivity.this, "修改失败", Toast.LENGTH_SHORT).show();
