@@ -85,7 +85,7 @@ public class PhonechangeActivity extends AppCompatActivity {
 
                                 @Override
                                 public void onResponse(String response, int id) {
-                                    Log.e("修改手机号返回", response);
+                                    finish();
 
                                 }
                             });

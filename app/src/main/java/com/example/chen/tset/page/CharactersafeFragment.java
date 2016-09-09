@@ -85,6 +85,7 @@ public class CharactersafeFragment extends Fragment {
 
                     @Override
                     public void onResponse(String response, int id) {
+                        Log.e("资讯返回",response);
                         Type listtype = new TypeToken<LinkedList<Consult>>() {
                         }.getType();
                         LinkedList<Consult> leclist = gson.fromJson(response, listtype);
@@ -101,6 +102,8 @@ public class CharactersafeFragment extends Fragment {
         @Override
         public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
             Intent intent = new Intent(getContext(), ConsultPageActivity.class);
+            intent.putExtra("information",list.get(position).getId()+"");
+            //根据点击页面判断是否为收藏页面，如果为收藏赞
             intent.putExtra("collect", "0");
             startActivity(intent);
         }

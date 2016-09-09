@@ -72,17 +72,6 @@ public class ReservationlistActivity extends AppCompatActivity implements View.O
 
     }
 
-    private Handler handler = new Handler() {
-        @Override
-        public void handleMessage(Message msg) {
-            if (msg.what == 0) {
-                rl_loading.setVisibility(View.GONE);
-
-            }
-
-        }
-
-    };
 
     private void httpinit() {
         OkHttpUtils
@@ -119,20 +108,7 @@ public class ReservationlistActivity extends AppCompatActivity implements View.O
                         tv_hospital.setText(reservationlist.getHospital());
                         tv_section.setText("科室：" + reservationlist.getSection());
                         tv_doctor_section.setText(reservationlist.getSection());
-                        final Thread thread = new Thread(new Runnable() {
-                            @Override
-                            public void run() {
-                                try {
-                                    Thread.sleep(1000);
-                                    handler.sendEmptyMessage(0);
-
-
-                                } catch (InterruptedException e) {
-                                    e.printStackTrace();
-                                }
-                            }
-                        });
-                        thread.start();
+                        rl_loading.setVisibility(View.GONE);
                     }
                 });
     }

@@ -256,15 +256,20 @@
         <View
             android:layout_width="match_parent"
             android:layout_height="1dp"
-            android:layout_marginLeft="@dimen/x30"
             android:background="@color/linegray" />
     </LinearLayout>
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/y30" />
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/linegray" />
 
 
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="@dimen/y90"
-        android:layout_marginTop="@dimen/y30"
         android:background="@color/white">
 
         <TextView

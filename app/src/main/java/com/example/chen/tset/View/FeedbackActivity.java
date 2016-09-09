@@ -10,6 +10,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.chen.tset.Data.Http_data;
+import com.example.chen.tset.Data.User_Http;
 import com.example.chen.tset.R;
 import com.zhy.http.okhttp.OkHttpUtils;
 import com.zhy.http.okhttp.callback.StringCallback;
@@ -67,7 +68,7 @@ public class FeedbackActivity extends AppCompatActivity implements View.OnClickL
                     OkHttpUtils
                             .post()
                             .url(Http_data.http_data + "/addadvise")
-                            .addParams("user_id", "1")
+                            .addParams("user_id", User_Http.user.getId()+"")
                             .addParams("content", et_feedback.getText().toString())
                             .build()
                             .execute(new StringCallback() {

@@ -80,9 +80,10 @@
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:layout_alignParentRight="true"
-            android:gravity="center_vertical">
+            >
 
             <ImageView
+                android:layout_marginTop="@dimen/y146"
                 android:layout_width="@dimen/x18"
                 android:layout_height="@dimen/y28"
                 android:layout_marginRight="@dimen/x30"
@@ -91,10 +92,7 @@
 
     </RelativeLayout>
 
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="1dp"
-        android:background="@color/linegray" />
+
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -345,7 +343,6 @@
     <View
         android:layout_width="match_parent"
         android:layout_height="1dp"
-        android:layout_marginLeft="@dimen/x30"
         android:background="@color/linegray" />
 
     <RelativeLayout

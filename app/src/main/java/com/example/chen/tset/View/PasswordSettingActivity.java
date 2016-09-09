@@ -103,6 +103,7 @@ public class PasswordSettingActivity extends AppCompatActivity implements View.O
                                 if (response.equals("1")) {
                                     Toast.makeText(PasswordSettingActivity.this, "修改失败", Toast.LENGTH_SHORT).show();
                                 } else {
+                                    User_Http.user.setPhone(et_newpassword.getText().toString());
                                     Toast.makeText(PasswordSettingActivity.this, "修改成功", Toast.LENGTH_SHORT).show();
                                     finish();
                                 }

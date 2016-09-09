@@ -82,19 +82,6 @@ public class DiseaselibFragment extends Fragment {
         gson = new Gson();
     }
 
-    private Handler handler = new Handler() {
-        @Override
-        public void handleMessage(Message msg) {
-            if (msg.what == 0) {
-                rl_loading.setVisibility(View.GONE);
-                view1.setVisibility(View.VISIBLE);
-
-            }
-
-        }
-
-    };
-
     private void listviewinit() {
         list = new ArrayList<>();
         adapter = new DiseaseliblistvAdapter(getContext(), list);
@@ -124,20 +111,9 @@ public class DiseaselibFragment extends Fragment {
                             list.add(dd);
                         }
                         adapter.notifyDataSetChanged();
-                        final Thread thread = new Thread(new Runnable() {
-                            @Override
-                            public void run() {
-                                try {
-                                    Thread.sleep(1000);
-                                    handler.sendEmptyMessage(0);
+                        rl_loading.setVisibility(View.GONE);
+                        view1.setVisibility(View.VISIBLE);
 
-
-                                } catch (InterruptedException e) {
-                                    e.printStackTrace();
-                                }
-                            }
-                        });
-                        thread.start();
                     }
                 });
     }
@@ -177,6 +153,7 @@ public class DiseaselibFragment extends Fragment {
 
                     @Override
                     public void onResponse(String response, int id) {
+                        Log.e("疾病返回",response);
                         list1 = gson.fromJson(response, new TypeToken<List<String>>() {
                         }.getType());
                         diseaselibrecyvAdapter = new DiseaselibrecyvAdapter(getContext(), list1);

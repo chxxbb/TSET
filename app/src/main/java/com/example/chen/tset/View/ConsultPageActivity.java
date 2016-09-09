@@ -18,6 +18,7 @@ import com.example.chen.tset.Data.Consult;
 import com.example.chen.tset.Data.Consultparticulars;
 import com.example.chen.tset.Data.Http_data;
 import com.example.chen.tset.Data.Reservationlist;
+import com.example.chen.tset.Data.User_Http;
 import com.example.chen.tset.R;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
@@ -40,6 +41,7 @@ public class ConsultPageActivity extends AppCompatActivity implements View.OnCli
     private ImageView iv_icon;
     private RelativeLayout rl_nonetwork, rl_loading;
     Gson gson;
+    String information;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -63,29 +65,19 @@ public class ConsultPageActivity extends AppCompatActivity implements View.OnCli
         ll_consult_return.setOnClickListener(this);
         ll_consult_collect.setOnClickListener(this);
         String collect = getIntent().getStringExtra("collect");
+        information = getIntent().getStringExtra("information");
         if (collect.equals("1")) {
             ll_consult_collect.setVisibility(View.GONE);
         }
     }
 
-    private Handler handler = new Handler() {
-        @Override
-        public void handleMessage(Message msg) {
-            if (msg.what == 0) {
-                rl_loading.setVisibility(View.GONE);
-
-            }
-
-        }
-
-    };
 
     private void httpinit() {
         gson = new Gson();
         OkHttpUtils
                 .post()
                 .url(Http_data.http_data + "/findCollect")
-                .addParams("id", "15")
+                .addParams("id", information)
                 .build()
                 .execute(new StringCallback() {
                     @Override
@@ -98,28 +90,24 @@ public class ConsultPageActivity extends AppCompatActivity implements View.OnCli
                     @Override
                     public void onResponse(String response, int id) {
                         Log.e("咨询详情返回", response);
-                        Type listtype = new TypeToken<LinkedList<Consultparticulars>>() {
-                        }.getType();
-                        LinkedList<Consultparticulars> leclist = gson.fromJson(response, listtype);
-                        Iterator it = leclist.iterator();
-                        Consultparticulars consultparticulars = (Consultparticulars) it.next();
-                        tv_title.setText(consultparticulars.getTitle());
-                        tv_time.setText("天使资讯  " + consultparticulars.getTime());
-                        tv_content.setText(consultparticulars.getContent());
-                        ImageLoader.getInstance().displayImage(consultparticulars.getIcon(), iv_icon);
-                        final Thread thread = new Thread(new Runnable() {
-                            @Override
-                            public void run() {
-                                try {
-                                    Thread.sleep(1000);
-                                    handler.sendEmptyMessage(0);
+                        if (response.equals("[]") || response.equals("")) {
+                            Toast.makeText(ConsultPageActivity.this, "没有这条新闻", Toast.LENGTH_SHORT).show();
+                            rl_loading.setVisibility(View.GONE);
+                            rl_nonetwork.setVisibility(View.VISIBLE);
+                            ll_consult_collect.setVisibility(View.GONE);
+                        } else {
 
-                                } catch (InterruptedException e) {
-                                    e.printStackTrace();
-                                }
-                            }
-                        });
-                        thread.start();
+                            Type listtype = new TypeToken<LinkedList<Consultparticulars>>() {
+                            }.getType();
+                            LinkedList<Consultparticulars> leclist = gson.fromJson(response, listtype);
+                            Iterator it = leclist.iterator();
+                            Consultparticulars consultparticulars = (Consultparticulars) it.next();
+                            tv_title.setText(consultparticulars.getTitle());
+                            tv_time.setText("天使资讯  " + consultparticulars.getTime());
+                            tv_content.setText(consultparticulars.getContent());
+                            ImageLoader.getInstance().displayImage(consultparticulars.getIcon(), iv_icon);
+                            rl_loading.setVisibility(View.GONE);
+                        }
                     }
                 });
     }
@@ -135,8 +123,8 @@ public class ConsultPageActivity extends AppCompatActivity implements View.OnCli
                 OkHttpUtils
                         .post()
                         .url(Http_data.http_data + "/AddCollect")
-                        .addParams("userId", "1")
-                        .addParams("cyclopediaId", "1")
+                        .addParams("userId", User_Http.user.getId() + "")
+                        .addParams("cyclopediaId", information)
                         .build()
                         .execute(new StringCallback() {
                             @Override

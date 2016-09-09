@@ -14,6 +14,7 @@ public class Consultparticulars {
         this.icon = icon;
         this.title = title;
         this.time = time;
+
     }
 
     public String getContent() {

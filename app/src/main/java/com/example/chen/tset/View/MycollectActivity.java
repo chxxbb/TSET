@@ -16,6 +16,7 @@ import android.widget.Toast;
 import com.example.chen.tset.Data.Http_data;
 import com.example.chen.tset.Data.Information;
 import com.example.chen.tset.Data.Lecture;
+import com.example.chen.tset.Data.User_Http;
 import com.example.chen.tset.R;
 import com.example.chen.tset.page.CharactersafeAdapter;
 import com.google.gson.Gson;
@@ -68,23 +69,12 @@ public class MycollectActivity extends AppCompatActivity {
 
     }
 
-    private Handler handler = new Handler() {
-        @Override
-        public void handleMessage(Message msg) {
-            if (msg.what == 0) {
-                rl_loading.setVisibility(View.GONE);
-
-            }
-
-        }
-
-    };
 
     private void initHttp() {
         OkHttpUtils
                 .post()
                 .url(Http_data.http_data + "/findCollectList")
-                .addParams("userId", "1")
+                .addParams("userId", User_Http.user.getId()+"")
                 .build()
                 .execute(new StringCallback() {
                     @Override
@@ -105,20 +95,7 @@ public class MycollectActivity extends AppCompatActivity {
                             list.add(information);
                         }
                         adapter.notifyDataSetChanged();
-                        final Thread thread = new Thread(new Runnable() {
-                            @Override
-                            public void run() {
-                                try {
-                                    Thread.sleep(1000);
-                                    handler.sendEmptyMessage(0);
-
-
-                                } catch (InterruptedException e) {
-                                    e.printStackTrace();
-                                }
-                            }
-                        });
-                        thread.start();
+                        rl_loading.setVisibility(View.GONE);
 
                     }
                 });

@@ -4,6 +4,12 @@
     android:layout_height="match_parent"
     android:orientation="vertical">
 
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/y20"
+        android:background="@color/backgroundgray" />
+
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="@dimen/y216"
@@ -138,6 +144,7 @@
                 android:id="@+id/tv_intro"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
                 android:ellipsize="end"
                 android:lines="1"
                 android:text="擅长：儿童发育行为的多动症，自闭症，遗尿症，疑难杂症等等什么的"
@@ -146,9 +153,5 @@
         </LinearLayout>
     </LinearLayout>
 
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="@dimen/y20"
-        android:background="@color/backgroundgray" />
 
 </LinearLayout>

@@ -43,7 +43,7 @@ public class SexpageActivity extends AppCompatActivity {
         rb_nman.setOnClickListener(listener);
         if (User_Http.user.getSex().equals("男")) {
             rb_man.setChecked(true);
-        } else {
+        } else{
             rb_nman.setChecked(true);
         }
     }
@@ -69,7 +69,7 @@ public class SexpageActivity extends AppCompatActivity {
         OkHttpUtils
                 .post()
                 .url(Http_data.http_data + "/changeSex" + "?" + User_Http.user.getId())
-                .addParams("gender", sex)
+                .addParams("sex", sex)
                 .build()
                 .execute(new StringCallback() {
                     @Override

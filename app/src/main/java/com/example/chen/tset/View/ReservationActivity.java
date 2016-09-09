@@ -59,17 +59,6 @@ public class ReservationActivity extends AppCompatActivity implements View.OnCli
         lv_reser.setOnItemClickListener(listener);
     }
 
-    private Handler handler = new Handler() {
-        @Override
-        public void handleMessage(Message msg) {
-            if (msg.what == 0) {
-                rl_loading.setVisibility(View.GONE);
-
-            }
-
-        }
-
-    };
 
     private void init() {
         list = new ArrayList<>();
@@ -99,20 +88,7 @@ public class ReservationActivity extends AppCompatActivity implements View.OnCli
                             list.add(reservation);
                         }
                         adapter.notifyDataSetChanged();
-                        final Thread thread = new Thread(new Runnable() {
-                            @Override
-                            public void run() {
-                                try {
-                                    Thread.sleep(1000);
-                                    handler.sendEmptyMessage(0);
-
-
-                                } catch (InterruptedException e) {
-                                    e.printStackTrace();
-                                }
-                            }
-                        });
-                        thread.start();
+                        rl_loading.setVisibility(View.GONE);
                     }
                 });
     }

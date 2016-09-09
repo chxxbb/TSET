@@ -29,7 +29,7 @@ public class SetdataActivity extends AppCompatActivity {
     private int editStart;
     private int editEnd;
     private int maxLen = 10; // the max byte
-    String gender = null;
+    String sex = null;
     User user = new User(User_Http.user);
 
 
@@ -88,15 +88,16 @@ public class SetdataActivity extends AppCompatActivity {
         @Override
         public void onClick(View v) {
             if (rbtn_man.isChecked()) {
-                gender = "男";
+                sex = "男";
             } else {
-                gender = "女";
+                sex = "女";
             }
             OkHttpUtils
                     .post()
-                    .url(Http_data.http_data + "/ChangeNameAndSex" + "?" + user.getId())
+                    .url(Http_data.http_data + "/ChangeNameAndSex")
+                    .addParams("id",User_Http.user.getId()+"")
                     .addParams("name", et_nickname.getText().toString())
-                    .addParams("gender", gender)
+                    .addParams("sex", sex)
                     .build()
                     .execute(new StringCallback() {
                         @Override
@@ -108,14 +109,15 @@ public class SetdataActivity extends AppCompatActivity {
                                 }
                             });
                         }
-
                         @Override
                         public void onResponse(String response, int id) {
                             if (response.equals("0")) {
                                 Toast.makeText(SetdataActivity.this, "修改成功", Toast.LENGTH_SHORT).show();
+                                User_Http.user.setName(et_nickname.getText().toString());
+                                User_Http.user.setSex(sex);
                                 Intent intent = new Intent(SetdataActivity.this, HomeActivity.class);
                                 startActivity(intent);
-                            } else if (response.equals("1")) {
+                            } else{
                                 Toast.makeText(SetdataActivity.this, "注册失败", Toast.LENGTH_SHORT).show();
                             }
                         }

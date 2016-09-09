@@ -114,8 +114,7 @@
                             android:layout_marginLeft="@dimen/x30"
                             android:layout_marginRight="@dimen/x30"
                             android:layout_marginTop="@dimen/y50"
-                            android:scaleType="fitXY"
-                            android:src="@color/backgroundblue" />
+                            android:scaleType="fitXY" />
 
                         <TextView
                             android:id="@+id/tv_content"
@@ -124,7 +123,6 @@
                             android:layout_marginLeft="@dimen/x30"
                             android:layout_marginRight="@dimen/x30"
                             android:layout_marginTop="@dimen/y40"
-                            android:text="据统计据统计据统计据统计据统计据统计据统计据统计据统计据统计据统计据统计据统计据统计据统计据统计据统计据统计据统计据统计据统计据统计据统计据统计据统计据统计据统计据统计据统计据统计据统计据统计据统计据统计据统计据统计据统计据统计据统计据统计据统计据统计据统计据统计据统计据统计据统计据统计据统计据统计据统计据统计据统计据统计据统计据统计据统计据统计据统计据统计据统计据统计据统计据统计据统计据统计据统计据统计据统计据统计据统计据统计据统计据统计据统计据统计据统计据统计据统计据统计据统计据统计据统计据统计据统计据统计据统计据统计据统计据统计据统计据统计据统计据统计据统计据统计据统计据统计据统计据统计据统计据统计据统计据统计据统计据统计据统计据统计据统计据统计据统计据统计据统计据统计据统计据统计据统计据统计据统计据统计据统计据统计据统计据统计据统计据统计据统计据统计据统计据统计据统计据统计据统计据统计据统计据统计据统计据统计据统计据统计据统计据统计据统计据统计据统计据统计据统计据统计据统计据统计据统计据统计据统计据统计据统计据统计据统计据统计据统计据统计据统计据统计据统计据统计据统计据统计据统计据统计据统计据统计据统计据统计据统计据统计据统计据统计据统计据统计据统计据统计据统计据统计据统计据统计据统计据统计据统计据统计据统计据统计据统计据统计"
                             android:textColor="@color/fontgray"
                             android:textSize="@dimen/y32" />
                     </LinearLayout>
@@ -133,7 +131,7 @@
                         android:id="@+id/rl_nonetwork"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
-                        android:layout_marginBottom="@dimen/y300"
+                        android:layout_marginBottom="@dimen/y400"
                         android:background="@color/white"
                         android:visibility="gone">
 
@@ -162,6 +160,7 @@
                         android:id="@+id/rl_loading"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
+                        android:layout_marginBottom="@dimen/y400"
                         android:background="@color/white">
 
                         <LinearLayout

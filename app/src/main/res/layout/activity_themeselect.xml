@@ -51,9 +51,7 @@
 
     <View
         android:layout_width="wrap_content"
-        android:layout_height="1dp"
-        android:layout_marginTop="@dimen/y30"
-        android:background="@color/linegray" />
+        android:layout_height="@dimen/y30" />
 
     <RelativeLayout
         android:layout_width="match_parent"

@@ -48,13 +48,7 @@ public class DiseaselibrecyvAdapter extends RecyclerView.Adapter {
             view = itemView.findViewById(R.id.view);
             linearLayout = (LinearLayout) itemView.findViewById(R.id.linearLayout);
             //设置点击事件
-            linearLayout.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    Intent intent = new Intent(context, DiseaseActivity.class);
-                    context.startActivity(intent);
-                }
-            });
+
         }
     }
 
@@ -65,7 +59,7 @@ public class DiseaselibrecyvAdapter extends RecyclerView.Adapter {
     }
 
     @Override
-    public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
+    public void onBindViewHolder(RecyclerView.ViewHolder holder, final int position) {
         Viewholder viewholder = (Viewholder) holder;
         viewholder.tv_disease.setText(list.get(position));
         if (position % 2 == 0) {
@@ -73,6 +67,14 @@ public class DiseaselibrecyvAdapter extends RecyclerView.Adapter {
         } else {
             viewholder.view.setVisibility(View.GONE);
         }
+        viewholder.linearLayout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(context, DiseaseActivity.class);
+                intent.putExtra("disease",list.get(position));
+                context.startActivity(intent);
+            }
+        });
     }
 
     @Override

@@ -73,23 +73,14 @@ public class DiseaseActivity extends AppCompatActivity {
             finish();
         }
     };
-    private Handler handler = new Handler() {
-        @Override
-        public void handleMessage(Message msg) {
-            if (msg.what == 0) {
-                rl_loading.setVisibility(View.GONE);
 
-            }
-
-        }
-
-    };
 
     private void httpinit() {
+        final String disease1=getIntent().getStringExtra("disease");
         OkHttpUtils
                 .post()
                 .url(Http_data.http_data + "/findIntroduction")
-                .addParams("id", "1")
+                .addParams("title", disease1)
                 .build()
                 .execute(new StringCallback() {
                     @Override
@@ -102,6 +93,13 @@ public class DiseaseActivity extends AppCompatActivity {
                     @Override
                     public void onResponse(String response, int id) {
                         Log.e("疾病详情返回", response);
+                        if (response.equals("[]")){
+                            Toast.makeText(DiseaseActivity.this, "没有这个疾病", Toast.LENGTH_SHORT).show();
+                            rl_loading.setVisibility(View.GONE);
+                            rl_nonetwork.setVisibility(View.VISIBLE);
+                        }else {
+
+
                         Type listtype = new TypeToken<LinkedList<Disease>>() {
                         }.getType();
                         LinkedList<Disease> leclist = gson.fromJson(response, listtype);
@@ -110,8 +108,8 @@ public class DiseaseActivity extends AppCompatActivity {
                         tv_content.setText(disease.getContent());
                         tv_acontent.setText(disease.getAcontent());
                         tv_acontent1.setText(disease.getAcontent());
-                        tv_title.setText(disease.getTitle());
-                        tv_title1.setText(disease.getTitle());
+                        tv_title.setText(disease1);
+                        tv_title1.setText(disease1);
                         tv_bcontent.setText(disease.getBcontent());
                         tv_dcontent.setText(disease.getDcontent());
                         tv_dname.setText(disease.getDname());
@@ -120,20 +118,8 @@ public class DiseaseActivity extends AppCompatActivity {
                         tv_ucontent.setText(disease.getUcontent());
                         ImageLoader.getInstance().displayImage(disease.getIcon(), iv_icon);
                         ImageLoader.getInstance().displayImage(disease.getDicon(), iv_dicon);
-                        final Thread thread = new Thread(new Runnable() {
-                            @Override
-                            public void run() {
-                                try {
-                                    Thread.sleep(1000);
-                                    handler.sendEmptyMessage(0);
-
-
-                                } catch (InterruptedException e) {
-                                    e.printStackTrace();
-                                }
-                            }
-                        });
-                        thread.start();
+                        rl_loading.setVisibility(View.GONE);
+                        }
                     }
                 });
     }

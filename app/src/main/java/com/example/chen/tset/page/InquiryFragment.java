@@ -60,7 +60,7 @@ public class InquiryFragment extends Fragment {
     private RelativeLayout rl_nonetwork, rl_loading;
     Gson gson;
     InquirylistAdapter listadapter;
-    private TextView tv_section, tv_city;
+    private TextView tv_section, tv_city,tv_sort;
 
 
     @Nullable
@@ -84,6 +84,7 @@ public class InquiryFragment extends Fragment {
         tv_city = (TextView) view.findViewById(R.id.tv_city);
         rl_nonetwork = (RelativeLayout) view.findViewById(R.id.rl_nonetwork);
         rl_loading = (RelativeLayout) view.findViewById(R.id.rl_loading);
+        tv_sort= (TextView) view.findViewById(R.id.tv_sort);
         lv_inquiry.setVerticalScrollBarEnabled(false);
         ll_city.setOnClickListener(listener);
         ll_development.setOnClickListener(listener);
@@ -97,14 +98,6 @@ public class InquiryFragment extends Fragment {
         });
     }
 
-    private Handler handler = new Handler() {
-        @Override
-        public void handleMessage(Message msg) {
-            if (msg.what == 0) {
-                rl_loading.setVisibility(View.GONE);
-            }
-        }
-    };
 
     private void listinit(List<Inquiry> list) {
         adapter = new InquiryAdapter(getContext(), list);
@@ -135,20 +128,7 @@ public class InquiryFragment extends Fragment {
                             list.add(inquiry);
                         }
                         adapter.notifyDataSetChanged();
-                        final Thread thread = new Thread(new Runnable() {
-                            @Override
-                            public void run() {
-                                try {
-                                    Thread.sleep(1000);
-                                    handler.sendEmptyMessage(0);
-
-
-                                } catch (InterruptedException e) {
-                                    e.printStackTrace();
-                                }
-                            }
-                        });
-                        thread.start();
+                        rl_loading.setVisibility(View.GONE);
                     }
                 });
     }
@@ -197,12 +177,14 @@ public class InquiryFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 listinit(list);
+                tv_sort.setText("默认排序");
                 setHeadDialog.dismiss();
             }
         });
         btn_title.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                tv_sort.setText("职称排序");
                 for (int i = 0; i < list.size(); i++) {
                     if (list.get(i).getTitle().equals("主任医师")) {
                         titlelist.add(list.get(i));

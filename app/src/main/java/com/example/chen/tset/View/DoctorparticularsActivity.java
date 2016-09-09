@@ -85,17 +85,6 @@ public class DoctorparticularsActivity extends AppCompatActivity {
         ll_return.setOnClickListener(listener);
     }
 
-    private Handler handler = new Handler() {
-        @Override
-        public void handleMessage(Message msg) {
-            if (msg.what == 0) {
-                rl_loading.setVisibility(View.GONE);
-
-            }
-
-        }
-
-    };
 
     private void httpinit() {
         list1 = new ArrayList<>();
@@ -134,20 +123,7 @@ public class DoctorparticularsActivity extends AppCompatActivity {
                         tv_bif.setText(list1.get(0).getBif());
                         tv_sum.setText("用户评论 （" + list1.get(0).getSum() + "人）");
                         tv_adept.setText(list1.get(0).getAdept());
-                        final Thread thread = new Thread(new Runnable() {
-                            @Override
-                            public void run() {
-                                try {
-                                    Thread.sleep(1000);
-                                    handler.sendEmptyMessage(0);
-
-
-                                } catch (InterruptedException e) {
-                                    e.printStackTrace();
-                                }
-                            }
-                        });
-                        thread.start();
+                        rl_loading.setVisibility(View.GONE);
                     }
                 });
     }

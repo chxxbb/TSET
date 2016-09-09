@@ -62,17 +62,6 @@ public class MyDoctorActivity extends AppCompatActivity {
         lv_mydoctor.setAdapter(adapter);
     }
 
-    private Handler handler = new Handler() {
-        @Override
-        public void handleMessage(Message msg) {
-            if (msg.what == 0) {
-                rl_loading.setVisibility(View.GONE);
-
-            }
-
-        }
-
-    };
 
     private void httpinit() {
         gson = new Gson();
@@ -98,20 +87,7 @@ public class MyDoctorActivity extends AppCompatActivity {
                             list.add(inquiry);
                         }
                         adapter.notifyDataSetChanged();
-                        final Thread thread = new Thread(new Runnable() {
-                            @Override
-                            public void run() {
-                                try {
-                                    Thread.sleep(1000);
-                                    handler.sendEmptyMessage(0);
-
-
-                                } catch (InterruptedException e) {
-                                    e.printStackTrace();
-                                }
-                            }
-                        });
-                        thread.start();
+                        rl_loading.setVisibility(View.GONE);
                     }
                 });
     }
