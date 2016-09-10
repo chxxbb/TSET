@@ -10,12 +10,22 @@ public class Information {
     private String icon;
     private String title;
     private String time;
+    private String id;
 
-    public Information(String content, String icon, String title, String time) {
+    public Information(String content, String icon, String title, String time, String id) {
         this.content = content;
         this.icon = icon;
         this.title = title;
         this.time = time;
+        this.id = id;
+    }
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
     }
 
     public String getContent() {

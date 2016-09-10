@@ -3,7 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@android:color/white"
+    android:background="@drawable/register_background"
     android:paddingLeft="@dimen/x30"
     android:paddingRight="@dimen/x30"
     tools:context=".View.LoginActivity">
@@ -95,7 +95,7 @@
         android:layout_below="@id/login_button"
         android:layout_marginTop="@dimen/y40"
         android:text="新用户"
-        android:textColor="#6fc9e6"
+        android:textColor="@color/white"
         android:textSize="@dimen/y34" />
 
     <TextView
@@ -106,7 +106,7 @@
         android:layout_below="@id/login_button"
         android:layout_marginTop="@dimen/y40"
         android:text="忘记密码?"
-        android:textColor="#6fc9e6"
+        android:textColor="@color/white"
         android:textSize="@dimen/y34" />
 
     <ImageView
@@ -116,7 +116,7 @@
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
         android:layout_marginBottom="@dimen/y80"
-        android:src="@mipmap/login_page_api_weixin" />
+        android:src="@drawable/register_wechat" />
 
     <ImageView
         android:id="@+id/login_page_api_qq"
@@ -126,7 +126,7 @@
         android:layout_marginBottom="@dimen/y80"
         android:layout_marginRight="@dimen/x40"
         android:layout_toLeftOf="@id/login_page_api_weixin"
-        android:src="@mipmap/login_page_api_qq" />
+        android:src="@drawable/register_qq" />
 
     <ImageView
         android:id="@+id/login_page_api_weibo"
@@ -136,7 +136,7 @@
         android:layout_marginBottom="@dimen/y80"
         android:layout_marginLeft="@dimen/x40"
         android:layout_toRightOf="@id/login_page_api_weixin"
-        android:src="@mipmap/login_page_api_weibo" />
+        android:src="@drawable/register_weibo" />
 
     <RelativeLayout
         android:layout_width="match_parent"
@@ -150,7 +150,7 @@
             android:layout_height="wrap_content"
             android:layout_centerHorizontal="true"
             android:text="第三方帐号登录"
-            android:textColor="#6fc9e6"
+            android:textColor="@color/white"
             android:textSize="@dimen/y32" />
 
         <View
@@ -159,7 +159,7 @@
             android:layout_centerVertical="true"
             android:layout_marginRight="@dimen/x24"
             android:layout_toLeftOf="@id/login_page_api_title"
-            android:background="#6fc9e6" />
+            android:background="@color/white" />
 
         <View
             android:layout_width="@dimen/x130"
@@ -167,7 +167,7 @@
             android:layout_centerVertical="true"
             android:layout_marginLeft="@dimen/x24"
             android:layout_toRightOf="@id/login_page_api_title"
-            android:background="#6fc9e6" />
+            android:background="@color/white" />
 
     </RelativeLayout>
 

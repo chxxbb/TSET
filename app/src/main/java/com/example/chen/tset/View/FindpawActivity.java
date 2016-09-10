@@ -7,6 +7,7 @@ import android.text.TextUtils;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.example.chen.tset.Data.Http_data;
@@ -27,6 +28,8 @@ public class FindpawActivity extends AppCompatActivity {
     Button activity_find_password_getcode_button = null, activity_find_password_button = null;
 
     Activity activity = this;
+    private ImageView iv_ret;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -152,7 +155,16 @@ public class FindpawActivity extends AppCompatActivity {
 
         activity_find_password_getcode_button = (Button) findViewById(R.id.find_password_getcode_button);
         activity_find_password_button = (Button) findViewById(R.id.find_password_button);
+        iv_ret= (ImageView) findViewById(R.id.iv_ret);
+        iv_ret.setOnClickListener(listener);
+
     }
+    private View.OnClickListener listener=new View.OnClickListener() {
+        @Override
+        public void onClick(View v) {
+            finish();
+        }
+    };
 
     public boolean isMobileNO(String mobiles) {
         Pattern p = Pattern.compile("^((13[0-9])|(15[^4,\\D])|(18[0-9]))\\d{8}$");

@@ -74,7 +74,7 @@ public class MycollectActivity extends AppCompatActivity {
         OkHttpUtils
                 .post()
                 .url(Http_data.http_data + "/findCollectList")
-                .addParams("userId", User_Http.user.getId()+"")
+                .addParams("userId", User_Http.user.getId() + "")
                 .build()
                 .execute(new StringCallback() {
                     @Override
@@ -86,7 +86,7 @@ public class MycollectActivity extends AppCompatActivity {
 
                     @Override
                     public void onResponse(String response, int id) {
-                        Log.e("返回", response);
+                        Log.e("收藏返回", response);
                         Type listtype = new TypeToken<LinkedList<Information>>() {
                         }.getType();
                         LinkedList<Information> leclist = gson.fromJson(response, listtype);
@@ -106,6 +106,7 @@ public class MycollectActivity extends AppCompatActivity {
         public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
             Intent intent = new Intent(MycollectActivity.this, ConsultPageActivity.class);
             intent.putExtra("collect", "1");
+            intent.putExtra("information", list.get(position).getId());
             startActivity(intent);
         }
     };

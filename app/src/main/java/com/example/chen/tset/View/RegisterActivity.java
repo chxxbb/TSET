@@ -152,7 +152,14 @@ public class RegisterActivity extends AppCompatActivity {
         activity_register_Verification_code_button = (Button) findViewById(R.id.activity_register_Verification_code_button);
         activity_register_submit = (Button) findViewById(R.id.activity_register_submit);
         activity_register_exit = (ImageView) findViewById(R.id.activity_register_exit);
+        activity_register_exit.setOnClickListener(listener);
     }
+    private View.OnClickListener listener=new View.OnClickListener() {
+        @Override
+        public void onClick(View v) {
+            finish();
+        }
+    };
 
     public boolean isMobileNO(String mobiles) {
         Pattern p = Pattern.compile("^((13[0-9])|(15[^4,\\D])|(18[0-9]))\\d{8}$");

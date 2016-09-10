@@ -40,7 +40,7 @@ public class ConsultPageActivity extends AppCompatActivity implements View.OnCli
     private TextView tv_title, tv_time, tv_content;
     private ImageView iv_icon;
     private RelativeLayout rl_nonetwork, rl_loading;
-    Gson gson;
+    Gson gson = new Gson();
     String information;
 
     @Override
@@ -48,7 +48,7 @@ public class ConsultPageActivity extends AppCompatActivity implements View.OnCli
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_consult_page);
         findview();
-        httpinit();
+
     }
 
     private void findview() {
@@ -66,14 +66,58 @@ public class ConsultPageActivity extends AppCompatActivity implements View.OnCli
         ll_consult_collect.setOnClickListener(this);
         String collect = getIntent().getStringExtra("collect");
         information = getIntent().getStringExtra("information");
+        Log.e("文章ID",information);
         if (collect.equals("1")) {
             ll_consult_collect.setVisibility(View.GONE);
+            collectinit();
+        }else {
+            informationinit();
         }
     }
 
+    private void collectinit() {
+        OkHttpUtils
+                .post()
+                .url(Http_data.http_data + "/findCollectdetaills")
+                .addParams("id", information)
+                .build()
+                .execute(new StringCallback() {
+                    @Override
+                    public void onError(Call call, Exception e, int id) {
 
-    private void httpinit() {
-        gson = new Gson();
+                        Toast.makeText(ConsultPageActivity.this, "网络连接失败", Toast.LENGTH_SHORT).show();
+                        rl_loading.setVisibility(View.GONE);
+                        rl_nonetwork.setVisibility(View.VISIBLE);
+                    }
+
+                    @Override
+                    public void onResponse(String response, int id) {
+                        Log.e("收藏详情返回", response);
+                        if (response.equals("[]") || response.equals("")) {
+
+                            Toast.makeText(ConsultPageActivity.this, "没有这条新闻", Toast.LENGTH_SHORT).show();
+                            rl_loading.setVisibility(View.GONE);
+                            rl_nonetwork.setVisibility(View.VISIBLE);
+                            ll_consult_collect.setVisibility(View.GONE);
+                        } else {
+
+                            Type listtype = new TypeToken<LinkedList<Consultparticulars>>() {
+                            }.getType();
+                            LinkedList<Consultparticulars> leclist = gson.fromJson(response, listtype);
+                            Iterator it = leclist.iterator();
+                            Consultparticulars consultparticulars = (Consultparticulars) it.next();
+                            tv_title.setText(consultparticulars.getTitle());
+                            tv_time.setText("天使资讯  " + consultparticulars.getTime());
+                            tv_content.setText(consultparticulars.getContent());
+                            ImageLoader.getInstance().displayImage(consultparticulars.getIcon(), iv_icon);
+                            rl_loading.setVisibility(View.GONE);
+                        }
+                    }
+                });
+    }
+
+
+    private void informationinit() {
         OkHttpUtils
                 .post()
                 .url(Http_data.http_data + "/findCollect")
@@ -82,6 +126,7 @@ public class ConsultPageActivity extends AppCompatActivity implements View.OnCli
                 .execute(new StringCallback() {
                     @Override
                     public void onError(Call call, Exception e, int id) {
+
                         Toast.makeText(ConsultPageActivity.this, "网络连接失败", Toast.LENGTH_SHORT).show();
                         rl_loading.setVisibility(View.GONE);
                         rl_nonetwork.setVisibility(View.VISIBLE);
@@ -91,6 +136,7 @@ public class ConsultPageActivity extends AppCompatActivity implements View.OnCli
                     public void onResponse(String response, int id) {
                         Log.e("咨询详情返回", response);
                         if (response.equals("[]") || response.equals("")) {
+
                             Toast.makeText(ConsultPageActivity.this, "没有这条新闻", Toast.LENGTH_SHORT).show();
                             rl_loading.setVisibility(View.GONE);
                             rl_nonetwork.setVisibility(View.VISIBLE);
