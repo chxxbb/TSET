@@ -34,7 +34,7 @@ public class FeedbackActivity extends AppCompatActivity implements View.OnClickL
         et_feedback = (EditText) findViewById(R.id.et_feedback);
         tv_cancel = (TextView) findViewById(R.id.tv_cancel);
         et_feedback.addTextChangedListener(textchanglistener);
-        tv_feedback.setOnClickListener(this);
+
         tv_cancel.setOnClickListener(this);
     }
 
@@ -46,9 +46,13 @@ public class FeedbackActivity extends AppCompatActivity implements View.OnClickL
 
         @Override
         public void onTextChanged(CharSequence s, int start, int before, int count) {
-            tv_feedback.setTextColor(android.graphics.Color.parseColor("#6fc9e6"));
+
             if (et_feedback.getText().toString().length() == 0) {
                 tv_feedback.setTextColor(android.graphics.Color.parseColor("#e0e0e0"));
+                tv_feedback.setOnClickListener(null);
+            }else {
+                tv_feedback.setOnClickListener(listener);
+                tv_feedback.setTextColor(android.graphics.Color.parseColor("#6fc9e6"));
             }
         }
 
@@ -57,38 +61,40 @@ public class FeedbackActivity extends AppCompatActivity implements View.OnClickL
 
         }
     };
+    private View.OnClickListener listener=new View.OnClickListener() {
+        @Override
+        public void onClick(View v) {
+            if (et_feedback.getText().toString().length() < 2) {
+                Toast.makeText(FeedbackActivity.this, "必须大于2个字", Toast.LENGTH_SHORT).show();
+            } else {
+                OkHttpUtils
+                        .post()
+                        .url(Http_data.http_data + "/addadvise")
+                        .addParams("user_id", User_Http.user.getId()+"")
+                        .addParams("content", et_feedback.getText().toString())
+                        .build()
+                        .execute(new StringCallback() {
+                            @Override
+                            public void onError(Call call, Exception e, int id) {
+                                Toast.makeText(FeedbackActivity.this, "网络连接失败", Toast.LENGTH_SHORT).show();
+                            }
+                            @Override
+                            public void onResponse(String response, int id) {
+                                if (response.equals("0")) {
+                                    Toast.makeText(FeedbackActivity.this, "提交成功", Toast.LENGTH_SHORT).show();
+                                    finish();
+                                } else {
+                                    Toast.makeText(FeedbackActivity.this, "提交失败", Toast.LENGTH_SHORT).show();
+                                }
+                            }
+                        });
+            }
+        }
+    };
 
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
-            case R.id.tv_feedback:
-                if (et_feedback.getText().toString().length() < 2) {
-                    Toast.makeText(FeedbackActivity.this, "必须大于2个字", Toast.LENGTH_SHORT).show();
-                } else {
-                    OkHttpUtils
-                            .post()
-                            .url(Http_data.http_data + "/addadvise")
-                            .addParams("user_id", User_Http.user.getId()+"")
-                            .addParams("content", et_feedback.getText().toString())
-                            .build()
-                            .execute(new StringCallback() {
-                                @Override
-                                public void onError(Call call, Exception e, int id) {
-                                    Toast.makeText(FeedbackActivity.this, "网络连接失败", Toast.LENGTH_SHORT).show();
-                                }
-
-                                @Override
-                                public void onResponse(String response, int id) {
-                                    if (response.equals("0")) {
-                                        Toast.makeText(FeedbackActivity.this, "提交成功", Toast.LENGTH_SHORT).show();
-                                        finish();
-                                    } else {
-                                        Toast.makeText(FeedbackActivity.this, "提交失败", Toast.LENGTH_SHORT).show();
-                                    }
-                                }
-                            });
-                }
-                break;
             case R.id.tv_cancel:
                 finish();
                 break;

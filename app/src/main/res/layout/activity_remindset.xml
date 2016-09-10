@@ -46,119 +46,128 @@
 
     <View
         android:layout_width="match_parent"
-        android:layout_height="1dp"
+        android:layout_height="@dimen/y1"
         android:background="@color/linegray" />
 
     <View
         android:layout_width="match_parent"
         android:layout_height="@dimen/y30" />
+
     <View
         android:layout_width="match_parent"
-        android:layout_height="1dp"
-        android:background="@color/linegray"/>
+        android:layout_height="@dimen/y1"
+        android:background="@color/linegray" />
 
-
-    <RelativeLayout
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="@dimen/y90"
+        android:layout_height="wrap_content"
         android:background="@color/white"
-        android:gravity="center_vertical">
+        android:orientation="vertical">
 
-        <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent">
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/y90"
+            android:background="@color/white"
+            android:gravity="center_vertical">
 
-            <TextView
+            <LinearLayout
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center_vertical"
-                android:layout_marginLeft="@dimen/x30"
-                android:text="声音"
-                android:textColor="@color/fontcolor"
-                android:textSize="@dimen/y32" />
-        </LinearLayout>
+                android:layout_height="match_parent">
 
-        <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:layout_alignParentRight="true"
-            android:orientation="horizontal">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginLeft="@dimen/x30"
+                    android:text="声音"
+                    android:textColor="@color/fontcolor"
+                    android:textSize="@dimen/y32" />
+            </LinearLayout>
 
-            <ToggleButton
-                android:layout_width="@dimen/x100"
-                android:layout_height="@dimen/y50"
-                android:layout_gravity="center_vertical"
-                android:background="@drawable/remindset_togglebutton"
-                android:textOff=""
-                android:textOn="" />
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_alignParentRight="true"
+                android:orientation="horizontal">
 
-            <View
-                android:layout_width="@dimen/x30"
-                android:layout_height="match_parent" />
-        </LinearLayout>
+                <ToggleButton
+                    android:layout_width="@dimen/x100"
+                    android:layout_height="@dimen/y50"
+                    android:layout_gravity="center_vertical"
+                    android:background="@drawable/remindset_togglebutton"
+                    android:textOff=""
+                    android:textOn="" />
+
+                <View
+                    android:layout_width="@dimen/x30"
+                    android:layout_height="match_parent" />
+            </LinearLayout>
 
 
-    </RelativeLayout>
+        </RelativeLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/y1"
+            android:layout_marginLeft="@dimen/x30"
+            android:background="@color/linegray" />
+
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/y90"
+            android:background="@color/white">
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginLeft="@dimen/x30"
+                    android:text="震动"
+                    android:textColor="@color/fontcolor"
+                    android:textSize="@dimen/y32" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_alignParentRight="true"
+                android:orientation="horizontal">
+
+                <ToggleButton
+                    android:layout_width="@dimen/x100"
+                    android:layout_height="@dimen/y50"
+                    android:layout_gravity="center_vertical"
+                    android:background="@drawable/remindset_togglebutton"
+                    android:textOff=""
+                    android:textOn="" />
+
+                <View
+                    android:layout_width="@dimen/x30"
+                    android:layout_height="match_parent" />
+            </LinearLayout>
+
+        </RelativeLayout>
+    </LinearLayout>
 
     <View
         android:layout_width="match_parent"
-        android:layout_height="1dp"
-        android:layout_marginLeft="@dimen/x30"
+        android:layout_height="@dimen/y1"
         android:background="@color/linegray" />
-
-
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="@dimen/y90"
-        android:background="@color/white">
-
-        <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent">
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center_vertical"
-                android:layout_marginLeft="@dimen/x30"
-                android:text="震动"
-                android:textColor="@color/fontcolor"
-                android:textSize="@dimen/y32" />
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:layout_alignParentRight="true"
-            android:orientation="horizontal">
-
-            <ToggleButton
-                android:layout_width="@dimen/x100"
-                android:layout_height="@dimen/y50"
-                android:layout_gravity="center_vertical"
-                android:background="@drawable/remindset_togglebutton"
-                android:textOff=""
-                android:textOn="" />
-
-            <View
-                android:layout_width="@dimen/x30"
-                android:layout_height="match_parent" />
-        </LinearLayout>
-
-    </RelativeLayout>
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="1dp"
-        android:background="@color/linegray"/>
 
 
     <View
         android:layout_width="match_parent"
         android:layout_height="@dimen/y30" />
+
     <View
         android:layout_width="match_parent"
-        android:layout_height="1dp"
-        android:background="@color/linegray"/>
+        android:layout_height="@dimen/y1"
+        android:background="@color/linegray" />
 
     <RelativeLayout
         android:layout_width="match_parent"
@@ -199,18 +208,20 @@
         </LinearLayout>
 
     </RelativeLayout>
+
     <View
         android:layout_width="match_parent"
-        android:layout_height="1dp"
-        android:background="@color/linegray"/>
+        android:layout_height="@dimen/y1"
+        android:background="@color/linegray" />
 
     <View
         android:layout_width="match_parent"
         android:layout_height="@dimen/y30" />
+
     <View
         android:layout_width="match_parent"
-        android:layout_height="1dp"
-        android:background="@color/linegray"/>
+        android:layout_height="@dimen/y1"
+        android:background="@color/linegray" />
 
 
     <RelativeLayout
@@ -252,10 +263,11 @@
         </LinearLayout>
 
     </RelativeLayout>
+
     <View
         android:layout_width="match_parent"
-        android:layout_height="1dp"
-        android:background="@color/linegray"/>
+        android:layout_height="@dimen/y1"
+        android:background="@color/linegray" />
 
 
 </LinearLayout>

@@ -68,6 +68,7 @@ public class MyDoctorActivity extends AppCompatActivity {
         OkHttpUtils
                 .post()
                 .url(Http_data.http_data + "/findMyDoctor")
+
                 .build()
                 .execute(new StringCallback() {
                     @Override

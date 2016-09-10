@@ -89,7 +89,7 @@
 
     <View
         android:layout_width="match_parent"
-        android:layout_height="1dp"
+        android:layout_height="@dimen/y1"
         android:layout_marginTop="@dimen/y12"
         android:background="@color/linegray"
         android:layout_marginLeft="@dimen/x30"/>

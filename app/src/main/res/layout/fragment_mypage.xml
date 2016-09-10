@@ -145,7 +145,7 @@
 
         <View
             android:layout_width="match_parent"
-            android:layout_height="1dp"
+            android:layout_height="@dimen/y1"
             android:layout_marginLeft="@dimen/x30"
             android:background="@color/linegray" />
 
@@ -194,7 +194,7 @@
 
         <View
             android:layout_width="match_parent"
-            android:layout_height="1dp"
+            android:layout_height="@dimen/y1"
             android:layout_marginLeft="@dimen/x30"
             android:background="@color/linegray" />
 
@@ -243,7 +243,7 @@
 
         <View
             android:layout_width="match_parent"
-            android:layout_height="1dp"
+            android:layout_height="@dimen/y1"
             android:layout_marginLeft="@dimen/x30"
             android:background="@color/linegray" />
 
@@ -292,7 +292,7 @@
 
         <View
             android:layout_width="match_parent"
-            android:layout_height="1dp"
+            android:layout_height="@dimen/y1"
             android:layout_marginLeft="@dimen/x30"
             android:background="@color/linegray" />
 
@@ -342,13 +342,20 @@
 
     <View
         android:layout_width="match_parent"
-        android:layout_height="1dp"
+        android:layout_height="@dimen/y1"
         android:background="@color/linegray" />
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/y20"
+        android:background="@color/backgroundgray"/>
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/y1"
+        android:background="@color/linegray"/>
 
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="@dimen/y90"
-        android:layout_marginTop="@dimen/y20"
         android:background="@color/white"
         android:gravity="center_vertical">
 
@@ -390,7 +397,7 @@
 
     <View
         android:layout_width="match_parent"
-        android:layout_height="1dp"
+        android:layout_height="@dimen/y1"
         android:background="@color/linegray" />
 
 </LinearLayout>

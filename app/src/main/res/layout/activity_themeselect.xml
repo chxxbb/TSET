@@ -46,120 +46,131 @@
 
     <View
         android:layout_width="wrap_content"
-        android:layout_height="1dp"
+        android:layout_height="@dimen/y1"
         android:background="@color/linegray" />
 
     <View
         android:layout_width="wrap_content"
         android:layout_height="@dimen/y30" />
-
-    <RelativeLayout
+    <View
         android:layout_width="match_parent"
-        android:layout_height="@dimen/y90"
+        android:layout_height="@dimen/y1"
+        android:background="@color/linegray"/>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
         android:background="@color/white">
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/y90"
+            android:background="@color/white">
 
-        <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:layout_marginLeft="@dimen/x30"
-            android:gravity="center_vertical"
-            android:orientation="horizontal">
-
-            <RadioButton
-                android:id="@+id/rbtn_white_front"
-                android:layout_width="@dimen/x40"
-                android:layout_height="@dimen/y40"
-                android:background="@drawable/themeselect_rbtn_select"
-                android:button="@null"/>
-
-            <TextView
+            <LinearLayout
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="@dimen/x8"
-                android:text="简洁白"
-                android:textColor="@color/xmgray"
-                android:textSize="@dimen/x32" />
-        </LinearLayout>
+                android:layout_height="match_parent"
+                android:layout_marginLeft="@dimen/x30"
+                android:gravity="center_vertical"
+                android:orientation="horizontal">
 
-        <LinearLayout
+                <RadioButton
+                    android:id="@+id/rbtn_white_front"
+                    android:layout_width="@dimen/x40"
+                    android:layout_height="@dimen/y40"
+                    android:background="@drawable/themeselect_rbtn_select"
+                    android:button="@null"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/x8"
+                    android:text="简洁白"
+                    android:textColor="@color/xmgray"
+                    android:textSize="@dimen/x32" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_alignParentRight="true"
+                android:layout_marginRight="@dimen/x30">
+
+                <RadioButton
+                    android:id="@+id/rbtn_white_queen"
+                    android:layout_width="@dimen/x120"
+                    android:layout_height="@dimen/y60"
+                    android:layout_gravity="center_vertical"
+                    android:background="@drawable/themeselect_btn_onclick"
+                    android:button="@null"
+                    android:gravity="center"
+                    android:text="使用"
+                    android:textColor="@color/white"
+                    android:textSize="@dimen/x32" />
+            </LinearLayout>
+
+        </RelativeLayout>
+
+        <View
             android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:layout_alignParentRight="true"
-            android:layout_marginRight="@dimen/x30">
+            android:layout_height="@dimen/y1"
+            android:layout_marginLeft="@dimen/x30"
+            android:background="@color/linegray" />
 
-            <RadioButton
-                android:id="@+id/rbtn_white_queen"
-                android:layout_width="@dimen/x120"
-                android:layout_height="@dimen/y60"
-                android:layout_gravity="center_vertical"
-                android:background="@drawable/themeselect_btn_onclick"
-                android:button="@null"
-                android:gravity="center"
-                android:text="使用"
-                android:textColor="@color/white"
-                android:textSize="@dimen/x32" />
-        </LinearLayout>
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/y90"
+            android:background="@color/white">
 
-    </RelativeLayout>
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="@dimen/x30"
+                android:gravity="center_vertical"
+                android:orientation="horizontal">
+                <RadioButton
+                    android:id="@+id/rbtn_blue_front"
+                    android:layout_width="@dimen/x40"
+                    android:layout_height="@dimen/y40"
+                    android:background="@drawable/themeselect_rbtn_select"
+                    android:button="@null"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/x8"
+                    android:text="水花蓝"
+                    android:textColor="@color/backgroundblue"
+                    android:textSize="@dimen/x32" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_alignParentRight="true"
+                android:layout_marginRight="@dimen/x30">
+
+
+                <RadioButton
+                    android:id="@+id/rbtn_blue_queen"
+                    android:layout_width="@dimen/x120"
+                    android:layout_height="@dimen/y60"
+                    android:layout_gravity="center_vertical"
+                    android:background="@drawable/themeselect_btn_onclick"
+                    android:button="@null"
+                    android:gravity="center"
+                    android:text="使用"
+                    android:textColor="@color/white"
+                    android:textSize="@dimen/x32" />
+            </LinearLayout>
+
+        </RelativeLayout>
+    </LinearLayout>
+
+
 
     <View
         android:layout_width="wrap_content"
-        android:layout_height="1dp"
-        android:layout_marginLeft="@dimen/x30"
-        android:background="@color/linegray" />
-
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="@dimen/y90"
-        android:background="@color/white">
-
-        <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:layout_marginLeft="@dimen/x30"
-            android:gravity="center_vertical"
-            android:orientation="horizontal">
-            <RadioButton
-                android:id="@+id/rbtn_blue_front"
-                android:layout_width="@dimen/x40"
-                android:layout_height="@dimen/y40"
-                android:background="@drawable/themeselect_rbtn_select"
-                android:button="@null"/>
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="@dimen/x8"
-                android:text="水花蓝"
-                android:textColor="@color/backgroundblue"
-                android:textSize="@dimen/x32" />
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:layout_alignParentRight="true"
-            android:layout_marginRight="@dimen/x30">
-
-
-            <RadioButton
-                android:id="@+id/rbtn_blue_queen"
-                android:layout_width="@dimen/x120"
-                android:layout_height="@dimen/y60"
-                android:layout_gravity="center_vertical"
-                android:background="@drawable/themeselect_btn_onclick"
-                android:button="@null"
-                android:gravity="center"
-                android:text="使用"
-                android:textColor="@color/white"
-                android:textSize="@dimen/x32" />
-        </LinearLayout>
-
-    </RelativeLayout>
-
-    <View
-        android:layout_width="wrap_content"
-        android:layout_height="1dp"
+        android:layout_height="@dimen/y1"
         android:background="@color/linegray" />
 
 

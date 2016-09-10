@@ -254,6 +254,7 @@
                             android:focusableInTouchMode="true">
 
                             <EditText
+                                android:id="@+id/et_name"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:layout_gravity="center_vertical"
@@ -384,6 +385,7 @@
                             android:focusableInTouchMode="true">
 
                             <EditText
+                                android:id="@+id/et_phone"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:layout_gravity="center_vertical"
@@ -430,6 +432,7 @@
                             android:src="@drawable/registration_import2" />
 
                         <EditText
+                            android:id="@+id/et_describe"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_marginLeft="@dimen/x16"
@@ -452,7 +455,7 @@
 
                 <View
                     android:layout_width="match_parent"
-                    android:layout_height="1dp"
+                    android:layout_height="@dimen/y1"
                     android:layout_alignTop="@+id/rl"
                     android:background="@color/linegray" />
 

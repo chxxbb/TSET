@@ -6,13 +6,13 @@ package com.example.chen.tset.Data;
 public class Doctorcomment {
     private String name;
     private String content;
-    private String icon;
+    private String usericon;
     private String time;
 
-    public Doctorcomment(String name, String content, String icon, String time) {
+    public Doctorcomment(String name, String content, String usericon, String time) {
         this.name = name;
         this.content = content;
-        this.icon = icon;
+        this.usericon = usericon;
         this.time = time;
     }
 
@@ -32,12 +32,12 @@ public class Doctorcomment {
         this.content = content;
     }
 
-    public String getIcon() {
-        return icon;
+    public String getUsericon() {
+        return usericon;
     }
 
-    public void setIcon(String icon) {
-        this.icon = icon;
+    public void setUsericon(String usericon) {
+        this.usericon = usericon;
     }
 
     public String getTime() {

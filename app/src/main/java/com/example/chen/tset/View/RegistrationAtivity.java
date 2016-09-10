@@ -14,6 +14,7 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.DatePicker;
+import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.ProgressBar;
@@ -51,6 +52,7 @@ public class RegistrationAtivity extends AppCompatActivity {
     private View dialogView;
     private TextView tv_city, tv_gender, tv_time, tv_age, tv_professionaltitle, tv_departments;
     private ProgressBar progressBar;
+    private EditText et_phone,et_name,et_describe;
     private Button btn_pay;
     Calendar c;
     int myear, mmonth, mday;
@@ -93,6 +95,9 @@ public class RegistrationAtivity extends AppCompatActivity {
         btn_pay = (Button) findViewById(R.id.btn_pay);
         ll_rutregistration = (LinearLayout) findViewById(R.id.ll_rutregistration);
         rl_nonetwork = (RelativeLayout) findViewById(R.id.rl_nonetwork);
+        et_name= (EditText) findViewById(R.id.et_name);
+        et_phone= (EditText) findViewById(R.id.et_phone);
+        et_describe= (EditText) findViewById(R.id.et_describe);
         rl_departments.setOnClickListener(listener);
         rl_city.setOnClickListener(listener);
         rl_gender.setOnClickListener(listener);
@@ -155,32 +160,32 @@ public class RegistrationAtivity extends AppCompatActivity {
     };
 
     private void pay() {
-//        OkHttpUtils
-//                .post()
-//                .url(Http_data.http_data + "/addRegistration")
-//                .addParams("city", tv_city.getText().toString())
-//                .addParams("section", tv_departments.getText().toString())
-//                .addParams("title", tv_professionaltitle.getText().toString())
-//                .addParams("time", tv_time.getText().toString())
-//                .addParams("sex", tv_gender.getText().toString())
-//                .addParams("age", tv_age.getText().toString())
-//                .addParams("name", "李狗蛋")
-//                .addParams("phone", "12345678901")
-//                .addParams("content", "要死了")
-//                .addParams("money", "1")
-//                .build()
-//                .execute(new StringCallback() {
-//                    @Override
-//                    public void onError(Call call, Exception e, int id) {
-//                        Toast.makeText(RegistrationAtivity.this, "网络连接失败", Toast.LENGTH_SHORT).show();
-//                    }
-//
-//                    @Override
-//                    public void onResponse(String response, int id) {
-//                        Log.e("一键挂号支付返回", response);
-//
-//                    }
-//                });
+        OkHttpUtils
+                .post()
+                .url(Http_data.http_data + "/addRegistration")
+                .addParams("city", tv_city.getText().toString())
+                .addParams("section", tv_departments.getText().toString())
+                .addParams("title", tv_professionaltitle.getText().toString())
+                .addParams("time", tv_time.getText().toString())
+                .addParams("sex", tv_gender.getText().toString())
+                .addParams("age", tv_age.getText().toString())
+                .addParams("name", et_name.getText().toString())
+                .addParams("phone", et_phone.getText().toString())
+                .addParams("content", et_describe.getText().toString())
+                .addParams("money", "1")
+                .build()
+                .execute(new StringCallback() {
+                    @Override
+                    public void onError(Call call, Exception e, int id) {
+                        Toast.makeText(RegistrationAtivity.this, "网络连接失败", Toast.LENGTH_SHORT).show();
+                    }
+
+                    @Override
+                    public void onResponse(String response, int id) {
+                        Log.e("一键挂号支付返回", response);
+
+                    }
+                });
         setHeadDialog = new Builder(this).create();
         setHeadDialog.show();
         WindowManager windowManager = getWindowManager();

@@ -38,7 +38,6 @@ public class PasswordSettingActivity extends AppCompatActivity implements View.O
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_password_setting);
         findView();
-        init();
     }
 
 
@@ -50,7 +49,6 @@ public class PasswordSettingActivity extends AppCompatActivity implements View.O
         tv_passet = (TextView) findViewById(R.id.tv_passet);
         forpas = et_forpassword.getText().toString();
         newpas = et_newpassword.getText().toString();
-        tv_pas.setOnClickListener(this);
         linearlayout.setOnClickListener(this);
         tv_passet.setOnClickListener(this);
         et_newpassword.addTextChangedListener(textchangelisterer);
@@ -67,8 +65,10 @@ public class PasswordSettingActivity extends AppCompatActivity implements View.O
         public void onTextChanged(CharSequence s, int start, int before, int count) {
             if (et_newpassword.getText().toString().length() != 0 && et_forpassword.getText().toString().length() != 0) {
                 tv_pas.setTextColor(android.graphics.Color.parseColor("#6fc9e6"));
+                tv_pas.setOnClickListener(listener);
             } else {
                 tv_pas.setTextColor(android.graphics.Color.parseColor("#e0e0e0"));
+                tv_pas.setOnClickListener(null);
             }
         }
 
@@ -77,41 +77,40 @@ public class PasswordSettingActivity extends AppCompatActivity implements View.O
 
         }
     };
+    private View.OnClickListener listener=new View.OnClickListener() {
+        @Override
+        public void onClick(View v) {
+            OkHttpUtils
+                    .post()
+                    .url(Http_data.http_data + "/changeP" + "?" + User_Http.user.getId())
+                    .addParams("oldPassword", et_forpassword.getText().toString())
+                    .addParams("newPassword", et_newpassword.getText().toString())
+                    .build()
+                    .execute(new StringCallback() {
+                        @Override
+                        public void onError(Call call, Exception e, int id) {
+                            Toast.makeText(PasswordSettingActivity.this, "网络连接失败", Toast.LENGTH_SHORT).show();
+                        }
 
-    private void init() {
+                        @Override
+                        public void onResponse(String response, int id) {
+                            if (response.equals("1")) {
+                                Toast.makeText(PasswordSettingActivity.this, "修改失败", Toast.LENGTH_SHORT).show();
+                            } else {
+                                User_Http.user.setPhone(et_newpassword.getText().toString());
+                                Toast.makeText(PasswordSettingActivity.this, "修改成功", Toast.LENGTH_SHORT).show();
+                                finish();
+                            }
+                        }
+                    });
+        }
+    };
 
-    }
+
 
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
-            case R.id.tv_pas:
-                OkHttpUtils
-                        .post()
-                        .url(Http_data.http_data + "/changeP" + "?" + User_Http.user.getId())
-                        .addParams("oldPassword", et_forpassword.getText().toString())
-                        .addParams("newPassword", et_newpassword.getText().toString())
-                        .build()
-                        .execute(new StringCallback() {
-                            @Override
-                            public void onError(Call call, Exception e, int id) {
-                                Toast.makeText(PasswordSettingActivity.this, "网络连接失败", Toast.LENGTH_SHORT).show();
-                            }
-
-                            @Override
-                            public void onResponse(String response, int id) {
-                                if (response.equals("1")) {
-                                    Toast.makeText(PasswordSettingActivity.this, "修改失败", Toast.LENGTH_SHORT).show();
-                                } else {
-                                    User_Http.user.setPhone(et_newpassword.getText().toString());
-                                    Toast.makeText(PasswordSettingActivity.this, "修改成功", Toast.LENGTH_SHORT).show();
-                                    finish();
-                                }
-                            }
-                        });
-
-
-                break;
             case R.id.tv_passet:
                 finish();
                 break;

@@ -19,9 +19,9 @@
 
         <View
             android:layout_width="match_parent"
-            android:layout_height="1dp"
+            android:layout_height="@dimen/y1"
             android:layout_alignTop="@+id/relativelaout"
-            android:background="@color/linegray1"></View>
+            android:background="@color/linegray1"/>
 
         <RelativeLayout
             android:layout_width="match_parent"

@@ -144,7 +144,7 @@
                 android:layout_marginTop="@dimen/y19"
                 android:text="儿童多动症，孤独症和情绪障碍的治疗。儿童多动症，孤独症和情绪障碍的治疗。"
                 android:textColor="@color/xmgray"
-                android:textSize="@dimen/y24" />
+                android:textSize="@dimen/y28" />
 
         </LinearLayout>
 
@@ -166,7 +166,7 @@
 
         <View
             android:layout_width="match_parent"
-            android:layout_height="1dp" />
+            android:layout_height="@dimen/y1" />
     </LinearLayout>
 
 </LinearLayout>

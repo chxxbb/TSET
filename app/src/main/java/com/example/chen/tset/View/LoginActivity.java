@@ -66,6 +66,7 @@ public class LoginActivity extends AppCompatActivity {
 
                                 if (response.equals("1")) {
                                     System.out.println("失败");
+                                    Toast.makeText(LoginActivity.this, "账号或密码错误", Toast.LENGTH_SHORT).show();
                                 } else {
                                     User user = gson.fromJson(response, User.class);
                                     Log.e("user", user.toString());

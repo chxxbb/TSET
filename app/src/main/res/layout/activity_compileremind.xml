@@ -100,7 +100,7 @@
     <View
         android:id="@+id/view"
         android:layout_width="match_parent"
-        android:layout_height="1dp"
+        android:layout_height="@dimen/y1"
         android:layout_marginLeft="@dimen/x30"
         android:layout_marginRight="@dimen/x30"
         android:background="@color/linegray" />
@@ -185,7 +185,7 @@
 
     <View
         android:layout_width="match_parent"
-        android:layout_height="1dp"
+        android:layout_height="@dimen/y1"
         android:background="@color/backgroundgray" />
 
     <FrameLayout
@@ -209,7 +209,7 @@
 
         <View
             android:layout_width="match_parent"
-            android:layout_height="1dp"
+            android:layout_height="@dimen/y1"
             android:layout_marginTop="@dimen/y148"
             android:background="@color/linegray" />
 
@@ -221,7 +221,7 @@
 
         <View
             android:layout_width="match_parent"
-            android:layout_height="1dp"
+            android:layout_height="@dimen/y1"
             android:layout_marginTop="@dimen/y248"
             android:background="@color/linegray" />
     </FrameLayout>

@@ -51,7 +51,7 @@ public class InquiryFragment extends Fragment {
     List<Inquiry> selectlist;
     //城市列表
     List<Inquiry> citylist;
-    //职称裂变
+    //职称列表
     List<Inquiry> titlelist;
     List<String> data;
     private LinearLayout ll_city, ll_development, ll_sort;
@@ -93,6 +93,17 @@ public class InquiryFragment extends Fragment {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 Intent intent = new Intent(getContext(), DoctorparticularsActivity.class);
+                //根据所选择的排序，点击时获取所点击医生ID
+                if(tv_section.getText().toString().equals("全部科室")||tv_city.getText().toString().equals("全部地区")||tv_sort.getText().toString().equals("智能排序")||tv_sort.getText().toString().equals("默认排序")){
+                    intent.putExtra("doctot_id",list.get(position).getId());
+                }else if (tv_city.getText().toString().equals("成都")||tv_city.getText().toString().equals("重庆")){
+                    intent.putExtra("doctot_id",citylist.get(position).getId());
+                }else if(tv_sort.getText().toString().equals("职称排序")){
+                    intent.putExtra("doctot_id",titlelist.get(position).getId());
+                }else {
+                    intent.putExtra("doctot_id",selectlist.get(position).getId());
+                }
+
                 startActivity(intent);
             }
         });
@@ -208,8 +219,21 @@ public class InquiryFragment extends Fragment {
                 listinit(titlelist);
                 setHeadDialog.dismiss();
             }
-
         });
+        lv_inquiry.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                Intent intent = new Intent(getContext(), DoctorparticularsActivity.class);
+                //根据所选择的排序，点击时获取所点击医生ID
+                if(tv_sort.getText().toString().equals("智能排序")||tv_sort.getText().toString().equals("默认排序")){
+                    intent.putExtra("doctot_id",list.get(position).getId());
+                }else if(tv_sort.getText().toString().equals("职称排序")){
+                    intent.putExtra("doctot_id",titlelist.get(position).getId());
+                }
+                startActivity(intent);
+            }
+        });
+
 
     }
 
@@ -261,7 +285,7 @@ public class InquiryFragment extends Fragment {
                     setHeadDialog.dismiss();
                 } else {
                     for (int i = 0; i < list.size(); i++) {
-                        //在集合中查找所点击科室的医生
+                        //在集合中查找所选科室的医生，放入一个新的集合中
                         if ((data.get(position)).equals(list.get(i).getSection())) {
                             selectlist.add(list.get(i));
                         }
@@ -274,6 +298,20 @@ public class InquiryFragment extends Fragment {
                     tv_section.setText(data.get(position));
                 }
                 setHeadDialog.dismiss();
+            }
+        });
+        lv_inquiry.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                Intent intent = new Intent(getContext(), DoctorparticularsActivity.class);
+                //根据所选择的排序，点击时获取所点击医生ID
+                if(tv_section.getText().toString().equals("全部科室")){
+                    intent.putExtra("doctot_id",list.get(position).getId());
+                }else {
+                    intent.putExtra("doctot_id",selectlist.get(position).getId());
+                }
+
+                startActivity(intent);
             }
         });
 
@@ -304,6 +342,7 @@ public class InquiryFragment extends Fragment {
                 setHeadDialog.dismiss();
             }
         });
+        //在集合中查找所选城市的医生，放入一个新的集合中
         btn_region.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -336,6 +375,20 @@ public class InquiryFragment extends Fragment {
                 }
                 listinit(citylist);
                 setHeadDialog.dismiss();
+            }
+        });
+        lv_inquiry.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                Intent intent = new Intent(getContext(), DoctorparticularsActivity.class);
+                //根据所选择的排序，点击时获取所点击医生ID
+                if(tv_city.getText().toString().equals("全部地区")){
+                    intent.putExtra("doctot_id",list.get(position).getId());
+                }else if (tv_city.getText().toString().equals("成都")||tv_city.getText().toString().equals("深圳")){
+                    intent.putExtra("doctot_id",citylist.get(position).getId());
+                }
+
+                startActivity(intent);
             }
         });
     }

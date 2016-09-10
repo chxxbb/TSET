@@ -48,10 +48,7 @@
         android:layout_height="1dp"
         android:background="@color/linegray"/>
 
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="@dimen/y4"
-        android:background="@color/white" />
+
 
     <ListView
         android:id="@+id/lv_inquiryrecord"

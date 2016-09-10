@@ -38,7 +38,6 @@ public class NamepageActivity extends AppCompatActivity {
         ll_rutname = (LinearLayout) findViewById(R.id.ll_rutname);
         et_name_save.addTextChangedListener(textListener);
         ll_rutname.setOnClickListener(listener);
-        tv_pas.setOnClickListener(listener);
     }
 
     private TextWatcher textListener = new TextWatcher() {
@@ -49,9 +48,12 @@ public class NamepageActivity extends AppCompatActivity {
 
         @Override
         public void onTextChanged(CharSequence s, int start, int before, int count) {
-            tv_pas.setTextColor(android.graphics.Color.parseColor("#6fc9e6"));
             if (et_name_save.length() == 0) {
                 tv_pas.setTextColor(android.graphics.Color.parseColor("#e0e0e0"));
+                tv_pas.setOnClickListener(null);
+            }else {
+                tv_pas.setTextColor(android.graphics.Color.parseColor("#6fc9e6"));
+                tv_pas.setOnClickListener(listener);
             }
         }
 

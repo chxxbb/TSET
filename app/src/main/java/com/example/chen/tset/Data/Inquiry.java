@@ -11,8 +11,9 @@ public class Inquiry {
     private String adept;
     private String section;
     private String hospital;
+    private String id;
 
-    public Inquiry(String icon, String title, String name, String money, String adept, String section, String hospital) {
+    public Inquiry(String icon, String title, String name, String money, String adept, String section, String hospital, String id) {
         this.icon = icon;
         this.title = title;
         this.name = name;
@@ -20,6 +21,15 @@ public class Inquiry {
         this.adept = adept;
         this.section = section;
         this.hospital = hospital;
+        this.id = id;
+    }
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
     }
 
     public String getHospital() {

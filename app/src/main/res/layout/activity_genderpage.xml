@@ -43,11 +43,18 @@
             android:textColor="@color/fontcolor"
             android:textSize="@dimen/x36" />
     </RelativeLayout>
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/y30"
+        android:background="@color/backgroundgray"/>
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/y1"
+        android:background="@color/linegray"/>
 
     <RadioGroup
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/y30"
         android:background="@color/white"
         android:orientation="vertical">
 
@@ -66,7 +73,7 @@
 
         <View
             android:layout_width="match_parent"
-            android:layout_height="1dp"
+            android:layout_height="@dimen/y1"
             android:layout_marginLeft="@dimen/x30"
             android:background="@color/linegray" />
 
@@ -83,5 +90,9 @@
             android:textColor="@color/fontcolor"
             android:textSize="@dimen/y32" />
     </RadioGroup>
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/y1"
+        android:background="@color/linegray"/>
 
 </LinearLayout>

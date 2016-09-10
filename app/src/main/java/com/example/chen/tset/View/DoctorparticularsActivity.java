@@ -1,5 +1,7 @@
 package com.example.chen.tset.View;
 
+import android.app.ExpandableListActivity;
+import android.content.Intent;
 import android.os.Handler;
 import android.os.Message;
 import android.support.v7.app.AppCompatActivity;
@@ -46,6 +48,7 @@ public class DoctorparticularsActivity extends AppCompatActivity {
     private Button btn_chatmoney, btn_callmoney;
     private CircleImageView iv_icon;
     private RelativeLayout rl_nonetwork, rl_loading;
+    String doctor_id=null;
 
 
     @Override
@@ -54,11 +57,17 @@ public class DoctorparticularsActivity extends AppCompatActivity {
         setContentView(R.layout.activity_doctorparticulars);
         findView();
         httpinit();
+
+    }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
         comment();
     }
 
-
     private void findView() {
+        doctor_id=getIntent().getStringExtra("doctot_id");
         tv_title = (TextView) findViewById(R.id.tv_title);
         tv_name = (TextView) findViewById(R.id.tv_name);
         btn_chatmoney = (Button) findViewById(R.id.btn_chatmoney);
@@ -83,6 +92,7 @@ public class DoctorparticularsActivity extends AppCompatActivity {
         adapter = new DoctorparticularsAdapter(this, list);
         lv_docttorparticulas.setAdapter(adapter);
         ll_return.setOnClickListener(listener);
+        btn_callmoney.setOnClickListener(listener);
     }
 
 
@@ -91,7 +101,7 @@ public class DoctorparticularsActivity extends AppCompatActivity {
         OkHttpUtils
                 .post()
                 .url(Http_data.http_data + "/findDatabank")
-                .addParams("id", "1")
+                .addParams("id", doctor_id)
                 .build()
                 .execute(new StringCallback() {
                     @Override
@@ -132,12 +142,11 @@ public class DoctorparticularsActivity extends AppCompatActivity {
         OkHttpUtils
                 .post()
                 .url(Http_data.http_data + "/findUserComment")
-                .addParams("user_id", "1")
+                .addParams("doctor_id", doctor_id)
                 .build()
                 .execute(new StringCallback() {
                     @Override
                     public void onError(Call call, Exception e, int id) {
-                        Toast.makeText(DoctorparticularsActivity.this, "网络连接失败", Toast.LENGTH_SHORT).show();
                     }
 
                     @Override
@@ -160,6 +169,18 @@ public class DoctorparticularsActivity extends AppCompatActivity {
         @Override
         public void onClick(View v) {
             finish();
+            switch (v.getId()){
+                case R.id.btn_callmoney:
+                    Intent intent=new Intent(DoctorparticularsActivity.this, EvaluatepageActivity.class);
+                    intent.putExtra("doctorid",doctor_id);
+                    startActivity(intent);
+                    break;
+                case R.id.ll_return:
+                    finish();
+                    break;
+
+
+            }
         }
     };
 }
