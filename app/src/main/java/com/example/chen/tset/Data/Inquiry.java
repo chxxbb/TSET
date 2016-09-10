@@ -12,8 +12,10 @@ public class Inquiry {
     private String section;
     private String hospital;
     private String id;
+    private int doctor_id;
 
-    public Inquiry(String icon, String title, String name, String money, String adept, String section, String hospital, String id) {
+
+    public Inquiry(String icon, String title, String name, String money, String adept, String section, String hospital, String id, int doctor_id) {
         this.icon = icon;
         this.title = title;
         this.name = name;
@@ -22,6 +24,15 @@ public class Inquiry {
         this.section = section;
         this.hospital = hospital;
         this.id = id;
+        this.doctor_id = doctor_id;
+    }
+
+    public int getDoctor_id() {
+        return doctor_id;
+    }
+
+    public void setDoctor_id(int doctor_id) {
+        this.doctor_id = doctor_id;
     }
 
     public String getId() {
@@ -86,5 +97,20 @@ public class Inquiry {
 
     public void setSection(String section) {
         this.section = section;
+    }
+
+    @Override
+    public String toString() {
+        return "Inquiry{" +
+                "icon='" + icon + '\'' +
+                ", title='" + title + '\'' +
+                ", name='" + name + '\'' +
+                ", money='" + money + '\'' +
+                ", adept='" + adept + '\'' +
+                ", section='" + section + '\'' +
+                ", hospital='" + hospital + '\'' +
+                ", id='" + id + '\'' +
+                ", doctor_id=" + doctor_id +
+                '}';
     }
 }

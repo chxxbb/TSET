@@ -8,12 +8,22 @@ public class Reservation {
     private String order;
     private String status;
     private String money;
+    private int id;
 
-    public Reservation(String time, String order, String status, String money) {
+    public Reservation(String time, String order, String status, String money, int id) {
         this.time = time;
         this.order = order;
         this.status = status;
         this.money = money;
+        this.id = id;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 
     public String getTime() {

@@ -11,9 +11,11 @@ import android.widget.AdapterView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.RelativeLayout;
+import android.widget.Toast;
 
 import com.example.chen.tset.Data.Http_data;
 import com.example.chen.tset.Data.Inquiry;
+import com.example.chen.tset.Data.User_Http;
 import com.example.chen.tset.R;
 import com.example.chen.tset.page.InquiryAdapter;
 import com.google.gson.Gson;
@@ -68,7 +70,7 @@ public class MyDoctorActivity extends AppCompatActivity {
         OkHttpUtils
                 .post()
                 .url(Http_data.http_data + "/findMyDoctor")
-
+                .addParams("user_id", User_Http.user.getId() + "")
                 .build()
                 .execute(new StringCallback() {
                     @Override
@@ -97,6 +99,7 @@ public class MyDoctorActivity extends AppCompatActivity {
         @Override
         public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
             Intent intent = new Intent(MyDoctorActivity.this, DoctorparticularsActivity.class);
+            intent.putExtra("doctot_id", list.get(position).getDoctor_id() + "");
             startActivity(intent);
         }
     };

@@ -16,6 +16,7 @@ import android.widget.Toast;
 import com.example.chen.tset.Data.Http_data;
 import com.example.chen.tset.Data.Information;
 import com.example.chen.tset.Data.Reservation;
+import com.example.chen.tset.Data.User_Http;
 import com.example.chen.tset.R;
 import com.example.chen.tset.page.ReservationlistvAdapter;
 import com.google.gson.Gson;
@@ -67,7 +68,7 @@ public class ReservationActivity extends AppCompatActivity implements View.OnCli
         OkHttpUtils
                 .post()
                 .url(Http_data.http_data + "/findReservation")
-                .addParams("user_id", "1")
+                .addParams("user_id", User_Http.user.getId()+"")
                 .build()
                 .execute(new StringCallback() {
                     @Override
@@ -102,6 +103,7 @@ public class ReservationActivity extends AppCompatActivity implements View.OnCli
         @Override
         public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
             Intent intent = new Intent(ReservationActivity.this, ReservationlistActivity.class);
+            intent.putExtra("ReservationID",list.get(position).getId()+"");
             startActivity(intent);
         }
     };

@@ -52,7 +52,7 @@ public class RegistrationAtivity extends AppCompatActivity {
     private View dialogView;
     private TextView tv_city, tv_gender, tv_time, tv_age, tv_professionaltitle, tv_departments;
     private ProgressBar progressBar;
-    private EditText et_phone,et_name,et_describe;
+    private EditText et_phone, et_name, et_describe;
     private Button btn_pay;
     Calendar c;
     int myear, mmonth, mday;
@@ -95,9 +95,9 @@ public class RegistrationAtivity extends AppCompatActivity {
         btn_pay = (Button) findViewById(R.id.btn_pay);
         ll_rutregistration = (LinearLayout) findViewById(R.id.ll_rutregistration);
         rl_nonetwork = (RelativeLayout) findViewById(R.id.rl_nonetwork);
-        et_name= (EditText) findViewById(R.id.et_name);
-        et_phone= (EditText) findViewById(R.id.et_phone);
-        et_describe= (EditText) findViewById(R.id.et_describe);
+        et_name = (EditText) findViewById(R.id.et_name);
+        et_phone = (EditText) findViewById(R.id.et_phone);
+        et_describe = (EditText) findViewById(R.id.et_describe);
         rl_departments.setOnClickListener(listener);
         rl_city.setOnClickListener(listener);
         rl_gender.setOnClickListener(listener);
@@ -146,6 +146,7 @@ public class RegistrationAtivity extends AppCompatActivity {
                 case R.id.rl_departments:
                     departmentsshowDialog();
                     break;
+                //支付
                 case R.id.btn_pay:
                     pay();
                     break;
@@ -160,66 +161,84 @@ public class RegistrationAtivity extends AppCompatActivity {
     };
 
     private void pay() {
-        OkHttpUtils
-                .post()
-                .url(Http_data.http_data + "/addRegistration")
-                .addParams("city", tv_city.getText().toString())
-                .addParams("section", tv_departments.getText().toString())
-                .addParams("title", tv_professionaltitle.getText().toString())
-                .addParams("time", tv_time.getText().toString())
-                .addParams("sex", tv_gender.getText().toString())
-                .addParams("age", tv_age.getText().toString())
-                .addParams("name", et_name.getText().toString())
-                .addParams("phone", et_phone.getText().toString())
-                .addParams("content", et_describe.getText().toString())
-                .addParams("money", "1")
-                .build()
-                .execute(new StringCallback() {
-                    @Override
-                    public void onError(Call call, Exception e, int id) {
-                        Toast.makeText(RegistrationAtivity.this, "网络连接失败", Toast.LENGTH_SHORT).show();
-                    }
+//        OkHttpUtils
+//                .post()
+//                .url(Http_data.http_data + "/addRegistration")
+//                .addParams("city", tv_city.getText().toString())
+//                .addParams("section", tv_departments.getText().toString())
+//                .addParams("title", tv_professionaltitle.getText().toString())
+//                .addParams("time", tv_time.getText().toString())
+//                .addParams("sex", tv_gender.getText().toString())
+//                .addParams("age", tv_age.getText().toString())
+//                .addParams("name", et_name.getText().toString())
+//                .addParams("phone", et_phone.getText().toString())
+//                .addParams("content", et_describe.getText().toString())
+//                .addParams("money", "1")
+//                .build()
+//                .execute(new StringCallback() {
+//                    @Override
+//                    public void onError(Call call, Exception e, int id) {
+//                        Toast.makeText(RegistrationAtivity.this, "网络连接失败", Toast.LENGTH_SHORT).show();
+//                    }
+//
+//                    @Override
+//                    public void onResponse(String response, int id) {
+//                        Log.e("一键挂号支付返回", response);
+//
+//                    }
+//                });
+        if (tv_city.getText().toString().equals("请选择城市")) {
+            Toast.makeText(RegistrationAtivity.this, "请选择城市", Toast.LENGTH_SHORT).show();
+        } else if (tv_departments.getText().toString().equals("选择科室")) {
+            Toast.makeText(RegistrationAtivity.this, "请选择科室", Toast.LENGTH_SHORT).show();
+        } else if (tv_professionaltitle.getText().toString().equals("选择职称")) {
+            Toast.makeText(RegistrationAtivity.this, "请选择职称", Toast.LENGTH_SHORT).show();
+        } else if (tv_time.getText().toString().equals("选择预约时间")) {
+            Toast.makeText(RegistrationAtivity.this, "请选择预约时间", Toast.LENGTH_SHORT).show();
+        } else if (et_name.getText().toString().equals("") || et_name.getText().toString() == null) {
+            Toast.makeText(RegistrationAtivity.this, "请输入姓名", Toast.LENGTH_SHORT).show();
+        } else if (tv_gender.getText().toString().equals("患者性别")) {
+            Toast.makeText(RegistrationAtivity.this, "选择预约性别", Toast.LENGTH_SHORT).show();
+        } else if (tv_age.getText().toString().equals("患者年龄")) {
+            Toast.makeText(RegistrationAtivity.this, "请选择年龄", Toast.LENGTH_SHORT).show();
+        } else if (et_phone.getText().toString().equals("") || et_name.getText().toString() == null) {
+            Toast.makeText(RegistrationAtivity.this, "请输入联系方式", Toast.LENGTH_SHORT).show();
+        } else {
+            setHeadDialog = new Builder(this).create();
+            setHeadDialog.show();
+            WindowManager windowManager = getWindowManager();
+            Display display = windowManager.getDefaultDisplay();
+            dialogView = View.inflate(getApplicationContext(), R.layout.payment_dialog, null);
+            rb_wenx = (RadioButton) dialogView.findViewById(R.id.rb_wenx);
+            rb_zhifb = (RadioButton) dialogView.findViewById(R.id.rb_zhifb);
+            ll_cancel = (LinearLayout) dialogView.findViewById(R.id.ll_cancel);
+            rb_wenx.setChecked(true);
+            progressBar = (ProgressBar) dialogView.findViewById(R.id.progressBar);
+            setHeadDialog.getWindow().setContentView(dialogView);
+            WindowManager.LayoutParams lp = setHeadDialog.getWindow().getAttributes();
+            lp.width = display.getWidth();
+            setHeadDialog.getWindow().setAttributes(lp);
+            Thread thread = new Thread(new Runnable() {
+                @Override
+                public void run() {
+                    int progressBarMax = progressBar.getMax();
+                    try {
+                        while (progressBarMax != progressBar.getProgress()) {
+                            int stepProgress = progressBarMax / 1000;
+                            int currentprogress = progressBar.getProgress();
+                            progressBar.setProgress(currentprogress + stepProgress);
+                            Thread.sleep(180);
+                        }
+                        finish();
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
 
-                    @Override
-                    public void onResponse(String response, int id) {
-                        Log.e("一键挂号支付返回", response);
-
                     }
-                });
-        setHeadDialog = new Builder(this).create();
-        setHeadDialog.show();
-        WindowManager windowManager = getWindowManager();
-        Display display = windowManager.getDefaultDisplay();
-        dialogView = View.inflate(getApplicationContext(), R.layout.payment_dialog, null);
-        rb_wenx = (RadioButton) dialogView.findViewById(R.id.rb_wenx);
-        rb_zhifb = (RadioButton) dialogView.findViewById(R.id.rb_zhifb);
-        ll_cancel = (LinearLayout) dialogView.findViewById(R.id.ll_cancel);
-        rb_wenx.setChecked(true);
-        progressBar = (ProgressBar) dialogView.findViewById(R.id.progressBar);
-        setHeadDialog.getWindow().setContentView(dialogView);
-        WindowManager.LayoutParams lp = setHeadDialog.getWindow().getAttributes();
-        lp.width = display.getWidth();
-        setHeadDialog.getWindow().setAttributes(lp);
-        Thread thread = new Thread(new Runnable() {
-            @Override
-            public void run() {
-                int progressBarMax = progressBar.getMax();
-                try {
-                    while (progressBarMax != progressBar.getProgress()) {
-                        int stepProgress = progressBarMax / 1000;
-                        int currentprogress = progressBar.getProgress();
-                        progressBar.setProgress(currentprogress + stepProgress);
-                        Thread.sleep(180);
-                    }
-                    finish();
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
-
                 }
-            }
-        });
-        thread.start();
-        payonclick();
+            });
+            thread.start();
+            payonclick();
+        }
 
     }
 

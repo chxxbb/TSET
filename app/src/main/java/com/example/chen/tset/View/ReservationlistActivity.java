@@ -38,6 +38,7 @@ public class ReservationlistActivity extends AppCompatActivity implements View.O
     private CircleImageView iv_icon;
     private RelativeLayout rl_nonetwork, rl_loading;
     Gson gson = new Gson();
+    private String reservationid=null;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -51,6 +52,7 @@ public class ReservationlistActivity extends AppCompatActivity implements View.O
 
 
     private void findView() {
+        reservationid=getIntent().getStringExtra("ReservationID");
         ll_myreservationg = (LinearLayout) findViewById(R.id.ll_myreservationg);
         tv_content = (TextView) findViewById(R.id.tv_content);
         tv_doctor_name = (TextView) findViewById(R.id.tv_doctor_name);
@@ -77,7 +79,7 @@ public class ReservationlistActivity extends AppCompatActivity implements View.O
         OkHttpUtils
                 .post()
                 .url(Http_data.http_data + "/findBookingDetails")
-                .addParams("id", "1")
+                .addParams("id", reservationid)
                 .build()
                 .execute(new StringCallback() {
                     @Override
