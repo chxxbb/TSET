@@ -21,7 +21,9 @@ import com.zhy.http.okhttp.callback.StringCallback;
 import java.io.File;
 
 import okhttp3.Call;
-
+/**
+ * 修改性别
+ */
 public class SexpageActivity extends AppCompatActivity {
     private LinearLayout ll_rutgender;
     private RadioButton rb_man, rb_nman;

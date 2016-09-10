@@ -16,7 +16,9 @@ import com.zhy.http.okhttp.OkHttpUtils;
 import com.zhy.http.okhttp.callback.StringCallback;
 
 import okhttp3.Call;
-
+/**
+ * APP评价
+ */
 public class FeedbackActivity extends AppCompatActivity implements View.OnClickListener {
     private TextView tv_feedback, tv_cancel;
     private EditText et_feedback;

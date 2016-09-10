@@ -8,7 +8,9 @@ import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 
 import com.example.chen.tset.R;
-
+/**
+ * 设置页面
+ */
 public class SetPageActivity extends AppCompatActivity implements View.OnClickListener {
     private RelativeLayout rl_themese, rl_feedback, rl_aboutus, rl_remidset, rl_setpass;
     private LinearLayout ll_return;

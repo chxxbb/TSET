@@ -7,7 +7,9 @@ import android.widget.LinearLayout;
 import android.widget.RadioButton;
 
 import com.example.chen.tset.R;
-
+/**
+ * 修改主题
+ */
 public class ThemeselectActivity extends AppCompatActivity implements View.OnClickListener {
     private LinearLayout ll_set;
     private RadioButton rbtn_white_front, rbtn_white_queen, rbtn_blue_front, rbtn_blue_queen;

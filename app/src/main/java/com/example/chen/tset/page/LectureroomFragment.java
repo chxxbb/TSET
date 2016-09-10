@@ -47,6 +47,7 @@ import okhttp3.Call;
 
 /**
  * Created by Administrator on 2016/8/25 0025.
+ * 讲堂页面
  */
 public class LectureroomFragment extends Fragment {
     View view;
@@ -72,6 +73,7 @@ public class LectureroomFragment extends Fragment {
         rl_nonetwork = (RelativeLayout) view.findViewById(R.id.rl_nonetwork);
         rl_loading = (RelativeLayout) view.findViewById(R.id.rl_loading);
         recyclerView.setVerticalScrollBarEnabled(false);
+        //RelativeLayout分成2列
         recyclerView.setLayoutManager(new StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL));
     }
 

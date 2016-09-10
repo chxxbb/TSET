@@ -26,7 +26,9 @@ import java.util.LinkedList;
 import java.util.List;
 
 import okhttp3.Call;
-
+/**
+ * 用药提醒页面
+ */
 public class PharmacyremindActivity extends AppCompatActivity {
     private ListView lv_pharmacy_remind;
     private LinearLayout ll_add_remind;

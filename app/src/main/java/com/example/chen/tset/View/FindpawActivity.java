@@ -21,7 +21,9 @@ import java.util.regex.Pattern;
 
 import okhttp3.Call;
 import okhttp3.Response;
-
+/**
+ * 修改密码
+ */
 public class FindpawActivity extends AppCompatActivity {
 
     EditText activity_find_password_phone = null, activity_find_password_code = null, activity_find_password_password = null, activity_find_password_password2 = null;

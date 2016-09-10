@@ -40,7 +40,7 @@ import java.util.List;
 
 import okhttp3.Call;
 
-
+//问诊页面
 public class InquiryFragment extends Fragment {
     View view;
     InquiryAdapter adapter;
@@ -149,12 +149,15 @@ public class InquiryFragment extends Fragment {
         public void onClick(View v) {
             switch (v.getId()) {
                 case R.id.ll_city:
+                    //选择城市排序
                     cityshowDialog();
                     break;
                 case R.id.ll_development:
+                    //选择科室排序
                     developmentshowDialog();
                     break;
                 case R.id.ll_sort:
+                    //选择默认排序
                     sortshowDialog();
                     break;
             }

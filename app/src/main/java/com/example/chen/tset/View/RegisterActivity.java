@@ -22,7 +22,9 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import okhttp3.Call;
-
+/**
+ * 注册页面
+ */
 public class RegisterActivity extends AppCompatActivity {
 
     EditText activity_register_phone = null, activity_register_password = null, activity_register_password2 = null, activity_register_Verification_code = null;

@@ -11,7 +11,9 @@ import com.example.chen.tset.page.InquiryrecordAdapter;
 
 import java.util.ArrayList;
 import java.util.List;
-
+/**
+ * 问诊历史
+ */
 public class InquiryrecordActivity extends AppCompatActivity {
     private ListView lv_inquiryrecord;
     private InquiryrecordAdapter adapter;

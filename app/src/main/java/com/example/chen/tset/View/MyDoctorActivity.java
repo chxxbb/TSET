@@ -30,7 +30,9 @@ import java.util.LinkedList;
 import java.util.List;
 
 import okhttp3.Call;
-
+/**
+ * 我的医生
+ */
 public class MyDoctorActivity extends AppCompatActivity {
     private ListView lv_mydoctor;
     Gson gson;

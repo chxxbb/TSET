@@ -31,7 +31,9 @@ import java.util.LinkedList;
 import java.util.List;
 
 import okhttp3.Call;
-
+/**
+ * 我的预约
+ */
 public class ReservationActivity extends AppCompatActivity implements View.OnClickListener {
     private LinearLayout ll_reservationreturn;
     ReservationlistvAdapter adapter;
@@ -102,6 +104,7 @@ public class ReservationActivity extends AppCompatActivity implements View.OnCli
     private AdapterView.OnItemClickListener listener = new AdapterView.OnItemClickListener() {
         @Override
         public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+            //根据文章ID获取文章详情
             Intent intent = new Intent(ReservationActivity.this, ReservationlistActivity.class);
             intent.putExtra("ReservationID",list.get(position).getId()+"");
             startActivity(intent);

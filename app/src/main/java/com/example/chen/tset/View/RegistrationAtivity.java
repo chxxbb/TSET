@@ -44,7 +44,9 @@ import java.util.LinkedList;
 import java.util.List;
 
 import okhttp3.Call;
-
+/**
+ * 一键挂号
+ */
 public class RegistrationAtivity extends AppCompatActivity {
     private RelativeLayout rl_city, rl_gender, rl_time, rl_age, rl_professionaltitle, rl_departments, rl_nonetwork;
     private LinearLayout ll_rutregistration, ll_cancel;
@@ -187,6 +189,7 @@ public class RegistrationAtivity extends AppCompatActivity {
 //
 //                    }
 //                });
+        //判断选项是否都已选择完
         if (tv_city.getText().toString().equals("请选择城市")) {
             Toast.makeText(RegistrationAtivity.this, "请选择城市", Toast.LENGTH_SHORT).show();
         } else if (tv_departments.getText().toString().equals("选择科室")) {

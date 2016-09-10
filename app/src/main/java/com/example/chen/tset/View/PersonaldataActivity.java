@@ -30,7 +30,9 @@ import java.util.Date;
 import java.util.Locale;
 
 import okhttp3.Call;
-
+/**
+ * 修改头像页面,已改为个人资料页面点击修改头像
+ */
 public class PersonaldataActivity extends AppCompatActivity {
     private RelativeLayout rl_name, rl_gender, rl_phone, rl_icon;
     private ImageView iv_icon;

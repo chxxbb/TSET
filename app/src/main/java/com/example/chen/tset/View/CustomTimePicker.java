@@ -13,7 +13,7 @@ import com.example.chen.tset.R;
 import java.lang.reflect.Field;
 
 /**
- * Created by Administrator on 2016/9/3 0003.
+ * 自定义时间选择框，隐藏时间上方和下方的线条
  */
 public class CustomTimePicker extends TimePicker {
     public CustomTimePicker(Context context) {

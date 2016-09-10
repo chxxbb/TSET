@@ -25,7 +25,9 @@ import java.util.Iterator;
 import java.util.LinkedList;
 
 import okhttp3.Call;
-
+/**
+ * 密码修改
+ */
 public class PasswordSettingActivity extends AppCompatActivity implements View.OnClickListener {
     private TextView tv_pas, tv_passet;
     private EditText et_newpassword, et_forpassword;
@@ -64,10 +66,12 @@ public class PasswordSettingActivity extends AppCompatActivity implements View.O
         @Override
         public void onTextChanged(CharSequence s, int start, int before, int count) {
             if (et_newpassword.getText().toString().length() != 0 && et_forpassword.getText().toString().length() != 0) {
+                //如果已经输入字符则字体颜色改变，且textview可以点击
                 tv_pas.setTextColor(android.graphics.Color.parseColor("#6fc9e6"));
                 tv_pas.setOnClickListener(listener);
             } else {
                 tv_pas.setTextColor(android.graphics.Color.parseColor("#e0e0e0"));
+                //设置textview不能点击
                 tv_pas.setOnClickListener(null);
             }
         }

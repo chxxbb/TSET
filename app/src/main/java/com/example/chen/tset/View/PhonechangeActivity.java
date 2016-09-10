@@ -18,7 +18,9 @@ import com.zhy.http.okhttp.OkHttpUtils;
 import com.zhy.http.okhttp.callback.StringCallback;
 
 import okhttp3.Call;
-
+/**
+ * 修改手机号
+ */
 public class PhonechangeActivity extends AppCompatActivity {
     private EditText et_verificationcode, et_phone;
     private TextView tv_pas;

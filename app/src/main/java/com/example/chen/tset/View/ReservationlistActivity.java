@@ -30,7 +30,9 @@ import java.util.List;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 import okhttp3.Call;
-
+/**
+ * 预约订单详情
+ */
 public class ReservationlistActivity extends AppCompatActivity implements View.OnClickListener {
     private LinearLayout ll_myreservationg;
     private ScrollView scrollView;

@@ -31,7 +31,9 @@ import java.util.LinkedList;
 import java.util.List;
 
 import okhttp3.Call;
-
+/**
+ * 我的收藏
+ */
 public class MycollectActivity extends AppCompatActivity {
     private ListView lv_collect;
     CharactersafeAdapter adapter;
@@ -104,6 +106,7 @@ public class MycollectActivity extends AppCompatActivity {
     private AdapterView.OnItemClickListener lvlitener = new AdapterView.OnItemClickListener() {
         @Override
         public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+            //向下个页面传递判断是否为收藏页面和文章ID
             Intent intent = new Intent(MycollectActivity.this, ConsultPageActivity.class);
             intent.putExtra("collect", "1");
             intent.putExtra("information", list.get(position).getId());

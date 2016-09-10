@@ -21,7 +21,9 @@ import com.zhy.http.okhttp.OkHttpUtils;
 import com.zhy.http.okhttp.callback.StringCallback;
 
 import okhttp3.Call;
-
+/**
+ * 注册设置昵称，性别
+ */
 public class SetdataActivity extends AppCompatActivity {
     private EditText et_nickname;
     private RadioButton rbtn_man, rb_madam;

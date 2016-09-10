@@ -33,7 +33,9 @@ import java.util.LinkedList;
 import java.util.List;
 
 import okhttp3.Call;
-
+/**
+ * 资讯详情页面与收藏详情页面公用同一个接口
+ */
 public class ConsultPageActivity extends AppCompatActivity implements View.OnClickListener {
     private ScrollView scrollview;
     private LinearLayout ll_consult_return, ll_consult_collect;
@@ -66,7 +68,7 @@ public class ConsultPageActivity extends AppCompatActivity implements View.OnCli
         ll_consult_collect.setOnClickListener(this);
         String collect = getIntent().getStringExtra("collect");
         information = getIntent().getStringExtra("information");
-        Log.e("文章ID",information);
+        //判断是否为收藏页面点击进入，如果是则隐藏下方收藏按钮
         if (collect.equals("1")) {
             ll_consult_collect.setVisibility(View.GONE);
             collectinit();

@@ -28,7 +28,9 @@ import java.util.LinkedList;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 import okhttp3.Call;
-
+/**
+ * 疾病详情页面
+ */
 public class DiseaseActivity extends AppCompatActivity {
     private LinearLayout ll_return;
     private ScrollView scrollView;

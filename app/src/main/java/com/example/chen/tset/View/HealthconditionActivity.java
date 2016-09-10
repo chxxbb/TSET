@@ -14,7 +14,9 @@ import android.widget.TextView;
 import com.daimajia.androidanimations.library.Techniques;
 import com.daimajia.androidanimations.library.YoYo;
 import com.example.chen.tset.R;
-
+/**
+ * 健康状况
+ */
 public class HealthconditionActivity extends AppCompatActivity {
     private Button btn_helth, btn_else;
     private TextView tv_henlth;
@@ -47,6 +49,7 @@ public class HealthconditionActivity extends AppCompatActivity {
                     ll_henlth.setVisibility(View.GONE);
                     ll_describe.setVisibility(View.VISIBLE);
                     linearLayout.setVisibility(View.VISIBLE);
+                    //第三方动画库
                     YoYo.with(Techniques.Landing)
                             .duration(500)
                             .playOn(findViewById(R.id.ll_describe));

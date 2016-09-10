@@ -35,7 +35,9 @@ import java.util.List;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 import okhttp3.Call;
-
+/**
+ * 医生详情页面，
+ */
 public class DoctorparticularsActivity extends AppCompatActivity {
     private ListView lv_docttorparticulas;
     private DoctorparticularsAdapter adapter;
@@ -95,7 +97,7 @@ public class DoctorparticularsActivity extends AppCompatActivity {
         btn_callmoney.setOnClickListener(listener);
     }
 
-
+    //医生信息
     private void httpinit() {
         list1 = new ArrayList<>();
         OkHttpUtils
@@ -113,7 +115,6 @@ public class DoctorparticularsActivity extends AppCompatActivity {
 
                     @Override
                     public void onResponse(String response, int id) {
-                        Log.e("医生详情返回", response);
                         Type listtype = new TypeToken<LinkedList<Doctor>>() {
                         }.getType();
                         LinkedList<Doctor> leclist = gson.fromJson(response, listtype);
@@ -137,7 +138,7 @@ public class DoctorparticularsActivity extends AppCompatActivity {
                     }
                 });
     }
-
+    //医生评论
     private void comment() {
         OkHttpUtils
                 .post()

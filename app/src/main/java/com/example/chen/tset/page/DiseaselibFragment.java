@@ -40,6 +40,7 @@ import okhttp3.Call;
 
 /**
  * Created by Administrator on 2016/8/25 0025.
+ * 疾病库页面
  */
 public class DiseaselibFragment extends Fragment {
     View view;
@@ -122,6 +123,7 @@ public class DiseaselibFragment extends Fragment {
         @Override
         public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
             adapter.changeSelected(position);
+            //根据点击的条目加载不同的数据
             httpinit(position);
         }
 

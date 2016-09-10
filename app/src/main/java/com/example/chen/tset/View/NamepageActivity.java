@@ -19,7 +19,9 @@ import com.zhy.http.okhttp.OkHttpUtils;
 import com.zhy.http.okhttp.callback.StringCallback;
 
 import okhttp3.Call;
-
+/**
+ * 修改昵称
+ */
 public class NamepageActivity extends AppCompatActivity {
     private EditText et_name_save;
     private TextView tv_pas;

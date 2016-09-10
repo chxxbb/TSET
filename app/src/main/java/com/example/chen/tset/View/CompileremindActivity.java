@@ -21,7 +21,9 @@ import com.example.chen.tset.R;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
-
+/**
+ * 添加提醒页面
+ */
 public class CompileremindActivity extends AppCompatActivity {
     private CustomTimePicker timepacker;
     private RelativeLayout rl_starttime, rl_endtiem;
@@ -102,6 +104,7 @@ public class CompileremindActivity extends AppCompatActivity {
                     break;
                 case R.id.tv_time_complete:
                     timepicker.setIs24HourView(true);
+                    //判断所选时间为上午还是下午
                     if (timepicker.getCurrentHour() > 11 && timepicker.getCurrentHour() < 24) {
                         aMPM = "下午";
                     } else {

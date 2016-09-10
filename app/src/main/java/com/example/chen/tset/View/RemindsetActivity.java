@@ -10,7 +10,9 @@ import android.widget.RadioButton;
 import android.widget.TextView;
 
 import com.example.chen.tset.R;
-
+/**
+ * 提醒设置页面
+ */
 public class RemindsetActivity extends AppCompatActivity implements View.OnClickListener {
     private LinearLayout ll_remidsetreturn;
 

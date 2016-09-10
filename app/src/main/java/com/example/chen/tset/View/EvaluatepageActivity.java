@@ -18,7 +18,9 @@ import com.zhy.http.okhttp.OkHttpUtils;
 import com.zhy.http.okhttp.callback.StringCallback;
 
 import okhttp3.Call;
-
+/**
+ * 医生评论页面
+ */
 public class EvaluatepageActivity extends AppCompatActivity {
     private TextView tv_evaluate;
     private EditText et_evaluate;

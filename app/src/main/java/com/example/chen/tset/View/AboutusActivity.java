@@ -6,7 +6,7 @@ import android.view.View;
 import android.widget.LinearLayout;
 
 import com.example.chen.tset.R;
-
+//关于我们页面
 public class AboutusActivity extends AppCompatActivity {
     private LinearLayout ll_aboutus;
 

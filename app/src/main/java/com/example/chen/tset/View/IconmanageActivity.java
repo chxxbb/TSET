@@ -22,7 +22,9 @@ import com.zhy.http.okhttp.callback.StringCallback;
 import java.io.File;
 
 import okhttp3.Call;
-
+/**
+ * 个人资料
+ */
 public class IconmanageActivity extends AppCompatActivity {
     private ImageView iv_manage, iv_ico;
     private File sdcardTempFile;
