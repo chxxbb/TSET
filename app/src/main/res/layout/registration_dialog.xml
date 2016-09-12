@@ -1,24 +1,27 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
     <LinearLayout
-        android:layout_alignParentBottom="true"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
         android:orientation="vertical">
+
         <ListView
+            android:id="@+id/lv_registration"
             android:layout_width="match_parent"
             android:layout_height="@dimen/y280"
             android:layout_marginLeft="@dimen/x30"
             android:layout_marginRight="@dimen/x30"
-            android:id="@+id/lv_registration"
-            android:background="@drawable/registration_btn_case">
-        </ListView>
+            android:background="@drawable/registration_btn_case"></ListView>
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
+
             <Button
                 android:id="@+id/btn_cancel"
                 android:layout_width="match_parent"
@@ -29,7 +32,8 @@
                 android:layout_marginTop="@dimen/y16"
                 android:background="@drawable/registration_btn_case"
                 android:text="取消"
-                android:textColor="@color/backgroundblue" />
+                android:textColor="@color/backgroundblue"
+                android:textSize="@dimen/y38" />
         </LinearLayout>
     </LinearLayout>
 

@@ -25,7 +25,8 @@
                 android:layout_marginRight="@dimen/x30"
                 android:background="@color/white"
                 android:text="默认排序"
-                android:textColor="@color/backgroundblue" />
+                android:textColor="@color/backgroundblue"
+                android:textSize="@dimen/y38" />
 
             <View
                 android:layout_width="match_parent"
@@ -40,7 +41,8 @@
                 android:layout_marginRight="@dimen/x30"
                 android:background="@color/white"
                 android:text="职称排序"
-                android:textColor="@color/backgroundblue" />
+                android:textColor="@color/backgroundblue"
+                android:textSize="@dimen/y38" />
         </LinearLayout>
 
         <Button
@@ -53,7 +55,8 @@
             android:layout_marginTop="@dimen/y16"
             android:background="@drawable/registration_btn_case"
             android:text="取消"
-            android:textColor="@color/backgroundblue" />
+            android:textColor="@color/backgroundblue"
+            android:textSize="@dimen/y38" />
     </LinearLayout>
 
 

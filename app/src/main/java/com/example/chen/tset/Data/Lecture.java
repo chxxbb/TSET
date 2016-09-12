@@ -2,6 +2,7 @@ package com.example.chen.tset.Data;
 
 /**
  * Created by Administrator on 2016/8/27 0027.
+ * 讲堂
  */
 public class Lecture {
     private int id;

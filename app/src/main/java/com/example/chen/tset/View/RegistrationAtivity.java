@@ -226,6 +226,7 @@ public class RegistrationAtivity extends AppCompatActivity {
                 public void run() {
                     int progressBarMax = progressBar.getMax();
                     try {
+                        //设置progressBar时间
                         while (progressBarMax != progressBar.getProgress()) {
                             int stepProgress = progressBarMax / 1000;
                             int currentprogress = progressBar.getProgress();

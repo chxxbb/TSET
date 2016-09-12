@@ -2,6 +2,7 @@ package com.example.chen.tset.Data;
 
 /**
  * Created by Administrator on 2016/9/3 0003.
+ * 一键挂号
  */
 public class Registration {
     private String id;

@@ -2,6 +2,7 @@ package com.example.chen.tset.Data;
 
 /**
  * Created by Administrator on 2016/9/6 0006.
+ * 医生列表
  */
 public class Doctor {
     private String bis;

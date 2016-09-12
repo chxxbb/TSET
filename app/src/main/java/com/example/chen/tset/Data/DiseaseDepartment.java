@@ -2,6 +2,7 @@ package com.example.chen.tset.Data;
 
 /**
  * Created by Administrator on 2016/8/31 0031.
+ * 疾病列表
  */
 public class DiseaseDepartment {
     private String icon;

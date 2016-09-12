@@ -2,6 +2,7 @@ package com.example.chen.tset.Data;
 
 /**
  * Created by Administrator on 2016/9/2 0002.
+ * 问诊
  */
 public class Inquiry {
     private String icon;

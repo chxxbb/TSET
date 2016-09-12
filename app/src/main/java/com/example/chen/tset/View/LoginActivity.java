@@ -19,6 +19,9 @@ import com.google.gson.Gson;
 import com.zhy.http.okhttp.OkHttpUtils;
 import com.zhy.http.okhttp.callback.StringCallback;
 
+import cn.jpush.android.api.JPushInterface;
+import cn.jpush.im.android.api.JMessageClient;
+import cn.jpush.im.api.BasicCallback;
 import okhttp3.Call;
 
 public class LoginActivity extends AppCompatActivity {
@@ -39,6 +42,16 @@ public class LoginActivity extends AppCompatActivity {
         initview();
 
         initOnclick();
+        JMessageClient.register("13547955233", "123456", new BasicCallback() {
+            @Override
+            public void gotResult(int i, String s) {
+                if (i == 0) {
+                    System.out.println("注册成功" + s);
+                } else if (i == 898001) {
+                    System.out.println("用户已存在" + s);
+                }
+            }
+        });
 
 
     }
@@ -114,5 +127,16 @@ public class LoginActivity extends AppCompatActivity {
 
         login_new_user = (TextView) findViewById(R.id.login_new_user);
         login_find_password = (TextView) findViewById(R.id.login_find_password);
+    }
+    @Override
+    protected void onPause() {
+        super.onPause();
+        JPushInterface.onPause(this);
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        JPushInterface.onResume(this);
     }
 }

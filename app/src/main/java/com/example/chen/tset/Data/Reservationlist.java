@@ -2,6 +2,7 @@ package com.example.chen.tset.Data;
 
 /**
  * Created by Administrator on 2016/9/7 0007.
+ * 预约详情
  */
 public class Reservationlist {
     private String doctor_name;

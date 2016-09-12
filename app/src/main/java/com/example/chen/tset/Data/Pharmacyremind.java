@@ -2,6 +2,7 @@ package com.example.chen.tset.Data;
 
 /**
  * Created by Administrator on 2016/9/6 0006.
+ * 用药提醒
  */
 public class Pharmacyremind {
     private String amcontent;

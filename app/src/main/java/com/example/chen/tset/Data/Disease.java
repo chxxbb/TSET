@@ -2,6 +2,7 @@ package com.example.chen.tset.Data;
 
 /**
  * Created by Administrator on 2016/9/7 0007.
+ * 疾病详情
  */
 public class Disease {
     private String title;

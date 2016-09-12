@@ -9,6 +9,9 @@ import com.nostra13.universalimageloader.core.ImageLoaderConfiguration;
 import com.nostra13.universalimageloader.core.assist.ImageScaleType;
 import com.nostra13.universalimageloader.core.display.RoundedBitmapDisplayer;
 
+import cn.jpush.android.api.JPushInterface;
+import cn.jpush.im.android.api.JMessageClient;
+
 /**
  * Created by Chen on 2016/6/8.
  */
@@ -41,5 +44,11 @@ public class ContextUtil extends Application {
 
         // 初始化ImageLoad
         ImageLoader.getInstance().init(config);
+
+
+
+
+        JMessageClient.init(getApplicationContext());
+        JPushInterface.setDebugMode(true);
     }
 }

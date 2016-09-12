@@ -2,6 +2,7 @@ package com.example.chen.tset.Data;
 
 /**
  * Created by Administrator on 2016/9/7 0007.
+ * 资讯详情
  */
 public class Consultparticulars {
     private String content;

@@ -36,7 +36,7 @@ import java.util.List;
 import de.hdodenhof.circleimageview.CircleImageView;
 import okhttp3.Call;
 /**
- * 医生详情页面，
+ * 医生详情页面，与我的医生详情，问诊详情共用同一个接口
  */
 public class DoctorparticularsActivity extends AppCompatActivity {
     private ListView lv_docttorparticulas;

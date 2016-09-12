@@ -33,6 +33,7 @@ import okhttp3.Call;
 
 /**
  * Created by Administrator on 2016/8/25 0025.
+ * 资讯页面
  */
 public class CharactersafeFragment extends Fragment {
     View view;
@@ -71,7 +72,6 @@ public class CharactersafeFragment extends Fragment {
         list = new ArrayList<>();
         adapter = new CharactersafeAdapter1(getContext(), list);
         lv_charactersafe.setAdapter(adapter);
-//        adapter.notifyDataSetChanged();
         OkHttpUtils
                 .post()
                 .url(Http_data.http_data + "/findCyclopediaList")
@@ -103,7 +103,7 @@ public class CharactersafeFragment extends Fragment {
         public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
             Intent intent = new Intent(getContext(), ConsultPageActivity.class);
             intent.putExtra("information",list.get(position).getId()+"");
-            //根据点击页面判断是否为收藏页面，如果为收藏赞
+            //根据点击页面判断是否为收藏页面，如果为隐藏赞
             intent.putExtra("collect", "0");
             startActivity(intent);
         }
