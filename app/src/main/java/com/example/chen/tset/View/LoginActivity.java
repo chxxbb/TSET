@@ -42,16 +42,7 @@ public class LoginActivity extends AppCompatActivity {
         initview();
 
         initOnclick();
-        JMessageClient.register("13547955233", "123456", new BasicCallback() {
-            @Override
-            public void gotResult(int i, String s) {
-                if (i == 0) {
-                    System.out.println("注册成功" + s);
-                } else if (i == 898001) {
-                    System.out.println("用户已存在" + s);
-                }
-            }
-        });
+
 
 
     }

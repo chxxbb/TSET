@@ -21,7 +21,7 @@
             android:layout_width="match_parent"
             android:layout_height="@dimen/y1"
             android:layout_alignTop="@+id/relativelaout"
-            android:background="@color/linegray1"/>
+            android:background="@color/linegray1" />
 
         <RelativeLayout
             android:layout_width="match_parent"
@@ -44,7 +44,6 @@
                         android:id="@+id/rb_encyclopedia"
                         android:layout_width="@dimen/x148"
                         android:layout_height="wrap_content"
-                        android:layout_marginBottom="@dimen/y12"
                         android:layout_marginTop="@dimen/y12"
                         android:background="@null"
                         android:button="@null"
@@ -58,7 +57,6 @@
                         android:id="@+id/rb_diagnosis"
                         android:layout_width="@dimen/x148"
                         android:layout_height="wrap_content"
-                        android:layout_marginBottom="@dimen/y12"
                         android:layout_marginTop="@dimen/y12"
                         android:background="@null"
                         android:button="@null"
@@ -82,7 +80,6 @@
                         android:id="@+id/rb_lectureroom"
                         android:layout_width="@dimen/x148"
                         android:layout_height="wrap_content"
-                        android:layout_marginBottom="@dimen/y12"
                         android:layout_marginTop="@dimen/y12"
                         android:background="@null"
                         android:button="@null"
@@ -96,7 +93,6 @@
                         android:id="@+id/rb_mypage"
                         android:layout_width="@dimen/x148"
                         android:layout_height="wrap_content"
-                        android:layout_marginBottom="@dimen/y12"
                         android:layout_marginTop="@dimen/y12"
                         android:background="@null"
                         android:button="@null"
@@ -110,12 +106,14 @@
 
         </RelativeLayout>
     </LinearLayout>
+
     <FrameLayout
         android:layout_width="@dimen/x120"
         android:layout_height="@dimen/y120"
         android:layout_alignParentBottom="true"
         android:layout_centerInParent="true"
         android:layout_marginBottom="@dimen/y12">
+
         <FrameLayout
             android:layout_width="@dimen/x120"
             android:layout_height="@dimen/y120"
@@ -135,12 +133,14 @@
                 android:textColor="@color/white"
                 android:textSize="@dimen/x32" />
         </FrameLayout>
+
         <FrameLayout
-            android:visibility="gone"
             android:id="@+id/fl_registration"
             android:layout_width="@dimen/x120"
             android:layout_height="@dimen/y120"
-            android:layout_centerInParent="true">
+            android:layout_centerInParent="true"
+            android:visibility="gone">
+
             <com.example.chen.tset.page.RegistrationView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -155,7 +155,6 @@
                 android:textSize="@dimen/x32" />
         </FrameLayout>
     </FrameLayout>
-
 
 
 </RelativeLayout>
