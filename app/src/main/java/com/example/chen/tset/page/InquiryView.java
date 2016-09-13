@@ -29,6 +29,7 @@ public class InquiryView extends View {
         int viewHeight = MeasureSpec.getSize(heightMeasureSpec);
         oval = new RectF(0, 0, viewWidth, viewHeight);
         setMeasuredDimension(viewWidth, viewHeight);
+        paint.setAntiAlias(true);
     }
 
     @Override

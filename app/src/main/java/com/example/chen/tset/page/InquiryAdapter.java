@@ -1,6 +1,7 @@
 package com.example.chen.tset.page;
 
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.util.Log;
@@ -9,11 +10,13 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.Button;
+import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.chen.tset.Data.Inquiry;
 import com.example.chen.tset.R;
+import com.example.chen.tset.View.ChatpageActivity;
 import com.nostra13.universalimageloader.core.DisplayImageOptions;
 import com.nostra13.universalimageloader.core.ImageLoader;
 
@@ -70,7 +73,13 @@ public class InquiryAdapter extends BaseAdapter {
         viewHolder.tv_intro.setText("擅长：" + list.get(position).getAdept());
         viewHolder.tv_section.setText(list.get(position).getSection());
         ImageLoader.getInstance().displayImage(list.get(position).getIcon(), viewHolder.iv_icon);
-
+        viewHolder.fl_chat.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent=new Intent(context, ChatpageActivity.class);
+                context.startActivity(intent);
+            }
+        });
         return convertView;
     }
 
@@ -82,6 +91,7 @@ public class InquiryAdapter extends BaseAdapter {
         private Button btn_money;
         private TextView tv_intro;
         private TextView tv_section;
+        private FrameLayout fl_chat;
 
         ViewHolder(View v) {
             textView = (TextView) v.findViewById(R.id.textView);
@@ -91,6 +101,7 @@ public class InquiryAdapter extends BaseAdapter {
             btn_money = (Button) v.findViewById(R.id.btn_money);
             tv_intro = (TextView) v.findViewById(R.id.tv_intro);
             tv_section = (TextView) v.findViewById(R.id.tv_section);
+            fl_chat= (FrameLayout) v.findViewById(R.id.fl_chat);
         }
     }
 }

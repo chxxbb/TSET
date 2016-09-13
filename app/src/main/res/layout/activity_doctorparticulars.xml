@@ -24,25 +24,31 @@
                 <LinearLayout
                     android:id="@+id/ll_return"
                     android:layout_width="match_parent"
-                    android:layout_height="@dimen/y220"
+                    android:layout_height="wrap_content"
                     android:background="@drawable/doctorparticulars_background"
                     android:orientation="horizontal">
-
-                    <ImageView
-                        android:layout_width="@dimen/x20"
-                        android:layout_height="@dimen/y36"
-                        android:layout_marginLeft="@dimen/x30"
-                        android:layout_marginTop="@dimen/y33"
-                        android:src="@drawable/doctorparticulars_return" />
-
-                    <TextView
+                    <LinearLayout
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginLeft="@dimen/x8"
-                        android:layout_marginTop="@dimen/y30"
-                        android:text="返回"
-                        android:textColor="@color/white"
-                        android:textSize="@dimen/y32" />
+                        android:orientation="horizontal">
+                        <ImageView
+                            android:layout_width="@dimen/x20"
+                            android:layout_height="@dimen/y36"
+                            android:layout_marginLeft="@dimen/x30"
+                            android:layout_marginTop="@dimen/y33"
+                            android:src="@drawable/doctorparticulars_return" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="@dimen/x8"
+                            android:layout_marginTop="@dimen/y30"
+                            android:text="返回"
+                            android:textColor="@color/white"
+                            android:textSize="@dimen/y32" />
+                    </LinearLayout>
+
+
                 </LinearLayout>
 
                 <RelativeLayout
