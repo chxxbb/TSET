@@ -5,6 +5,7 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.FrameLayout;
 import android.widget.RadioButton;
@@ -44,6 +45,31 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
         initJP();
         findView();
         init();
+        jmessage();
+    }
+
+    private void jmessage() {
+        JMessageClient.register(User_Http.user.getPhone(), "123456", new BasicCallback() {
+            @Override
+            public void gotResult(int i, String s) {
+                if (i == 0) {
+                    Log.e("jmessage", "注册成功");
+                } else if (i == 898001) {
+                    Log.e("jmessage", "注册失败");
+                }
+            }
+        });
+
+        JMessageClient.login(User_Http.user.getPhone(), "123456", new BasicCallback() {
+            @Override
+            public void gotResult(int i, String s) {
+                if (i == 0) {
+                    Log.e("jmessage", "登录成功");
+                } else {
+                    Log.e("jmessage", "登录失败");
+                }
+            }
+        });
     }
 
     private void initJP() {
@@ -153,4 +179,10 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
             startActivity(intent);
         }
     };
+
+    @Override
+    protected void onDestroy() {
+        JMessageClient.logout();
+        super.onDestroy();
+    }
 }

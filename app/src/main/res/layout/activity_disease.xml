@@ -323,7 +323,7 @@
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:layout_marginLeft="@dimen/x10"
-                                    android:text="症状"
+                                    android:text="治疗"
                                     android:textColor="@color/fontcolor"
                                     android:textSize="@dimen/y32" />
 
@@ -358,7 +358,7 @@
                                     android:layout_height="wrap_content"
                                     android:layout_gravity="center_vertical"
                                     android:layout_marginLeft="@dimen/x10"
-                                    android:text="治疗"
+                                    android:text="温馨提示"
                                     android:textColor="@color/fontcolor"
                                     android:textSize="@dimen/y32" />
 

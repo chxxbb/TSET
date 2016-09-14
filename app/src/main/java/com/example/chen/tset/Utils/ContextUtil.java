@@ -1,7 +1,9 @@
 package com.example.chen.tset.Utils;
 
 import android.app.Application;
+import android.util.Log;
 
+import com.example.chen.tset.Data.User_Http;
 import com.example.chen.tset.R;
 import com.nostra13.universalimageloader.core.DisplayImageOptions;
 import com.nostra13.universalimageloader.core.ImageLoader;
@@ -11,6 +13,7 @@ import com.nostra13.universalimageloader.core.display.RoundedBitmapDisplayer;
 
 import cn.jpush.android.api.JPushInterface;
 import cn.jpush.im.android.api.JMessageClient;
+import cn.jpush.im.api.BasicCallback;
 
 /**
  * Created by Chen on 2016/6/8.
@@ -50,5 +53,7 @@ public class ContextUtil extends Application {
 
         JMessageClient.init(getApplicationContext());
         JPushInterface.setDebugMode(true);
+
+
     }
 }

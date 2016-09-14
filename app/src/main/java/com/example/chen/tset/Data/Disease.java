@@ -16,8 +16,9 @@ public class Disease {
     private String acontent;
     private String bcontent;
     private String section;
+    private String ccontent;
 
-    public Disease(String title, String content, String icon, String uname, String ucontent, String dicon, String dname, String dcontent, String acontent, String bcontent, String section) {
+    public Disease(String title, String content, String icon, String uname, String ucontent, String dicon, String dname, String dcontent, String acontent, String bcontent, String section, String ccontent) {
         this.title = title;
         this.content = content;
         this.icon = icon;
@@ -29,6 +30,15 @@ public class Disease {
         this.acontent = acontent;
         this.bcontent = bcontent;
         this.section = section;
+        this.ccontent = ccontent;
+    }
+
+    public String getCcontent() {
+        return ccontent;
+    }
+
+    public void setCcontent(String ccontent) {
+        this.ccontent = ccontent;
     }
 
     public String getTitle() {

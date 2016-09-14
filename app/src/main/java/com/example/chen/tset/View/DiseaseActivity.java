@@ -28,6 +28,7 @@ import java.util.LinkedList;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 import okhttp3.Call;
+
 /**
  * 疾病详情页面
  */
@@ -78,7 +79,7 @@ public class DiseaseActivity extends AppCompatActivity {
 
 
     private void httpinit() {
-        final String disease1=getIntent().getStringExtra("disease");
+        final String disease1 = getIntent().getStringExtra("disease");
         OkHttpUtils
                 .post()
                 .url(Http_data.http_data + "/findIntroduction")
@@ -95,32 +96,36 @@ public class DiseaseActivity extends AppCompatActivity {
                     @Override
                     public void onResponse(String response, int id) {
                         Log.e("疾病详情返回", response);
-                        if (response.equals("[]")){
+                        if (response.equals("[]")) {
                             Toast.makeText(DiseaseActivity.this, "没有这个疾病", Toast.LENGTH_SHORT).show();
                             rl_loading.setVisibility(View.GONE);
                             rl_nonetwork.setVisibility(View.VISIBLE);
-                        }else {
+                        } else {
 
 
-                        Type listtype = new TypeToken<LinkedList<Disease>>() {
-                        }.getType();
-                        LinkedList<Disease> leclist = gson.fromJson(response, listtype);
-                        Iterator it = leclist.iterator();
-                        Disease disease = (Disease) it.next();
-                        tv_content.setText(disease.getContent());
-                        tv_acontent.setText(disease.getAcontent());
-                        tv_acontent1.setText(disease.getAcontent());
-                        tv_title.setText(disease1);
-                        tv_title1.setText(disease1);
-                        tv_bcontent.setText(disease.getBcontent());
-                        tv_dcontent.setText(disease.getDcontent());
-                        tv_dname.setText(disease.getDname());
-                        tv_uname.setText(disease.getUname());
-                        tv_section.setText(disease.getSection());
-                        tv_ucontent.setText(disease.getUcontent());
-                        ImageLoader.getInstance().displayImage(disease.getIcon(), iv_icon);
-                        ImageLoader.getInstance().displayImage(disease.getDicon(), iv_dicon);
-                        rl_loading.setVisibility(View.GONE);
+                            Type listtype = new TypeToken<LinkedList<Disease>>() {
+                            }.getType();
+                            LinkedList<Disease> leclist = gson.fromJson(response, listtype);
+                            Iterator it = leclist.iterator();
+                            Disease disease = (Disease) it.next();
+                            tv_content.setText("        " + disease.getContent());
+                            tv_acontent.setText("        " + disease.getBcontent());
+                            if (disease.getCcontent() == null) {
+                                tv_acontent1.setText("无");
+                            } else {
+                                tv_acontent1.setText("        " + disease.getCcontent());
+                            }
+                            tv_title.setText(disease1);
+                            tv_title1.setText(disease1);
+                            tv_bcontent.setText("        " + disease.getAcontent());
+                            tv_dcontent.setText("        " + disease.getDcontent());
+                            tv_dname.setText(disease.getDname());
+                            tv_uname.setText(disease.getUname());
+                            tv_section.setText(disease.getSection());
+                            tv_ucontent.setText("        " + disease.getUcontent());
+                            ImageLoader.getInstance().displayImage(disease.getIcon(), iv_icon);
+                            ImageLoader.getInstance().displayImage(disease.getDicon(), iv_dicon);
+                            rl_loading.setVisibility(View.GONE);
                         }
                     }
                 });
