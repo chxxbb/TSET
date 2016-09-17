@@ -76,7 +76,9 @@ public class InquiryAdapter extends BaseAdapter {
         viewHolder.fl_chat.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent=new Intent(context, ChatpageActivity.class);
+                Intent intent = new Intent(context, ChatpageActivity.class);
+                intent.putExtra("name", list.get(position).getName());
+                intent.putExtra("icon", list.get(position).getIcon());
                 context.startActivity(intent);
             }
         });
@@ -101,7 +103,7 @@ public class InquiryAdapter extends BaseAdapter {
             btn_money = (Button) v.findViewById(R.id.btn_money);
             tv_intro = (TextView) v.findViewById(R.id.tv_intro);
             tv_section = (TextView) v.findViewById(R.id.tv_section);
-            fl_chat= (FrameLayout) v.findViewById(R.id.fl_chat);
+            fl_chat = (FrameLayout) v.findViewById(R.id.fl_chat);
         }
     }
 }

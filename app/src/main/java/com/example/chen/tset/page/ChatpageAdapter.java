@@ -9,20 +9,32 @@ import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import com.example.chen.tset.Data.Chatcontent;
+import com.example.chen.tset.Data.User_Http;
 import com.example.chen.tset.R;
+import com.nostra13.universalimageloader.core.ImageLoader;
 
+import java.text.SimpleDateFormat;
 import java.util.List;
+
+import de.hdodenhof.circleimageview.CircleImageView;
 
 /**
  * Created by Administrator on 2016/9/14 0014.
  */
 public class ChatpageAdapter extends BaseAdapter {
     private Context context;
-    private List<String> list;
+    private List<Chatcontent> list;
+    private String doctoricon;
+    LayoutInflater inflater;
+    private final int TYPE1 = 1;
+    private final int TYPE2 = 2;
 
-    public ChatpageAdapter(Context context, List<String> list) {
+    public ChatpageAdapter(Context context, List<Chatcontent> list, String doctoricon) {
         this.context = context;
         this.list = list;
+        this.doctoricon = doctoricon;
+        inflater = LayoutInflater.from(context);
     }
 
     @Override
@@ -31,7 +43,7 @@ public class ChatpageAdapter extends BaseAdapter {
     }
 
     @Override
-    public String getItem(int position) {
+    public Chatcontent getItem(int position) {
         return list.get(position);
     }
 
@@ -41,35 +53,79 @@ public class ChatpageAdapter extends BaseAdapter {
     }
 
     @Override
-    public View getView(int position, View convertView, ViewGroup parent) {
-        if (convertView == null) {
-            LayoutInflater inflater = LayoutInflater.from(parent.getContext());
-            convertView = inflater.inflate(R.layout.chatpage_listv_leftitem, parent, false);
-            convertView.setTag(new ViewHolder1(convertView));
+    public int getViewTypeCount() {
+        return 3;
+    }
+
+
+    @Override
+    public int getItemViewType(int position) {
+        if (list.get(position).getContent().substring(0, 1).equals("1") && position != 0) {
+            return TYPE1;
+        } else {
+            return TYPE2;
         }
-        ViewHolder1 viewHolder = (ViewHolder1) convertView.getTag();
-//        if(list.get(position).substring(0,1).equals("1")){
-//            viewHolder.ll_chat.setVisibility(View.GONE);
-//            viewHolder.tv1.setText(list.get(position).substring(1));
-//        }else {
-//            viewHolder.rl_chat.setVisibility(View.GONE);
-//            viewHolder.tv.setText(list.get(position).substring(1));
-//        }
-        viewHolder.tv.setText(list.get(position).substring(1));
+    }
+
+    @Override
+    public View getView(int position, View convertView, ViewGroup parent) {
+        ViewHolder1 viewHolder1 = null;
+        ViewHolder2 viewHolder2 = null;
+        int type = getItemViewType(position);
+        if (convertView == null) {
+            switch (type) {
+                case TYPE1:
+                    convertView = inflater.inflate(R.layout.chatpage_listv_rightitem, parent, false);
+                    viewHolder1 = new ViewHolder1();
+                    viewHolder1.tv_right_text = (TextView) convertView.findViewById(R.id.tv_right_text);
+                    viewHolder1.iv_right_head = (CircleImageView) convertView.findViewById(R.id.iv_right_head);
+                    convertView.setTag(viewHolder1);
+                    break;
+                case TYPE2:
+                    convertView = inflater.inflate(R.layout.chatpage_listv_leftitem, parent, false);
+                    viewHolder2 = new ViewHolder2();
+                    viewHolder2.tv_left_text = (TextView) convertView.findViewById(R.id.tv_left_text);
+                    viewHolder2.iv_left_icon = (CircleImageView) convertView.findViewById(R.id.iv_left_icon);
+                    convertView.setTag(viewHolder2);
+                    break;
+
+            }
+        } else {
+            switch (type) {
+                case TYPE1:
+                    viewHolder1 = (ViewHolder1) convertView.getTag();
+                    break;
+                case TYPE2:
+                    viewHolder2 = (ViewHolder2) convertView.getTag();
+                    break;
+
+            }
+        }
+        switch (type) {
+            case TYPE1:
+                viewHolder1.tv_right_text.setText(list.get(position).getContent().substring(1));
+                ImageLoader.getInstance().displayImage(User_Http.user.getIcon(), viewHolder1.iv_right_head);
+                break;
+            case TYPE2:
+                viewHolder2.tv_left_text.setText(list.get(position).getContent().substring(1));
+                ImageLoader.getInstance().displayImage(doctoricon, viewHolder2.iv_left_icon);
+                break;
+
+        }
+
         return convertView;
     }
 
-    static class ViewHolder1 {
-        private TextView tv;
-        private TextView tv1;
-        private LinearLayout ll_chat;
-        private RelativeLayout rl_chat;
+    public class ViewHolder1 {
+        private TextView tv_right_text;
+        private CircleImageView iv_right_head;
 
-        ViewHolder1(View v) {
-            tv = (TextView) v.findViewById(R.id.tv);
-//            tv1= (TextView) v.findViewById(R.id.tv1);
-//            ll_chat= (LinearLayout) v.findViewById(R.id.ll_chat);
-//            rl_chat= (RelativeLayout) v.findViewById(R.id.rl_chat);
-        }
     }
+
+    public class ViewHolder2 {
+        private TextView tv_left_text;
+        private CircleImageView iv_left_icon;
+
+    }
+
 }

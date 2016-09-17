@@ -42,7 +42,6 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
-        initJP();
         findView();
         init();
         jmessage();
@@ -72,18 +71,7 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
         });
     }
 
-    private void initJP() {
-        JMessageClient.register(User_Http.user.getPhone(), "123456", new BasicCallback() {
-            @Override
-            public void gotResult(int i, String s) {
-                if (i == JPErrorCode.JP_ERROR_CODE_OK) {
-                    System.out.println("注册成功" + s);
-                } else if (i == JPErrorCode.JP_ERROR_CODE_EXIST) {
-                    System.out.println("用户已存在" + s);
-                }
-            }
-        });
-    }
+
 
     private void findView() {
         rb_encyclopedia = (RadioButton) findViewById(R.id.rb_encyclopedia);
