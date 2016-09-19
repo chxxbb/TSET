@@ -1,10 +1,13 @@
 package com.example.chen.tset.page;
 
 import android.content.Context;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
@@ -13,6 +16,7 @@ import com.example.chen.tset.Data.Chatcontent;
 import com.example.chen.tset.Data.User_Http;
 import com.example.chen.tset.R;
 import com.nostra13.universalimageloader.core.ImageLoader;
+import com.nostra13.universalimageloader.core.download.BaseImageDownloader;
 
 import java.text.SimpleDateFormat;
 import java.util.List;
@@ -60,7 +64,7 @@ public class ChatpageAdapter extends BaseAdapter {
 
     @Override
     public int getItemViewType(int position) {
-        if (list.get(position).getContent().substring(0, 1).equals("1") && position != 0) {
+        if (list.get(position).getContent().substring(0, 1).equals("1") || list.get(position).getContent().equals("1*1")) {
             return TYPE1;
         } else {
             return TYPE2;
@@ -79,6 +83,7 @@ public class ChatpageAdapter extends BaseAdapter {
                     viewHolder1 = new ViewHolder1();
                     viewHolder1.tv_right_text = (TextView) convertView.findViewById(R.id.tv_right_text);
                     viewHolder1.iv_right_head = (CircleImageView) convertView.findViewById(R.id.iv_right_head);
+                    viewHolder1.iv_right_chat = (ImageView) convertView.findViewById(R.id.iv_right_chat);
                     convertView.setTag(viewHolder1);
                     break;
                 case TYPE2:
@@ -86,6 +91,7 @@ public class ChatpageAdapter extends BaseAdapter {
                     viewHolder2 = new ViewHolder2();
                     viewHolder2.tv_left_text = (TextView) convertView.findViewById(R.id.tv_left_text);
                     viewHolder2.iv_left_icon = (CircleImageView) convertView.findViewById(R.id.iv_left_icon);
+                    viewHolder2.iv_left_chat = (ImageView) convertView.findViewById(R.id.iv_left_chat);
                     convertView.setTag(viewHolder2);
                     break;
 
@@ -103,12 +109,42 @@ public class ChatpageAdapter extends BaseAdapter {
         }
         switch (type) {
             case TYPE1:
-                viewHolder1.tv_right_text.setText(list.get(position).getContent().substring(1));
                 ImageLoader.getInstance().displayImage(User_Http.user.getIcon(), viewHolder1.iv_right_head);
+                if (list.get(position).getContent().equals("1*1")) {
+                    viewHolder1.iv_right_chat.setVisibility(View.VISIBLE);
+                    viewHolder1.tv_right_text.setVisibility(View.GONE);
+                    if (list.get(position).getFile() != null) {
+                        ImageLoader.getInstance().displayImage("file:///" + list.get(position).getFile(), viewHolder1.iv_right_chat);
+                    } else {
+
+                    }
+
+
+                } else {
+                    viewHolder1.iv_right_chat.setVisibility(View.GONE);
+                    viewHolder1.tv_right_text.setVisibility(View.VISIBLE);
+                    viewHolder1.tv_right_text.setText(list.get(position).getContent().substring(1));
+                }
+
+
                 break;
             case TYPE2:
-                viewHolder2.tv_left_text.setText(list.get(position).getContent().substring(1));
+
                 ImageLoader.getInstance().displayImage(doctoricon, viewHolder2.iv_left_icon);
+                if (list.get(position).getContent().equals("2*2")) {
+                    viewHolder2.tv_left_text.setVisibility(View.GONE);
+                    viewHolder2.iv_left_chat.setVisibility(View.VISIBLE);
+                    if (list.get(position).getFile() != null) {
+                        ImageLoader.getInstance().displayImage("file:///" + list.get(position).getFile(), viewHolder2.iv_left_chat);
+                    } else {
+
+                    }
+
+                } else {
+                    viewHolder2.iv_left_chat.setVisibility(View.GONE);
+                    viewHolder2.tv_left_text.setVisibility(View.VISIBLE);
+                    viewHolder2.tv_left_text.setText(list.get(position).getContent().substring(1));
+                }
                 break;
 
         }
@@ -119,13 +155,16 @@ public class ChatpageAdapter extends BaseAdapter {
     public class ViewHolder1 {
         private TextView tv_right_text;
         private CircleImageView iv_right_head;
+        private ImageView iv_right_chat;
 
     }
 
     public class ViewHolder2 {
         private TextView tv_left_text;
         private CircleImageView iv_left_icon;
+        private ImageView iv_left_chat;
 
     }
+
 
 }

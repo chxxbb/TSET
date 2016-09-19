@@ -15,6 +15,7 @@ import com.example.chen.tset.Data.Http_data;
 import com.example.chen.tset.Data.User;
 import com.example.chen.tset.Data.User_Http;
 import com.example.chen.tset.R;
+import com.example.chen.tset.Utils.ChatpageDao;
 import com.google.gson.Gson;
 import com.zhy.http.okhttp.OkHttpUtils;
 import com.zhy.http.okhttp.callback.StringCallback;
@@ -39,10 +40,10 @@ public class LoginActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.login_page);
 
+
         initview();
 
         initOnclick();
-
 
 
     }
@@ -119,15 +120,18 @@ public class LoginActivity extends AppCompatActivity {
         login_new_user = (TextView) findViewById(R.id.login_new_user);
         login_find_password = (TextView) findViewById(R.id.login_find_password);
     }
+
     @Override
     protected void onPause() {
         super.onPause();
         JPushInterface.onPause(this);
     }
 
+
     @Override
     protected void onResume() {
         super.onResume();
         JPushInterface.onResume(this);
     }
+
 }

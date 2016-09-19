@@ -20,6 +20,9 @@
     <style name="MyTabLayoutTextAppearance" parent="TextAppearance.AppCompat.Widget.ActionBar.Title">
         <item name="android:textSize">@dimen/y28</item>
     </style>
+    <style name="Dialog_Fullscreen">
+        <item name="android:windowFullscreen">true</item>
 
+    </style>
 
 </resources>

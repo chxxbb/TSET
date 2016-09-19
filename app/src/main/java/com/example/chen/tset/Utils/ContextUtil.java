@@ -32,8 +32,8 @@ public class ContextUtil extends Application {
         instance = this;
         DisplayImageOptions options = new DisplayImageOptions.Builder()
                 .showImageOnLoading(R.color.a)
-                .showImageOnFail(R.color.a)
-                .showImageForEmptyUri(R.color.a)
+                .showImageOnFail(R.drawable.defeated_picture)
+                .showImageForEmptyUri(R.drawable.defeated_picture)
                 .cacheInMemory(true) // 打开内存缓存
                 .cacheOnDisk(true) // 打开硬盘缓存
                 .resetViewBeforeLoading(true) // 在ImageView加载前清除它上面的图片

@@ -21,6 +21,7 @@ import com.zhy.http.okhttp.callback.StringCallback;
 import java.io.File;
 
 import okhttp3.Call;
+
 /**
  * 修改性别
  */
@@ -43,9 +44,9 @@ public class SexpageActivity extends AppCompatActivity {
         ll_rutgender.setOnClickListener(listener);
         rb_man.setOnClickListener(listener);
         rb_nman.setOnClickListener(listener);
-        if (User_Http.user.getSex().equals("男")) {
+        if (User_Http.user.getGender().equals("男")) {
             rb_man.setChecked(true);
-        } else{
+        } else {
             rb_nman.setChecked(true);
         }
     }
@@ -82,7 +83,7 @@ public class SexpageActivity extends AppCompatActivity {
                     @Override
                     public void onResponse(String response, int id) {
                         if (response.equals("0")) {
-                            User_Http.user.setSex(sex);
+                            User_Http.user.setGender(sex);
                             finish();
                         } else {
                             Toast.makeText(SexpageActivity.this, "修改失败", Toast.LENGTH_SHORT).show();

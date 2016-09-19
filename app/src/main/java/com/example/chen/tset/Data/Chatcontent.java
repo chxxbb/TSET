@@ -1,15 +1,57 @@
 package com.example.chen.tset.Data;
 
+import java.io.File;
+
 /**
  * Created by Administrator on 2016/9/17 0017.
  */
 public class Chatcontent {
     private String content;
     private long time;
+    private String file;
+    private String masterfile;
+    private String username;
+    private String myname;
 
-    public Chatcontent(String content, long time) {
+    public Chatcontent(String content, long time, String file, String masterfile, String username, String myname) {
         this.content = content;
         this.time = time;
+        this.file = file;
+        this.masterfile = masterfile;
+        this.username = username;
+        this.myname = myname;
+    }
+
+    public String getMyname() {
+        return myname;
+    }
+
+    public void setMyname(String myname) {
+        this.myname = myname;
+    }
+
+    public String getUsername() {
+        return username;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
+    }
+
+    public String getMasterfile() {
+        return masterfile;
+    }
+
+    public void setMasterfile(String masterfile) {
+        this.masterfile = masterfile;
+    }
+
+    public String getFile() {
+        return file;
+    }
+
+    public void setFile(String file) {
+        this.file = file;
     }
 
     public String getContent() {

@@ -21,6 +21,7 @@ import com.zhy.http.okhttp.OkHttpUtils;
 import com.zhy.http.okhttp.callback.StringCallback;
 
 import okhttp3.Call;
+
 /**
  * 注册设置昵称，性别
  */
@@ -97,9 +98,9 @@ public class SetdataActivity extends AppCompatActivity {
             OkHttpUtils
                     .post()
                     .url(Http_data.http_data + "/ChangeNameAndSex")
-                    .addParams("id",User_Http.user.getId()+"")
+                    .addParams("id", User_Http.user.getId() + "")
                     .addParams("name", et_nickname.getText().toString())
-                    .addParams("sex", sex)
+                    .addParams("gender", sex)
                     .build()
                     .execute(new StringCallback() {
                         @Override
@@ -111,15 +112,17 @@ public class SetdataActivity extends AppCompatActivity {
                                 }
                             });
                         }
+
                         @Override
                         public void onResponse(String response, int id) {
+                            Log.e("信息返回", response);
                             if (response.equals("0")) {
                                 Toast.makeText(SetdataActivity.this, "修改成功", Toast.LENGTH_SHORT).show();
                                 User_Http.user.setName(et_nickname.getText().toString());
-                                User_Http.user.setSex(sex);
+                                User_Http.user.setGender(sex);
                                 Intent intent = new Intent(SetdataActivity.this, HomeActivity.class);
                                 startActivity(intent);
-                            } else{
+                            } else {
                                 Toast.makeText(SetdataActivity.this, "注册失败", Toast.LENGTH_SHORT).show();
                             }
                         }

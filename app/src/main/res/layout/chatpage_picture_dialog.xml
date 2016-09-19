@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#00000000"
+    android:orientation="vertical">
+
+    <Button
+        android:id="@+id/btn_camera"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/y110"
+        android:layout_marginLeft="@dimen/x30"
+        android:layout_marginRight="@dimen/x30"
+        android:layout_marginTop="@dimen/y16"
+        android:background="@drawable/registration_btn_case"
+        android:text="相机"
+        android:textColor="@color/backgroundblue"
+        android:textSize="@dimen/y38" />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/y1"
+        android:layout_marginLeft="@dimen/x33"
+        android:layout_marginRight="@dimen/x33"
+        android:background="@color/linegray" />
+
+    <Button
+        android:id="@+id/btn_cutout"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/y110"
+        android:layout_marginBottom="@dimen/y20"
+        android:layout_marginLeft="@dimen/x30"
+        android:layout_marginRight="@dimen/x30"
+        android:background="@drawable/registration_btn_case"
+        android:text="截图"
+        android:textColor="@color/backgroundblue"
+        android:textSize="@dimen/y38" />
+
+    <Button
+        android:id="@+id/btn_cancel"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/y110"
+        android:layout_marginBottom="@dimen/y20"
+        android:layout_marginLeft="@dimen/x30"
+        android:layout_marginRight="@dimen/x30"
+        android:layout_marginTop="@dimen/y16"
+        android:background="@drawable/registration_btn_case"
+        android:text="取消"
+        android:textColor="@color/backgroundblue"
+        android:textSize="@dimen/y38" />
+
+</LinearLayout>

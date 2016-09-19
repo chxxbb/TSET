@@ -1,6 +1,13 @@
 package com.example.chen.tset.View;
 
+import android.annotation.TargetApi;
+import android.app.Notification;
+import android.app.NotificationManager;
+import android.app.PendingIntent;
+import android.content.Context;
 import android.content.Intent;
+import android.graphics.Color;
+import android.os.Build;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
@@ -12,8 +19,10 @@ import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.Toast;
 
+import com.example.chen.tset.Data.Chatcontent;
 import com.example.chen.tset.Data.JPErrorCode;
 import com.example.chen.tset.Data.User_Http;
+import com.example.chen.tset.Utils.ChatpageDao;
 import com.example.chen.tset.page.EncyclopediaFragment;
 import com.example.chen.tset.R;
 import com.example.chen.tset.page.InquiryFragment;
@@ -21,7 +30,15 @@ import com.example.chen.tset.page.InquiryView;
 import com.example.chen.tset.page.LectureroomFragment;
 import com.example.chen.tset.page.MypageFragment;
 
+import java.util.Date;
+
+import cn.jpush.android.api.JPushInterface;
 import cn.jpush.im.android.api.JMessageClient;
+import cn.jpush.im.android.api.content.ImageContent;
+import cn.jpush.im.android.api.content.TextContent;
+import cn.jpush.im.android.api.event.MessageEvent;
+import cn.jpush.im.android.api.event.NotificationClickEvent;
+import cn.jpush.im.android.api.model.Message;
 import cn.jpush.im.api.BasicCallback;
 
 public class HomeActivity extends AppCompatActivity implements View.OnClickListener {
@@ -35,16 +52,31 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
     private MypageFragment mypageFragment;
     private InquiryFragment inquiryFragment;
     private InquiryView iv_inquiry;
-    HomeActivity homeActivity;
+    ChatpageDao db;
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
+        JMessageClient.registerEventReceiver(this);
+        JMessageClient.setNotificationMode(JMessageClient.NOTI_MODE_DEFAULT);
+        db = new ChatpageDao(this);
         findView();
         init();
         jmessage();
+        judgeuser();
+        Chatcontent chatcontent = new Chatcontent(null, 0L, null, null, null, User_Http.user.getPhone());
+        db.addchatcont(chatcontent);
+
+    }
+
+    private void judgeuser() {
+        if (User_Http.user.getPhone() == null) {
+            Intent intent = new Intent(HomeActivity.this, LoginActivity.class);
+            startActivity(intent);
+            finish();
+        }
     }
 
     private void jmessage() {
@@ -71,6 +103,40 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
         });
     }
 
+    @TargetApi(Build.VERSION_CODES.JELLY_BEAN)
+    public void onEventMainThread(MessageEvent event) {
+        Message msg = event.getMessage();
+        switch (msg.getContentType()) {
+            case text:
+                TextContent textContent = (TextContent) msg.getContent();
+                String content = textContent.getText();
+                String username = msg.getFromID();
+                Date dt = new Date();
+                Long time = dt.getTime();
+                Chatcontent chatcontent = new Chatcontent("2" + content, time, null, null, username, User_Http.user.getPhone());
+                db.addchatcont(chatcontent);
+                break;
+            case image:
+                //处理图片消息
+                ImageContent imageContent = (ImageContent) msg.getContent();
+                String mfile = imageContent.getLocalPath();//图片本地地址 无效
+                String file = imageContent.getLocalThumbnailPath();//图片对应缩略图的本地地址
+                Log.e("接收的图片", file);
+                Date dt1 = new Date();
+                Long time1 = dt1.getTime();
+                chatcontent = new Chatcontent("2*2", time1, file, file, msg.getTargetID(), User_Http.user.getPhone());
+                db.addchatcont(chatcontent);
+
+        }
+
+    }
+
+    public void onEvent(NotificationClickEvent event) {
+        Message msg = event.getMessage();
+        Intent intent = new Intent(HomeActivity.this, ChatpageActivity.class);
+        intent.putExtra("sendID", msg.getTargetID());
+        startActivity(intent);//自定义跳转到指定页面
+    }
 
 
     private void findView() {
@@ -170,7 +236,19 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
 
     @Override
     protected void onDestroy() {
-        JMessageClient.logout();
+        JMessageClient.unRegisterEventReceiver(this);
         super.onDestroy();
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        JPushInterface.onPause(this);
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        JPushInterface.onResume(this);
     }
 }

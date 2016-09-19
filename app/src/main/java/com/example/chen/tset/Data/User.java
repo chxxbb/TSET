@@ -12,7 +12,7 @@ public class User {
 
     private String password = null;//密码
 
-    private String sex = null;//性别
+    private String gender = null;//性别
 
     private Integer age = null;//年龄
 
@@ -30,9 +30,33 @@ public class User {
 
     private Bitmap bitmap_icon = null;//头像
 
+    public User(Integer id, String phone, String name, String password, String gender, Integer age, String icon, String qq, String weibo, String wechat, String email, Integer role, Bitmap bitmap_icon) {
+        this.id = id;
+        this.phone = phone;
+        this.name = name;
+        this.password = password;
+        this.gender = gender;
+        this.age = age;
+        this.icon = icon;
+        this.qq = qq;
+        this.weibo = weibo;
+        this.wechat = wechat;
+        this.email = email;
+        this.role = role;
+        this.bitmap_icon = bitmap_icon;
+    }
+
+    public String getGender() {
+        return gender;
+    }
+
+    public void setGender(String gender) {
+        this.gender = gender;
+    }
+
     @Override
     public String toString() {
-        return "User [id=" + id + ", phone=" + phone + ", name=" + name + ", password=" + password + ", sex=" + sex
+        return "User [id=" + id + ", phone=" + phone + ", name=" + name + ", password=" + password + ", sex=" + gender
                 + ", age=" + age + ", icon=" + icon + ", qq=" + qq + ", weibo=" + weibo + ", wechat=" + wechat
                 + ", email=" + email + ", role=" + role + "]";
     }
@@ -69,13 +93,7 @@ public class User {
         this.password = password;
     }
 
-    public String getSex() {
-        return sex;
-    }
 
-    public void setSex(String sex) {
-        this.sex = sex;
-    }
 
     public Integer getAge() {
         return age;
@@ -146,7 +164,7 @@ public class User {
         phone = user.getPhone();
         name = user.getName();
         password = user.getPassword();
-        sex = user.getSex();
+        gender=user.getGender();
         age = user.getAge();
         icon = user.getIcon();
         qq = user.getQq();
@@ -166,7 +184,7 @@ public class User {
         phone = user.getPhone();
         name = user.getName();
         password = user.getPassword();
-        sex = user.getSex();
+        gender=user.getGender();
         age = user.getAge();
         icon = user.getIcon();
         qq = user.getQq();

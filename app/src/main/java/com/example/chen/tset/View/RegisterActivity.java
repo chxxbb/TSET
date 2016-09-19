@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -22,6 +23,7 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import okhttp3.Call;
+
 /**
  * 注册页面
  */
@@ -73,8 +75,8 @@ public class RegisterActivity extends AppCompatActivity {
 
                                 @Override
                                 public void onResponse(String response, int id) {
-                                    System.out.println(response);
-                                    if ("1".equals(response)) {
+                                    Log.e("验证码返回", response);
+                                    if ("2".equals(response)) {
                                         Toast.makeText(activity, "验证码发送失败", Toast.LENGTH_LONG).show();
                                     } else {
                                         Toast.makeText(activity, "验证码已发送", Toast.LENGTH_LONG).show();
@@ -126,7 +128,7 @@ public class RegisterActivity extends AppCompatActivity {
                                 @Override
                                 public void onResponse(String response, int id) {
                                     System.out.println(response);
-                                    if ("3".equals(response)) {
+                                    if ("1".equals(response)) {
                                         Toast.makeText(activity, "用户已注册", Toast.LENGTH_LONG).show();
                                     } else if ("2".equals(response)) {
                                         Toast.makeText(activity, "请发送验证码", Toast.LENGTH_LONG).show();
@@ -155,7 +157,8 @@ public class RegisterActivity extends AppCompatActivity {
         activity_register_exit = (ImageView) findViewById(R.id.activity_register_exit);
         activity_register_exit.setOnClickListener(listener);
     }
-    private View.OnClickListener listener=new View.OnClickListener() {
+
+    private View.OnClickListener listener = new View.OnClickListener() {
         @Override
         public void onClick(View v) {
             finish();

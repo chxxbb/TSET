@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.net.Uri;
+import android.os.Environment;
 import android.os.SystemClock;
 import android.provider.MediaStore;
 import android.support.v7.app.AppCompatActivity;
@@ -25,11 +26,13 @@ import com.zhy.http.okhttp.callback.StringCallback;
 
 import java.io.File;
 import java.io.FileOutputStream;
+import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Locale;
 
 import okhttp3.Call;
+
 /**
  * 修改头像页面,已改为个人资料页面点击修改头像
  */
@@ -40,12 +43,12 @@ public class PersonaldataActivity extends AppCompatActivity {
     private LinearLayout ll_rutmypage;
     private File sdcardTempFile;
     private int crop = 180;
+    private File audioFile;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_personaldata);
-        sdcardTempFile = new File("/sdcard/", "tmp_pic_" + SystemClock.currentThreadTimeMillis() + ".jpg");
         findView();
     }
 
@@ -70,7 +73,7 @@ public class PersonaldataActivity extends AppCompatActivity {
     @Override
     protected void onStart() {
         super.onStart();
-        tv_sex.setText(User_Http.user.getSex());
+        tv_sex.setText(User_Http.user.getGender());
         tv_name.setText(User_Http.user.getName());
         if (User_Http.user.getPhone() == null) {
             tv_phone.setText("未验证");
@@ -97,6 +100,14 @@ public class PersonaldataActivity extends AppCompatActivity {
                     startActivity(intent2);
                     break;
                 case R.id.rl_icon:
+                    audioFile = new File(Environment.getExternalStorageDirectory().getAbsolutePath() + "/data/files/");
+                    audioFile.mkdirs();//创建文件夹
+                    try {
+                        sdcardTempFile = File.createTempFile("recording", ".jpg", audioFile);
+                    } catch (IOException e) {
+
+                        e.printStackTrace();
+                    }
                     Intent intent3 = new Intent("android.intent.action.PICK");
                     intent3.setDataAndType(MediaStore.Images.Media.INTERNAL_CONTENT_URI, "image/*");
                     intent3.putExtra("output", Uri.fromFile(sdcardTempFile));
