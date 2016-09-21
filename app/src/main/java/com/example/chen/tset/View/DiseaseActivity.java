@@ -82,8 +82,8 @@ public class DiseaseActivity extends AppCompatActivity {
         final String disease1 = getIntent().getStringExtra("disease");
         OkHttpUtils
                 .post()
-                .url(Http_data.http_data + "/findIntroduction")
-                .addParams("title", disease1)
+                .url(Http_data.http_data + "/FindDiseaseByName")
+                .addParams("diseaseName", disease1)
                 .build()
                 .execute(new StringCallback() {
                     @Override
@@ -102,29 +102,31 @@ public class DiseaseActivity extends AppCompatActivity {
                             rl_nonetwork.setVisibility(View.VISIBLE);
                         } else {
 
+//                            Type listtype = new TypeToken<LinkedList<Disease>>() {}.getType();
+//                            LinkedList<Disease> leclist = gson.fromJson(response, listtype);
+//                            Iterator it = leclist.iterator();
+//                            Disease disease = (Disease) it.next();
+                            Disease disease=gson.fromJson(response,Disease.class);
 
-                            Type listtype = new TypeToken<LinkedList<Disease>>() {
-                            }.getType();
-                            LinkedList<Disease> leclist = gson.fromJson(response, listtype);
-                            Iterator it = leclist.iterator();
-                            Disease disease = (Disease) it.next();
-                            tv_content.setText("        " + disease.getContent());
-                            tv_acontent.setText("        " + disease.getBcontent());
-                            if (disease.getCcontent() == null) {
+
+
+                            tv_content.setText("        " + disease.getBio());
+                            tv_acontent.setText("        " + disease.getCure());
+                            if (disease.getPrompt() == null) {
                                 tv_acontent1.setText("无");
                             } else {
-                                tv_acontent1.setText("        " + disease.getCcontent());
+                                tv_acontent1.setText("        " + disease.getPrompt());
                             }
                             tv_title.setText(disease1);
                             tv_title1.setText(disease1);
-                            tv_bcontent.setText("        " + disease.getAcontent());
-                            tv_dcontent.setText("        " + disease.getDcontent());
-                            tv_dname.setText(disease.getDname());
-                            tv_uname.setText(disease.getUname());
-                            tv_section.setText(disease.getSection());
-                            tv_ucontent.setText("        " + disease.getUcontent());
-                            ImageLoader.getInstance().displayImage(disease.getIcon(), iv_icon);
-                            ImageLoader.getInstance().displayImage(disease.getDicon(), iv_dicon);
+                            tv_bcontent.setText("        " + disease.getSymptom());
+                            tv_dcontent.setText("        " + disease.getDoctorAnswerQuestion());
+                            tv_dname.setText(disease.getDoctorName());
+                            tv_uname.setText(disease.getUserName());
+                            tv_section.setText(disease.getSectionName());
+                            tv_ucontent.setText("        " + disease.getUserPutQuestion());
+                            ImageLoader.getInstance().displayImage(disease.getUserIcon(), iv_icon);
+                            ImageLoader.getInstance().displayImage(disease.getDoctorIcon(), iv_dicon);
                             rl_loading.setVisibility(View.GONE);
                         }
                     }

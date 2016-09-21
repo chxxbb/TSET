@@ -23,6 +23,7 @@ import com.example.chen.tset.Data.Chatcontent;
 import com.example.chen.tset.Data.JPErrorCode;
 import com.example.chen.tset.Data.User_Http;
 import com.example.chen.tset.Utils.ChatpageDao;
+import com.example.chen.tset.page.ConsultingFragment;
 import com.example.chen.tset.page.EncyclopediaFragment;
 import com.example.chen.tset.R;
 import com.example.chen.tset.page.InquiryFragment;
@@ -51,6 +52,7 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
     private LectureroomFragment lectureroomFragment;
     private MypageFragment mypageFragment;
     private InquiryFragment inquiryFragment;
+    private ConsultingFragment consultingFragment;
     private InquiryView iv_inquiry;
     ChatpageDao db;
 
@@ -65,19 +67,12 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
         findView();
         init();
         jmessage();
-        judgeuser();
         Chatcontent chatcontent = new Chatcontent(null, 0L, null, null, null, User_Http.user.getPhone());
         db.addchatcont(chatcontent);
 
     }
 
-    private void judgeuser() {
-        if (User_Http.user.getPhone() == null) {
-            Intent intent = new Intent(HomeActivity.this, LoginActivity.class);
-            startActivity(intent);
-            finish();
-        }
-    }
+
 
     private void jmessage() {
         JMessageClient.register(User_Http.user.getPhone(), "123456", new BasicCallback() {
@@ -168,6 +163,7 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
         if (lectureroomFragment != null) fragmentTransaction.hide(lectureroomFragment);
         if (mypageFragment != null) fragmentTransaction.hide(mypageFragment);
         if (inquiryFragment != null) fragmentTransaction.hide(inquiryFragment);
+        if(consultingFragment!=null)fragmentTransaction.hide(consultingFragment);
     }
 
 
@@ -209,6 +205,12 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
             case R.id.rb_diagnosis:
                 fl_registration.setVisibility(View.GONE);
                 radioGroup_right.clearCheck();
+                if (consultingFragment == null) {
+                    consultingFragment = new ConsultingFragment();
+                    ft.add(R.id.framelayout, consultingFragment);
+                } else {
+                    ft.show(consultingFragment);
+                }
                 break;
             case R.id.iv_inquiry:
                 radioGroup_right.clearCheck();

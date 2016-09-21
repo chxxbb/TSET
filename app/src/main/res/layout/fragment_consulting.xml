@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <com.example.chen.tset.Utils.CalendarView
+                android:id="@+id/calendar"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="#6fc8e6"
+                android:visibility="gone"></com.example.chen.tset.Utils.CalendarView>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/y80"
+                android:background="#61b3ce"
+                android:gravity="center_vertical"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/x30"
+                    android:text="提醒选择："
+                    android:textColor="@color/white"
+                    android:textSize="@dimen/y26" />
+
+                <RadioButton
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/x20"
+                    android:background="@null"
+                    android:button="@null"
+                    android:drawableLeft="@drawable/consulting_remind_unmep"
+                    android:drawablePadding="@dimen/x10"
+                    android:text="挂号提醒"
+                    android:textColor="@color/white"
+                    android:textSize="@dimen/y26" />
+
+                <RadioButton
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/x40"
+                    android:background="@null"
+                    android:button="@null"
+                    android:drawableLeft="@drawable/consulting_remind_unmep"
+                    android:drawablePadding="@dimen/x10"
+                    android:text="健康提醒"
+                    android:textColor="@color/white"
+                    android:textSize="@dimen/y26" />
+
+                <RadioButton
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/x40"
+                    android:background="@null"
+                    android:button="@null"
+                    android:drawableLeft="@drawable/consulting_remind_unmep"
+                    android:drawablePadding="@dimen/x10"
+                    android:text="用药提醒"
+                    android:textColor="@color/white"
+                    android:textSize="@dimen/y26" />
+            </LinearLayout>
+        </LinearLayout>
+
+        <RelativeLayout
+            android:id="@+id/rl_loading"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@color/white"
+            android:visibility="visible">
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:orientation="vertical">
+
+                <ImageView
+                    android:id="@+id/iv_lading"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/loading" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_marginTop="@dimen/y50"
+                    android:text="内容加载中"
+                    android:textColor="@color/linegray"
+                    android:textSize="@dimen/y32" />
+            </LinearLayout>
+        </RelativeLayout>
+    </FrameLayout>
+
+
+</LinearLayout>

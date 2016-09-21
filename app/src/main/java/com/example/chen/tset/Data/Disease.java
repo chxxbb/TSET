@@ -5,127 +5,149 @@ package com.example.chen.tset.Data;
  * 疾病详情
  */
 public class Disease {
-    private String title;
-    private String content;
-    private String icon;
-    private String uname;
-    private String ucontent;
-    private String dicon;
-    private String dname;
-    private String dcontent;
-    private String acontent;
-    private String bcontent;
-    private String section;
-    private String ccontent;
+    private Integer id;// 疾病id
 
-    public Disease(String title, String content, String icon, String uname, String ucontent, String dicon, String dname, String dcontent, String acontent, String bcontent, String section, String ccontent) {
-        this.title = title;
-        this.content = content;
-        this.icon = icon;
-        this.uname = uname;
-        this.ucontent = ucontent;
-        this.dicon = dicon;
-        this.dname = dname;
-        this.dcontent = dcontent;
-        this.acontent = acontent;
-        this.bcontent = bcontent;
-        this.section = section;
-        this.ccontent = ccontent;
+    private String name;// 疾病名
+
+    private String bio;// 疾病简介
+
+    private String userIcon;// 用户头像
+
+    private String userName;// 用户名称
+
+    private String userPutQuestion;// 用户的提问
+
+    private String doctorIcon;// 医生头像
+
+    private String doctorName;// 医生名称
+
+    private String doctorAnswerQuestion;// 医生的回答
+
+    private String symptom;// 症状
+
+    private String cure;// 治疗
+
+    private String prompt;// 温馨提示
+
+    private String sectionName;// 科室id
+
+    public Disease(Integer id, String name, String bio, String userIcon, String userName, String userPutQuestion, String doctorIcon, String doctorName, String doctorAnswerQuestion, String symptom, String cure, String prompt, String sectionName) {
+        this.id = id;
+        this.name = name;
+        this.bio = bio;
+        this.userIcon = userIcon;
+        this.userName = userName;
+        this.userPutQuestion = userPutQuestion;
+        this.doctorIcon = doctorIcon;
+        this.doctorName = doctorName;
+        this.doctorAnswerQuestion = doctorAnswerQuestion;
+        this.symptom = symptom;
+        this.cure = cure;
+        this.prompt = prompt;
+        this.sectionName = sectionName;
     }
 
-    public String getCcontent() {
-        return ccontent;
+    public Integer getId() {
+        return id;
     }
 
-    public void setCcontent(String ccontent) {
-        this.ccontent = ccontent;
+    public void setId(Integer id) {
+        this.id = id;
     }
 
-    public String getTitle() {
-        return title;
+    public String getName() {
+        return name;
     }
 
-    public void setTitle(String title) {
-        this.title = title;
+    public void setName(String name) {
+        this.name = name;
     }
 
-    public String getContent() {
-        return content;
+    public String getBio() {
+        return bio;
     }
 
-    public void setContent(String content) {
-        this.content = content;
+    public void setBio(String bio) {
+        this.bio = bio;
     }
 
-    public String getIcon() {
-        return icon;
+    public String getUserIcon() {
+        return userIcon;
     }
 
-    public void setIcon(String icon) {
-        this.icon = icon;
+    public void setUserIcon(String userIcon) {
+        this.userIcon = userIcon;
     }
 
-    public String getUname() {
-        return uname;
+    public String getUserName() {
+        return userName;
     }
 
-    public void setUname(String uname) {
-        this.uname = uname;
+    public void setUserName(String userName) {
+        this.userName = userName;
     }
 
-    public String getUcontent() {
-        return ucontent;
+    public String getUserPutQuestion() {
+        return userPutQuestion;
     }
 
-    public void setUcontent(String ucontent) {
-        this.ucontent = ucontent;
+    public void setUserPutQuestion(String userPutQuestion) {
+        this.userPutQuestion = userPutQuestion;
     }
 
-    public String getDicon() {
-        return dicon;
+    public String getDoctorIcon() {
+        return doctorIcon;
     }
 
-    public void setDicon(String dicon) {
-        this.dicon = dicon;
+    public void setDoctorIcon(String doctorIcon) {
+        this.doctorIcon = doctorIcon;
     }
 
-    public String getDname() {
-        return dname;
+    public String getDoctorName() {
+        return doctorName;
     }
 
-    public void setDname(String dname) {
-        this.dname = dname;
+    public void setDoctorName(String doctorName) {
+        this.doctorName = doctorName;
     }
 
-    public String getDcontent() {
-        return dcontent;
+    public String getDoctorAnswerQuestion() {
+        return doctorAnswerQuestion;
     }
 
-    public void setDcontent(String dcontent) {
-        this.dcontent = dcontent;
+    public void setDoctorAnswerQuestion(String doctorAnswerQuestion) {
+        this.doctorAnswerQuestion = doctorAnswerQuestion;
     }
 
-    public String getAcontent() {
-        return acontent;
+    public String getSymptom() {
+        return symptom;
     }
 
-    public void setAcontent(String acontent) {
-        this.acontent = acontent;
+    public void setSymptom(String symptom) {
+        this.symptom = symptom;
     }
 
-    public String getBcontent() {
-        return bcontent;
+    public String getCure() {
+        return cure;
     }
 
-    public void setBcontent(String bcontent) {
-        this.bcontent = bcontent;
+    public void setCure(String cure) {
+        this.cure = cure;
     }
 
-    public String getSection() {
-        return section;
+    public String getPrompt() {
+        return prompt;
     }
 
-    public void setSection(String section) {
-        this.section = section;
+    public void setPrompt(String prompt) {
+        this.prompt = prompt;
+    }
+
+    public String getSectionName() {
+        return sectionName;
+    }
+
+    public void setSectionName(String sectionName) {
+        this.sectionName = sectionName;
     }
 }

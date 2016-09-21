@@ -80,7 +80,7 @@ public class ChatpageActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_chatpage);
         JMessageClient.registerEventReceiver(this);
-        JMessageClient.enterSingleConversation("13456327895");
+        JMessageClient.enterSingleConversation("18302615820");
         db = new ChatpageDao(this);
         list = new ArrayList<>();
         historylist = new ArrayList<>();
@@ -122,7 +122,7 @@ public class ChatpageActivity extends AppCompatActivity {
 
     private void init() {
 
-        historylist = db.chatfind("13456327895");
+        historylist = db.chatfind("18302615820");
         Log.e("数据库", historylist.toString());
         for (int i = 0; i < historylist.size(); i++) {
             list.add(historylist.get(i));
@@ -146,12 +146,12 @@ public class ChatpageActivity extends AppCompatActivity {
                 public void run() {
                     if (actionId == EditorInfo.IME_ACTION_SEND) {
                         //发送消息
-                        Conversation c = JMessageClient.getSingleConversation("13456327895");
+                        Conversation c = JMessageClient.getSingleConversation("18302615820");
 //                13625784562
 //                13213657894
                         //13456327895
                         if (c == null) {
-                            c = Conversation.createSingleConversation("13456327895");
+                            c = Conversation.createSingleConversation("18302615820");
 //                13608170152
                         }
                         TextContent textContent = new TextContent(et_chat.getText().toString());
@@ -160,7 +160,7 @@ public class ChatpageActivity extends AppCompatActivity {
                         Date dt = new Date();
                         Long time = dt.getTime();
                         String content = "1" + et_chat.getText().toString();
-                        chatcontent = new Chatcontent(content, time, null, null, "13456327895", User_Http.user.getPhone());
+                        chatcontent = new Chatcontent(content, time, null, null, "18302615820", User_Http.user.getPhone());
                         list.add(chatcontent);
                         handler.sendEmptyMessage(0);
                         db.addchatcont(chatcontent);
@@ -192,8 +192,17 @@ public class ChatpageActivity extends AppCompatActivity {
 
 
     private View.OnClickListener lisntener = new View.OnClickListener() {
+
         @Override
         public void onClick(View v) {
+            audioFile = new File(Environment.getExternalStorageDirectory().getAbsolutePath() + "/data/files/");
+            audioFile.mkdirs();//创建文件夹
+            try {
+                sdcardTempFile = File.createTempFile("recording", ".jpg", audioFile);
+            } catch (IOException e) {
+
+                e.printStackTrace();
+            }
             switch (v.getId()) {
                 case R.id.iv_chat:
 
@@ -225,14 +234,7 @@ public class ChatpageActivity extends AppCompatActivity {
         Button btn_cancel = (Button) dialogView.findViewById(R.id.btn_cancel);
 
 
-        audioFile = new File(Environment.getExternalStorageDirectory().getAbsolutePath() + "/data/files/");
-        audioFile.mkdirs();//创建文件夹
-        try {
-            sdcardTempFile = File.createTempFile("recording", ".jpg", audioFile);
-        } catch (IOException e) {
 
-            e.printStackTrace();
-        }
 
 
         btn_camera.setOnClickListener(new View.OnClickListener() {
@@ -305,7 +307,7 @@ public class ChatpageActivity extends AppCompatActivity {
                 String content = "2" + textContent.getText();
                 Date dt = new Date();
                 Long time = dt.getTime();
-                if (msg.getTargetID().equals("13456327895")) {
+                if (msg.getTargetID().equals("18302615820")) {
                     chatcontent = new Chatcontent(content, time, null, null, msg.getTargetID(), User_Http.user.getPhone());
                     list.add(chatcontent);
                     adapter.notifyDataSetChanged();
@@ -316,13 +318,13 @@ public class ChatpageActivity extends AppCompatActivity {
             case image:
                 //处理图片消息
                 ImageContent imageContent = (ImageContent) msg.getContent();
-                String mfile = imageContent.getLocalPath();//图片本地地址 无效
+                imageContent.getLocalPath();//图片本地地址
                 String file = imageContent.getLocalThumbnailPath();//图片对应缩略图的本地地址
                 Log.e("接收的图片", file);
                 Date dt1 = new Date();
                 Long time1 = dt1.getTime();
                 chatcontent = new Chatcontent("2*2", time1, file, file, msg.getTargetID(), User_Http.user.getPhone());
-                if (msg.getTargetID().equals("13456327895")) {
+                if (msg.getTargetID().equals("18302615820")) {
                     list.add(chatcontent);
                     adapter.notifyDataSetChanged();
                 }
@@ -336,16 +338,16 @@ public class ChatpageActivity extends AppCompatActivity {
         Thread thread = new Thread(new Runnable() {
             @Override
             public void run() {
-                Conversation c = JMessageClient.getSingleConversation("13456327895");
+                Conversation c = JMessageClient.getSingleConversation("18302615820");
                 if (c == null) {
-                    c = Conversation.createSingleConversation("13456327895");
+                    c = Conversation.createSingleConversation("18302615820");
 //                13608170152
                 }
                 try {
                     ImageContent image = new ImageContent(sdcardTempFile);
                     Message message = c.createSendMessage(image);
                     JMessageClient.sendMessage(message);
-                    chatcontent = new Chatcontent("1*1", 0L, sdcardTempFile.getAbsolutePath(), sdcardTempFile.getAbsolutePath(), "13456327895", User_Http.user.getPhone());
+                    chatcontent = new Chatcontent("1*1", 0L, sdcardTempFile.getAbsolutePath(), sdcardTempFile.getAbsolutePath(), "18302615820", User_Http.user.getPhone());
                     Log.e("发送图片地址", sdcardTempFile.getAbsolutePath());
                     list.add(chatcontent);
                     db.addchatcont(chatcontent);
