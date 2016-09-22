@@ -22,9 +22,7 @@
                 android:id="@+id/btn_default"
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/y110"
-                android:layout_marginLeft="@dimen/x30"
-                android:layout_marginRight="@dimen/x30"
-                android:background="@color/white"
+                android:background="@drawable/dialoge_btn_top_case"
                 android:text="默认排序"
                 android:textColor="@color/backgroundblue"
                 android:textSize="@dimen/y38" />
@@ -38,9 +36,7 @@
                 android:id="@+id/btn_title"
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/y110"
-                android:layout_marginLeft="@dimen/x30"
-                android:layout_marginRight="@dimen/x30"
-                android:background="@color/white"
+                android:background="@drawable/dialoge_btn_bottom_case"
                 android:text="职称排序"
                 android:textColor="@color/backgroundblue"
                 android:textSize="@dimen/y38" />

@@ -19,6 +19,7 @@ import android.view.animation.Animation;
 import android.view.animation.Animation.AnimationListener;
 import android.view.animation.TranslateAnimation;
 import android.widget.AbsListView.LayoutParams;
+import android.widget.AdapterView;
 import android.widget.BaseAdapter;
 import android.widget.GridView;
 import android.widget.ImageButton;
@@ -225,19 +226,10 @@ public class CalendarView extends LinearLayout implements OnTouchListener,
 
         // 左方按钮
         ImageButton mLeftView = new ImageButton(mContext);
-//        StateListDrawable stateListDrawableL = new StateListDrawable();
-//        Drawable lDrawableNor = new BitmapDrawable(mContext.getResources(),
-//                BitmapFactory.decodeStream(CalendarView.class
-//                        .getResourceAsStream("image/left_arrow.png")));
-//        Drawable lDrawablePre = new BitmapDrawable(mContext.getResources(),
-//                BitmapFactory.decodeStream(CalendarView.class
-//                        .getResourceAsStream("image/left_arrow_pre.png")));
-//        stateListDrawableL.addState(new int[]{-android.R.attr.state_pressed}, lDrawableNor);
-//        stateListDrawableL.addState(new int[]{android.R.attr.state_pressed}, lDrawablePre);
         mLeftView.setBackgroundResource(R.drawable.consulting_left_arrows);
 
         android.widget.RelativeLayout.LayoutParams leftPP = new android.widget.RelativeLayout.LayoutParams(
-                ViewUtil.dip2px(mContext, 10), ViewUtil.dip2px(mContext, 15));
+                ViewUtil.dip2px(mContext, 15), ViewUtil.dip2px(mContext, 22));
         leftPP.addRule(RelativeLayout.ALIGN_PARENT_LEFT);
         leftPP.addRule(RelativeLayout.CENTER_VERTICAL, RelativeLayout.TRUE);
         DisplayMetrics dm = new DisplayMetrics();
@@ -268,12 +260,10 @@ public class CalendarView extends LinearLayout implements OnTouchListener,
         mRightView.setBackgroundResource(R.drawable.consulting_right_arrows);
 
         android.widget.RelativeLayout.LayoutParams rightPP = new android.widget.RelativeLayout.LayoutParams(
-                ViewUtil.dip2px(mContext, 10), ViewUtil.dip2px(mContext, 15));
+                ViewUtil.dip2px(mContext, 15), ViewUtil.dip2px(mContext, 22));
         rightPP.addRule(RelativeLayout.ALIGN_PARENT_RIGHT);
         rightPP.addRule(RelativeLayout.CENTER_VERTICAL, RelativeLayout.TRUE);
-        DisplayMetrics dm1 = new DisplayMetrics();
-        dm = mContext.getResources().getDisplayMetrics();
-        float density1 = dm.density;
+
 
         if (density == 1.5) {
             rightPP.setMargins(0, 0, (int) (density * 80), 0);
@@ -297,29 +287,23 @@ public class CalendarView extends LinearLayout implements OnTouchListener,
 
 
         ImageButton textView = new ImageButton(mContext);
-//        StateListDrawable stateListDrawable = new StateListDrawable();
-//        Drawable rDrawableNor = new BitmapDrawable(mContext.getResources(),
-//                BitmapFactory.decodeStream(CalendarView.class.getResourceAsStream("image/right_arrow.png")));
-//        Drawable rDrawablePre = new BitmapDrawable(mContext.getResources(),
-//                BitmapFactory.decodeStream(CalendarView.class.getResourceAsStream("image/right_arrow_pre.png")));
-//        stateListDrawable.addState(new int[]{-android.R.attr.state_pressed}, rDrawableNor);
-//        stateListDrawable.addState(new int[]{android.R.attr.state_pressed}, rDrawablePre);
+
         textView.setBackgroundResource(R.drawable.consulting_more);
-            android.widget.RelativeLayout.LayoutParams righttext = new android.widget.RelativeLayout.LayoutParams((int) (density * 18), (int) (density * 18));
-            righttext.addRule(RelativeLayout.ALIGN_PARENT_RIGHT);
-            righttext.addRule(RelativeLayout.CENTER_VERTICAL, RelativeLayout.TRUE);
-            righttext.setMargins(0, 0, (int) (density * 15), 0);
-            textView.setLayoutParams(righttext);
+        android.widget.RelativeLayout.LayoutParams righttext = new android.widget.RelativeLayout.LayoutParams((int) (density * 18), (int) (density * 18));
+        righttext.addRule(RelativeLayout.ALIGN_PARENT_RIGHT);
+        righttext.addRule(RelativeLayout.CENTER_VERTICAL, RelativeLayout.TRUE);
+        righttext.setMargins(0, 0, (int) (density * 15), 0);
+        textView.setLayoutParams(righttext);
         textView.setOnClickListener(new OnClickListener() {
 
             @Override
             public void onClick(View v) {
                 View mPopWindowView = View.inflate(mContext, R.layout.consulting_popuwidow_case, null);
-                final PopupWindow mPopWindow = new PopupWindow(mPopWindowView, (int) (density*90), (int) (density*100), true);
+                final PopupWindow mPopWindow = new PopupWindow(mPopWindowView, (int) (density * 90), (int) (density * 100), true);
                 mPopWindow.setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
                 mPopWindow.showAsDropDown(v);
-                LinearLayout ll_pharmacy= (LinearLayout) mPopWindowView.findViewById(R.id.ll_pharmacy);
-                LinearLayout ll_health= (LinearLayout) mPopWindowView.findViewById(R.id.ll_health);
+                LinearLayout ll_pharmacy = (LinearLayout) mPopWindowView.findViewById(R.id.ll_pharmacy);
+                LinearLayout ll_health = (LinearLayout) mPopWindowView.findViewById(R.id.ll_health);
                 ll_pharmacy.setOnClickListener(new OnClickListener() {
                     @Override
                     public void onClick(View v) {
@@ -383,6 +367,7 @@ public class CalendarView extends LinearLayout implements OnTouchListener,
         gAdapter = new CalendarGridViewAdapter(mContext, tempSelected2, markDates);
         gView2.setAdapter(gAdapter);// 设置菜单Adapter
         gView2.setId(calLayoutID);
+
 
         gView3 = new CalendarGridView(mContext);
         tempSelected3.add(Calendar.MONTH, 1);
@@ -555,13 +540,8 @@ public class CalendarView extends LinearLayout implements OnTouchListener,
                 Date date = (Date) txtDay.getTag();
                 calSelected.setTime(date);
                 gAdapter.setSelectedDate(calSelected);
-                gAdapter.notifyDataSetChanged();
+//                gAdapter.notifyDataSetChanged();
 
-                gAdapter1.setSelectedDate(calSelected);
-                gAdapter1.notifyDataSetChanged();
-
-                gAdapter3.setSelectedDate(calSelected);
-                gAdapter3.notifyDataSetChanged();
                 if (mListener != null)
                     mListener.onCalendarItemClick(this, date);
             }
@@ -659,8 +639,6 @@ class CalendarGridViewAdapter extends BaseAdapter {
 
     private Context mContext;
 
-    private int clickTemp = -1;
-
 
     private Calendar calToday = Calendar.getInstance(); // 今日
 
@@ -691,9 +669,6 @@ class CalendarGridViewAdapter extends BaseAdapter {
 
     }
 
-    public CalendarGridViewAdapter(Context context) {
-        this.mContext = context;
-    }
 
     @Override
     public int getCount() {
@@ -790,9 +765,11 @@ class CalendarGridViewAdapter extends BaseAdapter {
         if (equalsDate(calSelected.getTime(), myDate)) {
             // 选择的
             itemLayout.setBackgroundResource(R.drawable.consulting_onclick);
+
             Log.e("选择", calSelected.getTime().toString());
 
         }
+
 
         String title = calStartDate.get(Calendar.YEAR)
                 + "-"
@@ -875,31 +852,6 @@ class CalendarGridViewAdapter extends BaseAdapter {
         return itemLayout;
     }
 
-
-    //本月第一天
-    public String getFirstDayOfMonth() {
-        String str = "";
-        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
-
-        Calendar lastDate = Calendar.getInstance();
-        lastDate.set(Calendar.DATE, 1);// 设为当前月的1号
-        str = sdf.format(lastDate.getTime());
-        return str;
-    }
-
-    //本月最后一天
-    public String getDefaultDay() {
-        String str = "";
-        SimpleDateFormat sdf = new SimpleDateFormat("dd");
-
-        Calendar lastDate = Calendar.getInstance();
-        lastDate.set(Calendar.DATE, 1);// 设为当前月的1号
-        lastDate.add(Calendar.MONTH, 1);// 加一个月，变为下月的1号
-        lastDate.add(Calendar.DATE, -1);// 减去一天，变为当月最后一天
-
-        str = sdf.format(lastDate.getTime());
-        return str;
-    }
 
     @Override
     public void notifyDataSetChanged() {
@@ -984,6 +936,13 @@ class CalendarGridView extends GridView {
         int j = mContext.getResources().getDisplayMetrics().widthPixels - (i * 7);
         int x = j / 2;
         setPadding(x, 0, 0, 0);// 居中
+    }
+
+    @Override
+    public void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
+        int expandSpec = MeasureSpec.makeMeasureSpec(
+                Integer.MAX_VALUE >> 2, MeasureSpec.AT_MOST);
+        super.onMeasure(widthMeasureSpec, expandSpec);
     }
 }
 

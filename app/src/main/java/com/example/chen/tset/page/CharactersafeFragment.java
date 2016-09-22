@@ -74,7 +74,7 @@ public class CharactersafeFragment extends Fragment {
         lv_charactersafe.setAdapter(adapter);
         OkHttpUtils
                 .post()
-                .url(Http_data.http_data + "/findCyclopediaList")
+                .url(Http_data.http_data + "/FindCyclopediaListByCategoryId")
                 .addParams("categoryId", getI() + "")
                 .build()
                 .execute(new StringCallback() {

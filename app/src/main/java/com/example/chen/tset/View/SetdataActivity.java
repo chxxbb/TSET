@@ -97,7 +97,7 @@ public class SetdataActivity extends AppCompatActivity {
             }
             OkHttpUtils
                     .post()
-                    .url(Http_data.http_data + "/ChangeNameAndSex")
+                    .url(Http_data.http_data + "/AddNameAndGender")
                     .addParams("id", User_Http.user.getId() + "")
                     .addParams("name", et_nickname.getText().toString())
                     .addParams("gender", sex)

@@ -20,8 +20,8 @@
     <View
         android:layout_width="match_parent"
         android:layout_height="@dimen/y1"
-        android:layout_marginLeft="@dimen/x33"
-        android:layout_marginRight="@dimen/x33"
+        android:layout_marginLeft="@dimen/x43"
+        android:layout_marginRight="@dimen/x43"
         android:background="@color/linegray" />
 
     <Button

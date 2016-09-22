@@ -57,6 +57,7 @@ public class DiseaselibFragment extends Fragment {
     private RelativeLayout rl_nonetwork, rl_loading;
     private View view1;
     int mSelect = 0;
+    int pos = 0;
 
 
     @Nullable
@@ -81,6 +82,7 @@ public class DiseaselibFragment extends Fragment {
         recyv_dise.setLayoutManager(new StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL));
         listview_dise.setVerticalScrollBarEnabled(false);
         recyv_dise.setVerticalScrollBarEnabled(false);
+
     }
 
     private void listviewinit() {
@@ -90,7 +92,7 @@ public class DiseaselibFragment extends Fragment {
         listview_dise.setAdapter(adapter);
         OkHttpUtils
                 .post()
-                .url(Http_data.http_data + "/findSectionList")
+                .url(Http_data.http_data + "/FindSectionList")
                 .build()
                 .execute(new StringCallback() {
                     @Override
@@ -125,23 +127,12 @@ public class DiseaselibFragment extends Fragment {
         public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
             adapter.changeSelected(position);
             //根据点击的条目加载不同的数据
-            httpinit(position);
-//                ImageView iv_dislistv1= (ImageView) view.findViewById(R.id.iv_dislistv1);
-//                ImageView iv_dislistv= (ImageView) view.findViewById(R.id.iv_dislistv);
-//                LinearLayout dise_ll= (LinearLayout) view.findViewById(R.id.dise_ll);
-//                TextView tv_dislistv= (TextView) view.findViewById(R.id.tv_dislistv);
-//            if (mSelect == position) {
-//                iv_dislistv1.setVisibility(View.VISIBLE);
-//                iv_dislistv.setVisibility(View.GONE);
-//                dise_ll.setBackgroundColor(android.graphics.Color.parseColor("#6fc9e6"));
-//                tv_dislistv.setTextColor(0xffffffff);
-//            } else {
-//                iv_dislistv1.setVisibility(View.GONE);
-//                iv_dislistv.setVisibility(View.VISIBLE);
-//                dise_ll.setBackgroundColor(android.graphics.Color.parseColor("#f4f4f4"));
-//                tv_dislistv.setTextColor(android.graphics.Color.parseColor("#666666"));
-//
-//            }
+            if (pos != position) {
+                httpinit(position);
+            }
+
+//            listview_dise.setSelection(position);
+            pos = position;
 
 
         }
@@ -151,12 +142,10 @@ public class DiseaselibFragment extends Fragment {
         @Override
         public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
             adapter.changeSelected(position);
-//            changeSelected(position);
         }
 
         @Override
         public void onNothingSelected(AdapterView<?> parent) {
-
         }
     };
 

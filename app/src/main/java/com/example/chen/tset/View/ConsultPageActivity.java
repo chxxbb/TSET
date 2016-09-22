@@ -18,6 +18,7 @@ import com.example.chen.tset.Data.Consult;
 import com.example.chen.tset.Data.Consultparticulars;
 import com.example.chen.tset.Data.Http_data;
 import com.example.chen.tset.Data.Reservationlist;
+import com.example.chen.tset.Data.User;
 import com.example.chen.tset.Data.User_Http;
 import com.example.chen.tset.R;
 import com.google.gson.Gson;
@@ -33,6 +34,7 @@ import java.util.LinkedList;
 import java.util.List;
 
 import okhttp3.Call;
+
 /**
  * 资讯详情页面与收藏详情页面公用同一个接口
  */
@@ -68,14 +70,39 @@ public class ConsultPageActivity extends AppCompatActivity implements View.OnCli
         ll_consult_collect.setOnClickListener(this);
         String collect = getIntent().getStringExtra("collect");
         information = getIntent().getStringExtra("information");
+        findCollectExistByUserIdAndCyclopediaId();
         //判断是否为收藏页面点击进入，如果是则隐藏下方收藏按钮
         if (collect.equals("1")) {
             ll_consult_collect.setVisibility(View.GONE);
             collectinit();
-        }else {
+        } else {
             informationinit();
         }
+
     }
+
+    private void findCollectExistByUserIdAndCyclopediaId() {
+        Log.e("ID", User_Http.user.getId() + "");
+        Log.e("文章ID", information);
+        OkHttpUtils
+                .post()
+                .url(Http_data.http_data + "/FindCollectExistByUserIdAndCyclopediaId")
+                .addParams("userId", User_Http.user.getId() + "")
+                .addParams("cyclopediaId", information)
+                .build()
+                .execute(new StringCallback() {
+                    @Override
+                    public void onError(Call call, Exception e, int id) {
+                        Log.e("2323", "3223");
+                    }
+
+                    @Override
+                    public void onResponse(String response, int id) {
+                        Log.e("查询收藏", response);
+                    }
+                });
+    }
+
 
     private void collectinit() {
         OkHttpUtils
@@ -122,8 +149,8 @@ public class ConsultPageActivity extends AppCompatActivity implements View.OnCli
     private void informationinit() {
         OkHttpUtils
                 .post()
-                .url(Http_data.http_data + "/findCollect")
-                .addParams("id", information)
+                .url(Http_data.http_data + "/FindCyclopediaById")
+                .addParams("cyclopediaId", information)
                 .build()
                 .execute(new StringCallback() {
                     @Override
@@ -145,11 +172,12 @@ public class ConsultPageActivity extends AppCompatActivity implements View.OnCli
                             ll_consult_collect.setVisibility(View.GONE);
                         } else {
 
-                            Type listtype = new TypeToken<LinkedList<Consultparticulars>>() {
-                            }.getType();
-                            LinkedList<Consultparticulars> leclist = gson.fromJson(response, listtype);
-                            Iterator it = leclist.iterator();
-                            Consultparticulars consultparticulars = (Consultparticulars) it.next();
+//                            Type listtype = new TypeToken<LinkedList<Consultparticulars>>() {
+//                            }.getType();
+//                            LinkedList<Consultparticulars> leclist = gson.fromJson(response, listtype);
+//                            Iterator it = leclist.iterator();
+//                            Consultparticulars consultparticulars = (Consultparticulars) it.next();
+                            Consultparticulars consultparticulars = gson.fromJson(response, Consultparticulars.class);
                             tv_title.setText(consultparticulars.getTitle());
                             tv_time.setText("天使资讯  " + consultparticulars.getTime());
                             tv_content.setText(consultparticulars.getContent());

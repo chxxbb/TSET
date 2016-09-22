@@ -131,7 +131,6 @@
                         android:id="@+id/rl_nonetwork"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
-                        android:layout_marginBottom="@dimen/y400"
                         android:background="@color/white"
                         android:visibility="gone">
 
@@ -160,7 +159,6 @@
                         android:id="@+id/rl_loading"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
-                        android:layout_marginBottom="@dimen/y400"
                         android:background="@color/white">
 
                         <LinearLayout

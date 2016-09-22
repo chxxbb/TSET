@@ -417,11 +417,12 @@
 
                     <LinearLayout
                         android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
+                        android:layout_height="match_parent"
                         android:layout_centerInParent="true"
                         android:orientation="vertical">
 
                         <ImageView
+                            android:layout_marginTop="@dimen/x200"
                             android:id="@+id/iv_lading"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"

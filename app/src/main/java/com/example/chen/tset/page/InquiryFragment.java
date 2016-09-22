@@ -60,7 +60,7 @@ public class InquiryFragment extends Fragment {
     private RelativeLayout rl_nonetwork, rl_loading;
     Gson gson;
     InquirylistAdapter listadapter;
-    private TextView tv_section, tv_city,tv_sort;
+    private TextView tv_section, tv_city, tv_sort;
 
 
     @Nullable
@@ -84,7 +84,7 @@ public class InquiryFragment extends Fragment {
         tv_city = (TextView) view.findViewById(R.id.tv_city);
         rl_nonetwork = (RelativeLayout) view.findViewById(R.id.rl_nonetwork);
         rl_loading = (RelativeLayout) view.findViewById(R.id.rl_loading);
-        tv_sort= (TextView) view.findViewById(R.id.tv_sort);
+        tv_sort = (TextView) view.findViewById(R.id.tv_sort);
         lv_inquiry.setVerticalScrollBarEnabled(false);
         ll_city.setOnClickListener(listener);
         ll_development.setOnClickListener(listener);
@@ -94,14 +94,14 @@ public class InquiryFragment extends Fragment {
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 Intent intent = new Intent(getContext(), DoctorparticularsActivity.class);
                 //根据所选择的排序，点击时获取所点击医生ID
-                if(tv_section.getText().toString().equals("全部科室")||tv_city.getText().toString().equals("全部地区")||tv_sort.getText().toString().equals("智能排序")||tv_sort.getText().toString().equals("默认排序")){
-                    intent.putExtra("doctot_id",list.get(position).getId());
-                }else if (tv_city.getText().toString().equals("成都")||tv_city.getText().toString().equals("重庆")){
-                    intent.putExtra("doctot_id",citylist.get(position).getId());
-                }else if(tv_sort.getText().toString().equals("职称排序")){
-                    intent.putExtra("doctot_id",titlelist.get(position).getId());
-                }else {
-                    intent.putExtra("doctot_id",selectlist.get(position).getId());
+                if (tv_section.getText().toString().equals("全部科室") || tv_city.getText().toString().equals("全部地区") || tv_sort.getText().toString().equals("智能排序") || tv_sort.getText().toString().equals("默认排序")) {
+                    intent.putExtra("doctot_id", list.get(position).getId());
+                } else if (tv_city.getText().toString().equals("成都") || tv_city.getText().toString().equals("重庆")) {
+                    intent.putExtra("doctot_id", citylist.get(position).getId());
+                } else if (tv_sort.getText().toString().equals("职称排序")) {
+                    intent.putExtra("doctot_id", titlelist.get(position).getId());
+                } else {
+                    intent.putExtra("doctot_id", selectlist.get(position).getId());
                 }
 
                 startActivity(intent);
@@ -166,7 +166,8 @@ public class InquiryFragment extends Fragment {
     };
 
     private void sortshowDialog() {
-        setHeadDialog = new AlertDialog.Builder(getContext()).create();
+//        setHeadDialog = new AlertDialog.Builder(getContext()).create();
+        setHeadDialog = new Dialog(getContext(), R.style.CustomDialog);
         setHeadDialog.show();
         dialogView = View.inflate(getContext(), R.layout.inquiry_sort_dialog, null);
         setHeadDialog.getWindow().setContentView(dialogView);
@@ -228,10 +229,10 @@ public class InquiryFragment extends Fragment {
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 Intent intent = new Intent(getContext(), DoctorparticularsActivity.class);
                 //根据所选择的排序，点击时获取所点击医生ID
-                if(tv_sort.getText().toString().equals("智能排序")||tv_sort.getText().toString().equals("默认排序")){
-                    intent.putExtra("doctot_id",list.get(position).getId());
-                }else if(tv_sort.getText().toString().equals("职称排序")){
-                    intent.putExtra("doctot_id",titlelist.get(position).getId());
+                if (tv_sort.getText().toString().equals("智能排序") || tv_sort.getText().toString().equals("默认排序")) {
+                    intent.putExtra("doctot_id", list.get(position).getId());
+                } else if (tv_sort.getText().toString().equals("职称排序")) {
+                    intent.putExtra("doctot_id", titlelist.get(position).getId());
                 }
                 startActivity(intent);
             }
@@ -242,7 +243,8 @@ public class InquiryFragment extends Fragment {
 
     //科室弹出框
     private void developmentshowDialog() {
-        setHeadDialog = new AlertDialog.Builder(getContext()).create();
+//        setHeadDialog = new AlertDialog.Builder(getContext()).create();
+        setHeadDialog = new Dialog(getContext(), R.style.CustomDialog);
         setHeadDialog.show();
         dialogView = View.inflate(getContext(), R.layout.registration_dialog, null);
         ListView lv_registration = (ListView) dialogView.findViewById(R.id.lv_registration);
@@ -286,6 +288,7 @@ public class InquiryFragment extends Fragment {
                 if (position == 0) {
                     listinit(list);
                     setHeadDialog.dismiss();
+                    tv_section.setText("全部科室");
                 } else {
                     for (int i = 0; i < list.size(); i++) {
                         //在集合中查找所选科室的医生，放入一个新的集合中
@@ -308,10 +311,10 @@ public class InquiryFragment extends Fragment {
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 Intent intent = new Intent(getContext(), DoctorparticularsActivity.class);
                 //根据所选择的排序，点击时获取所点击医生ID
-                if(tv_section.getText().toString().equals("全部科室")){
-                    intent.putExtra("doctot_id",list.get(position).getId());
-                }else {
-                    intent.putExtra("doctot_id",selectlist.get(position).getId());
+                if (tv_section.getText().toString().equals("全部科室")) {
+                    intent.putExtra("doctot_id", list.get(position).getId());
+                } else {
+                    intent.putExtra("doctot_id", selectlist.get(position).getId());
                 }
 
                 startActivity(intent);
@@ -322,12 +325,14 @@ public class InquiryFragment extends Fragment {
 
     //城市弹出框
     public void cityshowDialog() {
-        setHeadDialog = new AlertDialog.Builder(getContext()).create();
+//        setHeadDialog = new AlertDialog.Builder(getContext()).create();
+        setHeadDialog = new Dialog(getContext(), R.style.CustomDialog);
         setHeadDialog.show();
         dialogView = View.inflate(getContext(), R.layout.inquiry_city_dialog, null);
         setHeadDialog.getWindow().setContentView(dialogView);
         WindowManager.LayoutParams lp = setHeadDialog.getWindow()
                 .getAttributes();
+
         setHeadDialog.getWindow().setAttributes(lp);
         citydialogclick();
     }
@@ -339,6 +344,7 @@ public class InquiryFragment extends Fragment {
         Button btn_cancel = (Button) dialogView.findViewById(R.id.btn_cancel);
         Button btn_chnegdu = (Button) dialogView.findViewById(R.id.btn_chengdu);
         Button btn_shenzheng = (Button) dialogView.findViewById(R.id.btn_shenzheng);
+        RelativeLayout rl = (RelativeLayout) dialogView.findViewById(R.id.rl);
         btn_cancel.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -385,10 +391,10 @@ public class InquiryFragment extends Fragment {
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 Intent intent = new Intent(getContext(), DoctorparticularsActivity.class);
                 //根据所选择的排序，点击时获取所点击医生ID
-                if(tv_city.getText().toString().equals("全部地区")){
-                    intent.putExtra("doctot_id",list.get(position).getId());
-                }else if (tv_city.getText().toString().equals("成都")||tv_city.getText().toString().equals("深圳")){
-                    intent.putExtra("doctot_id",citylist.get(position).getId());
+                if (tv_city.getText().toString().equals("全部地区")) {
+                    intent.putExtra("doctot_id", list.get(position).getId());
+                } else if (tv_city.getText().toString().equals("成都") || tv_city.getText().toString().equals("深圳")) {
+                    intent.putExtra("doctot_id", citylist.get(position).getId());
                 }
 
                 startActivity(intent);

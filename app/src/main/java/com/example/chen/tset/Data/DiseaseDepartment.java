@@ -5,30 +5,22 @@ package com.example.chen.tset.Data;
  * 疾病列表
  */
 public class DiseaseDepartment {
-    private String icon;
+    private String icon1;
     private String name;
-    private String iconn;
+    private String icon2;
 
-    public DiseaseDepartment(String icon, String name, String iconn) {
-        this.icon = icon;
+    public DiseaseDepartment(String icon1, String name, String icon2) {
+        this.icon1 = icon1;
         this.name = name;
-        this.iconn = iconn;
+        this.icon2 = icon2;
     }
 
-    public String getIconn() {
-        return iconn;
+    public String getIcon1() {
+        return icon1;
     }
 
-    public void setIconn(String iconn) {
-        this.iconn = iconn;
-    }
-
-    public String getIcon() {
-        return icon;
-    }
-
-    public void setIcon(String icon) {
-        this.icon = icon;
+    public void setIcon1(String icon1) {
+        this.icon1 = icon1;
     }
 
     public String getName() {
@@ -39,11 +31,11 @@ public class DiseaseDepartment {
         this.name = name;
     }
 
-    @Override
-    public String toString() {
-        return "DiseaseDepartment{" +
-                "icon='" + icon + '\'' +
-                ", name='" + name + '\'' +
-                '}';
+    public String getIcon2() {
+        return icon2;
+    }
+
+    public void setIcon2(String icon2) {
+        this.icon2 = icon2;
     }
 }

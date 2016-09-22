@@ -1,6 +1,7 @@
 package com.example.chen.tset.page;
 
 import android.content.Context;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -10,29 +11,40 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.example.chen.tset.Data.DiseaseDepartment;
+import com.example.chen.tset.Data.Http_data;
 import com.example.chen.tset.R;
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
 import com.nostra13.universalimageloader.core.ImageLoader;
+import com.zhy.http.okhttp.OkHttpUtils;
+import com.zhy.http.okhttp.callback.StringCallback;
 
+import java.util.ArrayList;
 import java.util.List;
+
+import okhttp3.Call;
 
 /**
  * Created by Administrator on 2016/8/25 0025.
  */
 public class DiseaseliblistvAdapter extends BaseAdapter {
-    private final List<DiseaseDepartment> list;
+    private List<DiseaseDepartment> list;
     Context context;
-    int mSelect = 0;
+
 
     public DiseaseliblistvAdapter(Context context, List<DiseaseDepartment> list) {
         this.context = context;
         this.list = list;
     }
 
+    int mSelect = 0;
+
     public void changeSelected(int positon) { //刷新方法
         if (positon != mSelect) {
             mSelect = positon;
             notifyDataSetChanged();
         }
+
     }
 
 
@@ -60,8 +72,8 @@ public class DiseaseliblistvAdapter extends BaseAdapter {
         }
         ViewHolder viewHolder = (ViewHolder) convertView.getTag();
         viewHolder.tv_dislistv.setText(list.get(position).getName());
-        ImageLoader.getInstance().displayImage(list.get(position).getIcon(), viewHolder.iv_dislistv);
-        ImageLoader.getInstance().displayImage(list.get(position).getIconn(), viewHolder.iv_dislistv1);
+        ImageLoader.getInstance().displayImage(list.get(position).getIcon1(), viewHolder.iv_dislistv);
+        ImageLoader.getInstance().displayImage(list.get(position).getIcon2(), viewHolder.iv_dislistv1);
         if (mSelect == position) {
             viewHolder.iv_dislistv1.setVisibility(View.VISIBLE);
             viewHolder.iv_dislistv.setVisibility(View.GONE);
@@ -88,5 +100,6 @@ public class DiseaseliblistvAdapter extends BaseAdapter {
             iv_dislistv1 = (ImageView) v.findViewById(R.id.iv_dislistv1);
         }
     }
+
 
 }

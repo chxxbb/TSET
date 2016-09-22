@@ -1,89 +1,282 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/white"
     android:orientation="vertical">
 
     <FrameLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:orientation="vertical">
-
-            <com.example.chen.tset.Utils.CalendarView
-                android:id="@+id/calendar"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:background="#6fc8e6"
-                android:visibility="gone"></com.example.chen.tset.Utils.CalendarView>
-
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="@dimen/y80"
-                android:background="#61b3ce"
-                android:gravity="center_vertical"
-                android:orientation="horizontal">
+                android:layout_height="match_parent"
+                android:orientation="vertical">
 
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="@dimen/x30"
-                    android:text="提醒选择："
-                    android:textColor="@color/white"
-                    android:textSize="@dimen/y26" />
+                <com.example.chen.tset.Utils.CalendarView
+                    android:id="@+id/calendar"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="#6fc8e6"
+                    android:visibility="gone"></com.example.chen.tset.Utils.CalendarView>
 
-                <RadioButton
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="@dimen/x20"
-                    android:background="@null"
-                    android:button="@null"
-                    android:drawableLeft="@drawable/consulting_remind_unmep"
-                    android:drawablePadding="@dimen/x10"
-                    android:text="挂号提醒"
-                    android:textColor="@color/white"
-                    android:textSize="@dimen/y26" />
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/y80"
+                    android:background="#61b3ce"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal">
 
-                <RadioButton
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="@dimen/x40"
-                    android:background="@null"
-                    android:button="@null"
-                    android:drawableLeft="@drawable/consulting_remind_unmep"
-                    android:drawablePadding="@dimen/x10"
-                    android:text="健康提醒"
-                    android:textColor="@color/white"
-                    android:textSize="@dimen/y26" />
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="@dimen/x30"
+                        android:text="提醒选择："
+                        android:textColor="@color/white"
+                        android:textSize="@dimen/y26" />
 
-                <RadioButton
-                    android:layout_width="wrap_content"
+                    <FrameLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content">
+
+                        <ImageView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:background="@drawable/consulting_remind_unmep"></ImageView>
+
+                        <LinearLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content">
+
+                            <ToggleButton
+                                android:layout_width="@dimen/x24"
+                                android:layout_height="@dimen/y18"
+                                android:layout_marginLeft="@dimen/x3"
+                                android:background="@drawable/cousulting_remind"
+                                android:textOff=""
+                                android:textOn="" />
+                        </LinearLayout>
+                    </FrameLayout>
+
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="@dimen/x4"
+                        android:text="挂号提醒"
+                        android:textColor="@color/white"
+                        android:textSize="@dimen/y26" />
+
+                    <FrameLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="@dimen/x40">
+
+                        <ImageView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:background="@drawable/consulting_remind_unmep"></ImageView>
+
+                        <LinearLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content">
+
+                            <ToggleButton
+                                android:layout_width="@dimen/x24"
+                                android:layout_height="@dimen/y18"
+                                android:layout_marginLeft="@dimen/x3"
+                                android:background="@drawable/cousulting_remind"
+                                android:textOff=""
+                                android:textOn="" />
+                        </LinearLayout>
+                    </FrameLayout>
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="@dimen/x4"
+                        android:text="健康提醒"
+                        android:textColor="@color/white"
+                        android:textSize="@dimen/y26" />
+
+                    <FrameLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="@dimen/x40">
+
+                        <ImageView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:background="@drawable/consulting_remind_unmep"></ImageView>
+
+                        <LinearLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content">
+
+                            <ToggleButton
+                                android:layout_width="@dimen/x24"
+                                android:layout_height="@dimen/y18"
+                                android:layout_marginLeft="@dimen/x3"
+                                android:background="@drawable/cousulting_remind"
+                                android:textOff=""
+                                android:textOn="" />
+                        </LinearLayout>
+                    </FrameLayout>
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="@dimen/x4"
+                        android:text="用药提醒"
+                        android:textColor="@color/white"
+                        android:textSize="@dimen/y26" />
+                </LinearLayout>
+                <LinearLayout
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginLeft="@dimen/x40"
-                    android:background="@null"
-                    android:button="@null"
-                    android:drawableLeft="@drawable/consulting_remind_unmep"
-                    android:drawablePadding="@dimen/x10"
-                    android:text="用药提醒"
-                    android:textColor="@color/white"
-                    android:textSize="@dimen/y26" />
+                    android:orientation="vertical"
+                    android:background="@color/backgroundgray">
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/y114"
+                        android:layout_marginLeft="@dimen/x20"
+                        android:layout_marginRight="@dimen/x20"
+                        android:layout_marginTop="@dimen/y20"
+                        android:gravity="center_vertical"
+                        android:orientation="horizontal">
+
+                        <ImageView
+                            android:layout_width="@dimen/x48"
+                            android:layout_height="@dimen/y100"
+                            android:background="@drawable/cousulting_yellow_side" />
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="@dimen/y100"
+                            android:background="@drawable/cousulting_option_background"
+                            android:orientation="vertical">
+
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginLeft="@dimen/x30"
+                                android:layout_marginTop="@dimen/y8"
+                                android:text="挂号详情"
+                                android:textColor="@color/xmgray"
+                                android:textSize="@dimen/y28" />
+
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginLeft="@dimen/x30"
+                                android:layout_marginTop="@dimen/y5"
+                                android:text="已挂号，医生嘱咐您不要吃冰水"
+                                android:textColor="#777777"
+                                android:textSize="@dimen/y24" />
+                        </LinearLayout>
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/y114"
+                        android:layout_marginLeft="@dimen/x20"
+                        android:layout_marginRight="@dimen/x20"
+                        android:layout_marginTop="@dimen/y20"
+                        android:gravity="center_vertical"
+                        android:orientation="horizontal">
+
+                        <ImageView
+                            android:layout_width="@dimen/x48"
+                            android:layout_height="@dimen/y100"
+                            android:background="@drawable/cousulting_green_side" />
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="@dimen/y100"
+                            android:background="@drawable/cousulting_option_background"
+                            android:orientation="vertical">
+
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginLeft="@dimen/x30"
+                                android:layout_marginTop="@dimen/y8"
+                                android:text="用药提醒"
+                                android:textColor="@color/xmgray"
+                                android:textSize="@dimen/y28" />
+
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginLeft="@dimen/x30"
+                                android:layout_marginTop="@dimen/y5"
+                                android:text="早8:30"
+                                android:textColor="#777777"
+                                android:textSize="@dimen/y24" />
+                        </LinearLayout>
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_marginBottom="@dimen/y30"
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/y114"
+                        android:layout_marginLeft="@dimen/x20"
+                        android:layout_marginRight="@dimen/x20"
+                        android:layout_marginTop="@dimen/y20"
+                        android:gravity="center_vertical"
+                        android:orientation="horizontal">
+
+                        <ImageView
+                            android:layout_width="@dimen/x48"
+                            android:layout_height="@dimen/y100"
+                            android:background="@drawable/cousulting_red_side" />
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="@dimen/y100"
+                            android:background="@drawable/cousulting_option_background"
+                            android:orientation="vertical">
+
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginLeft="@dimen/x30"
+                                android:layout_marginTop="@dimen/y8"
+                                android:text="健康状况"
+                                android:textColor="@color/xmgray"
+                                android:textSize="@dimen/y28" />
+
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginLeft="@dimen/x30"
+                                android:layout_marginTop="@dimen/y5"
+                                android:text="良好"
+                                android:textColor="#777777"
+                                android:textSize="@dimen/y24" />
+                        </LinearLayout>
+                    </LinearLayout>
+                </LinearLayout>
+
+
+
             </LinearLayout>
-        </LinearLayout>
+
 
         <RelativeLayout
             android:id="@+id/rl_loading"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:background="@color/white"
-            android:visibility="visible">
+            android:visibility="visible"
+            android:gravity="center_horizontal">
 
             <LinearLayout
+                android:layout_marginTop="@dimen/y300"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_centerInParent="true"
+                android:layout_alignParentBottom="true"
                 android:orientation="vertical">
 
                 <ImageView
@@ -105,4 +298,4 @@
     </FrameLayout>
 
 
-</LinearLayout>
+</ScrollView>

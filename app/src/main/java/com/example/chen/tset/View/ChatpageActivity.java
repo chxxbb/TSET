@@ -219,7 +219,8 @@ public class ChatpageActivity extends AppCompatActivity {
     };
 
     private void sendpictureDialog() {
-        setHeadDialog = new AlertDialog.Builder(this).create();
+//        setHeadDialog = new AlertDialog.Builder(this).create();
+        setHeadDialog = new Dialog(this, R.style.CustomDialog);
         setHeadDialog.show();
         dialogView = View.inflate(getApplicationContext(), R.layout.chatpage_picture_dialog, null);
         setHeadDialog.getWindow().setContentView(dialogView);
@@ -232,9 +233,6 @@ public class ChatpageActivity extends AppCompatActivity {
         Button btn_camera = (Button) dialogView.findViewById(R.id.btn_camera);
         Button btn_cutout = (Button) dialogView.findViewById(R.id.btn_cutout);
         Button btn_cancel = (Button) dialogView.findViewById(R.id.btn_cancel);
-
-
-
 
 
         btn_camera.setOnClickListener(new View.OnClickListener() {

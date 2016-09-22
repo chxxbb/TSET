@@ -44,6 +44,7 @@ import java.util.LinkedList;
 import java.util.List;
 
 import okhttp3.Call;
+
 /**
  * 一键挂号
  */
@@ -207,7 +208,8 @@ public class RegistrationAtivity extends AppCompatActivity {
         } else if (et_phone.getText().toString().equals("") || et_name.getText().toString() == null) {
             Toast.makeText(RegistrationAtivity.this, "请输入联系方式", Toast.LENGTH_SHORT).show();
         } else {
-            setHeadDialog = new Builder(this).create();
+//            setHeadDialog = new Builder(this).create();
+            setHeadDialog = new Dialog(this, R.style.CustomDialog);
             setHeadDialog.show();
             WindowManager windowManager = getWindowManager();
             Display display = windowManager.getDefaultDisplay();
@@ -268,7 +270,8 @@ public class RegistrationAtivity extends AppCompatActivity {
     }
 
     private void departmentsshowDialog() {
-        setHeadDialog = new Builder(this).create();
+//        setHeadDialog = new Builder(this).create();
+        setHeadDialog = new Dialog(this, R.style.CustomDialog);
         setHeadDialog.show();
         dialogView = View.inflate(getApplicationContext(), R.layout.registration_dialog, null);
         ListView lv_registration = (ListView) dialogView.findViewById(R.id.lv_registration);
@@ -301,7 +304,8 @@ public class RegistrationAtivity extends AppCompatActivity {
     }
 
     private void professionaltitleshowDialog() {
-        setHeadDialog = new Builder(this).create();
+//        setHeadDialog = new Builder(this).create();
+        setHeadDialog = new Dialog(this, R.style.CustomDialog);
         setHeadDialog.show();
         dialogView = View.inflate(getApplicationContext(), R.layout.registration_dialog, null);
         ListView lv_registration = (ListView) dialogView.findViewById(R.id.lv_registration);
@@ -335,7 +339,8 @@ public class RegistrationAtivity extends AppCompatActivity {
     }
 
     private void ageshowDialog() {
-        setHeadDialog = new Builder(this).create();
+//        setHeadDialog = new Builder(this).create();
+        setHeadDialog = new Dialog(this, R.style.CustomDialog);
         setHeadDialog.show();
         //设置弹出框视图
         dialogView = View.inflate(getApplicationContext(), R.layout.registration_dialog, null);
@@ -403,7 +408,8 @@ public class RegistrationAtivity extends AppCompatActivity {
 
     //选择性别
     private void gendershowDialog() {
-        setHeadDialog = new Builder(this).create();
+//        setHeadDialog = new Builder(this).create();
+        setHeadDialog = new Dialog(this, R.style.CustomDialog);
         setHeadDialog.show();
         //设置弹出框视图
         dialogView = View.inflate(getApplicationContext(), R.layout.registration_city_case, null);
@@ -446,7 +452,8 @@ public class RegistrationAtivity extends AppCompatActivity {
 
     //选择城市
     public void cityshowDialog() {
-        setHeadDialog = new Builder(this).create();
+//        setHeadDialog = new Builder(this).create();
+        setHeadDialog = new Dialog(this, R.style.CustomDialog);
         setHeadDialog.show();
         dialogView = View.inflate(getApplicationContext(), R.layout.registration_city_case, null);
         setHeadDialog.getWindow().setContentView(dialogView);

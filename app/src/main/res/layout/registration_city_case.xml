@@ -22,9 +22,7 @@
                 android:id="@+id/btn_chengdu"
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/y110"
-                android:layout_marginLeft="@dimen/x30"
-                android:layout_marginRight="@dimen/x30"
-                android:background="@color/white"
+                android:background="@drawable/dialoge_btn_top_case"
                 android:text="成都"
                 android:textColor="@color/backgroundblue" />
 
@@ -37,9 +35,7 @@
                 android:id="@+id/btn_shenzheng"
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/y110"
-                android:layout_marginLeft="@dimen/x30"
-                android:layout_marginRight="@dimen/x30"
-                android:background="@color/white"
+                android:background="@drawable/dialoge_btn_bottom_case"
                 android:text="深圳"
                 android:textColor="@color/backgroundblue" />
         </LinearLayout>
