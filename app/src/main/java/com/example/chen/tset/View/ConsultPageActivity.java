@@ -41,8 +41,8 @@ import okhttp3.Call;
 public class ConsultPageActivity extends AppCompatActivity implements View.OnClickListener {
     private ScrollView scrollview;
     private LinearLayout ll_consult_return, ll_consult_collect;
-    private TextView tv_title, tv_time, tv_content;
-    private ImageView iv_icon;
+    private TextView tv_title, tv_time, tv_content,tv_collsult,tv;
+    private ImageView iv_icon,iv_collsult;
     private RelativeLayout rl_nonetwork, rl_loading;
     Gson gson = new Gson();
     String information;
@@ -65,6 +65,9 @@ public class ConsultPageActivity extends AppCompatActivity implements View.OnCli
         iv_icon = (ImageView) findViewById(R.id.iv_icon);
         rl_nonetwork = (RelativeLayout) findViewById(R.id.rl_nonetwork);
         rl_loading = (RelativeLayout) findViewById(R.id.rl_loading);
+        tv_collsult= (TextView) findViewById(R.id.tv_collsilt);
+        iv_collsult= (ImageView) findViewById(R.id.iv_collsult);
+        tv= (TextView) findViewById(R.id.tv);
         scrollview.setVerticalScrollBarEnabled(false);
         ll_consult_return.setOnClickListener(this);
         ll_consult_collect.setOnClickListener(this);
@@ -74,16 +77,13 @@ public class ConsultPageActivity extends AppCompatActivity implements View.OnCli
         //判断是否为收藏页面点击进入，如果是则隐藏下方收藏按钮
         if (collect.equals("1")) {
             ll_consult_collect.setVisibility(View.GONE);
-            collectinit();
-        } else {
-            informationinit();
         }
+            informationinit();
+
 
     }
-
+    //判断文章是否收藏过
     private void findCollectExistByUserIdAndCyclopediaId() {
-        Log.e("ID", User_Http.user.getId() + "");
-        Log.e("文章ID", information);
         OkHttpUtils
                 .post()
                 .url(Http_data.http_data + "/FindCollectExistByUserIdAndCyclopediaId")
@@ -93,60 +93,34 @@ public class ConsultPageActivity extends AppCompatActivity implements View.OnCli
                 .execute(new StringCallback() {
                     @Override
                     public void onError(Call call, Exception e, int id) {
-                        Log.e("2323", "3223");
+                        Toast.makeText(ConsultPageActivity.this, "失败", Toast.LENGTH_SHORT).show();
                     }
 
                     @Override
                     public void onResponse(String response, int id) {
-                        Log.e("查询收藏", response);
-                    }
-                });
-    }
+                        Log.e("13",response);
+                        System.out.print(response);
+                        if(response.equals("0")){
+                            tv_collsult.setTextColor(android.graphics.Color.parseColor("#6fc9e6"));
+                            iv_collsult.setBackgroundResource(R.drawable.consult_isonclickpraise);
+
+                        }else {
+                            tv_collsult.setTextColor(android.graphics.Color.parseColor("#999999"));
+                            iv_collsult.setBackgroundResource(R.drawable.consult_unmeppraise);
+                            tv_collsult.setText("已赞");
+                            ll_consult_collect.setOnClickListener(null);
 
 
-    private void collectinit() {
-        OkHttpUtils
-                .post()
-                .url(Http_data.http_data + "/findCollectdetaills")
-                .addParams("id", information)
-                .build()
-                .execute(new StringCallback() {
-                    @Override
-                    public void onError(Call call, Exception e, int id) {
-
-                        Toast.makeText(ConsultPageActivity.this, "网络连接失败", Toast.LENGTH_SHORT).show();
-                        rl_loading.setVisibility(View.GONE);
-                        rl_nonetwork.setVisibility(View.VISIBLE);
-                    }
-
-                    @Override
-                    public void onResponse(String response, int id) {
-                        Log.e("收藏详情返回", response);
-                        if (response.equals("[]") || response.equals("")) {
-
-                            Toast.makeText(ConsultPageActivity.this, "没有这条新闻", Toast.LENGTH_SHORT).show();
-                            rl_loading.setVisibility(View.GONE);
-                            rl_nonetwork.setVisibility(View.VISIBLE);
-                            ll_consult_collect.setVisibility(View.GONE);
-                        } else {
-
-                            Type listtype = new TypeToken<LinkedList<Consultparticulars>>() {
-                            }.getType();
-                            LinkedList<Consultparticulars> leclist = gson.fromJson(response, listtype);
-                            Iterator it = leclist.iterator();
-                            Consultparticulars consultparticulars = (Consultparticulars) it.next();
-                            tv_title.setText(consultparticulars.getTitle());
-                            tv_time.setText("天使资讯  " + consultparticulars.getTime());
-                            tv_content.setText(consultparticulars.getContent());
-                            ImageLoader.getInstance().displayImage(consultparticulars.getIcon(), iv_icon);
-                            rl_loading.setVisibility(View.GONE);
                         }
                     }
                 });
     }
 
 
+
+    //获取文章详情
     private void informationinit() {
+        Log.e("文章ID",information);
         OkHttpUtils
                 .post()
                 .url(Http_data.http_data + "/FindCyclopediaById")
@@ -172,11 +146,7 @@ public class ConsultPageActivity extends AppCompatActivity implements View.OnCli
                             ll_consult_collect.setVisibility(View.GONE);
                         } else {
 
-//                            Type listtype = new TypeToken<LinkedList<Consultparticulars>>() {
-//                            }.getType();
-//                            LinkedList<Consultparticulars> leclist = gson.fromJson(response, listtype);
-//                            Iterator it = leclist.iterator();
-//                            Consultparticulars consultparticulars = (Consultparticulars) it.next();
+
                             Consultparticulars consultparticulars = gson.fromJson(response, Consultparticulars.class);
                             tv_title.setText(consultparticulars.getTitle());
                             tv_time.setText("天使资讯  " + consultparticulars.getTime());
@@ -196,9 +166,10 @@ public class ConsultPageActivity extends AppCompatActivity implements View.OnCli
                 finish();
                 break;
             case R.id.ll_consult_collect:
+                //收藏
                 OkHttpUtils
                         .post()
-                        .url(Http_data.http_data + "/AddCollect")
+                        .url(Http_data.http_data + "/AddCollectByUserIdAndCyclopediaId")
                         .addParams("userId", User_Http.user.getId() + "")
                         .addParams("cyclopediaId", information)
                         .build()
@@ -211,9 +182,14 @@ public class ConsultPageActivity extends AppCompatActivity implements View.OnCli
                             @Override
                             public void onResponse(String response, int id) {
                                 Log.e("咨询详情收藏返回", response);
-                                if (response.equals("1")) {
+                                if (response.equals("0")) {
                                     Toast.makeText(ConsultPageActivity.this, "收藏成功", Toast.LENGTH_SHORT).show();
+                                    tv_collsult.setTextColor(android.graphics.Color.parseColor("#999999"));
+                                    iv_collsult.setBackgroundResource(R.drawable.consult_unmeppraise);
+                                    tv_collsult.setText("已赞");
+                                    ll_consult_collect.setOnClickListener(null);
                                 }
+
                             }
                         });
                 break;

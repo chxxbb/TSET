@@ -71,8 +71,9 @@ public class SexpageActivity extends AppCompatActivity {
     private void httpinit(final String sex) {
         OkHttpUtils
                 .post()
-                .url(Http_data.http_data + "/changeSex" + "?" + User_Http.user.getId())
-                .addParams("sex", sex)
+                .url(Http_data.http_data + "/ChangeGender")
+                .addParams("id", User_Http.user.getId()+"")
+                .addParams("gender", sex)
                 .build()
                 .execute(new StringCallback() {
                     @Override

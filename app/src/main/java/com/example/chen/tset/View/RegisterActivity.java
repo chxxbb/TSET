@@ -59,7 +59,7 @@ public class RegisterActivity extends AppCompatActivity {
 
                     OkHttpUtils
                             .post()
-                            .url(Http_data.http_data + "/send")
+                            .url(Http_data.http_data + "/Send")
                             .addParams("phone", activity_register_phone.getText().toString())
                             .build()
                             .execute(new StringCallback() {
@@ -76,10 +76,10 @@ public class RegisterActivity extends AppCompatActivity {
                                 @Override
                                 public void onResponse(String response, int id) {
                                     Log.e("验证码返回", response);
-                                    if ("2".equals(response)) {
-                                        Toast.makeText(activity, "验证码发送失败", Toast.LENGTH_LONG).show();
-                                    } else {
+                                    if ("0".equals(response)) {
                                         Toast.makeText(activity, "验证码已发送", Toast.LENGTH_LONG).show();
+                                    } else {
+                                        Toast.makeText(activity, "验证码发送失败", Toast.LENGTH_LONG).show();
                                     }
                                 }
                             });

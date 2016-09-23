@@ -16,6 +16,7 @@ import com.example.chen.tset.Data.User;
 import com.example.chen.tset.Data.User_Http;
 import com.example.chen.tset.R;
 import com.example.chen.tset.Utils.ChatpageDao;
+import com.example.chen.tset.Utils.SharedPsaveuser;
 import com.google.gson.Gson;
 import com.zhy.http.okhttp.OkHttpUtils;
 import com.zhy.http.okhttp.callback.StringCallback;
@@ -34,6 +35,8 @@ public class LoginActivity extends AppCompatActivity {
 
     Gson gson = new Gson();
     Activity activity = this;
+    SharedPsaveuser sp;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -46,6 +49,10 @@ public class LoginActivity extends AppCompatActivity {
         initOnclick();
 
 
+        sp=new SharedPsaveuser(LoginActivity.this);
+
+
+
     }
 
     private void initOnclick() {
@@ -56,7 +63,7 @@ public class LoginActivity extends AppCompatActivity {
                 OkHttpUtils
                         .post()
                         .url(Http_data.http_data + "/login")
-                        .addParams("username", login_phone_edittext.getText().toString())
+                        .addParams("phone", login_phone_edittext.getText().toString())
                         .addParams("password", login_password_edittext.getText().toString())
                         .build()
                         .execute(new StringCallback() {
@@ -77,6 +84,13 @@ public class LoginActivity extends AppCompatActivity {
                                     Log.e("user", user.toString());
                                     User_Http.user.setUser(user);
                                     System.out.println(user.getName() + "-----------1---------");
+
+                                    //第一次登陆保存用户密码
+                                    SharedPsaveuser sp = new SharedPsaveuser(LoginActivity.this);
+                                    sp.setUserpassworde(login_password_edittext.getText().toString());
+
+
+
                                     if (user.getName() != null && !"".equals(user.getName())) {
                                         System.out.println(user.toString());
                                         Intent intent = new Intent(activity, HomeActivity.class);
@@ -120,6 +134,7 @@ public class LoginActivity extends AppCompatActivity {
         login_new_user = (TextView) findViewById(R.id.login_new_user);
         login_find_password = (TextView) findViewById(R.id.login_find_password);
     }
+
 
     @Override
     protected void onPause() {

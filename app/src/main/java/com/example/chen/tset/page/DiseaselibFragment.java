@@ -86,41 +86,65 @@ public class DiseaselibFragment extends Fragment {
     }
 
     private void listviewinit() {
+        Thread thread = new Thread(new Runnable() {
+            @Override
+            public void run() {
+                list = new ArrayList<>();
+                adapter = new DiseaseliblistvAdapter(getContext(), list);
+                listview_dise.setAdapter(adapter);
+                OkHttpUtils
+                        .post()
+                        .url(Http_data.http_data + "/FindSectionList")
+                        .build()
+                        .execute(new StringCallback() {
+                            @Override
+                            public void onError(Call call, Exception e, int id) {
+                                handler.sendEmptyMessage(1);
+                            }
 
-        list = new ArrayList<>();
-        adapter = new DiseaseliblistvAdapter(getContext(), list);
-        listview_dise.setAdapter(adapter);
-        OkHttpUtils
-                .post()
-                .url(Http_data.http_data + "/FindSectionList")
-                .build()
-                .execute(new StringCallback() {
-                    @Override
-                    public void onError(Call call, Exception e, int id) {
-                        view1.setVisibility(View.GONE);
-                        rl_loading.setVisibility(View.GONE);
-                        rl_nonetwork.setVisibility(View.VISIBLE);
-                        Toast.makeText(getContext(), "网络连接失败", Toast.LENGTH_SHORT).show();
-                    }
+                            @Override
+                            public void onResponse(String response, int id) {
+                                Log.e("百科疾病库", response);
+                                view1.setVisibility(View.GONE);
+                                Type listtype = new TypeToken<LinkedList<DiseaseDepartment>>() {
+                                }.getType();
+                                LinkedList<DiseaseDepartment> leclist = gson.fromJson(response, listtype);
+                                for (Iterator it = leclist.iterator(); it.hasNext(); ) {
+                                    DiseaseDepartment dd = (DiseaseDepartment) it.next();
+                                    list.add(dd);
+                                }
+                                handler.sendEmptyMessage(0);
 
-                    @Override
-                    public void onResponse(String response, int id) {
-                        Log.e("百科疾病库", response);
-                        view1.setVisibility(View.GONE);
-                        Type listtype = new TypeToken<LinkedList<DiseaseDepartment>>() {
-                        }.getType();
-                        LinkedList<DiseaseDepartment> leclist = gson.fromJson(response, listtype);
-                        for (Iterator it = leclist.iterator(); it.hasNext(); ) {
-                            DiseaseDepartment dd = (DiseaseDepartment) it.next();
-                            list.add(dd);
-                        }
-                        adapter.notifyDataSetChanged();
-                        rl_loading.setVisibility(View.GONE);
-                        view1.setVisibility(View.VISIBLE);
 
-                    }
-                });
+                            }
+                        });
+            }
+        });
+        thread.start();
+
     }
+
+    Handler handler = new Handler() {
+        @Override
+        public void handleMessage(Message msg) {
+            switch (msg.what) {
+                case 0:
+                    adapter.notifyDataSetChanged();
+                    rl_loading.setVisibility(View.GONE);
+                    view1.setVisibility(View.VISIBLE);
+                    break;
+                case 1:
+                    view1.setVisibility(View.GONE);
+                    rl_loading.setVisibility(View.GONE);
+                    rl_nonetwork.setVisibility(View.VISIBLE);
+                    Toast.makeText(getContext(), "网络连接失败", Toast.LENGTH_SHORT).show();
+                    break;
+                case 2:
+                    diseaselibrecyvAdapter.notifyDataSetChanged();
+                    break;
+            }
+        }
+    };
 
     private AdapterView.OnItemClickListener listener = new AdapterView.OnItemClickListener() {
         @Override
@@ -131,7 +155,6 @@ public class DiseaselibFragment extends Fragment {
                 httpinit(position);
             }
 
-//            listview_dise.setSelection(position);
             pos = position;
 
 
@@ -149,29 +172,35 @@ public class DiseaselibFragment extends Fragment {
         }
     };
 
-    private void httpinit(int sectionid) {
-        list1 = new ArrayList<>();
-        OkHttpUtils
-                .post()
-                .url(Http_data.http_data + "/findDiseaseList")
-                .addParams("sectionId", sectionid + "")
-                .build()
-                .execute(new StringCallback() {
-                    @Override
-                    public void onError(Call call, Exception e, int id) {
+    private void httpinit(final int sectionid) {
+        Thread thread1 = new Thread(new Runnable() {
+            @Override
+            public void run() {
+                list1 = new ArrayList<>();
+                OkHttpUtils
+                        .post()
+                        .url(Http_data.http_data + "/findDiseaseList")
+                        .addParams("sectionId", sectionid + "")
+                        .build()
+                        .execute(new StringCallback() {
+                            @Override
+                            public void onError(Call call, Exception e, int id) {
+                                handler.sendEmptyMessage(1);
+                            }
 
-                    }
-
-                    @Override
-                    public void onResponse(String response, int id) {
-                        Log.e("疾病返回", response);
-                        list1 = gson.fromJson(response, new TypeToken<List<String>>() {
-                        }.getType());
-                        diseaselibrecyvAdapter = new DiseaselibrecyvAdapter(getContext(), list1);
-                        recyv_dise.setAdapter(diseaselibrecyvAdapter);
-                        diseaselibrecyvAdapter.notifyDataSetChanged();
-                    }
-                });
+                            @Override
+                            public void onResponse(String response, int id) {
+                                Log.e("疾病返回", response);
+                                list1 = gson.fromJson(response, new TypeToken<List<String>>() {
+                                }.getType());
+                                diseaselibrecyvAdapter = new DiseaselibrecyvAdapter(getContext(), list1);
+                                recyv_dise.setAdapter(diseaselibrecyvAdapter);
+                                handler.sendEmptyMessage(2);
+                            }
+                        });
+            }
+        });
+        thread1.start();
 
 
     }

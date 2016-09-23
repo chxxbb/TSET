@@ -11,22 +11,22 @@ public class Information {
     private String icon;
     private String title;
     private String time;
-    private String id;
+    private String cyclopediaId;
 
-    public Information(String content, String icon, String title, String time, String id) {
+    public Information(String content, String icon, String title, String time, String cyclopediaId) {
         this.content = content;
         this.icon = icon;
         this.title = title;
         this.time = time;
-        this.id = id;
+        this.cyclopediaId = cyclopediaId;
     }
 
-    public String getId() {
-        return id;
+    public String getCyclopediaId() {
+        return cyclopediaId;
     }
 
-    public void setId(String id) {
-        this.id = id;
+    public void setCyclopediaId(String cyclopediaId) {
+        this.cyclopediaId = cyclopediaId;
     }
 
     public String getContent() {

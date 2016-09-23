@@ -50,6 +50,7 @@ public class NamepageActivity extends AppCompatActivity {
 
         @Override
         public void onTextChanged(CharSequence s, int start, int before, int count) {
+            //判断输入框是否输入字符，如果输入则改变颜色
             if (et_name_save.length() == 0) {
                 tv_pas.setTextColor(android.graphics.Color.parseColor("#e0e0e0"));
                 tv_pas.setOnClickListener(null);
@@ -74,7 +75,8 @@ public class NamepageActivity extends AppCompatActivity {
                 case R.id.tv_pas:
                     OkHttpUtils
                             .post()
-                            .url(Http_data.http_data + "/changeName" + "?" + User_Http.user.getId())
+                            .url(Http_data.http_data + "/ChangeName" )
+                            .addParams("id",User_Http.user.getId()+"")
                             .addParams("name", et_name_save.getText().toString())
                             .build()
                             .execute(new StringCallback() {

@@ -84,7 +84,7 @@ public class LectureroomFragment extends Fragment {
         recyclerView.setAdapter(adapter);
         OkHttpUtils
                 .post()
-                .url(Http_data.http_data + "/findKnowledgeLectureList" + "?categoryId")
+                .url(Http_data.http_data + "/FindLectureAll")
                 .build()
                 .execute(new StringCallback() {
                     @Override
@@ -99,10 +99,14 @@ public class LectureroomFragment extends Fragment {
                         Type listtype = new TypeToken<LinkedList<Lecture>>() {
                         }.getType();
                         LinkedList<Lecture> leclist = gson.fromJson(response, listtype);
+
+
                         for (Iterator it = leclist.iterator(); it.hasNext(); ) {
                             Lecture lecture = (Lecture) it.next();
                             list.add(lecture);
                         }
+
+
                         adapter.setList(list);
                         rl_loading.setVisibility(View.GONE);
                     }

@@ -43,6 +43,7 @@ public class EncyclopediaFragment extends Fragment {
     }
 
 
+
     private void findView() {
 
         vp_encyclopedia = (ViewPager) view.findViewById(R.id.vp_encyclopedia);
@@ -71,17 +72,22 @@ public class EncyclopediaFragment extends Fragment {
         view2.setVisibility(View.GONE);
         view3.setVisibility(View.GONE);
         view4.setVisibility(View.GONE);
+
     }
 
     private void init() {
         flist = new ArrayList<Fragment>();
         diseaselibFragment1 = new DiseaselibFragment();
         flist.add(diseaselibFragment1);
+
+
         for (int i = 1; i < 4; i++) {
             charactersafeFragment = new CharactersafeFragment();
             charactersafeFragment.setI(i);
             flist.add(charactersafeFragment);
         }
+
+
         adapter = new EncyclopediaAdapter(getChildFragmentManager(), flist);
         vp_encyclopedia.setAdapter(adapter);
         vp_encyclopedia.setOffscreenPageLimit(flist.size());
@@ -137,6 +143,7 @@ public class EncyclopediaFragment extends Fragment {
 
         @Override
         public void onPageScrollStateChanged(int state) {
+
 
         }
     };

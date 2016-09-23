@@ -89,9 +89,13 @@ public class InquiryFragment extends Fragment {
         ll_city.setOnClickListener(listener);
         ll_development.setOnClickListener(listener);
         ll_sort.setOnClickListener(listener);
+
+
+
         lv_inquiry.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+
                 Intent intent = new Intent(getContext(), DoctorparticularsActivity.class);
                 //根据所选择的排序，点击时获取所点击医生ID
                 if (tv_section.getText().toString().equals("全部科室") || tv_city.getText().toString().equals("全部地区") || tv_sort.getText().toString().equals("智能排序") || tv_sort.getText().toString().equals("默认排序")) {
@@ -119,7 +123,7 @@ public class InquiryFragment extends Fragment {
         gson = new Gson();
         OkHttpUtils
                 .post()
-                .url(Http_data.http_data + "/findInquiryList")
+                .url(Http_data.http_data + "/FindDoctorList")
                 .build()
                 .execute(new StringCallback() {
                     @Override
@@ -138,6 +142,8 @@ public class InquiryFragment extends Fragment {
                             Inquiry inquiry = (Inquiry) it.next();
                             list.add(inquiry);
                         }
+
+
                         adapter.notifyDataSetChanged();
                         rl_loading.setVisibility(View.GONE);
                     }

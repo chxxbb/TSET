@@ -57,6 +57,8 @@ public class PasswordSettingActivity extends AppCompatActivity implements View.O
         et_forpassword.addTextChangedListener(textchangelisterer);
     }
 
+
+
     private TextWatcher textchangelisterer = new TextWatcher() {
         @Override
         public void beforeTextChanged(CharSequence s, int start, int count, int after) {
@@ -86,7 +88,8 @@ public class PasswordSettingActivity extends AppCompatActivity implements View.O
         public void onClick(View v) {
             OkHttpUtils
                     .post()
-                    .url(Http_data.http_data + "/changeP" + "?" + User_Http.user.getId())
+                    .url(Http_data.http_data + "/ChangeP" )
+                    .addParams("id",User_Http.user.getId()+"")
                     .addParams("oldPassword", et_forpassword.getText().toString())
                     .addParams("newPassword", et_newpassword.getText().toString())
                     .build()

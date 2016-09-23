@@ -2,6 +2,8 @@ package com.example.chen.tset.page;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.util.Log;
@@ -28,6 +30,7 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
+
 
 import okhttp3.Call;
 
@@ -72,37 +75,60 @@ public class CharactersafeFragment extends Fragment {
         list = new ArrayList<>();
         adapter = new CharactersafeAdapter1(getContext(), list);
         lv_charactersafe.setAdapter(adapter);
-        OkHttpUtils
-                .post()
-                .url(Http_data.http_data + "/FindCyclopediaListByCategoryId")
-                .addParams("categoryId", getI() + "")
-                .build()
-                .execute(new StringCallback() {
-                    @Override
-                    public void onError(Call call, Exception e, int id) {
-                        rl_nonetwork.setVisibility(View.VISIBLE);
-                    }
+        Log.e("资讯页面ID",getI()+"");
+        Thread thread = new Thread(new Runnable() {
+            @Override
+            public void run() {
+                OkHttpUtils
+                        .post()
+                        .url(Http_data.http_data + "/FindCyclopediaListByCategoryId")
+                        .addParams("categoryId", getI() + "")
+                        .build()
+                        .execute(new StringCallback() {
+                            @Override
+                            public void onError(Call call, Exception e, int id) {
+                                handler.sendEmptyMessage(1);
+                            }
 
-                    @Override
-                    public void onResponse(String response, int id) {
-                        Log.e("资讯返回",response);
-                        Type listtype = new TypeToken<LinkedList<Consult>>() {
-                        }.getType();
-                        LinkedList<Consult> leclist = gson.fromJson(response, listtype);
-                        for (Iterator it = leclist.iterator(); it.hasNext(); ) {
-                            Consult consult = (Consult) it.next();
-                            list.add(consult);
-                        }
-                        adapter.notifyDataSetChanged();
-                    }
-                });
+                            @Override
+                            public void onResponse(String response, int id) {
+                                Log.e("资讯返回", response);
+                                Type listtype = new TypeToken<LinkedList<Consult>>() {
+                                }.getType();
+                                LinkedList<Consult> leclist = gson.fromJson(response, listtype);
+                                for (Iterator it = leclist.iterator(); it.hasNext(); ) {
+                                    Consult consult = (Consult) it.next();
+                                    list.add(consult);
+                                }
+                                handler.sendEmptyMessage(0);
+
+                            }
+                        });
+            }
+        });
+        thread.start();
     }
+
+    Handler handler = new Handler() {
+        @Override
+        public void handleMessage(Message msg) {
+            switch (msg.what) {
+                case 0:
+                    adapter.notifyDataSetChanged();
+                    break;
+                case 1:
+                    rl_nonetwork.setVisibility(View.VISIBLE);
+                    break;
+            }
+        }
+    };
+
 
     private AdapterView.OnItemClickListener listener = new AdapterView.OnItemClickListener() {
         @Override
         public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
             Intent intent = new Intent(getContext(), ConsultPageActivity.class);
-            intent.putExtra("information",list.get(position).getId()+"");
+            intent.putExtra("information", list.get(position).getId() + "");
             //根据点击页面判断是否为收藏页面，如果为隐藏赞
             intent.putExtra("collect", "0");
             startActivity(intent);

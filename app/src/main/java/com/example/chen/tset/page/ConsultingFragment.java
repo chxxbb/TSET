@@ -43,7 +43,7 @@ public class ConsultingFragment extends Fragment {
         rl_loading = (RelativeLayout) view.findViewById(R.id.rl_loading);
 
 
-        //点击事件
+        //日历点击事件
         calendarView.setOnCalendarViewListener(new CalendarView.OnCalendarViewListener() {
 
             @Override
@@ -58,6 +58,7 @@ public class ConsultingFragment extends Fragment {
 
 
     private void init() {
+        //设置日历标注，标注时间，标注状态
         List<Date> markDates = new ArrayList<Date>();
         markDates.add(new Date());
         calendarView.setMarkDates(markDates);

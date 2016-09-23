@@ -109,7 +109,7 @@ public class MycollectActivity extends AppCompatActivity {
             //向下个页面传递判断是否为收藏页面和文章ID
             Intent intent = new Intent(MycollectActivity.this, ConsultPageActivity.class);
             intent.putExtra("collect", "1");
-            intent.putExtra("information", list.get(position).getId());
+            intent.putExtra("information", list.get(position).getCyclopediaId());
             startActivity(intent);
         }
     };

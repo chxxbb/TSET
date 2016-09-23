@@ -36,6 +36,7 @@
         </LinearLayout>
 
         <TextView
+            android:id="@+id/tv"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerInParent="true"
@@ -93,7 +94,6 @@
                             android:layout_marginLeft="@dimen/x30"
                             android:layout_marginRight="@dimen/x30"
                             android:layout_marginTop="@dimen/y50"
-                            android:text="宝宝挑食你无计可施？这些妙招学起来"
                             android:textColor="@color/fontcolor"
                             android:textSize="@dimen/y40" />
 
@@ -103,7 +103,6 @@
                             android:layout_height="wrap_content"
                             android:layout_marginLeft="@dimen/x30"
                             android:layout_marginTop="@dimen/y40"
-                            android:text="天使资讯  06-14  11:00"
                             android:textColor="@color/xmgray"
                             android:textSize="@dimen/y24" />
 
@@ -131,6 +130,7 @@
                         android:id="@+id/rl_nonetwork"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
+                        android:layout_marginTop="@dimen/y400"
                         android:background="@color/white"
                         android:visibility="gone">
 
@@ -159,6 +159,7 @@
                         android:id="@+id/rl_loading"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
+                        android:layout_marginTop="@dimen/y400"
                         android:background="@color/white">
 
                         <LinearLayout
@@ -207,13 +208,15 @@
                 android:orientation="vertical">
 
                 <ImageView
+                    android:id="@+id/iv_collsult"
                     android:layout_width="@dimen/x44"
                     android:layout_height="@dimen/y44"
                     android:layout_gravity="center_horizontal"
                     android:layout_marginTop="@dimen/y12"
-                    android:src="@drawable/consult_isonclickpraise" />
+                    android:background="@drawable/consult_isonclickpraise" />
 
                 <TextView
+                    android:id="@+id/tv_collsilt"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_horizontal"

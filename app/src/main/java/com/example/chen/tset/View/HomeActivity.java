@@ -6,8 +6,11 @@ import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.graphics.Color;
 import android.os.Build;
+import android.os.Environment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
@@ -20,9 +23,12 @@ import android.widget.RadioGroup;
 import android.widget.Toast;
 
 import com.example.chen.tset.Data.Chatcontent;
+import com.example.chen.tset.Data.Http_data;
 import com.example.chen.tset.Data.JPErrorCode;
+import com.example.chen.tset.Data.User;
 import com.example.chen.tset.Data.User_Http;
 import com.example.chen.tset.Utils.ChatpageDao;
+import com.example.chen.tset.Utils.SharedPsaveuser;
 import com.example.chen.tset.page.ConsultingFragment;
 import com.example.chen.tset.page.EncyclopediaFragment;
 import com.example.chen.tset.R;
@@ -30,8 +36,20 @@ import com.example.chen.tset.page.InquiryFragment;
 import com.example.chen.tset.page.InquiryView;
 import com.example.chen.tset.page.LectureroomFragment;
 import com.example.chen.tset.page.MypageFragment;
+import com.google.gson.Gson;
+import com.zhy.http.okhttp.OkHttpUtils;
+import com.zhy.http.okhttp.callback.StringCallback;
 
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.net.MalformedURLException;
+import java.net.URL;
 import java.util.Date;
+import java.util.Set;
+import java.util.logging.Handler;
 
 import cn.jpush.android.api.JPushInterface;
 import cn.jpush.im.android.api.JMessageClient;
@@ -41,6 +59,7 @@ import cn.jpush.im.android.api.event.MessageEvent;
 import cn.jpush.im.android.api.event.NotificationClickEvent;
 import cn.jpush.im.android.api.model.Message;
 import cn.jpush.im.api.BasicCallback;
+import okhttp3.Call;
 
 public class HomeActivity extends AppCompatActivity implements View.OnClickListener {
     FragmentManager fm;
@@ -55,7 +74,15 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
     private ConsultingFragment consultingFragment;
     private InquiryView iv_inquiry;
     ChatpageDao db;
-
+    Set<User> set;
+    File sdcardTempFile;
+    File audioFile;
+    String icon;
+    Integer id;
+    String name;
+    String phone;
+    String gender;
+    SharedPsaveuser sp;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -69,8 +96,38 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
         jmessage();
         Chatcontent chatcontent = new Chatcontent(null, 0L, null, null, null, User_Http.user.getPhone());
         db.addchatcont(chatcontent);
+        sp = new SharedPsaveuser(HomeActivity.this);
 
     }
+
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+        spStorage();
+    }
+
+    @Override
+    protected void onDestroy() {
+        JMessageClient.unRegisterEventReceiver(this);
+        super.onDestroy();
+    }
+
+    //将用户基本信息保存在本地
+    private void spStorage() {
+        if(User_Http.user.getId()!=null){
+            id = User_Http.user.getId();
+            name = User_Http.user.getName();
+            phone = User_Http.user.getPhone();
+            gender = User_Http.user.getGender();
+            sp.setspUser(id, phone, name, gender);
+            Log.e("保存",sp.getTag().toString());
+        }
+
+
+    }
+
+
 
 
 
@@ -98,11 +155,15 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
         });
     }
 
+
+
     @TargetApi(Build.VERSION_CODES.JELLY_BEAN)
     public void onEventMainThread(MessageEvent event) {
         Message msg = event.getMessage();
         switch (msg.getContentType()) {
             case text:
+
+
                 TextContent textContent = (TextContent) msg.getContent();
                 String content = textContent.getText();
                 String username = msg.getFromID();
@@ -112,6 +173,8 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
                 db.addchatcont(chatcontent);
                 break;
             case image:
+
+
                 //处理图片消息
                 ImageContent imageContent = (ImageContent) msg.getContent();
                 String mfile = imageContent.getLocalPath();//图片本地地址 无效
@@ -153,17 +216,21 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
         fl_registration.setOnClickListener(listener);
     }
 
+
+
     private void init() {
         fm = getSupportFragmentManager();
         rb_encyclopedia.performClick();
     }
+
+
 
     private void hideAllFragment(FragmentTransaction fragmentTransaction) {
         if (encyclopediaFragment != null) fragmentTransaction.hide(encyclopediaFragment);
         if (lectureroomFragment != null) fragmentTransaction.hide(lectureroomFragment);
         if (mypageFragment != null) fragmentTransaction.hide(mypageFragment);
         if (inquiryFragment != null) fragmentTransaction.hide(inquiryFragment);
-        if(consultingFragment!=null)fragmentTransaction.hide(consultingFragment);
+        if (consultingFragment != null) fragmentTransaction.hide(consultingFragment);
     }
 
 
@@ -236,11 +303,6 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
         }
     };
 
-    @Override
-    protected void onDestroy() {
-        JMessageClient.unRegisterEventReceiver(this);
-        super.onDestroy();
-    }
 
     @Override
     protected void onPause() {

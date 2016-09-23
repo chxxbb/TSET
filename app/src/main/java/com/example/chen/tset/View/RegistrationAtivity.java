@@ -117,7 +117,7 @@ public class RegistrationAtivity extends AppCompatActivity {
         data = new ArrayList<>();
         data1 = new ArrayList<>();
         gson = new Gson();
-        professionaltitleinit();
+//        professionaltitleinit();
         divisioninit();
     }
 
@@ -523,7 +523,7 @@ public class RegistrationAtivity extends AppCompatActivity {
     private void divisioninit() {
         OkHttpUtils
                 .post()
-                .url(Http_data.http_data + "/resulters")
+                .url(Http_data.http_data + "/FindSectionAndTitleList")
                 .build()
                 .execute(new StringCallback() {
                     @Override

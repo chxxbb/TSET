@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.net.Uri;
+import android.os.Environment;
 import android.os.SystemClock;
 import android.provider.MediaStore;
 import android.support.v7.app.AppCompatActivity;
@@ -15,11 +16,17 @@ import android.widget.LinearLayout;
 import android.widget.Toast;
 
 import com.example.chen.tset.Data.Http_data;
+import com.example.chen.tset.Data.User_Http;
 import com.example.chen.tset.R;
+import com.example.chen.tset.Utils.SharedPsaveuser;
 import com.zhy.http.okhttp.OkHttpUtils;
 import com.zhy.http.okhttp.callback.StringCallback;
 
 import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.net.URL;
 
 import okhttp3.Call;
 /**
@@ -93,9 +100,11 @@ public class IconmanageActivity extends AppCompatActivity {
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+
         if (resultCode == RESULT_OK) {
             Bitmap bmp = BitmapFactory.decodeFile(sdcardTempFile.getAbsolutePath());
             iv_ico.setImageBitmap(bmp);
         }
     }
+
 }
