@@ -19,6 +19,7 @@ import com.zhy.http.okhttp.OkHttpUtils;
 import com.zhy.http.okhttp.callback.StringCallback;
 
 import okhttp3.Call;
+
 /**
  * 修改昵称
  */
@@ -38,6 +39,7 @@ public class NamepageActivity extends AppCompatActivity {
         et_name_save = (EditText) findViewById(R.id.et_name_save);
         tv_pas = (TextView) findViewById(R.id.tv_pas);
         ll_rutname = (LinearLayout) findViewById(R.id.ll_rutname);
+        et_name_save.setHint(User_Http.user.getName());
         et_name_save.addTextChangedListener(textListener);
         ll_rutname.setOnClickListener(listener);
     }
@@ -54,7 +56,7 @@ public class NamepageActivity extends AppCompatActivity {
             if (et_name_save.length() == 0) {
                 tv_pas.setTextColor(android.graphics.Color.parseColor("#e0e0e0"));
                 tv_pas.setOnClickListener(null);
-            }else {
+            } else {
                 tv_pas.setTextColor(android.graphics.Color.parseColor("#6fc9e6"));
                 tv_pas.setOnClickListener(listener);
             }
@@ -75,15 +77,14 @@ public class NamepageActivity extends AppCompatActivity {
                 case R.id.tv_pas:
                     OkHttpUtils
                             .post()
-                            .url(Http_data.http_data + "/ChangeName" )
-                            .addParams("id",User_Http.user.getId()+"")
+                            .url(Http_data.http_data + "/ChangeName")
+                            .addParams("id", User_Http.user.getId() + "")
                             .addParams("name", et_name_save.getText().toString())
                             .build()
                             .execute(new StringCallback() {
                                 @Override
                                 public void onError(Call call, Exception e, int id) {
                                     Toast.makeText(NamepageActivity.this, "网络连接失败", Toast.LENGTH_SHORT).show();
-                                    finish();
                                 }
 
                                 @Override

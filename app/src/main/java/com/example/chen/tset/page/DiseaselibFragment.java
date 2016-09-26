@@ -140,7 +140,6 @@ public class DiseaselibFragment extends Fragment {
                     view1.setVisibility(View.GONE);
                     rl_loading.setVisibility(View.GONE);
                     rl_nonetwork.setVisibility(View.VISIBLE);
-                    Toast.makeText(getContext(), "网络连接失败", Toast.LENGTH_SHORT).show();
                     break;
                 case 2:
                     diseaselibrecyvAdapter.notifyDataSetChanged();

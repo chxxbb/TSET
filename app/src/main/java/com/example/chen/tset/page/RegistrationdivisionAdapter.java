@@ -17,9 +17,9 @@ import java.util.List;
  */
 public class RegistrationdivisionAdapter extends BaseAdapter {
     private Context context;
-    private List<Registration> list;
+    private List<String> list;
 
-    public RegistrationdivisionAdapter(Context context, List<Registration> list) {
+    public RegistrationdivisionAdapter(Context context, List<String> list) {
         this.context = context;
         this.list = list;
     }
@@ -30,7 +30,7 @@ public class RegistrationdivisionAdapter extends BaseAdapter {
     }
 
     @Override
-    public Registration getItem(int position) {
+    public String getItem(int position) {
         return list.get(position);
     }
 
@@ -47,7 +47,7 @@ public class RegistrationdivisionAdapter extends BaseAdapter {
             convertView.setTag(new ViewHolder(convertView));
         }
         ViewHolder viewHolder = (ViewHolder) convertView.getTag();
-        viewHolder.textView.setText(list.get(position).getName());
+        viewHolder.textView.setText(list.get(position));
         return convertView;
     }
 

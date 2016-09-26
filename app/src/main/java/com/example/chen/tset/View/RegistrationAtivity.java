@@ -27,6 +27,7 @@ import android.widget.Toast;
 import com.example.chen.tset.Data.Consult;
 import com.example.chen.tset.Data.Http_data;
 import com.example.chen.tset.Data.Registration;
+import com.example.chen.tset.Data.User_Http;
 import com.example.chen.tset.R;
 import com.example.chen.tset.page.RegistrationageAdapter;
 import com.example.chen.tset.page.RegistrationdivisionAdapter;
@@ -42,6 +43,7 @@ import java.util.Calendar;
 import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Map;
 
 import okhttp3.Call;
 
@@ -50,7 +52,7 @@ import okhttp3.Call;
  */
 public class RegistrationAtivity extends AppCompatActivity {
     private RelativeLayout rl_city, rl_gender, rl_time, rl_age, rl_professionaltitle, rl_departments, rl_nonetwork;
-    private LinearLayout ll_rutregistration, ll_cancel;
+    private LinearLayout ll_rutregistration, ll_cancel, ll_registr;
     private Dialog setHeadDialog;
     private View dialogView;
     private TextView tv_city, tv_gender, tv_time, tv_age, tv_professionaltitle, tv_departments;
@@ -63,9 +65,9 @@ public class RegistrationAtivity extends AppCompatActivity {
     //年龄数据
     List<String> list;
     //职称
-    List<Registration> data;
+    List<String> data;
     //科室
-    List<Registration> data1;
+    List<String> data1;
     RegistrationageAdapter adapter;
     RegistrationdivisionAdapter divisionAdapter;
     RegistrationdivisionAdapter divisionAdapter1;
@@ -79,10 +81,15 @@ public class RegistrationAtivity extends AppCompatActivity {
         requestWindowFeature(Window.FEATURE_NO_TITLE);
         setContentView(R.layout.activity_registration_ativity);
         findView();
+
+
+        divisioninit();
     }
 
 
     private void findView() {
+
+
         rl_city = (RelativeLayout) findViewById(R.id.rl_city);
         tv_city = (TextView) findViewById(R.id.tv_city);
         rl_gender = (RelativeLayout) findViewById(R.id.rl_gender);
@@ -101,6 +108,7 @@ public class RegistrationAtivity extends AppCompatActivity {
         et_name = (EditText) findViewById(R.id.et_name);
         et_phone = (EditText) findViewById(R.id.et_phone);
         et_describe = (EditText) findViewById(R.id.et_describe);
+        ll_registr = (LinearLayout) findViewById(R.id.ll_registr);
         rl_departments.setOnClickListener(listener);
         rl_city.setOnClickListener(listener);
         rl_gender.setOnClickListener(listener);
@@ -118,7 +126,7 @@ public class RegistrationAtivity extends AppCompatActivity {
         data1 = new ArrayList<>();
         gson = new Gson();
 //        professionaltitleinit();
-        divisioninit();
+
     }
 
     private View.OnClickListener listener = new View.OnClickListener() {
@@ -164,32 +172,7 @@ public class RegistrationAtivity extends AppCompatActivity {
     };
 
     private void pay() {
-//        OkHttpUtils
-//                .post()
-//                .url(Http_data.http_data + "/addRegistration")
-//                .addParams("city", tv_city.getText().toString())
-//                .addParams("section", tv_departments.getText().toString())
-//                .addParams("title", tv_professionaltitle.getText().toString())
-//                .addParams("time", tv_time.getText().toString())
-//                .addParams("sex", tv_gender.getText().toString())
-//                .addParams("age", tv_age.getText().toString())
-//                .addParams("name", et_name.getText().toString())
-//                .addParams("phone", et_phone.getText().toString())
-//                .addParams("content", et_describe.getText().toString())
-//                .addParams("money", "1")
-//                .build()
-//                .execute(new StringCallback() {
-//                    @Override
-//                    public void onError(Call call, Exception e, int id) {
-//                        Toast.makeText(RegistrationAtivity.this, "网络连接失败", Toast.LENGTH_SHORT).show();
-//                    }
-//
-//                    @Override
-//                    public void onResponse(String response, int id) {
-//                        Log.e("一键挂号支付返回", response);
-//
-//                    }
-//                });
+
         //判断选项是否都已选择完
         if (tv_city.getText().toString().equals("请选择城市")) {
             Toast.makeText(RegistrationAtivity.this, "请选择城市", Toast.LENGTH_SHORT).show();
@@ -208,6 +191,33 @@ public class RegistrationAtivity extends AppCompatActivity {
         } else if (et_phone.getText().toString().equals("") || et_name.getText().toString() == null) {
             Toast.makeText(RegistrationAtivity.this, "请输入联系方式", Toast.LENGTH_SHORT).show();
         } else {
+
+            OkHttpUtils
+                    .post()
+                    .url(Http_data.http_data + "/AddRegistrationOrder")
+                    .addParams("city", tv_city.getText().toString())
+                    .addParams("section", tv_departments.getText().toString())
+                    .addParams("title", tv_professionaltitle.getText().toString())
+                    .addParams("time", tv_time.getText().toString())
+                    .addParams("sex", tv_gender.getText().toString())
+                    .addParams("age", tv_age.getText().toString())
+                    .addParams("name", et_name.getText().toString())
+                    .addParams("phone", et_phone.getText().toString())
+                    .addParams("content", et_describe.getText().toString())
+                    .addParams("userId", User_Http.user.getId()+"")
+                    .build()
+                    .execute(new StringCallback() {
+                        @Override
+                        public void onError(Call call, Exception e, int id) {
+                            Toast.makeText(RegistrationAtivity.this, "网络连接失败", Toast.LENGTH_SHORT).show();
+                        }
+
+                        @Override
+                        public void onResponse(String response, int id) {
+                            Log.e("一键挂号支付返回", response);
+
+                        }
+                    });
 //            setHeadDialog = new Builder(this).create();
             setHeadDialog = new Dialog(this, R.style.CustomDialog);
             setHeadDialog.show();
@@ -248,6 +258,7 @@ public class RegistrationAtivity extends AppCompatActivity {
 
     }
 
+
     private void payonclick() {
         rb_zhifb.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -269,6 +280,7 @@ public class RegistrationAtivity extends AppCompatActivity {
         });
     }
 
+
     private void departmentsshowDialog() {
 //        setHeadDialog = new Builder(this).create();
         setHeadDialog = new Dialog(this, R.style.CustomDialog);
@@ -283,13 +295,14 @@ public class RegistrationAtivity extends AppCompatActivity {
         departmentsdialogclick();
     }
 
+
     public void departmentsdialogclick() {
         Button btn_cancel = (Button) dialogView.findViewById(R.id.btn_cancel);
         ListView lv_registration = (ListView) dialogView.findViewById(R.id.lv_registration);
         lv_registration.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                tv_departments.setText(data1.get(position).getName());
+                tv_departments.setText(data1.get(position));
                 tv_departments.setTextColor(android.graphics.Color.parseColor("#323232"));
                 setHeadDialog.dismiss();
             }
@@ -303,20 +316,27 @@ public class RegistrationAtivity extends AppCompatActivity {
         });
     }
 
+
     private void professionaltitleshowDialog() {
-//        setHeadDialog = new Builder(this).create();
+
+
         setHeadDialog = new Dialog(this, R.style.CustomDialog);
         setHeadDialog.show();
+
         dialogView = View.inflate(getApplicationContext(), R.layout.registration_dialog, null);
         ListView lv_registration = (ListView) dialogView.findViewById(R.id.lv_registration);
+
         lv_registration.setVerticalScrollBarEnabled(false);
         lv_registration.setAdapter(divisionAdapter);
+
         setHeadDialog.getWindow().setContentView(dialogView);
+
         WindowManager.LayoutParams lp = setHeadDialog.getWindow().getAttributes();
         setHeadDialog.getWindow().setAttributes(lp);
         professionaltitleclick();
 
     }
+
 
     private void professionaltitleclick() {
         Button btn_cancel = (Button) dialogView.findViewById(R.id.btn_cancel);
@@ -324,7 +344,7 @@ public class RegistrationAtivity extends AppCompatActivity {
         lv_registration.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                tv_professionaltitle.setText(data.get(position).getName());
+                tv_professionaltitle.setText(data.get(position));
                 tv_professionaltitle.setTextColor(android.graphics.Color.parseColor("#323232"));
                 setHeadDialog.dismiss();
             }
@@ -338,13 +358,18 @@ public class RegistrationAtivity extends AppCompatActivity {
         });
     }
 
+
     private void ageshowDialog() {
 //        setHeadDialog = new Builder(this).create();
         setHeadDialog = new Dialog(this, R.style.CustomDialog);
         setHeadDialog.show();
+
+
         //设置弹出框视图
         dialogView = View.inflate(getApplicationContext(), R.layout.registration_dialog, null);
         ListView lv_registration = (ListView) dialogView.findViewById(R.id.lv_registration);
+
+
         lv_registration.setVerticalScrollBarEnabled(false);
         list = new ArrayList<>();
         for (int i = 1; i < 19; i++) {
@@ -359,6 +384,7 @@ public class RegistrationAtivity extends AppCompatActivity {
         setHeadDialog.getWindow().setAttributes(lp);
         agedialogclick();
     }
+
 
     private void agedialogclick() {
         Button btn_cancel = (Button) dialogView.findViewById(R.id.btn_cancel);
@@ -406,6 +432,7 @@ public class RegistrationAtivity extends AppCompatActivity {
         dialog.show();
     }
 
+
     //选择性别
     private void gendershowDialog() {
 //        setHeadDialog = new Builder(this).create();
@@ -418,6 +445,7 @@ public class RegistrationAtivity extends AppCompatActivity {
         setHeadDialog.getWindow().setAttributes(lp);
         genderdialogclick();
     }
+
 
     private void genderdialogclick() {
         Button btn_cancel = (Button) dialogView.findViewById(R.id.btn_cancel);
@@ -450,6 +478,7 @@ public class RegistrationAtivity extends AppCompatActivity {
         });
     }
 
+
     //选择城市
     public void cityshowDialog() {
 //        setHeadDialog = new Builder(this).create();
@@ -462,6 +491,7 @@ public class RegistrationAtivity extends AppCompatActivity {
         setHeadDialog.getWindow().setAttributes(lp);
         citydialogclick();
     }
+
 
     private void citydialogclick() {
         Button btn_cancel = (Button) dialogView.findViewById(R.id.btn_cancel);
@@ -492,33 +522,6 @@ public class RegistrationAtivity extends AppCompatActivity {
         });
     }
 
-    private void professionaltitleinit() {
-        OkHttpUtils
-                .post()
-                .url(Http_data.http_data + "/resulter")
-                .build()
-                .execute(new StringCallback() {
-                    @Override
-                    public void onError(Call call, Exception e, int id) {
-                        rl_nonetwork.setVisibility(View.VISIBLE);
-                    }
-
-                    @Override
-                    public void onResponse(String response, int id) {
-                        Log.e("一键挂号职称返回", response);
-//                        Type listtype = new TypeToken<LinkedList<Registration>>() {
-//                        }.getType();
-//                        LinkedList<Registration> leclist = gson.fromJson(response, listtype);
-//                        for (Iterator it = leclist.iterator(); it.hasNext(); ) {
-//                            Registration registration = (Registration) it.next();
-//                            data.add(registration);
-//                        }
-//                        divisionAdapter = new RegistrationdivisionAdapter(RegistrationAtivity.this, data);
-//                        divisionAdapter.notifyDataSetChanged();
-
-                    }
-                });
-    }
 
     private void divisioninit() {
         OkHttpUtils
@@ -528,21 +531,36 @@ public class RegistrationAtivity extends AppCompatActivity {
                 .execute(new StringCallback() {
                     @Override
                     public void onError(Call call, Exception e, int id) {
-                        Toast.makeText(RegistrationAtivity.this, "失败", Toast.LENGTH_SHORT).show();
+                        ll_registr.setVisibility(View.GONE);
+                        rl_nonetwork.setVisibility(View.VISIBLE);
+                        Toast.makeText(RegistrationAtivity.this, "网络连接失败", Toast.LENGTH_SHORT).show();
                     }
 
                     @Override
                     public void onResponse(String response, int id) {
-                        Log.e("一键挂号科室返回", response);
-//                        Type listtype = new TypeToken<LinkedList<Registration>>() {
-//                        }.getType();
-//                        LinkedList<Registration> leclist = gson.fromJson(response, listtype);
-//                        for (Iterator it = leclist.iterator(); it.hasNext(); ) {
-//                            Registration registration = (Registration) it.next();
-//                            data1.add(registration);
-//                        }
-//                        divisionAdapter1 = new RegistrationdivisionAdapter(RegistrationAtivity.this, data1);
-//                        divisionAdapter1.notifyDataSetChanged();
+                        Log.e("一键挂号返回", response);
+
+
+                        Type listtype = new TypeToken<List<List<String>>>() {
+                        }.getType();
+                        List<List<String>> mlist = gson.fromJson(response, listtype);
+
+                        for (int j = 0; j < mlist.get(1).size(); j++) {
+                            data.add(mlist.get(1).get(j));
+                        }
+
+
+                        for (int i = 0; i < mlist.get(0).size(); i++) {
+                            data1.add(mlist.get(0).get(i));
+                        }
+
+                        //职称
+                        divisionAdapter = new RegistrationdivisionAdapter(RegistrationAtivity.this, data);
+                        divisionAdapter.notifyDataSetChanged();
+
+                        //科室
+                        divisionAdapter1 = new RegistrationdivisionAdapter(RegistrationAtivity.this, data1);
+                        divisionAdapter1.notifyDataSetChanged();
 
                     }
 

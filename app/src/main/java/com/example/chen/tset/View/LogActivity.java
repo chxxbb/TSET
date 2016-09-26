@@ -94,8 +94,10 @@ public class LogActivity extends AppCompatActivity {
 
                         if (response.equals("1")) {
                             Toast.makeText(LogActivity.this, "密码被修改", Toast.LENGTH_SHORT).show();
+                            sp.clearinit();
                             Intent i = new Intent(LogActivity.this, LoginActivity.class);
                             startActivity(i);
+                            finish();
                         } else {
                             Gson gson = new Gson();
                             User user = gson.fromJson(response, User.class);

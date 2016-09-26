@@ -4,6 +4,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.TextView;
@@ -71,8 +72,8 @@ public class FeedbackActivity extends AppCompatActivity implements View.OnClickL
             } else {
                 OkHttpUtils
                         .post()
-                        .url(Http_data.http_data + "/addadvise")
-                        .addParams("user_id", User_Http.user.getId()+"")
+                        .url(Http_data.http_data + "/AddFeedback")
+                        .addParams("userId", User_Http.user.getId()+"")
                         .addParams("content", et_feedback.getText().toString())
                         .build()
                         .execute(new StringCallback() {
@@ -82,6 +83,7 @@ public class FeedbackActivity extends AppCompatActivity implements View.OnClickL
                             }
                             @Override
                             public void onResponse(String response, int id) {
+                                Log.e("反馈",response);
                                 if (response.equals("0")) {
                                     Toast.makeText(FeedbackActivity.this, "提交成功", Toast.LENGTH_SHORT).show();
                                     finish();
