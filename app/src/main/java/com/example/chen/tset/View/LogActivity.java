@@ -66,9 +66,11 @@ public class LogActivity extends AppCompatActivity {
             registerjudge();
             Intent intent = new Intent(LogActivity.this, HomeActivity.class);
             startActivity(intent);
+            finish();
         } else {
             Intent intent = new Intent(LogActivity.this, LoginActivity.class);
             startActivity(intent);
+            finish();
         }
     }
 

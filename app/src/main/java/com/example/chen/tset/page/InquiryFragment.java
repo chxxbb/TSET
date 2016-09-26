@@ -331,7 +331,6 @@ public class InquiryFragment extends Fragment {
 
     //城市弹出框
     public void cityshowDialog() {
-//        setHeadDialog = new AlertDialog.Builder(getContext()).create();
         setHeadDialog = new Dialog(getContext(), R.style.CustomDialog);
         setHeadDialog.show();
         dialogView = View.inflate(getContext(), R.layout.inquiry_city_dialog, null);

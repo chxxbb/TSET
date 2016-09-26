@@ -5,24 +5,26 @@ package com.example.chen.tset.Data;
  * 医生评论
  */
 public class Doctorcomment {
-    private String name;
+    private String userName;
     private String content;
-    private String usericon;
+    private String userIcon;
     private String time;
+    private int id;
 
-    public Doctorcomment(String name, String content, String usericon, String time) {
-        this.name = name;
+    public Doctorcomment(String userName, String content, String userIcon, String time, int id) {
+        this.userName = userName;
         this.content = content;
-        this.usericon = usericon;
+        this.userIcon = userIcon;
         this.time = time;
+        this.id = id;
     }
 
-    public String getName() {
-        return name;
+    public String getUserName() {
+        return userName;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setUserName(String userName) {
+        this.userName = userName;
     }
 
     public String getContent() {
@@ -33,12 +35,12 @@ public class Doctorcomment {
         this.content = content;
     }
 
-    public String getUsericon() {
-        return usericon;
+    public String getUserIcon() {
+        return userIcon;
     }
 
-    public void setUsericon(String usericon) {
-        this.usericon = usericon;
+    public void setUserIcon(String userIcon) {
+        this.userIcon = userIcon;
     }
 
     public String getTime() {
@@ -47,5 +49,13 @@ public class Doctorcomment {
 
     public void setTime(String time) {
         this.time = time;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 }

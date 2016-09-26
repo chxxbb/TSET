@@ -76,7 +76,7 @@ public class PersonaldataActivity extends AppCompatActivity {
     protected void onStart() {
         super.onStart();
 
-        //判断是否是联网状态
+        //判断是否是联网状态 如果用户实体类中数据为空 则使用本地保存的数据
         if (User_Http.user.getGender() == null) {
             tv_sex.setText(sp.getTag().getGender());
         } else {
@@ -171,11 +171,8 @@ public class PersonaldataActivity extends AppCompatActivity {
     };
 
     @Override
-    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        if (resultCode == RESULT_OK) {
-            Bitmap bmp = BitmapFactory.decodeFile(sdcardTempFile.getAbsolutePath());
-            iv_icon.setImageBitmap(bmp);
-        }
+    protected void onActivityResult(int requestCode, final int resultCode, Intent data) {
+
         OkHttpUtils
                 .postFile()
                 .url(Http_data.http_data + "/changeIcon" + "?" + User_Http.user.getId())
@@ -184,22 +181,28 @@ public class PersonaldataActivity extends AppCompatActivity {
                 .execute(new StringCallback() {
                     @Override
                     public void onError(Call call, Exception e, int id) {
+                        if(sdcardTempFile!=null){
+                            Toast.makeText(PersonaldataActivity.this, "头像修改失败", Toast.LENGTH_SHORT).show();
+                        }
 
                     }
 
                     @Override
                     public void onResponse(String response, int id) {
                         Log.e("头像返回", response);
+                        if (resultCode == RESULT_OK) {
+                            Bitmap bmp = BitmapFactory.decodeFile(sdcardTempFile.getAbsolutePath());
+                            iv_icon.setImageBitmap(bmp);
+                        }
+                        String icon = sdcardTempFile.getAbsolutePath();
+                        Log.e("图片", icon);
+                        //将更改过的头像保存在本地，并清除用户实体类中头像
+                        sp.setUsericon(icon);
+                        User_Http.user.setIcon(null);
 
                     }
                 });
-        String icon = sdcardTempFile.getAbsolutePath();
-        Log.e("图片", icon);
 
-
-        //将更改过的头像保存在本地，并清除用户实体类中头像
-        sp.setUsericon(icon);
-        User_Http.user.setIcon(null);
     }
 
 

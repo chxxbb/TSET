@@ -30,13 +30,7 @@ public class MyBroadcastReceiver extends BroadcastReceiver {
         if (JPushInterface.ACTION_REGISTRATION_ID.equals(intent.getAction())) {
         } else if (JPushInterface.ACTION_MESSAGE_RECEIVED.equals(intent.getAction())) {
             String str = bundle.getString(JPushInterface.EXTRA_MESSAGE);
-//            Map<String, String> map = new HashMap<String, String>();
-//            Gson gson = new Gson();
-//            map = gson.fromJson(str, new TypeToken<HashMap<String, String>>() {
-//            }.getType());
-//            String str1=map.get("1");
-//            String str2=map.get("2");
-//            Log.e("a",str2+"    "+str1);
+
             System.out.println("收到了自定义消息。消息内容是：" + bundle.getString(JPushInterface.EXTRA_MESSAGE));
             Log.e("11", bundle.getString(JPushInterface.EXTRA_MESSAGE));
             // 自定义消息不会展示在通知栏，完全要开发者写代码去处理

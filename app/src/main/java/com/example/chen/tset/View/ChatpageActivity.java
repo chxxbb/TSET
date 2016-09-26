@@ -80,7 +80,8 @@ public class ChatpageActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_chatpage);
         JMessageClient.registerEventReceiver(this);
-        JMessageClient.enterSingleConversation("18302615820");
+        //设置后在此页面接收此用户消息不会再通知栏中显示
+        JMessageClient.enterSingleConversation("13608170152");
         db = new ChatpageDao(this);
         list = new ArrayList<>();
         historylist = new ArrayList<>();
@@ -121,9 +122,8 @@ public class ChatpageActivity extends AppCompatActivity {
 
 
     private void init() {
-
-        historylist = db.chatfind("18302615820");
-        Log.e("数据库", historylist.toString());
+        //从数据库中获取此用户聊天记录
+        historylist = db.chatfind("13608170152");
         for (int i = 0; i < historylist.size(); i++) {
             list.add(historylist.get(i));
 
@@ -131,6 +131,7 @@ public class ChatpageActivity extends AppCompatActivity {
         adapter = new ChatpageAdapter(this, list, doctoricon);
         listView.setAdapter(adapter);
         if (historylist.size() > 8) {
+            //是listview从下面刷新数据
             listView.setStackFromBottom(true);
         }
 
@@ -145,22 +146,20 @@ public class ChatpageActivity extends AppCompatActivity {
                 @Override
                 public void run() {
                     if (actionId == EditorInfo.IME_ACTION_SEND) {
-                        //发送消息
-                        Conversation c = JMessageClient.getSingleConversation("18302615820");
-//                13625784562
-//                13213657894
-                        //13456327895
+                        //发送文本消息
+                        Conversation c = JMessageClient.getSingleConversation("13608170152");
                         if (c == null) {
-                            c = Conversation.createSingleConversation("18302615820");
-//                13608170152
+                            c = Conversation.createSingleConversation("13608170152");
+
                         }
                         TextContent textContent = new TextContent(et_chat.getText().toString());
                         Message message = c.createSendMessage(textContent);
                         JMessageClient.sendMessage(message);
                         Date dt = new Date();
                         Long time = dt.getTime();
+                        //存取到数据库中，+1用于判断是发送的消息还是接收的消息,1为自己发送的消息,2为接送到的消息
                         String content = "1" + et_chat.getText().toString();
-                        chatcontent = new Chatcontent(content, time, null, null, "18302615820", User_Http.user.getPhone());
+                        chatcontent = new Chatcontent(content, time, null, null, "13608170152", User_Http.user.getPhone());
                         list.add(chatcontent);
                         handler.sendEmptyMessage(0);
                         db.addchatcont(chatcontent);
@@ -205,11 +204,12 @@ public class ChatpageActivity extends AppCompatActivity {
             }
             switch (v.getId()) {
                 case R.id.iv_chat:
-
+                    //点击选择相机或截图
                     sendpictureDialog();
                     break;
 
                 case R.id.ll_consult_return:
+                    //登录聊天页面
                     JMessageClient.exitConversation();
                     finish();
                     break;
@@ -238,6 +238,7 @@ public class ChatpageActivity extends AppCompatActivity {
         btn_camera.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                //相机
                 Intent intent1 = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
                 intent1.putExtra(MediaStore.EXTRA_OUTPUT, Uri.fromFile(sdcardTempFile));
                 startActivityForResult(intent1, 100);
@@ -249,6 +250,7 @@ public class ChatpageActivity extends AppCompatActivity {
         btn_cutout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                //图片
                 Intent intent = new Intent("android.intent.action.PICK");
                 intent.setDataAndType(MediaStore.Images.Media.INTERNAL_CONTENT_URI, "image/*");
                 intent.putExtra("output", Uri.fromFile(sdcardTempFile));
@@ -270,6 +272,8 @@ public class ChatpageActivity extends AppCompatActivity {
 
     }
 
+
+    //用户点击返回键，关闭与改用户聊天
     @Override
     public void onBackPressed() {
         super.onBackPressed();
@@ -281,13 +285,18 @@ public class ChatpageActivity extends AppCompatActivity {
         public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
             if (list.get(position).getMasterfile() != null) {
                 setHeadDialog = new Dialog(ChatpageActivity.this, R.style.Dialog_Fullscreen);
-//            setHeadDialog = new AlertDialog.Builder(ChatpageActivity.this).create();
+
                 setHeadDialog.show();
                 dialogView = View.inflate(getApplicationContext(), R.layout.chat_imgv_dialog, null);
+
                 ImageView iv_chat_dial = (ImageView) dialogView.findViewById(R.id.iv_chat_dial);
+
                 ImageLoader.getInstance().displayImage("file:///" + list.get(position).getMasterfile(), iv_chat_dial);
+
                 setHeadDialog.getWindow().setContentView(dialogView);
+
                 WindowManager.LayoutParams lp = setHeadDialog.getWindow().getAttributes();
+
                 setHeadDialog.getWindow().setAttributes(lp);
             }
 
@@ -302,10 +311,11 @@ public class ChatpageActivity extends AppCompatActivity {
             case text:
                 //文本消息
                 TextContent textContent = (TextContent) msg.getContent();
+
                 String content = "2" + textContent.getText();
                 Date dt = new Date();
                 Long time = dt.getTime();
-                if (msg.getTargetID().equals("18302615820")) {
+                if (msg.getTargetID().equals("13608170152")) {
                     chatcontent = new Chatcontent(content, time, null, null, msg.getTargetID(), User_Http.user.getPhone());
                     list.add(chatcontent);
                     adapter.notifyDataSetChanged();
@@ -318,11 +328,10 @@ public class ChatpageActivity extends AppCompatActivity {
                 ImageContent imageContent = (ImageContent) msg.getContent();
                 imageContent.getLocalPath();//图片本地地址
                 String file = imageContent.getLocalThumbnailPath();//图片对应缩略图的本地地址
-                Log.e("接收的图片", file);
                 Date dt1 = new Date();
                 Long time1 = dt1.getTime();
                 chatcontent = new Chatcontent("2*2", time1, file, file, msg.getTargetID(), User_Http.user.getPhone());
-                if (msg.getTargetID().equals("18302615820")) {
+                if (msg.getTargetID().equals("13608170152")) {
                     list.add(chatcontent);
                     adapter.notifyDataSetChanged();
                 }
@@ -336,16 +345,17 @@ public class ChatpageActivity extends AppCompatActivity {
         Thread thread = new Thread(new Runnable() {
             @Override
             public void run() {
-                Conversation c = JMessageClient.getSingleConversation("18302615820");
+                Conversation c = JMessageClient.getSingleConversation("13608170152");
                 if (c == null) {
-                    c = Conversation.createSingleConversation("18302615820");
+                    c = Conversation.createSingleConversation("13608170152");
 //                13608170152
                 }
                 try {
+
                     ImageContent image = new ImageContent(sdcardTempFile);
                     Message message = c.createSendMessage(image);
                     JMessageClient.sendMessage(message);
-                    chatcontent = new Chatcontent("1*1", 0L, sdcardTempFile.getAbsolutePath(), sdcardTempFile.getAbsolutePath(), "18302615820", User_Http.user.getPhone());
+                    chatcontent = new Chatcontent("1*1", 0L, sdcardTempFile.getAbsolutePath(), sdcardTempFile.getAbsolutePath(), "13608170152", User_Http.user.getPhone());
                     Log.e("发送图片地址", sdcardTempFile.getAbsolutePath());
                     list.add(chatcontent);
                     db.addchatcont(chatcontent);

@@ -15,8 +15,10 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.View;
+import android.view.WindowManager;
 import android.widget.FrameLayout;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
@@ -83,6 +85,7 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
     String phone;
     String gender;
     SharedPsaveuser sp;
+    Context context;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -93,10 +96,17 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
         db = new ChatpageDao(this);
         findView();
         init();
-        jmessage();
+
         Chatcontent chatcontent = new Chatcontent(null, 0L, null, null, null, User_Http.user.getPhone());
         db.addchatcont(chatcontent);
         sp = new SharedPsaveuser(HomeActivity.this);
+
+
+
+        context=getBaseContext();
+        DisplayMetrics dm = new DisplayMetrics();
+        WindowManager windowManager = (WindowManager) context.getSystemService(Context.WINDOW_SERVICE);
+        windowManager.getDefaultDisplay().getMetrics(dm);
 
     }
 
@@ -104,6 +114,7 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
     @Override
     protected void onStart() {
         super.onStart();
+        jmessage();
         spStorage();
     }
 
@@ -121,7 +132,6 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
             phone = User_Http.user.getPhone();
             gender = User_Http.user.getGender();
             sp.setspUser(id, phone, name, gender);
-            Log.e("保存",sp.getTag().toString());
         }
 
 
@@ -130,9 +140,15 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
 
 
 
-
+    //登录jmeeage
     private void jmessage() {
-        JMessageClient.register(User_Http.user.getPhone(), "123456", new BasicCallback() {
+        String username=null;
+        if (User_Http.user.getPhone()==null){
+            username=sp.getTag().getPhone();
+        }else {
+            username=User_Http.user.getPhone();
+        }
+        JMessageClient.register(username, "123456", new BasicCallback() {
             @Override
             public void gotResult(int i, String s) {
                 if (i == 0) {
@@ -143,7 +159,7 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
             }
         });
 
-        JMessageClient.login(User_Http.user.getPhone(), "123456", new BasicCallback() {
+        JMessageClient.login(username, "123456", new BasicCallback() {
             @Override
             public void gotResult(int i, String s) {
                 if (i == 0) {
@@ -156,7 +172,7 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
     }
 
 
-
+    //接收其他用户发送的消息，会显示到通知栏
     @TargetApi(Build.VERSION_CODES.JELLY_BEAN)
     public void onEventMainThread(MessageEvent event) {
         Message msg = event.getMessage();

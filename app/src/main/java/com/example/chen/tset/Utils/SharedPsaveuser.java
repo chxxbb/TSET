@@ -62,4 +62,10 @@ public class SharedPsaveuser {
 
         return userinfo;
     }
+
+    //清空用户信息
+    public void clearinit(){
+        SharedPreferences sp = context.getSharedPreferences("user", Context.MODE_PRIVATE);
+        sp.edit().clear().commit();
+    }
 }

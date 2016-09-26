@@ -51,9 +51,9 @@ public class DoctorparticularsAdapter extends BaseAdapter {
             convertView.setTag(new ViewHolder(convertView));
         }
         ViewHolder viewHolder = (ViewHolder) convertView.getTag();
-        ImageLoader.getInstance().displayImage(list.get(position).getUsericon(), viewHolder.iv_icon);
+        ImageLoader.getInstance().displayImage(list.get(position).getUserIcon(), viewHolder.iv_icon);
         viewHolder.tv_content.setText(list.get(position).getContent());
-        viewHolder.tv_name.setText(list.get(position).getName());
+        viewHolder.tv_name.setText(list.get(position).getUserName());
         viewHolder.tv_time.setText(list.get(position).getTime());
         return convertView;
     }

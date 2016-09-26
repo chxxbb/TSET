@@ -8,6 +8,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.RelativeLayout;
+import android.widget.ScrollView;
 import android.widget.Toast;
 
 import com.example.chen.tset.R;
@@ -27,6 +28,8 @@ public class ConsultingFragment extends Fragment {
     View view;
     private CalendarView calendarView;
     private RelativeLayout rl_loading;
+    private ScrollView scrollview;
+
 
     @Nullable
     @Override
@@ -34,13 +37,21 @@ public class ConsultingFragment extends Fragment {
         view = inflater.inflate(R.layout.fragment_consulting, null);
         findView();
         init();
+
+
         return view;
     }
 
+    @Override
+    public void onStart() {
+        super.onStart();
+    }
 
     private void findView() {
         calendarView = (CalendarView) view.findViewById(R.id.calendar);
         rl_loading = (RelativeLayout) view.findViewById(R.id.rl_loading);
+        scrollview = (ScrollView) view.findViewById(R.id.scrollview);
+        scrollview.setVerticalScrollBarEnabled(false);
 
 
         //日历点击事件

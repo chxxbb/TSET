@@ -506,15 +506,15 @@ public class RegistrationAtivity extends AppCompatActivity {
                     @Override
                     public void onResponse(String response, int id) {
                         Log.e("一键挂号职称返回", response);
-                        Type listtype = new TypeToken<LinkedList<Registration>>() {
-                        }.getType();
-                        LinkedList<Registration> leclist = gson.fromJson(response, listtype);
-                        for (Iterator it = leclist.iterator(); it.hasNext(); ) {
-                            Registration registration = (Registration) it.next();
-                            data.add(registration);
-                        }
-                        divisionAdapter = new RegistrationdivisionAdapter(RegistrationAtivity.this, data);
-                        divisionAdapter.notifyDataSetChanged();
+//                        Type listtype = new TypeToken<LinkedList<Registration>>() {
+//                        }.getType();
+//                        LinkedList<Registration> leclist = gson.fromJson(response, listtype);
+//                        for (Iterator it = leclist.iterator(); it.hasNext(); ) {
+//                            Registration registration = (Registration) it.next();
+//                            data.add(registration);
+//                        }
+//                        divisionAdapter = new RegistrationdivisionAdapter(RegistrationAtivity.this, data);
+//                        divisionAdapter.notifyDataSetChanged();
 
                     }
                 });
@@ -534,15 +534,15 @@ public class RegistrationAtivity extends AppCompatActivity {
                     @Override
                     public void onResponse(String response, int id) {
                         Log.e("一键挂号科室返回", response);
-                        Type listtype = new TypeToken<LinkedList<Registration>>() {
-                        }.getType();
-                        LinkedList<Registration> leclist = gson.fromJson(response, listtype);
-                        for (Iterator it = leclist.iterator(); it.hasNext(); ) {
-                            Registration registration = (Registration) it.next();
-                            data1.add(registration);
-                        }
-                        divisionAdapter1 = new RegistrationdivisionAdapter(RegistrationAtivity.this, data1);
-                        divisionAdapter1.notifyDataSetChanged();
+//                        Type listtype = new TypeToken<LinkedList<Registration>>() {
+//                        }.getType();
+//                        LinkedList<Registration> leclist = gson.fromJson(response, listtype);
+//                        for (Iterator it = leclist.iterator(); it.hasNext(); ) {
+//                            Registration registration = (Registration) it.next();
+//                            data1.add(registration);
+//                        }
+//                        divisionAdapter1 = new RegistrationdivisionAdapter(RegistrationAtivity.this, data1);
+//                        divisionAdapter1.notifyDataSetChanged();
 
                     }
 

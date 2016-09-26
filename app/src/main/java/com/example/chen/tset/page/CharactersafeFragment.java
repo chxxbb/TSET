@@ -60,7 +60,10 @@ public class CharactersafeFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         view = inflater.inflate(R.layout.fragment_charactersafe, null);
         findView();
+
+
         init();
+
         return view;
     }
 
@@ -68,6 +71,13 @@ public class CharactersafeFragment extends Fragment {
         lv_charactersafe = (ListView) view.findViewById(R.id.lv_charactersafe);
         rl_nonetwork = (RelativeLayout) view.findViewById(R.id.rl_nonetwork);
         lv_charactersafe.setOnItemClickListener(listener);
+    }
+
+    @Override
+    public void onStart() {
+        super.onStart();
+
+
     }
 
     private void init() {

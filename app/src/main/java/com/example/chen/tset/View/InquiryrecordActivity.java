@@ -2,6 +2,7 @@ package com.example.chen.tset.View;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.ListView;
@@ -9,8 +10,14 @@ import android.widget.ListView;
 import com.example.chen.tset.R;
 import com.example.chen.tset.page.InquiryrecordAdapter;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
+
+import cn.jpush.im.android.api.JMessageClient;
+import cn.jpush.im.android.api.model.Conversation;
+
 /**
  * 问诊历史
  */
@@ -19,14 +26,18 @@ public class InquiryrecordActivity extends AppCompatActivity {
     private InquiryrecordAdapter adapter;
     private List<String> list;
     private LinearLayout ll_rut;
+    List<Conversation> clist;
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_inquiryrecord);
+
+        clist=JMessageClient.getConversationList();
         findView();
         init();
+
     }
 
 
@@ -39,19 +50,19 @@ public class InquiryrecordActivity extends AppCompatActivity {
 
     private void init() {
         list = new ArrayList<>();
-        list.add("上午 9:00");
-        list.add("上午 10:00");
-        list.add("上午 11:00");
-        list.add("上午 12:00");
-        list.add("上午 13:00");
-        list.add("上午 14:00");
-        list.add("上午 15:00");
-        list.add("上午 16:00");
-        list.add("上午 17:00");
-        list.add("上午 18:00");
-        adapter = new InquiryrecordAdapter(this, list);
-        lv_inquiryrecord.setAdapter(adapter);
-        adapter.notifyDataSetChanged();
+        if(list.size()==0){
+
+        }else {
+            for(int i=0;i<clist.size();i++){
+                Date d = new Date(clist.get(i).getLastMsgDate());
+                SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+                list.add(sdf.format(d));
+            }
+            adapter = new InquiryrecordAdapter(this, list);
+            lv_inquiryrecord.setAdapter(adapter);
+            adapter.notifyDataSetChanged();
+        }
+
     }
 
     private View.OnClickListener listener = new View.OnClickListener() {

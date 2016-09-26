@@ -5,42 +5,55 @@ package com.example.chen.tset.Data;
  * 医生列表
  */
 public class Doctor {
-    private String bis;
+
     private String icon;
-    private String bit;
-    private String bioo;
+
     private String title;
     private String name;
-    private String chatmoney;
-    private String callmoney;
+    private String chatCost;
+    private String callCost;
     private String adept;
     private String hospital;
     private String section;
-    private String bif;
-    private int sum;
+    private int commentCount;
+    private String seniority1;//资历1
 
-    public Doctor(String bis, String icon, String bit, String bioo, String title, String name, String chatmoney, String callmoney, String adept, String hospital, String section, String bif, int sum) {
-        this.bis = bis;
+    private String seniority2;//资历2
+
+    private String seniority3;//资历3
+
+    private String seniority4;//资历4
+
+    public Doctor(String icon, String title, String name, String chatCost, String callCost, String adept, String hospital, String section, int commentCount, String seniority1, String seniority2, String seniority3, String seniority4) {
         this.icon = icon;
-        this.bit = bit;
-        this.bioo = bioo;
         this.title = title;
         this.name = name;
-        this.chatmoney = chatmoney;
-        this.callmoney = callmoney;
+        this.chatCost = chatCost;
+        this.callCost = callCost;
         this.adept = adept;
         this.hospital = hospital;
         this.section = section;
-        this.bif = bif;
-        this.sum = sum;
+        this.commentCount = commentCount;
+        this.seniority1 = seniority1;
+        this.seniority2 = seniority2;
+        this.seniority3 = seniority3;
+        this.seniority4 = seniority4;
     }
 
-    public String getBis() {
-        return bis;
+    public String getChatCost() {
+        return chatCost;
     }
 
-    public void setBis(String bis) {
-        this.bis = bis;
+    public void setChatCost(String chatCost) {
+        this.chatCost = chatCost;
+    }
+
+    public String getCallCost() {
+        return callCost;
+    }
+
+    public void setCallCost(String callCost) {
+        this.callCost = callCost;
     }
 
     public String getIcon() {
@@ -49,22 +62,6 @@ public class Doctor {
 
     public void setIcon(String icon) {
         this.icon = icon;
-    }
-
-    public String getBit() {
-        return bit;
-    }
-
-    public void setBit(String bit) {
-        this.bit = bit;
-    }
-
-    public String getBioo() {
-        return bioo;
-    }
-
-    public void setBioo(String bioo) {
-        this.bioo = bioo;
     }
 
     public String getTitle() {
@@ -83,21 +80,7 @@ public class Doctor {
         this.name = name;
     }
 
-    public String getChatmoney() {
-        return chatmoney;
-    }
 
-    public void setChatmoney(String chatmoney) {
-        this.chatmoney = chatmoney;
-    }
-
-    public String getCallmoney() {
-        return callmoney;
-    }
-
-    public void setCallmoney(String callmoney) {
-        this.callmoney = callmoney;
-    }
 
     public String getAdept() {
         return adept;
@@ -123,19 +106,43 @@ public class Doctor {
         this.section = section;
     }
 
-    public String getBif() {
-        return bif;
+    public int getCommentCount() {
+        return commentCount;
     }
 
-    public void setBif(String bif) {
-        this.bif = bif;
+    public void setCommentCount(int commentCount) {
+        this.commentCount = commentCount;
     }
 
-    public int getSum() {
-        return sum;
+    public String getSeniority1() {
+        return seniority1;
     }
 
-    public void setSum(int sum) {
-        this.sum = sum;
+    public void setSeniority1(String seniority1) {
+        this.seniority1 = seniority1;
+    }
+
+    public String getSeniority2() {
+        return seniority2;
+    }
+
+    public void setSeniority2(String seniority2) {
+        this.seniority2 = seniority2;
+    }
+
+    public String getSeniority3() {
+        return seniority3;
+    }
+
+    public void setSeniority3(String seniority3) {
+        this.seniority3 = seniority3;
+    }
+
+    public String getSeniority4() {
+        return seniority4;
+    }
+
+    public void setSeniority4(String seniority4) {
+        this.seniority4 = seniority4;
     }
 }

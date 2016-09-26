@@ -69,7 +69,7 @@ public class InquiryAdapter extends BaseAdapter {
         viewHolder.textView.setText(9.9 + "分");
         viewHolder.tv_title.setText(list.get(position).getTitle());
         viewHolder.tv_name.setText(list.get(position).getName());
-        viewHolder.btn_money.setText("￥" + list.get(position).getMoney());
+        viewHolder.btn_money.setText("￥" + list.get(position).getChatCost());
         viewHolder.tv_intro.setText("擅长：" + list.get(position).getAdept());
         viewHolder.tv_section.setText(list.get(position).getSection());
         ImageLoader.getInstance().displayImage(list.get(position).getIcon(), viewHolder.iv_icon);

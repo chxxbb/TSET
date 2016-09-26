@@ -100,6 +100,7 @@ public class DiseaselibFragment extends Fragment {
                             @Override
                             public void onError(Call call, Exception e, int id) {
                                 handler.sendEmptyMessage(1);
+
                             }
 
                             @Override
@@ -114,6 +115,8 @@ public class DiseaselibFragment extends Fragment {
                                     list.add(dd);
                                 }
                                 handler.sendEmptyMessage(0);
+
+
 
 
                             }

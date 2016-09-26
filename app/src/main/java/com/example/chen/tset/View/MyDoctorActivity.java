@@ -101,7 +101,8 @@ public class MyDoctorActivity extends AppCompatActivity {
         @Override
         public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
             Intent intent = new Intent(MyDoctorActivity.this, DoctorparticularsActivity.class);
-            intent.putExtra("doctot_id", list.get(position).getDoctor_id() + "");
+            //医生ID
+            intent.putExtra("doctot_id", list.get(position).getId() + "");
             startActivity(intent);
         }
     };

@@ -35,6 +35,7 @@ import java.util.List;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 import okhttp3.Call;
+
 /**
  * 医生详情页面，与我的医生详情，问诊详情共用同一个接口
  */
@@ -46,11 +47,11 @@ public class DoctorparticularsActivity extends AppCompatActivity {
     List<Doctorcomment> list;
     List<Doctor> list1;
     Gson gson = new Gson();
-    private TextView tv_title, tv_name, tv_hospital, tv_bioo, tv_bis, tv_bit, tv_bif, tv_sum, tv_adept;
+    private TextView tv_title, tv_name, tv_hospital, tv_bioo, tv_bis, tv_bit, tv_bif, tv_sum, tv_adept, tv_grade;
     private Button btn_chatmoney, btn_callmoney;
     private CircleImageView iv_icon;
     private RelativeLayout rl_nonetwork, rl_loading;
-    String doctor_id=null;
+    String doctor_id = null;
 
 
     @Override
@@ -69,7 +70,7 @@ public class DoctorparticularsActivity extends AppCompatActivity {
     }
 
     private void findView() {
-        doctor_id=getIntent().getStringExtra("doctot_id");
+        doctor_id = getIntent().getStringExtra("doctot_id");
         tv_title = (TextView) findViewById(R.id.tv_title);
         tv_name = (TextView) findViewById(R.id.tv_name);
         btn_chatmoney = (Button) findViewById(R.id.btn_chatmoney);
@@ -86,6 +87,7 @@ public class DoctorparticularsActivity extends AppCompatActivity {
         tv_bit = (TextView) view.findViewById(R.id.tv_bit);
         tv_bis = (TextView) view.findViewById(R.id.tv_bis);
         tv_sum = (TextView) view.findViewById(R.id.tv_sum);
+        tv_grade = (TextView) view.findViewById(R.id.tv_grade);
         tv_adept = (TextView) view.findViewById(R.id.tv_adept);
         rl_nonetwork = (RelativeLayout) findViewById(R.id.rl_nonetwork);
         rl_loading = (RelativeLayout) findViewById(R.id.rl_loading);
@@ -95,15 +97,17 @@ public class DoctorparticularsActivity extends AppCompatActivity {
         lv_docttorparticulas.setAdapter(adapter);
         ll_return.setOnClickListener(listener);
         btn_callmoney.setOnClickListener(listener);
+
     }
 
     //医生信息
     private void httpinit() {
+        Log.e("医生ID", doctor_id);
         list1 = new ArrayList<>();
         OkHttpUtils
                 .post()
-                .url(Http_data.http_data + "/findDatabank")
-                .addParams("id", doctor_id)
+                .url(Http_data.http_data + "/FindDoctorById")
+                .addParams("doctorId", doctor_id)
                 .build()
                 .execute(new StringCallback() {
                     @Override
@@ -111,43 +115,44 @@ public class DoctorparticularsActivity extends AppCompatActivity {
                         Toast.makeText(DoctorparticularsActivity.this, "网络连接失败", Toast.LENGTH_SHORT).show();
                         rl_loading.setVisibility(View.GONE);
                         rl_nonetwork.setVisibility(View.VISIBLE);
+                        view.setVisibility(View.GONE);
+                        lv_docttorparticulas.setBackgroundColor(android.graphics.Color.parseColor("#ffffff"));
+                        list = null;
                     }
 
                     @Override
                     public void onResponse(String response, int id) {
-                        Type listtype = new TypeToken<LinkedList<Doctor>>() {
-                        }.getType();
-                        LinkedList<Doctor> leclist = gson.fromJson(response, listtype);
-                        for (Iterator it = leclist.iterator(); it.hasNext(); ) {
-                            Doctor doctor = (Doctor) it.next();
-                            list1.add(doctor);
-                        }
-                        tv_name.setText(list1.get(0).getName());
-                        tv_title.setText(list1.get(0).getTitle());
-                        tv_hospital.setText(list1.get(0).getHospital());
-                        btn_callmoney.setText("￥" + list1.get(0).getCallmoney() + "/10分钟");
-                        btn_chatmoney.setText("￥" + list1.get(0).getChatmoney() + "/次");
-                        ImageLoader.getInstance().displayImage(list1.get(0).getIcon(), iv_icon);
-                        tv_bioo.setText(list1.get(0).getBioo());
-                        tv_bis.setText(list1.get(0).getBis());
-                        tv_bit.setText(list1.get(0).getBit());
-                        tv_bif.setText(list1.get(0).getBif());
-                        tv_sum.setText("用户评论 （" + list1.get(0).getSum() + "人）");
-                        tv_adept.setText(list1.get(0).getAdept());
+                        Log.e("医生详情返回", response);
+
+                        Doctor doctor = gson.fromJson(response, Doctor.class);
+                        tv_name.setText(doctor.getName());
+                        tv_title.setText(doctor.getTitle());
+                        tv_hospital.setText(doctor.getHospital());
+                        btn_callmoney.setText("￥" + doctor.getCallCost() + "/10分钟");
+                        btn_chatmoney.setText("￥" + doctor.getChatCost() + "/次");
+                        ImageLoader.getInstance().displayImage(doctor.getIcon(), iv_icon);
+                        tv_bioo.setText(doctor.getSeniority1());
+                        tv_bis.setText(doctor.getSeniority2());
+                        tv_bit.setText(doctor.getSeniority3());
+                        tv_bif.setText(doctor.getSeniority4());
+                        tv_sum.setText("用户评论 （" + doctor.getCommentCount() + "人）");
+                        tv_adept.setText(doctor.getAdept());
                         rl_loading.setVisibility(View.GONE);
                     }
                 });
     }
+
     //医生评论
     private void comment() {
         OkHttpUtils
                 .post()
-                .url(Http_data.http_data + "/findUserComment")
-                .addParams("doctor_id", doctor_id)
+                .url(Http_data.http_data + "/FindDoctorCommentByDoctorId")
+                .addParams("doctorId", doctor_id)
                 .build()
                 .execute(new StringCallback() {
                     @Override
                     public void onError(Call call, Exception e, int id) {
+                        lv_docttorparticulas.setBackgroundColor(android.graphics.Color.parseColor("#ffffff"));
                     }
 
                     @Override
@@ -170,10 +175,10 @@ public class DoctorparticularsActivity extends AppCompatActivity {
         @Override
         public void onClick(View v) {
             finish();
-            switch (v.getId()){
+            switch (v.getId()) {
                 case R.id.btn_callmoney:
-                    Intent intent=new Intent(DoctorparticularsActivity.this, EvaluatepageActivity.class);
-                    intent.putExtra("doctorid",doctor_id);
+                    Intent intent = new Intent(DoctorparticularsActivity.this, EvaluatepageActivity.class);
+                    intent.putExtra("doctorid", doctor_id);
                     startActivity(intent);
                     break;
                 case R.id.ll_return:

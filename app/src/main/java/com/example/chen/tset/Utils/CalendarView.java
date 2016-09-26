@@ -138,18 +138,18 @@ public class CalendarView extends LinearLayout implements OnTouchListener,
         // 得到屏幕的宽度
         screenWidth = mContext.getResources().getDisplayMetrics().widthPixels;
 
-        // 滑动的动画
+//         滑动的动画
         slideLeftIn = new TranslateAnimation(screenWidth, 0, 0, 0);
-        slideLeftIn.setDuration(400);
+        slideLeftIn.setDuration(200);
         slideLeftIn.setAnimationListener(this);
         slideLeftOut = new TranslateAnimation(0, -screenWidth, 0, 0);
-        slideLeftOut.setDuration(400);
+        slideLeftOut.setDuration(200);
         slideLeftOut.setAnimationListener(this);
         slideRightIn = new TranslateAnimation(-screenWidth, 0, 0, 0);
-        slideRightIn.setDuration(400);
+        slideRightIn.setDuration(200);
         slideRightIn.setAnimationListener(this);
         slideRightOut = new TranslateAnimation(0, screenWidth, 0, 0);
-        slideRightOut.setDuration(400);
+        slideRightOut.setDuration(200);
         slideRightOut.setAnimationListener(this);
 
         // 手势操作
@@ -227,6 +227,8 @@ public class CalendarView extends LinearLayout implements OnTouchListener,
         // 左方按钮
         ImageButton mLeftView = new ImageButton(mContext);
         mLeftView.setBackgroundResource(R.drawable.consulting_left_arrows);
+
+
 
         android.widget.RelativeLayout.LayoutParams leftPP = new android.widget.RelativeLayout.LayoutParams(
                 ViewUtil.dip2px(mContext, 15), ViewUtil.dip2px(mContext, 22));
@@ -603,19 +605,9 @@ class WeekGridAdapter extends BaseAdapter {
                 android.view.ViewGroup.LayoutParams.MATCH_PARENT,
                 android.view.ViewGroup.LayoutParams.MATCH_PARENT);
         week.setLayoutParams(week_params);
-        week.setPadding(0, 0, 0, 0);
         week.setGravity(Gravity.CENTER);
-        week.setFocusable(false);
-        week.setBackgroundColor(Color.TRANSPARENT);
-
-        if (position == 6) { // 周六
-            week.setTextColor(Color.WHITE);
-        } else if (position == 0) { // 周日
-            week.setTextColor(Color.WHITE);
-        } else {
-            week.setTextColor(Color.WHITE);
-        }
-        week.setText(getItem(position) + "");
+        week.setTextColor(Color.WHITE);
+        week.setText(getItem(position)+"");
         return week;
     }
 }
@@ -698,9 +690,12 @@ class CalendarGridViewAdapter extends BaseAdapter {
         DisplayMetrics dm = new DisplayMetrics();
         dm = mContext.getResources().getDisplayMetrics();
         float density = dm.density;
+
         int i;
         if (density == 1.5) {
             i = (int) (5 * density);
+        }else if(density==3.0){
+            i= (int) (12*density);
         } else {
             i = (int) (10 * density);
         }
@@ -766,7 +761,6 @@ class CalendarGridViewAdapter extends BaseAdapter {
             // 选择的
             itemLayout.setBackgroundResource(R.drawable.consulting_onclick);
 
-            Log.e("选择", calSelected.getTime().toString());
 
         }
 
@@ -1076,16 +1070,6 @@ class CalendarUtil {
             return 30;
     }
 
-    /**
-     * 传回农历 y年的生肖
-     *
-     * @return 传回农历 y年的生肖
-     */
-    public String animalsYear() {
-        final String[] Animals = new String[]{"鼠", "牛", "虎", "兔", "龙", "蛇",
-                "马", "羊", "猴", "鸡", "狗", "猪"};
-        return Animals[(mLuchYear - 4) % 12];
-    }
 
     // ====== 传入 月日的offset 传回干支, 0=甲子
     private static String cyclicalm(int num) {
@@ -1097,11 +1081,7 @@ class CalendarUtil {
         return (Gan[num % 10] + Zhi[num % 12]);
     }
 
-    // ====== 传入 offset 传回干支, 0=甲子
-    public String cyclical() {
-        int num = mLuchYear - 1900 + 36;
-        return (cyclicalm(num));
-    }
+
 
     /**
      * 传出y年m月d日对应的农历. yearCyl3:农历年与1864的相差数 ? monCyl4:从1900年1月31日以来,闰月数
@@ -1272,16 +1252,7 @@ class CalendarUtil {
         return "周" + WEEK_NUMBER[calendar.get(Calendar.DAY_OF_WEEK) - 1] + "";
     }
 
-    /**
-     * 将当前时间转换成要展示的形式
-     *
-     * @param calendar
-     * @return
-     */
-    public static String getCurrentDay(Calendar calendar) {
-        return getDay(calendar) + " 农历" + new CalendarUtil(calendar).getDay()
-                + " " + getWeek(calendar);
-    }
+
 
     /**
      * 用于获取中国的传统节日
@@ -1343,37 +1314,7 @@ class StringUtil {
         return str1 == str2 || str1 != null && str1.equals(str2);
     }
 
-    /**
-     * 判断str1和str2是否相同(不区分大小写)
-     *
-     * @param str1 str1
-     * @param str2 str2
-     * @return true or false
-     */
-    public static boolean equalsIgnoreCase(String str1, String str2) {
-        return str1 != null && str1.equalsIgnoreCase(str2);
-    }
 
-    /**
-     * 判断字符串str1是否包含字符串str2
-     *
-     * @param str1 源字符串
-     * @param str2 指定字符串
-     * @return true源字符串包含指定字符串，false源字符串不包含指定字符串
-     */
-    public static boolean contains(String str1, String str2) {
-        return str1 != null && str1.contains(str2);
-    }
-
-    /**
-     * 判断字符串是否为空，为空则返回一个空值，不为空则返回原字符串
-     *
-     * @param str 待判断字符串
-     * @return 判断后的字符串
-     */
-    public static String getString(String str) {
-        return str == null ? "" : str;
-    }
 }
 
 /**
