@@ -57,7 +57,7 @@ public class FindpawActivity extends AppCompatActivity {
 
                     OkHttpUtils
                             .post()
-                            .url(Http_data.http_data + "/send")
+                            .url(Http_data.http_data + "/Send")
                             .addParams("phone", activity_find_password_phone.getText().toString())
                             .build()
                             .execute(new StringCallback() {
@@ -107,7 +107,7 @@ public class FindpawActivity extends AppCompatActivity {
                 } else {
                     OkHttpUtils
                             .post()
-                            .url(Http_data.http_data + "/changeP")
+                            .url(Http_data.http_data + "/ChangeP")
                             .addParams("phone", activity_find_password_phone.getText().toString())
                             .addParams("password", activity_find_password_password.getText().toString())
                             .addParams("code", activity_find_password_code.getText().toString())

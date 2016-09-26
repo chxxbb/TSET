@@ -122,6 +122,7 @@ public class SetdataActivity extends AppCompatActivity {
                                 User_Http.user.setGender(sex);
                                 Intent intent = new Intent(SetdataActivity.this, HomeActivity.class);
                                 startActivity(intent);
+                                finish();
                             } else {
                                 Toast.makeText(SetdataActivity.this, "注册失败", Toast.LENGTH_SHORT).show();
                             }
