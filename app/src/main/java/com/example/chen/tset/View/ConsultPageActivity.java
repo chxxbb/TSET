@@ -41,11 +41,12 @@ import okhttp3.Call;
 public class ConsultPageActivity extends AppCompatActivity implements View.OnClickListener {
     private ScrollView scrollview;
     private LinearLayout ll_consult_return, ll_consult_collect;
-    private TextView tv_title, tv_time, tv_content,tv_collsult,tv;
-    private ImageView iv_icon,iv_collsult;
+    private TextView tv_title, tv_time, tv_content, tv_collsult, tv;
+    private ImageView iv_icon, iv_collsult;
     private RelativeLayout rl_nonetwork, rl_loading;
     Gson gson = new Gson();
     String information;
+    Consultparticulars consultparticulars;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -65,9 +66,9 @@ public class ConsultPageActivity extends AppCompatActivity implements View.OnCli
         iv_icon = (ImageView) findViewById(R.id.iv_icon);
         rl_nonetwork = (RelativeLayout) findViewById(R.id.rl_nonetwork);
         rl_loading = (RelativeLayout) findViewById(R.id.rl_loading);
-        tv_collsult= (TextView) findViewById(R.id.tv_collsilt);
-        iv_collsult= (ImageView) findViewById(R.id.iv_collsult);
-        tv= (TextView) findViewById(R.id.tv);
+        tv_collsult = (TextView) findViewById(R.id.tv_collsilt);
+        iv_collsult = (ImageView) findViewById(R.id.iv_collsult);
+        tv = (TextView) findViewById(R.id.tv);
         scrollview.setVerticalScrollBarEnabled(false);
         ll_consult_return.setOnClickListener(this);
         ll_consult_collect.setOnClickListener(this);
@@ -78,49 +79,51 @@ public class ConsultPageActivity extends AppCompatActivity implements View.OnCli
         if (collect.equals("1")) {
             ll_consult_collect.setVisibility(View.GONE);
         }
-            informationinit();
+        informationinit();
 
 
     }
+
     //判断文章是否收藏过
     private void findCollectExistByUserIdAndCyclopediaId() {
-        OkHttpUtils
-                .post()
-                .url(Http_data.http_data + "/FindCollectExistByUserIdAndCyclopediaId")
-                .addParams("userId", User_Http.user.getId() + "")
-                .addParams("cyclopediaId", information)
-                .build()
-                .execute(new StringCallback() {
-                    @Override
-                    public void onError(Call call, Exception e, int id) {
-                        Toast.makeText(ConsultPageActivity.this, "失败", Toast.LENGTH_SHORT).show();
-                    }
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                OkHttpUtils
+                        .post()
+                        .url(Http_data.http_data + "/FindCollectExistByUserIdAndCyclopediaId")
+                        .addParams("userId", User_Http.user.getId() + "")
+                        .addParams("cyclopediaId", information)
+                        .build()
+                        .execute(new StringCallback() {
+                            @Override
+                            public void onError(Call call, Exception e, int id) {
+                                handler.sendEmptyMessage(0);
+                            }
 
-                    @Override
-                    public void onResponse(String response, int id) {
-                        Log.e("13",response);
-                        System.out.print(response);
-                        if(response.equals("0")){
-                            tv_collsult.setTextColor(android.graphics.Color.parseColor("#6fc9e6"));
-                            iv_collsult.setBackgroundResource(R.drawable.consult_isonclickpraise);
+                            @Override
+                            public void onResponse(String response, int id) {
 
-                        }else {
-                            tv_collsult.setTextColor(android.graphics.Color.parseColor("#999999"));
-                            iv_collsult.setBackgroundResource(R.drawable.consult_unmeppraise);
-                            tv_collsult.setText("已赞");
-                            ll_consult_collect.setOnClickListener(null);
+                                if (response.equals("0")) {
+                                    handler.sendEmptyMessage(1);
 
 
-                        }
-                    }
-                });
+                                } else {
+                                    handler.sendEmptyMessage(2);
+
+
+                                }
+                            }
+                        });
+            }
+        }).start();
+
     }
-
 
 
     //获取文章详情
     private void informationinit() {
-        Log.e("文章ID",information);
+        Log.e("文章ID", information);
         OkHttpUtils
                 .post()
                 .url(Http_data.http_data + "/FindCyclopediaById")
@@ -129,30 +132,21 @@ public class ConsultPageActivity extends AppCompatActivity implements View.OnCli
                 .execute(new StringCallback() {
                     @Override
                     public void onError(Call call, Exception e, int id) {
+                        handler.sendEmptyMessage(3);
 
-                        Toast.makeText(ConsultPageActivity.this, "网络连接失败", Toast.LENGTH_SHORT).show();
-                        rl_loading.setVisibility(View.GONE);
-                        rl_nonetwork.setVisibility(View.VISIBLE);
                     }
 
                     @Override
                     public void onResponse(String response, int id) {
                         Log.e("咨询详情返回", response);
                         if (response.equals("[]") || response.equals("")) {
+                            handler.sendEmptyMessage(4);
 
-                            Toast.makeText(ConsultPageActivity.this, "没有这条新闻", Toast.LENGTH_SHORT).show();
-                            rl_loading.setVisibility(View.GONE);
-                            rl_nonetwork.setVisibility(View.VISIBLE);
-                            ll_consult_collect.setVisibility(View.GONE);
                         } else {
+                            consultparticulars = gson.fromJson(response, Consultparticulars.class);
+                            handler.sendEmptyMessage(5);
 
 
-                            Consultparticulars consultparticulars = gson.fromJson(response, Consultparticulars.class);
-                            tv_title.setText(consultparticulars.getTitle());
-                            tv_time.setText("天使资讯  " + consultparticulars.getTime());
-                            tv_content.setText(consultparticulars.getContent());
-                            ImageLoader.getInstance().displayImage(consultparticulars.getIcon(), iv_icon);
-                            rl_loading.setVisibility(View.GONE);
                         }
                     }
                 });
@@ -176,18 +170,15 @@ public class ConsultPageActivity extends AppCompatActivity implements View.OnCli
                         .execute(new StringCallback() {
                             @Override
                             public void onError(Call call, Exception e, int id) {
-                                Toast.makeText(ConsultPageActivity.this, "网络连接失败", Toast.LENGTH_SHORT).show();
+                                handler.sendEmptyMessage(0);
                             }
 
                             @Override
                             public void onResponse(String response, int id) {
                                 Log.e("咨询详情收藏返回", response);
                                 if (response.equals("0")) {
-                                    Toast.makeText(ConsultPageActivity.this, "收藏成功", Toast.LENGTH_SHORT).show();
-                                    tv_collsult.setTextColor(android.graphics.Color.parseColor("#999999"));
-                                    iv_collsult.setBackgroundResource(R.drawable.consult_unmeppraise);
-                                    tv_collsult.setText("已赞");
-                                    ll_consult_collect.setOnClickListener(null);
+                                    handler.sendEmptyMessage(6);
+
                                 }
 
                             }
@@ -197,4 +188,58 @@ public class ConsultPageActivity extends AppCompatActivity implements View.OnCli
 
         }
     }
+
+    private Handler handler = new Handler() {
+        @Override
+        public void handleMessage(android.os.Message msg) {
+            switch (msg.what) {
+                case 0:
+
+                    Toast.makeText(ConsultPageActivity.this, "网络连接失败", Toast.LENGTH_SHORT).show();
+                    break;
+                case 1:
+
+                    tv_collsult.setTextColor(android.graphics.Color.parseColor("#6fc9e6"));
+                    iv_collsult.setBackgroundResource(R.drawable.consult_isonclickpraise);
+                    break;
+                case 2:
+
+                    tv_collsult.setTextColor(android.graphics.Color.parseColor("#999999"));
+                    iv_collsult.setBackgroundResource(R.drawable.consult_unmeppraise);
+                    tv_collsult.setText("已赞");
+                    ll_consult_collect.setOnClickListener(null);
+                    break;
+                case 3:
+
+                    rl_loading.setVisibility(View.GONE);
+                    rl_nonetwork.setVisibility(View.VISIBLE);
+                    break;
+                case 4:
+
+                    Toast.makeText(ConsultPageActivity.this, "没有这条新闻", Toast.LENGTH_SHORT).show();
+                    rl_loading.setVisibility(View.GONE);
+                    rl_nonetwork.setVisibility(View.VISIBLE);
+                    ll_consult_collect.setVisibility(View.GONE);
+                    break;
+                case 5:
+
+                    tv_title.setText(consultparticulars.getTitle());
+                    tv_time.setText("天使资讯  " + consultparticulars.getTime());
+                    tv_content.setText(consultparticulars.getContent());
+                    ImageLoader.getInstance().displayImage(consultparticulars.getIcon(), iv_icon);
+                    rl_loading.setVisibility(View.GONE);
+                    break;
+
+                case 6:
+                    Toast.makeText(ConsultPageActivity.this, "收藏成功", Toast.LENGTH_SHORT).show();
+                    tv_collsult.setTextColor(android.graphics.Color.parseColor("#999999"));
+                    iv_collsult.setBackgroundResource(R.drawable.consult_unmeppraise);
+                    tv_collsult.setText("已赞");
+                    ll_consult_collect.setOnClickListener(null);
+                    break;
+
+
+            }
+        }
+    };
 }

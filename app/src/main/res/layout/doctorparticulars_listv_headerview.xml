@@ -107,7 +107,7 @@
                 <LinearLayout
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginLeft="@dimen/x48"
+                    android:layout_marginLeft="@dimen/x24"
                     android:background="@drawable/doctorparticulars_qualifications_case">
 
                     <TextView

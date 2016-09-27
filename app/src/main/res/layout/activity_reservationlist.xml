@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/backgroundgray"
+    android:background="@color/white"
     android:orientation="vertical"
     tools:context="com.example.chen.tset.View.ReservationlistActivity">
 
@@ -170,7 +170,8 @@
 
                 <View
                     android:layout_width="match_parent"
-                    android:layout_height="@dimen/y30" />
+                    android:layout_height="@dimen/y30"
+                    android:background="@color/backgroundgray"/>
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -239,12 +240,13 @@
                             android:layout_alignParentRight="true">
 
                             <Button
+                                android:id="@+id/btn_cancel"
                                 android:layout_width="@dimen/x136"
                                 android:layout_height="@dimen/y50"
                                 android:layout_marginBottom="@dimen/y16"
                                 android:layout_marginRight="@dimen/x30"
                                 android:layout_marginTop="@dimen/y10"
-                                android:background="@drawable/reservationlist_btn_case"
+                                android:background="@drawable/reservationlist_btn_redcase"
                                 android:text="取消预约"
                                 android:textSize="@dimen/y22" />
                         </LinearLayout>
@@ -254,7 +256,8 @@
 
                 <View
                     android:layout_width="match_parent"
-                    android:layout_height="@dimen/y30" />
+                    android:layout_height="@dimen/y30"
+                    android:background="@color/backgroundgray"/>
 
                 <RelativeLayout
                     android:layout_width="match_parent"
@@ -334,7 +337,7 @@
                                     android:id="@+id/tv_doctor_name"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
-                                    android:text="张三疯"
+
                                     android:textColor="@color/xmgray"
                                     android:textSize="@dimen/y22" />
 
@@ -343,7 +346,6 @@
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:layout_marginLeft="@dimen/x20"
-                                    android:text="行为发育科"
                                     android:textColor="@color/xmgray"
                                     android:textSize="@dimen/y22" />
                             </LinearLayout>
@@ -395,6 +397,7 @@
                 android:orientation="vertical">
 
                 <ImageView
+                    android:layout_marginTop="@dimen/y150"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:src="@drawable/loadfail" />

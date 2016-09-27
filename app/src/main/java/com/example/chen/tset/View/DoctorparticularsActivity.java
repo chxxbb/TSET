@@ -52,6 +52,7 @@ public class DoctorparticularsActivity extends AppCompatActivity {
     private CircleImageView iv_icon;
     private RelativeLayout rl_nonetwork, rl_loading;
     String doctor_id = null;
+    Doctor doctor;
 
 
     @Override
@@ -102,72 +103,72 @@ public class DoctorparticularsActivity extends AppCompatActivity {
 
     //医生信息
     private void httpinit() {
-        Log.e("医生ID", doctor_id);
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                OkHttpUtils
+                        .post()
+                        .url(Http_data.http_data + "/FindDoctorById")
+                        .addParams("doctorId", doctor_id)
+                        .build()
+                        .execute(new StringCallback() {
+                            @Override
+                            public void onError(Call call, Exception e, int id) {
+                                handler.sendEmptyMessage(0);
+
+                            }
+
+                            @Override
+                            public void onResponse(String response, int id) {
+                                Log.e("医生详情返回", response);
+                                doctor = gson.fromJson(response, Doctor.class);
+
+                                handler.sendEmptyMessage(1);
+
+                            }
+                        });
+            }
+        }).start();
         list1 = new ArrayList<>();
-        OkHttpUtils
-                .post()
-                .url(Http_data.http_data + "/FindDoctorById")
-                .addParams("doctorId", doctor_id)
-                .build()
-                .execute(new StringCallback() {
-                    @Override
-                    public void onError(Call call, Exception e, int id) {
-                        Toast.makeText(DoctorparticularsActivity.this, "网络连接失败", Toast.LENGTH_SHORT).show();
-                        rl_loading.setVisibility(View.GONE);
-                        rl_nonetwork.setVisibility(View.VISIBLE);
-                        view.setVisibility(View.GONE);
-                        lv_docttorparticulas.setBackgroundColor(android.graphics.Color.parseColor("#ffffff"));
-                        list = null;
-                    }
 
-                    @Override
-                    public void onResponse(String response, int id) {
-                        Log.e("医生详情返回", response);
-
-                        Doctor doctor = gson.fromJson(response, Doctor.class);
-                        tv_name.setText(doctor.getName());
-                        tv_title.setText(doctor.getTitle());
-                        tv_hospital.setText(doctor.getHospital());
-                        btn_callmoney.setText("￥" + doctor.getCallCost() + "/10分钟");
-                        btn_chatmoney.setText("￥" + doctor.getChatCost() + "/次");
-                        ImageLoader.getInstance().displayImage(doctor.getIcon(), iv_icon);
-                        tv_bioo.setText(doctor.getSeniority1());
-                        tv_bis.setText(doctor.getSeniority2());
-                        tv_bit.setText(doctor.getSeniority3());
-                        tv_bif.setText(doctor.getSeniority4());
-                        tv_sum.setText("用户评论 （" + doctor.getCommentCount() + "人）");
-                        tv_adept.setText(doctor.getAdept());
-                        rl_loading.setVisibility(View.GONE);
-                    }
-                });
     }
 
     //医生评论
     private void comment() {
-        OkHttpUtils
-                .post()
-                .url(Http_data.http_data + "/FindDoctorCommentByDoctorId")
-                .addParams("doctorId", doctor_id)
-                .build()
-                .execute(new StringCallback() {
-                    @Override
-                    public void onError(Call call, Exception e, int id) {
-                        lv_docttorparticulas.setBackgroundColor(android.graphics.Color.parseColor("#ffffff"));
-                    }
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
 
-                    @Override
-                    public void onResponse(String response, int id) {
-                        Log.e("医生详情评论返回", response);
-                        Type listtype = new TypeToken<LinkedList<Doctorcomment>>() {
-                        }.getType();
-                        LinkedList<Doctorcomment> leclist = gson.fromJson(response, listtype);
-                        for (Iterator it = leclist.iterator(); it.hasNext(); ) {
-                            Doctorcomment doctorcomment = (Doctorcomment) it.next();
-                            list.add(doctorcomment);
-                        }
-                        adapter.notifyDataSetChanged();
-                    }
-                });
+
+                OkHttpUtils
+                        .post()
+                        .url(Http_data.http_data + "/FindDoctorCommentByDoctorId")
+                        .addParams("doctorId", doctor_id)
+                        .build()
+                        .execute(new StringCallback() {
+                            @Override
+                            public void onError(Call call, Exception e, int id) {
+                                handler.sendEmptyMessage(2);
+
+                            }
+
+                            @Override
+                            public void onResponse(String response, int id) {
+                                Type listtype = new TypeToken<LinkedList<Doctorcomment>>() {
+                                }.getType();
+                                LinkedList<Doctorcomment> leclist = gson.fromJson(response, listtype);
+                                for (Iterator it = leclist.iterator(); it.hasNext(); ) {
+                                    Doctorcomment doctorcomment = (Doctorcomment) it.next();
+                                    list.add(doctorcomment);
+                                }
+
+                                handler.sendEmptyMessage(3);
+
+                            }
+                        });
+            }
+        }).start();
+
     }
 
 
@@ -186,6 +187,51 @@ public class DoctorparticularsActivity extends AppCompatActivity {
                     break;
 
 
+            }
+        }
+    };
+
+
+    Handler handler = new Handler() {
+        @Override
+        public void handleMessage(Message msg) {
+            switch (msg.what) {
+                case 0:
+
+                    Toast.makeText(DoctorparticularsActivity.this, "网络连接失败", Toast.LENGTH_SHORT).show();
+                    rl_loading.setVisibility(View.GONE);
+                    rl_nonetwork.setVisibility(View.VISIBLE);
+                    view.setVisibility(View.GONE);
+                    lv_docttorparticulas.setBackgroundColor(android.graphics.Color.parseColor("#ffffff"));
+                    list = null;
+                    break;
+
+                case 1:
+
+                    tv_name.setText(doctor.getName());
+                    tv_title.setText(doctor.getTitle());
+                    tv_hospital.setText(doctor.getHospital());
+                    btn_callmoney.setText("￥" + doctor.getCallCost() + "/10分钟");
+                    btn_chatmoney.setText("￥" + doctor.getChatCost() + "/次");
+                    ImageLoader.getInstance().displayImage(doctor.getIcon(), iv_icon);
+                    tv_bioo.setText(doctor.getSeniority1());
+                    tv_bis.setText(doctor.getSeniority2());
+                    tv_bit.setText(doctor.getSeniority3());
+                    tv_bif.setText(doctor.getSeniority4());
+                    tv_sum.setText("用户评论 （" + doctor.getCommentCount() + "人）");
+                    tv_adept.setText(doctor.getAdept());
+                    rl_loading.setVisibility(View.GONE);
+                    break;
+
+                case 2:
+
+
+                    lv_docttorparticulas.setBackgroundColor(android.graphics.Color.parseColor("#ffffff"));
+                    break;
+                case 3:
+
+                    adapter.notifyDataSetChanged();
+                    break;
             }
         }
     };

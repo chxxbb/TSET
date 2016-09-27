@@ -81,7 +81,7 @@ public class ChatpageActivity extends AppCompatActivity {
         setContentView(R.layout.activity_chatpage);
         JMessageClient.registerEventReceiver(this);
         //设置后在此页面接收此用户消息不会再通知栏中显示
-        JMessageClient.enterSingleConversation("13608170152");
+        JMessageClient.enterSingleConversation("18302615820");
         db = new ChatpageDao(this);
         list = new ArrayList<>();
         historylist = new ArrayList<>();
@@ -123,7 +123,7 @@ public class ChatpageActivity extends AppCompatActivity {
 
     private void init() {
         //从数据库中获取此用户聊天记录
-        historylist = db.chatfind("13608170152");
+        historylist = db.chatfind("18302615820");
         for (int i = 0; i < historylist.size(); i++) {
             list.add(historylist.get(i));
 
@@ -147,9 +147,9 @@ public class ChatpageActivity extends AppCompatActivity {
                 public void run() {
                     if (actionId == EditorInfo.IME_ACTION_SEND) {
                         //发送文本消息
-                        Conversation c = JMessageClient.getSingleConversation("13608170152");
+                        Conversation c = JMessageClient.getSingleConversation("18302615820");
                         if (c == null) {
-                            c = Conversation.createSingleConversation("13608170152");
+                            c = Conversation.createSingleConversation("18302615820");
 
                         }
                         TextContent textContent = new TextContent(et_chat.getText().toString());
@@ -159,7 +159,7 @@ public class ChatpageActivity extends AppCompatActivity {
                         Long time = dt.getTime();
                         //存取到数据库中，+1用于判断是发送的消息还是接收的消息,1为自己发送的消息,2为接送到的消息
                         String content = "1" + et_chat.getText().toString();
-                        chatcontent = new Chatcontent(content, time, null, null, "13608170152", User_Http.user.getPhone());
+                        chatcontent = new Chatcontent(content, time, null, null, "18302615820", User_Http.user.getPhone());
                         list.add(chatcontent);
                         handler.sendEmptyMessage(0);
                         db.addchatcont(chatcontent);
@@ -315,7 +315,7 @@ public class ChatpageActivity extends AppCompatActivity {
                 String content = "2" + textContent.getText();
                 Date dt = new Date();
                 Long time = dt.getTime();
-                if (msg.getTargetID().equals("13608170152")) {
+                if (msg.getTargetID().equals("18302615820")) {
                     chatcontent = new Chatcontent(content, time, null, null, msg.getTargetID(), User_Http.user.getPhone());
                     list.add(chatcontent);
                     adapter.notifyDataSetChanged();
@@ -331,7 +331,7 @@ public class ChatpageActivity extends AppCompatActivity {
                 Date dt1 = new Date();
                 Long time1 = dt1.getTime();
                 chatcontent = new Chatcontent("2*2", time1, file, file, msg.getTargetID(), User_Http.user.getPhone());
-                if (msg.getTargetID().equals("13608170152")) {
+                if (msg.getTargetID().equals("18302615820")) {
                     list.add(chatcontent);
                     adapter.notifyDataSetChanged();
                 }
@@ -345,9 +345,9 @@ public class ChatpageActivity extends AppCompatActivity {
         Thread thread = new Thread(new Runnable() {
             @Override
             public void run() {
-                Conversation c = JMessageClient.getSingleConversation("13608170152");
+                Conversation c = JMessageClient.getSingleConversation("18302615820");
                 if (c == null) {
-                    c = Conversation.createSingleConversation("13608170152");
+                    c = Conversation.createSingleConversation("18302615820");
 //                13608170152
                 }
                 try {
@@ -355,7 +355,7 @@ public class ChatpageActivity extends AppCompatActivity {
                     ImageContent image = new ImageContent(sdcardTempFile);
                     Message message = c.createSendMessage(image);
                     JMessageClient.sendMessage(message);
-                    chatcontent = new Chatcontent("1*1", 0L, sdcardTempFile.getAbsolutePath(), sdcardTempFile.getAbsolutePath(), "13608170152", User_Http.user.getPhone());
+                    chatcontent = new Chatcontent("1*1", 0L, sdcardTempFile.getAbsolutePath(), sdcardTempFile.getAbsolutePath(), "18302615820", User_Http.user.getPhone());
                     Log.e("发送图片地址", sdcardTempFile.getAbsolutePath());
                     list.add(chatcontent);
                     db.addchatcont(chatcontent);

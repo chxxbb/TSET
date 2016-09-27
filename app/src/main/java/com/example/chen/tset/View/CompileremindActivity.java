@@ -21,6 +21,7 @@ import com.example.chen.tset.R;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
+
 /**
  * 添加提醒页面
  */
@@ -35,7 +36,7 @@ public class CompileremindActivity extends AppCompatActivity {
     private TimePicker timepicker;
     String aMPM = null;
     private FrameLayout frameLayout;
-    private LinearLayout ll_pharmacy_compile, ll_add_remind, ll_remind_content, ll_et;
+    private LinearLayout ll_pharmacy_compile, ll_add_remind, ll_remind_content, ll_et, ll_rutname;
     private View view, v1;
 
 
@@ -70,6 +71,8 @@ public class CompileremindActivity extends AppCompatActivity {
         ll_pharmacy_compile = (LinearLayout) findViewById(R.id.ll_pharmacy_compile);
         ll_add_remind = (LinearLayout) findViewById(R.id.ll_add_remind);
         ll_remind_content = (LinearLayout) findViewById(R.id.ll_remind_content);
+
+        ll_rutname = (LinearLayout) findViewById(R.id.ll_rutname);
         ll_et = (LinearLayout) findViewById(R.id.ll_et);
         view = findViewById(R.id.view);
         v1 = findViewById(R.id.v1);
@@ -83,6 +86,7 @@ public class CompileremindActivity extends AppCompatActivity {
         rl_endtiem.setOnClickListener(listener);
         tv_time_complete.setOnClickListener(listener);
         ll_add_remind.setOnClickListener(listener);
+        ll_rutname.setOnClickListener(listener);
         c = Calendar.getInstance();
         myear = c.get(Calendar.YEAR);
         mmonth = c.get(Calendar.MONTH);
@@ -131,6 +135,9 @@ public class CompileremindActivity extends AppCompatActivity {
                     ll_add_remind.setVisibility(View.GONE);
                     ll_et.setVisibility(View.GONE);
                     tv_remind_set.setText("添加提醒");
+                    break;
+                case R.id.ll_rutname:
+                    finish();
                     break;
             }
         }

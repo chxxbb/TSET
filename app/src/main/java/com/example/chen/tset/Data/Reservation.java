@@ -5,50 +5,42 @@ package com.example.chen.tset.Data;
  * 预约列表
  */
 public class Reservation {
-    private String time;
-    private String order;
-    private String status;
+    private String reservationTime;
+    private String orderCode;
+    private String orderStatus;
     private String money;
     private int id;
 
-    public Reservation(String time, String order, String status, String money, int id) {
-        this.time = time;
-        this.order = order;
-        this.status = status;
+    public Reservation(String reservationTime, String orderCode, String orderStatus, String money, int id) {
+        this.reservationTime = reservationTime;
+        this.orderCode = orderCode;
+        this.orderStatus = orderStatus;
         this.money = money;
         this.id = id;
     }
 
-    public int getId() {
-        return id;
+    public String getReservationTime() {
+        return reservationTime;
     }
 
-    public void setId(int id) {
-        this.id = id;
+    public void setReservationTime(String reservationTime) {
+        this.reservationTime = reservationTime;
     }
 
-    public String getTime() {
-        return time;
+    public String getOrderCode() {
+        return orderCode;
     }
 
-    public void setTime(String time) {
-        this.time = time;
+    public void setOrderCode(String orderCode) {
+        this.orderCode = orderCode;
     }
 
-    public String getOrder() {
-        return order;
+    public String getOrderStatus() {
+        return orderStatus;
     }
 
-    public void setOrder(String order) {
-        this.order = order;
-    }
-
-    public String getStatus() {
-        return status;
-    }
-
-    public void setStatus(String status) {
-        this.status = status;
+    public void setOrderStatus(String orderStatus) {
+        this.orderStatus = orderStatus;
     }
 
     public String getMoney() {
@@ -57,5 +49,13 @@ public class Reservation {
 
     public void setMoney(String money) {
         this.money = money;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 }

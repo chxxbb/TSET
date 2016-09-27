@@ -26,12 +26,13 @@ import java.util.LinkedList;
 import java.util.List;
 
 import okhttp3.Call;
+
 /**
  * 用药提醒页面
  */
 public class PharmacyremindActivity extends AppCompatActivity {
     private ListView lv_pharmacy_remind;
-    private LinearLayout ll_add_remind;
+    private LinearLayout ll_add_remind, ll_return;
     PharmacyremindAdapter adapter;
     List<Pharmacyremind> list;
     Gson gson = new Gson();
@@ -48,7 +49,9 @@ public class PharmacyremindActivity extends AppCompatActivity {
     private void findView() {
         lv_pharmacy_remind = (ListView) findViewById(R.id.lv_pharmacy_remind);
         ll_add_remind = (LinearLayout) findViewById(R.id.ll_add_remind);
+        ll_return = (LinearLayout) findViewById(R.id.ll_return);
         ll_add_remind.setOnClickListener(listener);
+        ll_return.setOnClickListener(listener);
         list = new ArrayList<>();
         adapter = new PharmacyremindAdapter(this, list);
         lv_pharmacy_remind.setAdapter(adapter);
@@ -63,6 +66,9 @@ public class PharmacyremindActivity extends AppCompatActivity {
                 case R.id.ll_add_remind:
                     Intent intent = new Intent(PharmacyremindActivity.this, CompileremindActivity.class);
                     startActivity(intent);
+                    break;
+                case R.id.ll_return:
+                    finish();
                     break;
             }
         }

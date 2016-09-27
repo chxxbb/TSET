@@ -39,6 +39,8 @@ public class DiseaseActivity extends AppCompatActivity {
     private CircleImageView iv_icon, iv_dicon;
     private RelativeLayout rl_nonetwork, rl_loading;
     Gson gson = new Gson();
+    Disease disease;
+    String disease1;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -79,57 +81,81 @@ public class DiseaseActivity extends AppCompatActivity {
 
 
     private void httpinit() {
-        final String disease1 = getIntent().getStringExtra("disease");
-        OkHttpUtils
-                .post()
-                .url(Http_data.http_data + "/FindDiseaseByName")
-                .addParams("diseaseName", disease1)
-                .build()
-                .execute(new StringCallback() {
-                    @Override
-                    public void onError(Call call, Exception e, int id) {
-                        Toast.makeText(DiseaseActivity.this, "网络连接失败", Toast.LENGTH_SHORT).show();
-                        rl_loading.setVisibility(View.GONE);
-                        rl_nonetwork.setVisibility(View.VISIBLE);
-                    }
+      disease1 = getIntent().getStringExtra("disease");
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                OkHttpUtils
+                        .post()
+                        .url(Http_data.http_data + "/FindDiseaseByName")
+                        .addParams("diseaseName", disease1)
+                        .build()
+                        .execute(new StringCallback() {
+                            @Override
+                            public void onError(Call call, Exception e, int id) {
 
-                    @Override
-                    public void onResponse(String response, int id) {
-                        Log.e("疾病详情返回", response);
-                        if (response.equals("[]")) {
-                            Toast.makeText(DiseaseActivity.this, "没有这个疾病", Toast.LENGTH_SHORT).show();
-                            rl_loading.setVisibility(View.GONE);
-                            rl_nonetwork.setVisibility(View.VISIBLE);
-                        } else {
-
-//                            Type listtype = new TypeToken<LinkedList<Disease>>() {}.getType();
-//                            LinkedList<Disease> leclist = gson.fromJson(response, listtype);
-//                            Iterator it = leclist.iterator();
-//                            Disease disease = (Disease) it.next();
-                            Disease disease=gson.fromJson(response,Disease.class);
-
-
-
-                            tv_content.setText("        " + disease.getBio());
-                            tv_acontent.setText("        " + disease.getCure());
-                            if (disease.getPrompt() == null) {
-                                tv_acontent1.setText("无");
-                            } else {
-                                tv_acontent1.setText("        " + disease.getPrompt());
+                                handler.sendEmptyMessage(0);
                             }
-                            tv_title.setText(disease1);
-                            tv_title1.setText(disease1);
-                            tv_bcontent.setText("        " + disease.getSymptom());
-                            tv_dcontent.setText("        " + disease.getDoctorAnswerQuestion());
-                            tv_dname.setText(disease.getDoctorName());
-                            tv_uname.setText(disease.getUserName());
-                            tv_section.setText(disease.getSectionName());
-                            tv_ucontent.setText("        " + disease.getUserPutQuestion());
-                            ImageLoader.getInstance().displayImage(disease.getUserIcon(), iv_icon);
-                            ImageLoader.getInstance().displayImage(disease.getDoctorIcon(), iv_dicon);
-                            rl_loading.setVisibility(View.GONE);
-                        }
-                    }
-                });
+
+                            @Override
+                            public void onResponse(String response, int id) {
+                                Log.e("疾病详情返回", response);
+                                if (response.equals("[]")) {
+                                    handler.sendEmptyMessage(1);
+                                } else {
+                                    disease=gson.fromJson(response,Disease.class);
+                                    handler.sendEmptyMessage(2);
+
+
+
+
+                                }
+                            }
+                        });
+            }
+        }).start();
+
     }
+
+    private Handler handler = new Handler() {
+        @Override
+        public void handleMessage(android.os.Message msg) {
+            switch (msg.what) {
+                case 0:
+                    Toast.makeText(DiseaseActivity.this, "网络连接失败", Toast.LENGTH_SHORT).show();
+                    rl_loading.setVisibility(View.GONE);
+                    rl_nonetwork.setVisibility(View.VISIBLE);
+                    break;
+                case 1:
+                    Toast.makeText(DiseaseActivity.this, "没有这个疾病", Toast.LENGTH_SHORT).show();
+                    rl_loading.setVisibility(View.GONE);
+                    rl_nonetwork.setVisibility(View.VISIBLE);
+                    break;
+
+                case 2:
+
+                    tv_content.setText("        " + disease.getBio());
+                    tv_acontent.setText("        " + disease.getCure());
+                    if (disease.getPrompt() == null) {
+                        tv_acontent1.setText("无");
+                    } else {
+                        tv_acontent1.setText("        " + disease.getPrompt());
+                    }
+                    tv_title.setText(disease1);
+                    tv_title1.setText(disease1);
+                    tv_bcontent.setText("        " + disease.getSymptom());
+                    tv_dcontent.setText("        " + disease.getDoctorAnswerQuestion());
+                    tv_dname.setText(disease.getDoctorName());
+                    tv_uname.setText(disease.getUserName());
+                    tv_section.setText(disease.getSectionName());
+                    tv_ucontent.setText("        " + disease.getUserPutQuestion());
+                    ImageLoader.getInstance().displayImage(disease.getUserIcon(), iv_icon);
+                    ImageLoader.getInstance().displayImage(disease.getDoctorIcon(), iv_dicon);
+                    rl_loading.setVisibility(View.GONE);
+                    break;
+
+
+            }
+        }
+    };
 }

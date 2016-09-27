@@ -15,9 +15,11 @@ import android.widget.Toast;
 
 import com.example.chen.tset.Data.Http_data;
 import com.example.chen.tset.Data.Inquiry;
+import com.example.chen.tset.Data.MyDoctor;
 import com.example.chen.tset.Data.User_Http;
 import com.example.chen.tset.R;
 import com.example.chen.tset.page.InquiryAdapter;
+import com.example.chen.tset.page.MyDoctorAdapter;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import com.zhy.http.okhttp.OkHttpUtils;
@@ -30,14 +32,15 @@ import java.util.LinkedList;
 import java.util.List;
 
 import okhttp3.Call;
+
 /**
  * 我的医生
  */
 public class MyDoctorActivity extends AppCompatActivity {
     private ListView lv_mydoctor;
     Gson gson;
-    InquiryAdapter adapter;
-    List<Inquiry> list;
+    MyDoctorAdapter adapter;
+    List<MyDoctor> list;
     private LinearLayout ll_rut;
     private RelativeLayout rl_nonetwork, rl_loading;
 
@@ -62,21 +65,23 @@ public class MyDoctorActivity extends AppCompatActivity {
 
     private void init() {
         list = new ArrayList<>();
-        adapter = new InquiryAdapter(MyDoctorActivity.this, list);
+        adapter = new MyDoctorAdapter(MyDoctorActivity.this, list);
         lv_mydoctor.setAdapter(adapter);
     }
 
 
     private void httpinit() {
+//        new Thread(new R)
         gson = new Gson();
         OkHttpUtils
                 .post()
-                .url(Http_data.http_data + "/findMyDoctor")
-                .addParams("user_id", User_Http.user.getId() + "")
+                .url(Http_data.http_data + "/FindDoctorListByUserId")
+                .addParams("userId", User_Http.user.getId() + "")
                 .build()
                 .execute(new StringCallback() {
                     @Override
                     public void onError(Call call, Exception e, int id) {
+                        Toast.makeText(MyDoctorActivity.this, "网络连接失败", Toast.LENGTH_SHORT).show();
                         rl_loading.setVisibility(View.GONE);
                         rl_nonetwork.setVisibility(View.VISIBLE);
                     }
@@ -84,11 +89,11 @@ public class MyDoctorActivity extends AppCompatActivity {
                     @Override
                     public void onResponse(String response, int id) {
                         Log.e("我的医生返回", response);
-                        Type listtype = new TypeToken<LinkedList<Inquiry>>() {
+                        Type listtype = new TypeToken<LinkedList<MyDoctor>>() {
                         }.getType();
-                        LinkedList<Inquiry> leclist = gson.fromJson(response, listtype);
+                        LinkedList<MyDoctor> leclist = gson.fromJson(response, listtype);
                         for (Iterator it = leclist.iterator(); it.hasNext(); ) {
-                            Inquiry inquiry = (Inquiry) it.next();
+                            MyDoctor inquiry = (MyDoctor) it.next();
                             list.add(inquiry);
                         }
                         adapter.notifyDataSetChanged();
@@ -97,12 +102,27 @@ public class MyDoctorActivity extends AppCompatActivity {
                 });
     }
 
+    Handler handler = new Handler() {
+        @Override
+        public void handleMessage(Message msg) {
+            switch (msg.what) {
+                case 0:
+
+                    break;
+                case 1:
+
+                    break;
+
+            }
+        }
+    };
+
     private AdapterView.OnItemClickListener lvlistener = new AdapterView.OnItemClickListener() {
         @Override
         public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
             Intent intent = new Intent(MyDoctorActivity.this, DoctorparticularsActivity.class);
             //医生ID
-            intent.putExtra("doctot_id", list.get(position).getId() + "");
+            intent.putExtra("doctot_id", list.get(position).getDoctorId() + "");
             startActivity(intent);
         }
     };

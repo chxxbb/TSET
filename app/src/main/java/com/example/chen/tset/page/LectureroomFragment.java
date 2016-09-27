@@ -82,36 +82,57 @@ public class LectureroomFragment extends Fragment {
         list = new ArrayList<>();
         adapter = new LectureroomAdapter(getContext(), list);
         recyclerView.setAdapter(adapter);
-        OkHttpUtils
-                .post()
-                .url(Http_data.http_data + "/FindLectureAll")
-                .build()
-                .execute(new StringCallback() {
-                    @Override
-                    public void onError(Call call, Exception e, int id) {
-                        rl_loading.setVisibility(View.GONE);
-                        rl_nonetwork.setVisibility(View.VISIBLE);
-                    }
 
-                    @Override
-                    public void onResponse(String response, int id) {
-                        Log.e("讲堂返回", response);
-                        Type listtype = new TypeToken<LinkedList<Lecture>>() {
-                        }.getType();
-                        LinkedList<Lecture> leclist = gson.fromJson(response, listtype);
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                OkHttpUtils
+                        .post()
+                        .url(Http_data.http_data + "/FindLectureAll")
+                        .build()
+                        .execute(new StringCallback() {
+                            @Override
+                            public void onError(Call call, Exception e, int id) {
+                                handler.sendEmptyMessage(0);
+                            }
 
-
-                        for (Iterator it = leclist.iterator(); it.hasNext(); ) {
-                            Lecture lecture = (Lecture) it.next();
-                            list.add(lecture);
-                        }
+                            @Override
+                            public void onResponse(String response, int id) {
+                                Log.e("讲堂返回", response);
+                                Type listtype = new TypeToken<LinkedList<Lecture>>() {
+                                }.getType();
+                                LinkedList<Lecture> leclist = gson.fromJson(response, listtype);
 
 
-                        adapter.setList(list);
-                        rl_loading.setVisibility(View.GONE);
-                    }
-                });
+                                for (Iterator it = leclist.iterator(); it.hasNext(); ) {
+                                    Lecture lecture = (Lecture) it.next();
+                                    list.add(lecture);
+                                }
+                                handler.sendEmptyMessage(1);
+                            }
+                        });
+            }
+        }).start();
+
 
     }
+
+    private Handler handler = new Handler() {
+        @Override
+        public void handleMessage(android.os.Message msg) {
+            switch (msg.what) {
+                case 0:
+                    rl_loading.setVisibility(View.GONE);
+                    rl_nonetwork.setVisibility(View.VISIBLE);
+                    break;
+                case 1:
+                    adapter.setList(list);
+                    rl_loading.setVisibility(View.GONE);
+                    break;
+
+
+            }
+        }
+    };
 
 }

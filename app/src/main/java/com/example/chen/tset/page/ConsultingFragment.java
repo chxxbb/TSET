@@ -1,6 +1,7 @@
 package com.example.chen.tset.page;
 
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
@@ -34,6 +35,8 @@ import android.widget.ViewFlipper;
 import com.example.chen.tset.Data.CalendarSign;
 import com.example.chen.tset.R;
 import com.example.chen.tset.Utils.CalendarGridView;
+import com.example.chen.tset.View.HealthconditionActivity;
+import com.example.chen.tset.View.PharmacyremindActivity;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -348,19 +351,24 @@ public class ConsultingFragment extends Fragment implements View.OnClickListener
             LinearLayout ll_pharmacy = (LinearLayout) mPopWindowView.findViewById(R.id.ll_pharmacy);
             LinearLayout ll_health = (LinearLayout) mPopWindowView.findViewById(R.id.ll_health);
 
-
+            //用药提醒
             ll_pharmacy.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    Toast.makeText(getContext(), "用药提醒", Toast.LENGTH_SHORT).show();
                     mPopWindow.dismiss();
+                    Intent intent = new Intent(getContext(), PharmacyremindActivity.class);
+                    startActivity(intent);
                 }
             });
+
+
+            //健康状况
             ll_health.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    Toast.makeText(getContext(), "健康状况", Toast.LENGTH_SHORT).show();
                     mPopWindow.dismiss();
+                    Intent intent = new Intent(getContext(), HealthconditionActivity.class);
+                    startActivity(intent);
                 }
             });
         }

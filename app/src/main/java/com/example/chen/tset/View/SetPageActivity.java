@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
+import android.widget.Toast;
 
 import com.example.chen.tset.R;
 import com.example.chen.tset.Utils.SharedPsaveuser;
@@ -79,6 +80,7 @@ public class SetPageActivity extends AppCompatActivity implements View.OnClickLi
                 sp.clearinit();
                 Intent intent5 = new Intent(SetPageActivity.this, LoginActivity.class);
                 startActivity(intent5);
+                Toast.makeText(SetPageActivity.this, "请重新登录", Toast.LENGTH_SHORT).show();
                 break;
             case R.id.ll_return:
                 finish();

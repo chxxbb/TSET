@@ -31,6 +31,7 @@ import java.util.LinkedList;
 import java.util.List;
 
 import okhttp3.Call;
+
 /**
  * 我的预约
  */
@@ -49,7 +50,7 @@ public class ReservationActivity extends AppCompatActivity implements View.OnCli
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_reservationactivity);
         findView();
-        init();
+
     }
 
     private void findView() {
@@ -62,6 +63,11 @@ public class ReservationActivity extends AppCompatActivity implements View.OnCli
         lv_reser.setOnItemClickListener(listener);
     }
 
+    @Override
+    protected void onStart() {
+        super.onStart();
+        init();
+    }
 
     private void init() {
         list = new ArrayList<>();
@@ -69,8 +75,8 @@ public class ReservationActivity extends AppCompatActivity implements View.OnCli
         lv_reser.setAdapter(adapter);
         OkHttpUtils
                 .post()
-                .url(Http_data.http_data + "/findReservation")
-                .addParams("user_id", User_Http.user.getId()+"")
+                .url(Http_data.http_data + "/FindOrderListByUserId")
+                .addParams("userId", User_Http.user.getId() + "")
                 .build()
                 .execute(new StringCallback() {
                     @Override
@@ -106,7 +112,7 @@ public class ReservationActivity extends AppCompatActivity implements View.OnCli
         public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
             //根据预约ID获取预约详情
             Intent intent = new Intent(ReservationActivity.this, ReservationlistActivity.class);
-            intent.putExtra("ReservationID",list.get(position).getId()+"");
+            intent.putExtra("ReservationID", list.get(position).getId() + "");
             startActivity(intent);
         }
     };

@@ -2,6 +2,7 @@ package com.example.chen.tset.View;
 
 import android.app.DatePickerDialog;
 import android.app.Dialog;
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.format.DateFormat;
@@ -38,8 +39,10 @@ import com.zhy.http.okhttp.callback.StringCallback;
 
 import java.lang.reflect.Type;
 import java.sql.Time;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Date;
 import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
@@ -72,7 +75,10 @@ public class RegistrationAtivity extends AppCompatActivity {
     RegistrationdivisionAdapter divisionAdapter;
     RegistrationdivisionAdapter divisionAdapter1;
     private RadioButton rb_zhifb, rb_wenx;
+    private Button btn_confirm_payment;
     Gson gson;
+    //订单号
+    private String orderCode;
 
 
     @Override
@@ -192,41 +198,66 @@ public class RegistrationAtivity extends AppCompatActivity {
             Toast.makeText(RegistrationAtivity.this, "请输入联系方式", Toast.LENGTH_SHORT).show();
         } else {
 
-            OkHttpUtils
-                    .post()
-                    .url(Http_data.http_data + "/AddRegistrationOrder")
-                    .addParams("city", tv_city.getText().toString())
-                    .addParams("section", tv_departments.getText().toString())
-                    .addParams("title", tv_professionaltitle.getText().toString())
-                    .addParams("time", tv_time.getText().toString())
-                    .addParams("sex", tv_gender.getText().toString())
-                    .addParams("age", tv_age.getText().toString())
-                    .addParams("name", et_name.getText().toString())
-                    .addParams("phone", et_phone.getText().toString())
-                    .addParams("content", et_describe.getText().toString())
-                    .addParams("userId", User_Http.user.getId()+"")
-                    .build()
-                    .execute(new StringCallback() {
-                        @Override
-                        public void onError(Call call, Exception e, int id) {
-                            Toast.makeText(RegistrationAtivity.this, "网络连接失败", Toast.LENGTH_SHORT).show();
-                        }
 
-                        @Override
-                        public void onResponse(String response, int id) {
-                            Log.e("一键挂号支付返回", response);
+            SimpleDateFormat formatter = new SimpleDateFormat("yyyyMMddHHmmss");
+            Date curDate = new Date(System.currentTimeMillis());//获取当前时间
+            final String str = formatter.format(curDate);
 
-                        }
-                    });
-//            setHeadDialog = new Builder(this).create();
+            new Thread(new Runnable() {
+                @Override
+                public void run() {
+                    OkHttpUtils
+                            .post()
+                            .url(Http_data.http_data + "/AddRegistrationOrder")
+                            .addParams("city", tv_city.getText().toString())
+                            .addParams("section", tv_departments.getText().toString())
+                            .addParams("title", tv_professionaltitle.getText().toString())
+                            .addParams("time", tv_time.getText().toString())
+                            .addParams("gender", tv_gender.getText().toString())
+                            .addParams("age", tv_age.getText().toString())
+                            .addParams("name", et_name.getText().toString())
+                            .addParams("phone", et_phone.getText().toString())
+                            .addParams("content", et_describe.getText().toString())
+                            .addParams("userId", User_Http.user.getId() + "")
+                            .addParams("createTime", str)
+                            .build()
+                            .execute(new StringCallback() {
+                                @Override
+                                public void onError(Call call, Exception e, int id) {
+                                    Toast.makeText(RegistrationAtivity.this, "网络连接失败", Toast.LENGTH_SHORT).show();
+                                }
+
+
+                                @Override
+                                public void onResponse(String response, int id) {
+                                    Log.e("一键挂号支付返回", response);
+
+                                    if (response.equals("0")) {
+                                        Toast.makeText(RegistrationAtivity.this, "挂号失败,请稍后再试", Toast.LENGTH_SHORT).show();
+                                    } else {
+                                        orderCode = response;
+                                    }
+
+                                }
+                            });
+                }
+            }).start();
+
+
             setHeadDialog = new Dialog(this, R.style.CustomDialog);
             setHeadDialog.show();
             WindowManager windowManager = getWindowManager();
             Display display = windowManager.getDefaultDisplay();
             dialogView = View.inflate(getApplicationContext(), R.layout.payment_dialog, null);
+
+
             rb_wenx = (RadioButton) dialogView.findViewById(R.id.rb_wenx);
             rb_zhifb = (RadioButton) dialogView.findViewById(R.id.rb_zhifb);
             ll_cancel = (LinearLayout) dialogView.findViewById(R.id.ll_cancel);
+
+            //确认支付
+            btn_confirm_payment = (Button) dialogView.findViewById(R.id.btn_confirm_payment);
+
             rb_wenx.setChecked(true);
             progressBar = (ProgressBar) dialogView.findViewById(R.id.progressBar);
             setHeadDialog.getWindow().setContentView(dialogView);
@@ -276,13 +307,49 @@ public class RegistrationAtivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 setHeadDialog.dismiss();
+                Intent intent = new Intent(RegistrationAtivity.this, ReservationActivity.class);
+                startActivity(intent);
+                Toast.makeText(RegistrationAtivity.this, "你可以在我的预约查看未完成的订单", Toast.LENGTH_SHORT).show();
+                finish();
+            }
+        });
+
+        btn_confirm_payment.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Log.e("订单号", orderCode);
+                OkHttpUtils
+                        .post()
+                        .url(Http_data.http_data + "/ChangOrderStatusByOrderCode")
+                        .addParams("orderCode", orderCode)
+                        .addParams("status", "已预约")
+                        .build()
+                        .execute(new StringCallback() {
+                            @Override
+                            public void onError(Call call, Exception e, int id) {
+                                Toast.makeText(RegistrationAtivity.this, "网络连接失败", Toast.LENGTH_SHORT).show();
+                            }
+
+                            @Override
+                            public void onResponse(String response, int id) {
+                                Log.e("支付", response);
+
+                                if (response.equals("0")) {
+                                    setHeadDialog.dismiss();
+                                    Intent intent = new Intent(RegistrationAtivity.this, ReservationActivity.class);
+                                    startActivity(intent);
+                                    Toast.makeText(RegistrationAtivity.this, "挂号成功,你可以在我的预约查看预约详情", Toast.LENGTH_SHORT).show();
+                                    finish();
+                                }
+                            }
+                        });
             }
         });
     }
 
 
     private void departmentsshowDialog() {
-//        setHeadDialog = new Builder(this).create();
+
         setHeadDialog = new Dialog(this, R.style.CustomDialog);
         setHeadDialog.show();
         dialogView = View.inflate(getApplicationContext(), R.layout.registration_dialog, null);
