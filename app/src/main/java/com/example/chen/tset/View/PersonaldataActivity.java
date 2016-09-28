@@ -20,6 +20,7 @@ import android.widget.Toast;
 import com.example.chen.tset.Data.Http_data;
 import com.example.chen.tset.Data.User_Http;
 import com.example.chen.tset.R;
+import com.example.chen.tset.Utils.MyBaseActivity;
 import com.example.chen.tset.Utils.SharedPsaveuser;
 import com.nostra13.universalimageloader.core.ImageLoader;
 import com.zhy.http.okhttp.OkHttpUtils;
@@ -37,7 +38,7 @@ import okhttp3.Call;
 /**
  * 修改头像页面,已改为个人资料页面点击修改头像
  */
-public class PersonaldataActivity extends AppCompatActivity {
+public class PersonaldataActivity extends MyBaseActivity {
     private RelativeLayout rl_name, rl_gender, rl_phone, rl_icon;
     private ImageView iv_icon;
     private TextView tv_name, tv_phone, tv_sex;
@@ -192,10 +193,11 @@ public class PersonaldataActivity extends AppCompatActivity {
                         Log.e("头像返回", response);
                         if (resultCode == RESULT_OK) {
                             Bitmap bmp = BitmapFactory.decodeFile(sdcardTempFile.getAbsolutePath());
+
                             iv_icon.setImageBitmap(bmp);
                         }
                         String icon = sdcardTempFile.getAbsolutePath();
-                        Log.e("图片", icon);
+
                         //将更改过的头像保存在本地，并清除用户实体类中头像
                         sp.setUsericon(icon);
                         User_Http.user.setIcon(null);

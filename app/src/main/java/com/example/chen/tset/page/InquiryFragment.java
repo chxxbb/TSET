@@ -74,6 +74,10 @@ public class InquiryFragment extends Fragment {
         return view;
     }
 
+    @Override
+    public void onStart() {
+        super.onStart();
+    }
 
     private void findView() {
         lv_inquiry = (ListView) view.findViewById(R.id.lv_inquiry);

@@ -21,6 +21,7 @@ import com.example.chen.tset.Data.Reservationlist;
 import com.example.chen.tset.Data.User;
 import com.example.chen.tset.Data.User_Http;
 import com.example.chen.tset.R;
+import com.example.chen.tset.Utils.MyBaseActivity;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import com.nostra13.universalimageloader.core.ImageLoader;
@@ -38,7 +39,7 @@ import okhttp3.Call;
 /**
  * 资讯详情页面与收藏详情页面公用同一个接口
  */
-public class ConsultPageActivity extends AppCompatActivity implements View.OnClickListener {
+public class ConsultPageActivity extends MyBaseActivity implements View.OnClickListener {
     private ScrollView scrollview;
     private LinearLayout ll_consult_return, ll_consult_collect;
     private TextView tv_title, tv_time, tv_content, tv_collsult, tv;

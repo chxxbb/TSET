@@ -1,6 +1,7 @@
 package com.example.chen.tset.View;
 
 import android.annotation.TargetApi;
+import android.app.Application;
 import android.app.Notification;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
@@ -11,6 +12,7 @@ import android.graphics.BitmapFactory;
 import android.graphics.Color;
 import android.os.Build;
 import android.os.Environment;
+import android.os.PersistableBundle;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
@@ -30,6 +32,7 @@ import com.example.chen.tset.Data.JPErrorCode;
 import com.example.chen.tset.Data.User;
 import com.example.chen.tset.Data.User_Http;
 import com.example.chen.tset.Utils.ChatpageDao;
+import com.example.chen.tset.Utils.MyBaseActivity;
 import com.example.chen.tset.Utils.SharedPsaveuser;
 import com.example.chen.tset.page.ConsultingFragment;
 import com.example.chen.tset.page.EncyclopediaFragment;
@@ -47,6 +50,7 @@ import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.Date;
@@ -63,7 +67,7 @@ import cn.jpush.im.android.api.model.Message;
 import cn.jpush.im.api.BasicCallback;
 import okhttp3.Call;
 
-public class HomeActivity extends AppCompatActivity implements View.OnClickListener {
+public class HomeActivity extends MyBaseActivity implements View.OnClickListener {
     FragmentManager fm;
     FragmentTransaction ft;
     private RadioButton rb_encyclopedia, rb_lectureroom, rb_mypage, rb_diagnosis;
@@ -102,11 +106,62 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
         sp = new SharedPsaveuser(HomeActivity.this);
 
 
-
-        context=getBaseContext();
+        context = getBaseContext();
         DisplayMetrics dm = new DisplayMetrics();
         WindowManager windowManager = (WindowManager) context.getSystemService(Context.WINDOW_SERVICE);
         windowManager.getDefaultDisplay().getMetrics(dm);
+        if(User_Http.user.getIcon()!=null){
+            saveicon();
+        }
+
+
+        jmessage();
+
+//        Intent i = getBaseContext().getPackageManager()
+//                .getLaunchIntentForPackage(getBaseContext().getPackageName());
+//        i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+//        startActivity(i);
+
+
+
+    }
+
+    private void saveicon() {
+
+        new Thread() {
+            public void run() {
+                try {
+                    audioFile = new File(Environment.getExternalStorageDirectory().getAbsolutePath() + "/data/files/");
+                    audioFile.mkdirs();//创建文件夹
+                    sdcardTempFile = File.createTempFile("recording", ".jpg", audioFile);
+                    String urlPath = User_Http.user.getIcon();
+                    URL url = new URL(urlPath);
+                    HttpURLConnection conn = (HttpURLConnection) url.openConnection();
+                    conn.setConnectTimeout(6 * 1000);  // 注意要设置超时，设置时间不要超过10秒，避免被android系统回收
+                    if (conn.getResponseCode() != 200) throw new RuntimeException("请求url失败");
+                    InputStream inSream = conn.getInputStream();
+                    //把图片保存到项目的根目录
+                    readAsFile(inSream, new File(String.valueOf(sdcardTempFile)));
+                    String icon = sdcardTempFile.getAbsolutePath();
+                    //将更改过的头像保存在本地
+                    sp.setUsericon(icon);
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+        }.start();
+    }
+
+
+    public static void readAsFile(InputStream inSream, File file) throws Exception {
+        FileOutputStream outStream = new FileOutputStream(file);
+        byte[] buffer = new byte[1024];
+        int len = -1;
+        while ((len = inSream.read(buffer)) != -1) {
+            outStream.write(buffer, 0, len);
+        }
+        outStream.close();
+        inSream.close();
 
     }
 
@@ -114,8 +169,12 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
     @Override
     protected void onStart() {
         super.onStart();
-        jmessage();
+
+
+
         spStorage();
+
+
     }
 
     @Override
@@ -126,7 +185,7 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
 
     //将用户基本信息保存在本地
     private void spStorage() {
-        if(User_Http.user.getId()!=null){
+        if (User_Http.user.getId() != null) {
             id = User_Http.user.getId();
             name = User_Http.user.getName();
             phone = User_Http.user.getPhone();
@@ -138,16 +197,18 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
     }
 
 
-
-
     //登录jmeeage
     private void jmessage() {
-        String username=null;
-        if (User_Http.user.getPhone()==null){
-            username=sp.getTag().getPhone();
-        }else {
-            username=User_Http.user.getPhone();
+
+        String username = null;
+        if (User_Http.user.getPhone() == null) {
+            username = sp.getTag().getPhone();
+        } else {
+            username = User_Http.user.getPhone();
         }
+
+
+
         JMessageClient.register(username, "123456", new BasicCallback() {
             @Override
             public void gotResult(int i, String s) {
@@ -159,9 +220,11 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
             }
         });
 
+        final String finalUsername = username;
         JMessageClient.login(username, "123456", new BasicCallback() {
             @Override
             public void gotResult(int i, String s) {
+                Log.e("username", finalUsername);
                 if (i == 0) {
                     Log.e("jmessage", "登录成功");
                 } else {
@@ -233,12 +296,10 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
     }
 
 
-
     private void init() {
         fm = getSupportFragmentManager();
         rb_encyclopedia.performClick();
     }
-
 
 
     private void hideAllFragment(FragmentTransaction fragmentTransaction) {
@@ -320,6 +381,41 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
     };
 
 
+    private void registerjudge() {
+        OkHttpUtils
+                .post()
+                .url(Http_data.http_data + "/login")
+                .addParams("phone", sp.getTag().getPhone())
+                .addParams("password", sp.getTag().getPassword())
+                .build()
+                .execute(new StringCallback() {
+                    @Override
+                    public void onError(Call call, Exception e, int id) {
+
+                    }
+
+                    @Override
+                    public void onResponse(String response, int id) {
+                        Log.e("返回", response);
+
+                        if (response.equals("1")) {
+                            Toast.makeText(HomeActivity.this, "密码被修改", Toast.LENGTH_SHORT).show();
+                            sp.clearinit();
+                            Intent i = new Intent(HomeActivity.this, LoginActivity.class);
+                            startActivity(i);
+                            finish();
+                        } else {
+                            Gson gson = new Gson();
+                            User user = gson.fromJson(response, User.class);
+                            Log.e("user", user.toString());
+                            User_Http.user.setUser(user);
+                        }
+
+                    }
+                });
+    }
+
+
     @Override
     protected void onPause() {
         super.onPause();
@@ -331,4 +427,13 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
         super.onResume();
         JPushInterface.onResume(this);
     }
+
+
+    @Override
+    protected void onSaveInstanceState(Bundle outState) {
+        // TODO Auto-generated method stub
+        super.onSaveInstanceState(outState);
+    }
+
+
 }

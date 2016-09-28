@@ -70,6 +70,10 @@ public class DiseaselibFragment extends Fragment {
         return view;
     }
 
+    @Override
+    public void onStart() {
+        super.onStart();
+    }
 
     private void findView() {
         listview_dise = (ListView) view.findViewById(R.id.listview_dise);

@@ -17,6 +17,7 @@ import android.widget.TimePicker;
 import android.widget.Toast;
 
 import com.example.chen.tset.R;
+import com.example.chen.tset.Utils.MyBaseActivity;
 
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
@@ -25,7 +26,7 @@ import java.util.Date;
 /**
  * 添加提醒页面
  */
-public class CompileremindActivity extends AppCompatActivity {
+public class CompileremindActivity extends MyBaseActivity {
     private CustomTimePicker timepacker;
     private RelativeLayout rl_starttime, rl_endtiem;
     private TextView tv_starttime, tv_endtiem, tv_time_complete, tv_remind_set, tv_remind_content, tv_pharmacy_compile;

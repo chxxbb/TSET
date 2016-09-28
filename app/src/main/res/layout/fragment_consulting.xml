@@ -38,9 +38,9 @@
                             android:layout_width="@dimen/y24"
                             android:layout_height="@dimen/x36"
                             android:layout_gravity="center"
+                            android:layout_marginLeft="@dimen/x30"
                             android:layout_marginRight="@dimen/x30"
-                            android:src="@drawable/consulting_left_arrows"
-                            android:layout_marginLeft="@dimen/x30"/>
+                            android:src="@drawable/consulting_left_arrows" />
                     </LinearLayout>
 
 
@@ -75,15 +75,16 @@
 
                 <LinearLayout
                     android:id="@+id/ll_consulting_popup_case"
-                    android:layout_alignParentRight="true"
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
+                    android:layout_alignParentRight="true"
                     android:gravity="center_vertical">
+
                     <ImageView
                         android:layout_width="@dimen/x36"
                         android:layout_height="@dimen/y36"
-                        android:src="@drawable/consulting_more"
-                        android:layout_marginRight="@dimen/x30"/>
+                        android:layout_marginRight="@dimen/x30"
+                        android:src="@drawable/consulting_more" />
                 </LinearLayout>
             </RelativeLayout>
 
@@ -205,7 +206,7 @@
 
                 <View
                     android:layout_width="@dimen/x10"
-                    android:layout_height="match_parent"/>
+                    android:layout_height="match_parent" />
             </LinearLayout>
 
             <View
@@ -218,8 +219,8 @@
                 android:id="@+id/flipper"
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
-                android:background="#6fc8e6"
-                android:layout_gravity="center_horizontal"/>
+                android:layout_gravity="center_horizontal"
+                android:background="#6fc8e6" />
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -228,7 +229,9 @@
                 android:gravity="center_vertical"
                 android:orientation="horizontal">
 
+
                 <TextView
+
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="@dimen/x30"
@@ -236,37 +239,101 @@
                     android:textColor="@color/white"
                     android:textSize="@dimen/y26" />
 
-                <FrameLayout
+                <LinearLayout
+                    android:id="@+id/ll_registration"
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content">
+                    android:layout_height="match_parent"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal">
 
-                    <ImageView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:background="@drawable/consulting_remind_unmep"></ImageView>
-
-                    <LinearLayout
+                    <FrameLayout
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content">
 
-                        <ToggleButton
-                            android:layout_width="@dimen/x24"
-                            android:layout_height="@dimen/y18"
-                            android:layout_marginLeft="@dimen/x3"
-                            android:background="@drawable/cousulting_remind"
-                            android:textOff=""
-                            android:textOn="" />
-                    </LinearLayout>
-                </FrameLayout>
+                        <ImageView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:background="@drawable/consulting_remind_unmep"></ImageView>
+
+                        <LinearLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content">
+
+                            <ToggleButton
+                                android:id="@+id/tb_registration"
+                                android:layout_width="@dimen/x24"
+                                android:layout_height="@dimen/y18"
+                                android:layout_marginLeft="@dimen/x3"
+                                android:background="@drawable/cousulting_remind"
+                                android:checked="true"
+                                android:textOff=""
+                                android:textOn="" />
+                        </LinearLayout>
+                    </FrameLayout>
 
 
-                <TextView
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="@dimen/x4"
+                        android:text="挂号提醒"
+                        android:textColor="@color/white"
+                        android:textSize="@dimen/y26" />
+                </LinearLayout>
+
+
+                <LinearLayout
+                    android:id="@+id/ll_health"
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="@dimen/x4"
-                    android:text="挂号提醒"
-                    android:textColor="@color/white"
-                    android:textSize="@dimen/y26" />
+                    android:layout_height="match_parent"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal">
+
+
+                    <FrameLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="@dimen/x40">
+
+                        <ImageView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:background="@drawable/consulting_remind_unmep"></ImageView>
+
+                        <LinearLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content">
+
+                            <ToggleButton
+                                android:id="@+id/tb_health"
+                                android:layout_width="@dimen/x24"
+                                android:layout_height="@dimen/y18"
+                                android:layout_marginLeft="@dimen/x3"
+                                android:background="@drawable/cousulting_remind"
+                                android:checked="true"
+                                android:textOff=""
+                                android:textOn="" />
+                        </LinearLayout>
+                    </FrameLayout>
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="@dimen/x4"
+                        android:text="健康提醒"
+                        android:textColor="@color/white"
+                        android:textSize="@dimen/y26" />
+
+
+                </LinearLayout>
+
+
+                <LinearLayout
+                    android:id="@+id/ll_pharmacy"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal">
 
                 <FrameLayout
                     android:layout_width="wrap_content"
@@ -283,42 +350,12 @@
                         android:layout_height="wrap_content">
 
                         <ToggleButton
+                            android:id="@+id/tb_pharmacy"
                             android:layout_width="@dimen/x24"
                             android:layout_height="@dimen/y18"
                             android:layout_marginLeft="@dimen/x3"
                             android:background="@drawable/cousulting_remind"
-                            android:textOff=""
-                            android:textOn="" />
-                    </LinearLayout>
-                </FrameLayout>
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="@dimen/x4"
-                    android:text="健康提醒"
-                    android:textColor="@color/white"
-                    android:textSize="@dimen/y26" />
-
-                <FrameLayout
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="@dimen/x40">
-
-                    <ImageView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:background="@drawable/consulting_remind_unmep"></ImageView>
-
-                    <LinearLayout
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content">
-
-                        <ToggleButton
-                            android:layout_width="@dimen/x24"
-                            android:layout_height="@dimen/y18"
-                            android:layout_marginLeft="@dimen/x3"
-                            android:background="@drawable/cousulting_remind"
+                            android:checked="true"
                             android:textOff=""
                             android:textOn="" />
                     </LinearLayout>
@@ -331,6 +368,7 @@
                     android:text="用药提醒"
                     android:textColor="@color/white"
                     android:textSize="@dimen/y26" />
+                </LinearLayout>
             </LinearLayout>
 
             <LinearLayout
@@ -342,10 +380,10 @@
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="@dimen/y114"
+                    android:layout_marginBottom="@dimen/y5"
                     android:layout_marginLeft="@dimen/x20"
                     android:layout_marginRight="@dimen/x20"
                     android:layout_marginTop="@dimen/y20"
-                    android:layout_marginBottom="@dimen/y5"
                     android:gravity="center_vertical"
                     android:orientation="horizontal">
 
@@ -383,10 +421,10 @@
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="@dimen/y114"
+                    android:layout_marginBottom="@dimen/y5"
                     android:layout_marginLeft="@dimen/x20"
                     android:layout_marginRight="@dimen/x20"
                     android:layout_marginTop="@dimen/y5"
-                    android:layout_marginBottom="@dimen/y5"
                     android:gravity="center_vertical"
                     android:orientation="horizontal">
 

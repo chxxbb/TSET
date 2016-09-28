@@ -13,6 +13,7 @@ import com.example.chen.tset.Data.Http_data;
 import com.example.chen.tset.Data.Information;
 import com.example.chen.tset.Data.Pharmacyremind;
 import com.example.chen.tset.R;
+import com.example.chen.tset.Utils.MyBaseActivity;
 import com.example.chen.tset.page.PharmacyremindAdapter;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
@@ -30,7 +31,7 @@ import okhttp3.Call;
 /**
  * 用药提醒页面
  */
-public class PharmacyremindActivity extends AppCompatActivity {
+public class PharmacyremindActivity extends MyBaseActivity {
     private ListView lv_pharmacy_remind;
     private LinearLayout ll_add_remind, ll_return;
     PharmacyremindAdapter adapter;

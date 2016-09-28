@@ -14,6 +14,7 @@ import android.widget.Toast;
 import com.example.chen.tset.Data.Http_data;
 import com.example.chen.tset.Data.User_Http;
 import com.example.chen.tset.R;
+import com.example.chen.tset.Utils.MyBaseActivity;
 import com.zhy.http.okhttp.OkHttpUtils;
 import com.zhy.http.okhttp.callback.StringCallback;
 
@@ -21,7 +22,7 @@ import okhttp3.Call;
 /**
  * 修改手机号
  */
-public class PhonechangeActivity extends AppCompatActivity {
+public class PhonechangeActivity extends MyBaseActivity {
     private EditText et_verificationcode, et_phone;
     private TextView tv_pas;
     private LinearLayout ll_rutphone;

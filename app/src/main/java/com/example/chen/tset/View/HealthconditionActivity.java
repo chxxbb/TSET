@@ -18,11 +18,12 @@ import android.widget.ToggleButton;
 import com.daimajia.androidanimations.library.Techniques;
 import com.daimajia.androidanimations.library.YoYo;
 import com.example.chen.tset.R;
+import com.example.chen.tset.Utils.MyBaseActivity;
 
 /**
  * 健康状况
  */
-public class HealthconditionActivity extends AppCompatActivity {
+public class HealthconditionActivity extends MyBaseActivity {
     private Button btn_helth, btn_else;
     private TextView tv_henlth;
     private LinearLayout ll_henlth, ll_describe, linearLayout, ll_consult_return;

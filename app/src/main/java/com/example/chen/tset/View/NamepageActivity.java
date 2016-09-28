@@ -15,6 +15,7 @@ import com.example.chen.tset.Data.Http_data;
 import com.example.chen.tset.Data.User;
 import com.example.chen.tset.Data.User_Http;
 import com.example.chen.tset.R;
+import com.example.chen.tset.Utils.MyBaseActivity;
 import com.zhy.http.okhttp.OkHttpUtils;
 import com.zhy.http.okhttp.callback.StringCallback;
 
@@ -23,7 +24,7 @@ import okhttp3.Call;
 /**
  * 修改昵称
  */
-public class NamepageActivity extends AppCompatActivity {
+public class NamepageActivity extends MyBaseActivity {
     private EditText et_name_save;
     private TextView tv_pas;
     private LinearLayout ll_rutname;

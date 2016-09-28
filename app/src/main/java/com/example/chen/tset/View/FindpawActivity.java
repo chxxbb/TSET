@@ -12,6 +12,7 @@ import android.widget.Toast;
 
 import com.example.chen.tset.Data.Http_data;
 import com.example.chen.tset.R;
+import com.example.chen.tset.Utils.MyBaseActivity;
 import com.zhy.http.okhttp.OkHttpUtils;
 import com.zhy.http.okhttp.callback.Callback;
 import com.zhy.http.okhttp.callback.StringCallback;
@@ -24,7 +25,7 @@ import okhttp3.Response;
 /**
  * 修改密码
  */
-public class FindpawActivity extends AppCompatActivity {
+public class FindpawActivity extends MyBaseActivity {
 
     EditText activity_find_password_phone = null, activity_find_password_code = null, activity_find_password_password = null, activity_find_password_password2 = null;
     Button activity_find_password_getcode_button = null, activity_find_password_button = null;

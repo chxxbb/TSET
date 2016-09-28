@@ -6,8 +6,10 @@ import android.view.View;
 import android.widget.LinearLayout;
 
 import com.example.chen.tset.R;
+import com.example.chen.tset.Utils.MyBaseActivity;
+
 //关于我们页面
-public class AboutusActivity extends AppCompatActivity {
+public class AboutusActivity extends MyBaseActivity {
     private LinearLayout ll_aboutus;
 
     @Override

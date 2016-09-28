@@ -18,6 +18,7 @@ import android.widget.Toast;
 import com.example.chen.tset.Data.Http_data;
 import com.example.chen.tset.Data.User_Http;
 import com.example.chen.tset.R;
+import com.example.chen.tset.Utils.MyBaseActivity;
 import com.example.chen.tset.Utils.SharedPsaveuser;
 import com.zhy.http.okhttp.OkHttpUtils;
 import com.zhy.http.okhttp.callback.StringCallback;
@@ -32,7 +33,7 @@ import okhttp3.Call;
 /**
  * 个人资料
  */
-public class IconmanageActivity extends AppCompatActivity {
+public class IconmanageActivity extends MyBaseActivity {
     private ImageView iv_manage, iv_ico;
     private File sdcardTempFile;
     private int crop = 180;

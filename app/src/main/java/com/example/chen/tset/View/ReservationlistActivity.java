@@ -19,6 +19,7 @@ import com.example.chen.tset.Data.Reservation;
 import com.example.chen.tset.Data.Reservationlist;
 import com.example.chen.tset.Data.User;
 import com.example.chen.tset.R;
+import com.example.chen.tset.Utils.MyBaseActivity;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import com.zhy.http.okhttp.OkHttpUtils;
@@ -36,7 +37,7 @@ import okhttp3.Call;
 /**
  * 预约订单详情
  */
-public class ReservationlistActivity extends AppCompatActivity implements View.OnClickListener {
+public class ReservationlistActivity extends MyBaseActivity implements View.OnClickListener {
     private LinearLayout ll_myreservationg;
     private ScrollView scrollView;
     private TextView tv_content, tv_doctor_name, tv_title, tv_appointment_time, tv_valid_time, tv_address, tv_patient_name, tv_money, tv_patient_phone, tv_order_no, tv_hospital, tv_section, tv_doctor_section;

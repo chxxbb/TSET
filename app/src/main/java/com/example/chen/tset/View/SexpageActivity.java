@@ -15,6 +15,7 @@ import android.widget.Toast;
 import com.example.chen.tset.Data.Http_data;
 import com.example.chen.tset.Data.User_Http;
 import com.example.chen.tset.R;
+import com.example.chen.tset.Utils.MyBaseActivity;
 import com.zhy.http.okhttp.OkHttpUtils;
 import com.zhy.http.okhttp.callback.StringCallback;
 
@@ -25,7 +26,7 @@ import okhttp3.Call;
 /**
  * 修改性别
  */
-public class SexpageActivity extends AppCompatActivity {
+public class SexpageActivity extends MyBaseActivity {
     private LinearLayout ll_rutgender;
     private RadioButton rb_man, rb_nman;
 

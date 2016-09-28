@@ -6,5 +6,5 @@
         android:dashGap="3dp"
         android:dashWidth="6dp"
         android:width="1dp"
-        android:color="#eb686c" />
+        android:color="#6fc9e6" />
 </shape>

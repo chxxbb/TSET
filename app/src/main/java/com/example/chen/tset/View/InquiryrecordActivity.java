@@ -8,6 +8,7 @@ import android.widget.LinearLayout;
 import android.widget.ListView;
 
 import com.example.chen.tset.R;
+import com.example.chen.tset.Utils.MyBaseActivity;
 import com.example.chen.tset.page.InquiryrecordAdapter;
 
 import java.text.SimpleDateFormat;
@@ -21,7 +22,7 @@ import cn.jpush.im.android.api.model.Conversation;
 /**
  * 问诊历史
  */
-public class InquiryrecordActivity extends AppCompatActivity {
+public class InquiryrecordActivity extends MyBaseActivity {
     private ListView lv_inquiryrecord;
     private InquiryrecordAdapter adapter;
     private List<String> list;

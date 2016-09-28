@@ -30,6 +30,7 @@ import android.widget.RelativeLayout;
 import android.widget.ScrollView;
 import android.widget.TextView;
 import android.widget.Toast;
+import android.widget.ToggleButton;
 import android.widget.ViewFlipper;
 
 import com.example.chen.tset.Data.CalendarSign;
@@ -84,6 +85,20 @@ public class ConsultingFragment extends Fragment implements View.OnClickListener
     private LinearLayout ll_consulting_popup_case;
 
 
+    private LinearLayout ll_registration, ll_health, ll_pharmacy;
+
+    private ToggleButton tb_registration, tb_health, tb_pharmacy;
+
+    //挂号提醒选择状态
+    int registrationSelect = 1;
+
+    //健康提醒选择状态
+    int healthSelect = 1;
+
+
+    //用药提醒选择状态
+    int pharmacySelect = 1;
+
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -135,6 +150,19 @@ public class ConsultingFragment extends Fragment implements View.OnClickListener
         ll_right = (LinearLayout) view.findViewById(R.id.ll_right);
         ll_left = (LinearLayout) view.findViewById(R.id.ll_left);
 
+        ll_registration = (LinearLayout) view.findViewById(R.id.ll_registration);
+        tb_registration = (ToggleButton) view.findViewById(R.id.tb_registration);
+        ll_registration.setOnClickListener(tblistener);
+
+        tb_health = (ToggleButton) view.findViewById(R.id.tb_health);
+        ll_health = (LinearLayout) view.findViewById(R.id.ll_health);
+        ll_health.setOnClickListener(tblistener);
+
+
+        tb_pharmacy = (ToggleButton) view.findViewById(R.id.tb_pharmacy);
+        ll_pharmacy = (LinearLayout) view.findViewById(R.id.ll_pharmacy);
+        ll_pharmacy.setOnClickListener(tblistener);
+
         ll_consulting_popup_case = (LinearLayout) view.findViewById(R.id.ll_consulting_popup_case);
 
 
@@ -143,7 +171,68 @@ public class ConsultingFragment extends Fragment implements View.OnClickListener
         ll_consulting_popup_case.setOnClickListener(listener);
 
 
+        if (tb_registration.isChecked()) {
+            registrationSelect = 1;
+        } else {
+            registrationSelect = 2;
+        }
+
+        if (tb_health.isChecked()) {
+            healthSelect = 1;
+        } else {
+            healthSelect = 2;
+        }
+
+
+        if (tb_pharmacy.isChecked()) {
+            pharmacySelect = 1;
+        } else {
+            pharmacySelect = 2;
+        }
+
+
     }
+
+
+    private View.OnClickListener tblistener = new View.OnClickListener() {
+        @Override
+        public void onClick(View v) {
+            switch (v.getId()) {
+                case R.id.ll_registration:
+
+                    if (registrationSelect == 1) {
+                        tb_registration.setChecked(false);
+                        registrationSelect = 2;
+                    } else if (registrationSelect == 2) {
+                        tb_registration.setChecked(true);
+                        registrationSelect = 1;
+                    }
+                    break;
+
+
+                case R.id.ll_health:
+                    if (healthSelect == 1) {
+                        tb_health.setChecked(false);
+                        healthSelect = 2;
+                    } else if (healthSelect == 2) {
+                        tb_health.setChecked(true);
+                        healthSelect = 1;
+                    }
+                    break;
+
+
+                case R.id.ll_pharmacy:
+                    if (pharmacySelect == 1) {
+                        tb_pharmacy.setChecked(false);
+                        pharmacySelect = 2;
+                    } else if (pharmacySelect == 2) {
+                        tb_pharmacy.setChecked(true);
+                        pharmacySelect = 1;
+                    }
+                    break;
+            }
+        }
+    };
 
 
     private void init() {

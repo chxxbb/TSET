@@ -30,6 +30,7 @@ import com.example.chen.tset.Data.Http_data;
 import com.example.chen.tset.Data.Registration;
 import com.example.chen.tset.Data.User_Http;
 import com.example.chen.tset.R;
+import com.example.chen.tset.Utils.MyBaseActivity;
 import com.example.chen.tset.page.RegistrationageAdapter;
 import com.example.chen.tset.page.RegistrationdivisionAdapter;
 import com.google.gson.Gson;
@@ -53,7 +54,7 @@ import okhttp3.Call;
 /**
  * 一键挂号
  */
-public class RegistrationAtivity extends AppCompatActivity {
+public class RegistrationAtivity extends MyBaseActivity {
     private RelativeLayout rl_city, rl_gender, rl_time, rl_age, rl_professionaltitle, rl_departments, rl_nonetwork;
     private LinearLayout ll_rutregistration, ll_cancel, ll_registr;
     private Dialog setHeadDialog;

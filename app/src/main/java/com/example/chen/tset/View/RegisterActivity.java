@@ -15,6 +15,7 @@ import android.widget.Toast;
 import com.example.chen.tset.Data.Http_data;
 import com.example.chen.tset.Data.User;
 import com.example.chen.tset.R;
+import com.example.chen.tset.Utils.MyBaseActivity;
 import com.google.gson.Gson;
 import com.zhy.http.okhttp.OkHttpUtils;
 import com.zhy.http.okhttp.callback.StringCallback;
@@ -27,7 +28,7 @@ import okhttp3.Call;
 /**
  * 注册页面
  */
-public class RegisterActivity extends AppCompatActivity {
+public class RegisterActivity extends MyBaseActivity {
 
     EditText activity_register_phone = null, activity_register_password = null, activity_register_password2 = null, activity_register_Verification_code = null;
     Button activity_register_Verification_code_button = null, activity_register_submit = null;

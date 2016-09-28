@@ -18,8 +18,11 @@ import android.widget.Toast;
 import com.example.chen.tset.Data.Consult;
 import com.example.chen.tset.Data.Http_data;
 import com.example.chen.tset.Data.Lecture;
+import com.example.chen.tset.Data.User_Http;
 import com.example.chen.tset.R;
+import com.example.chen.tset.Utils.SharedPsaveuser;
 import com.example.chen.tset.View.ConsultPageActivity;
+import com.example.chen.tset.View.LogActivity;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import com.zhy.http.okhttp.OkHttpUtils;
@@ -45,7 +48,9 @@ public class CharactersafeFragment extends Fragment {
     private RelativeLayout rl_nonetwork;
     List<Consult> list;
     Gson gson;
-    int i;
+    int i=1;
+
+    SharedPsaveuser sp;
 
     public int getI() {
         return i;
@@ -61,6 +66,11 @@ public class CharactersafeFragment extends Fragment {
         view = inflater.inflate(R.layout.fragment_charactersafe, null);
         findView();
 
+
+
+
+
+        sp=new SharedPsaveuser(getContext());
 
         init();
 
@@ -85,7 +95,6 @@ public class CharactersafeFragment extends Fragment {
         list = new ArrayList<>();
         adapter = new CharactersafeAdapter1(getContext(), list);
         lv_charactersafe.setAdapter(adapter);
-        Log.e("资讯页面ID",getI()+"");
         Thread thread = new Thread(new Runnable() {
             @Override
             public void run() {

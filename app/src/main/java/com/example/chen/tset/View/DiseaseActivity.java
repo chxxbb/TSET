@@ -16,6 +16,7 @@ import com.example.chen.tset.Data.Consultparticulars;
 import com.example.chen.tset.Data.Disease;
 import com.example.chen.tset.Data.Http_data;
 import com.example.chen.tset.R;
+import com.example.chen.tset.Utils.MyBaseActivity;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import com.nostra13.universalimageloader.core.ImageLoader;
@@ -32,7 +33,7 @@ import okhttp3.Call;
 /**
  * 疾病详情页面
  */
-public class DiseaseActivity extends AppCompatActivity {
+public class DiseaseActivity extends MyBaseActivity {
     private LinearLayout ll_return;
     private ScrollView scrollView;
     private TextView tv_content, tv_acontent, tv_acontent1, tv_title, tv_title1, tv_bcontent, tv_dcontent, tv_dname, tv_uname, tv_section, tv_ucontent;

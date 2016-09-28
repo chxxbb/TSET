@@ -74,6 +74,7 @@ public class ChatpageActivity extends AppCompatActivity {
     private View dialogView;
     private LinearLayout ll_consult_return;
     ChatpageDao db;
+    String doctorID;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -91,6 +92,8 @@ public class ChatpageActivity extends AppCompatActivity {
 
 
     private void findView() {
+        doctorID = getIntent().getStringExtra("doctorID");
+        Log.e("医生ID",doctorID);
         //医生姓名
         doctorname = getIntent().getStringExtra("name");
         //医生头像
@@ -125,12 +128,16 @@ public class ChatpageActivity extends AppCompatActivity {
         //从数据库中获取此用户聊天记录
         historylist = db.chatfind("18302615820");
         for (int i = 0; i < historylist.size(); i++) {
-            list.add(historylist.get(i));
+
+            if (historylist.get(i).getMyname().equals(User_Http.user.getPhone())) {
+                list.add(historylist.get(i));
+            }
+
 
         }
         adapter = new ChatpageAdapter(this, list, doctoricon);
         listView.setAdapter(adapter);
-        if (historylist.size() > 8) {
+        if (historylist.size() > 7) {
             //是listview从下面刷新数据
             listView.setStackFromBottom(true);
         }
@@ -138,6 +145,7 @@ public class ChatpageActivity extends AppCompatActivity {
         adapter.notifyDataSetChanged();
 
     }
+
 
     private TextView.OnEditorActionListener ettextlistener = new TextView.OnEditorActionListener() {
         @Override
@@ -189,7 +197,7 @@ public class ChatpageActivity extends AppCompatActivity {
         }
     };
 
-
+    //发送图片
     private View.OnClickListener lisntener = new View.OnClickListener() {
 
         @Override
@@ -218,6 +226,8 @@ public class ChatpageActivity extends AppCompatActivity {
         }
     };
 
+
+    //图片发送弹出框
     private void sendpictureDialog() {
 //        setHeadDialog = new AlertDialog.Builder(this).create();
         setHeadDialog = new Dialog(this, R.style.CustomDialog);
@@ -229,6 +239,8 @@ public class ChatpageActivity extends AppCompatActivity {
         sendpictureclick();
     }
 
+
+    //选择获取图片方式
     private void sendpictureclick() {
         Button btn_camera = (Button) dialogView.findViewById(R.id.btn_camera);
         Button btn_cutout = (Button) dialogView.findViewById(R.id.btn_cutout);
@@ -280,6 +292,8 @@ public class ChatpageActivity extends AppCompatActivity {
         JMessageClient.exitConversation();
     }
 
+
+    //点击图片查看图片详情
     private AdapterView.OnItemClickListener listvlistener = new AdapterView.OnItemClickListener() {
         @Override
         public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
@@ -340,6 +354,8 @@ public class ChatpageActivity extends AppCompatActivity {
         }
     }
 
+
+    //发送图片
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         Thread thread = new Thread(new Runnable() {
@@ -356,7 +372,6 @@ public class ChatpageActivity extends AppCompatActivity {
                     Message message = c.createSendMessage(image);
                     JMessageClient.sendMessage(message);
                     chatcontent = new Chatcontent("1*1", 0L, sdcardTempFile.getAbsolutePath(), sdcardTempFile.getAbsolutePath(), "18302615820", User_Http.user.getPhone());
-                    Log.e("发送图片地址", sdcardTempFile.getAbsolutePath());
                     list.add(chatcontent);
                     db.addchatcont(chatcontent);
                 } catch (FileNotFoundException e) {

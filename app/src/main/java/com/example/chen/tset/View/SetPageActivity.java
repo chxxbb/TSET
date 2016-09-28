@@ -8,13 +8,15 @@ import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.Toast;
 
+import com.example.chen.tset.Data.User_Http;
 import com.example.chen.tset.R;
+import com.example.chen.tset.Utils.MyBaseActivity;
 import com.example.chen.tset.Utils.SharedPsaveuser;
 
 /**
  * 设置页面
  */
-public class SetPageActivity extends AppCompatActivity implements View.OnClickListener {
+public class SetPageActivity extends MyBaseActivity implements View.OnClickListener {
     private RelativeLayout rl_themese, rl_feedback, rl_aboutus, rl_remidset, rl_setpass, rl_exit;
     private LinearLayout ll_return;
     SharedPsaveuser sp;
@@ -81,6 +83,9 @@ public class SetPageActivity extends AppCompatActivity implements View.OnClickLi
                 Intent intent5 = new Intent(SetPageActivity.this, LoginActivity.class);
                 startActivity(intent5);
                 Toast.makeText(SetPageActivity.this, "请重新登录", Toast.LENGTH_SHORT).show();
+                User_Http.activity.finish();
+                finish();
+
                 break;
             case R.id.ll_return:
                 finish();

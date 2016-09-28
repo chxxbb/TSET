@@ -67,6 +67,10 @@ public class LectureroomFragment extends Fragment {
         return view;
     }
 
+    @Override
+    public void onStart() {
+        super.onStart();
+    }
 
     private void findView() {
         recyclerView = (RecyclerView) view.findViewById(R.id.recyclerView);

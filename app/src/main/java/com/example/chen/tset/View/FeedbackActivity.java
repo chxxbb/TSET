@@ -13,6 +13,7 @@ import android.widget.Toast;
 import com.example.chen.tset.Data.Http_data;
 import com.example.chen.tset.Data.User_Http;
 import com.example.chen.tset.R;
+import com.example.chen.tset.Utils.MyBaseActivity;
 import com.zhy.http.okhttp.OkHttpUtils;
 import com.zhy.http.okhttp.callback.StringCallback;
 
@@ -20,7 +21,7 @@ import okhttp3.Call;
 /**
  * APP评价
  */
-public class FeedbackActivity extends AppCompatActivity implements View.OnClickListener {
+public class FeedbackActivity extends MyBaseActivity implements View.OnClickListener {
     private TextView tv_feedback, tv_cancel;
     private EditText et_feedback;
 

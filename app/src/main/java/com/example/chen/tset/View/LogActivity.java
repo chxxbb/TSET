@@ -6,6 +6,9 @@ import android.os.Message;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.animation.AlphaAnimation;
+import android.view.animation.Animation;
+import android.widget.RelativeLayout;
 import android.widget.Toast;
 
 import com.example.chen.tset.Data.Http_data;
@@ -23,56 +26,73 @@ import okhttp3.Call;
 public class LogActivity extends AppCompatActivity {
     SharedPsaveuser sp;
 
+    private RelativeLayout rl_log;
+
+    int i = 0;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_log);
-        //设置引导页面延时
-        new Thread(new Runnable() {
+
+        rl_log = (RelativeLayout) findViewById(R.id.rl_log);
+
+        judgeWhetherRegister();
+        //初始化
+        Animation alphaAnimation = new AlphaAnimation(0.5f, 1.0f);
+        //设置动画时间
+        alphaAnimation.setDuration(2000);
+
+        rl_log.startAnimation(alphaAnimation);
+
+
+        alphaAnimation.setAnimationListener(new Animation.AnimationListener() {
             @Override
-            public void run() {
-                try {
-                    Thread.sleep(1000);
-                    handler.sendEmptyMessage(0);
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
-                }
+            public void onAnimationStart(Animation animation) {
 
             }
-        }).start();
 
-        sp = new SharedPsaveuser(LogActivity.this);
+            @Override
+            public void onAnimationEnd(Animation animation) {
+
+                if (i == 1) {
+                    Intent intent = new Intent(LogActivity.this, HomeActivity.class);
+                    startActivity(intent);
+                    finish();
+                } else {
+                    Intent intent = new Intent(LogActivity.this, LoginActivity.class);
+                    startActivity(intent);
+                    finish();
+                }
 
 
+            }
 
+            @Override
+            public void onAnimationRepeat(Animation animation) {
+
+            }
+        });
 
 
     }
-    Handler handler=new Handler(){
-        @Override
-        public void handleMessage(Message msg) {
-            super.handleMessage(msg);
-            switch (msg.what){
-                case 0:
-                    judgeWhetherRegister();
-                    break;
-            }
-        }
-    };
+
 
     //判断是否登录过
     private void judgeWhetherRegister() {
+        sp = new SharedPsaveuser(LogActivity.this);
         if (sp.getTag().getPhone() != null && sp.getTag().getPassword() != null) {
             registerjudge();
-            Intent intent = new Intent(LogActivity.this, HomeActivity.class);
-            startActivity(intent);
-            finish();
+
+            i = 1;
+
         } else {
-            Intent intent = new Intent(LogActivity.this, LoginActivity.class);
-            startActivity(intent);
-            finish();
+
+            i = 2;
+
         }
     }
+
 
     //如果登录过则从后台获取用户信息
     private void registerjudge() {
@@ -108,6 +128,8 @@ public class LogActivity extends AppCompatActivity {
                     }
                 });
     }
+
+
     @Override
     protected void onPause() {
         super.onPause();

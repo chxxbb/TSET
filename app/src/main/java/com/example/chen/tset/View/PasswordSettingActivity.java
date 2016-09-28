@@ -16,6 +16,7 @@ import com.example.chen.tset.Data.Http_data;
 import com.example.chen.tset.Data.Lecture;
 import com.example.chen.tset.Data.User_Http;
 import com.example.chen.tset.R;
+import com.example.chen.tset.Utils.MyBaseActivity;
 import com.google.gson.reflect.TypeToken;
 import com.zhy.http.okhttp.OkHttpUtils;
 import com.zhy.http.okhttp.callback.StringCallback;
@@ -28,7 +29,7 @@ import okhttp3.Call;
 /**
  * 密码修改
  */
-public class PasswordSettingActivity extends AppCompatActivity implements View.OnClickListener {
+public class PasswordSettingActivity extends MyBaseActivity implements View.OnClickListener {
     private TextView tv_pas, tv_passet;
     private EditText et_newpassword, et_forpassword;
     private LinearLayout linearlayout;

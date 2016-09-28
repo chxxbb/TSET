@@ -20,6 +20,7 @@ import com.example.chen.tset.Data.Doctorcomment;
 import com.example.chen.tset.Data.Http_data;
 import com.example.chen.tset.Data.Information;
 import com.example.chen.tset.R;
+import com.example.chen.tset.Utils.MyBaseActivity;
 import com.example.chen.tset.page.DoctorparticularsAdapter;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
@@ -39,7 +40,7 @@ import okhttp3.Call;
 /**
  * 医生详情页面，与我的医生详情，问诊详情共用同一个接口
  */
-public class DoctorparticularsActivity extends AppCompatActivity {
+public class DoctorparticularsActivity extends MyBaseActivity {
     private ListView lv_docttorparticulas;
     private DoctorparticularsAdapter adapter;
     private LinearLayout ll_return;

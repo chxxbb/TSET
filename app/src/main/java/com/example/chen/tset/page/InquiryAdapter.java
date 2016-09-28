@@ -13,12 +13,17 @@ import android.widget.Button;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import com.example.chen.tset.Data.Http_data;
 import com.example.chen.tset.Data.Inquiry;
+import com.example.chen.tset.Data.User_Http;
 import com.example.chen.tset.R;
 import com.example.chen.tset.View.ChatpageActivity;
 import com.nostra13.universalimageloader.core.DisplayImageOptions;
 import com.nostra13.universalimageloader.core.ImageLoader;
+import com.zhy.http.okhttp.OkHttpUtils;
+import com.zhy.http.okhttp.callback.StringCallback;
 
 import java.io.BufferedInputStream;
 import java.io.BufferedOutputStream;
@@ -30,6 +35,7 @@ import java.net.URL;
 import java.util.List;
 
 import de.hdodenhof.circleimageview.CircleImageView;
+import okhttp3.Call;
 
 /**
  * Created by Administrator on 2016/9/1 0001.
@@ -76,14 +82,48 @@ public class InquiryAdapter extends BaseAdapter {
         viewHolder.fl_chat.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
+//                submit(position);
+
+
                 Intent intent = new Intent(context, ChatpageActivity.class);
                 intent.putExtra("name", list.get(position).getName());
                 intent.putExtra("icon", list.get(position).getIcon());
+                intent.putExtra("doctorID", list.get(position).getId());
                 context.startActivity(intent);
             }
         });
         return convertView;
     }
+
+    private void submit(final int pos) {
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                OkHttpUtils
+                        .post()
+                        .url(Http_data.http_data + "")
+                        .addParams("userId", User_Http.user.getId() + "")
+                        .addParams("doctorID", list.get(pos).getId())
+                        .build()
+                        .execute(new StringCallback() {
+                            @Override
+                            public void onError(Call call, Exception e, int id) {
+                                Log.e("失败", "失败");
+                            }
+
+                            @Override
+                            public void onResponse(String response, int id) {
+                                Log.e("返回", response);
+
+
+                            }
+                        });
+            }
+        }).start();
+
+    }
+
 
     static class ViewHolder {
         private TextView textView;

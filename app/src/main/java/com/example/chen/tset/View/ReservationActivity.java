@@ -18,6 +18,7 @@ import com.example.chen.tset.Data.Information;
 import com.example.chen.tset.Data.Reservation;
 import com.example.chen.tset.Data.User_Http;
 import com.example.chen.tset.R;
+import com.example.chen.tset.Utils.MyBaseActivity;
 import com.example.chen.tset.page.ReservationlistvAdapter;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
@@ -35,7 +36,7 @@ import okhttp3.Call;
 /**
  * 我的预约
  */
-public class ReservationActivity extends AppCompatActivity implements View.OnClickListener {
+public class ReservationActivity extends MyBaseActivity implements View.OnClickListener {
     private LinearLayout ll_reservationreturn;
     ReservationlistvAdapter adapter;
     private ListView lv_reser;

@@ -18,6 +18,7 @@ import com.example.chen.tset.Data.Inquiry;
 import com.example.chen.tset.Data.MyDoctor;
 import com.example.chen.tset.Data.User_Http;
 import com.example.chen.tset.R;
+import com.example.chen.tset.Utils.MyBaseActivity;
 import com.example.chen.tset.page.InquiryAdapter;
 import com.example.chen.tset.page.MyDoctorAdapter;
 import com.google.gson.Gson;
@@ -36,7 +37,7 @@ import okhttp3.Call;
 /**
  * 我的医生
  */
-public class MyDoctorActivity extends AppCompatActivity {
+public class MyDoctorActivity extends MyBaseActivity {
     private ListView lv_mydoctor;
     Gson gson;
     MyDoctorAdapter adapter;
