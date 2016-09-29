@@ -27,7 +27,7 @@ import cn.jpush.im.android.api.JMessageClient;
 import cn.jpush.im.api.BasicCallback;
 import okhttp3.Call;
 
-public class LoginActivity extends MyBaseActivity {
+public class LoginActivity extends AppCompatActivity {
 
     EditText login_phone_edittext = null, login_password_edittext = null;
     Button login_button = null;

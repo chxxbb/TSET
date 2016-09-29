@@ -68,4 +68,18 @@ public class SharedPsaveuser {
         SharedPreferences sp = context.getSharedPreferences("user", Context.MODE_PRIVATE);
         sp.edit().clear().commit();
     }
+
+
+    public void setregisterstate(String phone){
+        SharedPreferences sp = context.getSharedPreferences("register", Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = sp.edit();
+        editor.putString("phone",phone);
+        editor.commit();
+    }
+
+    public String getregisterstate(){
+        SharedPreferences sp = context.getSharedPreferences("register", Context.MODE_PRIVATE);
+        String phone=sp.getString("phone",null);
+        return phone;
+    }
 }

@@ -55,6 +55,7 @@ import cn.jpush.im.android.api.event.LoginStateChangeEvent;
 import cn.jpush.im.android.api.event.MessageEvent;
 import cn.jpush.im.android.api.model.Conversation;
 import cn.jpush.im.android.api.model.Message;
+import cn.jpush.im.api.BasicCallback;
 import de.hdodenhof.circleimageview.CircleImageView;
 
 public class ChatpageActivity extends AppCompatActivity {
@@ -72,9 +73,10 @@ public class ChatpageActivity extends AppCompatActivity {
     private File audioFile;
     private Dialog setHeadDialog;
     private View dialogView;
-    private LinearLayout ll_consult_return;
+    private LinearLayout ll_consult_return,ll_doctor_particulars;
     ChatpageDao db;
     String doctorID;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -82,6 +84,15 @@ public class ChatpageActivity extends AppCompatActivity {
         setContentView(R.layout.activity_chatpage);
         JMessageClient.registerEventReceiver(this);
         //设置后在此页面接收此用户消息不会再通知栏中显示
+
+    }
+
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+
+
         JMessageClient.enterSingleConversation("18302615820");
         db = new ChatpageDao(this);
         list = new ArrayList<>();
@@ -91,9 +102,9 @@ public class ChatpageActivity extends AppCompatActivity {
     }
 
 
+
     private void findView() {
         doctorID = getIntent().getStringExtra("doctorID");
-        Log.e("医生ID",doctorID);
         //医生姓名
         doctorname = getIntent().getStringExtra("name");
         //医生头像
@@ -102,6 +113,8 @@ public class ChatpageActivity extends AppCompatActivity {
         iv_chat = (ImageView) findViewById(R.id.iv_chat);
         listView = (ListView) findViewById(R.id.listView);
         tv_doctorname = (TextView) findViewById(R.id.tv_doctorname);
+
+        ll_doctor_particulars= (LinearLayout) findViewById(R.id.ll_doctor_particulars);
 
 
         ll_consult_return = (LinearLayout) findViewById(R.id.ll_consult_return);
@@ -113,6 +126,7 @@ public class ChatpageActivity extends AppCompatActivity {
 
         iv_chat.setOnClickListener(lisntener);
         ll_consult_return.setOnClickListener(lisntener);
+        ll_doctor_particulars.setOnClickListener(doctorlisntener);
 
         listView.setTranscriptMode(AbsListView.TRANSCRIPT_MODE_NORMAL);
 
@@ -121,7 +135,18 @@ public class ChatpageActivity extends AppCompatActivity {
         listView.setOnItemClickListener(listvlistener);
 
 
+
     }
+
+    private View.OnClickListener doctorlisntener=new View.OnClickListener() {
+        @Override
+        public void onClick(View v) {
+            Intent intent=new Intent(ChatpageActivity.this,DoctorparticularsActivity.class);
+            intent.putExtra("doctot_id",doctorID);
+            startActivity(intent);
+        }
+    };
+
 
 
     private void init() {
@@ -131,20 +156,24 @@ public class ChatpageActivity extends AppCompatActivity {
 
             if (historylist.get(i).getMyname().equals(User_Http.user.getPhone())) {
                 list.add(historylist.get(i));
-            }
 
+
+            }
 
         }
         adapter = new ChatpageAdapter(this, list, doctoricon);
         listView.setAdapter(adapter);
-        if (historylist.size() > 7) {
-            //是listview从下面刷新数据
-            listView.setStackFromBottom(true);
-        }
+        //listview从底部开始刷新数据
+
+
+
+        listView.setStackFromBottom(true);
 
         adapter.notifyDataSetChanged();
 
     }
+
+
 
 
     private TextView.OnEditorActionListener ettextlistener = new TextView.OnEditorActionListener() {
@@ -384,6 +413,7 @@ public class ChatpageActivity extends AppCompatActivity {
 
 
     }
+
 
 
     @Override

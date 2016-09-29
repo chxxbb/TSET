@@ -91,10 +91,13 @@ public class HomeActivity extends MyBaseActivity implements View.OnClickListener
     SharedPsaveuser sp;
     Context context;
 
+    public static HomeActivity text_homeactivity;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
+        text_homeactivity = this;
         JMessageClient.registerEventReceiver(this);
         JMessageClient.setNotificationMode(JMessageClient.NOTI_MODE_DEFAULT);
         db = new ChatpageDao(this);
@@ -110,18 +113,15 @@ public class HomeActivity extends MyBaseActivity implements View.OnClickListener
         DisplayMetrics dm = new DisplayMetrics();
         WindowManager windowManager = (WindowManager) context.getSystemService(Context.WINDOW_SERVICE);
         windowManager.getDefaultDisplay().getMetrics(dm);
-        if(User_Http.user.getIcon()!=null){
+        if (User_Http.user.getIcon() != null) {
             saveicon();
         }
 
-
-        jmessage();
 
 //        Intent i = getBaseContext().getPackageManager()
 //                .getLaunchIntentForPackage(getBaseContext().getPackageName());
 //        i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
 //        startActivity(i);
-
 
 
     }
@@ -169,7 +169,7 @@ public class HomeActivity extends MyBaseActivity implements View.OnClickListener
     @Override
     protected void onStart() {
         super.onStart();
-
+        jmessage();
 
 
         spStorage();
@@ -208,7 +208,6 @@ public class HomeActivity extends MyBaseActivity implements View.OnClickListener
         }
 
 
-
         JMessageClient.register(username, "123456", new BasicCallback() {
             @Override
             public void gotResult(int i, String s) {
@@ -217,14 +216,14 @@ public class HomeActivity extends MyBaseActivity implements View.OnClickListener
                 } else if (i == 898001) {
                     Log.e("jmessage", "注册失败");
                 }
+
+                Log.e("RegistrationID",JPushInterface.getRegistrationID(HomeActivity.this));
             }
         });
 
-        final String finalUsername = username;
         JMessageClient.login(username, "123456", new BasicCallback() {
             @Override
             public void gotResult(int i, String s) {
-                Log.e("username", finalUsername);
                 if (i == 0) {
                     Log.e("jmessage", "登录成功");
                 } else {

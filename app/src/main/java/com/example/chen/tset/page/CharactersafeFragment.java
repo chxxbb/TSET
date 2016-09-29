@@ -48,7 +48,7 @@ public class CharactersafeFragment extends Fragment {
     private RelativeLayout rl_nonetwork;
     List<Consult> list;
     Gson gson;
-    int i=1;
+    int i;
 
     SharedPsaveuser sp;
 
@@ -64,6 +64,7 @@ public class CharactersafeFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         view = inflater.inflate(R.layout.fragment_charactersafe, null);
+
         findView();
 
 
@@ -98,10 +99,11 @@ public class CharactersafeFragment extends Fragment {
         Thread thread = new Thread(new Runnable() {
             @Override
             public void run() {
+                Log.e("i",i+"");
                 OkHttpUtils
                         .post()
                         .url(Http_data.http_data + "/FindCyclopediaListByCategoryId")
-                        .addParams("categoryId", getI() + "")
+                        .addParams("categoryId", i + "")
                         .build()
                         .execute(new StringCallback() {
                             @Override
@@ -112,14 +114,17 @@ public class CharactersafeFragment extends Fragment {
                             @Override
                             public void onResponse(String response, int id) {
                                 Log.e("资讯返回", response);
-                                Type listtype = new TypeToken<LinkedList<Consult>>() {
-                                }.getType();
-                                LinkedList<Consult> leclist = gson.fromJson(response, listtype);
-                                for (Iterator it = leclist.iterator(); it.hasNext(); ) {
-                                    Consult consult = (Consult) it.next();
-                                    list.add(consult);
+                                if(!response.equals("1")){
+                                    Type listtype = new TypeToken<LinkedList<Consult>>() {
+                                    }.getType();
+                                    LinkedList<Consult> leclist = gson.fromJson(response, listtype);
+                                    for (Iterator it = leclist.iterator(); it.hasNext(); ) {
+                                        Consult consult = (Consult) it.next();
+                                        list.add(consult);
+                                    }
+                                    handler.sendEmptyMessage(0);
                                 }
-                                handler.sendEmptyMessage(0);
+
 
                             }
                         });

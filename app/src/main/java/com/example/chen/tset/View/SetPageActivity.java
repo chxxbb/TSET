@@ -83,7 +83,7 @@ public class SetPageActivity extends MyBaseActivity implements View.OnClickListe
                 Intent intent5 = new Intent(SetPageActivity.this, LoginActivity.class);
                 startActivity(intent5);
                 Toast.makeText(SetPageActivity.this, "请重新登录", Toast.LENGTH_SHORT).show();
-                User_Http.activity.finish();
+                HomeActivity.text_homeactivity.finish();
                 finish();
 
                 break;

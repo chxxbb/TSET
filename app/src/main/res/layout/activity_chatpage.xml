@@ -49,6 +49,7 @@
                 android:textSize="@dimen/x36" />
 
             <LinearLayout
+                android:id="@+id/ll_doctor_particulars"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:layout_alignParentRight="true">
@@ -72,11 +73,13 @@
             <ListView
                 android:id="@+id/listView"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
+                android:layout_height="wrap_content"
                 android:layout_marginBottom="@dimen/y96"
                 android:layout_marginTop="@dimen/y96"
                 android:listSelector="@android:color/transparent"
-                android:overScrollMode="never"></ListView>
+                android:stackFromBottom="true"
+                android:overScrollMode="never"
+                android:transcriptMode="alwaysScroll"></ListView>
         </LinearLayout>
 
         <LinearLayout

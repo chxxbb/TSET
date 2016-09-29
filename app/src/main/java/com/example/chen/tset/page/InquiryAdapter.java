@@ -1,17 +1,23 @@
 package com.example.chen.tset.page;
 
+import android.app.Dialog;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.util.Log;
+import android.view.Display;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.WindowManager;
 import android.widget.BaseAdapter;
 import android.widget.Button;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
+import android.widget.ProgressBar;
+import android.widget.RadioButton;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -20,6 +26,7 @@ import com.example.chen.tset.Data.Inquiry;
 import com.example.chen.tset.Data.User_Http;
 import com.example.chen.tset.R;
 import com.example.chen.tset.View.ChatpageActivity;
+import com.example.chen.tset.View.ReservationActivity;
 import com.nostra13.universalimageloader.core.DisplayImageOptions;
 import com.nostra13.universalimageloader.core.ImageLoader;
 import com.zhy.http.okhttp.OkHttpUtils;
@@ -43,6 +50,19 @@ import okhttp3.Call;
 public class InquiryAdapter extends BaseAdapter {
     private Context context;
     private List<Inquiry> list;
+    private Dialog setHeadDialog;
+    private View dialogView;
+
+
+    RadioButton rb_wenx;
+
+    RadioButton rb_zhifb;
+
+    LinearLayout ll_cancel;
+
+    Button btn_confirm_payment;
+
+    ProgressBar progressBar;
 
     public InquiryAdapter(Context context, List<Inquiry> list) {
         this.context = context;
@@ -83,44 +103,117 @@ public class InquiryAdapter extends BaseAdapter {
             @Override
             public void onClick(View v) {
 
-//                submit(position);
-
-
                 Intent intent = new Intent(context, ChatpageActivity.class);
                 intent.putExtra("name", list.get(position).getName());
                 intent.putExtra("icon", list.get(position).getIcon());
                 intent.putExtra("doctorID", list.get(position).getId());
                 context.startActivity(intent);
+//                payDialog(position);
+
+//                OkHttpUtils
+//                        .post()
+//                        .url(Http_data.http_data)
+//                        .build()
+//                        .execute(new StringCallback() {
+//                            @Override
+//                            public void onError(Call call, Exception e, int id) {
+//
+//                            }
+//
+//                            @Override
+//                            public void onResponse(String response, int id) {
+//
+//                            }
+//                        });
+
+
+//                Intent intent = new Intent(context, ChatpageActivity.class);
+//                intent.putExtra("name", list.get(position).getName());
+//                intent.putExtra("icon", list.get(position).getIcon());
+//                intent.putExtra("doctorID", list.get(position).getId());
+//                context.startActivity(intent);
             }
+
         });
         return convertView;
     }
 
-    private void submit(final int pos) {
-        new Thread(new Runnable() {
+    //支付弹出框
+    private void payDialog(int pos) {
+
+        setHeadDialog = new Dialog(context, R.style.CustomDialog);
+        setHeadDialog.show();
+        WindowManager windowManager = (WindowManager) context.getSystemService(Context.WINDOW_SERVICE);
+        Display display = windowManager.getDefaultDisplay();
+        dialogView = View.inflate(context, R.layout.payment_dialog, null);
+
+
+        rb_wenx = (RadioButton) dialogView.findViewById(R.id.rb_wenx);
+        rb_zhifb = (RadioButton) dialogView.findViewById(R.id.rb_zhifb);
+        ll_cancel = (LinearLayout) dialogView.findViewById(R.id.ll_cancel);
+
+        //确认支付
+        btn_confirm_payment = (Button) dialogView.findViewById(R.id.btn_confirm_payment);
+
+        rb_wenx.setChecked(true);
+        progressBar = (ProgressBar) dialogView.findViewById(R.id.progressBar);
+        setHeadDialog.getWindow().setContentView(dialogView);
+        WindowManager.LayoutParams lp = setHeadDialog.getWindow().getAttributes();
+        lp.width = display.getWidth();
+        setHeadDialog.getWindow().setAttributes(lp);
+        Thread thread = new Thread(new Runnable() {
             @Override
             public void run() {
-                OkHttpUtils
-                        .post()
-                        .url(Http_data.http_data + "")
-                        .addParams("userId", User_Http.user.getId() + "")
-                        .addParams("doctorID", list.get(pos).getId())
-                        .build()
-                        .execute(new StringCallback() {
-                            @Override
-                            public void onError(Call call, Exception e, int id) {
-                                Log.e("失败", "失败");
-                            }
+                int progressBarMax = progressBar.getMax();
+                try {
+                    //设置progressBar时间
+                    while (progressBarMax != progressBar.getProgress()) {
+                        int stepProgress = progressBarMax / 1000;
+                        int currentprogress = progressBar.getProgress();
+                        progressBar.setProgress(currentprogress + stepProgress);
+                        Thread.sleep(180);
+                    }
 
-                            @Override
-                            public void onResponse(String response, int id) {
-                                Log.e("返回", response);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
 
-
-                            }
-                        });
+                }
             }
-        }).start();
+        });
+        thread.start();
+
+        paydialogonclick(pos);
+
+    }
+
+
+    //支付点击事件
+    private void paydialogonclick(final int pos) {
+        rb_zhifb.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                rb_wenx.setChecked(false);
+            }
+        });
+        rb_wenx.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                rb_zhifb.setChecked(false);
+            }
+        });
+        ll_cancel.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                setHeadDialog.dismiss();
+            }
+        });
+
+        btn_confirm_payment.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+            }
+        });
 
     }
 

@@ -43,11 +43,11 @@
                     android:textSize="@dimen/x36" />
 
                 <Button
-                    android:layout_width="@dimen/x130"
+                    android:layout_width="@dimen/x140"
                     android:layout_height="@dimen/y32"
                     android:layout_marginTop="@dimen/y14"
                     android:background="@drawable/qqregister_btn_case"
-                    android:text="QQ用户登录"
+                    android:text="注册登录用户"
                     android:textColor="@color/backgroundblue"
                     android:textSize="@dimen/x20" />
             </LinearLayout>
@@ -79,19 +79,17 @@
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
-            android:layout_alignParentRight="true"
-            >
+            android:layout_alignParentRight="true">
 
             <ImageView
-                android:layout_marginTop="@dimen/y146"
                 android:layout_width="@dimen/x18"
                 android:layout_height="@dimen/y28"
                 android:layout_marginRight="@dimen/x30"
+                android:layout_marginTop="@dimen/y146"
                 android:src="@drawable/mypage_skip" />
         </LinearLayout>
 
     </RelativeLayout>
-
 
 
     <LinearLayout
@@ -344,14 +342,16 @@
         android:layout_width="match_parent"
         android:layout_height="@dimen/y1"
         android:background="@color/linegray" />
+
     <View
         android:layout_width="match_parent"
         android:layout_height="@dimen/y20"
-        android:background="@color/backgroundgray"/>
+        android:background="@color/backgroundgray" />
+
     <View
         android:layout_width="match_parent"
         android:layout_height="@dimen/y1"
-        android:background="@color/linegray"/>
+        android:background="@color/linegray" />
 
     <RelativeLayout
         android:layout_width="match_parent"
