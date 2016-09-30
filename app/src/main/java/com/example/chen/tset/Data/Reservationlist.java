@@ -8,23 +8,31 @@ public class Reservationlist {
     private String city;
     private String section;
     private String title;
-    private String reservationTime;
+    private String reservationDate;
     private String name;
     private String phone;
     private String money;
     private String orderCode;
     private String orderStatus;
 
-    public Reservationlist(String city, String section, String title, String reservationTime, String name, String phone, String money, String orderCode, String orderStatus) {
+    public Reservationlist(String city, String section, String title, String reservationDate, String name, String phone, String money, String orderCode, String orderStatus) {
         this.city = city;
         this.section = section;
         this.title = title;
-        this.reservationTime = reservationTime;
+        this.reservationDate = reservationDate;
         this.name = name;
         this.phone = phone;
         this.money = money;
         this.orderCode = orderCode;
         this.orderStatus = orderStatus;
+    }
+
+    public String getReservationDate() {
+        return reservationDate;
+    }
+
+    public void setReservationDate(String reservationDate) {
+        this.reservationDate = reservationDate;
     }
 
     public String getCity() {
@@ -51,13 +59,6 @@ public class Reservationlist {
         this.title = title;
     }
 
-    public String getReservationTime() {
-        return reservationTime;
-    }
-
-    public void setReservationTime(String reservationTime) {
-        this.reservationTime = reservationTime;
-    }
 
     public String getName() {
         return name;

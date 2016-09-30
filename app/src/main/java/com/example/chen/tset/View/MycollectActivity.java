@@ -1,6 +1,8 @@
 package com.example.chen.tset.View;
 
 import android.content.Intent;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Handler;
 import android.os.Message;
 import android.support.v7.app.AppCompatActivity;
@@ -13,6 +15,10 @@ import android.widget.ListView;
 import android.widget.RelativeLayout;
 import android.widget.Toast;
 
+import com.baoyz.swipemenulistview.SwipeMenu;
+import com.baoyz.swipemenulistview.SwipeMenuCreator;
+import com.baoyz.swipemenulistview.SwipeMenuItem;
+import com.baoyz.swipemenulistview.SwipeMenuListView;
 import com.example.chen.tset.Data.Http_data;
 import com.example.chen.tset.Data.Information;
 import com.example.chen.tset.Data.Lecture;
@@ -32,11 +38,12 @@ import java.util.LinkedList;
 import java.util.List;
 
 import okhttp3.Call;
+
 /**
  * 我的收藏
  */
 public class MycollectActivity extends MyBaseActivity {
-    private ListView lv_collect;
+    private SwipeMenuListView lv_collect;
     CharactersafeAdapter adapter;
     List<Information> list;
     private LinearLayout ll_collectretur;
@@ -52,15 +59,36 @@ public class MycollectActivity extends MyBaseActivity {
         initHttp();
     }
 
+    @Override
+    protected void onStart() {
+        super.onStart();
+
+    }
 
     private void findView() {
-        lv_collect = (ListView) findViewById(R.id.lv_collect);
+        lv_collect = (SwipeMenuListView) findViewById(R.id.lv_collect);
         ll_collectretur = (LinearLayout) findViewById(R.id.ll_collectretur);
         rl_nonetwork = (RelativeLayout) findViewById(R.id.rl_nonetwork);
         rl_loading = (RelativeLayout) findViewById(R.id.rl_loading);
         lv_collect.setVerticalScrollBarEnabled(false);
         ll_collectretur.setOnClickListener(listener);
         lv_collect.setOnItemClickListener(lvlitener);
+
+        SwipeMenuCreator creator = new SwipeMenuCreator() {
+            @Override
+            public void create(SwipeMenu menu) {
+                SwipeMenuItem openItem = new SwipeMenuItem(getApplicationContext());
+                openItem.setBackground(new ColorDrawable(Color.RED));
+                openItem.setWidth(150);
+                openItem.setTitle("删除");
+                openItem.setTitleSize(17);
+                openItem.setTitleColor(Color.WHITE);
+                menu.addMenuItem(openItem);
+            }
+        };
+
+        lv_collect.setMenuCreator(creator);
+        lv_collect.setOnMenuItemClickListener(onmentlistener);
 
     }
 
@@ -122,6 +150,37 @@ public class MycollectActivity extends MyBaseActivity {
                     finish();
                     break;
             }
+        }
+    };
+
+    private SwipeMenuListView.OnMenuItemClickListener onmentlistener = new SwipeMenuListView.OnMenuItemClickListener() {
+        @Override
+        public boolean onMenuItemClick(final int position, SwipeMenu menu, int index) {
+            Toast.makeText(MycollectActivity.this, "删除", Toast.LENGTH_SHORT).show();
+            OkHttpUtils
+                    .post()
+                    .url(Http_data.http_data + "/DeleteCollectById")
+                    .addParams("id", list.get(position).getId()+"")
+                    .build()
+                    .execute(new StringCallback() {
+                        @Override
+                        public void onError(Call call, Exception e, int id) {
+                            Log.e("失败","失败");
+                        }
+
+                        @Override
+                        public void onResponse(String response, int id) {
+
+                            if(response.equals("0")){
+                                list.clear();
+                                initHttp();
+
+
+                            }
+                        }
+                    });
+
+            return false;
         }
     };
 }

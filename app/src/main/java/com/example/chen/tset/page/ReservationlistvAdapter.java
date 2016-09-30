@@ -51,16 +51,16 @@ public class ReservationlistvAdapter extends BaseAdapter {
             convertView.setTag(new ViewHolder(convertView));
         }
         ViewHolder viewHolder = (ViewHolder) convertView.getTag();
-        viewHolder.tv_time.setText("有效期：" + list.get(position).getReservationTime());
+        viewHolder.tv_time.setText("有效期：" + list.get(position).getReservationDate());
         viewHolder.tv_order.setText("订单号：" + list.get(position).getOrderCode());
         viewHolder.tv_status.setText(list.get(position).getOrderStatus());
         viewHolder.tv_money.setText("￥" + list.get(position).getMoney());
         if (list.get(position).getOrderStatus().equals("已取消") || list.get(position).getOrderStatus().equals("已过期")) {
             viewHolder.tv_status.setTextColor(android.graphics.Color.parseColor("#999999"));
+        }else {
+            viewHolder.tv_status.setTextColor(android.graphics.Color.parseColor("#6fc9e6"));
         }
-        if (list.get(position).getOrderStatus().equals("已取消")) {
-            viewHolder.tv_money.setTextColor(android.graphics.Color.parseColor("#999999"));
-        }
+
         return convertView;
     }
 

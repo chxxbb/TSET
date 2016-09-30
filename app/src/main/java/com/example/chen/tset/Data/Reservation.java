@@ -5,26 +5,26 @@ package com.example.chen.tset.Data;
  * 预约列表
  */
 public class Reservation {
-    private String reservationTime;
+    private String reservationDate;
     private String orderCode;
     private String orderStatus;
     private String money;
     private int id;
 
-    public Reservation(String reservationTime, String orderCode, String orderStatus, String money, int id) {
-        this.reservationTime = reservationTime;
+    public Reservation(String reservationDate, String orderCode, String orderStatus, String money, int id) {
+        this.reservationDate = reservationDate;
         this.orderCode = orderCode;
         this.orderStatus = orderStatus;
         this.money = money;
         this.id = id;
     }
 
-    public String getReservationTime() {
-        return reservationTime;
+    public String getReservationDate() {
+        return reservationDate;
     }
 
-    public void setReservationTime(String reservationTime) {
-        this.reservationTime = reservationTime;
+    public void setReservationDate(String reservationDate) {
+        this.reservationDate = reservationDate;
     }
 
     public String getOrderCode() {

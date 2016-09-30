@@ -125,32 +125,39 @@ public class ConsultPageActivity extends MyBaseActivity implements View.OnClickL
     //获取文章详情
     private void informationinit() {
         Log.e("文章ID", information);
-        OkHttpUtils
-                .post()
-                .url(Http_data.http_data + "/FindCyclopediaById")
-                .addParams("cyclopediaId", information)
-                .build()
-                .execute(new StringCallback() {
-                    @Override
-                    public void onError(Call call, Exception e, int id) {
-                        handler.sendEmptyMessage(3);
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                OkHttpUtils
+                        .post()
+                        .url(Http_data.http_data + "/FindCyclopediaById")
+                        .addParams("cyclopediaId", information)
+                        .build()
+                        .execute(new StringCallback() {
+                            @Override
+                            public void onError(Call call, Exception e, int id) {
+                                handler.sendEmptyMessage(3);
 
-                    }
+                            }
 
-                    @Override
-                    public void onResponse(String response, int id) {
-                        Log.e("咨询详情返回", response);
-                        if (response.equals("[]") || response.equals("")) {
-                            handler.sendEmptyMessage(4);
+                            @Override
+                            public void onResponse(String response, int id) {
+                                Log.e("咨询详情返回", response);
+                                if (response.equals("[]") || response.equals("")) {
+                                    handler.sendEmptyMessage(4);
 
-                        } else {
-                            consultparticulars = gson.fromJson(response, Consultparticulars.class);
-                            handler.sendEmptyMessage(5);
+                                } else {
+                                    consultparticulars = gson.fromJson(response, Consultparticulars.class);
+                                    handler.sendEmptyMessage(5);
 
 
-                        }
-                    }
-                });
+                                }
+                            }
+                        });
+
+            }
+        }).start();
+
     }
 
 
@@ -161,29 +168,35 @@ public class ConsultPageActivity extends MyBaseActivity implements View.OnClickL
                 finish();
                 break;
             case R.id.ll_consult_collect:
-                //收藏
-                OkHttpUtils
-                        .post()
-                        .url(Http_data.http_data + "/AddCollectByUserIdAndCyclopediaId")
-                        .addParams("userId", User_Http.user.getId() + "")
-                        .addParams("cyclopediaId", information)
-                        .build()
-                        .execute(new StringCallback() {
-                            @Override
-                            public void onError(Call call, Exception e, int id) {
-                                handler.sendEmptyMessage(0);
-                            }
+                new Thread(new Runnable() {
+                    @Override
+                    public void run() {
+                        //收藏
+                        OkHttpUtils
+                                .post()
+                                .url(Http_data.http_data + "/AddCollectByUserIdAndCyclopediaId")
+                                .addParams("userId", User_Http.user.getId() + "")
+                                .addParams("cyclopediaId", information)
+                                .build()
+                                .execute(new StringCallback() {
+                                    @Override
+                                    public void onError(Call call, Exception e, int id) {
+                                        handler.sendEmptyMessage(0);
+                                    }
 
-                            @Override
-                            public void onResponse(String response, int id) {
-                                Log.e("咨询详情收藏返回", response);
-                                if (response.equals("0")) {
-                                    handler.sendEmptyMessage(6);
+                                    @Override
+                                    public void onResponse(String response, int id) {
+                                        Log.e("咨询详情收藏返回", response);
+                                        if (response.equals("0")) {
+                                            handler.sendEmptyMessage(6);
 
-                                }
+                                        }
 
-                            }
-                        });
+                                    }
+                                });
+                    }
+                }).start();
+
                 break;
 
 

@@ -54,11 +54,11 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <ListView
+        <com.baoyz.swipemenulistview.SwipeMenuListView
             android:id="@+id/lv_collect"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:overScrollMode="never"></ListView>
+            android:layout_height="match_parent"
+            android:overScrollMode="never"></com.baoyz.swipemenulistview.SwipeMenuListView>
 
         <RelativeLayout
             android:id="@+id/rl_nonetwork"

@@ -253,9 +253,6 @@
             android:textSize="@dimen/y32" />
     </LinearLayout>
 
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="@dimen/y30" />
 
     <LinearLayout
         android:id="@+id/ll_remind_content"

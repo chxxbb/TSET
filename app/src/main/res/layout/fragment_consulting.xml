@@ -378,6 +378,7 @@
                 android:orientation="vertical">
 
                 <LinearLayout
+                    android:id="@+id/ll_registration_info"
                     android:layout_width="match_parent"
                     android:layout_height="@dimen/y114"
                     android:layout_marginBottom="@dimen/y5"
@@ -408,6 +409,7 @@
                             android:textSize="@dimen/y28" />
 
                         <TextView
+                            android:id="@+id/tv_registration_info"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_marginLeft="@dimen/x30"

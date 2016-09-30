@@ -12,13 +12,23 @@ public class Information {
     private String title;
     private String time;
     private String cyclopediaId;
+    private int id;
 
-    public Information(String content, String icon, String title, String time, String cyclopediaId) {
+    public Information(String content, String icon, String title, String time, String cyclopediaId, int id) {
         this.content = content;
         this.icon = icon;
         this.title = title;
         this.time = time;
         this.cyclopediaId = cyclopediaId;
+        this.id = id;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 
     public String getCyclopediaId() {

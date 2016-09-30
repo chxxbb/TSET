@@ -128,8 +128,8 @@ public class ReservationlistActivity extends MyBaseActivity implements View.OnCl
 
                     tv_doctor_name.setText(reservationlist.getName());
                     tv_title.setText("职称：" + reservationlist.getTitle());
-                    tv_appointment_time.setText("日期：" + reservationlist.getReservationTime());
-                    tv_valid_time.setText("有效期：" + reservationlist.getReservationTime());
+                    tv_appointment_time.setText("日期：" + reservationlist.getReservationDate());
+                    tv_valid_time.setText("有效期：" + reservationlist.getReservationDate() );
                     if (reservationlist.getCity().equals("成都")) {
                         tv_address.setText("地址：" + "成都地址");
                     } else {

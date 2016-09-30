@@ -34,16 +34,24 @@ import android.widget.ToggleButton;
 import android.widget.ViewFlipper;
 
 import com.example.chen.tset.Data.CalendarSign;
+import com.example.chen.tset.Data.Http_data;
+import com.example.chen.tset.Data.User_Http;
 import com.example.chen.tset.R;
 import com.example.chen.tset.Utils.CalendarGridView;
+import com.example.chen.tset.View.CompileremindActivity;
 import com.example.chen.tset.View.HealthconditionActivity;
 import com.example.chen.tset.View.PharmacyremindActivity;
+import com.example.chen.tset.View.ReservationlistActivity;
+import com.zhy.http.okhttp.OkHttpUtils;
+import com.zhy.http.okhttp.callback.StringCallback;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.Locale;
+
+import okhttp3.Call;
 
 /**
  * Created by Administrator on 2016/9/21 0021.
@@ -85,9 +93,11 @@ public class ConsultingFragment extends Fragment implements View.OnClickListener
     private LinearLayout ll_consulting_popup_case;
 
 
-    private LinearLayout ll_registration, ll_health, ll_pharmacy;
+    private LinearLayout ll_registration, ll_health, ll_pharmacy, ll_registration_info;
 
     private ToggleButton tb_registration, tb_health, tb_pharmacy;
+
+    private TextView tv_registration_info;
 
     //挂号提醒选择状态
     int registrationSelect = 1;
@@ -98,6 +108,9 @@ public class ConsultingFragment extends Fragment implements View.OnClickListener
 
     //用药提醒选择状态
     int pharmacySelect = 1;
+
+    String registrationId;
+
 
     @Nullable
     @Override
@@ -118,10 +131,15 @@ public class ConsultingFragment extends Fragment implements View.OnClickListener
 
             }
         }).start();
+        calhttpinit();
 
 
         return view;
     }
+
+    private void calhttpinit() {
+    }
+
 
     Handler handler = new Handler() {
         @Override
@@ -164,6 +182,9 @@ public class ConsultingFragment extends Fragment implements View.OnClickListener
         ll_pharmacy.setOnClickListener(tblistener);
 
         ll_consulting_popup_case = (LinearLayout) view.findViewById(R.id.ll_consulting_popup_case);
+
+        ll_registration_info = (LinearLayout) view.findViewById(R.id.ll_registration_info);
+        tv_registration_info = (TextView) view.findViewById(R.id.tv_registration_info);
 
 
         ll_left.setOnClickListener(this);
@@ -343,6 +364,9 @@ public class ConsultingFragment extends Fragment implements View.OnClickListener
         view.setText(textDate);
     }
 
+
+
+
     private void addGridView() {
         LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(AbsListView.LayoutParams.MATCH_PARENT, AbsListView.LayoutParams.MATCH_PARENT);
         // 取得屏幕的宽度和高度
@@ -391,7 +415,38 @@ public class ConsultingFragment extends Fragment implements View.OnClickListener
                     String scheduleDay = calV.getDateByClickItem(position).split("\\.")[0]; // 这一天的阳历
                     String scheduleYear = calV.getShowYear();
                     String scheduleMonth = calV.getShowMonth();
-                    Log.e("时间", scheduleYear + "年" + scheduleMonth + "月" + scheduleDay + "日");
+
+
+                    String date = scheduleYear + "-0" + scheduleMonth + "-" + scheduleDay;
+                    Log.e("时间", date);
+                    Log.e("userid", User_Http.user.getId() + "");
+                    OkHttpUtils
+                            .post()
+                            .url(Http_data.http_data + "/FindUserIntradayByUserIdAndDate")
+                            .addParams("userId", User_Http.user.getId() + "")
+                            .addParams("date", date)
+                            .build()
+                            .execute(new StringCallback() {
+                                @Override
+                                public void onError(Call call, Exception e, int id) {
+                                    Log.e("失败", "失败");
+                                }
+
+                                @Override
+                                public void onResponse(String response, int id) {
+                                    Log.e("诊疗返回", response);
+//                                    if (response.equals("0")) {
+//                                        tv_registration_info.setText("无挂号");
+//                                    } else {
+//                                        tv_registration_info.setText("已挂号");
+//                                        ll_registration_info.setOnClickListener(lllistener);
+//                                        registrationId = response;
+//
+//                                    }
+
+
+                                }
+                            });
 
 
                 }
@@ -438,6 +493,8 @@ public class ConsultingFragment extends Fragment implements View.OnClickListener
 
 
             LinearLayout ll_pharmacy = (LinearLayout) mPopWindowView.findViewById(R.id.ll_pharmacy);
+
+
             LinearLayout ll_health = (LinearLayout) mPopWindowView.findViewById(R.id.ll_health);
 
             //用药提醒
@@ -445,7 +502,7 @@ public class ConsultingFragment extends Fragment implements View.OnClickListener
                 @Override
                 public void onClick(View v) {
                     mPopWindow.dismiss();
-                    Intent intent = new Intent(getContext(), PharmacyremindActivity.class);
+                    Intent intent = new Intent(getContext(), CompileremindActivity.class);
                     startActivity(intent);
                 }
             });
@@ -460,6 +517,19 @@ public class ConsultingFragment extends Fragment implements View.OnClickListener
                     startActivity(intent);
                 }
             });
+        }
+    };
+
+    private View.OnClickListener lllistener = new View.OnClickListener() {
+        @Override
+        public void onClick(View v) {
+            switch (v.getId()) {
+                case R.id.ll_registration_info:
+                    Intent intent = new Intent(getContext(), ReservationlistActivity.class);
+                    intent.putExtra("ReservationID", registrationId);
+                    startActivity(intent);
+                    break;
+            }
         }
     };
 
