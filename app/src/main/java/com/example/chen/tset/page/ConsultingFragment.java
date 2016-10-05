@@ -22,34 +22,35 @@ import android.view.WindowManager;
 import android.view.animation.AnimationUtils;
 import android.widget.AbsListView;
 import android.widget.AdapterView;
-import android.widget.GridView;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.PopupWindow;
 import android.widget.RelativeLayout;
-import android.widget.ScrollView;
 import android.widget.TextView;
 import android.widget.Toast;
 import android.widget.ToggleButton;
 import android.widget.ViewFlipper;
 
 import com.example.chen.tset.Data.CalendarSign;
+import com.example.chen.tset.Data.Calendarform;
 import com.example.chen.tset.Data.Http_data;
 import com.example.chen.tset.Data.User_Http;
 import com.example.chen.tset.R;
 import com.example.chen.tset.Utils.CalendarGridView;
+import com.example.chen.tset.Utils.MyScrollview;
 import com.example.chen.tset.View.CompileremindActivity;
 import com.example.chen.tset.View.HealthconditionActivity;
-import com.example.chen.tset.View.PharmacyremindActivity;
 import com.example.chen.tset.View.ReservationlistActivity;
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
 import com.zhy.http.okhttp.OkHttpUtils;
 import com.zhy.http.okhttp.callback.StringCallback;
 
+import java.lang.reflect.Type;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
-import java.util.Locale;
 
 import okhttp3.Call;
 
@@ -59,7 +60,7 @@ import okhttp3.Call;
 public class ConsultingFragment extends Fragment implements View.OnClickListener {
     View view;
     private RelativeLayout rl_loading;
-    private ScrollView scrollview;
+    private MyScrollview scrollview;
     private LinearLayout ll_right, ll_left;
     private GestureDetector gestureDetector = null;
     private CalendarAdapter calV = null;
@@ -71,6 +72,9 @@ public class ConsultingFragment extends Fragment implements View.OnClickListener
     private int month_c = 0;
     private int day_c = 0;
     private String currentDate = "";
+
+    //用户点击的时间
+    String date;
     /**
      * 每次添加gridview到viewflipper中时给的标记
      */
@@ -111,13 +115,17 @@ public class ConsultingFragment extends Fragment implements View.OnClickListener
 
     String registrationId;
 
+    Gson gson = new Gson();
+
+    List<Calendarform> clist;
+
 
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         view = inflater.inflate(R.layout.fragment_consulting, null);
 
-
+        clist = new ArrayList<>();
         new Thread(new Runnable() {
             @Override
             public void run() {
@@ -133,9 +141,12 @@ public class ConsultingFragment extends Fragment implements View.OnClickListener
         }).start();
         calhttpinit();
 
+        findAllByDate();
+
 
         return view;
     }
+
 
     private void calhttpinit() {
     }
@@ -158,7 +169,7 @@ public class ConsultingFragment extends Fragment implements View.OnClickListener
 
     private void findView() {
         rl_loading = (RelativeLayout) view.findViewById(R.id.rl_loading);
-        scrollview = (ScrollView) view.findViewById(R.id.scrollview);
+        scrollview = (MyScrollview) view.findViewById(R.id.scrollview);
         scrollview.setVerticalScrollBarEnabled(false);
 
         currentMonth = (TextView) view.findViewById(R.id.currentMonth);
@@ -272,11 +283,11 @@ public class ConsultingFragment extends Fragment implements View.OnClickListener
 
 
         list = new ArrayList<>();
-        CalendarSign sign = new CalendarSign("2016年9月28日", 1);
-        CalendarSign sign1 = new CalendarSign("2016年9月22日", 2);
-        CalendarSign sign2 = new CalendarSign("2016年9月7日", 3);
-        CalendarSign sign3 = new CalendarSign("2016年8月7日", 3);
-        CalendarSign sign4 = new CalendarSign("2016年10月7日", 3);
+        CalendarSign sign = new CalendarSign("2016年10月28日", 1);
+        CalendarSign sign1 = new CalendarSign("2016年10月22日", 2);
+        CalendarSign sign2 = new CalendarSign("2016年10月16日", 3);
+        CalendarSign sign3 = new CalendarSign("2016年11月7日", 3);
+        CalendarSign sign4 = new CalendarSign("2016年9月7日", 3);
         list.add(sign);
         list.add(sign1);
         list.add(sign2);
@@ -290,6 +301,19 @@ public class ConsultingFragment extends Fragment implements View.OnClickListener
         addTextToTopTextView(currentMonth);
 
 
+//        flipper.setOnTouchListener(new View.OnTouchListener() {
+//            @Override
+//            public boolean onTouch(View v, MotionEvent event) {
+//
+//                if (event.getAction() == MotionEvent.ACTION_UP)
+//                    scrollview.requestDisallowInterceptTouchEvent(false);
+//                else
+//                    scrollview.requestDisallowInterceptTouchEvent(true);
+//                return false;
+//            }
+//        });
+
+
     }
 
 
@@ -297,15 +321,23 @@ public class ConsultingFragment extends Fragment implements View.OnClickListener
         @Override
         public boolean onFling(MotionEvent e1, MotionEvent e2, float velocityX, float velocityY) {
             int gvFlag = 0; // 每次添加gridview到viewflipper中时给的标记
-            if (e1.getX() - e2.getX() > 120) {
+            if (e1.getX() - e2.getX() > 60) {
+
+
                 // 像左滑动
                 enterNextMonth(gvFlag);
+
+
                 return true;
-            } else if (e1.getX() - e2.getX() < -120) {
+            } else if (e1.getX() - e2.getX() < -60) {
+
+
                 // 向右滑动
                 enterPrevMonth(gvFlag);
                 return true;
             }
+
+
             return false;
         }
     }
@@ -365,8 +397,6 @@ public class ConsultingFragment extends Fragment implements View.OnClickListener
     }
 
 
-
-
     private void addGridView() {
         LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(AbsListView.LayoutParams.MATCH_PARENT, AbsListView.LayoutParams.MATCH_PARENT);
         // 取得屏幕的宽度和高度
@@ -416,9 +446,14 @@ public class ConsultingFragment extends Fragment implements View.OnClickListener
                     String scheduleYear = calV.getShowYear();
                     String scheduleMonth = calV.getShowMonth();
 
+                    if (scheduleMonth.equals("1") || scheduleMonth.equals("2") || scheduleMonth.equals("3") || scheduleMonth.equals("4") || scheduleMonth.equals("5") || scheduleMonth.equals("6") || scheduleMonth.equals("7") || scheduleMonth.equals("8") || scheduleMonth.equals("9")) {
+                        date = scheduleYear + "-0" + scheduleMonth + "-" + scheduleDay;
+                    } else {
+                        date = scheduleYear + "-" + scheduleMonth + "-" + scheduleDay;
+                    }
 
-                    String date = scheduleYear + "-0" + scheduleMonth + "-" + scheduleDay;
-                    Log.e("时间", date);
+
+                    Log.e("点击的时间", date);
                     Log.e("userid", User_Http.user.getId() + "");
                     OkHttpUtils
                             .post()
@@ -453,6 +488,48 @@ public class ConsultingFragment extends Fragment implements View.OnClickListener
             }
         });
         gridView.setLayoutParams(params);
+    }
+
+
+    public void findAllByDate() {
+        SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM");
+        Date curDate = new Date(System.currentTimeMillis());//获取当前时间
+        String str = formatter.format(curDate);
+        OkHttpUtils
+                .post()
+                .url(Http_data.http_data + "/FindAllByDate")
+                .addParams("userId", User_Http.user.getId() + "")
+                .addParams("date", str)
+                .build()
+                .execute(new StringCallback() {
+                    @Override
+                    public void onError(Call call, Exception e, int id) {
+                        Toast.makeText(getContext(), "失败", Toast.LENGTH_SHORT).show();
+                    }
+
+                    @Override
+                    public void onResponse(String response, int id) {
+                        Log.e("诊疗", response);
+                        Type listtype = new TypeToken<List<List<Calendarform>>>() {
+                        }.getType();
+                        List<List<Calendarform>> mlist = gson.fromJson(response, listtype);
+                        for (int i = 0; i < mlist.get(0).size(); i++) {
+                            clist.add(mlist.get(0).get(i));
+                        }
+
+                        for (int i = 0; i < mlist.get(1).size(); i++) {
+                            clist.add(mlist.get(1).get(i));
+                        }
+
+                        for (int i = 0; i < mlist.get(2).size(); i++) {
+                            clist.add(mlist.get(2).get(i));
+                        }
+
+                        Log.e("总集合", clist.toString());
+
+
+                    }
+                });
     }
 
 

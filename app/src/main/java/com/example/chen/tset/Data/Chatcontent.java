@@ -69,4 +69,16 @@ public class Chatcontent {
     public void setTime(long time) {
         this.time = time;
     }
+
+    @Override
+    public String toString() {
+        return "Chatcontent{" +
+                "content='" + content + '\'' +
+                ", time=" + time +
+                ", file='" + file + '\'' +
+                ", masterfile='" + masterfile + '\'' +
+                ", username='" + username + '\'' +
+                ", myname='" + myname + '\'' +
+                '}';
+    }
 }

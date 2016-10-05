@@ -55,7 +55,7 @@ import okhttp3.Call;
  * 一键挂号
  */
 public class RegistrationAtivity extends MyBaseActivity {
-    private RelativeLayout rl_city, rl_gender, rl_time, rl_age, rl_professionaltitle, rl_departments, rl_nonetwork;
+    private RelativeLayout rl_city, rl_gender, rl_time, rl_age, rl_professionaltitle, rl_departments, rl_nonetwork, rl_loading;
     private LinearLayout ll_rutregistration, ll_cancel, ll_registr;
     private Dialog setHeadDialog;
     private View dialogView;
@@ -95,8 +95,6 @@ public class RegistrationAtivity extends MyBaseActivity {
 
 
     private void findView() {
-
-
         rl_city = (RelativeLayout) findViewById(R.id.rl_city);
         tv_city = (TextView) findViewById(R.id.tv_city);
         rl_gender = (RelativeLayout) findViewById(R.id.rl_gender);
@@ -116,6 +114,7 @@ public class RegistrationAtivity extends MyBaseActivity {
         et_phone = (EditText) findViewById(R.id.et_phone);
         et_describe = (EditText) findViewById(R.id.et_describe);
         ll_registr = (LinearLayout) findViewById(R.id.ll_registr);
+        rl_loading = (RelativeLayout) findViewById(R.id.rl_loading);
         rl_departments.setOnClickListener(listener);
         rl_city.setOnClickListener(listener);
         rl_gender.setOnClickListener(listener);
@@ -601,6 +600,7 @@ public class RegistrationAtivity extends MyBaseActivity {
                     public void onError(Call call, Exception e, int id) {
                         ll_registr.setVisibility(View.GONE);
                         rl_nonetwork.setVisibility(View.VISIBLE);
+                        rl_loading.setVisibility(View.GONE);
                         Toast.makeText(RegistrationAtivity.this, "网络连接失败", Toast.LENGTH_SHORT).show();
                     }
 
@@ -629,6 +629,8 @@ public class RegistrationAtivity extends MyBaseActivity {
                         //科室
                         divisionAdapter1 = new RegistrationdivisionAdapter(RegistrationAtivity.this, data1);
                         divisionAdapter1.notifyDataSetChanged();
+
+                        rl_loading.setVisibility(View.GONE);
 
                     }
 

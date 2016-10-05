@@ -113,17 +113,12 @@ public class HomeActivity extends MyBaseActivity implements View.OnClickListener
         DisplayMetrics dm = new DisplayMetrics();
         WindowManager windowManager = (WindowManager) context.getSystemService(Context.WINDOW_SERVICE);
         windowManager.getDefaultDisplay().getMetrics(dm);
-        if (User_Http.user.getIcon() != null) {
-            saveicon();
-        }
+//        if (User_Http.user.getIcon() == null) {
+//            Log.e("保存图片", "保存图片");
+//            saveicon();
+//        }
 
-
-//        Intent i = getBaseContext().getPackageManager()
-//                .getLaunchIntentForPackage(getBaseContext().getPackageName());
-//        i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-//        startActivity(i);
-
-
+        Log.e("保存的User",sp.getTag().toString());
     }
 
     private void saveicon() {
@@ -217,7 +212,7 @@ public class HomeActivity extends MyBaseActivity implements View.OnClickListener
                     Log.e("jmessage", "注册失败");
                 }
 
-                Log.e("RegistrationID",JPushInterface.getRegistrationID(HomeActivity.this));
+                Log.e("RegistrationID", JPushInterface.getRegistrationID(HomeActivity.this));
             }
         });
 

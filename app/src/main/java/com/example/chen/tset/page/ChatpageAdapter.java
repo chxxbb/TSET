@@ -3,6 +3,7 @@ package com.example.chen.tset.page;
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -114,6 +115,7 @@ public class ChatpageAdapter extends BaseAdapter {
                     viewHolder1.iv_right_chat.setVisibility(View.VISIBLE);
                     viewHolder1.tv_right_text.setVisibility(View.GONE);
                     if (list.get(position).getFile() != null) {
+                        Log.e("图片地址",list.get(position).getFile());
                         ImageLoader.getInstance().displayImage("file:///" + list.get(position).getFile(), viewHolder1.iv_right_chat);
                     } else {
 
@@ -135,6 +137,7 @@ public class ChatpageAdapter extends BaseAdapter {
                     viewHolder2.tv_left_text.setVisibility(View.GONE);
                     viewHolder2.iv_left_chat.setVisibility(View.VISIBLE);
                     if (list.get(position).getFile() != null) {
+
                         ImageLoader.getInstance().displayImage("file:///" + list.get(position).getFile(), viewHolder2.iv_left_chat);
                     } else {
 

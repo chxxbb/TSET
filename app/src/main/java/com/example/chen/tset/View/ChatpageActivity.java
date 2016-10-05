@@ -92,7 +92,6 @@ public class ChatpageActivity extends AppCompatActivity {
     protected void onStart() {
         super.onStart();
 
-
         JMessageClient.enterSingleConversation("18302615820");
         db = new ChatpageDao(this);
         list = new ArrayList<>();
@@ -171,6 +170,10 @@ public class ChatpageActivity extends AppCompatActivity {
 
         adapter.notifyDataSetChanged();
 
+
+
+
+
     }
 
 
@@ -225,6 +228,8 @@ public class ChatpageActivity extends AppCompatActivity {
             }
         }
     };
+
+
 
     //发送图片
     private View.OnClickListener lisntener = new View.OnClickListener() {

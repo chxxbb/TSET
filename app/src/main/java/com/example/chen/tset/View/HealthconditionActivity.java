@@ -4,8 +4,10 @@ import android.os.Bundle;
 import android.support.v7.widget.CardView;
 import android.view.View;
 import android.widget.LinearLayout;
+
 import com.example.chen.tset.R;
 import com.example.chen.tset.Utils.MyBaseActivity;
+import com.example.chen.tset.Utils.MyEditText;
 
 /**
  * 健康状况
@@ -14,10 +16,9 @@ public class HealthconditionActivity extends MyBaseActivity {
 
     private LinearLayout ll_consult_return;
 
-    private CardView cv_healthcondition_condition_describe,cv_healthcondition_condition_import;
+    private CardView cv_healthcondition_condition_describe, cv_healthcondition_condition_import;
 
-
-
+    private MyEditText et_healthcondition;
 
 
     @Override
@@ -29,12 +30,12 @@ public class HealthconditionActivity extends MyBaseActivity {
 
     private void findView() {
         ll_consult_return = (LinearLayout) findViewById(R.id.ll_consult_return);
-        cv_healthcondition_condition_describe= (CardView) findViewById(R.id.cv_healthcondition_condition_describe);
-        cv_healthcondition_condition_import= (CardView) findViewById(R.id.cv_healthcondition_condition_import);
+        cv_healthcondition_condition_describe = (CardView) findViewById(R.id.cv_healthcondition_condition_describe);
+        cv_healthcondition_condition_import = (CardView) findViewById(R.id.cv_healthcondition_condition_import);
+        et_healthcondition = (MyEditText) findViewById(R.id.et_healthcondition);
         ll_consult_return.setOnClickListener(listener);
         cv_healthcondition_condition_describe.setOnClickListener(listener);
         cv_healthcondition_condition_import.setOnClickListener(listener);
-
 
     }
 
@@ -48,12 +49,12 @@ public class HealthconditionActivity extends MyBaseActivity {
                     break;
 
                 case R.id.cv_healthcondition_condition_describe:
+                    et_healthcondition.requestFocus();
                     cv_healthcondition_condition_describe.setVisibility(View.GONE);
                     cv_healthcondition_condition_import.setVisibility(View.VISIBLE);
                     break;
             }
         }
-
 
     };
 }

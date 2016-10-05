@@ -27,10 +27,12 @@
                     android:layout_height="wrap_content"
                     android:background="@drawable/doctorparticulars_background"
                     android:orientation="horizontal">
+
                     <LinearLayout
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:orientation="horizontal">
+
                         <ImageView
                             android:layout_width="@dimen/x20"
                             android:layout_height="@dimen/y36"
@@ -184,10 +186,10 @@
 
             <de.hdodenhof.circleimageview.CircleImageView
                 android:id="@+id/iv_icon"
-                android:layout_width="@dimen/x160"
-                android:layout_height="@dimen/y160"
+                android:layout_width="@dimen/x150"
+                android:layout_height="@dimen/y150"
                 android:layout_marginLeft="@dimen/x30"
-                android:layout_marginTop="@dimen/y145"
+                android:layout_marginTop="@dimen/y175"
                 android:src="@color/backgroundblue"
                 app:civ_border_color="@color/white"
                 app:civ_border_width="@dimen/x5" />
@@ -219,9 +221,9 @@
             android:orientation="vertical">
 
             <ImageView
-                android:layout_marginTop="@dimen/y100"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/y100"
                 android:src="@drawable/loadfail" />
 
             <TextView

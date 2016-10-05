@@ -7,6 +7,7 @@ import android.os.Handler;
 import android.os.Message;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
@@ -74,12 +75,16 @@ public class MycollectActivity extends MyBaseActivity {
         ll_collectretur.setOnClickListener(listener);
         lv_collect.setOnItemClickListener(lvlitener);
 
+        DisplayMetrics dm = new DisplayMetrics();
+        dm = this.getResources().getDisplayMetrics();
+        final float density = dm.density;
+        Log.e("密度",density+"");
         SwipeMenuCreator creator = new SwipeMenuCreator() {
             @Override
             public void create(SwipeMenu menu) {
                 SwipeMenuItem openItem = new SwipeMenuItem(getApplicationContext());
                 openItem.setBackground(new ColorDrawable(Color.RED));
-                openItem.setWidth(150);
+                openItem.setWidth((int) (75*density));
                 openItem.setTitle("删除");
                 openItem.setTitleSize(17);
                 openItem.setTitleColor(Color.WHITE);
@@ -156,25 +161,23 @@ public class MycollectActivity extends MyBaseActivity {
     private SwipeMenuListView.OnMenuItemClickListener onmentlistener = new SwipeMenuListView.OnMenuItemClickListener() {
         @Override
         public boolean onMenuItemClick(final int position, SwipeMenu menu, int index) {
-            Toast.makeText(MycollectActivity.this, "删除", Toast.LENGTH_SHORT).show();
             OkHttpUtils
                     .post()
                     .url(Http_data.http_data + "/DeleteCollectById")
-                    .addParams("id", list.get(position).getId()+"")
+                    .addParams("id", list.get(position).getId() + "")
                     .build()
                     .execute(new StringCallback() {
                         @Override
                         public void onError(Call call, Exception e, int id) {
-                            Log.e("失败","失败");
+                            Log.e("失败", "失败");
                         }
 
                         @Override
                         public void onResponse(String response, int id) {
-
-                            if(response.equals("0")){
+                            if (response.equals("0")) {
+                                Toast.makeText(MycollectActivity.this, "删除成功", Toast.LENGTH_SHORT).show();
                                 list.clear();
                                 initHttp();
-
 
                             }
                         }

@@ -52,7 +52,8 @@
             android:id="@+id/lv_reser"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:overScrollMode="never"></ListView>
+            android:overScrollMode="never"
+            android:layout_marginBottom="@dimen/y30"></ListView>
 
         <RelativeLayout
             android:id="@+id/rl_nonetwork"
