@@ -1,6 +1,7 @@
 package com.example.chen.tset.View;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.Editable;
@@ -17,6 +18,7 @@ import com.example.chen.tset.Data.Lecture;
 import com.example.chen.tset.Data.User_Http;
 import com.example.chen.tset.R;
 import com.example.chen.tset.Utils.MyBaseActivity;
+import com.example.chen.tset.Utils.SharedPsaveuser;
 import com.google.gson.reflect.TypeToken;
 import com.zhy.http.okhttp.OkHttpUtils;
 import com.zhy.http.okhttp.callback.StringCallback;
@@ -35,11 +37,13 @@ public class PasswordSettingActivity extends MyBaseActivity implements View.OnCl
     private LinearLayout linearlayout;
     String forpas;
     String newpas;
+    SharedPsaveuser sp;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_password_setting);
+        sp = new SharedPsaveuser(this);
         findView();
     }
 
@@ -106,7 +110,12 @@ public class PasswordSettingActivity extends MyBaseActivity implements View.OnCl
                                 Toast.makeText(PasswordSettingActivity.this, "修改失败", Toast.LENGTH_SHORT).show();
                             } else {
                                 User_Http.user.setPhone(et_newpassword.getText().toString());
-                                Toast.makeText(PasswordSettingActivity.this, "修改成功", Toast.LENGTH_SHORT).show();
+                                //清除本地用户信息
+                                sp.clearinit();
+                                Intent intent5 = new Intent(PasswordSettingActivity.this, LoginActivity.class);
+                                startActivity(intent5);
+                                Toast.makeText(PasswordSettingActivity.this, "密码修改成功,请重新登录", Toast.LENGTH_SHORT).show();
+                                HomeActivity.text_homeactivity.finish();
                                 finish();
                             }
                         }

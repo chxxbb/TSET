@@ -7,6 +7,7 @@ import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Color;
@@ -113,12 +114,16 @@ public class HomeActivity extends MyBaseActivity implements View.OnClickListener
         DisplayMetrics dm = new DisplayMetrics();
         WindowManager windowManager = (WindowManager) context.getSystemService(Context.WINDOW_SERVICE);
         windowManager.getDefaultDisplay().getMetrics(dm);
-//        if (User_Http.user.getIcon() == null) {
-//            Log.e("保存图片", "保存图片");
-//            saveicon();
-//        }
 
-        Log.e("保存的User",sp.getTag().toString());
+        //保存头像
+        if (sp.getTag().getIcon() == null && User_Http.user.getIcon() != null) {
+
+            saveicon();
+        }
+
+        jmessage();
+
+
     }
 
     private void saveicon() {
@@ -128,7 +133,7 @@ public class HomeActivity extends MyBaseActivity implements View.OnClickListener
                 try {
                     audioFile = new File(Environment.getExternalStorageDirectory().getAbsolutePath() + "/data/files/");
                     audioFile.mkdirs();//创建文件夹
-                    sdcardTempFile = File.createTempFile("recording", ".jpg", audioFile);
+                    sdcardTempFile = File.createTempFile(".recording", ".jpg", audioFile);
                     String urlPath = User_Http.user.getIcon();
                     URL url = new URL(urlPath);
                     HttpURLConnection conn = (HttpURLConnection) url.openConnection();
@@ -147,7 +152,7 @@ public class HomeActivity extends MyBaseActivity implements View.OnClickListener
         }.start();
     }
 
-
+    //将获取的头像转换成流
     public static void readAsFile(InputStream inSream, File file) throws Exception {
         FileOutputStream outStream = new FileOutputStream(file);
         byte[] buffer = new byte[1024];
@@ -164,8 +169,6 @@ public class HomeActivity extends MyBaseActivity implements View.OnClickListener
     @Override
     protected void onStart() {
         super.onStart();
-        jmessage();
-
 
         spStorage();
 
@@ -212,7 +215,7 @@ public class HomeActivity extends MyBaseActivity implements View.OnClickListener
                     Log.e("jmessage", "注册失败");
                 }
 
-                Log.e("RegistrationID", JPushInterface.getRegistrationID(HomeActivity.this));
+
             }
         });
 
@@ -221,6 +224,7 @@ public class HomeActivity extends MyBaseActivity implements View.OnClickListener
             public void gotResult(int i, String s) {
                 if (i == 0) {
                     Log.e("jmessage", "登录成功");
+
                 } else {
                     Log.e("jmessage", "登录失败");
                 }
@@ -252,7 +256,7 @@ public class HomeActivity extends MyBaseActivity implements View.OnClickListener
                 ImageContent imageContent = (ImageContent) msg.getContent();
                 String mfile = imageContent.getLocalPath();//图片本地地址 无效
                 String file = imageContent.getLocalThumbnailPath();//图片对应缩略图的本地地址
-                Log.e("接收的图片", file);
+
                 Date dt1 = new Date();
                 Long time1 = dt1.getTime();
                 chatcontent = new Chatcontent("2*2", time1, file, file, msg.getTargetID(), User_Http.user.getPhone());
@@ -393,8 +397,15 @@ public class HomeActivity extends MyBaseActivity implements View.OnClickListener
                         Log.e("返回", response);
 
                         if (response.equals("1")) {
+
                             Toast.makeText(HomeActivity.this, "密码被修改", Toast.LENGTH_SHORT).show();
                             sp.clearinit();
+
+                            SharedPreferences sp1 = getSharedPreferences("jmlogin", MODE_PRIVATE);
+                            SharedPreferences.Editor edit = sp1.edit();
+                            edit.putBoolean("isclick", true);
+                            edit.commit();
+
                             Intent i = new Intent(HomeActivity.this, LoginActivity.class);
                             startActivity(i);
                             finish();

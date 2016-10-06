@@ -60,7 +60,8 @@
             android:hint="请输入手机号"
             android:inputType="phone"
             android:maxLength="11"
-            android:textColorHint="@color/white" />
+            android:textColorHint="@color/white"
+            android:textSize="@dimen/x32" />
     </LinearLayout>
 
     <LinearLayout
@@ -92,7 +93,8 @@
                 android:hint="输入验证码"
                 android:inputType="phone"
                 android:maxLength="6"
-                android:textColorHint="@color/white" />
+                android:textColorHint="@color/white"
+                android:textSize="@dimen/x32" />
         </LinearLayout>
 
         <Button
@@ -132,7 +134,8 @@
             android:hint="请输入密码"
             android:inputType="numberPassword"
             android:maxLength="16"
-            android:textColorHint="@color/white" />
+            android:textColorHint="@color/white"
+            android:textSize="@dimen/x32" />
     </LinearLayout>
 
     <LinearLayout
@@ -161,7 +164,8 @@
             android:hint="请确认密码"
             android:inputType="textPassword"
             android:maxLength="16"
-            android:textColorHint="@color/white" />
+            android:textColorHint="@color/white"
+            android:textSize="@dimen/x32" />
     </LinearLayout>
 
     <Button

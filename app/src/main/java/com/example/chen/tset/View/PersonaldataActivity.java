@@ -119,9 +119,9 @@ public class PersonaldataActivity extends MyBaseActivity {
     private View.OnClickListener listener = new View.OnClickListener() {
         @Override
         public void onClick(View v) {
-            if(User_Http.user.getName()==null&User_Http.user.getPhone()==null){
+            if (User_Http.user.getName() == null & User_Http.user.getPhone() == null) {
                 Toast.makeText(PersonaldataActivity.this, "网络连接失败", Toast.LENGTH_SHORT).show();
-            }else {
+            } else {
                 switch (v.getId()) {
                     case R.id.rl_name:
                         Intent intent = new Intent(PersonaldataActivity.this, NamepageActivity.class);
@@ -139,7 +139,7 @@ public class PersonaldataActivity extends MyBaseActivity {
                         audioFile = new File(Environment.getExternalStorageDirectory().getAbsolutePath() + "/data/files/");
                         audioFile.mkdirs();//创建文件夹
                         try {
-                            sdcardTempFile = File.createTempFile("recording", ".jpg", audioFile);
+                            sdcardTempFile = File.createTempFile(".recording", ".jpg", audioFile);
                         } catch (IOException e) {
 
                             e.printStackTrace();
@@ -161,10 +161,9 @@ public class PersonaldataActivity extends MyBaseActivity {
             }
 
 
-
         }
     };
-    private View.OnClickListener finlistener=new View.OnClickListener() {
+    private View.OnClickListener finlistener = new View.OnClickListener() {
         @Override
         public void onClick(View v) {
             finish();
@@ -182,7 +181,7 @@ public class PersonaldataActivity extends MyBaseActivity {
                 .execute(new StringCallback() {
                     @Override
                     public void onError(Call call, Exception e, int id) {
-                        if(sdcardTempFile!=null){
+                        if (sdcardTempFile != null) {
                             Toast.makeText(PersonaldataActivity.this, "头像修改失败", Toast.LENGTH_SHORT).show();
                         }
 

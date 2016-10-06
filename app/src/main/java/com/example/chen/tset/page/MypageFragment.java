@@ -79,6 +79,8 @@ public class MypageFragment extends Fragment {
         } else if (User_Http.user.getIcon() == null || User_Http.user.getIcon().equals("")) {
 
             ImageLoader.getInstance().displayImage("file:///" + sp.getTag().getIcon(), iv_ico);
+
+           
         } else {
 
             ImageLoader.getInstance().displayImage(User_Http.user.getIcon(), iv_ico);

@@ -110,13 +110,17 @@ public class ChatpageAdapter extends BaseAdapter {
         }
         switch (type) {
             case TYPE1:
-                ImageLoader.getInstance().displayImage(User_Http.user.getIcon(), viewHolder1.iv_right_head);
+                if(User_Http.user.getIcon()==null){
+                    viewHolder1.iv_right_head.setImageResource(R.drawable.default_icon);
+                }else {
+                    ImageLoader.getInstance().displayImage(User_Http.user.getIcon(), viewHolder1.iv_right_head);
+                }
                 if (list.get(position).getContent().equals("1*1")) {
                     viewHolder1.iv_right_chat.setVisibility(View.VISIBLE);
                     viewHolder1.tv_right_text.setVisibility(View.GONE);
                     if (list.get(position).getFile() != null) {
-                        Log.e("图片地址",list.get(position).getFile());
                         ImageLoader.getInstance().displayImage("file:///" + list.get(position).getFile(), viewHolder1.iv_right_chat);
+
                     } else {
 
                     }

@@ -30,7 +30,7 @@
                 android:gravity="center"
                 android:text="注册账号"
                 android:textColor="@color/white"
-                android:textSize="@dimen/x36" />
+                android:textSize="@dimen/y36" />
         </LinearLayout>
     </RelativeLayout>
 
@@ -60,6 +60,7 @@
             android:hint="请输入手机号"
             android:inputType="phone"
             android:maxLength="11"
+            android:textSize="@dimen/y32"
             android:textColorHint="@color/white" />
     </LinearLayout>
 
@@ -80,6 +81,7 @@
             android:src="@drawable/register_06" />
 
         <EditText
+            android:textSize="@dimen/y32"
             android:id="@+id/activity_register_password"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -109,6 +111,7 @@
             android:src="@drawable/register_06" />
 
         <EditText
+            android:textSize="@dimen/y32"
             android:id="@+id/activity_register_password2"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -141,6 +144,7 @@
                 android:src="@drawable/register_07" />
 
             <EditText
+                android:textSize="@dimen/y32"
                 android:id="@+id/activity_register_Verification_code"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"

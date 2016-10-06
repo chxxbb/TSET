@@ -99,7 +99,7 @@ public class CharactersafeFragment extends Fragment {
         Thread thread = new Thread(new Runnable() {
             @Override
             public void run() {
-                Log.e("i",i+"");
+
                 OkHttpUtils
                         .post()
                         .url(Http_data.http_data + "/FindCyclopediaListByCategoryId")
