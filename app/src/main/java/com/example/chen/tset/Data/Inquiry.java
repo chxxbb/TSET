@@ -13,9 +13,9 @@ public class Inquiry {
     private String section;
     private String hospital;
     private String id;
+    private String username;
 
-
-    public Inquiry(String icon, String title, String name, String chatCost, String adept, String section, String hospital, String id) {
+    public Inquiry(String icon, String title, String name, String chatCost, String adept, String section, String hospital, String id, String username) {
         this.icon = icon;
         this.title = title;
         this.name = name;
@@ -24,6 +24,15 @@ public class Inquiry {
         this.section = section;
         this.hospital = hospital;
         this.id = id;
+        this.username = username;
+    }
+
+    public String getUsername() {
+        return username;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
     }
 
     public String getIcon() {

@@ -15,6 +15,7 @@
             android:orientation="horizontal">
 
             <de.hdodenhof.circleimageview.CircleImageView
+                android:id="@+id/iv_dicon"
                 android:layout_width="@dimen/x100"
                 android:layout_height="@dimen/y100"
                 android:layout_marginBottom="@dimen/y16"
@@ -29,18 +30,18 @@
                 android:orientation="vertical">
 
                 <TextView
+                    android:id="@+id/tv_doctor_name"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/y26"
-                    android:text="张医生"
                     android:textColor="@color/fontcolor"
                     android:textSize="@dimen/y30" />
 
                 <TextView
+                    android:id="@+id/tv_statu"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/y20"
-                    android:text="问诊已结束"
                     android:textColor="@color/xmgray"
                     android:textSize="@dimen/y26" />
             </LinearLayout>
@@ -52,7 +53,7 @@
             android:layout_alignParentRight="true">
 
             <TextView
-                android:id="@+id/textView"
+                android:id="@+id/tv_time"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginRight="@dimen/x30"

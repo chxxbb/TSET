@@ -9,6 +9,7 @@ import android.os.Bundle;
 import android.text.format.DateFormat;
 import android.view.View;
 import android.widget.DatePicker;
+import android.widget.EditText;
 import android.widget.FrameLayout;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
@@ -27,18 +28,20 @@ import java.util.Date;
  * 添加提醒页面
  */
 public class CompileremindActivity extends MyBaseActivity {
-    private CustomTimePicker timepacker;
     private RelativeLayout rl_starttime, rl_endtiem;
-    private TextView tv_starttime, tv_endtiem, tv_time_complete, tv_remind_set, tv_remind_content, tv_pharmacy_compile;
+    private TextView tv_starttime, tv_endtiem, tv_time_complete, tv_remind_set;
     int myear, mmonth, mday;
     Calendar c;
     DatePickerDialog dialog;
     private String date;
     private TimePicker timepicker;
     String aMPM = null;
-    private FrameLayout frameLayout;
-    private LinearLayout ll_pharmacy_compile, ll_add_remind, ll_remind_content, ll_et, ll_rutname;
-    private View view, v1;
+    private LinearLayout ll_add_remind, ll_rutname;
+    private EditText et_pharmacy_compile;
+
+    private TextView tv_time1, tv_content1;
+
+    private LinearLayout ll_contnt1, ll_compile;
 
 
     @Override
@@ -50,8 +53,7 @@ public class CompileremindActivity extends MyBaseActivity {
     }
 
     private void findView() {
-        //日期选择
-        timepacker = (CustomTimePicker) findViewById(R.id.timepicker);
+
         //选择结束时间
         rl_endtiem = (RelativeLayout) findViewById(R.id.rl_endtime);
         //开始时间
@@ -64,19 +66,19 @@ public class CompileremindActivity extends MyBaseActivity {
         tv_time_complete = (TextView) findViewById(R.id.tv_time_complete);
         //内容设置
         tv_remind_set = (TextView) findViewById(R.id.tv_remind_set);
-        frameLayout = (FrameLayout) findViewById(R.id.frameLayout);
-        //提醒内容
-        tv_remind_content = (TextView) findViewById(R.id.tv_remind_content);
-        //用药提醒
-        tv_pharmacy_compile = (TextView) findViewById(R.id.tv_pharmacy_compile);
-        ll_pharmacy_compile = (LinearLayout) findViewById(R.id.ll_pharmacy_compile);
         ll_add_remind = (LinearLayout) findViewById(R.id.ll_add_remind);
-        ll_remind_content = (LinearLayout) findViewById(R.id.ll_remind_content);
 
         ll_rutname = (LinearLayout) findViewById(R.id.ll_rutname);
-        ll_et = (LinearLayout) findViewById(R.id.ll_et);
-        view = findViewById(R.id.view);
-        v1 = findViewById(R.id.v1);
+
+        et_pharmacy_compile = (EditText) findViewById(R.id.et_pharmacy_compile);
+
+        tv_content1 = (TextView) findViewById(R.id.tv_content1);
+
+        tv_time1 = (TextView) findViewById(R.id.tv_time1);
+
+        ll_contnt1 = (LinearLayout) findViewById(R.id.ll_contnt1);
+
+        ll_compile = (LinearLayout) findViewById(R.id.ll_compile);
 
         //获取当前时间
         SimpleDateFormat formatter = new SimpleDateFormat("yyyy年MM月dd日");
@@ -116,26 +118,16 @@ public class CompileremindActivity extends MyBaseActivity {
                         aMPM = "上午";
                     }
                     timepicker.setIs24HourView(false);
-                    frameLayout.setVisibility(View.GONE);
-                    tv_time_complete.setVisibility(View.GONE);
-                    ll_pharmacy_compile.setVisibility(View.GONE);
-                    ll_remind_content.setVisibility(View.GONE);
-                    ll_add_remind.setVisibility(View.VISIBLE);
-                    ll_et.setVisibility(View.VISIBLE);
-                    tv_remind_set.setText(aMPM + timepicker.getCurrentHour() + "" + ":" + timepicker.getCurrentMinute() + "");
-                    break;
-                case R.id.ll_add_remind:
-                    rl_endtiem.setVisibility(View.GONE);
-                    rl_starttime.setVisibility(View.GONE);
-                    view.setVisibility(View.GONE);
-                    v1.setVisibility(View.GONE);
-                    frameLayout.setVisibility(View.VISIBLE);
-                    tv_time_complete.setVisibility(View.VISIBLE);
-                    ll_pharmacy_compile.setVisibility(View.VISIBLE);
-                    ll_remind_content.setVisibility(View.VISIBLE);
-                    ll_add_remind.setVisibility(View.GONE);
-                    ll_et.setVisibility(View.GONE);
-                    tv_remind_set.setText("添加提醒");
+                    if (et_pharmacy_compile.getText().length() == 0) {
+                        Toast.makeText(CompileremindActivity.this, "请输入用药", Toast.LENGTH_SHORT).show();
+                    } else {
+                        tv_time1.setText(aMPM + timepicker.getCurrentHour() + "" + ":" + timepicker.getCurrentMinute() + "");
+                        tv_content1.setText(et_pharmacy_compile.getText().toString());
+                        ll_contnt1.setVisibility(View.VISIBLE);
+                        ll_compile.setVisibility(View.GONE);
+                        ll_add_remind.setVisibility(View.VISIBLE);
+                    }
+
                     break;
                 case R.id.ll_rutname:
                     finish();

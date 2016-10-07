@@ -1,13 +1,18 @@
 package com.example.chen.tset.View;
 
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 
+import com.example.chen.tset.Data.Inquiryrecord;
+import com.example.chen.tset.Data.User_Http;
 import com.example.chen.tset.R;
+import com.example.chen.tset.Utils.InquiryrecordDao;
 import com.example.chen.tset.Utils.MyBaseActivity;
 import com.example.chen.tset.page.InquiryrecordAdapter;
 
@@ -25,19 +30,20 @@ import cn.jpush.im.android.api.model.Conversation;
 public class InquiryrecordActivity extends MyBaseActivity {
     private ListView lv_inquiryrecord;
     private InquiryrecordAdapter adapter;
-    private List<String> list;
     private LinearLayout ll_rut;
-    List<Conversation> clist;
+    InquiryrecordDao db;
+    List<Inquiryrecord> list;
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_inquiryrecord);
-
-        clist=JMessageClient.getConversationList();
+        list = new ArrayList<>();
+        db = new InquiryrecordDao(this);
         findView();
         init();
+
 
     }
 
@@ -45,32 +51,29 @@ public class InquiryrecordActivity extends MyBaseActivity {
     private void findView() {
         lv_inquiryrecord = (ListView) findViewById(R.id.lv_inquiryrecord);
         ll_rut = (LinearLayout) findViewById(R.id.ll_rut);
-        ll_rut.setOnClickListener(listener);
         lv_inquiryrecord.setVerticalScrollBarEnabled(false);
+        lv_inquiryrecord.setOnItemClickListener(lvlistener);
     }
 
     private void init() {
-        list = new ArrayList<>();
-        if(list.size()==0){
-
-        }else {
-            for(int i=0;i<clist.size();i++){
-                Date d = new Date(clist.get(i).getLastMsgDate());
-                SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-                list.add(sdf.format(d));
-            }
-            adapter = new InquiryrecordAdapter(this, list);
-            lv_inquiryrecord.setAdapter(adapter);
-            adapter.notifyDataSetChanged();
-        }
-
+        list = db.chatfind(User_Http.user.getPhone());
+        Log.e("231", list.toString());
+        adapter = new InquiryrecordAdapter(this, list);
+        lv_inquiryrecord.setAdapter(adapter);
+        adapter.notifyDataSetChanged();
     }
 
-    private View.OnClickListener listener = new View.OnClickListener() {
+    private AdapterView.OnItemClickListener lvlistener = new AdapterView.OnItemClickListener() {
         @Override
-        public void onClick(View v) {
-            finish();
+        public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+            Intent intent = new Intent(InquiryrecordActivity.this, ChatpageActivity.class);
+            intent.putExtra("name", list.get(position).getDoctorname());
+            intent.putExtra("icon", list.get(position).getDoctoricon());
+            intent.putExtra("doctorID", list.get(position).getId());
+            intent.putExtra("username", list.get(position).getDoctorid());
+            startActivity(intent);
         }
     };
+
 
 }

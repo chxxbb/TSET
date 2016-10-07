@@ -54,6 +54,8 @@ public class PersonaldataActivity extends MyBaseActivity {
         setContentView(R.layout.activity_personaldata);
         sp = new SharedPsaveuser(PersonaldataActivity.this);
         findView();
+        audioFile = new File(Environment.getExternalStorageDirectory().getAbsolutePath() + "/data/files/");
+        audioFile.mkdirs();//创建文件夹
     }
 
     private void findView() {
@@ -136,10 +138,9 @@ public class PersonaldataActivity extends MyBaseActivity {
                         startActivity(intent2);
                         break;
                     case R.id.rl_icon:
-                        audioFile = new File(Environment.getExternalStorageDirectory().getAbsolutePath() + "/data/files/");
-                        audioFile.mkdirs();//创建文件夹
+
                         try {
-                            sdcardTempFile = File.createTempFile(".recording", ".jpg", audioFile);
+                            sdcardTempFile = File.createTempFile(".texticon", ".jpg", audioFile);
                         } catch (IOException e) {
 
                             e.printStackTrace();

@@ -107,6 +107,7 @@ public class InquiryAdapter extends BaseAdapter {
                 intent.putExtra("name", list.get(position).getName());
                 intent.putExtra("icon", list.get(position).getIcon());
                 intent.putExtra("doctorID", list.get(position).getId());
+                intent.putExtra("username", list.get(position).getUsername());
                 context.startActivity(intent);
 //                payDialog(position);
 

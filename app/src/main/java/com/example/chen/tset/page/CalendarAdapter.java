@@ -62,6 +62,17 @@ public class CalendarAdapter extends BaseAdapter {
 
     List<CalendarSign> list;
 
+    int option = 0;
+
+    public void changeoption(int positon) { //提醒设置
+        if (positon != option) {
+            option = positon;
+            notifyDataSetChanged();
+        }
+
+    }
+
+
     public CalendarAdapter() {
         Date date = new Date();
         sysDate = sdf.format(date); // 当期日期

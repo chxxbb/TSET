@@ -7,18 +7,22 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.TextView;
 
+import com.example.chen.tset.Data.Inquiryrecord;
 import com.example.chen.tset.R;
+import com.nostra13.universalimageloader.core.ImageLoader;
 
 import java.util.List;
+
+import de.hdodenhof.circleimageview.CircleImageView;
 
 /**
  * Created by Administrator on 2016/9/6 0006.
  */
 public class InquiryrecordAdapter extends BaseAdapter {
     private Context context;
-    private List<String> list;
+    private List<Inquiryrecord> list;
 
-    public InquiryrecordAdapter(Context context, List<String> list) {
+    public InquiryrecordAdapter(Context context, List<Inquiryrecord> list) {
         this.context = context;
         this.list = list;
     }
@@ -29,7 +33,7 @@ public class InquiryrecordAdapter extends BaseAdapter {
     }
 
     @Override
-    public String getItem(int position) {
+    public Inquiryrecord getItem(int position) {
         return list.get(position);
     }
 
@@ -46,15 +50,22 @@ public class InquiryrecordAdapter extends BaseAdapter {
             convertView.setTag(new ViewHolder(convertView));
         }
         ViewHolder viewHolder = (ViewHolder) convertView.getTag();
-        viewHolder.textView.setText(list.get(position));
+        viewHolder.tv_doctor_name.setText(list.get(position).getDoctorname());
+        viewHolder.tv_time.setText(list.get(position).getTime());
+        viewHolder.tv_statu.setText(list.get(position).getState());
+        ImageLoader.getInstance().displayImage(list.get(position).getDoctoricon(), viewHolder.iv_dicon);
         return convertView;
     }
 
     static class ViewHolder {
-        private TextView textView;
+        private CircleImageView iv_dicon;
+        private TextView tv_doctor_name, tv_statu, tv_time;
 
         ViewHolder(View v) {
-            textView = (TextView) v.findViewById(R.id.textView);
+            tv_doctor_name = (TextView) v.findViewById(R.id.tv_doctor_name);
+            tv_statu = (TextView) v.findViewById(R.id.tv_statu);
+            tv_time = (TextView) v.findViewById(R.id.tv_time);
+            iv_dicon = (CircleImageView) v.findViewById(R.id.iv_dicon);
         }
     }
 }

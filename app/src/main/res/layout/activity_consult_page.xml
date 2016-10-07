@@ -117,12 +117,12 @@
 
                         <TextView
                             android:id="@+id/tv_content"
-                            android:lineSpacingExtra="@dimen/y18"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_marginLeft="@dimen/x30"
                             android:layout_marginRight="@dimen/x30"
                             android:layout_marginTop="@dimen/y40"
+                            android:lineSpacingExtra="@dimen/y18"
                             android:textColor="@color/fontgray"
                             android:textSize="@dimen/y32" />
                     </LinearLayout>

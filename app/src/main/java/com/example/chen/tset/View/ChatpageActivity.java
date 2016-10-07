@@ -34,11 +34,13 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.chen.tset.Data.Chatcontent;
+import com.example.chen.tset.Data.Inquiryrecord;
 import com.example.chen.tset.Data.User;
 import com.example.chen.tset.Data.User_Http;
 
 import com.example.chen.tset.R;
 import com.example.chen.tset.Utils.ChatpageDao;
+import com.example.chen.tset.Utils.InquiryrecordDao;
 import com.example.chen.tset.Utils.SharedPsaveuser;
 import com.example.chen.tset.page.ChatpageAdapter;
 import com.nostra13.universalimageloader.core.ImageLoader;
@@ -46,6 +48,7 @@ import com.nostra13.universalimageloader.core.ImageLoader;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -80,7 +83,14 @@ public class ChatpageActivity extends AppCompatActivity {
     private LinearLayout ll_consult_return, ll_doctor_particulars;
     ChatpageDao db;
     String doctorID;
+    String username;
     SharedPsaveuser sp = new SharedPsaveuser(ChatpageActivity.this);
+    InquiryrecordDao inquiryrecorddb;
+    List<Chatcontent> data;
+
+
+    //用于判断用户是否和医生对话过
+    int chatstate = 0;
 
 
     @Override
@@ -89,6 +99,12 @@ public class ChatpageActivity extends AppCompatActivity {
         setContentView(R.layout.activity_chatpage);
         JMessageClient.registerEventReceiver(this);
 
+        inquiryrecorddb = new InquiryrecordDao(this);
+
+        audioFile = new File(Environment.getExternalStorageDirectory().getAbsolutePath() + "/data/files/");
+        audioFile.mkdirs();//创建文件夹
+        data = new ArrayList<>();
+
 
     }
 
@@ -96,8 +112,7 @@ public class ChatpageActivity extends AppCompatActivity {
     @Override
     protected void onStart() {
         super.onStart();
-        //设置后在此页面接收此用户消息不会再通知栏中显示
-        JMessageClient.enterSingleConversation("18302615820");
+
         db = new ChatpageDao(this);
         list = new ArrayList<>();
         historylist = new ArrayList<>();
@@ -137,6 +152,7 @@ public class ChatpageActivity extends AppCompatActivity {
         doctorname = getIntent().getStringExtra("name");
         //医生头像
         doctoricon = getIntent().getStringExtra("icon");
+        username = getIntent().getStringExtra("username");
         et_chat = (EditText) findViewById(R.id.et_chat);
         iv_chat = (ImageView) findViewById(R.id.iv_chat);
         listView = (ListView) findViewById(R.id.listView);
@@ -164,6 +180,9 @@ public class ChatpageActivity extends AppCompatActivity {
         iv_chat.setOnClickListener(lisntener);
         ll_consult_return.setOnClickListener(lisntener);
         et_chat.setOnEditorActionListener(ettextlistener);
+
+        //设置后在此页面接收此用户消息不会再通知栏中显示
+        JMessageClient.enterSingleConversation("18302615820");
 
 
     }
@@ -207,42 +226,47 @@ public class ChatpageActivity extends AppCompatActivity {
     private TextView.OnEditorActionListener ettextlistener = new TextView.OnEditorActionListener() {
         @Override
         public boolean onEditorAction(TextView v, final int actionId, KeyEvent event) {
-            Thread thread = new Thread(new Runnable() {
-                @Override
-                public void run() {
-                    try {
-                        if (actionId == EditorInfo.IME_ACTION_SEND) {
-                            //发送文本消息
-                            Conversation c = JMessageClient.getSingleConversation("18302615820");
-                            if (c == null) {
-                                c = Conversation.createSingleConversation("18302615820");
+//            Thread thread = new Thread(new Runnable() {
+//                @Override
+//                public void run() {
+            try {
+                if (actionId == EditorInfo.IME_ACTION_SEND) {
+                    //发送文本消息
+                    Conversation c = JMessageClient.getSingleConversation("18302615820");
+                    if (c == null) {
+                        c = Conversation.createSingleConversation("18302615820");
 
-                            }
-                            TextContent textContent = new TextContent(et_chat.getText().toString());
-                            Message message = c.createSendMessage(textContent);
-                            JMessageClient.sendMessage(message);
-                            Date dt = new Date();
-                            Long time = dt.getTime();
-                            //存取到数据库中，+1用于判断是发送的消息还是接收的消息,1为自己发送的消息,2为接送到的消息
-                            String content = "1" + et_chat.getText().toString();
-                            chatcontent = new Chatcontent(content, time, null, null, "18302615820", User_Http.user.getPhone());
-                            list.add(chatcontent);
-                            handler.sendEmptyMessage(0);
-                            db.addchatcont(chatcontent);
-                        }
-                    } catch (Exception e) {
-                        e.printStackTrace();
-                        jmessage();
-                        handler.sendEmptyMessage(2);
                     }
-
+                    TextContent textContent = new TextContent(et_chat.getText().toString());
+                    Message message = c.createSendMessage(textContent);
+                    JMessageClient.sendMessage(message);
+                    Date dt = new Date();
+                    Long time = dt.getTime();
+                    //存取到数据库中，+1用于判断是发送的消息还是接收的消息,1为自己发送的消息,2为接送到的消息
+                    String content = "1" + et_chat.getText().toString();
+                    chatcontent = new Chatcontent(content, time, null, null, "18302615820", User_Http.user.getPhone());
+                    list.add(chatcontent);
+                    et_chat.setText("");
+//                            handler.sendEmptyMessage(0);
+                    db.addchatcont(chatcontent);
+                    adapter.notifyDataSetChanged();
+                    chatstate++;
                 }
-            });
-            thread.start();
+            } catch (Exception e) {
+                e.printStackTrace();
+                jmessage();
+                handler.sendEmptyMessage(2);
+            }
+
+//                }
+//            });
+//            thread.start();
 
             return false;
         }
     };
+
+
     private Handler handler = new Handler() {
         @Override
         public void handleMessage(android.os.Message msg) {
@@ -271,14 +295,7 @@ public class ChatpageActivity extends AppCompatActivity {
 
         @Override
         public void onClick(View v) {
-            audioFile = new File(Environment.getExternalStorageDirectory().getAbsolutePath() + "/data/files/");
-            audioFile.mkdirs();//创建文件夹
-            try {
-                sdcardTempFile = File.createTempFile("recording", ".jpg", audioFile);
-            } catch (IOException e) {
 
-                e.printStackTrace();
-            }
             switch (v.getId()) {
                 case R.id.iv_chat:
                     //点击选择相机或截图
@@ -312,6 +329,7 @@ public class ChatpageActivity extends AppCompatActivity {
 
     //选择获取图片方式
     private void sendpictureclick() {
+
         Button btn_camera = (Button) dialogView.findViewById(R.id.btn_camera);
         Button btn_cutout = (Button) dialogView.findViewById(R.id.btn_cutout);
         Button btn_cancel = (Button) dialogView.findViewById(R.id.btn_cancel);
@@ -320,6 +338,15 @@ public class ChatpageActivity extends AppCompatActivity {
         btn_camera.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
+
+                try {
+                    sdcardTempFile = File.createTempFile("textcamera", ".jpg", audioFile);
+                } catch (IOException e) {
+
+                    e.printStackTrace();
+                }
+
                 //相机
                 Intent intent1 = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
                 intent1.putExtra(MediaStore.EXTRA_OUTPUT, Uri.fromFile(sdcardTempFile));
@@ -332,13 +359,22 @@ public class ChatpageActivity extends AppCompatActivity {
         btn_cutout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
+
+                try {
+                    sdcardTempFile = File.createTempFile("textscreenshot", ".jpg", audioFile);
+                } catch (IOException e) {
+
+                    e.printStackTrace();
+                }
+
                 //图片
                 Intent intent = new Intent("android.intent.action.PICK");
                 intent.setDataAndType(MediaStore.Images.Media.INTERNAL_CONTENT_URI, "image/*");
                 intent.putExtra("output", Uri.fromFile(sdcardTempFile));
                 intent.putExtra("crop", "true");
-                intent.putExtra("aspectX", 1);// 裁剪框比例
-                intent.putExtra("aspectY", 1);
+                intent.putExtra("aspectX", 2);// 裁剪框比例
+                intent.putExtra("aspectY", 2);
                 startActivityForResult(intent, 100);
                 setHeadDialog.dismiss();
             }
@@ -440,15 +476,17 @@ public class ChatpageActivity extends AppCompatActivity {
                 try {
 
                     ImageContent image = new ImageContent(sdcardTempFile);
+
                     Message message = c.createSendMessage(image);
                     JMessageClient.sendMessage(message);
                     chatcontent = new Chatcontent("1*1", 0L, sdcardTempFile.getAbsolutePath(), sdcardTempFile.getAbsolutePath(), "18302615820", User_Http.user.getPhone());
                     list.add(chatcontent);
                     db.addchatcont(chatcontent);
-                } catch (FileNotFoundException e) {
+                } catch (Exception e) {
                     e.printStackTrace();
                 }
                 handler.sendEmptyMessage(1);
+                chatstate++;
             }
         });
         thread.start();
@@ -461,6 +499,27 @@ public class ChatpageActivity extends AppCompatActivity {
     protected void onPause() {
         super.onPause();
         JPushInterface.onPause(this);
+        int j = 0;
+
+        SimpleDateFormat formatter = new SimpleDateFormat("yyyy/MM/dd  HH:mm:ss");
+        Date curDate = new Date(System.currentTimeMillis());//获取当前时间
+        String str = formatter.format(curDate);
+        List<Inquiryrecord> list = inquiryrecorddb.chatfind(User_Http.user.getPhone());
+
+
+        //判断数据库中是否有这个医生的聊天记录
+        for (int i = 0; i < list.size(); i++) {
+            if (username.equals(list.get(i).getDoctorid())) {
+                j++;
+            }
+        }
+
+        if (j == 0 && chatstate != 0) {
+            Inquiryrecord inquiryrecord = new Inquiryrecord(User_Http.user.getPhone(), username, doctorID, doctorname, doctoricon, str, "");
+            inquiryrecorddb.addInquiryrecord(inquiryrecord);
+        }
+
+
     }
 
 

@@ -51,6 +51,7 @@
             android:layout_alignParentRight="true">
 
             <TextView
+                android:id="@+id/tv_heath_save"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_vertical"
@@ -353,7 +354,7 @@
                     android:layout_marginTop="@dimen/y28"
                     android:src="@drawable/healthcondition_describe" />
 
-                <com.example.chen.tset.Utils.MyEditText
+                <com.example.chen.tset.page.NoteEditor
                     android:id="@+id/et_healthcondition"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -362,8 +363,8 @@
                     android:layout_marginTop="@dimen/x20"
                     android:background="@null"
                     android:cursorVisible="false"
+                    android:gravity="top"
                     android:lineSpacingExtra="@dimen/y40"
-                    android:maxLength="89"
                     android:textColor="@color/fontgray"
                     android:textSize="@dimen/y28" />
             </LinearLayout>
