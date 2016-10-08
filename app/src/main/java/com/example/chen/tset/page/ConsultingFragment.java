@@ -38,8 +38,10 @@ import com.example.chen.tset.Data.User_Http;
 import com.example.chen.tset.R;
 import com.example.chen.tset.Utils.CalendarGridView;
 import com.example.chen.tset.Utils.MyScrollview;
+import com.example.chen.tset.Utils.PharmacyDao;
 import com.example.chen.tset.View.CompileremindActivity;
 import com.example.chen.tset.View.HealthconditionActivity;
+import com.example.chen.tset.View.PharmacyremindActivity;
 import com.example.chen.tset.View.ReservationlistActivity;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
@@ -97,7 +99,7 @@ public class ConsultingFragment extends Fragment implements View.OnClickListener
     private LinearLayout ll_consulting_popup_case;
 
 
-    private LinearLayout ll_registration, ll_health, ll_pharmacy, ll_registration_info;
+    private LinearLayout ll_registration, ll_health, ll_pharmacy, ll_registration_info, ll_consulting_phramacy;
 
     private ToggleButton tb_registration, tb_health, tb_pharmacy;
 
@@ -141,7 +143,7 @@ public class ConsultingFragment extends Fragment implements View.OnClickListener
         }).start();
         calhttpinit();
 
-        findAllByDate();
+//        findAllByDate();
 
 
         return view;
@@ -191,6 +193,9 @@ public class ConsultingFragment extends Fragment implements View.OnClickListener
         tb_pharmacy = (ToggleButton) view.findViewById(R.id.tb_pharmacy);
         ll_pharmacy = (LinearLayout) view.findViewById(R.id.ll_pharmacy);
         ll_pharmacy.setOnClickListener(tblistener);
+
+        ll_consulting_phramacy = (LinearLayout) view.findViewById(R.id.ll_consulting_phramacy);
+        ll_consulting_phramacy.setOnClickListener(remindlistener);
 
         ll_consulting_popup_case = (LinearLayout) view.findViewById(R.id.ll_consulting_popup_case);
 
@@ -504,7 +509,6 @@ public class ConsultingFragment extends Fragment implements View.OnClickListener
                 .execute(new StringCallback() {
                     @Override
                     public void onError(Call call, Exception e, int id) {
-                        Toast.makeText(getContext(), "失败", Toast.LENGTH_SHORT).show();
                     }
 
                     @Override
@@ -604,6 +608,18 @@ public class ConsultingFragment extends Fragment implements View.OnClickListener
                 case R.id.ll_registration_info:
                     Intent intent = new Intent(getContext(), ReservationlistActivity.class);
                     intent.putExtra("ReservationID", registrationId);
+                    startActivity(intent);
+                    break;
+            }
+        }
+    };
+
+    private View.OnClickListener remindlistener = new View.OnClickListener() {
+        @Override
+        public void onClick(View v) {
+            switch (v.getId()) {
+                case R.id.ll_consulting_phramacy:
+                    Intent intent = new Intent(getContext(), PharmacyremindActivity.class);
                     startActivity(intent);
                     break;
             }

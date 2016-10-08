@@ -30,10 +30,12 @@ import android.widget.Toast;
 import com.example.chen.tset.Data.Chatcontent;
 import com.example.chen.tset.Data.Http_data;
 import com.example.chen.tset.Data.JPErrorCode;
+import com.example.chen.tset.Data.Pharmacyremind;
 import com.example.chen.tset.Data.User;
 import com.example.chen.tset.Data.User_Http;
 import com.example.chen.tset.Utils.ChatpageDao;
 import com.example.chen.tset.Utils.MyBaseActivity;
+import com.example.chen.tset.Utils.PharmacyDao;
 import com.example.chen.tset.Utils.SharedPsaveuser;
 import com.example.chen.tset.page.ConsultingFragment;
 import com.example.chen.tset.page.EncyclopediaFragment;
@@ -54,7 +56,11 @@ import java.io.InputStream;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.text.ParseException;
+import java.text.ParsePosition;
+import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.List;
 import java.util.Set;
 import java.util.logging.Handler;
 
@@ -122,6 +128,8 @@ public class HomeActivity extends MyBaseActivity implements View.OnClickListener
         }
 
         jmessage();
+
+        delpharmacy();
 
 
     }
@@ -418,6 +426,51 @@ public class HomeActivity extends MyBaseActivity implements View.OnClickListener
 
                     }
                 });
+    }
+
+
+    private void delpharmacy() {
+        PharmacyDao pharmacyDao = new PharmacyDao(this);
+
+
+        if (sp.getTag().getPhone() != null) {
+            List<Pharmacyremind> list = pharmacyDao.chatfind(sp.getTag().getPhone());
+            if (list != null) {
+                Date d1 = null;
+                try {
+
+                    for (int i = 0; i < list.size(); i++) {
+                        String date = list.get(i).getOverdate();
+                        SimpleDateFormat formatter = new SimpleDateFormat("yyyyMMdd");
+                        Date curDate = new Date(System.currentTimeMillis());//获取当前时间
+                        String str = formatter.format(curDate);
+
+
+                        d1 = new SimpleDateFormat("yyyy年MM月dd").parse(date);
+                        SimpleDateFormat nian = new SimpleDateFormat("yyyy");
+                        SimpleDateFormat yue = new SimpleDateFormat("MM");
+                        SimpleDateFormat ri = new SimpleDateFormat("dd");
+                        String nian1 = nian.format(d1);
+                        String yue1 = yue.format(d1);
+                        String ri1 = ri.format(d1);
+
+                        int pharmacydate = Integer.parseInt(nian1 + yue1 + ri1);
+                        int currentdate = Integer.parseInt(str);
+
+                        if (currentdate > pharmacydate) {
+                            pharmacyDao.del();
+                            Log.e("删除用药", "删除");
+                        }
+
+                    }
+
+                } catch (ParseException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
+
+
     }
 
 

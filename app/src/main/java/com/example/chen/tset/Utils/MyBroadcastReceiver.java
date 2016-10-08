@@ -37,13 +37,13 @@ public class MyBroadcastReceiver extends BroadcastReceiver {
         } else if (JPushInterface.ACTION_NOTIFICATION_RECEIVED.equals(intent.getAction())) {
             System.out.println("收到了通知");
             // 在这里可以做些统计，或者做些其他工作
-            Toast.makeText(context, "wangwangwang!", Toast.LENGTH_LONG).show();
+
         } else if (JPushInterface.ACTION_NOTIFICATION_OPENED.equals(intent.getAction())) {
             System.out.println("用户点击打开了通知");
             // 在这里可以自己写代码去定义用户点击后的行为
-            Toast.makeText(context, "fuck", Toast.LENGTH_LONG).show();
+
         } else {
-            Toast.makeText(context, "Unhandled intent - " + intent.getAction(), Toast.LENGTH_LONG).show();
+
         }
     }
 }

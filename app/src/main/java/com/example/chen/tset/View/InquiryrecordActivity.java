@@ -11,9 +11,11 @@ import android.widget.ListView;
 
 import com.example.chen.tset.Data.Inquiryrecord;
 import com.example.chen.tset.Data.User_Http;
+import com.example.chen.tset.Data.Userinfo;
 import com.example.chen.tset.R;
 import com.example.chen.tset.Utils.InquiryrecordDao;
 import com.example.chen.tset.Utils.MyBaseActivity;
+import com.example.chen.tset.Utils.SharedPsaveuser;
 import com.example.chen.tset.page.InquiryrecordAdapter;
 
 import java.text.SimpleDateFormat;
@@ -53,10 +55,18 @@ public class InquiryrecordActivity extends MyBaseActivity {
         ll_rut = (LinearLayout) findViewById(R.id.ll_rut);
         lv_inquiryrecord.setVerticalScrollBarEnabled(false);
         lv_inquiryrecord.setOnItemClickListener(lvlistener);
+        ll_rut.setOnClickListener(listener);
     }
 
     private void init() {
-        list = db.chatfind(User_Http.user.getPhone());
+        if (User_Http.user.getPhone() != null) {
+            list = db.chatfind(User_Http.user.getPhone());
+        } else {
+            SharedPsaveuser sp = new SharedPsaveuser(this);
+            Userinfo userinfo = sp.getTag();
+            list = db.chatfind(userinfo.getPhone());
+        }
+
         Log.e("231", list.toString());
         adapter = new InquiryrecordAdapter(this, list);
         lv_inquiryrecord.setAdapter(adapter);
@@ -72,6 +82,18 @@ public class InquiryrecordActivity extends MyBaseActivity {
             intent.putExtra("doctorID", list.get(position).getId());
             intent.putExtra("username", list.get(position).getDoctorid());
             startActivity(intent);
+        }
+    };
+
+
+    private View.OnClickListener listener = new View.OnClickListener() {
+        @Override
+        public void onClick(View v) {
+            switch (v.getId()) {
+                case R.id.ll_rut:
+                    finish();
+                    break;
+            }
         }
     };
 

@@ -38,6 +38,7 @@ import com.example.chen.tset.Data.Inquiryrecord;
 import com.example.chen.tset.Data.User;
 import com.example.chen.tset.Data.User_Http;
 
+import com.example.chen.tset.Data.Userinfo;
 import com.example.chen.tset.R;
 import com.example.chen.tset.Utils.ChatpageDao;
 import com.example.chen.tset.Utils.InquiryrecordDao;
@@ -87,6 +88,7 @@ public class ChatpageActivity extends AppCompatActivity {
     SharedPsaveuser sp = new SharedPsaveuser(ChatpageActivity.this);
     InquiryrecordDao inquiryrecorddb;
     List<Chatcontent> data;
+    List<Inquiryrecord> ilist;
 
 
     //用于判断用户是否和医生对话过
@@ -182,7 +184,7 @@ public class ChatpageActivity extends AppCompatActivity {
         et_chat.setOnEditorActionListener(ettextlistener);
 
         //设置后在此页面接收此用户消息不会再通知栏中显示
-        JMessageClient.enterSingleConversation("18302615820");
+        JMessageClient.enterSingleConversation(username);
 
 
     }
@@ -199,7 +201,7 @@ public class ChatpageActivity extends AppCompatActivity {
 
     private void init() {
         //从数据库中获取此用户聊天记录
-        historylist = db.chatfind("18302615820");
+        historylist = db.chatfind(username);
         for (int i = 0; i < historylist.size(); i++) {
 
             if (historylist.get(i).getMyname().equals(User_Http.user.getPhone())) {
@@ -232,9 +234,9 @@ public class ChatpageActivity extends AppCompatActivity {
             try {
                 if (actionId == EditorInfo.IME_ACTION_SEND) {
                     //发送文本消息
-                    Conversation c = JMessageClient.getSingleConversation("18302615820");
+                    Conversation c = JMessageClient.getSingleConversation(username);
                     if (c == null) {
-                        c = Conversation.createSingleConversation("18302615820");
+                        c = Conversation.createSingleConversation(username);
 
                     }
                     TextContent textContent = new TextContent(et_chat.getText().toString());
@@ -244,7 +246,7 @@ public class ChatpageActivity extends AppCompatActivity {
                     Long time = dt.getTime();
                     //存取到数据库中，+1用于判断是发送的消息还是接收的消息,1为自己发送的消息,2为接送到的消息
                     String content = "1" + et_chat.getText().toString();
-                    chatcontent = new Chatcontent(content, time, null, null, "18302615820", User_Http.user.getPhone());
+                    chatcontent = new Chatcontent(content, time, null, null, username, User_Http.user.getPhone());
                     list.add(chatcontent);
                     et_chat.setText("");
 //                            handler.sendEmptyMessage(0);
@@ -435,7 +437,7 @@ public class ChatpageActivity extends AppCompatActivity {
                 String content = "2" + textContent.getText();
                 Date dt = new Date();
                 Long time = dt.getTime();
-                if (msg.getTargetID().equals("18302615820")) {
+                if (msg.getTargetID().equals(username)) {
                     chatcontent = new Chatcontent(content, time, null, null, msg.getTargetID(), User_Http.user.getPhone());
                     list.add(chatcontent);
                     adapter.notifyDataSetChanged();
@@ -451,7 +453,7 @@ public class ChatpageActivity extends AppCompatActivity {
                 Date dt1 = new Date();
                 Long time1 = dt1.getTime();
                 chatcontent = new Chatcontent("2*2", time1, file, file, msg.getTargetID(), User_Http.user.getPhone());
-                if (msg.getTargetID().equals("18302615820")) {
+                if (msg.getTargetID().equals(username)) {
                     list.add(chatcontent);
                     adapter.notifyDataSetChanged();
                 }
@@ -468,9 +470,9 @@ public class ChatpageActivity extends AppCompatActivity {
             @Override
             public void run() {
 
-                Conversation c = JMessageClient.getSingleConversation("18302615820");
+                Conversation c = JMessageClient.getSingleConversation(username);
                 if (c == null) {
-                    c = Conversation.createSingleConversation("18302615820");
+                    c = Conversation.createSingleConversation(username);
 //                13608170152
                 }
                 try {
@@ -479,7 +481,7 @@ public class ChatpageActivity extends AppCompatActivity {
 
                     Message message = c.createSendMessage(image);
                     JMessageClient.sendMessage(message);
-                    chatcontent = new Chatcontent("1*1", 0L, sdcardTempFile.getAbsolutePath(), sdcardTempFile.getAbsolutePath(), "18302615820", User_Http.user.getPhone());
+                    chatcontent = new Chatcontent("1*1", 0L, sdcardTempFile.getAbsolutePath(), sdcardTempFile.getAbsolutePath(), username, User_Http.user.getPhone());
                     list.add(chatcontent);
                     db.addchatcont(chatcontent);
                 } catch (Exception e) {
@@ -504,12 +506,18 @@ public class ChatpageActivity extends AppCompatActivity {
         SimpleDateFormat formatter = new SimpleDateFormat("yyyy/MM/dd  HH:mm:ss");
         Date curDate = new Date(System.currentTimeMillis());//获取当前时间
         String str = formatter.format(curDate);
-        List<Inquiryrecord> list = inquiryrecorddb.chatfind(User_Http.user.getPhone());
+        if (User_Http.user.getPhone() != null) {
+            ilist = inquiryrecorddb.chatfind(User_Http.user.getPhone());
+        } else {
+            SharedPsaveuser sp = new SharedPsaveuser(this);
+            Userinfo userinfo = sp.getTag();
+            ilist = inquiryrecorddb.chatfind(userinfo.getPhone());
+        }
 
 
         //判断数据库中是否有这个医生的聊天记录
-        for (int i = 0; i < list.size(); i++) {
-            if (username.equals(list.get(i).getDoctorid())) {
+        for (int i = 0; i < ilist.size(); i++) {
+            if (username.equals(ilist.get(i).getDoctorid())) {
                 j++;
             }
         }

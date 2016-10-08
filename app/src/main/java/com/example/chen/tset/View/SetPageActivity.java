@@ -32,7 +32,6 @@ public class SetPageActivity extends MyBaseActivity implements View.OnClickListe
     }
 
     private void findView() {
-//        rl_themese = (RelativeLayout) findViewById(R.id.rl_themese);
         rl_feedback = (RelativeLayout) findViewById(R.id.rl_feedback);
         rl_aboutus = (RelativeLayout) findViewById(R.id.rl_aboutus);
         rl_remidset = (RelativeLayout) findViewById(R.id.rl_remidset);
@@ -40,7 +39,6 @@ public class SetPageActivity extends MyBaseActivity implements View.OnClickListe
         ll_return = (LinearLayout) findViewById(R.id.ll_return);
         rl_exit = (RelativeLayout) findViewById(R.id.rl_exit);
         ll_return.setOnClickListener(this);
-//        rl_themese.setOnClickListener(this);
         rl_exit.setOnClickListener(this);
         rl_feedback.setOnClickListener(this);
         rl_aboutus.setOnClickListener(this);
@@ -51,10 +49,6 @@ public class SetPageActivity extends MyBaseActivity implements View.OnClickListe
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
-//            case R.id.rl_themese:
-//                Intent intent = new Intent(SetPageActivity.this, ThemeselectActivity.class);
-//                startActivity(intent);
-//                break;
             case R.id.rl_feedback:
                 //一键反馈
                 Intent intent1 = new Intent(SetPageActivity.this, FeedbackActivity.class);
