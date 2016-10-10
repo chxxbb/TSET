@@ -266,9 +266,11 @@
                                 android:layout_marginLeft="@dimen/x3"
                                 android:background="@drawable/cousulting_remind"
                                 android:checked="true"
+                                android:clickable="false"
                                 android:textOff=""
                                 android:textOn="" />
                         </LinearLayout>
+
                     </FrameLayout>
 
 
@@ -311,6 +313,7 @@
                                 android:layout_marginLeft="@dimen/x3"
                                 android:background="@drawable/cousulting_remind"
                                 android:checked="true"
+                                android:clickable="false"
                                 android:textOff=""
                                 android:textOn="" />
                         </LinearLayout>
@@ -356,6 +359,7 @@
                                 android:layout_marginLeft="@dimen/x3"
                                 android:background="@drawable/cousulting_remind"
                                 android:checked="true"
+                                android:clickable="false"
                                 android:textOff=""
                                 android:textOn="" />
                         </LinearLayout>

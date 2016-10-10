@@ -1,9 +1,8 @@
 package com.example.chen.tset.View;
 
-import android.content.Intent;
+
 import android.os.Handler;
 import android.os.Message;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -14,12 +13,10 @@ import android.widget.RelativeLayout;
 import android.widget.Toast;
 
 import com.example.chen.tset.Data.Http_data;
-import com.example.chen.tset.Data.Inquiry;
 import com.example.chen.tset.Data.MyDoctor;
 import com.example.chen.tset.Data.User_Http;
 import com.example.chen.tset.R;
 import com.example.chen.tset.Utils.MyBaseActivity;
-import com.example.chen.tset.page.InquiryAdapter;
 import com.example.chen.tset.page.MyDoctorAdapter;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
@@ -121,10 +118,10 @@ public class MyDoctorActivity extends MyBaseActivity {
     private AdapterView.OnItemClickListener lvlistener = new AdapterView.OnItemClickListener() {
         @Override
         public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-            Intent intent = new Intent(MyDoctorActivity.this, DoctorparticularsActivity.class);
-            //医生ID
-            intent.putExtra("doctot_id", list.get(position).getDoctorId() + "");
-            startActivity(intent);
+//            Intent intent = new Intent(MyDoctorActivity.this, DoctorparticularsActivity.class);
+//            //医生ID
+//            intent.putExtra("doctot_id", list.get(position).getDoctorId() + "");
+//            startActivity(intent);
         }
     };
 

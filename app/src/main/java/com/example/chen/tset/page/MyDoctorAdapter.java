@@ -68,6 +68,8 @@ public class MyDoctorAdapter extends BaseAdapter {
                 Intent intent = new Intent(context, ChatpageActivity.class);
                 intent.putExtra("name", list.get(position).getDoctorName());
                 intent.putExtra("icon", list.get(position).getDoctorIcon());
+                intent.putExtra("doctorID", list.get(position).getDoctorId());
+                intent.putExtra("username", list.get(position).getDoctorUserName());
                 context.startActivity(intent);
             }
         });

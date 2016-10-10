@@ -22,6 +22,7 @@ import android.view.WindowManager;
 import android.view.animation.AnimationUtils;
 import android.widget.AbsListView;
 import android.widget.AdapterView;
+import android.widget.CompoundButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.PopupWindow;
@@ -183,16 +184,14 @@ public class ConsultingFragment extends Fragment implements View.OnClickListener
 
         ll_registration = (LinearLayout) view.findViewById(R.id.ll_registration);
         tb_registration = (ToggleButton) view.findViewById(R.id.tb_registration);
-        ll_registration.setOnClickListener(tblistener);
 
         tb_health = (ToggleButton) view.findViewById(R.id.tb_health);
         ll_health = (LinearLayout) view.findViewById(R.id.ll_health);
-        ll_health.setOnClickListener(tblistener);
 
 
         tb_pharmacy = (ToggleButton) view.findViewById(R.id.tb_pharmacy);
         ll_pharmacy = (LinearLayout) view.findViewById(R.id.ll_pharmacy);
-        ll_pharmacy.setOnClickListener(tblistener);
+
 
         ll_consulting_phramacy = (LinearLayout) view.findViewById(R.id.ll_consulting_phramacy);
         ll_consulting_phramacy.setOnClickListener(remindlistener);
@@ -223,8 +222,10 @@ public class ConsultingFragment extends Fragment implements View.OnClickListener
 
         if (tb_pharmacy.isChecked()) {
             pharmacySelect = 1;
+
         } else {
             pharmacySelect = 2;
+
         }
 
 
@@ -239,9 +240,13 @@ public class ConsultingFragment extends Fragment implements View.OnClickListener
 
                     if (registrationSelect == 1) {
                         tb_registration.setChecked(false);
+
+
                         registrationSelect = 2;
                     } else if (registrationSelect == 2) {
                         tb_registration.setChecked(true);
+
+
                         registrationSelect = 1;
                     }
                     break;
@@ -250,9 +255,15 @@ public class ConsultingFragment extends Fragment implements View.OnClickListener
                 case R.id.ll_health:
                     if (healthSelect == 1) {
                         tb_health.setChecked(false);
+
+                        calV.healthremind(2);
+
                         healthSelect = 2;
                     } else if (healthSelect == 2) {
                         tb_health.setChecked(true);
+
+                        calV.healthremind(1);
+
                         healthSelect = 1;
                     }
                     break;
@@ -261,9 +272,13 @@ public class ConsultingFragment extends Fragment implements View.OnClickListener
                 case R.id.ll_pharmacy:
                     if (pharmacySelect == 1) {
                         tb_pharmacy.setChecked(false);
+
+
                         pharmacySelect = 2;
                     } else if (pharmacySelect == 2) {
                         tb_pharmacy.setChecked(true);
+
+
                         pharmacySelect = 1;
                     }
                     break;
@@ -288,16 +303,22 @@ public class ConsultingFragment extends Fragment implements View.OnClickListener
 
 
         list = new ArrayList<>();
-        CalendarSign sign = new CalendarSign("2016年10月28日", 1);
-        CalendarSign sign1 = new CalendarSign("2016年10月22日", 2);
         CalendarSign sign2 = new CalendarSign("2016年10月16日", 3);
-        CalendarSign sign3 = new CalendarSign("2016年11月7日", 3);
-        CalendarSign sign4 = new CalendarSign("2016年9月7日", 3);
-        list.add(sign);
+        CalendarSign sign5 = new CalendarSign("2016年10月4日", 6);
+        CalendarSign sign6 = new CalendarSign("2016年10月28日", 7);
+        CalendarSign sign7 = new CalendarSign("2016年10月13日", 8);
+        CalendarSign sign8 = new CalendarSign("2016年10月25日", 9);
+        CalendarSign sign1 = new CalendarSign("2016年10月23日", 9);
+        CalendarSign sign4 = new CalendarSign("2016年10月24日", 9);
+        CalendarSign sign3 = new CalendarSign("2016年10月26日", 9);
         list.add(sign1);
         list.add(sign2);
         list.add(sign3);
         list.add(sign4);
+        list.add(sign5);
+        list.add(sign6);
+        list.add(sign7);
+        list.add(sign8);
 
         calV = new CalendarAdapter(getContext(), getResources(), jumpMonth, jumpYear, year_c, month_c, day_c, list);
         addGridView();
@@ -305,18 +326,49 @@ public class ConsultingFragment extends Fragment implements View.OnClickListener
         flipper.addView(gridView, 0);
         addTextToTopTextView(currentMonth);
 
+        calV.pharmacyremind(1);
+        calV.registrationremind(1);
+        calV.healthremind(1);
 
-//        flipper.setOnTouchListener(new View.OnTouchListener() {
-//            @Override
-//            public boolean onTouch(View v, MotionEvent event) {
-//
-//                if (event.getAction() == MotionEvent.ACTION_UP)
-//                    scrollview.requestDisallowInterceptTouchEvent(false);
-//                else
-//                    scrollview.requestDisallowInterceptTouchEvent(true);
-//                return false;
-//            }
-//        });
+
+        tb_pharmacy.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                if (isChecked) {
+                    calV.pharmacyremind(1);
+                } else {
+                    calV.pharmacyremind(2);
+                }
+            }
+        });
+
+
+        tb_registration.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                if (isChecked) {
+                    calV.registrationremind(1);
+                } else {
+                    calV.registrationremind(2);
+                }
+            }
+        });
+
+
+        tb_health.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                if (isChecked) {
+                    calV.healthremind(1);
+                } else {
+                    calV.healthremind(2);
+                }
+            }
+        });
+
+        ll_registration.setOnClickListener(tblistener);
+        ll_health.setOnClickListener(tblistener);
+        ll_pharmacy.setOnClickListener(tblistener);
 
 
     }
@@ -339,6 +391,7 @@ public class ConsultingFragment extends Fragment implements View.OnClickListener
 
                 // 向右滑动
                 enterPrevMonth(gvFlag);
+
                 return true;
             }
 
@@ -354,6 +407,8 @@ public class ConsultingFragment extends Fragment implements View.OnClickListener
      * @param gvFlag
      */
     private void enterNextMonth(int gvFlag) {
+
+
         addGridView(); // 添加一个gridView
         jumpMonth++; // 下一个月
 
@@ -366,6 +421,7 @@ public class ConsultingFragment extends Fragment implements View.OnClickListener
         flipper.setOutAnimation(AnimationUtils.loadAnimation(getContext(), R.anim.push_left_out));
         flipper.showNext();
         flipper.removeViewAt(0);
+
     }
 
     /**
@@ -374,6 +430,8 @@ public class ConsultingFragment extends Fragment implements View.OnClickListener
      * @param gvFlag
      */
     private void enterPrevMonth(int gvFlag) {
+
+
         addGridView(); // 添加一个gridView
         jumpMonth--; // 上一个月
 
@@ -387,6 +445,7 @@ public class ConsultingFragment extends Fragment implements View.OnClickListener
         flipper.setOutAnimation(AnimationUtils.loadAnimation(getContext(), R.anim.push_right_out));
         flipper.showPrevious();
         flipper.removeViewAt(0);
+
     }
 
 

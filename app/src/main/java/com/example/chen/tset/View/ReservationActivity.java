@@ -28,6 +28,7 @@ import com.zhy.http.okhttp.callback.StringCallback;
 
 import java.lang.reflect.Type;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
@@ -43,6 +44,7 @@ public class ReservationActivity extends MyBaseActivity implements View.OnClickL
     private ListView lv_reser;
     private RelativeLayout rl_nonetwork, rl_loading;
     List<Reservation> list;
+    List<Reservation> data;
     Gson gson = new Gson();
 
     //233
@@ -51,6 +53,7 @@ public class ReservationActivity extends MyBaseActivity implements View.OnClickL
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_reservationactivity);
+        data = new ArrayList<>();
         findView();
 
     }
@@ -70,7 +73,6 @@ public class ReservationActivity extends MyBaseActivity implements View.OnClickL
         super.onStart();
         init();
     }
-
 
 
     private void init() {
@@ -100,6 +102,8 @@ public class ReservationActivity extends MyBaseActivity implements View.OnClickL
                             Reservation reservation = (Reservation) it.next();
                             list.add(reservation);
                         }
+                        //使list倒序排列
+                        Collections.reverse(list);
                         adapter.notifyDataSetChanged();
                         rl_loading.setVisibility(View.GONE);
                     }

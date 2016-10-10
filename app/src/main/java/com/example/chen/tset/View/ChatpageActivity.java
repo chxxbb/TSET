@@ -103,7 +103,7 @@ public class ChatpageActivity extends AppCompatActivity {
 
         inquiryrecorddb = new InquiryrecordDao(this);
 
-        audioFile = new File(Environment.getExternalStorageDirectory().getAbsolutePath() + "/data/files/");
+        audioFile = new File(Environment.getExternalStorageDirectory().getAbsolutePath() + "/text/chatprint/");
         audioFile.mkdirs();//创建文件夹
         data = new ArrayList<>();
 
@@ -204,7 +204,8 @@ public class ChatpageActivity extends AppCompatActivity {
         historylist = db.chatfind(username);
         for (int i = 0; i < historylist.size(); i++) {
 
-            if (historylist.get(i).getMyname().equals(User_Http.user.getPhone())) {
+
+            if (historylist.get(i).getMyname().equals(sp.getTag().getPhone())) {
                 list.add(historylist.get(i));
 
 
@@ -246,7 +247,7 @@ public class ChatpageActivity extends AppCompatActivity {
                     Long time = dt.getTime();
                     //存取到数据库中，+1用于判断是发送的消息还是接收的消息,1为自己发送的消息,2为接送到的消息
                     String content = "1" + et_chat.getText().toString();
-                    chatcontent = new Chatcontent(content, time, null, null, username, User_Http.user.getPhone());
+                    chatcontent = new Chatcontent(content, time, null, null, username, sp.getTag().getPhone());
                     list.add(chatcontent);
                     et_chat.setText("");
 //                            handler.sendEmptyMessage(0);
@@ -341,19 +342,24 @@ public class ChatpageActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
-
                 try {
                     sdcardTempFile = File.createTempFile("textcamera", ".jpg", audioFile);
+
                 } catch (IOException e) {
 
                     e.printStackTrace();
                 }
+
 
                 //相机
                 Intent intent1 = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
                 intent1.putExtra(MediaStore.EXTRA_OUTPUT, Uri.fromFile(sdcardTempFile));
                 startActivityForResult(intent1, 100);
                 setHeadDialog.dismiss();
+
+
+
+
             }
         });
 
@@ -438,7 +444,7 @@ public class ChatpageActivity extends AppCompatActivity {
                 Date dt = new Date();
                 Long time = dt.getTime();
                 if (msg.getTargetID().equals(username)) {
-                    chatcontent = new Chatcontent(content, time, null, null, msg.getTargetID(), User_Http.user.getPhone());
+                    chatcontent = new Chatcontent(content, time, null, null, msg.getTargetID(), sp.getTag().getPhone());
                     list.add(chatcontent);
                     adapter.notifyDataSetChanged();
                 }
@@ -452,7 +458,7 @@ public class ChatpageActivity extends AppCompatActivity {
                 String file = imageContent.getLocalThumbnailPath();//图片对应缩略图的本地地址
                 Date dt1 = new Date();
                 Long time1 = dt1.getTime();
-                chatcontent = new Chatcontent("2*2", time1, file, file, msg.getTargetID(), User_Http.user.getPhone());
+                chatcontent = new Chatcontent("2*2", time1, file, file, msg.getTargetID(), sp.getTag().getPhone());
                 if (msg.getTargetID().equals(username)) {
                     list.add(chatcontent);
                     adapter.notifyDataSetChanged();
@@ -481,11 +487,12 @@ public class ChatpageActivity extends AppCompatActivity {
 
                     Message message = c.createSendMessage(image);
                     JMessageClient.sendMessage(message);
-                    chatcontent = new Chatcontent("1*1", 0L, sdcardTempFile.getAbsolutePath(), sdcardTempFile.getAbsolutePath(), username, User_Http.user.getPhone());
+                    chatcontent = new Chatcontent("1*1", 0L, sdcardTempFile.getAbsolutePath(), sdcardTempFile.getAbsolutePath(), username, sp.getTag().getPhone());
                     list.add(chatcontent);
                     db.addchatcont(chatcontent);
                 } catch (Exception e) {
                     e.printStackTrace();
+
                 }
                 handler.sendEmptyMessage(1);
                 chatstate++;
@@ -507,7 +514,7 @@ public class ChatpageActivity extends AppCompatActivity {
         Date curDate = new Date(System.currentTimeMillis());//获取当前时间
         String str = formatter.format(curDate);
         if (User_Http.user.getPhone() != null) {
-            ilist = inquiryrecorddb.chatfind(User_Http.user.getPhone());
+            ilist = inquiryrecorddb.chatfind(sp.getTag().getPhone());
         } else {
             SharedPsaveuser sp = new SharedPsaveuser(this);
             Userinfo userinfo = sp.getTag();
@@ -523,7 +530,7 @@ public class ChatpageActivity extends AppCompatActivity {
         }
 
         if (j == 0 && chatstate != 0) {
-            Inquiryrecord inquiryrecord = new Inquiryrecord(User_Http.user.getPhone(), username, doctorID, doctorname, doctoricon, str, "");
+            Inquiryrecord inquiryrecord = new Inquiryrecord(sp.getTag().getPhone(), username, doctorID, doctorname, doctoricon, str, "");
             inquiryrecorddb.addInquiryrecord(inquiryrecord);
         }
 

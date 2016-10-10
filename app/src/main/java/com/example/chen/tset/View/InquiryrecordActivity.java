@@ -8,6 +8,7 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
+import android.widget.RelativeLayout;
 
 import com.example.chen.tset.Data.Inquiryrecord;
 import com.example.chen.tset.Data.User_Http;
@@ -35,6 +36,7 @@ public class InquiryrecordActivity extends MyBaseActivity {
     private LinearLayout ll_rut;
     InquiryrecordDao db;
     List<Inquiryrecord> list;
+    private RelativeLayout rl_nonetwork;
 
 
     @Override
@@ -52,6 +54,7 @@ public class InquiryrecordActivity extends MyBaseActivity {
 
     private void findView() {
         lv_inquiryrecord = (ListView) findViewById(R.id.lv_inquiryrecord);
+        rl_nonetwork = (RelativeLayout) findViewById(R.id.rl_nonetwork);
         ll_rut = (LinearLayout) findViewById(R.id.ll_rut);
         lv_inquiryrecord.setVerticalScrollBarEnabled(false);
         lv_inquiryrecord.setOnItemClickListener(lvlistener);
@@ -67,7 +70,6 @@ public class InquiryrecordActivity extends MyBaseActivity {
             list = db.chatfind(userinfo.getPhone());
         }
 
-        Log.e("231", list.toString());
         adapter = new InquiryrecordAdapter(this, list);
         lv_inquiryrecord.setAdapter(adapter);
         adapter.notifyDataSetChanged();

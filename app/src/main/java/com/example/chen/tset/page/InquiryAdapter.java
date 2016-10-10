@@ -18,6 +18,7 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.RadioButton;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -103,12 +104,42 @@ public class InquiryAdapter extends BaseAdapter {
             @Override
             public void onClick(View v) {
 
-                Intent intent = new Intent(context, ChatpageActivity.class);
-                intent.putExtra("name", list.get(position).getName());
-                intent.putExtra("icon", list.get(position).getIcon());
-                intent.putExtra("doctorID", list.get(position).getId());
-                intent.putExtra("username", list.get(position).getUsername());
-                context.startActivity(intent);
+
+                setHeadDialog = new Dialog(context, R.style.CustomDialog);
+                setHeadDialog.show();
+                dialogView = View.inflate(context, R.layout.inquiry_chat_dialog, null);
+                setHeadDialog.getWindow().setContentView(dialogView);
+                WindowManager.LayoutParams lp = setHeadDialog.getWindow()
+                        .getAttributes();
+                setHeadDialog.getWindow().setAttributes(lp);
+
+                RelativeLayout rl_confirm = (RelativeLayout) dialogView.findViewById(R.id.rl_confirm);
+                RelativeLayout lr_cancel = (RelativeLayout) dialogView.findViewById(R.id.lr_cancel);
+
+
+
+                lr_cancel.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        setHeadDialog.dismiss();
+                    }
+                });
+
+
+
+
+                rl_confirm.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        Intent intent = new Intent(context, ChatpageActivity.class);
+                        intent.putExtra("name", list.get(position).getName());
+                        intent.putExtra("icon", list.get(position).getIcon());
+                        intent.putExtra("doctorID", list.get(position).getId());
+                        intent.putExtra("username", list.get(position).getUsername());
+                        context.startActivity(intent);
+                        setHeadDialog.dismiss();
+                    }
+                });
 //                payDialog(position);
 
 //                OkHttpUtils

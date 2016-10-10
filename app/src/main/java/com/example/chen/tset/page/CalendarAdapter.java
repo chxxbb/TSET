@@ -62,14 +62,35 @@ public class CalendarAdapter extends BaseAdapter {
 
     List<CalendarSign> list;
 
-    int option = 0;
 
-    public void changeoption(int positon) { //提醒设置
-        if (positon != option) {
-            option = positon;
+    //用药提醒设置
+    int pharmacy = 0;
+
+    public void pharmacyremind(int position) {
+        if (position != pharmacy) {
+            pharmacy = position;
             notifyDataSetChanged();
         }
+    }
 
+    //挂号提醒
+    int registration = 0;
+
+    public void registrationremind(int position) {
+        if (position != registration) {
+            registration = position;
+            notifyDataSetChanged();
+        }
+    }
+
+    //健康提醒
+    int health = 0;
+
+    public void healthremind(int position) {
+        if (position != health) {
+            health = position;
+            notifyDataSetChanged();
+        }
     }
 
 
@@ -198,14 +219,126 @@ public class CalendarAdapter extends BaseAdapter {
 
         }
 
-        for (int i = 0; i < list.size(); i++) {
-            if ((scheduleYear + "年" + scheduleMonth + "月" + scheduleDay + "日").equals(list.get(i).getTime()) && position < daysOfMonth + dayOfWeek && position >= dayOfWeek) {
-                if (list.get(i).getState() == 1) {
-                    textView.setBackgroundResource(R.drawable.consulting1);
-                } else if (list.get(i).getState() == 2) {
-                    textView.setBackgroundResource(R.drawable.consulting2);
-                } else if (list.get(i).getState() == 3) {
-                    textView.setBackgroundResource(R.drawable.consulting3);
+
+        // 111  222   122  212  122    112 121  211
+
+        if (pharmacy == 2 && health == 2 && registration == 2) {
+
+
+        }
+
+
+        //只有用药提醒被选中
+        else if (pharmacy == 1 && registration == 2 && health == 2) {
+            for (int i = 0; i < list.size(); i++) {
+                if ((scheduleYear + "年" + scheduleMonth + "月" + scheduleDay + "日").equals(list.get(i).getTime()) && position < daysOfMonth + dayOfWeek && position >= dayOfWeek) {
+                    if (list.get(i).getState() == 9) {
+                        textView.setBackgroundResource(R.drawable.consulting9);
+                    } else if (list.get(i).getState() == 3) {
+                        textView.setBackgroundResource(R.drawable.consulting9);
+                    } else if (list.get(i).getState() == 8) {
+                        textView.setBackgroundResource(R.drawable.consulting9);
+                    }
+                }
+
+            }
+
+        }
+        //只有健康提醒被选中
+        else if (pharmacy == 2 && registration == 2 && health == 1) {
+            for (int i = 0; i < list.size(); i++) {
+                if ((scheduleYear + "年" + scheduleMonth + "月" + scheduleDay + "日").equals(list.get(i).getTime()) && position < daysOfMonth + dayOfWeek && position >= dayOfWeek) {
+                    if (list.get(i).getState() == 7) {
+                        textView.setBackgroundResource(R.drawable.consulting7);
+                    } else if (list.get(i).getState() == 8) {
+                        textView.setBackgroundResource(R.drawable.consulting7);
+                    }
+                }
+
+            }
+        }
+        //只有挂号提醒被选中
+        else if (pharmacy == 2 && registration == 1 && health == 2) {
+            for (int i = 0; i < list.size(); i++) {
+                if ((scheduleYear + "年" + scheduleMonth + "月" + scheduleDay + "日").equals(list.get(i).getTime()) && position < daysOfMonth + dayOfWeek && position >= dayOfWeek) {
+                    if (list.get(i).getState() == 3) {
+                        textView.setBackgroundResource(R.drawable.consulting6);
+                    } else if (list.get(i).getState() == 6) {
+                        textView.setBackgroundResource(R.drawable.consulting6);
+                    }
+                }
+
+            }
+        }
+
+        //挂号，健康都被选中
+        else if (pharmacy == 2 && registration == 1 && health == 1) {
+            for (int i = 0; i < list.size(); i++) {
+                if ((scheduleYear + "年" + scheduleMonth + "月" + scheduleDay + "日").equals(list.get(i).getTime()) && position < daysOfMonth + dayOfWeek && position >= dayOfWeek) {
+                    if (list.get(i).getState() == 3) {
+                        textView.setBackgroundResource(R.drawable.consulting6);
+                    } else if (list.get(i).getState() == 6) {
+                        textView.setBackgroundResource(R.drawable.consulting6);
+                    } else if (list.get(i).getState() == 7) {
+                        textView.setBackgroundResource(R.drawable.consulting7);
+                    } else if (list.get(i).getState() == 8) {
+                        textView.setBackgroundResource(R.drawable.consulting7);
+                    }
+                }
+
+            }
+        }
+        //挂号，用药都被选中
+        else if (pharmacy == 1 && registration == 1 && health == 2) {
+            for (int i = 0; i < list.size(); i++) {
+                if ((scheduleYear + "年" + scheduleMonth + "月" + scheduleDay + "日").equals(list.get(i).getTime()) && position < daysOfMonth + dayOfWeek && position >= dayOfWeek) {
+                    if (list.get(i).getState() == 3) {
+                        textView.setBackgroundResource(R.drawable.consulting3);
+                    } else if (list.get(i).getState() == 6) {
+                        textView.setBackgroundResource(R.drawable.consulting6);
+                    } else if (list.get(i).getState() == 8) {
+                        textView.setBackgroundResource(R.drawable.consulting9);
+                    } else if (list.get(i).getState() == 8) {
+                        textView.setBackgroundResource(R.drawable.consulting9);
+                    }else if(list.get(i).getState() == 9){
+                        textView.setBackgroundResource(R.drawable.consulting9);
+                    }
+                }
+
+            }
+        }
+
+        //健康，用药都被选中
+        else if (pharmacy == 1 && registration == 2 && health == 1) {
+            for (int i = 0; i < list.size(); i++) {
+                if ((scheduleYear + "年" + scheduleMonth + "月" + scheduleDay + "日").equals(list.get(i).getTime()) && position < daysOfMonth + dayOfWeek && position >= dayOfWeek) {
+                    if (list.get(i).getState() == 3) {
+                        textView.setBackgroundResource(R.drawable.consulting9);
+                    } else if (list.get(i).getState() == 7) {
+                        textView.setBackgroundResource(R.drawable.consulting7);
+                    } else if (list.get(i).getState() == 8) {
+                        textView.setBackgroundResource(R.drawable.consulting8);
+                    } else if (list.get(i).getState() == 9) {
+                        textView.setBackgroundResource(R.drawable.consulting9);
+                    }
+                }
+
+            }
+        } else {
+            for (int i = 0; i < list.size(); i++) {
+                if ((scheduleYear + "年" + scheduleMonth + "月" + scheduleDay + "日").equals(list.get(i).getTime()) && position < daysOfMonth + dayOfWeek && position >= dayOfWeek) {
+
+                    if (list.get(i).getState() == 3) {
+                        textView.setBackgroundResource(R.drawable.consulting3);
+                    } else if (list.get(i).getState() == 6) {
+                        textView.setBackgroundResource(R.drawable.consulting6);
+                    } else if (list.get(i).getState() == 7) {
+                        textView.setBackgroundResource(R.drawable.consulting7);
+                    } else if (list.get(i).getState() == 8) {
+                        textView.setBackgroundResource(R.drawable.consulting8);
+                    } else if (list.get(i).getState() == 9) {
+                        textView.setBackgroundResource(R.drawable.consulting9);
+                    }
                 }
             }
         }

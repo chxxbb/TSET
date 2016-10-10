@@ -16,6 +16,7 @@ import android.widget.TextView;
 import com.example.chen.tset.Data.Chatcontent;
 import com.example.chen.tset.Data.User_Http;
 import com.example.chen.tset.R;
+import com.example.chen.tset.Utils.SharedPsaveuser;
 import com.nostra13.universalimageloader.core.ImageLoader;
 import com.nostra13.universalimageloader.core.download.BaseImageDownloader;
 
@@ -34,6 +35,7 @@ public class ChatpageAdapter extends BaseAdapter {
     LayoutInflater inflater;
     private final int TYPE1 = 1;
     private final int TYPE2 = 2;
+    SharedPsaveuser sp;
 
     public ChatpageAdapter(Context context, List<Chatcontent> list, String doctoricon) {
         this.context = context;
@@ -74,6 +76,7 @@ public class ChatpageAdapter extends BaseAdapter {
 
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
+        sp = new SharedPsaveuser(context);
         ViewHolder1 viewHolder1 = null;
         ViewHolder2 viewHolder2 = null;
         int type = getItemViewType(position);
@@ -110,9 +113,11 @@ public class ChatpageAdapter extends BaseAdapter {
         }
         switch (type) {
             case TYPE1:
-                if(User_Http.user.getIcon()==null){
+                if (User_Http.user.getIcon() == null && sp.getTag().getIcon() == null) {
                     viewHolder1.iv_right_head.setImageResource(R.drawable.default_icon);
-                }else {
+                } else if (User_Http.user.getIcon() == null) {
+                    ImageLoader.getInstance().displayImage("file:///" + sp.getTag().getIcon(), viewHolder1.iv_right_head);
+                } else {
                     ImageLoader.getInstance().displayImage(User_Http.user.getIcon(), viewHolder1.iv_right_head);
                 }
                 if (list.get(position).getContent().equals("1*1")) {

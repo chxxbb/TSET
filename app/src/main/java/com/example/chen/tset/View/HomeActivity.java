@@ -11,6 +11,7 @@ import android.content.SharedPreferences;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Color;
+import android.net.Uri;
 import android.os.Build;
 import android.os.Environment;
 import android.os.PersistableBundle;
@@ -132,6 +133,31 @@ public class HomeActivity extends MyBaseActivity implements View.OnClickListener
         delpharmacy();
 
 
+        versionUpdate();
+
+
+    }
+
+    private void versionUpdate() {
+        OkHttpUtils
+                .post()
+                .url(Http_data.http_data + "/VersionUpdate")
+                .build()
+                .execute(new StringCallback() {
+                    @Override
+                    public void onError(Call call, Exception e, int id) {
+                        Log.e("更新", "失败");
+                    }
+
+                    @Override
+                    public void onResponse(String response, int id) {
+                        Log.e("更新返回", response);
+                    }
+                });
+//        Uri packageURI = Uri.parse("package:com.example.chen.tset");
+//        Intent uninstallIntent = new Intent(Intent.ACTION_DELETE, packageURI);
+//        startActivity(uninstallIntent);
+
     }
 
     private void saveicon() {
@@ -139,9 +165,9 @@ public class HomeActivity extends MyBaseActivity implements View.OnClickListener
         new Thread() {
             public void run() {
                 try {
-                    audioFile = new File(Environment.getExternalStorageDirectory().getAbsolutePath() + "/data/files/");
+                    audioFile = new File(Environment.getExternalStorageDirectory().getAbsolutePath() + "/text/icon/");
                     audioFile.mkdirs();//创建文件夹
-                    sdcardTempFile = File.createTempFile(".recording", ".jpg", audioFile);
+                    sdcardTempFile = File.createTempFile(".icon", ".jpg", audioFile);
                     String urlPath = User_Http.user.getIcon();
                     URL url = new URL(urlPath);
                     HttpURLConnection conn = (HttpURLConnection) url.openConnection();
@@ -428,7 +454,7 @@ public class HomeActivity extends MyBaseActivity implements View.OnClickListener
                 });
     }
 
-
+    //当前时间大于用户设置的用药提醒时间 则删除这条用药提醒
     private void delpharmacy() {
         PharmacyDao pharmacyDao = new PharmacyDao(this);
 

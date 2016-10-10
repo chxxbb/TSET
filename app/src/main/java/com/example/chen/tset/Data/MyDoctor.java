@@ -11,8 +11,9 @@ public class MyDoctor {
     private String adept;
     private String doctorSection;
     private String doctorTitle;
+    private String doctorUserName;
 
-    public MyDoctor(int doctorId, String doctorIcon, String chatCost, String doctorName, String adept, String doctorSection, String doctorTitle) {
+    public MyDoctor(int doctorId, String doctorIcon, String chatCost, String doctorName, String adept, String doctorSection, String doctorTitle, String doctorUserName) {
         this.doctorId = doctorId;
         this.doctorIcon = doctorIcon;
         this.chatCost = chatCost;
@@ -20,6 +21,15 @@ public class MyDoctor {
         this.adept = adept;
         this.doctorSection = doctorSection;
         this.doctorTitle = doctorTitle;
+        this.doctorUserName = doctorUserName;
+    }
+
+    public String getDoctorUserName() {
+        return doctorUserName;
+    }
+
+    public void setDoctorUserName(String doctorUserName) {
+        this.doctorUserName = doctorUserName;
     }
 
     public int getDoctorId() {

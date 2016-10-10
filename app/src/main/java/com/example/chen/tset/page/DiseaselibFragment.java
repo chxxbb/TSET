@@ -121,8 +121,6 @@ public class DiseaselibFragment extends Fragment {
                                 handler.sendEmptyMessage(0);
 
 
-
-
                             }
                         });
             }
@@ -143,6 +141,7 @@ public class DiseaselibFragment extends Fragment {
                 case 1:
                     view1.setVisibility(View.GONE);
                     rl_loading.setVisibility(View.GONE);
+                    recyv_dise.setVisibility(View.GONE);
                     rl_nonetwork.setVisibility(View.VISIBLE);
                     break;
                 case 2:

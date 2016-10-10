@@ -2,6 +2,7 @@ package com.example.chen.tset.page;
 
 import android.content.Context;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -57,7 +58,7 @@ public class ReservationlistvAdapter extends BaseAdapter {
         viewHolder.tv_money.setText("￥" + list.get(position).getMoney());
         if (list.get(position).getOrderStatus().equals("已取消") || list.get(position).getOrderStatus().equals("已过期")) {
             viewHolder.tv_status.setTextColor(android.graphics.Color.parseColor("#999999"));
-        }else {
+        } else {
             viewHolder.tv_status.setTextColor(android.graphics.Color.parseColor("#6fc9e6"));
         }
 
