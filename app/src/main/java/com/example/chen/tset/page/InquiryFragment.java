@@ -33,7 +33,9 @@ import com.zhy.http.okhttp.OkHttpUtils;
 import com.zhy.http.okhttp.callback.StringCallback;
 
 import java.lang.reflect.Type;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
@@ -93,6 +95,8 @@ public class InquiryFragment extends Fragment {
         ll_city.setOnClickListener(listener);
         ll_development.setOnClickListener(listener);
         ll_sort.setOnClickListener(listener);
+
+
 
 
 
@@ -395,6 +399,8 @@ public class InquiryFragment extends Fragment {
                 setHeadDialog.dismiss();
             }
         });
+
+
         lv_inquiry.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {

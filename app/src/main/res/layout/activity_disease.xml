@@ -83,7 +83,7 @@
                             android:layout_height="wrap_content"
                             android:layout_gravity="center_vertical"
                             android:layout_marginLeft="@dimen/x30"
-                            android:text="下丘脑垂体综合征"
+
                             android:textColor="@color/fontcolor"
                             android:textSize="@dimen/y30" />
                     </LinearLayout>
@@ -107,7 +107,7 @@
                             android:layout_marginLeft="@dimen/x30"
                             android:layout_marginRight="@dimen/x30"
                             android:layout_marginTop="@dimen/y30"
-                            android:text="下丘脑垂体综合征是由于站位，外伤，感染等多种病因累计下丘脑，导致感染等多种病因累计下丘脑感染等多种病因累计下丘脑感染等多种病因累计下丘脑感染等多种病因累计下丘脑感染等多种病因累计下丘脑"
+
                             android:textColor="@color/fontcolor"
                             android:textSize="@dimen/y28" />
                     </LinearLayout>
@@ -178,7 +178,7 @@
                                     android:layout_height="wrap_content"
                                     android:layout_marginLeft="@dimen/x20"
                                     android:layout_marginTop="@dimen/y36"
-                                    android:text="8岁孩子妈妈 张XX"
+
                                     android:textColor="@color/xmgray"
                                     android:textSize="@dimen/y24" />
 
@@ -189,7 +189,7 @@
                                     android:layout_marginBottom="@dimen/y26"
                                     android:layout_marginLeft="@dimen/x20"
                                     android:layout_marginTop="@dimen/y12"
-                                    android:text="医生，医生，医生，医生，医生，医生，医生，医生，医生，医生，医生，医生，医生，医生，医生，医生，医生，医生，医生，医生，医生，"
+
                                     android:textColor="@color/fontcolor"
                                     android:textSize="@dimen/y28" />
                             </LinearLayout>
@@ -247,7 +247,7 @@
                                         android:id="@+id/tv_dname"
                                         android:layout_width="wrap_content"
                                         android:layout_height="wrap_content"
-                                        android:text="张医生"
+
                                         android:textColor="@color/xmgray"
                                         android:textSize="@dimen/y24" />
 
@@ -256,7 +256,7 @@
                                         android:layout_width="wrap_content"
                                         android:layout_height="wrap_content"
                                         android:layout_marginTop="@dimen/y8"
-                                        android:text="XXXXXX科"
+
                                         android:textColor="@color/xmgray"
                                         android:textSize="@dimen/y24" />
                                 </LinearLayout>
@@ -268,7 +268,7 @@
                                 android:layout_height="wrap_content"
                                 android:layout_marginLeft="@dimen/x20"
                                 android:layout_marginTop="@dimen/y20"
-                                android:text="经本医生诊断，你的孩子没救了"
+
                                 android:textColor="@color/fontcolor"
                                 android:textSize="@dimen/y28" />
 
@@ -302,7 +302,7 @@
                                 android:layout_marginLeft="@dimen/x20"
                                 android:layout_marginRight="@dimen/x20"
                                 android:layout_marginTop="@dimen/y10"
-                                android:text="首发症状,首发症状,首发症状,首发症状,首发症状,首发症状,首发症状,首发症状,首发症状,首发症状,首发症状,首发症状,首发症状,首发症状,首发症状,首发症状,首发症状,首发症状,首发症状,首发症状,首发症状,首发症状,首发症状,首发症状,首发症状,首发症状,"
+
                                 android:textColor="@color/fontcolor"
                                 android:textSize="@dimen/y28" />
 
@@ -336,7 +336,7 @@
                                 android:layout_marginLeft="@dimen/x20"
                                 android:layout_marginRight="@dimen/x20"
                                 android:layout_marginTop="@dimen/y10"
-                                android:text="首发症状与本病病因密切有关"
+
                                 android:textColor="@color/fontcolor"
                                 android:textSize="@dimen/y28" />
 
@@ -372,7 +372,7 @@
                                 android:layout_marginLeft="@dimen/x20"
                                 android:layout_marginRight="@dimen/x20"
                                 android:layout_marginTop="@dimen/y10"
-                                android:text="首发症状与本病病因密切有关"
+
                                 android:textColor="@color/fontcolor"
                                 android:textSize="@dimen/y28" />
 
@@ -422,7 +422,7 @@
                         android:orientation="vertical">
 
                         <ImageView
-                            android:layout_marginTop="@dimen/x200"
+                            android:layout_marginTop="@dimen/y400"
                             android:id="@+id/iv_lading"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"

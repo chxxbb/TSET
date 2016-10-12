@@ -40,6 +40,9 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 
 import de.hdodenhof.circleimageview.CircleImageView;
@@ -103,6 +106,20 @@ public class InquiryAdapter extends BaseAdapter {
         viewHolder.fl_chat.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                SimpleDateFormat formatter = new SimpleDateFormat("HH");
+                Date curDate = new Date(System.currentTimeMillis());//获取当前时间
+                String str = formatter.format(curDate);
+
+
+
+
+                if (str.equals("12") || str.equals("13")) {
+                    Toast.makeText(context, "现在医生不在，请稍后再来", Toast.LENGTH_SHORT).show();
+                }
+
+//                else if(Integer.getInteger(str)>18||Integer.getInteger(str)<=8){
+//                    Toast.makeText(context, "医生已经下班了", Toast.LENGTH_SHORT).show();
+//                }
 
 
                 setHeadDialog = new Dialog(context, R.style.CustomDialog);
@@ -117,15 +134,12 @@ public class InquiryAdapter extends BaseAdapter {
                 RelativeLayout lr_cancel = (RelativeLayout) dialogView.findViewById(R.id.lr_cancel);
 
 
-
                 lr_cancel.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
                         setHeadDialog.dismiss();
                     }
                 });
-
-
 
 
                 rl_confirm.setOnClickListener(new View.OnClickListener() {

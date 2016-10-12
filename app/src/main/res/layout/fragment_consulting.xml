@@ -101,10 +101,18 @@
 
             <LinearLayout
                 android:layout_width="match_parent"
+                android:layout_height="wrap_content"></LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="#6fc8e6"
                 android:gravity="center_horizontal"
                 android:orientation="horizontal">
+
+                <View
+                    android:layout_width="@dimen/x7"
+                    android:layout_height="match_parent" />
 
                 <LinearLayout
                     android:layout_width="0dp"
@@ -205,7 +213,7 @@
                 </LinearLayout>
 
                 <View
-                    android:layout_width="@dimen/x10"
+                    android:layout_width="@dimen/x7"
                     android:layout_height="match_parent" />
             </LinearLayout>
 
@@ -215,12 +223,20 @@
                 android:background="@color/backgroundblue" />
 
 
-            <ViewFlipper
-                android:id="@+id/flipper"
-                android:layout_width="fill_parent"
+            <LinearLayout
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_gravity="center_horizontal"
-                android:background="#6fc8e6" />
+                android:background="@color/backgroundblue">
+
+                <ViewFlipper
+                    android:id="@+id/flipper"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_marginLeft="@dimen/x13"
+                    android:background="#6fc8e6" />
+            </LinearLayout>
+
 
             <LinearLayout
                 android:layout_width="match_parent"

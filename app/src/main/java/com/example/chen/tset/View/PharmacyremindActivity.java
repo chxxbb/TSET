@@ -22,8 +22,9 @@ import java.util.List;
  */
 public class PharmacyremindActivity extends MyBaseActivity {
     private LinearLayout ll_return;
-    List<Pharmacyremind> list;
+
     PharmacyremindAdapter adapter;
+    List<Pharmacyremind> list;
     PharmacyDao db;
     SharedPsaveuser sp;
     ListView lv_pharmacy_remind;

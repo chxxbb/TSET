@@ -32,14 +32,19 @@ import android.widget.Toast;
 import android.widget.ToggleButton;
 import android.widget.ViewFlipper;
 
-import com.example.chen.tset.Data.CalendarSign;
+import com.example.chen.tset.Data.ConsultingRemindState;
+import com.example.chen.tset.Data.DiseaseDepartment;
+import com.example.chen.tset.Data.Information;
+import com.example.chen.tset.Data.PharmacyState;
 import com.example.chen.tset.Data.Calendarform;
 import com.example.chen.tset.Data.Http_data;
+import com.example.chen.tset.Data.Pharmacyremind;
 import com.example.chen.tset.Data.User_Http;
 import com.example.chen.tset.R;
 import com.example.chen.tset.Utils.CalendarGridView;
 import com.example.chen.tset.Utils.MyScrollview;
 import com.example.chen.tset.Utils.PharmacyDao;
+import com.example.chen.tset.Utils.SharedPsaveuser;
 import com.example.chen.tset.View.CompileremindActivity;
 import com.example.chen.tset.View.HealthconditionActivity;
 import com.example.chen.tset.View.PharmacyremindActivity;
@@ -50,10 +55,16 @@ import com.zhy.http.okhttp.OkHttpUtils;
 import com.zhy.http.okhttp.callback.StringCallback;
 
 import java.lang.reflect.Type;
+import java.text.DateFormat;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
+import java.util.Iterator;
+import java.util.LinkedList;
 import java.util.List;
+import java.util.Map;
 
 import okhttp3.Call;
 
@@ -95,7 +106,8 @@ public class ConsultingFragment extends Fragment implements View.OnClickListener
      */
     private ImageView nextMonth;
 
-    List<CalendarSign> list;
+    List<PharmacyState> list;
+
 
     private LinearLayout ll_consulting_popup_case;
 
@@ -122,12 +134,28 @@ public class ConsultingFragment extends Fragment implements View.OnClickListener
 
     List<Calendarform> clist;
 
+    int registrationSetting = 1;
+
+    int healthSetting = 1;
+
+    int pharmacySetting = 1;
+
+    PharmacyDao db;
+    SharedPsaveuser sp;
+
+    List<ConsultingRemindState> data;
+
 
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         view = inflater.inflate(R.layout.fragment_consulting, null);
+        return view;
+    }
 
+    @Override
+    public void onStart() {
+        super.onStart();
         clist = new ArrayList<>();
         new Thread(new Runnable() {
             @Override
@@ -144,12 +172,8 @@ public class ConsultingFragment extends Fragment implements View.OnClickListener
         }).start();
         calhttpinit();
 
-//        findAllByDate();
-
-
-        return view;
+        findAllByDate();
     }
-
 
     private void calhttpinit() {
     }
@@ -288,7 +312,7 @@ public class ConsultingFragment extends Fragment implements View.OnClickListener
 
 
     private void init() {
-
+        data = new ArrayList<>();
         Date date = new Date();
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-M-d");
         currentDate = sdf.format(date); // 当期日期
@@ -303,28 +327,14 @@ public class ConsultingFragment extends Fragment implements View.OnClickListener
 
 
         list = new ArrayList<>();
-        CalendarSign sign2 = new CalendarSign("2016年10月16日", 3);
-        CalendarSign sign5 = new CalendarSign("2016年10月4日", 6);
-        CalendarSign sign6 = new CalendarSign("2016年10月28日", 7);
-        CalendarSign sign7 = new CalendarSign("2016年10月13日", 8);
-        CalendarSign sign8 = new CalendarSign("2016年10月25日", 9);
-        CalendarSign sign1 = new CalendarSign("2016年10月23日", 9);
-        CalendarSign sign4 = new CalendarSign("2016年10月24日", 9);
-        CalendarSign sign3 = new CalendarSign("2016年10月26日", 9);
-        list.add(sign1);
-        list.add(sign2);
-        list.add(sign3);
-        list.add(sign4);
-        list.add(sign5);
-        list.add(sign6);
-        list.add(sign7);
-        list.add(sign8);
 
-        calV = new CalendarAdapter(getContext(), getResources(), jumpMonth, jumpYear, year_c, month_c, day_c, list);
+
+        calV = new CalendarAdapter(getContext(), getResources(), jumpMonth, jumpYear, year_c, month_c, day_c, data);
         addGridView();
         gridView.setAdapter(calV);
         flipper.addView(gridView, 0);
         addTextToTopTextView(currentMonth);
+
 
         calV.pharmacyremind(1);
         calV.registrationremind(1);
@@ -373,6 +383,68 @@ public class ConsultingFragment extends Fragment implements View.OnClickListener
 
     }
 
+    //获取本地用药提醒数据
+    private void pharmacyRemindinit() {
+
+
+        sp = new SharedPsaveuser(getContext());
+        db = new PharmacyDao(getContext());
+        List<Pharmacyremind> plist = db.chatfind(sp.getTag().getPhone());
+        if (plist.size() != 0) {
+            for (int i = 0; i < plist.size(); i++) {
+                String startdate = plist.get(i).getStartdate();
+                String overdate = plist.get(i).getOverdate();
+
+                printDay(startdate, overdate);
+            }
+
+        }
+    }
+
+
+    private void printDay(String startDay, String endDay) {
+
+        try {
+
+            DateFormat FORMATTER = new SimpleDateFormat("yyyy年MM月dd日");
+            Calendar startDay1 = Calendar.getInstance();
+            Calendar endDay1 = Calendar.getInstance();
+            startDay1.setTime(FORMATTER.parse(startDay));
+            endDay1.setTime(FORMATTER.parse(endDay));
+
+            // 给出的日期开始日比终了日大则不执行打印
+            if (startDay.compareTo(endDay) >= 0) {
+                return;
+            }
+            // 现在打印中的日期
+            Calendar currentPrintDay = startDay1;
+            while (true) {
+                // 日期加一
+                currentPrintDay.add(Calendar.DATE, 1);
+                // 日期加一后判断是否达到终了日，达到则终止打印
+                if (currentPrintDay.compareTo(endDay1) == 0) {
+                    break;
+                }
+                // 打印日期
+                SimpleDateFormat dd = new SimpleDateFormat("yyyy年MM月dd日");
+                String date1 = dd.format(currentPrintDay.getTime());
+
+                PharmacyState calendarSign = new PharmacyState(date1, 9);
+                PharmacyState calendarSign1 = new PharmacyState(startDay, 9);
+                PharmacyState calendarSign2 = new PharmacyState(endDay, 9);
+                list.add(calendarSign);
+                list.add(calendarSign1);
+                list.add(calendarSign2);
+
+
+            }
+
+
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+    }
+
 
     private class MyGestureListener extends GestureDetector.SimpleOnGestureListener {
         @Override
@@ -391,6 +463,7 @@ public class ConsultingFragment extends Fragment implements View.OnClickListener
 
                 // 向右滑动
                 enterPrevMonth(gvFlag);
+
 
                 return true;
             }
@@ -412,7 +485,7 @@ public class ConsultingFragment extends Fragment implements View.OnClickListener
         addGridView(); // 添加一个gridView
         jumpMonth++; // 下一个月
 
-        calV = new CalendarAdapter(getContext(), this.getResources(), jumpMonth, jumpYear, year_c, month_c, day_c, list);
+        calV = new CalendarAdapter(getContext(), this.getResources(), jumpMonth, jumpYear, year_c, month_c, day_c, data);
         gridView.setAdapter(calV);
         addTextToTopTextView(currentMonth); // 移动到下一月后，将当月显示在头标题中
         gvFlag++;
@@ -421,6 +494,14 @@ public class ConsultingFragment extends Fragment implements View.OnClickListener
         flipper.setOutAnimation(AnimationUtils.loadAnimation(getContext(), R.anim.push_left_out));
         flipper.showNext();
         flipper.removeViewAt(0);
+
+        calV.pharmacyremind(1);
+        calV.registrationremind(1);
+        calV.healthremind(1);
+        tb_pharmacy.setChecked(true);
+        tb_registration.setChecked(true);
+        tb_health.setChecked(true);
+
 
     }
 
@@ -435,7 +516,7 @@ public class ConsultingFragment extends Fragment implements View.OnClickListener
         addGridView(); // 添加一个gridView
         jumpMonth--; // 上一个月
 
-        calV = new CalendarAdapter(getContext(), this.getResources(), jumpMonth, jumpYear, year_c, month_c, day_c, list);
+        calV = new CalendarAdapter(getContext(), this.getResources(), jumpMonth, jumpYear, year_c, month_c, day_c, data);
         gridView.setAdapter(calV);
         gvFlag++;
         addTextToTopTextView(currentMonth); // 移动到上一月后，将当月显示在头标题中
@@ -445,6 +526,13 @@ public class ConsultingFragment extends Fragment implements View.OnClickListener
         flipper.setOutAnimation(AnimationUtils.loadAnimation(getContext(), R.anim.push_right_out));
         flipper.showPrevious();
         flipper.removeViewAt(0);
+
+        calV.pharmacyremind(1);
+        calV.registrationremind(1);
+        calV.healthremind(1);
+        tb_pharmacy.setChecked(true);
+        tb_registration.setChecked(true);
+        tb_health.setChecked(true);
 
     }
 
@@ -561,38 +649,35 @@ public class ConsultingFragment extends Fragment implements View.OnClickListener
         String str = formatter.format(curDate);
         OkHttpUtils
                 .post()
-                .url(Http_data.http_data + "/FindAllByDate")
+                .url(Http_data.http_data + "/FindCalendarList")
                 .addParams("userId", User_Http.user.getId() + "")
                 .addParams("date", str)
                 .build()
                 .execute(new StringCallback() {
                     @Override
                     public void onError(Call call, Exception e, int id) {
+                        Toast.makeText(getContext(), "网络连接失败", Toast.LENGTH_SHORT).show();
                     }
 
                     @Override
                     public void onResponse(String response, int id) {
                         Log.e("诊疗", response);
-                        Type listtype = new TypeToken<List<List<Calendarform>>>() {
+                        Type listtype = new TypeToken<LinkedList<ConsultingRemindState>>() {
                         }.getType();
-                        List<List<Calendarform>> mlist = gson.fromJson(response, listtype);
-                        for (int i = 0; i < mlist.get(0).size(); i++) {
-                            clist.add(mlist.get(0).get(i));
+                        LinkedList<ConsultingRemindState> leclist = gson.fromJson(response, listtype);
+                        for (Iterator it = leclist.iterator(); it.hasNext(); ) {
+                            ConsultingRemindState consultingRemindState = (ConsultingRemindState) it.next();
+                            data.add(consultingRemindState);
                         }
 
-                        for (int i = 0; i < mlist.get(1).size(); i++) {
-                            clist.add(mlist.get(1).get(i));
-                        }
-
-                        for (int i = 0; i < mlist.get(2).size(); i++) {
-                            clist.add(mlist.get(2).get(i));
-                        }
-
-                        Log.e("总集合", clist.toString());
+                        calV.notifyDataSetChanged();
 
 
                     }
+
+
                 });
+
     }
 
 

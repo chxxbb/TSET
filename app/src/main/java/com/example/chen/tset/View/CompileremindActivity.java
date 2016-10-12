@@ -3,6 +3,7 @@ package com.example.chen.tset.View;
 import android.annotation.TargetApi;
 import android.app.DatePickerDialog;
 import android.content.ContentResolver;
+import android.content.Context;
 import android.os.Build;
 import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
@@ -22,6 +23,7 @@ import android.widget.Toast;
 
 import com.daimajia.androidanimations.library.Techniques;
 import com.daimajia.androidanimations.library.YoYo;
+import com.example.chen.tset.Data.Http_data;
 import com.example.chen.tset.Data.Pharmacyremind;
 import com.example.chen.tset.Data.User_Http;
 import com.example.chen.tset.Data.Userinfo;
@@ -29,10 +31,14 @@ import com.example.chen.tset.R;
 import com.example.chen.tset.Utils.MyBaseActivity;
 import com.example.chen.tset.Utils.PharmacyDao;
 import com.example.chen.tset.Utils.SharedPsaveuser;
+import com.zhy.http.okhttp.OkHttpUtils;
+import com.zhy.http.okhttp.callback.StringCallback;
 
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
+
+import okhttp3.Call;
 
 /**
  * 添加提醒页面
@@ -154,7 +160,7 @@ public class CompileremindActivity extends MyBaseActivity {
         tv_time_complete3.setOnClickListener(listener);
 
         //获取当前时间
-        SimpleDateFormat formatter = new SimpleDateFormat("yyyy年MM月dd日");
+        SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
         Date curDate = new Date(System.currentTimeMillis());
         tv_starttime.setText(formatter.format(curDate));
         tv_endtiem.setText(formatter.format(curDate));
@@ -207,7 +213,7 @@ public class CompileremindActivity extends MyBaseActivity {
                     if (et_pharmacy_compile.getText().length() == 0) {
                         Toast.makeText(CompileremindActivity.this, "请输入用药", Toast.LENGTH_SHORT).show();
                     } else {
-                        tv_time1.setText(aMPM + timepicker.getCurrentHour() + "" + ":" + timepicker.getCurrentMinute() + "");
+                        tv_time1.setText(timepicker.getCurrentHour() + "" + ":" + timepicker.getCurrentMinute() + "");
                         tv_content1.setText(et_pharmacy_compile.getText().toString());
                         ll_contnt1.setVisibility(View.VISIBLE);
                         ll_compile.setVisibility(View.GONE);
@@ -243,7 +249,7 @@ public class CompileremindActivity extends MyBaseActivity {
                     if (et_pharmacy_compile1.getText().length() == 0) {
                         Toast.makeText(CompileremindActivity.this, "请输入用药", Toast.LENGTH_SHORT).show();
                     } else {
-                        tv_time2.setText(aMPM + timepicker1.getCurrentHour() + "" + ":" + timepicker1.getCurrentMinute() + "");
+                        tv_time2.setText(timepicker1.getCurrentHour() + "" + ":" + timepicker1.getCurrentMinute() + "");
                         tv_content2.setText(et_pharmacy_compile1.getText().toString());
                         ll_compile1.setVisibility(View.GONE);
                         ll_contnt2.setVisibility(View.VISIBLE);
@@ -279,7 +285,7 @@ public class CompileremindActivity extends MyBaseActivity {
                     if (et_pharmacy_compile3.getText().length() == 0) {
                         Toast.makeText(CompileremindActivity.this, "请输入用药", Toast.LENGTH_SHORT).show();
                     } else {
-                        tv_time3.setText(aMPM + timepicker3.getCurrentHour() + "" + ":" + timepicker3.getCurrentMinute() + "");
+                        tv_time3.setText(timepicker3.getCurrentHour() + "" + ":" + timepicker3.getCurrentMinute() + "");
                         tv_content3.setText(et_pharmacy_compile3.getText().toString());
                         ll_compile3.setVisibility(View.GONE);
                         ll_contnt3.setVisibility(View.VISIBLE);
@@ -290,9 +296,14 @@ public class CompileremindActivity extends MyBaseActivity {
 
 
                 case R.id.tv_pas:
+
                     startdate = tv_starttime.getText().toString();
                     overdate = tv_endtiem.getText().toString();
+
+
                     time1 = tv_time1.getText().toString();
+
+                    Log.e("11", time1);
                     content1 = tv_content1.getText().toString();
                     time2 = tv_time2.getText().toString();
                     content2 = tv_content2.getText().toString();
@@ -301,14 +312,40 @@ public class CompileremindActivity extends MyBaseActivity {
 
                     if (!tv_time1.getText().toString().equals("") && !tv_content1.getText().toString().equals("")) {
 
-                        Userinfo user = sp.getTag();
-                        pharmacyrmind = new Pharmacyremind(user.getPhone(), startdate, overdate, time1, content1, time2, content2, time3, content3);
-                        db.addPharmacy(pharmacyrmind);
-                        Toast.makeText(CompileremindActivity.this, "添加成功，你可以在用药提醒页面查看", Toast.LENGTH_SHORT).show();
-                        finish();
+                        OkHttpUtils
+                                .post()
+                                .url(Http_data.http_data + "/AddRemind")
+                                .addParams("userId", User_Http.user.getId() + "")
+                                .addParams("startTime", startdate)
+                                .addParams("endTime", overdate)
+                                .addParams("time1", time1)
+                                .addParams("content1", content1)
+                                .addParams("time2", time2)
+                                .addParams("content2", content2)
+                                .addParams("time3", time3)
+                                .addParams("content3", content3)
+                                .build()
+                                .execute(new StringCallback() {
+                                    @Override
+                                    public void onError(Call call, Exception e, int id) {
+                                        Log.e("失败", "失败");
+                                    }
+
+                                    @Override
+                                    public void onResponse(String response, int id) {
+                                        Log.e("用药提醒返回", response);
+                                    }
+                                });
+
+
+
+//                        Toast.makeText(CompileremindActivity.this, "添加成功，你可以在用药提醒页面查看", Toast.LENGTH_SHORT).show();
+//                        finish();
 
                     } else {
+
                         Toast.makeText(CompileremindActivity.this, "你还未添加至少一条用药提醒", Toast.LENGTH_SHORT).show();
+
                     }
 
                     break;
@@ -334,7 +371,7 @@ public class CompileremindActivity extends MyBaseActivity {
                     Toast.makeText(CompileremindActivity.this, "不能选择以前的时间", Toast.LENGTH_SHORT).show();
                 } else {
                     c1.set(year, monthOfYear, dayOfMonth);
-                    date = (String) DateFormat.format("yyy年MM月dd日", c1);
+                    date = (String) DateFormat.format("yyy-MM-dd", c1);
                     tv_starttime.setText(date);
                 }
 
@@ -356,7 +393,7 @@ public class CompileremindActivity extends MyBaseActivity {
                     Toast.makeText(CompileremindActivity.this, "不能选择以前的时间", Toast.LENGTH_SHORT).show();
                 } else {
                     c1.set(year, monthOfYear, dayOfMonth);
-                    date = (String) DateFormat.format("yyy年MM月dd日", c1);
+                    date = (String) DateFormat.format("yyy-MM-dd", c1);
                     tv_endtiem.setText(date);
                 }
 

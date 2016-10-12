@@ -183,7 +183,7 @@ public class PersonaldataActivity extends MyBaseActivity {
                     @Override
                     public void onError(Call call, Exception e, int id) {
                         if (sdcardTempFile != null) {
-                            Toast.makeText(PersonaldataActivity.this, "头像修改失败", Toast.LENGTH_SHORT).show();
+
                         }
 
                     }

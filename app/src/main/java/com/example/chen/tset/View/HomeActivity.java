@@ -274,17 +274,15 @@ public class HomeActivity extends MyBaseActivity implements View.OnClickListener
         switch (msg.getContentType()) {
             case text:
 
-
                 TextContent textContent = (TextContent) msg.getContent();
                 String content = textContent.getText();
                 String username = msg.getFromID();
                 Date dt = new Date();
                 Long time = dt.getTime();
-                Chatcontent chatcontent = new Chatcontent("2" + content, time, null, null, username, User_Http.user.getPhone());
+                Chatcontent chatcontent = new Chatcontent("2" + content, time, null, null, username, sp.getTag().getPhone());
                 db.addchatcont(chatcontent);
                 break;
             case image:
-
 
                 //处理图片消息
                 ImageContent imageContent = (ImageContent) msg.getContent();
@@ -293,7 +291,7 @@ public class HomeActivity extends MyBaseActivity implements View.OnClickListener
 
                 Date dt1 = new Date();
                 Long time1 = dt1.getTime();
-                chatcontent = new Chatcontent("2*2", time1, file, file, msg.getTargetID(), User_Http.user.getPhone());
+                chatcontent = new Chatcontent("2*2", time1, file, file, msg.getTargetID(), sp.getTag().getPhone());
                 db.addchatcont(chatcontent);
 
         }

@@ -2,7 +2,6 @@ package com.example.chen.tset.page;
 
 import android.content.Context;
 import android.content.res.Resources;
-import android.graphics.Color;
 import android.graphics.drawable.Drawable;
 import android.text.SpannableString;
 import android.text.Spanned;
@@ -14,8 +13,10 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
-import com.example.chen.tset.Data.CalendarSign;
+import com.example.chen.tset.Data.ConsultingRemindState;
+import com.example.chen.tset.Data.PharmacyState;
 import com.example.chen.tset.R;
 import com.example.chen.tset.Utils.LunarCalendar;
 import com.example.chen.tset.Utils.SpecialCalendar;
@@ -60,7 +61,11 @@ public class CalendarAdapter extends BaseAdapter {
     private String sys_month = "";
     private String sys_day = "";
 
-    List<CalendarSign> list;
+    List<PharmacyState> list;
+
+    List<ConsultingRemindState> data;
+
+    String scheduleDay;
 
 
     //用药提醒设置
@@ -115,13 +120,13 @@ public class CalendarAdapter extends BaseAdapter {
 
     }
 
-    public CalendarAdapter(Context context, Resources rs, int jumpMonth, int jumpYear, int year_c, int month_c, int day_c, List<CalendarSign> list) {
+    public CalendarAdapter(Context context, Resources rs, int jumpMonth, int jumpYear, int year_c, int month_c, int day_c, List<ConsultingRemindState> data) {
         this();
         this.context = context;
         sc = new SpecialCalendar();
         lc = new LunarCalendar();
         this.res = rs;
-        this.list = list;
+        this.data = data;
 
         int stepYear = year_c + jumpYear;
         int stepMonth = month_c + jumpMonth;
@@ -205,8 +210,13 @@ public class CalendarAdapter extends BaseAdapter {
             textView.setTextColor(android.graphics.Color.parseColor("#f9e491"));
         }
 
+        if (getDateByClickItem(position).split("\\.")[0].equals("1") || getDateByClickItem(position).split("\\.")[0].equals("2") || getDateByClickItem(position).split("\\.")[0].equals("3") || getDateByClickItem(position).split("\\.")[0].equals("4") || getDateByClickItem(position).split("\\.")[0].equals("5") || getDateByClickItem(position).split("\\.")[0].equals("6") || getDateByClickItem(position).split("\\.")[0].equals("7") || getDateByClickItem(position).split("\\.")[0].equals("8") || getDateByClickItem(position).split("\\.")[0].equals("9")) {
+            scheduleDay = "0" + getDateByClickItem(position).split("\\.")[0]; // 这一天的阳历
+        } else {
+            scheduleDay = getDateByClickItem(position).split("\\.")[0];
+        }
 
-        String scheduleDay = getDateByClickItem(position).split("\\.")[0]; // 这一天的阳历
+
         String scheduleYear = getShowYear();
         String scheduleMonth = getShowMonth();
 
@@ -220,23 +230,18 @@ public class CalendarAdapter extends BaseAdapter {
         }
 
 
-        // 111  222   122  212  122    112 121  211
+        // 全部未被选中
 
         if (pharmacy == 2 && health == 2 && registration == 2) {
 
 
         }
 
-
         //只有用药提醒被选中
         else if (pharmacy == 1 && registration == 2 && health == 2) {
-            for (int i = 0; i < list.size(); i++) {
-                if ((scheduleYear + "年" + scheduleMonth + "月" + scheduleDay + "日").equals(list.get(i).getTime()) && position < daysOfMonth + dayOfWeek && position >= dayOfWeek) {
-                    if (list.get(i).getState() == 9) {
-                        textView.setBackgroundResource(R.drawable.consulting9);
-                    } else if (list.get(i).getState() == 3) {
-                        textView.setBackgroundResource(R.drawable.consulting9);
-                    } else if (list.get(i).getState() == 8) {
+            for (int i = 0; i < data.size(); i++) {
+                if ((scheduleYear + "-" + scheduleMonth + "-" + scheduleDay).equals(data.get(i).getDate()) && position < daysOfMonth + dayOfWeek && position >= dayOfWeek) {
+                    if (data.get(i).getRemindId() != 0) {
                         textView.setBackgroundResource(R.drawable.consulting9);
                     }
                 }
@@ -246,11 +251,9 @@ public class CalendarAdapter extends BaseAdapter {
         }
         //只有健康提醒被选中
         else if (pharmacy == 2 && registration == 2 && health == 1) {
-            for (int i = 0; i < list.size(); i++) {
-                if ((scheduleYear + "年" + scheduleMonth + "月" + scheduleDay + "日").equals(list.get(i).getTime()) && position < daysOfMonth + dayOfWeek && position >= dayOfWeek) {
-                    if (list.get(i).getState() == 7) {
-                        textView.setBackgroundResource(R.drawable.consulting7);
-                    } else if (list.get(i).getState() == 8) {
+            for (int i = 0; i < data.size(); i++) {
+                if ((scheduleYear + "-" + scheduleMonth + "-" + scheduleDay).equals(data.get(i).getDate()) && position < daysOfMonth + dayOfWeek && position >= dayOfWeek) {
+                    if (data.get(i).getHealthId() != 0) {
                         textView.setBackgroundResource(R.drawable.consulting7);
                     }
                 }
@@ -259,11 +262,9 @@ public class CalendarAdapter extends BaseAdapter {
         }
         //只有挂号提醒被选中
         else if (pharmacy == 2 && registration == 1 && health == 2) {
-            for (int i = 0; i < list.size(); i++) {
-                if ((scheduleYear + "年" + scheduleMonth + "月" + scheduleDay + "日").equals(list.get(i).getTime()) && position < daysOfMonth + dayOfWeek && position >= dayOfWeek) {
-                    if (list.get(i).getState() == 3) {
-                        textView.setBackgroundResource(R.drawable.consulting6);
-                    } else if (list.get(i).getState() == 6) {
+            for (int i = 0; i < data.size(); i++) {
+                if ((scheduleYear + "-" + scheduleMonth + "-" + scheduleDay).equals(data.get(i).getDate()) && position < daysOfMonth + dayOfWeek && position >= dayOfWeek) {
+                    if (data.get(i).getRegistrationId() != 0) {
                         textView.setBackgroundResource(R.drawable.consulting6);
                     }
                 }
@@ -273,15 +274,11 @@ public class CalendarAdapter extends BaseAdapter {
 
         //挂号，健康都被选中
         else if (pharmacy == 2 && registration == 1 && health == 1) {
-            for (int i = 0; i < list.size(); i++) {
-                if ((scheduleYear + "年" + scheduleMonth + "月" + scheduleDay + "日").equals(list.get(i).getTime()) && position < daysOfMonth + dayOfWeek && position >= dayOfWeek) {
-                    if (list.get(i).getState() == 3) {
+            for (int i = 0; i < data.size(); i++) {
+                if ((scheduleYear + "-" + scheduleMonth + "-" + scheduleDay).equals(data.get(i).getDate()) && position < daysOfMonth + dayOfWeek && position >= dayOfWeek) {
+                    if (data.get(i).getRegistrationId() != 0) {
                         textView.setBackgroundResource(R.drawable.consulting6);
-                    } else if (list.get(i).getState() == 6) {
-                        textView.setBackgroundResource(R.drawable.consulting6);
-                    } else if (list.get(i).getState() == 7) {
-                        textView.setBackgroundResource(R.drawable.consulting7);
-                    } else if (list.get(i).getState() == 8) {
+                    } else if (data.get(i).getHealthId() != 0 && data.get(i).getRegistrationId() == 0) {
                         textView.setBackgroundResource(R.drawable.consulting7);
                     }
                 }
@@ -290,53 +287,51 @@ public class CalendarAdapter extends BaseAdapter {
         }
         //挂号，用药都被选中
         else if (pharmacy == 1 && registration == 1 && health == 2) {
-            for (int i = 0; i < list.size(); i++) {
-                if ((scheduleYear + "年" + scheduleMonth + "月" + scheduleDay + "日").equals(list.get(i).getTime()) && position < daysOfMonth + dayOfWeek && position >= dayOfWeek) {
-                    if (list.get(i).getState() == 3) {
-                        textView.setBackgroundResource(R.drawable.consulting3);
-                    } else if (list.get(i).getState() == 6) {
+            for (int i = 0; i < data.size(); i++) {
+                if ((scheduleYear + "-" + scheduleMonth + "-" + scheduleDay).equals(data.get(i).getDate()) && position < daysOfMonth + dayOfWeek && position >= dayOfWeek) {
+                    if ((data.get(i).getRemindId() != 0 && data.get(i).getRegistrationId() == 0 && data.get(i).getHealthId() == 0) || (data.get(i).getHealthId() != 0 && data.get(i).getRegistrationId() == 0 && data.get(i).getRemindId() != 0)) {
+                        textView.setBackgroundResource(R.drawable.consulting9);
+                    } else if (data.get(i).getRegistrationId() != 0 && data.get(i).getRemindId() == 0) {
                         textView.setBackgroundResource(R.drawable.consulting6);
-                    } else if (list.get(i).getState() == 8) {
-                        textView.setBackgroundResource(R.drawable.consulting9);
-                    } else if (list.get(i).getState() == 8) {
-                        textView.setBackgroundResource(R.drawable.consulting9);
-                    }else if(list.get(i).getState() == 9){
-                        textView.setBackgroundResource(R.drawable.consulting9);
+                    } else if (data.get(i).getRegistrationId() != 0 && data.get(i).getRemindId() != 0) {
+                        textView.setBackgroundResource(R.drawable.consulting3);
                     }
-                }
 
+                }
             }
         }
 
         //健康，用药都被选中
         else if (pharmacy == 1 && registration == 2 && health == 1) {
-            for (int i = 0; i < list.size(); i++) {
-                if ((scheduleYear + "年" + scheduleMonth + "月" + scheduleDay + "日").equals(list.get(i).getTime()) && position < daysOfMonth + dayOfWeek && position >= dayOfWeek) {
-                    if (list.get(i).getState() == 3) {
+            for (int i = 0; i < data.size(); i++) {
+                if ((scheduleYear + "-" + scheduleMonth + "-" + scheduleDay).equals(data.get(i).getDate()) && position < daysOfMonth + dayOfWeek && position >= dayOfWeek) {
+                    if ((data.get(i).getRemindId() != 0 && data.get(i).getRegistrationId() == 0 && data.get(i).getHealthId() == 0) || (data.get(i).getRemindId() != 0 && data.get(i).getRegistrationId() != 0 && data.get(i).getHealthId() == 0)) {
                         textView.setBackgroundResource(R.drawable.consulting9);
-                    } else if (list.get(i).getState() == 7) {
+                    } else if (data.get(i).getHealthId() != 0 && data.get(i).getRemindId() == 0) {
                         textView.setBackgroundResource(R.drawable.consulting7);
-                    } else if (list.get(i).getState() == 8) {
+                    } else if (data.get(i).getHealthId() != 0 && data.get(i).getRemindId() != 0) {
                         textView.setBackgroundResource(R.drawable.consulting8);
-                    } else if (list.get(i).getState() == 9) {
-                        textView.setBackgroundResource(R.drawable.consulting9);
                     }
                 }
 
             }
-        } else {
-            for (int i = 0; i < list.size(); i++) {
-                if ((scheduleYear + "年" + scheduleMonth + "月" + scheduleDay + "日").equals(list.get(i).getTime()) && position < daysOfMonth + dayOfWeek && position >= dayOfWeek) {
+        }
+        //全部都为选中状态
+        else {
 
-                    if (list.get(i).getState() == 3) {
+            for (int i = 0; i < data.size(); i++) {
+
+                if ((scheduleYear + "-" + scheduleMonth + "-" + scheduleDay).equals(data.get(i).getDate()) && position < daysOfMonth + dayOfWeek && position >= dayOfWeek) {
+
+                    if ((data.get(i).getHealthId() != 0 && data.get(i).getRegistrationId() != 0 && data.get(i).getRemindId() != 0) || (data.get(i).getHealthId() == 0 && data.get(i).getRegistrationId() != 0 && data.get(i).getRemindId() != 0)) {
                         textView.setBackgroundResource(R.drawable.consulting3);
-                    } else if (list.get(i).getState() == 6) {
+                    } else if ((data.get(i).getRegistrationId() != 0 && data.get(i).getRemindId() == 0 && data.get(i).getHealthId() != 0) || (data.get(i).getRegistrationId() != 0 && data.get(i).getRemindId() == 0 && data.get(i).getHealthId() == 0)) {
                         textView.setBackgroundResource(R.drawable.consulting6);
-                    } else if (list.get(i).getState() == 7) {
+                    } else if (data.get(i).getHealthId() != 0 && data.get(i).getRemindId() == 0 && data.get(i).getRegistrationId() == 0) {
                         textView.setBackgroundResource(R.drawable.consulting7);
-                    } else if (list.get(i).getState() == 8) {
+                    } else if (data.get(i).getHealthId() != 0 && data.get(i).getRemindId() != 0 && data.get(i).getRegistrationId() == 0) {
                         textView.setBackgroundResource(R.drawable.consulting8);
-                    } else if (list.get(i).getState() == 9) {
+                    } else if (data.get(i).getRemindId() != 0 && data.get(i).getHealthId() == 0 && data.get(i).getRegistrationId() == 0) {
                         textView.setBackgroundResource(R.drawable.consulting9);
                     }
                 }
@@ -348,6 +343,7 @@ public class CalendarAdapter extends BaseAdapter {
     }
 
     // 得到某年的某月的天数且这月的第一天是星期几
+
     public void getCalendar(int year, int month) {
         isLeapyear = sc.isLeapYear(year); // 是否为闰年
         daysOfMonth = sc.getDaysOfMonth(isLeapyear, month); // 某月的总天数

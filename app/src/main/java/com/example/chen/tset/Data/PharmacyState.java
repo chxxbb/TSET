@@ -3,11 +3,12 @@ package com.example.chen.tset.Data;
 /**
  * Created by Administrator on 2016/9/26 0026.
  */
-public class CalendarSign {
+public class PharmacyState {
     private String time;
     private int state;
 
-    public CalendarSign(String time, int state) {
+
+    public PharmacyState(String time, int state) {
         this.time = time;
         this.state = state;
     }

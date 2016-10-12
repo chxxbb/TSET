@@ -48,6 +48,7 @@ public class ConsultPageActivity extends MyBaseActivity implements View.OnClickL
     Gson gson = new Gson();
     String information;
     Consultparticulars consultparticulars;
+    String collect;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -73,13 +74,12 @@ public class ConsultPageActivity extends MyBaseActivity implements View.OnClickL
         scrollview.setVerticalScrollBarEnabled(false);
         ll_consult_return.setOnClickListener(this);
         ll_consult_collect.setOnClickListener(this);
-        String collect = getIntent().getStringExtra("collect");
+        collect = getIntent().getStringExtra("collect");
         information = getIntent().getStringExtra("information");
         findCollectExistByUserIdAndCyclopediaId();
-        //判断是否为收藏页面点击进入，如果是则隐藏下方收藏按钮
-        if (collect.equals("1")) {
-            ll_consult_collect.setVisibility(View.GONE);
-        }
+        ll_consult_collect.setVisibility(View.GONE);
+
+
         informationinit();
 
 
@@ -208,7 +208,7 @@ public class ConsultPageActivity extends MyBaseActivity implements View.OnClickL
         public void handleMessage(android.os.Message msg) {
             switch (msg.what) {
                 case 0:
-
+                    ll_consult_collect.setVisibility(View.GONE);
                     Toast.makeText(ConsultPageActivity.this, "网络连接失败", Toast.LENGTH_SHORT).show();
                     break;
                 case 1:
@@ -239,9 +239,15 @@ public class ConsultPageActivity extends MyBaseActivity implements View.OnClickL
 
                     tv_title.setText(consultparticulars.getTitle());
                     tv_time.setText("天使资讯  " + consultparticulars.getTime());
-                    tv_content.setText(consultparticulars.getContent()+" \n"+" \n");
+                    tv_content.setText("        " + consultparticulars.getContent() + " \n" + " \n");
                     ImageLoader.getInstance().displayImage(consultparticulars.getIcon(), iv_icon);
                     rl_loading.setVisibility(View.GONE);
+                    //判断是否为收藏页面点击进入，如果是则隐藏下方收藏按钮
+                    if (collect.equals("1")) {
+                        ll_consult_collect.setVisibility(View.GONE);
+                    } else {
+                        ll_consult_collect.setVisibility(View.VISIBLE);
+                    }
                     break;
 
                 case 6:
