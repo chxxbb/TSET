@@ -4,7 +4,9 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/register_background"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    android:focusable="true"
+    android:focusableInTouchMode="true">
 
     <RelativeLayout
         android:layout_width="match_parent"
@@ -30,7 +32,7 @@
                 android:gravity="center"
                 android:text="忘记密码"
                 android:textColor="@color/white"
-                android:textSize="@dimen/x36" />
+                android:textSize="@dimen/y36" />
         </LinearLayout>
     </RelativeLayout>
 
@@ -56,12 +58,12 @@
             android:layout_height="wrap_content"
             android:layout_marginLeft="@dimen/x20"
             android:background="@null"
-            android:cursorVisible="false"
             android:hint="请输入手机号"
             android:inputType="phone"
             android:maxLength="11"
             android:textColorHint="@color/white"
-            android:textSize="@dimen/x32" />
+            android:textCursorDrawable="@drawable/deittext_cursor_white_style"
+            android:textSize="@dimen/y32" />
     </LinearLayout>
 
     <LinearLayout
@@ -89,12 +91,12 @@
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="@dimen/x20"
                 android:background="@null"
-                android:cursorVisible="false"
                 android:hint="输入验证码"
                 android:inputType="phone"
                 android:maxLength="6"
                 android:textColorHint="@color/white"
-                android:textSize="@dimen/x32" />
+                android:textCursorDrawable="@drawable/deittext_cursor_white_style"
+                android:textSize="@dimen/y32" />
         </LinearLayout>
 
         <Button
@@ -130,12 +132,12 @@
             android:layout_height="wrap_content"
             android:layout_marginLeft="@dimen/x20"
             android:background="@null"
-            android:cursorVisible="false"
             android:hint="请输入密码"
             android:inputType="numberPassword"
             android:maxLength="16"
             android:textColorHint="@color/white"
-            android:textSize="@dimen/x32" />
+            android:textCursorDrawable="@drawable/deittext_cursor_white_style"
+            android:textSize="@dimen/y32" />
     </LinearLayout>
 
     <LinearLayout
@@ -160,12 +162,12 @@
             android:layout_height="wrap_content"
             android:layout_marginLeft="@dimen/x20"
             android:background="@null"
-            android:cursorVisible="false"
             android:hint="请确认密码"
             android:inputType="textPassword"
             android:maxLength="16"
             android:textColorHint="@color/white"
-            android:textSize="@dimen/x32" />
+            android:textCursorDrawable="@drawable/deittext_cursor_white_style"
+            android:textSize="@dimen/y32" />
     </LinearLayout>
 
     <Button

@@ -67,7 +67,7 @@ import de.hdodenhof.circleimageview.CircleImageView;
 
 public class ChatpageActivity extends AppCompatActivity {
     private EditText et_chat;
-    private ImageView iv_chat;
+    //    private ImageView iv_chat;
     private ListView listView;
     private TextView tv_doctorname;
     private RelativeLayout rl_loading;
@@ -89,6 +89,8 @@ public class ChatpageActivity extends AppCompatActivity {
     InquiryrecordDao inquiryrecorddb;
     List<Chatcontent> data;
     List<Inquiryrecord> ilist;
+
+    private Button btn_chat;
 
 
     //用于判断用户是否和医生对话过
@@ -156,7 +158,7 @@ public class ChatpageActivity extends AppCompatActivity {
         doctoricon = getIntent().getStringExtra("icon");
         username = getIntent().getStringExtra("username");
         et_chat = (EditText) findViewById(R.id.et_chat);
-        iv_chat = (ImageView) findViewById(R.id.iv_chat);
+
         listView = (ListView) findViewById(R.id.listView);
         tv_doctorname = (TextView) findViewById(R.id.tv_doctorname);
 
@@ -166,6 +168,11 @@ public class ChatpageActivity extends AppCompatActivity {
 
 
         ll_consult_return = (LinearLayout) findViewById(R.id.ll_consult_return);
+
+        btn_chat = (Button) findViewById(R.id.btn_chat);
+
+        //设置后在此页面接收此用户消息不会再通知栏中显示
+        JMessageClient.enterSingleConversation(username);
 
 
         tv_doctorname.setText(doctorname);
@@ -179,12 +186,10 @@ public class ChatpageActivity extends AppCompatActivity {
 
 
         listView.setOnItemClickListener(listvlistener);
-        iv_chat.setOnClickListener(lisntener);
-        ll_consult_return.setOnClickListener(lisntener);
-        et_chat.setOnEditorActionListener(ettextlistener);
 
-        //设置后在此页面接收此用户消息不会再通知栏中显示
-        JMessageClient.enterSingleConversation(username);
+        ll_consult_return.setOnClickListener(lisntener);
+
+        btn_chat.setOnClickListener(btnlistener);
 
 
     }
@@ -226,48 +231,46 @@ public class ChatpageActivity extends AppCompatActivity {
     }
 
 
-    private TextView.OnEditorActionListener ettextlistener = new TextView.OnEditorActionListener() {
+    //发送文本消息
+    private View.OnClickListener btnlistener = new View.OnClickListener() {
         @Override
-        public boolean onEditorAction(TextView v, final int actionId, KeyEvent event) {
-//            Thread thread = new Thread(new Runnable() {
-//                @Override
-//                public void run() {
-            try {
-                if (actionId == EditorInfo.IME_ACTION_SEND) {
-                    //发送文本消息
-                    Conversation c = JMessageClient.getSingleConversation(username);
-                    if (c == null) {
-                        c = Conversation.createSingleConversation(username);
-
-                    }
-                    TextContent textContent = new TextContent(et_chat.getText().toString());
-                    Message message = c.createSendMessage(textContent);
-                    JMessageClient.sendMessage(message);
-                    Date dt = new Date();
-                    Long time = dt.getTime();
-                    //存取到数据库中，+1用于判断是发送的消息还是接收的消息,1为自己发送的消息,2为接送到的消息
-                    String content = "1" + et_chat.getText().toString();
-                    chatcontent = new Chatcontent(content, time, null, null, username, sp.getTag().getPhone());
-                    list.add(chatcontent);
-                    et_chat.setText("");
-//                            handler.sendEmptyMessage(0);
-                    db.addchatcont(chatcontent);
-                    adapter.notifyDataSetChanged();
-                    chatstate++;
-                }
-            } catch (Exception e) {
-                e.printStackTrace();
-                jmessage();
-                handler.sendEmptyMessage(2);
-            }
-
-//                }
-//            });
-//            thread.start();
-
-            return false;
+        public void onClick(View v) {
+            sendmessage();
         }
     };
+
+
+    private void sendmessage() {
+        try {
+            //发送文本消息
+            Conversation c = JMessageClient.getSingleConversation(username);
+            if (c == null) {
+                c = Conversation.createSingleConversation(username);
+
+            }
+            TextContent textContent = new TextContent(et_chat.getText().toString());
+            Message message = c.createSendMessage(textContent);
+            JMessageClient.sendMessage(message);
+            Date dt = new Date();
+            Long time = dt.getTime();
+            //存取到数据库中，+1用于判断是发送的消息还是接收的消息,1为自己发送的消息,2为接送到的消息
+            String content = "1" + et_chat.getText().toString();
+            chatcontent = new Chatcontent(content, time, null, null, username, sp.getTag().getPhone());
+            list.add(chatcontent);
+            et_chat.setText("");
+//                            handler.sendEmptyMessage(0);
+            db.addchatcont(chatcontent);
+            adapter.notifyDataSetChanged();
+            chatstate++;
+
+        } catch (Exception e) {
+            e.printStackTrace();
+            jmessage();
+            handler.sendEmptyMessage(2);
+        }
+
+//                }
+    }
 
 
     private Handler handler = new Handler() {
@@ -300,10 +303,6 @@ public class ChatpageActivity extends AppCompatActivity {
         public void onClick(View v) {
 
             switch (v.getId()) {
-                case R.id.iv_chat:
-                    //点击选择相机或截图
-                    sendpictureDialog();
-                    break;
 
                 case R.id.ll_consult_return:
                     //退出聊天页面
@@ -356,8 +355,6 @@ public class ChatpageActivity extends AppCompatActivity {
                 intent1.putExtra(MediaStore.EXTRA_OUTPUT, Uri.fromFile(sdcardTempFile));
                 startActivityForResult(intent1, 100);
                 setHeadDialog.dismiss();
-
-
 
 
             }

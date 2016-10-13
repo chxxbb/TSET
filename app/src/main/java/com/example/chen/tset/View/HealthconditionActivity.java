@@ -344,17 +344,20 @@ public class HealthconditionActivity extends MyBaseActivity {
 
     private void httpinit() {
         content = et_healthcondition.getText().toString();
+        String a = list.toString();
+        String tag = a.substring(1, a.length() - 1);
+
         OkHttpUtils
                 .post()
                 .url(Http_data.http_data + "/AddHealth")
                 .addParams("userId", User_Http.user.getId() + "")
-                .addParams("tag", list + "")
+                .addParams("tag", tag)
                 .addParams("content", content)
                 .build()
                 .execute(new StringCallback() {
                     @Override
                     public void onError(Call call, Exception e, int id) {
-                        Log.e("失败", "失败");
+
                     }
 
                     @Override

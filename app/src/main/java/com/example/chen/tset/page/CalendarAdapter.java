@@ -223,9 +223,25 @@ public class CalendarAdapter extends BaseAdapter {
 
         //点击改变背景
         if (mSelect == position) {
+//            Log.e("111", "111");
+//            if (textView.getBackground() != null) {
+//                Log.e("222", "222");
+//
+//                if (context.getResources().getDrawable(R.drawable.consulting9).getConstantState().toString().equals(textView.getBackground().getConstantState().toString())) {
+//                    Log.e("333", "333");
+//
+//                    textView.setBackgroundResource(R.drawable.consulting7);
+//                } else {
+//
+//                }
+//            }
+
             textView.setBackgroundResource(R.drawable.cousulting_checked);
+
         } else {
+
             textView.setBackgroundColor(android.graphics.Color.parseColor("#6FC9E6"));
+
 
         }
 
@@ -242,7 +258,12 @@ public class CalendarAdapter extends BaseAdapter {
             for (int i = 0; i < data.size(); i++) {
                 if ((scheduleYear + "-" + scheduleMonth + "-" + scheduleDay).equals(data.get(i).getDate()) && position < daysOfMonth + dayOfWeek && position >= dayOfWeek) {
                     if (data.get(i).getRemindId() != 0) {
-                        textView.setBackgroundResource(R.drawable.consulting9);
+                        if(mSelect == position){
+                            textView.setBackgroundResource(R.drawable.consulting_onclick9);
+                        }else {
+                            textView.setBackgroundResource(R.drawable.consulting9);
+                        }
+
                     }
                 }
 
@@ -254,7 +275,13 @@ public class CalendarAdapter extends BaseAdapter {
             for (int i = 0; i < data.size(); i++) {
                 if ((scheduleYear + "-" + scheduleMonth + "-" + scheduleDay).equals(data.get(i).getDate()) && position < daysOfMonth + dayOfWeek && position >= dayOfWeek) {
                     if (data.get(i).getHealthId() != 0) {
-                        textView.setBackgroundResource(R.drawable.consulting7);
+
+                        if(mSelect == position){
+                            textView.setBackgroundResource(R.drawable.consulting_onclick7);
+                        }else {
+                            textView.setBackgroundResource(R.drawable.consulting7);
+                        }
+
                     }
                 }
 
@@ -265,7 +292,13 @@ public class CalendarAdapter extends BaseAdapter {
             for (int i = 0; i < data.size(); i++) {
                 if ((scheduleYear + "-" + scheduleMonth + "-" + scheduleDay).equals(data.get(i).getDate()) && position < daysOfMonth + dayOfWeek && position >= dayOfWeek) {
                     if (data.get(i).getRegistrationId() != 0) {
-                        textView.setBackgroundResource(R.drawable.consulting6);
+
+                        if(mSelect == position){
+                            textView.setBackgroundResource(R.drawable.consulting_onclick6);
+                        }else {
+                            textView.setBackgroundResource(R.drawable.consulting6);
+                        }
+
                     }
                 }
 

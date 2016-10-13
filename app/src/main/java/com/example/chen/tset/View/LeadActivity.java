@@ -87,12 +87,11 @@ public class LeadActivity extends AppCompatActivity {
         viewpager.addOnPageChangeListener(listener);
         ImageView imageView = null;
         imageView = (ImageView) View.inflate(this, R.layout.activity_lead_item, null);
-        imageView.setImageResource(R.drawable.lead_item3);
+        imageView.setImageResource(R.drawable.lead_item1);
         adapter.addim(imageView);
         imageView = (ImageView) View.inflate(this, R.layout.activity_lead_item, null);
-        imageView.setImageResource(R.drawable.lead_item4);
+        imageView.setImageResource(R.drawable.lead_item2);
         adapter.addim(imageView);
-
         imageView = (ImageView) View.inflate(this, R.layout.activity_lead_item, null);
         imageView.setImageResource(R.drawable.lead_item3);
         adapter.addim(imageView);

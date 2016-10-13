@@ -2,12 +2,14 @@ package com.example.chen.tset.View;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.support.v4.view.animation.FastOutLinearInInterpolator;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -37,6 +39,8 @@ public class LoginActivity extends AppCompatActivity {
     Gson gson = new Gson();
     Activity activity = this;
     SharedPsaveuser sp;
+
+
 
 
     @Override
@@ -125,6 +129,8 @@ public class LoginActivity extends AppCompatActivity {
             }
         });
 
+
+
     }
 
     private void initview() {
@@ -134,6 +140,7 @@ public class LoginActivity extends AppCompatActivity {
 
         login_new_user = (TextView) findViewById(R.id.login_new_user);
         login_find_password = (TextView) findViewById(R.id.login_find_password);
+
     }
 
 

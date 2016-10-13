@@ -406,7 +406,8 @@
                     android:layout_marginRight="@dimen/x20"
                     android:layout_marginTop="@dimen/y20"
                     android:gravity="center_vertical"
-                    android:orientation="horizontal">
+                    android:orientation="horizontal"
+                    android:visibility="gone">
 
                     <ImageView
                         android:layout_width="@dimen/x48"
@@ -434,7 +435,7 @@
                             android:layout_height="wrap_content"
                             android:layout_marginLeft="@dimen/x30"
                             android:layout_marginTop="@dimen/y5"
-                            android:text="已挂号，医生嘱咐您不要吃冰水"
+
                             android:textColor="#777777"
                             android:textSize="@dimen/y24" />
                     </LinearLayout>
@@ -449,7 +450,8 @@
                     android:layout_marginRight="@dimen/x20"
                     android:layout_marginTop="@dimen/y5"
                     android:gravity="center_vertical"
-                    android:orientation="horizontal">
+                    android:orientation="horizontal"
+                    android:visibility="gone">
 
                     <ImageView
                         android:layout_width="@dimen/x48"
@@ -472,17 +474,18 @@
                             android:textSize="@dimen/y28" />
 
                         <TextView
+                            android:id="@+id/tv_consulting_pharmacy"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_marginLeft="@dimen/x30"
                             android:layout_marginTop="@dimen/y5"
-                            android:text="早8:30"
                             android:textColor="#777777"
                             android:textSize="@dimen/y24" />
                     </LinearLayout>
                 </LinearLayout>
 
                 <LinearLayout
+                    android:id="@+id/ll_consulting_health"
                     android:layout_width="match_parent"
                     android:layout_height="@dimen/y114"
                     android:layout_marginBottom="@dimen/y20"
@@ -490,7 +493,8 @@
                     android:layout_marginRight="@dimen/x20"
                     android:layout_marginTop="@dimen/y5"
                     android:gravity="center_vertical"
-                    android:orientation="horizontal">
+                    android:orientation="horizontal"
+                    android:visibility="gone">
 
                     <ImageView
                         android:layout_width="@dimen/x48"
@@ -513,11 +517,12 @@
                             android:textSize="@dimen/y28" />
 
                         <TextView
+                            android:id="@+id/tv_consulting_health"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_marginLeft="@dimen/x30"
                             android:layout_marginTop="@dimen/y5"
-                            android:text="良好"
+
                             android:textColor="#777777"
                             android:textSize="@dimen/y24" />
                     </LinearLayout>

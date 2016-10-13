@@ -30,11 +30,13 @@ import android.widget.Toast;
 
 import com.example.chen.tset.Data.Chatcontent;
 import com.example.chen.tset.Data.Http_data;
+import com.example.chen.tset.Data.Inquiryrecord;
 import com.example.chen.tset.Data.JPErrorCode;
 import com.example.chen.tset.Data.Pharmacyremind;
 import com.example.chen.tset.Data.User;
 import com.example.chen.tset.Data.User_Http;
 import com.example.chen.tset.Utils.ChatpageDao;
+import com.example.chen.tset.Utils.InquiryrecordDao;
 import com.example.chen.tset.Utils.MyBaseActivity;
 import com.example.chen.tset.Utils.PharmacyDao;
 import com.example.chen.tset.Utils.SharedPsaveuser;
@@ -60,6 +62,7 @@ import java.net.URL;
 import java.text.ParseException;
 import java.text.ParsePosition;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.Set;
@@ -299,9 +302,17 @@ public class HomeActivity extends MyBaseActivity implements View.OnClickListener
     }
 
     public void onEvent(NotificationClickEvent event) {
+
+        InquiryrecordDao db = new InquiryrecordDao(this);
         Message msg = event.getMessage();
+        Inquiryrecord inquiryrecord = db.chatfinddoctor(msg.getTargetID());
+
+
         Intent intent = new Intent(HomeActivity.this, ChatpageActivity.class);
-        intent.putExtra("sendID", msg.getTargetID());
+        intent.putExtra("doctorID", inquiryrecord.getId());
+        intent.putExtra("name", inquiryrecord.getDoctorname());
+        intent.putExtra("icon", inquiryrecord.getDoctoricon());
+        intent.putExtra("username", inquiryrecord.getDoctorid());
         startActivity(intent);//自定义跳转到指定页面
     }
 

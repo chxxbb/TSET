@@ -316,8 +316,8 @@ public class CompileremindActivity extends MyBaseActivity {
                                 .post()
                                 .url(Http_data.http_data + "/AddRemind")
                                 .addParams("userId", User_Http.user.getId() + "")
-                                .addParams("startTime", startdate)
-                                .addParams("endTime", overdate)
+                                .addParams("startDay", startdate)
+                                .addParams("endDay", overdate)
                                 .addParams("time1", time1)
                                 .addParams("content1", content1)
                                 .addParams("time2", time2)
@@ -328,19 +328,21 @@ public class CompileremindActivity extends MyBaseActivity {
                                 .execute(new StringCallback() {
                                     @Override
                                     public void onError(Call call, Exception e, int id) {
-                                        Log.e("失败", "失败");
+                                        Toast.makeText(CompileremindActivity.this, "网络连接失败", Toast.LENGTH_SHORT).show();
                                     }
 
                                     @Override
                                     public void onResponse(String response, int id) {
                                         Log.e("用药提醒返回", response);
+                                        if (response.equals("0")) {
+                                            Toast.makeText(CompileremindActivity.this, "添加成功，你可以在用药提醒页面查看", Toast.LENGTH_SHORT).show();
+                                            finish();
+                                        } else {
+                                            Toast.makeText(CompileremindActivity.this, "添加失败", Toast.LENGTH_SHORT).show();
+                                        }
                                     }
                                 });
 
-
-
-//                        Toast.makeText(CompileremindActivity.this, "添加成功，你可以在用药提醒页面查看", Toast.LENGTH_SHORT).show();
-//                        finish();
 
                     } else {
 

@@ -5,6 +5,8 @@
     android:layout_height="match_parent"
     android:background="@color/backgroundgray"
     android:orientation="vertical"
+    android:focusable="true"
+    android:focusableInTouchMode="true"
     tools:context="com.example.chen.tset.View.NamepageActivity">
 
     <RelativeLayout
@@ -78,7 +80,7 @@
                 android:layout_height="match_parent"
                 android:layout_marginLeft="@dimen/x30"
                 android:background="@null"
-                android:cursorVisible="false"
+                android:textCursorDrawable="@drawable/deittext_cursor_blue_style"
                 android:hint="请输入你的昵称"
                 android:textColor="@color/fontcolor"
                 android:textColorHint="@color/linegray"

@@ -6,7 +6,9 @@
     android:background="@drawable/register_background"
     android:paddingLeft="@dimen/x30"
     android:paddingRight="@dimen/x30"
-    tools:context=".View.LoginActivity">
+    tools:context=".View.LoginActivity"
+    android:focusable="true"
+    android:focusableInTouchMode="true">
 
     <RelativeLayout
         android:id="@+id/login_phone_relayout"
@@ -32,12 +34,12 @@
             android:layout_marginLeft="@dimen/x20"
             android:layout_toRightOf="@id/login_phone_image"
             android:background="@null"
-            android:cursorVisible="false"
             android:hint="请输入手机号"
             android:inputType="number"
             android:maxLength="11"
             android:textColor="@android:color/white"
             android:textColorHint="@android:color/white"
+            android:textCursorDrawable="@drawable/deittext_cursor_white_style"
             android:textSize="@dimen/y32" />
 
     </RelativeLayout>
@@ -68,7 +70,7 @@
             android:layout_marginRight="@dimen/x20"
             android:layout_toRightOf="@id/login_password_image"
             android:background="@null"
-            android:cursorVisible="false"
+            android:textCursorDrawable="@drawable/deittext_cursor_white_style"
             android:hint="请输入密码"
             android:inputType="textPassword"
             android:textColor="@android:color/white"

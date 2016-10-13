@@ -107,7 +107,7 @@
                             android:layout_marginLeft="@dimen/x30"
                             android:layout_marginRight="@dimen/x30"
                             android:layout_marginTop="@dimen/y30"
-
+                            android:lineSpacingExtra="@dimen/y12"
                             android:textColor="@color/fontcolor"
                             android:textSize="@dimen/y28" />
                     </LinearLayout>
@@ -189,6 +189,7 @@
                                     android:layout_marginBottom="@dimen/y26"
                                     android:layout_marginLeft="@dimen/x20"
                                     android:layout_marginTop="@dimen/y12"
+                                    android:lineSpacingExtra="@dimen/y12"
 
                                     android:textColor="@color/fontcolor"
                                     android:textSize="@dimen/y28" />
@@ -268,7 +269,7 @@
                                 android:layout_height="wrap_content"
                                 android:layout_marginLeft="@dimen/x20"
                                 android:layout_marginTop="@dimen/y20"
-
+                                android:lineSpacingExtra="@dimen/y12"
                                 android:textColor="@color/fontcolor"
                                 android:textSize="@dimen/y28" />
 
@@ -302,7 +303,7 @@
                                 android:layout_marginLeft="@dimen/x20"
                                 android:layout_marginRight="@dimen/x20"
                                 android:layout_marginTop="@dimen/y10"
-
+                                android:lineSpacingExtra="@dimen/y12"
                                 android:textColor="@color/fontcolor"
                                 android:textSize="@dimen/y28" />
 
@@ -336,7 +337,7 @@
                                 android:layout_marginLeft="@dimen/x20"
                                 android:layout_marginRight="@dimen/x20"
                                 android:layout_marginTop="@dimen/y10"
-
+                                android:lineSpacingExtra="@dimen/y12"
                                 android:textColor="@color/fontcolor"
                                 android:textSize="@dimen/y28" />
 
@@ -372,7 +373,7 @@
                                 android:layout_marginLeft="@dimen/x20"
                                 android:layout_marginRight="@dimen/x20"
                                 android:layout_marginTop="@dimen/y10"
-
+                                android:lineSpacingExtra="@dimen/y12"
                                 android:textColor="@color/fontcolor"
                                 android:textSize="@dimen/y28" />
 
@@ -422,10 +423,10 @@
                         android:orientation="vertical">
 
                         <ImageView
-                            android:layout_marginTop="@dimen/y400"
                             android:id="@+id/iv_lading"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
+                            android:layout_marginTop="@dimen/y400"
                             android:src="@drawable/loading" />
 
                         <TextView

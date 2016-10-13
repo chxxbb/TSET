@@ -3,6 +3,8 @@ package com.example.chen.tset.View;
 import android.app.DatePickerDialog;
 import android.app.Dialog;
 import android.content.Intent;
+import android.os.Handler;
+import android.os.Message;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.format.DateFormat;
@@ -232,10 +234,13 @@ public class RegistrationAtivity extends MyBaseActivity {
                                 public void onResponse(String response, int id) {
                                     Log.e("一键挂号支付返回", response);
 
-                                    if (response.equals("0")) {
-                                        Toast.makeText(RegistrationAtivity.this, "挂号失败,请稍后再试", Toast.LENGTH_SHORT).show();
+                                    if (response.equals("2")) {
+                                        handler.sendEmptyMessage(0);
+                                    } else if (response.equals("1")) {
+                                        handler.sendEmptyMessage(1);
                                     } else {
                                         orderCode = response;
+                                        handler.sendEmptyMessage(2);
                                     }
 
                                 }
@@ -244,50 +249,69 @@ public class RegistrationAtivity extends MyBaseActivity {
             }).start();
 
 
-            setHeadDialog = new Dialog(this, R.style.CustomDialog);
-            setHeadDialog.show();
-            WindowManager windowManager = getWindowManager();
-            Display display = windowManager.getDefaultDisplay();
-            dialogView = View.inflate(getApplicationContext(), R.layout.payment_dialog, null);
-
-
-            rb_wenx = (RadioButton) dialogView.findViewById(R.id.rb_wenx);
-            rb_zhifb = (RadioButton) dialogView.findViewById(R.id.rb_zhifb);
-            ll_cancel = (LinearLayout) dialogView.findViewById(R.id.ll_cancel);
-
-            //确认支付
-            btn_confirm_payment = (Button) dialogView.findViewById(R.id.btn_confirm_payment);
-
-            rb_wenx.setChecked(true);
-            progressBar = (ProgressBar) dialogView.findViewById(R.id.progressBar);
-            setHeadDialog.getWindow().setContentView(dialogView);
-            WindowManager.LayoutParams lp = setHeadDialog.getWindow().getAttributes();
-            lp.width = display.getWidth();
-            setHeadDialog.getWindow().setAttributes(lp);
-            Thread thread = new Thread(new Runnable() {
-                @Override
-                public void run() {
-                    int progressBarMax = progressBar.getMax();
-                    try {
-                        //设置progressBar时间
-                        while (progressBarMax != progressBar.getProgress()) {
-                            int stepProgress = progressBarMax / 1000;
-                            int currentprogress = progressBar.getProgress();
-                            progressBar.setProgress(currentprogress + stepProgress);
-                            Thread.sleep(180);
-                        }
-                        finish();
-                    } catch (InterruptedException e) {
-                        e.printStackTrace();
-
-                    }
-                }
-            });
-            thread.start();
-            payonclick();
         }
 
     }
+
+    Handler handler = new Handler() {
+        @Override
+        public void handleMessage(Message msg) {
+            switch (msg.what) {
+                case 0:
+                    Toast.makeText(RegistrationAtivity.this, "挂号失败,请稍后再试", Toast.LENGTH_SHORT).show();
+                    break;
+                case 1:
+                    Toast.makeText(RegistrationAtivity.this, "你这一天已经挂过号了", Toast.LENGTH_SHORT).show();
+                    break;
+                case 2:
+
+                    setHeadDialog = new Dialog(RegistrationAtivity.this, R.style.CustomDialog);
+                    setHeadDialog.show();
+                    WindowManager windowManager = getWindowManager();
+                    Display display = windowManager.getDefaultDisplay();
+                    dialogView = View.inflate(getApplicationContext(), R.layout.payment_dialog, null);
+
+
+                    rb_wenx = (RadioButton) dialogView.findViewById(R.id.rb_wenx);
+                    rb_zhifb = (RadioButton) dialogView.findViewById(R.id.rb_zhifb);
+                    ll_cancel = (LinearLayout) dialogView.findViewById(R.id.ll_cancel);
+
+                    //确认支付
+                    btn_confirm_payment = (Button) dialogView.findViewById(R.id.btn_confirm_payment);
+
+                    rb_wenx.setChecked(true);
+                    progressBar = (ProgressBar) dialogView.findViewById(R.id.progressBar);
+                    setHeadDialog.getWindow().setContentView(dialogView);
+                    WindowManager.LayoutParams lp = setHeadDialog.getWindow().getAttributes();
+                    lp.width = display.getWidth();
+                    setHeadDialog.getWindow().setAttributes(lp);
+                    Thread thread = new Thread(
+                            new Runnable() {
+                                @Override
+                                public void run() {
+                                    int progressBarMax = progressBar.getMax();
+                                    try {
+                                        //设置progressBar时间
+                                        while (progressBarMax != progressBar.getProgress()) {
+                                            int stepProgress = progressBarMax / 1000;
+                                            int currentprogress = progressBar.getProgress();
+                                            progressBar.setProgress(currentprogress + stepProgress);
+                                            Thread.sleep(180);
+                                        }
+                                        finish();
+                                    } catch (InterruptedException e) {
+                                        e.printStackTrace();
+
+                                    }
+                                }
+                            });
+                    thread.start();
+                    payonclick();
+                    break;
+
+            }
+        }
+    };
 
 
     private void payonclick() {

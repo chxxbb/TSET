@@ -39,7 +39,7 @@ public class InquiryrecordDao {
     }
 
 
-    //查找
+    //根据用户ID查找查找
     public List<Inquiryrecord> chatfind(String username) {
         List<Inquiryrecord> list = new ArrayList<>();
         Cursor cursor = db.rawQuery("select * from inquiry where username=?", new String[]{username});
@@ -54,6 +54,23 @@ public class InquiryrecordDao {
             list.add(inquiryrecord);
         }
         return list;
+    }
+
+    //查找
+    public Inquiryrecord chatfinddoctor(String doctorid) {
+        Inquiryrecord inquiryrecord = null;
+        Cursor cursor = db.rawQuery("select * from inquiry where doctorid=?", new String[]{doctorid});
+        while (cursor.moveToNext()) {
+            String username = cursor.getString(cursor.getColumnIndex("username"));
+            String doctorname = cursor.getString(cursor.getColumnIndex("doctorname"));
+            String doctoricon = cursor.getString(cursor.getColumnIndex("doctoricon"));
+            String time = cursor.getString(cursor.getColumnIndex("time"));
+            String state = cursor.getString(cursor.getColumnIndex("state"));
+            String id = cursor.getString(cursor.getColumnIndex("id"));
+           inquiryrecord = new Inquiryrecord(username, doctorid, id, doctorname, doctoricon, time, state);
+
+        }
+        return inquiryrecord;
     }
 
 }

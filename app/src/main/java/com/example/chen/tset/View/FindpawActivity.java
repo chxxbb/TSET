@@ -47,7 +47,7 @@ public class FindpawActivity extends MyBaseActivity {
 
     private void initOnClick() {
 
-        System.out.println("ssss");
+
 
         activity_find_password_getcode_button.setOnClickListener(new View.OnClickListener() {
             @Override

@@ -32,9 +32,8 @@ import android.widget.Toast;
 import android.widget.ToggleButton;
 import android.widget.ViewFlipper;
 
+import com.example.chen.tset.Data.Calendarinit;
 import com.example.chen.tset.Data.ConsultingRemindState;
-import com.example.chen.tset.Data.DiseaseDepartment;
-import com.example.chen.tset.Data.Information;
 import com.example.chen.tset.Data.PharmacyState;
 import com.example.chen.tset.Data.Calendarform;
 import com.example.chen.tset.Data.Http_data;
@@ -64,7 +63,6 @@ import java.util.Date;
 import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
-import java.util.Map;
 
 import okhttp3.Call;
 
@@ -112,11 +110,11 @@ public class ConsultingFragment extends Fragment implements View.OnClickListener
     private LinearLayout ll_consulting_popup_case;
 
 
-    private LinearLayout ll_registration, ll_health, ll_pharmacy, ll_registration_info, ll_consulting_phramacy;
+    private LinearLayout ll_registration, ll_health, ll_pharmacy, ll_registration_info, ll_consulting_phramacy, ll_consulting_health;
 
     private ToggleButton tb_registration, tb_health, tb_pharmacy;
 
-    private TextView tv_registration_info;
+    private TextView tv_registration_info, tv_consulting_pharmacy, tv_consulting_health;
 
     //挂号提醒选择状态
     int registrationSelect = 1;
@@ -133,12 +131,6 @@ public class ConsultingFragment extends Fragment implements View.OnClickListener
     Gson gson = new Gson();
 
     List<Calendarform> clist;
-
-    int registrationSetting = 1;
-
-    int healthSetting = 1;
-
-    int pharmacySetting = 1;
 
     PharmacyDao db;
     SharedPsaveuser sp;
@@ -170,12 +162,13 @@ public class ConsultingFragment extends Fragment implements View.OnClickListener
 
             }
         }).start();
-        calhttpinit();
 
-        findAllByDate();
-    }
 
-    private void calhttpinit() {
+        SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM");
+        Date curDate = new Date(System.currentTimeMillis());//获取当前时间
+        String str = formatter.format(curDate);
+
+        findAllByDate(str);
     }
 
 
@@ -187,6 +180,17 @@ public class ConsultingFragment extends Fragment implements View.OnClickListener
                     findView();
                     init();
                     rl_loading.setVisibility(View.GONE);
+                    break;
+                case 1:
+                    calV.notifyDataSetChanged();
+                    break;
+                case 2:
+                    Toast.makeText(getContext(), "网络连接失败", Toast.LENGTH_SHORT).show();
+                    break;
+                case 3:
+                    ll_registration_info.setVisibility(View.GONE);
+                    ll_consulting_phramacy.setVisibility(View.GONE);
+                    ll_consulting_health.setVisibility(View.GONE);
                     break;
 
             }
@@ -224,6 +228,13 @@ public class ConsultingFragment extends Fragment implements View.OnClickListener
 
         ll_registration_info = (LinearLayout) view.findViewById(R.id.ll_registration_info);
         tv_registration_info = (TextView) view.findViewById(R.id.tv_registration_info);
+
+        ll_consulting_health = (LinearLayout) view.findViewById(R.id.ll_consulting_health);
+
+
+        tv_consulting_health = (TextView) view.findViewById(R.id.tv_consulting_health);
+
+        tv_consulting_pharmacy = (TextView) view.findViewById(R.id.tv_consulting_pharmacy);
 
 
         ll_left.setOnClickListener(this);
@@ -380,6 +391,10 @@ public class ConsultingFragment extends Fragment implements View.OnClickListener
         ll_health.setOnClickListener(tblistener);
         ll_pharmacy.setOnClickListener(tblistener);
 
+        SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd");//设置日期格式
+
+        findCalendar(df.format(new Date()));
+
 
     }
 
@@ -488,6 +503,10 @@ public class ConsultingFragment extends Fragment implements View.OnClickListener
         calV = new CalendarAdapter(getContext(), this.getResources(), jumpMonth, jumpYear, year_c, month_c, day_c, data);
         gridView.setAdapter(calV);
         addTextToTopTextView(currentMonth); // 移动到下一月后，将当月显示在头标题中
+
+//        findAllByDate(calV.getShowYear() + "-" + calV.getShowMonth());
+
+
         gvFlag++;
         flipper.addView(gridView, gvFlag);
         flipper.setInAnimation(AnimationUtils.loadAnimation(getContext(), R.anim.push_left_in));
@@ -520,6 +539,9 @@ public class ConsultingFragment extends Fragment implements View.OnClickListener
         gridView.setAdapter(calV);
         gvFlag++;
         addTextToTopTextView(currentMonth); // 移动到上一月后，将当月显示在头标题中
+
+//        findAllByDate(calV.getShowYear() + "-" + calV.getShowMonth());
+
         flipper.addView(gridView, gvFlag);
 
         flipper.setInAnimation(AnimationUtils.loadAnimation(getContext(), R.anim.push_right_in));
@@ -604,38 +626,7 @@ public class ConsultingFragment extends Fragment implements View.OnClickListener
                         date = scheduleYear + "-" + scheduleMonth + "-" + scheduleDay;
                     }
 
-
-                    Log.e("点击的时间", date);
-                    Log.e("userid", User_Http.user.getId() + "");
-                    OkHttpUtils
-                            .post()
-                            .url(Http_data.http_data + "/FindUserIntradayByUserIdAndDate")
-                            .addParams("userId", User_Http.user.getId() + "")
-                            .addParams("date", date)
-                            .build()
-                            .execute(new StringCallback() {
-                                @Override
-                                public void onError(Call call, Exception e, int id) {
-                                    Log.e("失败", "失败");
-                                }
-
-                                @Override
-                                public void onResponse(String response, int id) {
-                                    Log.e("诊疗返回", response);
-//                                    if (response.equals("0")) {
-//                                        tv_registration_info.setText("无挂号");
-//                                    } else {
-//                                        tv_registration_info.setText("已挂号");
-//                                        ll_registration_info.setOnClickListener(lllistener);
-//                                        registrationId = response;
-//
-//                                    }
-
-
-                                }
-                            });
-
-
+                    findCalendar(date);
                 }
             }
         });
@@ -643,40 +634,76 @@ public class ConsultingFragment extends Fragment implements View.OnClickListener
     }
 
 
-    public void findAllByDate() {
-        SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM");
-        Date curDate = new Date(System.currentTimeMillis());//获取当前时间
-        String str = formatter.format(curDate);
-        OkHttpUtils
-                .post()
-                .url(Http_data.http_data + "/FindCalendarList")
-                .addParams("userId", User_Http.user.getId() + "")
-                .addParams("date", str)
-                .build()
-                .execute(new StringCallback() {
-                    @Override
-                    public void onError(Call call, Exception e, int id) {
-                        Toast.makeText(getContext(), "网络连接失败", Toast.LENGTH_SHORT).show();
-                    }
+    public void findCalendar(final String date1) {
+        Thread thread = new Thread(new Runnable() {
+            @Override
+            public void run() {
+                OkHttpUtils
+                        .post()
+                        .url(Http_data.http_data + "/FindCalendar")
+                        .addParams("userId", User_Http.user.getId() + "")
+                        .addParams("date", date1)
+                        .build()
+                        .execute(new StringCallback() {
+                            @Override
+                            public void onError(Call call, Exception e, int id) {
 
-                    @Override
-                    public void onResponse(String response, int id) {
-                        Log.e("诊疗", response);
-                        Type listtype = new TypeToken<LinkedList<ConsultingRemindState>>() {
-                        }.getType();
-                        LinkedList<ConsultingRemindState> leclist = gson.fromJson(response, listtype);
-                        for (Iterator it = leclist.iterator(); it.hasNext(); ) {
-                            ConsultingRemindState consultingRemindState = (ConsultingRemindState) it.next();
-                            data.add(consultingRemindState);
-                        }
+                            }
 
-                        calV.notifyDataSetChanged();
+                            @Override
+                            public void onResponse(String response, int id) {
+                                Log.e("诊疗返回", response);
+                                if (response.equals("{}")) {
+                                    handler.sendEmptyMessage(3);
+
+                                } else {
+                                    Calendarinit calendarinit = gson.fromJson(response, Calendarinit.class);
+                                    Log.e("11", calendarinit.toString());
+                                }
 
 
-                    }
+                            }
+                        });
+            }
+        });
+        thread.start();
+    }
 
+    public void findAllByDate(final String str) {
+        Thread thread = new Thread(new Runnable() {
+            @Override
+            public void run() {
 
-                });
+                OkHttpUtils
+                        .post()
+                        .url(Http_data.http_data + "/FindCalendarList")
+                        .addParams("userId", User_Http.user.getId() + "")
+                        .addParams("date", str)
+                        .build()
+                        .execute(new StringCallback() {
+                            @Override
+                            public void onError(Call call, Exception e, int id) {
+                                handler.sendEmptyMessage(2);
+                            }
+
+                            @Override
+                            public void onResponse(String response, int id) {
+                                Log.e("诊疗", response);
+                                Type listtype = new TypeToken<LinkedList<ConsultingRemindState>>() {
+                                }.getType();
+                                LinkedList<ConsultingRemindState> leclist = gson.fromJson(response, listtype);
+                                for (Iterator it = leclist.iterator(); it.hasNext(); ) {
+                                    ConsultingRemindState consultingRemindState = (ConsultingRemindState) it.next();
+                                    data.add(consultingRemindState);
+                                }
+                                handler.sendEmptyMessage(1);
+                            }
+
+                        });
+            }
+        });
+        thread.start();
+
 
     }
 
