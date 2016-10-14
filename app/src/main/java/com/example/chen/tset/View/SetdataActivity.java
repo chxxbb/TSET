@@ -18,6 +18,7 @@ import com.example.chen.tset.Data.User;
 import com.example.chen.tset.Data.User_Http;
 import com.example.chen.tset.R;
 import com.example.chen.tset.Utils.MyBaseActivity;
+import com.example.chen.tset.Utils.SharedPsaveuser;
 import com.zhy.http.okhttp.OkHttpUtils;
 import com.zhy.http.okhttp.callback.StringCallback;
 
@@ -35,12 +36,14 @@ public class SetdataActivity extends MyBaseActivity {
     private int maxLen = 10; // the max byte
     String sex = null;
     User user = new User(User_Http.user);
+    SharedPsaveuser sp;
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_setdata);
+        sp=new SharedPsaveuser(this);
         finView();
     }
 

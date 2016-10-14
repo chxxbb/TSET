@@ -13,23 +13,30 @@
         android:layout_height="@dimen/y96"
         android:gravity="center_vertical"
         android:orientation="horizontal">
-
-        <ImageView
+        <LinearLayout
             android:id="@+id/activity_register_exit"
-            android:layout_width="@dimen/x20"
-            android:layout_height="@dimen/y36"
-            android:layout_marginLeft="@dimen/x30"
-            android:src="@drawable/doctorparticulars_return" />
+            android:layout_width="@dimen/x100"
+            android:layout_height="match_parent"
+            android:gravity="center_vertical">
+            <ImageView
+
+                android:layout_width="@dimen/x20"
+                android:layout_height="@dimen/y36"
+                android:layout_marginLeft="@dimen/x30"
+                android:src="@drawable/doctorparticulars_return" />
+        </LinearLayout>
+
+
 
         <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:gravity="center">
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_centerInParent="true">
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:gravity="center"
+                android:layout_gravity="center_vertical"
                 android:text="注册账号"
                 android:textColor="@color/white"
                 android:textSize="@dimen/y36" />

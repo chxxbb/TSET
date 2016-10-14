@@ -59,17 +59,23 @@
         android:layout_width="match_parent"
         android:layout_height="@dimen/y1"
         android:background="@color/linegray" />
-
-    <EditText
-        android:id="@+id/et_feedback"
+    <LinearLayout
+        android:id="@+id/ll_et_feedback"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="@dimen/x30"
-        android:layout_marginTop="@dimen/x30"
-        android:background="@null"
-        android:textCursorDrawable="@drawable/deittext_cursor_blue_style"
-        android:hint="您的意见和建议，对我们很重要"
-        android:textColor="@color/fontcolor"
-        android:textColorHint="@color/linegray" />
+        android:layout_height="match_parent">
+        <EditText
+            android:id="@+id/et_feedback"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/x30"
+            android:layout_marginTop="@dimen/x30"
+            android:background="@null"
+            android:textCursorDrawable="@drawable/deittext_cursor_blue_style"
+            android:hint="您的意见和建议，对我们很重要"
+            android:textColor="@color/fontcolor"
+            android:textColorHint="@color/linegray" />
+
+    </LinearLayout>
+
 
 </LinearLayout>

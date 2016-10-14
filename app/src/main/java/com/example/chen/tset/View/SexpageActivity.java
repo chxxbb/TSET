@@ -16,6 +16,7 @@ import com.example.chen.tset.Data.Http_data;
 import com.example.chen.tset.Data.User_Http;
 import com.example.chen.tset.R;
 import com.example.chen.tset.Utils.MyBaseActivity;
+import com.example.chen.tset.Utils.SharedPsaveuser;
 import com.zhy.http.okhttp.OkHttpUtils;
 import com.zhy.http.okhttp.callback.StringCallback;
 
@@ -29,11 +30,13 @@ import okhttp3.Call;
 public class SexpageActivity extends MyBaseActivity {
     private LinearLayout ll_rutgender;
     private RadioButton rb_man, rb_nman;
+    SharedPsaveuser sp;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_genderpage);
+        sp = new SharedPsaveuser(this);
         findView();
     }
 
@@ -73,7 +76,7 @@ public class SexpageActivity extends MyBaseActivity {
         OkHttpUtils
                 .post()
                 .url(Http_data.http_data + "/ChangeGender")
-                .addParams("id", User_Http.user.getId()+"")
+                .addParams("id", sp.getTag().getId() + "")
                 .addParams("gender", sex)
                 .build()
                 .execute(new StringCallback() {

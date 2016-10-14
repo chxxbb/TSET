@@ -97,9 +97,6 @@ public class InquiryFragment extends Fragment {
         ll_sort.setOnClickListener(listener);
 
 
-
-
-
         lv_inquiry.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
@@ -206,6 +203,8 @@ public class InquiryFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 listinit(list);
+                tv_city.setText("全部地区");
+                tv_sort.setText("职称排序");
                 tv_sort.setText("默认排序");
                 setHeadDialog.dismiss();
             }
@@ -213,7 +212,9 @@ public class InquiryFragment extends Fragment {
         btn_title.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                tv_city.setText("全部地区");
                 tv_sort.setText("职称排序");
+                tv_section.setText("全部科室");
                 for (int i = 0; i < list.size(); i++) {
                     if (list.get(i).getTitle().equals("主任医师")) {
                         titlelist.add(list.get(i));
@@ -299,6 +300,8 @@ public class InquiryFragment extends Fragment {
         lv_registration.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                tv_city.setText("全部地区");
+                tv_sort.setText("默认排序");
                 if (position == 0) {
                     listinit(list);
                     setHeadDialog.dismiss();
@@ -368,14 +371,18 @@ public class InquiryFragment extends Fragment {
         btn_region.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                tv_city.setText("全部地区");
                 listinit(list);
+                tv_sort.setText("默认排序");
+                tv_section.setText("全部科室");
                 setHeadDialog.dismiss();
             }
         });
         btn_chnegdu.setOnClickListener(new View.OnClickListener() {
+
             @Override
             public void onClick(View v) {
+                tv_sort.setText("默认排序");
+                tv_section.setText("全部科室");
                 tv_city.setText("成都");
                 for (int i = 0; i < list.size(); i++) {
                     if (list.get(i).getHospital().equals("成都天使儿童医院")) {
@@ -389,6 +396,8 @@ public class InquiryFragment extends Fragment {
         btn_shenzheng.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                tv_sort.setText("默认排序");
+                tv_section.setText("全部科室");
                 tv_city.setText("深圳");
                 for (int i = 0; i < list.size(); i++) {
                     if (list.get(i).getHospital().equals("深圳天使儿童医院")) {

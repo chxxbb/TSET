@@ -133,7 +133,7 @@ public class HomeActivity extends MyBaseActivity implements View.OnClickListener
 
         jmessage();
 
-        delpharmacy();
+
 
 
         versionUpdate();
@@ -157,9 +157,7 @@ public class HomeActivity extends MyBaseActivity implements View.OnClickListener
                         Log.e("更新返回", response);
                     }
                 });
-//        Uri packageURI = Uri.parse("package:com.example.chen.tset");
-//        Intent uninstallIntent = new Intent(Intent.ACTION_DELETE, packageURI);
-//        startActivity(uninstallIntent);
+
 
     }
 

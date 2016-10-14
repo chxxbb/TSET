@@ -26,6 +26,7 @@ import com.example.chen.tset.Data.Lecture;
 import com.example.chen.tset.Data.User_Http;
 import com.example.chen.tset.R;
 import com.example.chen.tset.Utils.MyBaseActivity;
+import com.example.chen.tset.Utils.SharedPsaveuser;
 import com.example.chen.tset.page.CharactersafeAdapter;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
@@ -55,14 +56,15 @@ public class MycollectActivity extends MyBaseActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_mycollect);
-        findView();
-        init();
-        initHttp();
+
     }
 
     @Override
     protected void onStart() {
         super.onStart();
+        findView();
+        init();
+        initHttp();
 
     }
 
@@ -78,13 +80,13 @@ public class MycollectActivity extends MyBaseActivity {
         DisplayMetrics dm = new DisplayMetrics();
         dm = this.getResources().getDisplayMetrics();
         final float density = dm.density;
-        Log.e("密度",density+"");
+        Log.e("密度", density + "");
         SwipeMenuCreator creator = new SwipeMenuCreator() {
             @Override
             public void create(SwipeMenu menu) {
                 SwipeMenuItem openItem = new SwipeMenuItem(getApplicationContext());
                 openItem.setBackground(new ColorDrawable(Color.RED));
-                openItem.setWidth((int) (75*density));
+                openItem.setWidth((int) (75 * density));
                 openItem.setTitle("删除");
                 openItem.setTitleSize(17);
                 openItem.setTitleColor(Color.WHITE);
@@ -107,10 +109,11 @@ public class MycollectActivity extends MyBaseActivity {
 
 
     private void initHttp() {
+        SharedPsaveuser sp=new SharedPsaveuser(this);
         OkHttpUtils
                 .post()
                 .url(Http_data.http_data + "/findCollectList")
-                .addParams("userId", User_Http.user.getId() + "")
+                .addParams("userId", sp.getTag().getId() + "")
                 .build()
                 .execute(new StringCallback() {
                     @Override

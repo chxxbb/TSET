@@ -176,12 +176,10 @@ public class DoctorparticularsActivity extends MyBaseActivity {
     private View.OnClickListener listener = new View.OnClickListener() {
         @Override
         public void onClick(View v) {
-            finish();
+
             switch (v.getId()) {
                 case R.id.btn_callmoney:
-                    Intent intent = new Intent(DoctorparticularsActivity.this, EvaluatepageActivity.class);
-                    intent.putExtra("doctorid", doctor_id);
-                    startActivity(intent);
+
                     break;
                 case R.id.ll_return:
                     finish();

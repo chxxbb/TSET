@@ -44,13 +44,16 @@ import com.example.chen.tset.Utils.CalendarGridView;
 import com.example.chen.tset.Utils.MyScrollview;
 import com.example.chen.tset.Utils.PharmacyDao;
 import com.example.chen.tset.Utils.SharedPsaveuser;
+import com.example.chen.tset.View.CompilePharmacyRemindActivity;
 import com.example.chen.tset.View.CompileremindActivity;
 import com.example.chen.tset.View.HealthconditionActivity;
 import com.example.chen.tset.View.PharmacyremindActivity;
 import com.example.chen.tset.View.ReservationlistActivity;
 import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 import com.google.gson.reflect.TypeToken;
 import com.zhy.http.okhttp.OkHttpUtils;
+import com.zhy.http.okhttp.callback.Callback;
 import com.zhy.http.okhttp.callback.StringCallback;
 
 import java.lang.reflect.Type;
@@ -60,11 +63,15 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.Iterator;
+import java.util.LinkedHashMap;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Map;
 
 import okhttp3.Call;
+import okhttp3.Response;
 
 /**
  * Created by Administrator on 2016/9/21 0021.
@@ -84,6 +91,7 @@ public class ConsultingFragment extends Fragment implements View.OnClickListener
     private int month_c = 0;
     private int day_c = 0;
     private String currentDate = "";
+
 
     //用户点击的时间
     String date;
@@ -137,11 +145,16 @@ public class ConsultingFragment extends Fragment implements View.OnClickListener
 
     List<ConsultingRemindState> data;
 
+    Calendarinit calendarinit;
+
+    String pharmacydate;
+
 
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         view = inflater.inflate(R.layout.fragment_consulting, null);
+        sp = new SharedPsaveuser(getContext());
         return view;
     }
 
@@ -164,10 +177,11 @@ public class ConsultingFragment extends Fragment implements View.OnClickListener
         }).start();
 
 
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
         SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM");
         Date curDate = new Date(System.currentTimeMillis());//获取当前时间
         String str = formatter.format(curDate);
-
+        pharmacydate = sdf.format(curDate);
         findAllByDate(str);
     }
 
@@ -191,6 +205,56 @@ public class ConsultingFragment extends Fragment implements View.OnClickListener
                     ll_registration_info.setVisibility(View.GONE);
                     ll_consulting_phramacy.setVisibility(View.GONE);
                     ll_consulting_health.setVisibility(View.GONE);
+
+
+                    tv_registration_info = (TextView) view.findViewById(R.id.tv_registration_info);
+
+                    ll_consulting_health = (LinearLayout) view.findViewById(R.id.ll_consulting_health);
+
+                    tv_consulting_health = (TextView) view.findViewById(R.id.tv_consulting_health);
+
+                    tv_consulting_pharmacy = (TextView) view.findViewById(R.id.tv_consulting_pharmacy);
+
+
+                    break;
+                case 4:
+                    if (calendarinit.getRegistrationId() == 0) {
+                        ll_registration_info.setVisibility(View.GONE);
+                    } else {
+                        ll_registration_info.setVisibility(View.VISIBLE);
+                        tv_registration_info.setText("有挂号" + ",请于" + pharmacydate + "准时就诊");
+                        ll_registration_info.setOnClickListener(new View.OnClickListener() {
+                            @Override
+                            public void onClick(View v) {
+                                Intent intent = new Intent(getContext(), ReservationlistActivity.class);
+                                Log.e("111", calendarinit.getRegistrationId() + "");
+                                intent.putExtra("ReservationID", calendarinit.getRegistrationId() + "");
+                                startActivity(intent);
+                            }
+                        });
+                    }
+
+                    if (calendarinit.getTag() == null && calendarinit.getContent() == null) {
+                        ll_consulting_health.setVisibility(View.GONE);
+                    } else {
+                        ll_consulting_health.setVisibility(View.VISIBLE);
+                        tv_consulting_health.setText(calendarinit.getTag() +"  " +calendarinit.getContent());
+                    }
+
+                    if (calendarinit.getTime1() == null && calendarinit.getTime2() == null && calendarinit.getTime3() == null) {
+                        ll_consulting_phramacy.setVisibility(View.GONE);
+                    } else {
+                        ll_consulting_phramacy.setVisibility(View.VISIBLE);
+                        tv_consulting_pharmacy.setText(calendarinit.getTime1() + "   " + calendarinit.getTime2() + "   " + calendarinit.getTime3());
+                        ll_consulting_phramacy.setOnClickListener(new View.OnClickListener() {
+                            @Override
+                            public void onClick(View v) {
+                                Intent intent = new Intent(getContext(), CompilePharmacyRemindActivity.class);
+                                intent.putExtra("remindId", calendarinit.getRemindId() + "");
+                                startActivity(intent);
+                            }
+                        });
+                    }
                     break;
 
             }
@@ -230,7 +294,6 @@ public class ConsultingFragment extends Fragment implements View.OnClickListener
         tv_registration_info = (TextView) view.findViewById(R.id.tv_registration_info);
 
         ll_consulting_health = (LinearLayout) view.findViewById(R.id.ll_consulting_health);
-
 
         tv_consulting_health = (TextView) view.findViewById(R.id.tv_consulting_health);
 
@@ -396,24 +459,6 @@ public class ConsultingFragment extends Fragment implements View.OnClickListener
         findCalendar(df.format(new Date()));
 
 
-    }
-
-    //获取本地用药提醒数据
-    private void pharmacyRemindinit() {
-
-
-        sp = new SharedPsaveuser(getContext());
-        db = new PharmacyDao(getContext());
-        List<Pharmacyremind> plist = db.chatfind(sp.getTag().getPhone());
-        if (plist.size() != 0) {
-            for (int i = 0; i < plist.size(); i++) {
-                String startdate = plist.get(i).getStartdate();
-                String overdate = plist.get(i).getOverdate();
-
-                printDay(startdate, overdate);
-            }
-
-        }
     }
 
 
@@ -620,10 +665,13 @@ public class ConsultingFragment extends Fragment implements View.OnClickListener
                     String scheduleYear = calV.getShowYear();
                     String scheduleMonth = calV.getShowMonth();
 
+
                     if (scheduleMonth.equals("1") || scheduleMonth.equals("2") || scheduleMonth.equals("3") || scheduleMonth.equals("4") || scheduleMonth.equals("5") || scheduleMonth.equals("6") || scheduleMonth.equals("7") || scheduleMonth.equals("8") || scheduleMonth.equals("9")) {
                         date = scheduleYear + "-0" + scheduleMonth + "-" + scheduleDay;
+                        pharmacydate = scheduleYear + "-0" + scheduleMonth + "-" + scheduleDay;
                     } else {
                         date = scheduleYear + "-" + scheduleMonth + "-" + scheduleDay;
+                        pharmacydate = scheduleYear + "-" + scheduleMonth + "-" + scheduleDay;
                     }
 
                     findCalendar(date);
@@ -641,7 +689,7 @@ public class ConsultingFragment extends Fragment implements View.OnClickListener
                 OkHttpUtils
                         .post()
                         .url(Http_data.http_data + "/FindCalendar")
-                        .addParams("userId", User_Http.user.getId() + "")
+                        .addParams("userId", sp.getTag().getId() + "")
                         .addParams("date", date1)
                         .build()
                         .execute(new StringCallback() {
@@ -652,13 +700,11 @@ public class ConsultingFragment extends Fragment implements View.OnClickListener
 
                             @Override
                             public void onResponse(String response, int id) {
-                                Log.e("诊疗返回", response);
                                 if (response.equals("{}")) {
                                     handler.sendEmptyMessage(3);
-
                                 } else {
-                                    Calendarinit calendarinit = gson.fromJson(response, Calendarinit.class);
-                                    Log.e("11", calendarinit.toString());
+                                    calendarinit = gson.fromJson(response, Calendarinit.class);
+                                    handler.sendEmptyMessage(4);
                                 }
 
 
@@ -677,7 +723,7 @@ public class ConsultingFragment extends Fragment implements View.OnClickListener
                 OkHttpUtils
                         .post()
                         .url(Http_data.http_data + "/FindCalendarList")
-                        .addParams("userId", User_Http.user.getId() + "")
+                        .addParams("userId",sp.getTag().getId() + "")
                         .addParams("date", str)
                         .build()
                         .execute(new StringCallback() {

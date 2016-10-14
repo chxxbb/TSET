@@ -1,12 +1,15 @@
 package com.example.chen.tset.View;
 
+import android.content.Context;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.Log;
 import android.view.View;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -14,6 +17,7 @@ import com.example.chen.tset.Data.Http_data;
 import com.example.chen.tset.Data.User_Http;
 import com.example.chen.tset.R;
 import com.example.chen.tset.Utils.MyBaseActivity;
+import com.example.chen.tset.Utils.SharedPsaveuser;
 import com.zhy.http.okhttp.OkHttpUtils;
 import com.zhy.http.okhttp.callback.StringCallback;
 
@@ -24,22 +28,35 @@ import okhttp3.Call;
 public class FeedbackActivity extends MyBaseActivity implements View.OnClickListener {
     private TextView tv_feedback, tv_cancel;
     private EditText et_feedback;
+    private LinearLayout ll_et_feedback;
+
+    SharedPsaveuser sp;
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_feedback);
+        sp=new SharedPsaveuser(this);
         findView();
     }
 
     private void findView() {
         tv_feedback = (TextView) findViewById(R.id.tv_feedback);
         et_feedback = (EditText) findViewById(R.id.et_feedback);
+        ll_et_feedback= (LinearLayout) findViewById(R.id.ll_et_feedback);
         tv_cancel = (TextView) findViewById(R.id.tv_cancel);
         et_feedback.addTextChangedListener(textchanglistener);
 
         tv_cancel.setOnClickListener(this);
+        ll_et_feedback.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                et_feedback.requestFocus();
+                InputMethodManager imm = (InputMethodManager)FeedbackActivity .this.getSystemService(Context.INPUT_METHOD_SERVICE);
+                imm.toggleSoftInput(0, InputMethodManager.HIDE_NOT_ALWAYS);
+            }
+        });
     }
 
     private TextWatcher textchanglistener = new TextWatcher() {
@@ -74,7 +91,7 @@ public class FeedbackActivity extends MyBaseActivity implements View.OnClickList
                 OkHttpUtils
                         .post()
                         .url(Http_data.http_data + "/AddFeedback")
-                        .addParams("userId", User_Http.user.getId()+"")
+                        .addParams("userId", sp.getTag().getId()+"")
                         .addParams("content", et_feedback.getText().toString())
                         .build()
                         .execute(new StringCallback() {

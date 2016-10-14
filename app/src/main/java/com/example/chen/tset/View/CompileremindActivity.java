@@ -315,7 +315,7 @@ public class CompileremindActivity extends MyBaseActivity {
                         OkHttpUtils
                                 .post()
                                 .url(Http_data.http_data + "/AddRemind")
-                                .addParams("userId", User_Http.user.getId() + "")
+                                .addParams("userId", sp.getTag().getId() + "")
                                 .addParams("startDay", startdate)
                                 .addParams("endDay", overdate)
                                 .addParams("time1", time1)
@@ -338,7 +338,7 @@ public class CompileremindActivity extends MyBaseActivity {
                                             Toast.makeText(CompileremindActivity.this, "添加成功，你可以在用药提醒页面查看", Toast.LENGTH_SHORT).show();
                                             finish();
                                         } else {
-                                            Toast.makeText(CompileremindActivity.this, "添加失败", Toast.LENGTH_SHORT).show();
+                                            Toast.makeText(CompileremindActivity.this, "你在这段时间内已添加过用药了", Toast.LENGTH_SHORT).show();
                                         }
                                     }
                                 });

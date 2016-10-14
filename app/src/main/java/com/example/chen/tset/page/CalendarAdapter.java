@@ -223,18 +223,7 @@ public class CalendarAdapter extends BaseAdapter {
 
         //点击改变背景
         if (mSelect == position) {
-//            Log.e("111", "111");
-//            if (textView.getBackground() != null) {
-//                Log.e("222", "222");
-//
-//                if (context.getResources().getDrawable(R.drawable.consulting9).getConstantState().toString().equals(textView.getBackground().getConstantState().toString())) {
-//                    Log.e("333", "333");
-//
-//                    textView.setBackgroundResource(R.drawable.consulting7);
-//                } else {
-//
-//                }
-//            }
+
 
             textView.setBackgroundResource(R.drawable.cousulting_checked);
 
@@ -258,9 +247,9 @@ public class CalendarAdapter extends BaseAdapter {
             for (int i = 0; i < data.size(); i++) {
                 if ((scheduleYear + "-" + scheduleMonth + "-" + scheduleDay).equals(data.get(i).getDate()) && position < daysOfMonth + dayOfWeek && position >= dayOfWeek) {
                     if (data.get(i).getRemindId() != 0) {
-                        if(mSelect == position){
+                        if (mSelect == position) {
                             textView.setBackgroundResource(R.drawable.consulting_onclick9);
-                        }else {
+                        } else {
                             textView.setBackgroundResource(R.drawable.consulting9);
                         }
 
@@ -276,9 +265,9 @@ public class CalendarAdapter extends BaseAdapter {
                 if ((scheduleYear + "-" + scheduleMonth + "-" + scheduleDay).equals(data.get(i).getDate()) && position < daysOfMonth + dayOfWeek && position >= dayOfWeek) {
                     if (data.get(i).getHealthId() != 0) {
 
-                        if(mSelect == position){
+                        if (mSelect == position) {
                             textView.setBackgroundResource(R.drawable.consulting_onclick7);
-                        }else {
+                        } else {
                             textView.setBackgroundResource(R.drawable.consulting7);
                         }
 
@@ -293,9 +282,9 @@ public class CalendarAdapter extends BaseAdapter {
                 if ((scheduleYear + "-" + scheduleMonth + "-" + scheduleDay).equals(data.get(i).getDate()) && position < daysOfMonth + dayOfWeek && position >= dayOfWeek) {
                     if (data.get(i).getRegistrationId() != 0) {
 
-                        if(mSelect == position){
+                        if (mSelect == position) {
                             textView.setBackgroundResource(R.drawable.consulting_onclick6);
-                        }else {
+                        } else {
                             textView.setBackgroundResource(R.drawable.consulting6);
                         }
 
@@ -310,9 +299,19 @@ public class CalendarAdapter extends BaseAdapter {
             for (int i = 0; i < data.size(); i++) {
                 if ((scheduleYear + "-" + scheduleMonth + "-" + scheduleDay).equals(data.get(i).getDate()) && position < daysOfMonth + dayOfWeek && position >= dayOfWeek) {
                     if (data.get(i).getRegistrationId() != 0) {
-                        textView.setBackgroundResource(R.drawable.consulting6);
+
+                        if (mSelect == position) {
+                            textView.setBackgroundResource(R.drawable.consulting_onclick6);
+                        } else {
+                            textView.setBackgroundResource(R.drawable.consulting6);
+                        }
+
                     } else if (data.get(i).getHealthId() != 0 && data.get(i).getRegistrationId() == 0) {
-                        textView.setBackgroundResource(R.drawable.consulting7);
+                        if (mSelect == position) {
+                            textView.setBackgroundResource(R.drawable.consulting_onclick7);
+                        } else {
+                            textView.setBackgroundResource(R.drawable.consulting7);
+                        }
                     }
                 }
 
@@ -323,11 +322,23 @@ public class CalendarAdapter extends BaseAdapter {
             for (int i = 0; i < data.size(); i++) {
                 if ((scheduleYear + "-" + scheduleMonth + "-" + scheduleDay).equals(data.get(i).getDate()) && position < daysOfMonth + dayOfWeek && position >= dayOfWeek) {
                     if ((data.get(i).getRemindId() != 0 && data.get(i).getRegistrationId() == 0 && data.get(i).getHealthId() == 0) || (data.get(i).getHealthId() != 0 && data.get(i).getRegistrationId() == 0 && data.get(i).getRemindId() != 0)) {
-                        textView.setBackgroundResource(R.drawable.consulting9);
+                        if (mSelect == position) {
+                            textView.setBackgroundResource(R.drawable.consulting_onclick9);
+                        } else {
+                            textView.setBackgroundResource(R.drawable.consulting9);
+                        }
                     } else if (data.get(i).getRegistrationId() != 0 && data.get(i).getRemindId() == 0) {
-                        textView.setBackgroundResource(R.drawable.consulting6);
+                        if (mSelect == position) {
+                            textView.setBackgroundResource(R.drawable.consulting_onclick6);
+                        } else {
+                            textView.setBackgroundResource(R.drawable.consulting6);
+                        }
                     } else if (data.get(i).getRegistrationId() != 0 && data.get(i).getRemindId() != 0) {
-                        textView.setBackgroundResource(R.drawable.consulting3);
+                        if (mSelect == position) {
+                            textView.setBackgroundResource(R.drawable.consulting_onclick3);
+                        } else {
+                            textView.setBackgroundResource(R.drawable.consulting3);
+                        }
                     }
 
                 }
@@ -339,11 +350,23 @@ public class CalendarAdapter extends BaseAdapter {
             for (int i = 0; i < data.size(); i++) {
                 if ((scheduleYear + "-" + scheduleMonth + "-" + scheduleDay).equals(data.get(i).getDate()) && position < daysOfMonth + dayOfWeek && position >= dayOfWeek) {
                     if ((data.get(i).getRemindId() != 0 && data.get(i).getRegistrationId() == 0 && data.get(i).getHealthId() == 0) || (data.get(i).getRemindId() != 0 && data.get(i).getRegistrationId() != 0 && data.get(i).getHealthId() == 0)) {
-                        textView.setBackgroundResource(R.drawable.consulting9);
+                        if (mSelect == position) {
+                            textView.setBackgroundResource(R.drawable.consulting_onclick9);
+                        } else {
+                            textView.setBackgroundResource(R.drawable.consulting9);
+                        }
                     } else if (data.get(i).getHealthId() != 0 && data.get(i).getRemindId() == 0) {
-                        textView.setBackgroundResource(R.drawable.consulting7);
+                        if (mSelect == position) {
+                            textView.setBackgroundResource(R.drawable.consulting_onclick7);
+                        } else {
+                            textView.setBackgroundResource(R.drawable.consulting7);
+                        }
                     } else if (data.get(i).getHealthId() != 0 && data.get(i).getRemindId() != 0) {
-                        textView.setBackgroundResource(R.drawable.consulting8);
+                        if (mSelect == position) {
+                            textView.setBackgroundResource(R.drawable.consulting_onclick8);
+                        } else {
+                            textView.setBackgroundResource(R.drawable.consulting8);
+                        }
                     }
                 }
 
@@ -357,15 +380,35 @@ public class CalendarAdapter extends BaseAdapter {
                 if ((scheduleYear + "-" + scheduleMonth + "-" + scheduleDay).equals(data.get(i).getDate()) && position < daysOfMonth + dayOfWeek && position >= dayOfWeek) {
 
                     if ((data.get(i).getHealthId() != 0 && data.get(i).getRegistrationId() != 0 && data.get(i).getRemindId() != 0) || (data.get(i).getHealthId() == 0 && data.get(i).getRegistrationId() != 0 && data.get(i).getRemindId() != 0)) {
-                        textView.setBackgroundResource(R.drawable.consulting3);
+                        if (mSelect == position) {
+                            textView.setBackgroundResource(R.drawable.consulting_onclick3);
+                        } else {
+                            textView.setBackgroundResource(R.drawable.consulting3);
+                        }
                     } else if ((data.get(i).getRegistrationId() != 0 && data.get(i).getRemindId() == 0 && data.get(i).getHealthId() != 0) || (data.get(i).getRegistrationId() != 0 && data.get(i).getRemindId() == 0 && data.get(i).getHealthId() == 0)) {
-                        textView.setBackgroundResource(R.drawable.consulting6);
+                        if (mSelect == position) {
+                            textView.setBackgroundResource(R.drawable.consulting_onclick6);
+                        } else {
+                            textView.setBackgroundResource(R.drawable.consulting6);
+                        }
                     } else if (data.get(i).getHealthId() != 0 && data.get(i).getRemindId() == 0 && data.get(i).getRegistrationId() == 0) {
-                        textView.setBackgroundResource(R.drawable.consulting7);
+                        if (mSelect == position) {
+                            textView.setBackgroundResource(R.drawable.consulting_onclick7);
+                        } else {
+                            textView.setBackgroundResource(R.drawable.consulting7);
+                        }
                     } else if (data.get(i).getHealthId() != 0 && data.get(i).getRemindId() != 0 && data.get(i).getRegistrationId() == 0) {
-                        textView.setBackgroundResource(R.drawable.consulting8);
+                        if (mSelect == position) {
+                            textView.setBackgroundResource(R.drawable.consulting_onclick8);
+                        } else {
+                            textView.setBackgroundResource(R.drawable.consulting8);
+                        }
                     } else if (data.get(i).getRemindId() != 0 && data.get(i).getHealthId() == 0 && data.get(i).getRegistrationId() == 0) {
-                        textView.setBackgroundResource(R.drawable.consulting9);
+                        if (mSelect == position) {
+                            textView.setBackgroundResource(R.drawable.consulting_onclick9);
+                        } else {
+                            textView.setBackgroundResource(R.drawable.consulting9);
+                        }
                     }
                 }
             }

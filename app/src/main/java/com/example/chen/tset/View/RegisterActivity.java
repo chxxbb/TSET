@@ -2,6 +2,8 @@ package com.example.chen.tset.View;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.graphics.Color;
+import android.os.CountDownTimer;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.TextUtils;
@@ -10,6 +12,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.Toast;
 
 import com.example.chen.tset.Data.Http_data;
@@ -32,28 +35,32 @@ public class RegisterActivity extends MyBaseActivity {
 
     EditText activity_register_phone = null, activity_register_password = null, activity_register_password2 = null, activity_register_Verification_code = null;
     Button activity_register_Verification_code_button = null, activity_register_submit = null;
-    ImageView activity_register_exit = null;
+    LinearLayout activity_register_exit = null;
 
     Activity activity = this;
     Gson gson = new Gson();
 
     User user = new User();
 
+    private TimeCount time;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_register);
+
         initView();
 
+        time = new TimeCount(60000, 1000);
         initOnclick();
 
     }
 
     private void initOnclick() {
-
         activity_register_Verification_code_button.setOnClickListener(new View.OnClickListener() {      //点击发送验证码后触发
             @Override
             public void onClick(View v) {
+
                 if (TextUtils.isEmpty(activity_register_phone.getText())) {
                     Toast.makeText(activity, "请填写手机号", Toast.LENGTH_LONG).show();
                 } else if (isMobileNO(activity_register_phone.getText().toString())) {
@@ -78,6 +85,7 @@ public class RegisterActivity extends MyBaseActivity {
                                 public void onResponse(String response, int id) {
                                     Log.e("验证码返回", response);
                                     if ("0".equals(response)) {
+                                        time.start();
                                         Toast.makeText(activity, "验证码已发送", Toast.LENGTH_LONG).show();
                                     } else {
                                         Toast.makeText(activity, "验证码发送失败", Toast.LENGTH_LONG).show();
@@ -155,7 +163,7 @@ public class RegisterActivity extends MyBaseActivity {
         activity_register_Verification_code = (EditText) findViewById(R.id.activity_register_Verification_code);
         activity_register_Verification_code_button = (Button) findViewById(R.id.activity_register_Verification_code_button);
         activity_register_submit = (Button) findViewById(R.id.activity_register_submit);
-        activity_register_exit = (ImageView) findViewById(R.id.activity_register_exit);
+        activity_register_exit = (LinearLayout) findViewById(R.id.activity_register_exit);
         activity_register_exit.setOnClickListener(listener);
     }
 
@@ -176,6 +184,29 @@ public class RegisterActivity extends MyBaseActivity {
         Pattern p = Pattern.compile("^[0-9a-zA-Z]{6,16}$");
         Matcher m = p.matcher(mobiles);
         return m.matches();
+    }
+
+    class TimeCount extends CountDownTimer {
+
+        public TimeCount(long millisInFuture, long countDownInterval) {
+            super(millisInFuture, countDownInterval);
+        }
+
+        @Override
+        public void onTick(long millisUntilFinished) {
+            activity_register_Verification_code_button.setBackgroundResource(R.drawable.verification_btn_case);
+            activity_register_Verification_code_button.setClickable(false);
+            activity_register_Verification_code_button.setText(+millisUntilFinished / 1000+"秒");
+
+        }
+
+        @Override
+        public void onFinish() {
+            activity_register_Verification_code_button.setText("获取验证码");
+            activity_register_Verification_code_button.setClickable(true);
+            activity_register_Verification_code_button.setBackgroundResource(R.drawable.verification_btn_case);
+
+        }
     }
 
 }

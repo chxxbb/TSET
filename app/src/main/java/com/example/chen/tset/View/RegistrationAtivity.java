@@ -33,6 +33,7 @@ import com.example.chen.tset.Data.Registration;
 import com.example.chen.tset.Data.User_Http;
 import com.example.chen.tset.R;
 import com.example.chen.tset.Utils.MyBaseActivity;
+import com.example.chen.tset.Utils.SharedPsaveuser;
 import com.example.chen.tset.page.RegistrationageAdapter;
 import com.example.chen.tset.page.RegistrationdivisionAdapter;
 import com.google.gson.Gson;
@@ -83,12 +84,15 @@ public class RegistrationAtivity extends MyBaseActivity {
     //订单号
     private String orderCode;
 
+    SharedPsaveuser sp;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         requestWindowFeature(Window.FEATURE_NO_TITLE);
         setContentView(R.layout.activity_registration_ativity);
+        sp=new SharedPsaveuser(this);
         findView();
 
 
@@ -220,7 +224,7 @@ public class RegistrationAtivity extends MyBaseActivity {
                             .addParams("name", et_name.getText().toString())
                             .addParams("phone", et_phone.getText().toString())
                             .addParams("content", et_describe.getText().toString())
-                            .addParams("userId", User_Http.user.getId() + "")
+                            .addParams("userId", sp.getTag().getId() + "")
                             .addParams("createTime", str)
                             .build()
                             .execute(new StringCallback() {

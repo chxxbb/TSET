@@ -15,6 +15,7 @@ import com.example.chen.tset.Data.Http_data;
 import com.example.chen.tset.Data.User_Http;
 import com.example.chen.tset.R;
 import com.example.chen.tset.Utils.MyBaseActivity;
+import com.example.chen.tset.Utils.SharedPsaveuser;
 import com.zhy.http.okhttp.OkHttpUtils;
 import com.zhy.http.okhttp.callback.StringCallback;
 
@@ -26,11 +27,13 @@ public class PhonechangeActivity extends MyBaseActivity {
     private EditText et_verificationcode, et_phone;
     private TextView tv_pas;
     private LinearLayout ll_rutphone;
+    SharedPsaveuser sp;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_phonechange);
+        sp=new SharedPsaveuser(this);
         findView();
     }
 
@@ -76,7 +79,7 @@ public class PhonechangeActivity extends MyBaseActivity {
                     OkHttpUtils
                             .post()
                             .url(Http_data.http_data + "/bingding")
-                            .addParams("id", User_Http.user.getId() + "")
+                            .addParams("id", sp.getTag().getId() + "")
                             .addParams("phone", et_phone.getText().toString())
                             .addParams("code", et_verificationcode.getText().toString())
                             .build()

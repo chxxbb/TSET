@@ -205,7 +205,8 @@
         <activity android:name=".View.ChatpageActivity" />
         <activity android:name=".View.LoginActivity" />
         <activity android:name=".View.CompilePharmacyRemindActivity" />
-        <activity android:name=".View.LogActivity"></activity>
+        <activity android:name=".View.LogActivity" />
+        <activity android:name=".View.OnekeyLoinActivity"></activity>
     </application>
 
 </manifest>

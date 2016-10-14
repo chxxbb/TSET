@@ -22,6 +22,7 @@ import com.example.chen.tset.Data.User;
 import com.example.chen.tset.Data.User_Http;
 import com.example.chen.tset.R;
 import com.example.chen.tset.Utils.MyBaseActivity;
+import com.example.chen.tset.Utils.SharedPsaveuser;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import com.nostra13.universalimageloader.core.ImageLoader;
@@ -50,10 +51,13 @@ public class ConsultPageActivity extends MyBaseActivity implements View.OnClickL
     Consultparticulars consultparticulars;
     String collect;
 
+    SharedPsaveuser sp;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_consult_page);
+        sp=new SharedPsaveuser(ConsultPageActivity.this);
         findview();
 
     }
@@ -73,11 +77,11 @@ public class ConsultPageActivity extends MyBaseActivity implements View.OnClickL
         tv = (TextView) findViewById(R.id.tv);
         scrollview.setVerticalScrollBarEnabled(false);
         ll_consult_return.setOnClickListener(this);
-        ll_consult_collect.setOnClickListener(this);
+        ll_consult_collect.setOnClickListener(collectlistener);
         collect = getIntent().getStringExtra("collect");
         information = getIntent().getStringExtra("information");
         findCollectExistByUserIdAndCyclopediaId();
-        ll_consult_collect.setVisibility(View.GONE);
+
 
 
         informationinit();
@@ -93,7 +97,7 @@ public class ConsultPageActivity extends MyBaseActivity implements View.OnClickL
                 OkHttpUtils
                         .post()
                         .url(Http_data.http_data + "/FindCollectExistByUserIdAndCyclopediaId")
-                        .addParams("userId", User_Http.user.getId() + "")
+                        .addParams("userId", sp.getTag().getId() + "")
                         .addParams("cyclopediaId", information)
                         .build()
                         .execute(new StringCallback() {
@@ -167,41 +171,11 @@ public class ConsultPageActivity extends MyBaseActivity implements View.OnClickL
             case R.id.ll_consult_return:
                 finish();
                 break;
-            case R.id.ll_consult_collect:
-                new Thread(new Runnable() {
-                    @Override
-                    public void run() {
-                        //收藏
-                        OkHttpUtils
-                                .post()
-                                .url(Http_data.http_data + "/AddCollectByUserIdAndCyclopediaId")
-                                .addParams("userId", User_Http.user.getId() + "")
-                                .addParams("cyclopediaId", information)
-                                .build()
-                                .execute(new StringCallback() {
-                                    @Override
-                                    public void onError(Call call, Exception e, int id) {
-                                        handler.sendEmptyMessage(0);
-                                    }
-
-                                    @Override
-                                    public void onResponse(String response, int id) {
-                                        Log.e("咨询详情收藏返回", response);
-                                        if (response.equals("0")) {
-                                            handler.sendEmptyMessage(6);
-
-                                        }
-
-                                    }
-                                });
-                    }
-                }).start();
-
-                break;
 
 
         }
     }
+
 
     private Handler handler = new Handler() {
         @Override
@@ -221,7 +195,7 @@ public class ConsultPageActivity extends MyBaseActivity implements View.OnClickL
                     tv_collsult.setTextColor(android.graphics.Color.parseColor("#999999"));
                     iv_collsult.setBackgroundResource(R.drawable.consult_unmeppraise);
                     tv_collsult.setText("已赞");
-                    ll_consult_collect.setOnClickListener(null);
+                    ll_consult_collect.setOnClickListener(unfavoritelistener);
                     break;
                 case 3:
 
@@ -242,12 +216,12 @@ public class ConsultPageActivity extends MyBaseActivity implements View.OnClickL
                     tv_content.setText("        " + consultparticulars.getContent() + " \n" + " \n");
                     ImageLoader.getInstance().displayImage(consultparticulars.getIcon(), iv_icon);
                     rl_loading.setVisibility(View.GONE);
-                    //判断是否为收藏页面点击进入，如果是则隐藏下方收藏按钮
-                    if (collect.equals("1")) {
-                        ll_consult_collect.setVisibility(View.GONE);
-                    } else {
-                        ll_consult_collect.setVisibility(View.VISIBLE);
-                    }
+//                    //判断是否为收藏页面点击进入，如果是则隐藏下方收藏按钮
+//                    if (collect.equals("1")) {
+//                        ll_consult_collect.setVisibility(View.GONE);
+//                    } else {
+//                        ll_consult_collect.setVisibility(View.VISIBLE);
+//                    }
                     break;
 
                 case 6:
@@ -255,11 +229,83 @@ public class ConsultPageActivity extends MyBaseActivity implements View.OnClickL
                     tv_collsult.setTextColor(android.graphics.Color.parseColor("#999999"));
                     iv_collsult.setBackgroundResource(R.drawable.consult_unmeppraise);
                     tv_collsult.setText("已赞");
-                    ll_consult_collect.setOnClickListener(null);
+                    ll_consult_collect.setOnClickListener(unfavoritelistener);
                     break;
 
 
             }
         }
     };
+
+    private View.OnClickListener collectlistener = new View.OnClickListener() {
+        @Override
+        public void onClick(View v) {
+            new Thread(new Runnable() {
+                @Override
+                public void run() {
+                    //收藏
+                    OkHttpUtils
+                            .post()
+                            .url(Http_data.http_data + "/AddCollectByUserIdAndCyclopediaId")
+                            .addParams("userId", sp.getTag().getId() + "")
+                            .addParams("cyclopediaId", information)
+                            .build()
+                            .execute(new StringCallback() {
+                                @Override
+                                public void onError(Call call, Exception e, int id) {
+                                    handler.sendEmptyMessage(0);
+                                }
+
+                                @Override
+                                public void onResponse(String response, int id) {
+                                    Log.e("咨询详情收藏返回", response);
+                                    if (response.equals("0")) {
+                                        handler.sendEmptyMessage(6);
+
+                                    }
+
+                                }
+                            });
+                }
+            }).start();
+
+        }
+    };
+
+
+    private View.OnClickListener unfavoritelistener = new View.OnClickListener() {
+        @Override
+        public void onClick(View v) {
+            Log.e("文章ID",information);
+            Log.e("userid",User_Http.user.getId()+"");
+            OkHttpUtils
+                    .post()
+                    .url(Http_data.http_data + "/DeleteCollectByUserIdAndCyclopediaId")
+                    .addParams("cyclopediaId", information)
+                    .addParams("userId",sp.getTag().getId()+"")
+                    .build()
+                    .execute(new StringCallback() {
+                        @Override
+                        public void onError(Call call, Exception e, int id) {
+                            Log.e("失败", "失败");
+                        }
+
+                        @Override
+                        public void onResponse(String response, int id) {
+                            Log.e("取消收藏返回",response);
+                            if (response.equals("0")) {
+                                Toast.makeText(ConsultPageActivity.this, "删除成功", Toast.LENGTH_SHORT).show();
+                                tv_collsult.setTextColor(android.graphics.Color.parseColor("#6fc9e6"));
+                                iv_collsult.setBackgroundResource(R.drawable.consult_isonclickpraise);
+                                tv_collsult.setText("赞");
+                                ll_consult_collect.setOnClickListener(collectlistener);
+
+                            }
+                        }
+                    });
+
+        }
+    };
+
+
 }

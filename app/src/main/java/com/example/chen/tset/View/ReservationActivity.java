@@ -20,6 +20,7 @@ import com.example.chen.tset.Data.Reservation;
 import com.example.chen.tset.Data.User_Http;
 import com.example.chen.tset.R;
 import com.example.chen.tset.Utils.MyBaseActivity;
+import com.example.chen.tset.Utils.SharedPsaveuser;
 import com.example.chen.tset.page.ReservationlistvAdapter;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
@@ -46,6 +47,7 @@ public class ReservationActivity extends MyBaseActivity implements View.OnClickL
     List<Reservation> list;
     List<Reservation> data;
     Gson gson = new Gson();
+    SharedPsaveuser sp;
 
     //233
 
@@ -54,6 +56,7 @@ public class ReservationActivity extends MyBaseActivity implements View.OnClickL
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_reservationactivity);
         data = new ArrayList<>();
+        sp=new SharedPsaveuser(this);
         findView();
 
     }
@@ -82,7 +85,7 @@ public class ReservationActivity extends MyBaseActivity implements View.OnClickL
         OkHttpUtils
                 .post()
                 .url(Http_data.http_data + "/FindOrderListByUserId")
-                .addParams("userId", User_Http.user.getId() + "")
+                .addParams("userId", sp.getTag().getId() + "")
                 .build()
                 .execute(new StringCallback() {
                     @Override

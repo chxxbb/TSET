@@ -1,6 +1,7 @@
 package com.example.chen.tset.View;
 
 import android.app.Activity;
+import android.os.CountDownTimer;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.TextUtils;
@@ -8,11 +9,13 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.Toast;
 
 import com.example.chen.tset.Data.Http_data;
 import com.example.chen.tset.R;
 import com.example.chen.tset.Utils.MyBaseActivity;
+import com.example.chen.tset.Utils.SharedPsaveuser;
 import com.zhy.http.okhttp.OkHttpUtils;
 import com.zhy.http.okhttp.callback.Callback;
 import com.zhy.http.okhttp.callback.StringCallback;
@@ -31,7 +34,12 @@ public class FindpawActivity extends MyBaseActivity {
     Button activity_find_password_getcode_button = null, activity_find_password_button = null;
 
     Activity activity = this;
-    private ImageView iv_ret;
+    private LinearLayout iv_ret;
+
+    SharedPsaveuser sp;
+
+    private TimeCount time;
+
 
 
     @Override
@@ -39,8 +47,10 @@ public class FindpawActivity extends MyBaseActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_find_pawnumber);
 
-        initView();
+        sp=new SharedPsaveuser(this);
 
+        initView();
+        time = new TimeCount(60000, 1000);
         initOnClick();
 
     }
@@ -76,8 +86,10 @@ public class FindpawActivity extends MyBaseActivity {
                                 public void onResponse(String response, int id) {
                                     System.out.println(response);
                                     if ("1".equals(response)) {
+
                                         Toast.makeText(activity, "验证码发送失败", Toast.LENGTH_LONG).show();
                                     } else {
+                                        time.start();
                                         Toast.makeText(activity, "验证码已发送", Toast.LENGTH_LONG).show();
                                     }
                                 }
@@ -158,7 +170,7 @@ public class FindpawActivity extends MyBaseActivity {
 
         activity_find_password_getcode_button = (Button) findViewById(R.id.find_password_getcode_button);
         activity_find_password_button = (Button) findViewById(R.id.find_password_button);
-        iv_ret= (ImageView) findViewById(R.id.iv_ret);
+        iv_ret= (LinearLayout) findViewById(R.id.iv_ret);
         iv_ret.setOnClickListener(listener);
 
     }
@@ -168,6 +180,31 @@ public class FindpawActivity extends MyBaseActivity {
             finish();
         }
     };
+
+
+
+    class TimeCount extends CountDownTimer {
+
+        public TimeCount(long millisInFuture, long countDownInterval) {
+            super(millisInFuture, countDownInterval);
+        }
+
+        @Override
+        public void onTick(long millisUntilFinished) {
+            activity_find_password_getcode_button.setBackgroundResource(R.drawable.verification_btn_case);
+            activity_find_password_getcode_button.setClickable(false);
+            activity_find_password_getcode_button.setText(millisUntilFinished / 1000 +"秒");
+
+        }
+
+        @Override
+        public void onFinish() {
+            activity_find_password_getcode_button.setText("获取验证码");
+            activity_find_password_getcode_button.setClickable(true);
+            activity_find_password_getcode_button.setBackgroundResource(R.drawable.verification_btn_case);
+
+        }
+    }
 
     public boolean isMobileNO(String mobiles) {
         Pattern p = Pattern.compile("^((13[0-9])|(15[^4,\\D])|(18[0-9]))\\d{8}$");

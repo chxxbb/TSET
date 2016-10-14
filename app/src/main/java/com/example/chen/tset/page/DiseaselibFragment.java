@@ -86,6 +86,24 @@ public class DiseaselibFragment extends Fragment {
         recyv_dise.setLayoutManager(new StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL));
         listview_dise.setVerticalScrollBarEnabled(false);
         recyv_dise.setVerticalScrollBarEnabled(false);
+        list = new ArrayList<>();
+
+        list1 = new ArrayList<>();
+
+        adapter = new DiseaseliblistvAdapter(getContext(), list);
+        listview_dise.setAdapter(adapter);
+
+
+        rl_nonetwork.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                rl_loading.setVisibility(View.VISIBLE);
+                listviewinit();
+                httpinit(0);
+                Log.e("23322", list.toString());
+
+            }
+        });
 
     }
 
@@ -93,9 +111,7 @@ public class DiseaselibFragment extends Fragment {
         Thread thread = new Thread(new Runnable() {
             @Override
             public void run() {
-                list = new ArrayList<>();
-                adapter = new DiseaseliblistvAdapter(getContext(), list);
-                listview_dise.setAdapter(adapter);
+
                 OkHttpUtils
                         .post()
                         .url(Http_data.http_data + "/FindSectionList")
@@ -135,7 +151,6 @@ public class DiseaselibFragment extends Fragment {
             switch (msg.what) {
                 case 0:
                     adapter.notifyDataSetChanged();
-                    rl_loading.setVisibility(View.GONE);
                     view1.setVisibility(View.VISIBLE);
                     break;
                 case 1:
@@ -146,6 +161,8 @@ public class DiseaselibFragment extends Fragment {
                     break;
                 case 2:
                     diseaselibrecyvAdapter.notifyDataSetChanged();
+                    rl_nonetwork.setVisibility(View.GONE);
+                    rl_loading.setVisibility(View.GONE);
                     break;
             }
         }
@@ -181,7 +198,6 @@ public class DiseaselibFragment extends Fragment {
         Thread thread1 = new Thread(new Runnable() {
             @Override
             public void run() {
-                list1 = new ArrayList<>();
                 OkHttpUtils
                         .post()
                         .url(Http_data.http_data + "/findDiseaseList")
@@ -200,6 +216,7 @@ public class DiseaselibFragment extends Fragment {
                                 }.getType());
                                 diseaselibrecyvAdapter = new DiseaselibrecyvAdapter(getContext(), list1);
                                 recyv_dise.setAdapter(diseaselibrecyvAdapter);
+
                                 handler.sendEmptyMessage(2);
                             }
                         });

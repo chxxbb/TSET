@@ -103,6 +103,9 @@ public class InquiryAdapter extends BaseAdapter {
         viewHolder.tv_intro.setText("擅长：" + list.get(position).getAdept());
         viewHolder.tv_section.setText(list.get(position).getSection());
         ImageLoader.getInstance().displayImage(list.get(position).getIcon(), viewHolder.iv_icon);
+
+
+
         viewHolder.fl_chat.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -273,6 +276,7 @@ public class InquiryAdapter extends BaseAdapter {
         private TextView tv_intro;
         private TextView tv_section;
         private FrameLayout fl_chat;
+        private View view;
 
         ViewHolder(View v) {
             textView = (TextView) v.findViewById(R.id.textView);
@@ -283,6 +287,7 @@ public class InquiryAdapter extends BaseAdapter {
             tv_intro = (TextView) v.findViewById(R.id.tv_intro);
             tv_section = (TextView) v.findViewById(R.id.tv_section);
             fl_chat = (FrameLayout) v.findViewById(R.id.fl_chat);
+            view=v.findViewById(R.id.view);
         }
     }
 }

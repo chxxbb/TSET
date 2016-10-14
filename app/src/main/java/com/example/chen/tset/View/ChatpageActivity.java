@@ -235,7 +235,12 @@ public class ChatpageActivity extends AppCompatActivity {
     private View.OnClickListener btnlistener = new View.OnClickListener() {
         @Override
         public void onClick(View v) {
-            sendmessage();
+            if(et_chat.getText().length()==0){
+                Toast.makeText(ChatpageActivity.this, "请输入你需要发送的内容", Toast.LENGTH_SHORT).show();
+            }else {
+                sendmessage();
+            }
+
         }
     };
 

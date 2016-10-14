@@ -3,7 +3,7 @@
     android:id="@+id/scrollview"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/white"
+    android:background="@color/backgroundgray"
     android:orientation="vertical">
 
     <FrameLayout
@@ -397,6 +397,10 @@
                 android:background="@color/backgroundgray"
                 android:orientation="vertical">
 
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/y15" />
+
                 <LinearLayout
                     android:id="@+id/ll_registration_info"
                     android:layout_width="match_parent"
@@ -404,7 +408,7 @@
                     android:layout_marginBottom="@dimen/y5"
                     android:layout_marginLeft="@dimen/x20"
                     android:layout_marginRight="@dimen/x20"
-                    android:layout_marginTop="@dimen/y20"
+                    android:layout_marginTop="@dimen/y5"
                     android:gravity="center_vertical"
                     android:orientation="horizontal"
                     android:visibility="gone">
@@ -518,11 +522,11 @@
 
                         <TextView
                             android:id="@+id/tv_consulting_health"
+                            android:includeFontPadding="false"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_marginLeft="@dimen/x30"
                             android:layout_marginTop="@dimen/y5"
-
                             android:textColor="#777777"
                             android:textSize="@dimen/y24" />
                     </LinearLayout>
@@ -546,6 +550,7 @@
                 android:layout_height="wrap_content"
                 android:layout_alignParentBottom="true"
                 android:layout_marginTop="@dimen/y400"
+                android:layout_marginBottom="@dimen/y400"
                 android:orientation="vertical">
 
                 <ImageView
@@ -562,6 +567,7 @@
                     android:text="内容加载中"
                     android:textColor="@color/linegray"
                     android:textSize="@dimen/y32" />
+
             </LinearLayout>
         </RelativeLayout>
     </FrameLayout>

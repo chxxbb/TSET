@@ -10,7 +10,10 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.Animation;
+import android.view.animation.RotateAnimation;
 import android.widget.AdapterView;
+import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.RelativeLayout;
 import android.widget.Toast;
@@ -52,6 +55,8 @@ public class CharactersafeFragment extends Fragment {
 
     SharedPsaveuser sp;
 
+
+
     public int getI() {
         return i;
     }
@@ -67,11 +72,11 @@ public class CharactersafeFragment extends Fragment {
 
         findView();
 
-
-
-
-
-        sp=new SharedPsaveuser(getContext());
+        sp = new SharedPsaveuser(getContext());
+        gson = new Gson();
+        list = new ArrayList<>();
+        adapter = new CharactersafeAdapter1(getContext(), list);
+        lv_charactersafe.setAdapter(adapter);
 
         init();
 
@@ -81,7 +86,18 @@ public class CharactersafeFragment extends Fragment {
     private void findView() {
         lv_charactersafe = (ListView) view.findViewById(R.id.lv_charactersafe);
         rl_nonetwork = (RelativeLayout) view.findViewById(R.id.rl_nonetwork);
+
         lv_charactersafe.setOnItemClickListener(listener);
+
+
+        rl_nonetwork.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                init();
+                rl_nonetwork.setVisibility(View.GONE);
+            }
+        });
     }
 
     @Override
@@ -92,10 +108,7 @@ public class CharactersafeFragment extends Fragment {
     }
 
     private void init() {
-        gson = new Gson();
-        list = new ArrayList<>();
-        adapter = new CharactersafeAdapter1(getContext(), list);
-        lv_charactersafe.setAdapter(adapter);
+
         Thread thread = new Thread(new Runnable() {
             @Override
             public void run() {
@@ -114,7 +127,7 @@ public class CharactersafeFragment extends Fragment {
                             @Override
                             public void onResponse(String response, int id) {
                                 Log.e("资讯返回", response);
-                                if(!response.equals("1")){
+                                if (!response.equals("1")) {
                                     Type listtype = new TypeToken<LinkedList<Consult>>() {
                                     }.getType();
                                     LinkedList<Consult> leclist = gson.fromJson(response, listtype);

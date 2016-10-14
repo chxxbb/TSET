@@ -17,6 +17,7 @@ import com.example.chen.tset.Data.User_Http;
 import com.example.chen.tset.R;
 import com.example.chen.tset.Utils.MyBaseActivity;
 import com.example.chen.tset.Utils.MyEditText;
+import com.example.chen.tset.Utils.SharedPsaveuser;
 import com.example.chen.tset.page.NoteEditor;
 import com.zhy.http.okhttp.OkHttpUtils;
 import com.zhy.http.okhttp.callback.StringCallback;
@@ -346,11 +347,12 @@ public class HealthconditionActivity extends MyBaseActivity {
         content = et_healthcondition.getText().toString();
         String a = list.toString();
         String tag = a.substring(1, a.length() - 1);
+        SharedPsaveuser sp=new SharedPsaveuser(this);
 
         OkHttpUtils
                 .post()
                 .url(Http_data.http_data + "/AddHealth")
-                .addParams("userId", User_Http.user.getId() + "")
+                .addParams("userId", sp.getTag().getId() + "")
                 .addParams("tag", tag)
                 .addParams("content", content)
                 .build()

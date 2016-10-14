@@ -1,5 +1,6 @@
 package com.example.chen.tset.View;
 
+import android.app.Dialog;
 import android.content.Intent;
 import android.os.Handler;
 import android.os.Message;
@@ -7,6 +8,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
@@ -40,7 +42,7 @@ import okhttp3.Call;
 public class ReservationlistActivity extends MyBaseActivity implements View.OnClickListener {
     private LinearLayout ll_myreservationg;
     private ScrollView scrollView;
-    private TextView tv_content, tv_doctor_name, tv_title, tv_appointment_time, tv_valid_time, tv_address, tv_patient_name, tv_money, tv_patient_phone, tv_order_no, tv_hospital, tv_section, tv_doctor_section;
+    private TextView tv_content, tv_title, tv_appointment_time, tv_valid_time, tv_address, tv_patient_name, tv_money, tv_patient_phone, tv_order_no, tv_hospital, tv_section;
     private CircleImageView iv_icon;
     private RelativeLayout rl_nonetwork, rl_loading;
 
@@ -50,6 +52,9 @@ public class ReservationlistActivity extends MyBaseActivity implements View.OnCl
     private String reservationid = null;
 
     Reservationlist reservationlist;
+
+    private Dialog setHeadDialog;
+    private View dialogView;
 
 
     @Override
@@ -67,7 +72,7 @@ public class ReservationlistActivity extends MyBaseActivity implements View.OnCl
         reservationid = getIntent().getStringExtra("ReservationID");
         ll_myreservationg = (LinearLayout) findViewById(R.id.ll_myreservationg);
         tv_content = (TextView) findViewById(R.id.tv_content);
-        tv_doctor_name = (TextView) findViewById(R.id.tv_doctor_name);
+
         tv_title = (TextView) findViewById(R.id.tv_title);
         tv_appointment_time = (TextView) findViewById(R.id.tv_appointment_time);
         tv_valid_time = (TextView) findViewById(R.id.tv_valid_time);
@@ -78,7 +83,7 @@ public class ReservationlistActivity extends MyBaseActivity implements View.OnCl
         tv_order_no = (TextView) findViewById(R.id.tv_order_no);
         tv_hospital = (TextView) findViewById(R.id.tv_hospital);
         tv_section = (TextView) findViewById(R.id.tv_section);
-        tv_doctor_section = (TextView) findViewById(R.id.tv_doctor_section);
+
         iv_icon = (CircleImageView) findViewById(R.id.iv_icon);
         rl_nonetwork = (RelativeLayout) findViewById(R.id.rl_nonetwork);
         rl_loading = (RelativeLayout) findViewById(R.id.rl_loading);
@@ -114,6 +119,7 @@ public class ReservationlistActivity extends MyBaseActivity implements View.OnCl
     }
 
 
+
     Handler handler = new Handler() {
         @Override
         public void handleMessage(Message msg) {
@@ -126,10 +132,10 @@ public class ReservationlistActivity extends MyBaseActivity implements View.OnCl
                     break;
                 case 1:
 
-                    tv_doctor_name.setText(reservationlist.getName());
+
                     tv_title.setText("职称：" + reservationlist.getTitle());
                     tv_appointment_time.setText("日期：" + reservationlist.getReservationDate());
-                    tv_valid_time.setText("有效期：" + reservationlist.getReservationDate() );
+                    tv_valid_time.setText("有效期：" + reservationlist.getReservationDate());
                     if (reservationlist.getCity().equals("成都")) {
                         tv_address.setText("地址：" + "成都地址");
                     } else {
@@ -147,10 +153,16 @@ public class ReservationlistActivity extends MyBaseActivity implements View.OnCl
                         tv_hospital.setText("深证天使儿童医院");
                     }
                     tv_section.setText("科室：" + reservationlist.getSection());
-                    tv_doctor_section.setText(reservationlist.getSection());
 
-                    if (reservationlist.getOrderStatus().equals("待支付") || reservationlist.getOrderStatus().equals("已预约")) {
+
+                    if ( reservationlist.getOrderStatus().equals("已预约")) {
+
                         btn_cancel.setOnClickListener(listener);
+
+                    }else if(reservationlist.getOrderStatus().equals("待支付")){
+                        btn_cancel.setText("去支付");
+                        btn_cancel.setOnClickListener(paylistener);
+
                     } else if (reservationlist.getOrderStatus().equals("已取消")) {
                         btn_cancel.setBackgroundResource(R.drawable.reservationlist_btn_graycase);
                         btn_cancel.setText("已取消");
@@ -185,32 +197,72 @@ public class ReservationlistActivity extends MyBaseActivity implements View.OnCl
     private View.OnClickListener listener = new View.OnClickListener() {
         @Override
         public void onClick(View v) {
-            new Thread(new Runnable() {
-                @Override
-                public void run() {
+            cancelindent();
 
-                }
-            }).start();
-            OkHttpUtils
-                    .post()
-                    .url(Http_data.http_data + "/ChangOrderStatusByOrderCode")
-                    .addParams("orderCode", reservationlist.getOrderCode())
-                    .addParams("status", "已取消")
-                    .build()
-                    .execute(new StringCallback() {
-                        @Override
-                        public void onError(Call call, Exception e, int id) {
-                            handler.sendEmptyMessage(2);
-                        }
+        }
+    };
 
-                        @Override
-                        public void onResponse(String response, int id) {
+    public void cancelindent() {
+        setHeadDialog = new Dialog(this, R.style.CustomDialog);
+        setHeadDialog.show();
+        dialogView = View.inflate(this, R.layout.inquiry_chat_dialog, null);
+        setHeadDialog.getWindow().setContentView(dialogView);
+        WindowManager.LayoutParams lp = setHeadDialog.getWindow()
+                .getAttributes();
+        setHeadDialog.getWindow().setAttributes(lp);
 
-                            if (response.equals("0")) {
-                                handler.sendEmptyMessage(3);
+        RelativeLayout rl_confirm = (RelativeLayout) dialogView.findViewById(R.id.rl_confirm);
+        RelativeLayout lr_cancel = (RelativeLayout) dialogView.findViewById(R.id.lr_cancel);
+        TextView tv_whether = (TextView) dialogView.findViewById(R.id.tv_whether);
+        tv_whether.setText("是否确认取消订单");
+
+
+        lr_cancel.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                setHeadDialog.dismiss();
+            }
+        });
+
+
+        rl_confirm.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                new Thread(new Runnable() {
+                    @Override
+                    public void run() {
+
+                    }
+                }).start();
+                OkHttpUtils
+                        .post()
+                        .url(Http_data.http_data + "/ChangOrderStatusByOrderCode")
+                        .addParams("orderCode", reservationlist.getOrderCode())
+                        .addParams("status", "已取消")
+                        .build()
+                        .execute(new StringCallback() {
+                            @Override
+                            public void onError(Call call, Exception e, int id) {
+                                handler.sendEmptyMessage(2);
                             }
-                        }
-                    });
+
+                            @Override
+                            public void onResponse(String response, int id) {
+
+                                if (response.equals("0")) {
+                                    handler.sendEmptyMessage(3);
+                                }
+                            }
+                        });
+
+            }
+        });
+    }
+
+    private View.OnClickListener paylistener=new View.OnClickListener() {
+        @Override
+        public void onClick(View v) {
+            Toast.makeText(ReservationlistActivity.this, "支付", Toast.LENGTH_SHORT).show();
         }
     };
 

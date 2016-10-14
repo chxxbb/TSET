@@ -50,7 +50,7 @@ public class SetPageActivity extends MyBaseActivity implements View.OnClickListe
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.rl_feedback:
-                //一键反馈
+                //意见反馈
                 Intent intent1 = new Intent(SetPageActivity.this, FeedbackActivity.class);
                 startActivity(intent1);
                 break;

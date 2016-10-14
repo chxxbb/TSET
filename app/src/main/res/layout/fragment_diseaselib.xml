@@ -52,9 +52,10 @@
             android:visibility="gone">
 
             <LinearLayout
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_centerInParent="true"
+                android:gravity="center_horizontal"
                 android:orientation="vertical">
 
                 <ImageView
@@ -69,6 +70,21 @@
                     android:text="内容被外星人劫持了"
                     android:textColor="@color/linegray"
                     android:textSize="@dimen/y32" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/y50"
+                    android:gravity="center_horizontal"
+                    android:text="点击刷新"
+                    android:textColor="@color/backgroundblue"
+                    android:textSize="@dimen/y36" />
+
+                <ImageView
+                    android:id="@+id/iv_refresh"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/refresh" />
             </LinearLayout>
         </RelativeLayout>
 

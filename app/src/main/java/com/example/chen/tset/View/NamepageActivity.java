@@ -16,6 +16,7 @@ import com.example.chen.tset.Data.User;
 import com.example.chen.tset.Data.User_Http;
 import com.example.chen.tset.R;
 import com.example.chen.tset.Utils.MyBaseActivity;
+import com.example.chen.tset.Utils.SharedPsaveuser;
 import com.zhy.http.okhttp.OkHttpUtils;
 import com.zhy.http.okhttp.callback.StringCallback;
 
@@ -29,10 +30,13 @@ public class NamepageActivity extends MyBaseActivity {
     private TextView tv_pas;
     private LinearLayout ll_rutname;
 
+    SharedPsaveuser sp;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_namepage);
+        sp = new SharedPsaveuser(this);
         findView();
     }
 
@@ -76,10 +80,11 @@ public class NamepageActivity extends MyBaseActivity {
                     finish();
                     break;
                 case R.id.tv_pas:
+                    SharedPsaveuser sp = new SharedPsaveuser(NamepageActivity.this);
                     OkHttpUtils
                             .post()
                             .url(Http_data.http_data + "/ChangeName")
-                            .addParams("id", User_Http.user.getId() + "")
+                            .addParams("id", sp.getTag().getId() + "")
                             .addParams("name", et_name_save.getText().toString())
                             .build()
                             .execute(new StringCallback() {

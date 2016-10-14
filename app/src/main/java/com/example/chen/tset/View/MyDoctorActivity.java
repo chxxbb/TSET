@@ -17,6 +17,7 @@ import com.example.chen.tset.Data.MyDoctor;
 import com.example.chen.tset.Data.User_Http;
 import com.example.chen.tset.R;
 import com.example.chen.tset.Utils.MyBaseActivity;
+import com.example.chen.tset.Utils.SharedPsaveuser;
 import com.example.chen.tset.page.MyDoctorAdapter;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
@@ -70,11 +71,12 @@ public class MyDoctorActivity extends MyBaseActivity {
 
     private void httpinit() {
 //        new Thread(new R)
+        SharedPsaveuser sp=new SharedPsaveuser(this);
         gson = new Gson();
         OkHttpUtils
                 .post()
                 .url(Http_data.http_data + "/FindDoctorListByUserId")
-                .addParams("userId", User_Http.user.getId() + "")
+                .addParams("userId", sp.getTag().getId() + "")
                 .build()
                 .execute(new StringCallback() {
                     @Override

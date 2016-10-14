@@ -15,6 +15,7 @@ import com.example.chen.tset.Data.Http_data;
 import com.example.chen.tset.Data.User_Http;
 import com.example.chen.tset.R;
 import com.example.chen.tset.Utils.MyBaseActivity;
+import com.example.chen.tset.Utils.SharedPsaveuser;
 import com.zhy.http.okhttp.OkHttpUtils;
 import com.zhy.http.okhttp.callback.StringCallback;
 
@@ -28,11 +29,14 @@ public class EvaluatepageActivity extends MyBaseActivity {
     private LinearLayout ll_rutname;
     String doctor_id=null;
 
+    SharedPsaveuser sp;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_evaluatepage);
+        sp=new SharedPsaveuser(this);
         findView();
     }
 
@@ -74,7 +78,7 @@ public class EvaluatepageActivity extends MyBaseActivity {
                     OkHttpUtils
                             .post()
                             .url(Http_data.http_data + "/addappraise")
-                            .addParams("user_id", User_Http.user.getId()+"")
+                            .addParams("user_id", sp.getTag().getId()+"")
                             .addParams("doctor_id",doctor_id)
                             .addParams("content",et_evaluate.getText().toString())
                             .build()

@@ -94,7 +94,7 @@ public class PasswordSettingActivity extends MyBaseActivity implements View.OnCl
             OkHttpUtils
                     .post()
                     .url(Http_data.http_data + "/ChangeP" )
-                    .addParams("id",User_Http.user.getId()+"")
+                    .addParams("id",sp.getTag().getId()+"")
                     .addParams("oldPassword", et_forpassword.getText().toString())
                     .addParams("newPassword", et_newpassword.getText().toString())
                     .build()

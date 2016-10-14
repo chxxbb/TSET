@@ -1,20 +1,57 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/register_background"
+    android:focusable="true"
+    android:focusableInTouchMode="true"
+    android:orientation="vertical"
     android:paddingLeft="@dimen/x30"
     android:paddingRight="@dimen/x30"
-    tools:context=".View.LoginActivity"
-    android:focusable="true"
-    android:focusableInTouchMode="true">
+    tools:context=".View.LoginActivity">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/y96"
+        android:gravity="center_vertical"
+        android:orientation="horizontal">
+
+        <LinearLayout
+            android:id="@+id/activity_login_exit"
+            android:layout_width="@dimen/x100"
+            android:layout_height="match_parent"
+            android:gravity="center_vertical">
+
+            <ImageView
+
+                android:layout_width="@dimen/x20"
+                android:layout_height="@dimen/y36"
+                android:layout_marginLeft="@dimen/x15"
+                android:src="@drawable/doctorparticulars_return" />
+        </LinearLayout>
+
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_centerInParent="true">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:text="密码登陆"
+                android:textColor="@color/white"
+                android:textSize="@dimen/y36" />
+        </LinearLayout>
+    </RelativeLayout>
 
     <RelativeLayout
         android:id="@+id/login_phone_relayout"
         android:layout_width="match_parent"
         android:layout_height="@dimen/y80"
-        android:layout_marginTop="@dimen/y270"
+        android:layout_marginTop="@dimen/y40"
         android:background="@drawable/login_shape"
         android:paddingLeft="@dimen/x20"
         android:paddingRight="@dimen/x20">
@@ -70,11 +107,12 @@
             android:layout_marginRight="@dimen/x20"
             android:layout_toRightOf="@id/login_password_image"
             android:background="@null"
-            android:textCursorDrawable="@drawable/deittext_cursor_white_style"
             android:hint="请输入密码"
             android:inputType="textPassword"
+            android:maxLength="16"
             android:textColor="@android:color/white"
             android:textColorHint="@android:color/white"
+            android:textCursorDrawable="@drawable/deittext_cursor_white_style"
             android:textSize="@dimen/y32" />
 
     </RelativeLayout>
@@ -90,88 +128,29 @@
         android:textColor="@android:color/white"
         android:textSize="@dimen/y32" />
 
-    <TextView
-        android:id="@+id/login_new_user"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/login_button"
-        android:layout_marginTop="@dimen/y40"
-        android:text="新用户"
-        android:textColor="@color/white"
-        android:textSize="@dimen/y34" />
-
-    <TextView
-        android:id="@+id/login_find_password"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentRight="true"
-        android:layout_below="@id/login_button"
-        android:layout_marginTop="@dimen/y40"
-        android:text="忘记密码?"
-        android:textColor="@color/white"
-        android:textSize="@dimen/y34" />
-
-    <ImageView
-        android:id="@+id/login_page_api_weixin"
-        android:layout_width="@dimen/y100"
-        android:layout_height="@dimen/y100"
-        android:layout_alignParentBottom="true"
-        android:layout_centerHorizontal="true"
-        android:layout_marginBottom="@dimen/y80"
-        android:src="@drawable/register_wechat" />
-
-    <ImageView
-        android:id="@+id/login_page_api_qq"
-        android:layout_width="@dimen/y100"
-        android:layout_height="@dimen/y100"
-        android:layout_alignParentBottom="true"
-        android:layout_marginBottom="@dimen/y80"
-        android:layout_marginRight="@dimen/x40"
-        android:layout_toLeftOf="@id/login_page_api_weixin"
-        android:src="@drawable/register_qq" />
-
-    <ImageView
-        android:id="@+id/login_page_api_weibo"
-        android:layout_width="@dimen/y100"
-        android:layout_height="@dimen/y100"
-        android:layout_alignParentBottom="true"
-        android:layout_marginBottom="@dimen/y80"
-        android:layout_marginLeft="@dimen/x40"
-        android:layout_toRightOf="@id/login_page_api_weixin"
-        android:src="@drawable/register_weibo" />
-
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_above="@id/login_page_api_weixin"
-        android:layout_marginBottom="@dimen/y60">
+        android:layout_below="@id/login_button"
+        android:layout_marginTop="@dimen/y40">
 
         <TextView
-            android:id="@+id/login_page_api_title"
+            android:id="@+id/login_new_user"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_centerHorizontal="true"
-            android:text="第三方帐号登录"
+            android:text="快速注册"
             android:textColor="@color/white"
-            android:textSize="@dimen/y32" />
+            android:textSize="@dimen/y34" />
 
-        <View
-            android:layout_width="@dimen/x130"
-            android:layout_height="@dimen/y1"
-            android:layout_centerVertical="true"
-            android:layout_marginRight="@dimen/x24"
-            android:layout_toLeftOf="@id/login_page_api_title"
-            android:background="@color/white" />
-
-        <View
-            android:layout_width="@dimen/x130"
-            android:layout_height="@dimen/y1"
-            android:layout_centerVertical="true"
-            android:layout_marginLeft="@dimen/x24"
-            android:layout_toRightOf="@id/login_page_api_title"
-            android:background="@color/white" />
-
+        <TextView
+            android:id="@+id/login_find_password"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:text="忘记密码?"
+            android:textColor="@color/white"
+            android:textSize="@dimen/y34" />
     </RelativeLayout>
 
 
-</RelativeLayout>
+</LinearLayout>

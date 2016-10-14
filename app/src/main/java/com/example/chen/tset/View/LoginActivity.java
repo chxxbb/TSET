@@ -2,6 +2,8 @@ package com.example.chen.tset.View;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.graphics.Color;
+import android.os.CountDownTimer;
 import android.support.v4.view.animation.FastOutLinearInInterpolator;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -39,6 +41,8 @@ public class LoginActivity extends AppCompatActivity {
     Gson gson = new Gson();
     Activity activity = this;
     SharedPsaveuser sp;
+
+
 
 
 
@@ -142,6 +146,9 @@ public class LoginActivity extends AppCompatActivity {
         login_find_password = (TextView) findViewById(R.id.login_find_password);
 
     }
+
+
+
 
 
     @Override
