@@ -13,6 +13,7 @@ import android.widget.Toast;
 import com.example.chen.tset.Data.Http_data;
 import com.example.chen.tset.Data.Pharmacyremindinit;
 import com.example.chen.tset.R;
+import com.example.chen.tset.Utils.ListenerManager;
 import com.google.gson.Gson;
 import com.zhy.http.okhttp.OkHttpUtils;
 import com.zhy.http.okhttp.callback.StringCallback;
@@ -119,6 +120,7 @@ public class CompilePharmacyRemindActivity extends AppCompatActivity {
                         @Override
                         public void onResponse(String response, int id) {
                             if (response.equals("0")) {
+                                ListenerManager.getInstance().sendBroadCast("更新日历页面");
                                 Toast.makeText(CompilePharmacyRemindActivity.this, "删除成功", Toast.LENGTH_SHORT).show();
                                 finish();
                             } else {

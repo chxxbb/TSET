@@ -21,6 +21,8 @@ import com.example.chen.tset.Data.Reservationlist;
 import com.example.chen.tset.Data.User;
 import com.example.chen.tset.Data.User_Http;
 import com.example.chen.tset.R;
+import com.example.chen.tset.Utils.IListener;
+import com.example.chen.tset.Utils.ListenerManager;
 import com.example.chen.tset.Utils.MyBaseActivity;
 import com.example.chen.tset.Utils.SharedPsaveuser;
 import com.google.gson.Gson;
@@ -40,7 +42,7 @@ import okhttp3.Call;
 /**
  * 资讯详情页面与收藏详情页面公用同一个接口
  */
-public class ConsultPageActivity extends MyBaseActivity implements View.OnClickListener {
+public class ConsultPageActivity extends MyBaseActivity implements View.OnClickListener, IListener {
     private ScrollView scrollview;
     private LinearLayout ll_consult_return, ll_consult_collect;
     private TextView tv_title, tv_time, tv_content, tv_collsult, tv;
@@ -57,7 +59,8 @@ public class ConsultPageActivity extends MyBaseActivity implements View.OnClickL
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_consult_page);
-        sp=new SharedPsaveuser(ConsultPageActivity.this);
+        sp = new SharedPsaveuser(ConsultPageActivity.this);
+        ListenerManager.getInstance().registerListtener(this);
         findview();
 
     }
@@ -81,7 +84,6 @@ public class ConsultPageActivity extends MyBaseActivity implements View.OnClickL
         collect = getIntent().getStringExtra("collect");
         information = getIntent().getStringExtra("information");
         findCollectExistByUserIdAndCyclopediaId();
-
 
 
         informationinit();
@@ -216,12 +218,7 @@ public class ConsultPageActivity extends MyBaseActivity implements View.OnClickL
                     tv_content.setText("        " + consultparticulars.getContent() + " \n" + " \n");
                     ImageLoader.getInstance().displayImage(consultparticulars.getIcon(), iv_icon);
                     rl_loading.setVisibility(View.GONE);
-//                    //判断是否为收藏页面点击进入，如果是则隐藏下方收藏按钮
-//                    if (collect.equals("1")) {
-//                        ll_consult_collect.setVisibility(View.GONE);
-//                    } else {
-//                        ll_consult_collect.setVisibility(View.VISIBLE);
-//                    }
+
                     break;
 
                 case 6:
@@ -276,13 +273,12 @@ public class ConsultPageActivity extends MyBaseActivity implements View.OnClickL
     private View.OnClickListener unfavoritelistener = new View.OnClickListener() {
         @Override
         public void onClick(View v) {
-            Log.e("文章ID",information);
-            Log.e("userid",User_Http.user.getId()+"");
+
             OkHttpUtils
                     .post()
                     .url(Http_data.http_data + "/DeleteCollectByUserIdAndCyclopediaId")
                     .addParams("cyclopediaId", information)
-                    .addParams("userId",sp.getTag().getId()+"")
+                    .addParams("userId", sp.getTag().getId() + "")
                     .build()
                     .execute(new StringCallback() {
                         @Override
@@ -292,8 +288,9 @@ public class ConsultPageActivity extends MyBaseActivity implements View.OnClickL
 
                         @Override
                         public void onResponse(String response, int id) {
-                            Log.e("取消收藏返回",response);
+                            Log.e("取消收藏返回", response);
                             if (response.equals("0")) {
+                                ListenerManager.getInstance().sendBroadCast("更新我的收藏");
                                 Toast.makeText(ConsultPageActivity.this, "删除成功", Toast.LENGTH_SHORT).show();
                                 tv_collsult.setTextColor(android.graphics.Color.parseColor("#6fc9e6"));
                                 iv_collsult.setBackgroundResource(R.drawable.consult_isonclickpraise);
@@ -308,4 +305,8 @@ public class ConsultPageActivity extends MyBaseActivity implements View.OnClickL
     };
 
 
+    @Override
+    public void notifyAllActivity(String str) {
+
+    }
 }

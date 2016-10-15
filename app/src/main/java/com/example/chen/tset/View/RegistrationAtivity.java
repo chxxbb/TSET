@@ -2,6 +2,7 @@ package com.example.chen.tset.View;
 
 import android.app.DatePickerDialog;
 import android.app.Dialog;
+import android.content.Context;
 import android.content.Intent;
 import android.os.Handler;
 import android.os.Message;
@@ -13,6 +14,7 @@ import android.view.Display;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
@@ -32,6 +34,7 @@ import com.example.chen.tset.Data.Http_data;
 import com.example.chen.tset.Data.Registration;
 import com.example.chen.tset.Data.User_Http;
 import com.example.chen.tset.R;
+import com.example.chen.tset.Utils.ListenerManager;
 import com.example.chen.tset.Utils.MyBaseActivity;
 import com.example.chen.tset.Utils.SharedPsaveuser;
 import com.example.chen.tset.page.RegistrationageAdapter;
@@ -59,7 +62,7 @@ import okhttp3.Call;
  */
 public class RegistrationAtivity extends MyBaseActivity {
     private RelativeLayout rl_city, rl_gender, rl_time, rl_age, rl_professionaltitle, rl_departments, rl_nonetwork, rl_loading;
-    private LinearLayout ll_rutregistration, ll_cancel, ll_registr;
+    private LinearLayout ll_rutregistration, ll_cancel, ll_registr, ll_et_describe;
     private Dialog setHeadDialog;
     private View dialogView;
     private TextView tv_city, tv_gender, tv_time, tv_age, tv_professionaltitle, tv_departments;
@@ -92,7 +95,7 @@ public class RegistrationAtivity extends MyBaseActivity {
         super.onCreate(savedInstanceState);
         requestWindowFeature(Window.FEATURE_NO_TITLE);
         setContentView(R.layout.activity_registration_ativity);
-        sp=new SharedPsaveuser(this);
+        sp = new SharedPsaveuser(this);
         findView();
 
 
@@ -121,6 +124,7 @@ public class RegistrationAtivity extends MyBaseActivity {
         et_describe = (EditText) findViewById(R.id.et_describe);
         ll_registr = (LinearLayout) findViewById(R.id.ll_registr);
         rl_loading = (RelativeLayout) findViewById(R.id.rl_loading);
+        ll_et_describe = (LinearLayout) findViewById(R.id.ll_et_describe);
         rl_departments.setOnClickListener(listener);
         rl_city.setOnClickListener(listener);
         rl_gender.setOnClickListener(listener);
@@ -129,6 +133,7 @@ public class RegistrationAtivity extends MyBaseActivity {
         rl_professionaltitle.setOnClickListener(listener);
         btn_pay.setOnClickListener(listener);
         ll_rutregistration.setOnClickListener(listener);
+        ll_et_describe.setOnClickListener(listener);
         //获取当前时间
         c = Calendar.getInstance();
         myear = c.get(Calendar.YEAR);
@@ -175,6 +180,12 @@ public class RegistrationAtivity extends MyBaseActivity {
                     break;
                 case R.id.ll_rutregistration:
                     finish();
+                    break;
+                case R.id.ll_et_describe:
+                    et_describe.requestFocus();
+                    //点击后弹出软键盘
+                    InputMethodManager imm = (InputMethodManager) RegistrationAtivity.this.getSystemService(Context.INPUT_METHOD_SERVICE);
+                    imm.toggleSoftInput(0, InputMethodManager.HIDE_NOT_ALWAYS);
                     break;
 
             }
@@ -243,6 +254,7 @@ public class RegistrationAtivity extends MyBaseActivity {
                                     } else if (response.equals("1")) {
                                         handler.sendEmptyMessage(1);
                                     } else {
+                                        ListenerManager.getInstance().sendBroadCast("更新日历页面");
                                         orderCode = response;
                                         handler.sendEmptyMessage(2);
                                     }
@@ -394,6 +406,16 @@ public class RegistrationAtivity extends MyBaseActivity {
     public void departmentsdialogclick() {
         Button btn_cancel = (Button) dialogView.findViewById(R.id.btn_cancel);
         ListView lv_registration = (ListView) dialogView.findViewById(R.id.lv_registration);
+        RelativeLayout rl_regisration = (RelativeLayout) dialogView.findViewById(R.id.rl_regisration);
+
+        rl_regisration.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                setHeadDialog.dismiss();
+            }
+        });
+
+
         lv_registration.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
@@ -436,6 +458,14 @@ public class RegistrationAtivity extends MyBaseActivity {
     private void professionaltitleclick() {
         Button btn_cancel = (Button) dialogView.findViewById(R.id.btn_cancel);
         ListView lv_registration = (ListView) dialogView.findViewById(R.id.lv_registration);
+        RelativeLayout rl_regisration = (RelativeLayout) dialogView.findViewById(R.id.rl_regisration);
+
+        rl_regisration.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                setHeadDialog.dismiss();
+            }
+        });
         lv_registration.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
@@ -483,7 +513,15 @@ public class RegistrationAtivity extends MyBaseActivity {
 
     private void agedialogclick() {
         Button btn_cancel = (Button) dialogView.findViewById(R.id.btn_cancel);
+        RelativeLayout rl_regisration = (RelativeLayout) dialogView.findViewById(R.id.rl_regisration);
         ListView lv_registration = (ListView) dialogView.findViewById(R.id.lv_registration);
+
+        rl_regisration.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                setHeadDialog.dismiss();
+            }
+        });
         lv_registration.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
@@ -546,8 +584,17 @@ public class RegistrationAtivity extends MyBaseActivity {
         Button btn_cancel = (Button) dialogView.findViewById(R.id.btn_cancel);
         Button btn_chnegdu = (Button) dialogView.findViewById(R.id.btn_chengdu);
         Button btn_shenzheng = (Button) dialogView.findViewById(R.id.btn_shenzheng);
+        RelativeLayout rl_city = (RelativeLayout) dialogView.findViewById(R.id.rl_city);
         btn_chnegdu.setText("男");
         btn_shenzheng.setText("女");
+        rl_city.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                setHeadDialog.dismiss();
+            }
+        });
+
+
         btn_cancel.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -592,12 +639,24 @@ public class RegistrationAtivity extends MyBaseActivity {
         Button btn_cancel = (Button) dialogView.findViewById(R.id.btn_cancel);
         Button btn_chnegdu = (Button) dialogView.findViewById(R.id.btn_chengdu);
         Button btn_shenzheng = (Button) dialogView.findViewById(R.id.btn_shenzheng);
-        btn_cancel.setOnClickListener(new View.OnClickListener() {
+        RelativeLayout rl_city = (RelativeLayout) dialogView.findViewById(R.id.rl_city);
+        rl_city.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 setHeadDialog.dismiss();
             }
         });
+
+
+        btn_cancel.setOnClickListener(
+                new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        setHeadDialog.dismiss();
+                    }
+                });
+
+
         btn_chnegdu.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

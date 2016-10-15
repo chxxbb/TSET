@@ -19,6 +19,8 @@ import com.example.chen.tset.Data.Information;
 import com.example.chen.tset.Data.Reservation;
 import com.example.chen.tset.Data.User_Http;
 import com.example.chen.tset.R;
+import com.example.chen.tset.Utils.IListener;
+import com.example.chen.tset.Utils.ListenerManager;
 import com.example.chen.tset.Utils.MyBaseActivity;
 import com.example.chen.tset.Utils.SharedPsaveuser;
 import com.example.chen.tset.page.ReservationlistvAdapter;
@@ -39,7 +41,7 @@ import okhttp3.Call;
 /**
  * 我的预约
  */
-public class ReservationActivity extends MyBaseActivity implements View.OnClickListener {
+public class ReservationActivity extends MyBaseActivity implements View.OnClickListener,IListener {
     private LinearLayout ll_reservationreturn;
     ReservationlistvAdapter adapter;
     private ListView lv_reser;
@@ -57,7 +59,9 @@ public class ReservationActivity extends MyBaseActivity implements View.OnClickL
         setContentView(R.layout.activity_reservationactivity);
         data = new ArrayList<>();
         sp=new SharedPsaveuser(this);
+        ListenerManager.getInstance().registerListtener(this);
         findView();
+        init();
 
     }
 
@@ -69,19 +73,17 @@ public class ReservationActivity extends MyBaseActivity implements View.OnClickL
         lv_reser.setVerticalScrollBarEnabled(false);
         ll_reservationreturn.setOnClickListener(this);
         lv_reser.setOnItemClickListener(listener);
-    }
 
-    @Override
-    protected void onStart() {
-        super.onStart();
-        init();
-    }
-
-
-    private void init() {
         list = new ArrayList<>();
         adapter = new ReservationlistvAdapter(this, list);
         lv_reser.setAdapter(adapter);
+    }
+
+
+
+
+    private void init() {
+
         OkHttpUtils
                 .post()
                 .url(Http_data.http_data + "/FindOrderListByUserId")
@@ -98,6 +100,7 @@ public class ReservationActivity extends MyBaseActivity implements View.OnClickL
                     @Override
                     public void onResponse(String response, int id) {
                         Log.e("我的预约返回", response);
+                        list.clear();
                         Type listtype = new TypeToken<LinkedList<Reservation>>() {
                         }.getType();
                         LinkedList<Reservation> leclist = gson.fromJson(response, listtype);
@@ -127,4 +130,12 @@ public class ReservationActivity extends MyBaseActivity implements View.OnClickL
             startActivity(intent);
         }
     };
+
+    @Override
+    public void notifyAllActivity(String str) {
+        Log.e("我的预约",str);
+        if(str.equals("更新我的预约")){
+            init();
+        }
+    }
 }

@@ -1,11 +1,13 @@
 package com.example.chen.tset.View;
 
+import android.content.Context;
 import android.os.Bundle;
 import android.support.v7.widget.CardView;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.Log;
 import android.view.View;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.CompoundButton;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -15,6 +17,8 @@ import android.widget.ToggleButton;
 import com.example.chen.tset.Data.Http_data;
 import com.example.chen.tset.Data.User_Http;
 import com.example.chen.tset.R;
+import com.example.chen.tset.Utils.IListener;
+import com.example.chen.tset.Utils.ListenerManager;
 import com.example.chen.tset.Utils.MyBaseActivity;
 import com.example.chen.tset.Utils.MyEditText;
 import com.example.chen.tset.Utils.SharedPsaveuser;
@@ -30,11 +34,13 @@ import okhttp3.Call;
 /**
  * 健康状况
  */
-public class HealthconditionActivity extends MyBaseActivity {
+public class HealthconditionActivity extends MyBaseActivity implements IListener {
 
     private LinearLayout ll_consult_return;
 
-    private CardView cv_healthcondition_condition_describe, cv_healthcondition_condition_import;
+    private CardView cv_healthcondition_condition_import;
+
+    private LinearLayout cv_healthcondition_condition_describe;
 
     private NoteEditor et_healthcondition;
 
@@ -53,6 +59,7 @@ public class HealthconditionActivity extends MyBaseActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_healthcondition);
+        ListenerManager.getInstance().registerListtener(this);
         list = new ArrayList<>();
         findView();
     }
@@ -60,7 +67,7 @@ public class HealthconditionActivity extends MyBaseActivity {
 
     private void findView() {
         ll_consult_return = (LinearLayout) findViewById(R.id.ll_consult_return);
-        cv_healthcondition_condition_describe = (CardView) findViewById(R.id.cv_healthcondition_condition_describe);
+        cv_healthcondition_condition_describe = (LinearLayout) findViewById(R.id.cv_healthcondition_condition_describe);
         cv_healthcondition_condition_import = (CardView) findViewById(R.id.cv_healthcondition_condition_import);
         et_healthcondition = (NoteEditor) findViewById(R.id.et_healthcondition);
         tv_heath_save = (TextView) findViewById(R.id.tv_heath_save);
@@ -325,15 +332,21 @@ public class HealthconditionActivity extends MyBaseActivity {
 
                 case R.id.cv_healthcondition_condition_describe:
                     et_healthcondition.requestFocus();
+                    //点击后弹出软键盘
+                    InputMethodManager imm = (InputMethodManager) HealthconditionActivity.this.getSystemService(Context.INPUT_METHOD_SERVICE);
+                    imm.toggleSoftInput(0, InputMethodManager.HIDE_NOT_ALWAYS);
                     cv_healthcondition_condition_describe.setVisibility(View.GONE);
                     cv_healthcondition_condition_import.setVisibility(View.VISIBLE);
                     break;
 
                 case R.id.tv_heath_save:
 
+
+
                     if (list.size() == 0 && et_healthcondition.getText().toString().length() == 0) {
                         Toast.makeText(HealthconditionActivity.this, "请选择或输入您的健康状况", Toast.LENGTH_SHORT).show();
                     } else {
+
                         httpinit();
                     }
                     break;
@@ -342,12 +355,18 @@ public class HealthconditionActivity extends MyBaseActivity {
 
     };
 
+    @Override
+    public void notifyAllActivity(String str)
+    {
+
+    }
+
 
     private void httpinit() {
         content = et_healthcondition.getText().toString();
         String a = list.toString();
         String tag = a.substring(1, a.length() - 1);
-        SharedPsaveuser sp=new SharedPsaveuser(this);
+        SharedPsaveuser sp = new SharedPsaveuser(this);
 
         OkHttpUtils
                 .post()
@@ -359,7 +378,7 @@ public class HealthconditionActivity extends MyBaseActivity {
                 .execute(new StringCallback() {
                     @Override
                     public void onError(Call call, Exception e, int id) {
-
+                        Toast.makeText(HealthconditionActivity.this, "网络连接失败", Toast.LENGTH_SHORT).show();
                     }
 
                     @Override
@@ -368,6 +387,7 @@ public class HealthconditionActivity extends MyBaseActivity {
                         if (response.equals("1")) {
                             Toast.makeText(HealthconditionActivity.this, "今天你已经添加过你的健康状况了", Toast.LENGTH_SHORT).show();
                         } else {
+                            ListenerManager.getInstance().sendBroadCast("更新日历页面");
                             finish();
                         }
                     }

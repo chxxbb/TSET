@@ -98,8 +98,10 @@ public class DiseaselibFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 rl_loading.setVisibility(View.VISIBLE);
-                listviewinit();
                 httpinit(0);
+                listviewinit();
+
+
                 Log.e("23322", list.toString());
 
             }
@@ -214,7 +216,9 @@ public class DiseaselibFragment extends Fragment {
                                 Log.e("疾病返回", response);
                                 list1 = gson.fromJson(response, new TypeToken<List<String>>() {
                                 }.getType());
+
                                 diseaselibrecyvAdapter = new DiseaselibrecyvAdapter(getContext(), list1);
+
                                 recyv_dise.setAdapter(diseaselibrecyvAdapter);
 
                                 handler.sendEmptyMessage(2);

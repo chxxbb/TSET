@@ -67,7 +67,7 @@ import de.hdodenhof.circleimageview.CircleImageView;
 
 public class ChatpageActivity extends AppCompatActivity {
     private EditText et_chat;
-    //    private ImageView iv_chat;
+//        private ImageView iv_chat;
     private ListView listView;
     private TextView tv_doctorname;
     private RelativeLayout rl_loading;
@@ -157,6 +157,8 @@ public class ChatpageActivity extends AppCompatActivity {
         //医生头像
         doctoricon = getIntent().getStringExtra("icon");
         username = getIntent().getStringExtra("username");
+
+//        iv_chat= (ImageView) findViewById(R.id.iv_chat);
         et_chat = (EditText) findViewById(R.id.et_chat);
 
         listView = (ListView) findViewById(R.id.listView);
@@ -187,6 +189,7 @@ public class ChatpageActivity extends AppCompatActivity {
 
         listView.setOnItemClickListener(listvlistener);
 
+//        iv_chat.setOnClickListener(lisntener);
         ll_consult_return.setOnClickListener(lisntener);
 
         btn_chat.setOnClickListener(btnlistener);
@@ -314,6 +317,10 @@ public class ChatpageActivity extends AppCompatActivity {
                     JMessageClient.exitConversation();
                     finish();
                     break;
+
+//                case R.id.iv_chat:
+//                    sendpictureDialog();
+//                    break;
             }
 
         }

@@ -522,11 +522,13 @@
 
                         <TextView
                             android:id="@+id/tv_consulting_health"
-                            android:includeFontPadding="false"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_marginLeft="@dimen/x30"
                             android:layout_marginTop="@dimen/y5"
+                            android:ellipsize="end"
+                            android:includeFontPadding="false"
+                            android:maxLines="1"
                             android:textColor="#777777"
                             android:textSize="@dimen/y24" />
                     </LinearLayout>
@@ -549,8 +551,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentBottom="true"
-                android:layout_marginTop="@dimen/y400"
                 android:layout_marginBottom="@dimen/y400"
+                android:layout_marginTop="@dimen/y400"
                 android:orientation="vertical">
 
                 <ImageView

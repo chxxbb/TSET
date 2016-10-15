@@ -54,12 +54,15 @@ public class DiseaselibrecyvAdapter extends RecyclerView.Adapter {
 
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+
         view = LayoutInflater.from(parent.getContext()).inflate(R.layout.disease_recyv_item, parent, false);
+
         return new Viewholder(view);
     }
 
     @Override
     public void onBindViewHolder(RecyclerView.ViewHolder holder, final int position) {
+
         Viewholder viewholder = (Viewholder) holder;
         viewholder.tv_disease.setText(list.get(position));
         if (position % 2 == 0) {

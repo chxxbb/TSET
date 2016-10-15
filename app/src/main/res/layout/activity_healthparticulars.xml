@@ -1,0 +1,380 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    android:orientation="vertical"
+    tools:context="com.example.chen.tset.View.HealthparticularsActivity">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/y96"
+        android:background="@color/white">
+
+        <LinearLayout
+            android:id="@+id/ll_health_return"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:orientation="horizontal">
+
+            <ImageView
+                android:layout_width="@dimen/x20"
+                android:layout_height="@dimen/y36"
+                android:layout_gravity="center_vertical"
+                android:layout_marginLeft="@dimen/x30"
+                android:src="@drawable/opinion_return" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:layout_marginLeft="@dimen/x8"
+                android:text="问诊"
+                android:textColor="@color/backgroundblue"
+                android:textSize="@dimen/x32" />
+        </LinearLayout>
+
+
+    </RelativeLayout>
+
+    <android.support.v7.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/x30"
+        android:layout_marginRight="@dimen/x30"
+        app:cardBackgroundColor="@color/white"
+        app:cardCornerRadius="@dimen/y20"
+        app:cardMaxElevation="@dimen/y8">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="@dimen/x30"
+            android:layout_marginRight="@dimen/x30"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/y40"
+                android:text="我的健康状况"
+                android:textColor="@color/fontcolor"
+                android:textSize="@dimen/y32" />
+
+            <TextView
+                android:id="@+id/tv_time"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/y24"
+                android:textColor="@color/linegray1"
+                android:textSize="@dimen/y24" />
+
+            <HorizontalScrollView
+                android:id="@+id/scrollView"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/y96"
+                android:layout_marginTop="@dimen/y28"
+                android:background="@color/backgroundgray"
+                android:overScrollMode="never"
+                android:scrollbars="none">
+
+
+                <LinearLayout
+
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal">
+
+                    <LinearLayout
+                        android:id="@+id/ll_tag1"
+                        android:layout_width="wrap_content"
+                        android:layout_height="@dimen/y70"
+                        android:layout_marginLeft="@dimen/x20"
+                        android:background="@drawable/healthcondition_rbtn_unmep_greencase"
+                        android:visibility="gone">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center_vertical"
+                            android:layout_marginLeft="@dimen/x20"
+                            android:layout_marginRight="@dimen/x20"
+                            android:text="流涕"
+                            android:textColor="#a6cd57"
+                            android:textSize="@dimen/y23" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:id="@+id/ll_tag2"
+                        android:layout_width="wrap_content"
+                        android:layout_height="@dimen/y70"
+                        android:layout_marginLeft="@dimen/x20"
+                        android:background="@drawable/healthcondition_rbtn_unmep_greencase"
+                        android:visibility="gone">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center_vertical"
+                            android:layout_marginLeft="@dimen/x20"
+                            android:layout_marginRight="@dimen/x20"
+                            android:text="咳嗽"
+                            android:textColor="#a6cd57"
+                            android:textSize="@dimen/y23" />
+                    </LinearLayout>
+
+
+                    <LinearLayout
+                        android:id="@+id/ll_tag3"
+                        android:layout_width="wrap_content"
+                        android:layout_height="@dimen/y70"
+                        android:layout_marginLeft="@dimen/x20"
+                        android:background="@drawable/healthcondition_rbtn_unmep_greencase"
+                        android:visibility="gone">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center_vertical"
+                            android:layout_marginLeft="@dimen/x20"
+                            android:layout_marginRight="@dimen/x20"
+                            android:text="头疼"
+                            android:textColor="#a6cd57"
+                            android:textSize="@dimen/y23" />
+                    </LinearLayout>
+
+
+                    <LinearLayout
+                        android:id="@+id/ll_tag4"
+                        android:layout_width="wrap_content"
+                        android:layout_height="@dimen/y70"
+                        android:layout_marginLeft="@dimen/x20"
+                        android:background="@drawable/healthcondition_rbtn_unmep_yellowcase"
+                        android:visibility="gone">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center_vertical"
+                            android:layout_marginLeft="@dimen/x20"
+                            android:layout_marginRight="@dimen/x20"
+                            android:text="发热"
+                            android:textColor="#ebc668"
+                            android:textSize="@dimen/y23" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:id="@+id/ll_tag5"
+                        android:layout_width="wrap_content"
+                        android:layout_height="@dimen/y70"
+                        android:layout_marginLeft="@dimen/x20"
+                        android:background="@drawable/healthcondition_rbtn_unmep_yellowcase"
+                        android:visibility="gone">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center_vertical"
+                            android:layout_marginLeft="@dimen/x20"
+                            android:layout_marginRight="@dimen/x20"
+                            android:text="口腔溃疡"
+                            android:textColor="#ebc668"
+                            android:textSize="@dimen/y23" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:id="@+id/ll_tag6"
+                        android:layout_width="wrap_content"
+                        android:layout_height="@dimen/y70"
+                        android:layout_marginLeft="@dimen/x20"
+                        android:background="@drawable/healthcondition_rbtn_unmep_yellowcase"
+                        android:visibility="gone">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center_vertical"
+                            android:layout_marginLeft="@dimen/x20"
+                            android:layout_marginRight="@dimen/x20"
+                            android:text="口干口渴"
+                            android:textColor="#ebc668"
+                            android:textSize="@dimen/y23" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:id="@+id/ll_tag7"
+                        android:layout_width="wrap_content"
+                        android:layout_height="@dimen/y70"
+                        android:layout_marginLeft="@dimen/x20"
+                        android:background="@drawable/healthcondition_rbtn_unmep_yellowcase"
+                        android:visibility="gone">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center_vertical"
+                            android:layout_marginLeft="@dimen/x20"
+                            android:layout_marginRight="@dimen/x20"
+                            android:text="鼻塞"
+                            android:textColor="#ebc668"
+                            android:textSize="@dimen/y23" />
+                    </LinearLayout>
+
+
+                    <LinearLayout
+                        android:id="@+id/ll_tag8"
+                        android:layout_width="wrap_content"
+                        android:layout_height="@dimen/y70"
+                        android:layout_marginLeft="@dimen/x20"
+                        android:background="@drawable/healthcondition_rbtn_unmep_redcase"
+                        android:visibility="gone">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center_vertical"
+                            android:layout_marginLeft="@dimen/x20"
+                            android:layout_marginRight="@dimen/x20"
+                            android:text="咽疼"
+                            android:textColor="#eb686c"
+                            android:textSize="@dimen/y23" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:id="@+id/ll_tag9"
+                        android:layout_width="wrap_content"
+                        android:layout_height="@dimen/y70"
+                        android:layout_marginLeft="@dimen/x20"
+                        android:background="@drawable/healthcondition_rbtn_unmep_redcase"
+                        android:visibility="gone">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center_vertical"
+                            android:layout_marginLeft="@dimen/x20"
+                            android:layout_marginRight="@dimen/x20"
+                            android:text="出疹"
+                            android:textColor="#eb686c"
+                            android:textSize="@dimen/y23" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:id="@+id/ll_tag10"
+                        android:layout_width="wrap_content"
+                        android:layout_height="@dimen/y70"
+                        android:layout_marginLeft="@dimen/x20"
+                        android:background="@drawable/healthcondition_rbtn_unmep_redcase"
+                        android:visibility="gone">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center_vertical"
+                            android:layout_marginLeft="@dimen/x20"
+                            android:layout_marginRight="@dimen/x20"
+                            android:text="睡眠问题"
+                            android:textColor="#eb686c"
+                            android:textSize="@dimen/y23" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:id="@+id/ll_tag11"
+                        android:layout_width="wrap_content"
+                        android:layout_height="@dimen/y70"
+                        android:layout_marginLeft="@dimen/x20"
+                        android:background="@drawable/healthcondition_rbtn_unmep_redcase"
+                        android:visibility="gone">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center_vertical"
+                            android:layout_marginLeft="@dimen/x20"
+                            android:layout_marginRight="@dimen/x20"
+                            android:text="腹泻"
+                            android:textColor="#eb686c"
+                            android:textSize="@dimen/y23" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:id="@+id/ll_tag12"
+                        android:layout_width="wrap_content"
+                        android:layout_height="@dimen/y70"
+                        android:layout_marginLeft="@dimen/x20"
+                        android:background="@drawable/healthcondition_rbtn_unmep_redcase"
+                        android:visibility="gone">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center_vertical"
+                            android:layout_marginLeft="@dimen/x20"
+                            android:layout_marginRight="@dimen/x20"
+                            android:text="腹疼"
+                            android:textColor="#eb686c"
+                            android:textSize="@dimen/y23" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:id="@+id/ll_tag13"
+                        android:layout_width="wrap_content"
+                        android:layout_height="@dimen/y70"
+                        android:layout_marginLeft="@dimen/x20"
+                        android:background="@drawable/healthcondition_rbtn_unmep_redcase"
+                        android:visibility="gone">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center_vertical"
+                            android:layout_marginLeft="@dimen/x20"
+                            android:layout_marginRight="@dimen/x20"
+                            android:text="腹胀"
+                            android:textColor="#eb686c"
+                            android:textSize="@dimen/y23" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:id="@+id/ll_tag14"
+                        android:layout_width="wrap_content"
+                        android:layout_height="@dimen/y70"
+                        android:layout_marginLeft="@dimen/x20"
+                        android:background="@drawable/healthcondition_rbtn_unmep_redcase"
+                        android:visibility="gone">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center_vertical"
+                            android:layout_marginLeft="@dimen/x20"
+                            android:layout_marginRight="@dimen/x20"
+                            android:text="呕吐"
+                            android:textColor="#eb686c"
+                            android:textSize="@dimen/y23" />
+                    </LinearLayout>
+
+
+                </LinearLayout>
+
+
+            </HorizontalScrollView>
+
+            <TextView
+                android:id="@+id/tv_content"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="@dimen/y40"
+                android:layout_marginTop="@dimen/y24"
+                android:textColor="@color/fontgray"
+                android:textSize="@dimen/y28" />
+
+        </LinearLayout>
+
+    </android.support.v7.widget.CardView>
+
+
+</LinearLayout>

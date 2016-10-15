@@ -56,6 +56,7 @@ public class DoctorparticularsActivity extends MyBaseActivity {
     Doctor doctor;
 
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -99,6 +100,7 @@ public class DoctorparticularsActivity extends MyBaseActivity {
         lv_docttorparticulas.setAdapter(adapter);
         ll_return.setOnClickListener(listener);
         btn_callmoney.setOnClickListener(listener);
+
 
     }
 
@@ -179,6 +181,18 @@ public class DoctorparticularsActivity extends MyBaseActivity {
 
             switch (v.getId()) {
                 case R.id.btn_callmoney:
+//                    doctorID = getIntent().getStringExtra("doctorID");
+//                    //医生姓名
+//                    doctorname = getIntent().getStringExtra("name");
+//                    //医生头像
+//                    doctoricon = getIntent().getStringExtra("icon");
+//                    username = getIntent().getStringExtra("username");
+
+                    Intent intent=new Intent(DoctorparticularsActivity.this,ChatpageActivity.class);
+                    intent.putExtra("name",doctor.getName());
+                    intent.putExtra("icon",doctor.getIcon());
+                    intent.putExtra("doctorID",doctor_id);
+                    startActivity(intent);
 
                     break;
                 case R.id.ll_return:

@@ -25,6 +25,8 @@ import com.example.chen.tset.Data.Information;
 import com.example.chen.tset.Data.Lecture;
 import com.example.chen.tset.Data.User_Http;
 import com.example.chen.tset.R;
+import com.example.chen.tset.Utils.IListener;
+import com.example.chen.tset.Utils.ListenerManager;
 import com.example.chen.tset.Utils.MyBaseActivity;
 import com.example.chen.tset.Utils.SharedPsaveuser;
 import com.example.chen.tset.page.CharactersafeAdapter;
@@ -44,27 +46,30 @@ import okhttp3.Call;
 /**
  * 我的收藏
  */
-public class MycollectActivity extends MyBaseActivity {
+public class MycollectActivity extends MyBaseActivity implements IListener{
     private SwipeMenuListView lv_collect;
     CharactersafeAdapter adapter;
     List<Information> list;
     private LinearLayout ll_collectretur;
     private RelativeLayout rl_nonetwork, rl_loading;
     Gson gson;
+    SharedPsaveuser sp;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_mycollect);
-
+        ListenerManager.getInstance().registerListtener(this);
+        findView();
+        init();
+        initHttp();
     }
 
     @Override
     protected void onStart() {
         super.onStart();
-        findView();
-        init();
-        initHttp();
+
+
 
     }
 
@@ -109,7 +114,7 @@ public class MycollectActivity extends MyBaseActivity {
 
 
     private void initHttp() {
-        SharedPsaveuser sp=new SharedPsaveuser(this);
+        sp=new SharedPsaveuser(this);
         OkHttpUtils
                 .post()
                 .url(Http_data.http_data + "/findCollectList")
@@ -125,7 +130,7 @@ public class MycollectActivity extends MyBaseActivity {
 
                     @Override
                     public void onResponse(String response, int id) {
-                        Log.e("收藏返回", response);
+                        list.clear();
                         Type listtype = new TypeToken<LinkedList<Information>>() {
                         }.getType();
                         LinkedList<Information> leclist = gson.fromJson(response, listtype);
@@ -189,4 +194,12 @@ public class MycollectActivity extends MyBaseActivity {
             return false;
         }
     };
+
+    @Override
+    public void notifyAllActivity(String str) {
+        Log.e("我的收藏",str);
+        if(str.equals("更新我的收藏")){
+            initHttp();
+        }
+    }
 }

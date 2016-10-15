@@ -96,6 +96,10 @@ public class InquiryFragment extends Fragment {
         ll_development.setOnClickListener(listener);
         ll_sort.setOnClickListener(listener);
 
+        View view1 = View.inflate(getContext(), R.layout.inquiry_listview_stern, null);
+
+        lv_inquiry.addFooterView(view1);
+
 
         lv_inquiry.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
@@ -193,6 +197,14 @@ public class InquiryFragment extends Fragment {
         Button btn_sortcancel = (Button) dialogView.findViewById(R.id.btn_sortcancel);
         Button btn_default = (Button) dialogView.findViewById(R.id.btn_default);
         Button btn_title = (Button) dialogView.findViewById(R.id.btn_title);
+        RelativeLayout rl_inquiry_sort = (RelativeLayout) dialogView.findViewById(R.id.rl_inquiry_sort);
+
+        rl_inquiry_sort.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                setHeadDialog.dismiss();
+            }
+        });
         btn_sortcancel.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -290,6 +302,13 @@ public class InquiryFragment extends Fragment {
     private void developmentdialogclick() {
         selectlist = new ArrayList<>();
         Button btn_cancel = (Button) dialogView.findViewById(R.id.btn_cancel);
+        RelativeLayout rl_regisration = (RelativeLayout) dialogView.findViewById(R.id.rl_regisration);
+        rl_regisration.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                setHeadDialog.dismiss();
+            }
+        });
         btn_cancel.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -361,6 +380,13 @@ public class InquiryFragment extends Fragment {
         Button btn_chnegdu = (Button) dialogView.findViewById(R.id.btn_chengdu);
         Button btn_shenzheng = (Button) dialogView.findViewById(R.id.btn_shenzheng);
         RelativeLayout rl = (RelativeLayout) dialogView.findViewById(R.id.rl);
+        RelativeLayout rl_city = (RelativeLayout) dialogView.findViewById(R.id.rl_city);
+        rl_city.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                setHeadDialog.dismiss();
+            }
+        });
         btn_cancel.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -374,6 +400,7 @@ public class InquiryFragment extends Fragment {
                 listinit(list);
                 tv_sort.setText("默认排序");
                 tv_section.setText("全部科室");
+                tv_city.setText("全部地区");
                 setHeadDialog.dismiss();
             }
         });

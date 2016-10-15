@@ -21,6 +21,8 @@ import com.example.chen.tset.Data.Reservation;
 import com.example.chen.tset.Data.Reservationlist;
 import com.example.chen.tset.Data.User;
 import com.example.chen.tset.R;
+import com.example.chen.tset.Utils.IListener;
+import com.example.chen.tset.Utils.ListenerManager;
 import com.example.chen.tset.Utils.MyBaseActivity;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
@@ -39,7 +41,7 @@ import okhttp3.Call;
 /**
  * 预约订单详情
  */
-public class ReservationlistActivity extends MyBaseActivity implements View.OnClickListener {
+public class ReservationlistActivity extends MyBaseActivity implements View.OnClickListener, IListener {
     private LinearLayout ll_myreservationg;
     private ScrollView scrollView;
     private TextView tv_content, tv_title, tv_appointment_time, tv_valid_time, tv_address, tv_patient_name, tv_money, tv_patient_phone, tv_order_no, tv_hospital, tv_section;
@@ -62,6 +64,7 @@ public class ReservationlistActivity extends MyBaseActivity implements View.OnCl
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_reservationlist);
         scrollView = (ScrollView) findViewById(R.id.scrollView);
+        ListenerManager.getInstance().registerListtener(this);
         scrollView.setVerticalScrollBarEnabled(false);
         findView();
         httpinit();
@@ -94,7 +97,7 @@ public class ReservationlistActivity extends MyBaseActivity implements View.OnCl
 
 
     private void httpinit() {
-        Log.e("预约ID", reservationid);
+
         OkHttpUtils
                 .post()
                 .url(Http_data.http_data + "/FindRegistrationById")
@@ -117,7 +120,6 @@ public class ReservationlistActivity extends MyBaseActivity implements View.OnCl
                     }
                 });
     }
-
 
 
     Handler handler = new Handler() {
@@ -155,11 +157,11 @@ public class ReservationlistActivity extends MyBaseActivity implements View.OnCl
                     tv_section.setText("科室：" + reservationlist.getSection());
 
 
-                    if ( reservationlist.getOrderStatus().equals("已预约")) {
+                    if (reservationlist.getOrderStatus().equals("已预约")) {
 
                         btn_cancel.setOnClickListener(listener);
 
-                    }else if(reservationlist.getOrderStatus().equals("待支付")){
+                    } else if (reservationlist.getOrderStatus().equals("待支付")) {
                         btn_cancel.setText("去支付");
                         btn_cancel.setOnClickListener(paylistener);
 
@@ -185,8 +187,12 @@ public class ReservationlistActivity extends MyBaseActivity implements View.OnCl
                     Toast.makeText(ReservationlistActivity.this, "网络连接失败", Toast.LENGTH_SHORT).show();
                     break;
                 case 3:
-                    finish();
+                    ListenerManager.getInstance().sendBroadCast("更新我的预约");
                     Toast.makeText(ReservationlistActivity.this, "取消成功", Toast.LENGTH_SHORT).show();
+                    btn_cancel.setBackgroundResource(R.drawable.reservationlist_btn_graycase);
+                    btn_cancel.setText("已取消");
+                    btn_cancel.setTextColor(android.graphics.Color.parseColor("#bbbbbb"));
+                    btn_cancel.setOnClickListener(null);
                     break;
 
             }
@@ -228,6 +234,9 @@ public class ReservationlistActivity extends MyBaseActivity implements View.OnCl
         rl_confirm.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
+                setHeadDialog.dismiss();
+
                 new Thread(new Runnable() {
                     @Override
                     public void run() {
@@ -250,6 +259,7 @@ public class ReservationlistActivity extends MyBaseActivity implements View.OnCl
                             public void onResponse(String response, int id) {
 
                                 if (response.equals("0")) {
+
                                     handler.sendEmptyMessage(3);
                                 }
                             }
@@ -259,7 +269,7 @@ public class ReservationlistActivity extends MyBaseActivity implements View.OnCl
         });
     }
 
-    private View.OnClickListener paylistener=new View.OnClickListener() {
+    private View.OnClickListener paylistener = new View.OnClickListener() {
         @Override
         public void onClick(View v) {
             Toast.makeText(ReservationlistActivity.this, "支付", Toast.LENGTH_SHORT).show();
@@ -269,5 +279,10 @@ public class ReservationlistActivity extends MyBaseActivity implements View.OnCl
     @Override
     public void onClick(View v) {
         finish();
+    }
+
+    @Override
+    public void notifyAllActivity(String str) {
+
     }
 }

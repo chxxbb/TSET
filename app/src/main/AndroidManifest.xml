@@ -206,7 +206,8 @@
         <activity android:name=".View.LoginActivity" />
         <activity android:name=".View.CompilePharmacyRemindActivity" />
         <activity android:name=".View.LogActivity" />
-        <activity android:name=".View.OnekeyLoinActivity"></activity>
+        <activity android:name=".View.OnekeyLoinActivity" />
+        <activity android:name=".View.HealthparticularsActivity"></activity>
     </application>
 
 </manifest>

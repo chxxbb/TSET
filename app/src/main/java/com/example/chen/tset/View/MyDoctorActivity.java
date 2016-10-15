@@ -1,6 +1,7 @@
 package com.example.chen.tset.View;
 
 
+import android.content.Intent;
 import android.os.Handler;
 import android.os.Message;
 import android.os.Bundle;
@@ -120,10 +121,10 @@ public class MyDoctorActivity extends MyBaseActivity {
     private AdapterView.OnItemClickListener lvlistener = new AdapterView.OnItemClickListener() {
         @Override
         public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-//            Intent intent = new Intent(MyDoctorActivity.this, DoctorparticularsActivity.class);
-//            //医生ID
-//            intent.putExtra("doctot_id", list.get(position).getDoctorId() + "");
-//            startActivity(intent);
+            Intent intent = new Intent(MyDoctorActivity.this, DoctorparticularsActivity.class);
+            //医生ID
+            intent.putExtra("doctot_id", list.get(position).getDoctorId() + "");
+            startActivity(intent);
         }
     };
 

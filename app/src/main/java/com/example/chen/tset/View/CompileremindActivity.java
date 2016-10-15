@@ -28,6 +28,8 @@ import com.example.chen.tset.Data.Pharmacyremind;
 import com.example.chen.tset.Data.User_Http;
 import com.example.chen.tset.Data.Userinfo;
 import com.example.chen.tset.R;
+import com.example.chen.tset.Utils.IListener;
+import com.example.chen.tset.Utils.ListenerManager;
 import com.example.chen.tset.Utils.MyBaseActivity;
 import com.example.chen.tset.Utils.PharmacyDao;
 import com.example.chen.tset.Utils.SharedPsaveuser;
@@ -43,7 +45,7 @@ import okhttp3.Call;
 /**
  * 添加提醒页面
  */
-public class CompileremindActivity extends MyBaseActivity {
+public class CompileremindActivity extends MyBaseActivity implements IListener{
     private RelativeLayout rl_starttime, rl_endtiem;
     private TextView tv_starttime, tv_endtiem, tv_time_complete, tv_remind_set;
     int myear, mmonth, mday;
@@ -335,6 +337,7 @@ public class CompileremindActivity extends MyBaseActivity {
                                     public void onResponse(String response, int id) {
                                         Log.e("用药提醒返回", response);
                                         if (response.equals("0")) {
+                                            ListenerManager.getInstance().sendBroadCast("更新日历页面");
                                             Toast.makeText(CompileremindActivity.this, "添加成功，你可以在用药提醒页面查看", Toast.LENGTH_SHORT).show();
                                             finish();
                                         } else {
@@ -404,4 +407,13 @@ public class CompileremindActivity extends MyBaseActivity {
         dialog.show();
     }
 
+
+    @Override
+    public void notifyAllActivity(String str)
+    {
+
+    };
+
 }
+
+
