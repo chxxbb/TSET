@@ -79,13 +79,15 @@ public class LectureroomFragment extends Fragment {
         recyclerView.setVerticalScrollBarEnabled(false);
         //RelativeLayout分成2列
         recyclerView.setLayoutManager(new StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL));
+        list = new ArrayList<>();
+        adapter = new LectureroomAdapter(getContext(), list);
+        recyclerView.setAdapter(adapter);
+
     }
 
 
     private void init() {
-        list = new ArrayList<>();
-        adapter = new LectureroomAdapter(getContext(), list);
-        recyclerView.setAdapter(adapter);
+
 
         new Thread(new Runnable() {
             @Override

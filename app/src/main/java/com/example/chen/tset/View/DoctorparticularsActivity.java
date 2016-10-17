@@ -49,7 +49,8 @@ public class DoctorparticularsActivity extends MyBaseActivity {
     List<Doctor> list1;
     Gson gson = new Gson();
     private TextView tv_title, tv_name, tv_hospital, tv_bioo, tv_bis, tv_bit, tv_bif, tv_sum, tv_adept, tv_grade;
-    private Button btn_chatmoney, btn_callmoney;
+
+    private TextView btn_chatmoney,btn_callmoney;
     private CircleImageView iv_icon;
     private RelativeLayout rl_nonetwork, rl_loading;
     String doctor_id = null;
@@ -76,8 +77,8 @@ public class DoctorparticularsActivity extends MyBaseActivity {
         doctor_id = getIntent().getStringExtra("doctot_id");
         tv_title = (TextView) findViewById(R.id.tv_title);
         tv_name = (TextView) findViewById(R.id.tv_name);
-        btn_chatmoney = (Button) findViewById(R.id.btn_chatmoney);
-        btn_callmoney = (Button) findViewById(R.id.btn_callmoney);
+        btn_chatmoney = (TextView) findViewById(R.id.btn_chatmoney);
+        btn_callmoney = (TextView) findViewById(R.id.btn_callmoney);
         tv_hospital = (TextView) findViewById(R.id.tv_hospital);
         iv_icon = (CircleImageView) findViewById(R.id.iv_icon);
         lv_docttorparticulas = (ListView) findViewById(R.id.lv_docttorparticulas);

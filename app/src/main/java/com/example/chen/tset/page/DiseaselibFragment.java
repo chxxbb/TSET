@@ -83,6 +83,7 @@ public class DiseaselibFragment extends Fragment {
         rl_loading = (RelativeLayout) view.findViewById(R.id.rl_loading);
         listview_dise.setOnItemClickListener(listener);
         listview_dise.setOnItemSelectedListener(slistener);
+        recyv_dise.setHasFixedSize(true);
         recyv_dise.setLayoutManager(new StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL));
         listview_dise.setVerticalScrollBarEnabled(false);
         recyv_dise.setVerticalScrollBarEnabled(false);
@@ -93,16 +94,18 @@ public class DiseaselibFragment extends Fragment {
         adapter = new DiseaseliblistvAdapter(getContext(), list);
         listview_dise.setAdapter(adapter);
 
+        diseaselibrecyvAdapter = new DiseaselibrecyvAdapter(getContext(), list1);
+
+        recyv_dise.setAdapter(diseaselibrecyvAdapter);
+
 
         rl_nonetwork.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 rl_loading.setVisibility(View.VISIBLE);
-                httpinit(0);
+                httpinit(1);
                 listviewinit();
 
-
-                Log.e("23322", list.toString());
 
             }
         });
@@ -162,7 +165,8 @@ public class DiseaselibFragment extends Fragment {
                     rl_nonetwork.setVisibility(View.VISIBLE);
                     break;
                 case 2:
-                    diseaselibrecyvAdapter.notifyDataSetChanged();
+                    Log.e("疾病列表", list1.toString());
+                    diseaselibrecyvAdapter.setList(list1);
                     rl_nonetwork.setVisibility(View.GONE);
                     rl_loading.setVisibility(View.GONE);
                     break;
@@ -216,10 +220,6 @@ public class DiseaselibFragment extends Fragment {
                                 Log.e("疾病返回", response);
                                 list1 = gson.fromJson(response, new TypeToken<List<String>>() {
                                 }.getType());
-
-                                diseaselibrecyvAdapter = new DiseaselibrecyvAdapter(getContext(), list1);
-
-                                recyv_dise.setAdapter(diseaselibrecyvAdapter);
 
                                 handler.sendEmptyMessage(2);
                             }

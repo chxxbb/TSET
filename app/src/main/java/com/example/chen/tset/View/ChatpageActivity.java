@@ -45,6 +45,7 @@ import com.example.chen.tset.Utils.InquiryrecordDao;
 import com.example.chen.tset.Utils.SharedPsaveuser;
 import com.example.chen.tset.page.ChatpageAdapter;
 import com.nostra13.universalimageloader.core.ImageLoader;
+import com.soundcloud.android.crop.Crop;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -67,7 +68,7 @@ import de.hdodenhof.circleimageview.CircleImageView;
 
 public class ChatpageActivity extends AppCompatActivity {
     private EditText et_chat;
-//        private ImageView iv_chat;
+    private ImageView iv_chat;
     private ListView listView;
     private TextView tv_doctorname;
     private RelativeLayout rl_loading;
@@ -158,7 +159,7 @@ public class ChatpageActivity extends AppCompatActivity {
         doctoricon = getIntent().getStringExtra("icon");
         username = getIntent().getStringExtra("username");
 
-//        iv_chat= (ImageView) findViewById(R.id.iv_chat);
+        iv_chat = (ImageView) findViewById(R.id.iv_chat);
         et_chat = (EditText) findViewById(R.id.et_chat);
 
         listView = (ListView) findViewById(R.id.listView);
@@ -189,7 +190,7 @@ public class ChatpageActivity extends AppCompatActivity {
 
         listView.setOnItemClickListener(listvlistener);
 
-//        iv_chat.setOnClickListener(lisntener);
+        iv_chat.setOnClickListener(lisntener);
         ll_consult_return.setOnClickListener(lisntener);
 
         btn_chat.setOnClickListener(btnlistener);
@@ -238,9 +239,9 @@ public class ChatpageActivity extends AppCompatActivity {
     private View.OnClickListener btnlistener = new View.OnClickListener() {
         @Override
         public void onClick(View v) {
-            if(et_chat.getText().length()==0){
-                Toast.makeText(ChatpageActivity.this, "请输入你需要发送的内容", Toast.LENGTH_SHORT).show();
-            }else {
+            if (et_chat.getText().length() == 0) {
+
+            } else {
                 sendmessage();
             }
 
@@ -286,12 +287,25 @@ public class ChatpageActivity extends AppCompatActivity {
         public void handleMessage(android.os.Message msg) {
             switch (msg.what) {
                 case 0:
-                    adapter.notifyDataSetChanged();
-                    et_chat.setText("");
+                    try {
+
+                        adapter.notifyDataSetChanged();
+                        et_chat.setText("");
+                    } catch (Exception e) {
+
+                        e.printStackTrace();
+                    }
+
                     break;
                 case 1:
-                    adapter.notifyDataSetChanged();
-                    et_chat.setText("");
+                    try {
+
+                        adapter.notifyDataSetChanged();
+                        et_chat.setText("");
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                        Toast.makeText(ChatpageActivity.this, "发送失败，请重新发送", Toast.LENGTH_SHORT).show();
+                    }
                     break;
                 case 2:
                     Toast.makeText(ChatpageActivity.this, "发送失败，请重新发送", Toast.LENGTH_SHORT).show();
@@ -318,9 +332,9 @@ public class ChatpageActivity extends AppCompatActivity {
                     finish();
                     break;
 
-//                case R.id.iv_chat:
-//                    sendpictureDialog();
-//                    break;
+                case R.id.iv_chat:
+                    sendpictureDialog();
+                    break;
             }
 
         }
@@ -361,7 +375,6 @@ public class ChatpageActivity extends AppCompatActivity {
                     e.printStackTrace();
                 }
 
-
                 //相机
                 Intent intent1 = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
                 intent1.putExtra(MediaStore.EXTRA_OUTPUT, Uri.fromFile(sdcardTempFile));
@@ -372,27 +385,11 @@ public class ChatpageActivity extends AppCompatActivity {
             }
         });
 
-
         btn_cutout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
-
-                try {
-                    sdcardTempFile = File.createTempFile("textscreenshot", ".jpg", audioFile);
-                } catch (IOException e) {
-
-                    e.printStackTrace();
-                }
-
-                //图片
-                Intent intent = new Intent("android.intent.action.PICK");
-                intent.setDataAndType(MediaStore.Images.Media.INTERNAL_CONTENT_URI, "image/*");
-                intent.putExtra("output", Uri.fromFile(sdcardTempFile));
-                intent.putExtra("crop", "true");
-                intent.putExtra("aspectX", 2);// 裁剪框比例
-                intent.putExtra("aspectY", 2);
-                startActivityForResult(intent, 100);
+                Crop.pickImage(ChatpageActivity.this);
                 setHeadDialog.dismiss();
             }
         });
@@ -403,6 +400,57 @@ public class ChatpageActivity extends AppCompatActivity {
                 setHeadDialog.dismiss();
             }
         });
+
+
+    }
+
+    //截取图片
+    private void beginCrop(Uri source) {
+        try {
+            sdcardTempFile = File.createTempFile("textscreenshot", ".jpg", audioFile);
+        } catch (IOException e) {
+
+            e.printStackTrace();
+        }
+
+        Uri destination = Uri.fromFile(sdcardTempFile);
+        Crop.of(source, destination).asSquare().start(this);
+    }
+
+
+    //保存发送图片
+    private void handleCrop(int resultCode, Intent result) {
+        if (resultCode == RESULT_OK) {
+            Thread thread = new Thread(new Runnable() {
+                @Override
+                public void run() {
+
+                    try {
+                        Conversation c = JMessageClient.getSingleConversation(username);
+                        if (c == null) {
+                            c = Conversation.createSingleConversation(username);
+                        }
+
+                        ImageContent image = new ImageContent(sdcardTempFile);
+
+                        Message message = c.createSendMessage(image);
+                        JMessageClient.sendMessage(message);
+                        chatcontent = new Chatcontent("1*1", 0L, sdcardTempFile.getAbsolutePath(), sdcardTempFile.getAbsolutePath(), username, sp.getTag().getPhone());
+                        list.add(chatcontent);
+                        handler.sendEmptyMessage(1);
+                        db.addchatcont(chatcontent);
+                    } catch (Exception e) {
+                        e.printStackTrace();
+
+                    }
+
+                    chatstate++;
+                }
+            });
+            thread.start();
+        } else if (resultCode == Crop.RESULT_ERROR) {
+            Toast.makeText(this, Crop.getError(result).getMessage(), Toast.LENGTH_SHORT).show();
+        }
 
 
     }
@@ -480,36 +528,17 @@ public class ChatpageActivity extends AppCompatActivity {
 
     //发送图片
     @Override
-    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        Thread thread = new Thread(new Runnable() {
-            @Override
-            public void run() {
-
-                Conversation c = JMessageClient.getSingleConversation(username);
-                if (c == null) {
-                    c = Conversation.createSingleConversation(username);
-//                13608170152
-                }
-                try {
-
-                    ImageContent image = new ImageContent(sdcardTempFile);
-
-                    Message message = c.createSendMessage(image);
-                    JMessageClient.sendMessage(message);
-                    chatcontent = new Chatcontent("1*1", 0L, sdcardTempFile.getAbsolutePath(), sdcardTempFile.getAbsolutePath(), username, sp.getTag().getPhone());
-                    list.add(chatcontent);
-                    db.addchatcont(chatcontent);
-                } catch (Exception e) {
-                    e.printStackTrace();
-
-                }
-                handler.sendEmptyMessage(1);
-                chatstate++;
-            }
-        });
-        thread.start();
-
-
+    protected void onActivityResult(int requestCode, int resultCode, Intent result) {
+        if (requestCode == Crop.REQUEST_PICK && resultCode == RESULT_OK) {
+            Log.e("111", "111");
+            beginCrop(result.getData());
+        } else if (requestCode == Crop.REQUEST_CROP) {
+            Log.e("222", "222");
+            handleCrop(resultCode, result);
+        } else if (resultCode == RESULT_OK && requestCode == 100) {
+            Log.e("333", "333");
+            handleCrop(resultCode, result);
+        }
     }
 
 

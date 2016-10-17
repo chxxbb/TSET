@@ -36,6 +36,14 @@ public class DiseaselibrecyvAdapter extends RecyclerView.Adapter {
         this.inflater = LayoutInflater.from(context);
     }
 
+    public List<String> getList() {
+        return list;
+    }
+
+    public void setList(List<String> list) {
+        this.list = list;
+        notifyDataSetChanged();
+    }
 
     class Viewholder extends RecyclerView.ViewHolder {
         private TextView tv_disease;
@@ -70,6 +78,7 @@ public class DiseaselibrecyvAdapter extends RecyclerView.Adapter {
         } else {
             viewholder.view.setVisibility(View.GONE);
         }
+
         viewholder.linearLayout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

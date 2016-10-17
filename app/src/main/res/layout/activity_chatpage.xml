@@ -122,13 +122,13 @@
                         android:textSize="@dimen/y28" />
                 </LinearLayout>
 
-                <!--<ImageView-->
-                <!--android:id="@+id/iv_chat"-->
-                <!--android:layout_width="@dimen/x56"-->
-                <!--android:layout_height="@dimen/y56"-->
-                <!--android:layout_marginLeft="@dimen/x20"-->
-                <!--android:layout_marginRight="@dimen/x30"-->
-                <!--android:src="@drawable/chat_more" />-->
+                <ImageView
+                android:id="@+id/iv_chat"
+                android:layout_width="@dimen/x56"
+                android:layout_height="@dimen/y56"
+                android:layout_marginLeft="@dimen/x20"
+                android:layout_marginRight="@dimen/x30"
+                android:src="@drawable/chat_more" />
 
 
                 <Button

@@ -134,52 +134,53 @@
                         android:layout_alignParentRight="true"
                         android:orientation="vertical">
 
-                        <FrameLayout
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content">
+                        <LinearLayout
+                            android:layout_width="@dimen/x205"
+                            android:layout_height="@dimen/y74"
+                            android:background="@drawable/doctorparticulars_chat_case"
+                            android:gravity="center_horizontal">
 
-                            <Button
-                                android:id="@+id/btn_chatmoney"
-                                android:layout_width="@dimen/x180"
-                                android:layout_height="@dimen/y60"
-                                android:layout_marginLeft="@dimen/x25"
-                                android:layout_marginRight="@dimen/x30"
-                                android:layout_marginTop="@dimen/y10"
-                                android:background="@drawable/doctorparticulars_registration_btn_case"
-                                android:text="￥ 25/次"
-                                android:textColor="@color/white"
-                                android:textSize="@dimen/y25" />
+                            <LinearLayout
+                                android:layout_width="wrap_content"
+                                android:layout_height="match_parent">
 
-                            <ImageView
-                                android:layout_width="@dimen/x40"
-                                android:layout_height="@dimen/y42"
-                                android:src="@drawable/doctorparticulars_registration" />
-                        </FrameLayout>
+                                <TextView
+                                    android:id="@+id/btn_chatmoney"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginTop="@dimen/y25"
+                                    android:text="￥ 25/次"
+                                    android:textColor="@color/white"
+                                    android:textSize="@dimen/y25" />
 
-                        <FrameLayout
-                            android:id="@+id/fl_callmoney"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
+                            </LinearLayout>
+                        </LinearLayout>
+
+
+                        <LinearLayout
+                            android:layout_width="@dimen/x205"
+                            android:layout_height="@dimen/y70"
                             android:layout_marginBottom="@dimen/y30"
                             android:layout_marginRight="@dimen/x30"
-                            android:layout_marginTop="@dimen/y18">
+                            android:layout_marginTop="@dimen/y18"
+                            android:background="@drawable/doctorparticulars_phone_case"
+                            android:gravity="center_horizontal">
 
-                            <Button
-                                android:id="@+id/btn_callmoney"
-                                android:layout_width="@dimen/x180"
-                                android:layout_height="@dimen/y60"
-                                android:layout_marginLeft="@dimen/x25"
-                                android:layout_marginTop="@dimen/y10"
-                                android:background="@drawable/deoctorprticulars_phone_btn_case"
-                                android:text="￥ 25/10分钟"
-                                android:textColor="@color/white"
-                                android:textSize="@dimen/y25" />
+                            <LinearLayout
+                                android:layout_width="wrap_content"
+                                android:layout_height="match_parent">
 
-                            <ImageView
-                                android:layout_width="@dimen/x40"
-                                android:layout_height="@dimen/y42"
-                                android:src="@drawable/deoctorprticulars_phone" />
-                        </FrameLayout>
+                                <TextView
+                                    android:id="@+id/btn_callmoney"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginTop="@dimen/y25"
+                                    android:text="￥ 25/10分钟"
+                                    android:textColor="@color/white"
+                                    android:textSize="@dimen/y25" />
+
+                            </LinearLayout>
+                        </LinearLayout>
                     </LinearLayout>
                 </RelativeLayout>
             </LinearLayout>

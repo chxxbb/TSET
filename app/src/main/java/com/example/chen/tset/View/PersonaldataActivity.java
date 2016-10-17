@@ -23,6 +23,7 @@ import com.example.chen.tset.R;
 import com.example.chen.tset.Utils.MyBaseActivity;
 import com.example.chen.tset.Utils.SharedPsaveuser;
 import com.nostra13.universalimageloader.core.ImageLoader;
+import com.soundcloud.android.crop.Crop;
 import com.zhy.http.okhttp.OkHttpUtils;
 import com.zhy.http.okhttp.callback.StringCallback;
 
@@ -44,8 +45,8 @@ public class PersonaldataActivity extends MyBaseActivity {
     private TextView tv_name, tv_phone, tv_sex;
     private LinearLayout ll_rutmypage;
     private File sdcardTempFile;
-    private int crop = 180;
     private File audioFile;
+    private int crop = 180;
     SharedPsaveuser sp;
 
     @Override
@@ -138,25 +139,9 @@ public class PersonaldataActivity extends MyBaseActivity {
                         startActivity(intent2);
                         break;
                     case R.id.rl_icon:
+                        Crop.pickImage(PersonaldataActivity.this);
 
-                        try {
-                            sdcardTempFile = File.createTempFile(".icon", ".jpg", audioFile);
-                        } catch (IOException e) {
 
-                            e.printStackTrace();
-                        }
-                        Intent intent3 = new Intent("android.intent.action.PICK");
-                        intent3.setDataAndType(MediaStore.Images.Media.INTERNAL_CONTENT_URI, "image/*");
-                        intent3.putExtra("output", Uri.fromFile(sdcardTempFile));
-                        intent3.putExtra("crop", "true");
-                        intent3.putExtra("aspectX", 1);// 裁剪框比例
-                        intent3.putExtra("aspectY", 1);
-                        intent3.putExtra("outputX", crop);// 输出图片大小
-                        intent3.putExtra("outputY", crop);
-                        intent3.putExtra("return-data", true);
-                        intent3.putExtra("outputFormat", Bitmap.CompressFormat.JPEG.toString());
-                        intent3.putExtra("noFaceDetection", true);
-                        startActivityForResult(intent3, 100);
                         break;
                 }
             }
@@ -171,41 +156,73 @@ public class PersonaldataActivity extends MyBaseActivity {
         }
     };
 
-    @Override
-    protected void onActivityResult(int requestCode, final int resultCode, Intent data) {
 
-        OkHttpUtils
-                .postFile()
-                .url(Http_data.http_data + "/changeIcon" + "?" + User_Http.user.getId())
-                .file(sdcardTempFile)
-                .build()
-                .execute(new StringCallback() {
-                    @Override
-                    public void onError(Call call, Exception e, int id) {
-                        if (sdcardTempFile != null) {
+    //截取图片
+    private void beginCrop(Uri source) {
+        try {
+            sdcardTempFile = File.createTempFile(".icon", ".jpg", audioFile);
+        } catch (IOException e) {
+
+            e.printStackTrace();
+        }
+
+        Uri destination = Uri.fromFile(sdcardTempFile);
+        Crop.of(source, destination).asSquare().start(this);
+    }
+
+
+    //保存头像
+    private void handleCrop(final int resultCode, Intent result) {
+        if (resultCode == RESULT_OK) {
+
+            OkHttpUtils
+                    .postFile()
+                    .url(Http_data.http_data + "/changeIcon" + "?" + User_Http.user.getId())
+                    .file(sdcardTempFile)
+                    .build()
+                    .execute(new StringCallback() {
+                        @Override
+                        public void onError(Call call, Exception e, int id) {
+                            if (sdcardTempFile != null) {
+
+                            }
+                            Log.e("失败", "失败");
 
                         }
 
-                    }
+                        @Override
+                        public void onResponse(String response, int id) {
+                            Log.e("头像返回", response);
 
-                    @Override
-                    public void onResponse(String response, int id) {
-                        Log.e("头像返回", response);
-                        if (resultCode == RESULT_OK) {
                             Bitmap bmp = BitmapFactory.decodeFile(sdcardTempFile.getAbsolutePath());
 
                             iv_icon.setImageBitmap(bmp);
+
+                            String icon = sdcardTempFile.getAbsolutePath();
+
+                            //将更改过的头像保存在本地，并清除用户实体类中头像
+                            sp.setUsericon(icon);
+                            User_Http.user.setIcon(null);
+
                         }
-                        String icon = sdcardTempFile.getAbsolutePath();
+                    });
 
-                        //将更改过的头像保存在本地，并清除用户实体类中头像
-                        sp.setUsericon(icon);
-                        User_Http.user.setIcon(null);
 
-                    }
-                });
+        } else if (resultCode == Crop.RESULT_ERROR) {
 
+        }
     }
+
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent result) {
+        if (requestCode == Crop.REQUEST_PICK && resultCode == RESULT_OK) {
+            beginCrop(result.getData());
+        } else if (requestCode == Crop.REQUEST_CROP) {
+            handleCrop(resultCode, result);
+        }
+    }
+
 
 
 }
