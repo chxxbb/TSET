@@ -54,6 +54,8 @@ import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import okhttp3.Call;
 
@@ -213,6 +215,8 @@ public class RegistrationAtivity extends MyBaseActivity {
             Toast.makeText(RegistrationAtivity.this, "请选择年龄", Toast.LENGTH_SHORT).show();
         } else if (et_phone.getText().toString().equals("") || et_name.getText().toString() == null) {
             Toast.makeText(RegistrationAtivity.this, "请输入联系方式", Toast.LENGTH_SHORT).show();
+        } else if (!isMobileNO(et_phone.getText().toString())) {
+            Toast.makeText(RegistrationAtivity.this, "请填写正确的手机号", Toast.LENGTH_SHORT).show();
         } else {
 
 
@@ -267,6 +271,12 @@ public class RegistrationAtivity extends MyBaseActivity {
 
         }
 
+    }
+
+    public boolean isMobileNO(String mobiles) {
+        Pattern p = Pattern.compile("^((13[0-9])|(15[^4,\\D])|(18[0-9]))\\d{8}$");
+        Matcher m = p.matcher(mobiles);
+        return m.matches();
     }
 
     Handler handler = new Handler() {

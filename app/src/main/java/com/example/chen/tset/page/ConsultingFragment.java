@@ -260,6 +260,9 @@ public class ConsultingFragment extends Fragment implements View.OnClickListener
                     } else {
                         ll_registration_info.setVisibility(View.VISIBLE);
                         tv_registration_info.setText("有挂号" + ",请于" + pharmacydate + "准时就诊");
+
+                        SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMdd");
+
                         ll_registration_info.setOnClickListener(new View.OnClickListener() {
                             @Override
                             public void onClick(View v) {

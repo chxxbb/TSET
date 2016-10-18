@@ -55,6 +55,7 @@ public class CharactersafeFragment extends Fragment {
 
     SharedPsaveuser sp;
 
+    View footView;
 
 
     public int getI() {
@@ -126,7 +127,7 @@ public class CharactersafeFragment extends Fragment {
 
                             @Override
                             public void onResponse(String response, int id) {
-                                Log.e("资讯返回", response);
+
                                 if (!response.equals("1")) {
                                     Type listtype = new TypeToken<LinkedList<Consult>>() {
                                     }.getType();

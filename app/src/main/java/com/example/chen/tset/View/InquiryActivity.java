@@ -1,14 +1,11 @@
-package com.example.chen.tset.page;
+package com.example.chen.tset.View;
 
 import android.app.Dialog;
 import android.content.Intent;
+import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.support.annotation.Nullable;
-import android.support.v4.app.Fragment;
 import android.util.Log;
-import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
 import android.view.WindowManager;
 import android.widget.AdapterView;
 import android.widget.Button;
@@ -21,7 +18,8 @@ import android.widget.Toast;
 import com.example.chen.tset.Data.Http_data;
 import com.example.chen.tset.Data.Inquiry;
 import com.example.chen.tset.R;
-import com.example.chen.tset.View.DoctorparticularsActivity;
+import com.example.chen.tset.page.InquiryAdapter;
+import com.example.chen.tset.page.InquirylistAdapter;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import com.zhy.http.okhttp.OkHttpUtils;
@@ -35,8 +33,7 @@ import java.util.List;
 
 import okhttp3.Call;
 
-//问诊页面
-public class InquiryFragment extends Fragment {
+public class InquiryActivity extends AppCompatActivity {
     View view;
     InquiryAdapter adapter;
     private ListView lv_inquiry;
@@ -58,38 +55,33 @@ public class InquiryFragment extends Fragment {
     private TextView tv_section, tv_city, tv_sort;
 
 
-    @Nullable
     @Override
-    public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        view = inflater.inflate(R.layout.activity_inquiry, null);
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_inquiry);
+
         list = new ArrayList<>();
         findView();
         listinit(list);
         httpinit();
-        return view;
-    }
-
-    @Override
-    public void onStart() {
-        super.onStart();
     }
 
     private void findView() {
-        lv_inquiry = (ListView) view.findViewById(R.id.lv_inquiry);
-        ll_city = (LinearLayout) view.findViewById(R.id.ll_city);
-        ll_development = (LinearLayout) view.findViewById(R.id.ll_development);
-        ll_sort = (LinearLayout) view.findViewById(R.id.ll_sort);
-        tv_section = (TextView) view.findViewById(R.id.tv_section);
-        tv_city = (TextView) view.findViewById(R.id.tv_city);
-        rl_nonetwork = (RelativeLayout) view.findViewById(R.id.rl_nonetwork);
-        rl_loading = (RelativeLayout) view.findViewById(R.id.rl_loading);
-        tv_sort = (TextView) view.findViewById(R.id.tv_sort);
+        lv_inquiry = (ListView) findViewById(R.id.lv_inquiry);
+        ll_city = (LinearLayout) findViewById(R.id.ll_city);
+        ll_development = (LinearLayout) findViewById(R.id.ll_development);
+        ll_sort = (LinearLayout) findViewById(R.id.ll_sort);
+        tv_section = (TextView) findViewById(R.id.tv_section);
+        tv_city = (TextView) findViewById(R.id.tv_city);
+        rl_nonetwork = (RelativeLayout) findViewById(R.id.rl_nonetwork);
+        rl_loading = (RelativeLayout) findViewById(R.id.rl_loading);
+        tv_sort = (TextView) findViewById(R.id.tv_sort);
         lv_inquiry.setVerticalScrollBarEnabled(false);
         ll_city.setOnClickListener(listener);
         ll_development.setOnClickListener(listener);
         ll_sort.setOnClickListener(listener);
 
-        View view1 = View.inflate(getContext(), R.layout.inquiry_listview_stern, null);
+        View view1 = View.inflate(this, R.layout.inquiry_listview_stern, null);
 
         lv_inquiry.addFooterView(view1);
 
@@ -98,7 +90,7 @@ public class InquiryFragment extends Fragment {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
 
-                Intent intent = new Intent(getContext(), DoctorparticularsActivity.class);
+                Intent intent = new Intent(InquiryActivity.this, DoctorparticularsActivity.class);
                 //根据所选择的排序，点击时获取所点击医生ID
                 if (tv_section.getText().toString().equals("全部科室") || tv_city.getText().toString().equals("全部地区") || tv_sort.getText().toString().equals("智能排序") || tv_sort.getText().toString().equals("默认排序")) {
                     intent.putExtra("doctot_id", list.get(position).getId());
@@ -117,7 +109,7 @@ public class InquiryFragment extends Fragment {
 
 
     private void listinit(List<Inquiry> list) {
-        adapter = new InquiryAdapter(getContext(), list);
+        adapter = new InquiryAdapter(InquiryActivity.this, list);
         lv_inquiry.setAdapter(adapter);
     }
 
@@ -175,9 +167,9 @@ public class InquiryFragment extends Fragment {
 
     private void sortshowDialog() {
 //        setHeadDialog = new AlertDialog.Builder(getContext()).create();
-        setHeadDialog = new Dialog(getContext(), R.style.CustomDialog);
+        setHeadDialog = new Dialog(InquiryActivity.this, R.style.CustomDialog);
         setHeadDialog.show();
-        dialogView = View.inflate(getContext(), R.layout.inquiry_sort_dialog, null);
+        dialogView = View.inflate(InquiryActivity.this, R.layout.inquiry_sort_dialog, null);
         setHeadDialog.getWindow().setContentView(dialogView);
         WindowManager.LayoutParams lp = setHeadDialog.getWindow()
                 .getAttributes();
@@ -247,7 +239,7 @@ public class InquiryFragment extends Fragment {
         lv_inquiry.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                Intent intent = new Intent(getContext(), DoctorparticularsActivity.class);
+                Intent intent = new Intent(InquiryActivity.this, DoctorparticularsActivity.class);
                 //根据所选择的排序，点击时获取所点击医生ID
                 if (tv_sort.getText().toString().equals("智能排序") || tv_sort.getText().toString().equals("默认排序")) {
                     intent.putExtra("doctot_id", list.get(position).getId());
@@ -264,9 +256,9 @@ public class InquiryFragment extends Fragment {
     //科室弹出框
     private void developmentshowDialog() {
 //        setHeadDialog = new AlertDialog.Builder(getContext()).create();
-        setHeadDialog = new Dialog(getContext(), R.style.CustomDialog);
+        setHeadDialog = new Dialog(InquiryActivity.this, R.style.CustomDialog);
         setHeadDialog.show();
-        dialogView = View.inflate(getContext(), R.layout.registration_dialog, null);
+        dialogView = View.inflate(InquiryActivity.this, R.layout.registration_dialog, null);
         ListView lv_registration = (ListView) dialogView.findViewById(R.id.lv_registration);
         data = new ArrayList<>();
         data.add("全部科室");
@@ -283,7 +275,7 @@ public class InquiryFragment extends Fragment {
         data.add("小儿消化");
         data.add("其他");
         lv_registration.setVerticalScrollBarEnabled(false);
-        listadapter = new InquirylistAdapter(getContext(), data);
+        listadapter = new InquirylistAdapter(InquiryActivity.this, data);
         lv_registration.setAdapter(listadapter);
         listadapter.notifyDataSetChanged();
         setHeadDialog.getWindow().setContentView(dialogView);
@@ -326,7 +318,7 @@ public class InquiryFragment extends Fragment {
                         }
                     }
                     if (selectlist.size() == 0) {
-                        Toast.makeText(getContext(), "没有此科室的医生", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(InquiryActivity.this, "没有此科室的医生", Toast.LENGTH_SHORT).show();
                     } else {
                         listinit(selectlist);
                     }
@@ -338,7 +330,7 @@ public class InquiryFragment extends Fragment {
         lv_inquiry.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                Intent intent = new Intent(getContext(), DoctorparticularsActivity.class);
+                Intent intent = new Intent(InquiryActivity.this, DoctorparticularsActivity.class);
                 //根据所选择的排序，点击时获取所点击医生ID
                 if (tv_section.getText().toString().equals("全部科室")) {
                     intent.putExtra("doctot_id", list.get(position).getId());
@@ -354,9 +346,9 @@ public class InquiryFragment extends Fragment {
 
     //城市弹出框
     public void cityshowDialog() {
-        setHeadDialog = new Dialog(getContext(), R.style.CustomDialog);
+        setHeadDialog = new Dialog(InquiryActivity.this, R.style.CustomDialog);
         setHeadDialog.show();
-        dialogView = View.inflate(getContext(), R.layout.inquiry_city_dialog, null);
+        dialogView = View.inflate(InquiryActivity.this, R.layout.inquiry_city_dialog, null);
         setHeadDialog.getWindow().setContentView(dialogView);
         WindowManager.LayoutParams lp = setHeadDialog.getWindow()
                 .getAttributes();
@@ -433,7 +425,7 @@ public class InquiryFragment extends Fragment {
         lv_inquiry.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                Intent intent = new Intent(getContext(), DoctorparticularsActivity.class);
+                Intent intent = new Intent(InquiryActivity.this, DoctorparticularsActivity.class);
                 //根据所选择的排序，点击时获取所点击医生ID
                 if (tv_city.getText().toString().equals("全部地区")) {
                     intent.putExtra("doctot_id", list.get(position).getId());
@@ -445,5 +437,4 @@ public class InquiryFragment extends Fragment {
             }
         });
     }
-
 }

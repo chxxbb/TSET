@@ -2,6 +2,7 @@ package com.example.chen.tset.View;
 
 import android.annotation.TargetApi;
 import android.app.Application;
+import android.app.Dialog;
 import android.app.Notification;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
@@ -24,8 +25,11 @@ import android.util.Log;
 import android.view.View;
 import android.view.WindowManager;
 import android.widget.FrameLayout;
+import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
+import android.widget.RelativeLayout;
 import android.widget.Toast;
 
 import com.example.chen.tset.Data.Chatcontent;
@@ -89,7 +93,7 @@ public class HomeActivity extends MyBaseActivity implements View.OnClickListener
     private MypageFragment mypageFragment;
     private InquiryFragment inquiryFragment;
     private ConsultingFragment consultingFragment;
-    private InquiryView iv_inquiry;
+    private ImageView iv_inquiry;
     ChatpageDao db;
     Set<User> set;
     File sdcardTempFile;
@@ -101,8 +105,11 @@ public class HomeActivity extends MyBaseActivity implements View.OnClickListener
     String gender;
     SharedPsaveuser sp;
     Context context;
+    private Dialog setHeadDialog;
+    private View dialogView;
 
     public static HomeActivity text_homeactivity;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -132,8 +139,6 @@ public class HomeActivity extends MyBaseActivity implements View.OnClickListener
         }
 
         jmessage();
-
-
 
 
         versionUpdate();
@@ -266,7 +271,13 @@ public class HomeActivity extends MyBaseActivity implements View.OnClickListener
             }
         });
     }
-
+    /***
+    JMessageClient.NOTI_MODE_DEFAULT 显示通知，有声音，有震动。
+    JMessageClient.NOTI_MODE_NO_SOUND 显示通知，无声音，有震动。
+    JMessageClient.NOTI_MODE_NO_VIBRATE 显示通知，有声音，无震动。
+    JMessageClient.NOTI_MODE_SILENCE 显示通知，无声音，无震动。
+    JMessageClient.NOTI_MODE_NO_NOTIFICATION 不显示通知。
+     */
 
     //接收其他用户发送的消息，会显示到通知栏
     @TargetApi(Build.VERSION_CODES.JELLY_BEAN)
@@ -278,6 +289,7 @@ public class HomeActivity extends MyBaseActivity implements View.OnClickListener
                 TextContent textContent = (TextContent) msg.getContent();
                 String content = textContent.getText();
                 String username = msg.getFromID();
+
                 Date dt = new Date();
                 Long time = dt.getTime();
                 Chatcontent chatcontent = new Chatcontent("2" + content, time, null, null, username, sp.getTag().getPhone());
@@ -323,14 +335,14 @@ public class HomeActivity extends MyBaseActivity implements View.OnClickListener
         rb_diagnosis = (RadioButton) findViewById(R.id.rb_diagnosis);
         radioGroup_left = (RadioGroup) findViewById(R.id.radioGroup_left);
         radioGroup_right = (RadioGroup) findViewById(R.id.radioGroup_right);
-        iv_inquiry = (InquiryView) findViewById(R.id.iv_inquiry);
+        iv_inquiry = (ImageView) findViewById(R.id.iv_inquiry);
         fl_registration = (FrameLayout) findViewById(R.id.fl_registration);
         rb_encyclopedia.setChecked(true);
         rb_encyclopedia.setOnClickListener(this);
         rb_lectureroom.setOnClickListener(this);
         rb_mypage.setOnClickListener(this);
         rb_diagnosis.setOnClickListener(this);
-        iv_inquiry.setOnClickListener(this);
+        iv_inquiry.setOnClickListener(inquirylistener);
         fl_registration.setOnClickListener(listener);
     }
 
@@ -345,7 +357,7 @@ public class HomeActivity extends MyBaseActivity implements View.OnClickListener
         if (encyclopediaFragment != null) fragmentTransaction.hide(encyclopediaFragment);
         if (lectureroomFragment != null) fragmentTransaction.hide(lectureroomFragment);
         if (mypageFragment != null) fragmentTransaction.hide(mypageFragment);
-        if (inquiryFragment != null) fragmentTransaction.hide(inquiryFragment);
+
         if (consultingFragment != null) fragmentTransaction.hide(consultingFragment);
     }
 
@@ -395,17 +407,6 @@ public class HomeActivity extends MyBaseActivity implements View.OnClickListener
                     ft.show(consultingFragment);
                 }
                 break;
-            case R.id.iv_inquiry:
-                radioGroup_right.clearCheck();
-                radioGroup_left.clearCheck();
-                fl_registration.setVisibility(View.VISIBLE);
-                if (inquiryFragment == null) {
-                    inquiryFragment = new InquiryFragment();
-                    ft.add(R.id.framelayout, inquiryFragment);
-                } else {
-                    ft.show(inquiryFragment);
-                }
-                break;
         }
         ft.commit();
 
@@ -419,91 +420,58 @@ public class HomeActivity extends MyBaseActivity implements View.OnClickListener
         }
     };
 
+    private View.OnClickListener inquirylistener = new View.OnClickListener() {
+        @Override
+        public void onClick(View v) {
+            serveshowDialog();
+        }
+    };
 
-    private void registerjudge() {
-        OkHttpUtils
-                .post()
-                .url(Http_data.http_data + "/login")
-                .addParams("phone", sp.getTag().getPhone())
-                .addParams("password", sp.getTag().getPassword())
-                .build()
-                .execute(new StringCallback() {
-                    @Override
-                    public void onError(Call call, Exception e, int id) {
 
-                    }
+    //服务弹出框
+    public void serveshowDialog() {
+        setHeadDialog = new Dialog(this, R.style.CustomDialog);
+        setHeadDialog.show();
+        dialogView = View.inflate(this, R.layout.inquiry_popup_dialog, null);
+        setHeadDialog.getWindow().setContentView(dialogView);
+        WindowManager.LayoutParams lp = setHeadDialog.getWindow()
+                .getAttributes();
 
-                    @Override
-                    public void onResponse(String response, int id) {
-                        Log.e("返回", response);
+        setHeadDialog.getWindow().setAttributes(lp);
 
-                        if (response.equals("1")) {
+        serveonclick();
 
-                            Toast.makeText(HomeActivity.this, "密码被修改", Toast.LENGTH_SHORT).show();
-                            sp.clearinit();
-
-                            SharedPreferences sp1 = getSharedPreferences("jmlogin", MODE_PRIVATE);
-                            SharedPreferences.Editor edit = sp1.edit();
-                            edit.putBoolean("isclick", true);
-                            edit.commit();
-
-                            Intent i = new Intent(HomeActivity.this, LoginActivity.class);
-                            startActivity(i);
-                            finish();
-                        } else {
-                            Gson gson = new Gson();
-                            User user = gson.fromJson(response, User.class);
-                            Log.e("user", user.toString());
-                            User_Http.user.setUser(user);
-                        }
-
-                    }
-                });
     }
 
-    //当前时间大于用户设置的用药提醒时间 则删除这条用药提醒
-    private void delpharmacy() {
-        PharmacyDao pharmacyDao = new PharmacyDao(this);
+    private void serveonclick() {
+        RelativeLayout rl_inquiry_dialog = (RelativeLayout) dialogView.findViewById(R.id.rl_inquiry_dialog);
+        LinearLayout ll_serve_registration = (LinearLayout) dialogView.findViewById(R.id.ll_serve_registration);
+        LinearLayout ll_online_inquiry = (LinearLayout) dialogView.findViewById(R.id.ll_online_inquiry);
 
-
-        if (sp.getTag().getPhone() != null) {
-            List<Pharmacyremind> list = pharmacyDao.chatfind(sp.getTag().getPhone());
-            if (list != null) {
-                Date d1 = null;
-                try {
-
-                    for (int i = 0; i < list.size(); i++) {
-                        String date = list.get(i).getOverdate();
-                        SimpleDateFormat formatter = new SimpleDateFormat("yyyyMMdd");
-                        Date curDate = new Date(System.currentTimeMillis());//获取当前时间
-                        String str = formatter.format(curDate);
-
-
-                        d1 = new SimpleDateFormat("yyyy年MM月dd").parse(date);
-                        SimpleDateFormat nian = new SimpleDateFormat("yyyy");
-                        SimpleDateFormat yue = new SimpleDateFormat("MM");
-                        SimpleDateFormat ri = new SimpleDateFormat("dd");
-                        String nian1 = nian.format(d1);
-                        String yue1 = yue.format(d1);
-                        String ri1 = ri.format(d1);
-
-                        int pharmacydate = Integer.parseInt(nian1 + yue1 + ri1);
-                        int currentdate = Integer.parseInt(str);
-
-                        if (currentdate > pharmacydate) {
-                            pharmacyDao.del();
-                            Log.e("删除用药", "删除");
-                        }
-
-                    }
-
-                } catch (ParseException e) {
-                    e.printStackTrace();
-                }
+        rl_inquiry_dialog.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                setHeadDialog.dismiss();
             }
-        }
+        });
 
+        ll_serve_registration.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(HomeActivity.this, RegistrationAtivity.class);
+                startActivity(intent);
+                setHeadDialog.dismiss();
+            }
+        });
 
+        ll_online_inquiry.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(HomeActivity.this, InquiryActivity.class);
+                startActivity(intent);
+                setHeadDialog.dismiss();
+            }
+        });
     }
 
 

@@ -85,7 +85,7 @@ public class MycollectActivity extends MyBaseActivity implements IListener{
         DisplayMetrics dm = new DisplayMetrics();
         dm = this.getResources().getDisplayMetrics();
         final float density = dm.density;
-        Log.e("密度", density + "");
+
         SwipeMenuCreator creator = new SwipeMenuCreator() {
             @Override
             public void create(SwipeMenu menu) {

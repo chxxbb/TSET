@@ -50,18 +50,20 @@ public class DoctorparticularsActivity extends MyBaseActivity {
     Gson gson = new Gson();
     private TextView tv_title, tv_name, tv_hospital, tv_bioo, tv_bis, tv_bit, tv_bif, tv_sum, tv_adept, tv_grade;
 
-    private TextView btn_chatmoney,btn_callmoney;
+    private TextView btn_chatmoney, btn_callmoney;
     private CircleImageView iv_icon;
     private RelativeLayout rl_nonetwork, rl_loading;
     String doctor_id = null;
     Doctor doctor;
 
+    private LinearLayout ll_chatmoney;
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_doctorparticulars);
+
         findView();
         httpinit();
 
@@ -95,12 +97,13 @@ public class DoctorparticularsActivity extends MyBaseActivity {
         tv_adept = (TextView) view.findViewById(R.id.tv_adept);
         rl_nonetwork = (RelativeLayout) findViewById(R.id.rl_nonetwork);
         rl_loading = (RelativeLayout) findViewById(R.id.rl_loading);
+        ll_chatmoney = (LinearLayout) findViewById(R.id.ll_chatmoney);
         lv_docttorparticulas.setVerticalScrollBarEnabled(false);
         list = new ArrayList<>();
         adapter = new DoctorparticularsAdapter(this, list);
         lv_docttorparticulas.setAdapter(adapter);
         ll_return.setOnClickListener(listener);
-        btn_callmoney.setOnClickListener(listener);
+        ll_chatmoney.setOnClickListener(listener);
 
 
     }
@@ -181,23 +184,19 @@ public class DoctorparticularsActivity extends MyBaseActivity {
         public void onClick(View v) {
 
             switch (v.getId()) {
-                case R.id.btn_callmoney:
-//                    doctorID = getIntent().getStringExtra("doctorID");
-//                    //医生姓名
-//                    doctorname = getIntent().getStringExtra("name");
-//                    //医生头像
-//                    doctoricon = getIntent().getStringExtra("icon");
-//                    username = getIntent().getStringExtra("username");
 
-                    Intent intent=new Intent(DoctorparticularsActivity.this,ChatpageActivity.class);
-                    intent.putExtra("name",doctor.getName());
-                    intent.putExtra("icon",doctor.getIcon());
-                    intent.putExtra("doctorID",doctor_id);
-                    startActivity(intent);
 
-                    break;
                 case R.id.ll_return:
                     finish();
+                    break;
+                case R.id.ll_chatmoney:
+//                    Intent intent=new Intent(DoctorparticularsActivity.this,ChatpageActivity.class);
+//                    intent.putExtra("name",doctor.getName());
+//                    intent.putExtra("icon",doctor.getIcon());
+//                    intent.putExtra("doctorID",doctor_id);
+//                    intent.putExtra("username",doctor.)
+//                    startActivity(intent);
+
                     break;
 
 

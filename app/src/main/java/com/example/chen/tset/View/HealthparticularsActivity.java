@@ -67,7 +67,6 @@ public class HealthparticularsActivity extends AppCompatActivity {
 
 
         for (int i = 0; i < wordList.size(); i++) {
-            Log.e("231", wordList.get(i).trim());
             if (wordList.get(i).trim().equals("流涕")) {
                 ll_tag1.setVisibility(View.VISIBLE);
             } else if (wordList.get(i).trim().equals("咳嗽")) {

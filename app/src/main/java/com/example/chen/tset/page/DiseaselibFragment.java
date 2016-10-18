@@ -130,7 +130,7 @@ public class DiseaselibFragment extends Fragment {
 
                             @Override
                             public void onResponse(String response, int id) {
-                                Log.e("百科疾病库", response);
+
                                 view1.setVisibility(View.GONE);
                                 Type listtype = new TypeToken<LinkedList<DiseaseDepartment>>() {
                                 }.getType();
@@ -165,7 +165,7 @@ public class DiseaselibFragment extends Fragment {
                     rl_nonetwork.setVisibility(View.VISIBLE);
                     break;
                 case 2:
-                    Log.e("疾病列表", list1.toString());
+
                     diseaselibrecyvAdapter.setList(list1);
                     rl_nonetwork.setVisibility(View.GONE);
                     rl_loading.setVisibility(View.GONE);
@@ -217,7 +217,7 @@ public class DiseaselibFragment extends Fragment {
 
                             @Override
                             public void onResponse(String response, int id) {
-                                Log.e("疾病返回", response);
+
                                 list1 = gson.fromJson(response, new TypeToken<List<String>>() {
                                 }.getType());
 

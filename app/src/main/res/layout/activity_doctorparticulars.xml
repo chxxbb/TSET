@@ -135,6 +135,7 @@
                         android:orientation="vertical">
 
                         <LinearLayout
+                            android:id="@+id/ll_chatmoney"
                             android:layout_width="@dimen/x205"
                             android:layout_height="@dimen/y74"
                             android:background="@drawable/doctorparticulars_chat_case"

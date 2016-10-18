@@ -342,7 +342,6 @@ public class HealthconditionActivity extends MyBaseActivity implements IListener
                 case R.id.tv_heath_save:
 
 
-
                     if (list.size() == 0 && et_healthcondition.getText().toString().length() == 0) {
                         Toast.makeText(HealthconditionActivity.this, "请选择或输入您的健康状况", Toast.LENGTH_SHORT).show();
                     } else {
@@ -356,8 +355,7 @@ public class HealthconditionActivity extends MyBaseActivity implements IListener
     };
 
     @Override
-    public void notifyAllActivity(String str)
-    {
+    public void notifyAllActivity(String str) {
 
     }
 
@@ -383,11 +381,11 @@ public class HealthconditionActivity extends MyBaseActivity implements IListener
 
                     @Override
                     public void onResponse(String response, int id) {
-                        Log.e("健康状况返回", response);
                         if (response.equals("1")) {
                             Toast.makeText(HealthconditionActivity.this, "今天你已经添加过你的健康状况了", Toast.LENGTH_SHORT).show();
                         } else {
                             ListenerManager.getInstance().sendBroadCast("更新日历页面");
+                            Toast.makeText(HealthconditionActivity.this, "保存成功，你可以在健康日历上面查看", Toast.LENGTH_SHORT).show();
                             finish();
                         }
                     }

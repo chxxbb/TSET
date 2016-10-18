@@ -123,6 +123,8 @@ public class ChatpageActivity extends AppCompatActivity {
         historylist = new ArrayList<>();
         findView();
         init();
+        //设置后在此页面接收此用户消息不会再通知栏中显示
+        JMessageClient.enterSingleConversation(username);
 
     }
 
@@ -174,8 +176,7 @@ public class ChatpageActivity extends AppCompatActivity {
 
         btn_chat = (Button) findViewById(R.id.btn_chat);
 
-        //设置后在此页面接收此用户消息不会再通知栏中显示
-        JMessageClient.enterSingleConversation(username);
+
 
 
         tv_doctorname.setText(doctorname);
@@ -340,6 +341,11 @@ public class ChatpageActivity extends AppCompatActivity {
         }
     };
 
+    @Override
+    protected void onStop() {
+        super.onStop();
+        JMessageClient.exitConversation();
+    }
 
     //图片发送弹出框
     private void sendpictureDialog() {
