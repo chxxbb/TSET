@@ -190,12 +190,12 @@ public class DoctorparticularsActivity extends MyBaseActivity {
                     finish();
                     break;
                 case R.id.ll_chatmoney:
-//                    Intent intent=new Intent(DoctorparticularsActivity.this,ChatpageActivity.class);
-//                    intent.putExtra("name",doctor.getName());
-//                    intent.putExtra("icon",doctor.getIcon());
-//                    intent.putExtra("doctorID",doctor_id);
-//                    intent.putExtra("username",doctor.)
-//                    startActivity(intent);
+                    Intent intent=new Intent(DoctorparticularsActivity.this,ChatpageActivity.class);
+                    intent.putExtra("name",doctor.getName());
+                    intent.putExtra("icon",doctor.getIcon());
+                    intent.putExtra("doctorID",doctor_id);
+                    intent.putExtra("username",doctor.getUsername());
+                    startActivity(intent);
 
                     break;
 

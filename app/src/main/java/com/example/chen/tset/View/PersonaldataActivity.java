@@ -139,8 +139,14 @@ public class PersonaldataActivity extends MyBaseActivity {
                         startActivity(intent2);
                         break;
                     case R.id.rl_icon:
-                        Crop.pickImage(PersonaldataActivity.this);
 
+
+                        try {
+                            Crop.pickImage(PersonaldataActivity.this);
+                        } catch (Exception e) {
+                            e.printStackTrace();
+                            Toast.makeText(PersonaldataActivity.this, "打开图库失败，请查看是否开启权限或稍后再试", Toast.LENGTH_SHORT).show();
+                        }
 
                         break;
                 }
@@ -222,7 +228,6 @@ public class PersonaldataActivity extends MyBaseActivity {
             handleCrop(resultCode, result);
         }
     }
-
 
 
 }

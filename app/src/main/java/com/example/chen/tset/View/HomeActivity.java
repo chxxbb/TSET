@@ -23,7 +23,12 @@ import android.os.Bundle;
 import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.View;
+import android.view.Window;
 import android.view.WindowManager;
+import android.view.animation.Animation;
+import android.view.animation.RotateAnimation;
+import android.view.animation.ScaleAnimation;
+import android.view.animation.TranslateAnimation;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -110,12 +115,18 @@ public class HomeActivity extends MyBaseActivity implements View.OnClickListener
 
     public static HomeActivity text_homeactivity;
 
+    Animation translateAnimation;
+    Animation translateAnimation1;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
+
         text_homeactivity = this;
+
+
         JMessageClient.registerEventReceiver(this);
         JMessageClient.setNotificationMode(JMessageClient.NOTI_MODE_DEFAULT);
         db = new ChatpageDao(this);
@@ -271,12 +282,13 @@ public class HomeActivity extends MyBaseActivity implements View.OnClickListener
             }
         });
     }
+
     /***
-    JMessageClient.NOTI_MODE_DEFAULT 显示通知，有声音，有震动。
-    JMessageClient.NOTI_MODE_NO_SOUND 显示通知，无声音，有震动。
-    JMessageClient.NOTI_MODE_NO_VIBRATE 显示通知，有声音，无震动。
-    JMessageClient.NOTI_MODE_SILENCE 显示通知，无声音，无震动。
-    JMessageClient.NOTI_MODE_NO_NOTIFICATION 不显示通知。
+     * JMessageClient.NOTI_MODE_DEFAULT 显示通知，有声音，有震动。
+     * JMessageClient.NOTI_MODE_NO_SOUND 显示通知，无声音，有震动。
+     * JMessageClient.NOTI_MODE_NO_VIBRATE 显示通知，有声音，无震动。
+     * JMessageClient.NOTI_MODE_SILENCE 显示通知，无声音，无震动。
+     * JMessageClient.NOTI_MODE_NO_NOTIFICATION 不显示通知。
      */
 
     //接收其他用户发送的消息，会显示到通知栏
@@ -431,11 +443,15 @@ public class HomeActivity extends MyBaseActivity implements View.OnClickListener
     //服务弹出框
     public void serveshowDialog() {
         setHeadDialog = new Dialog(this, R.style.CustomDialog);
+
         setHeadDialog.show();
         dialogView = View.inflate(this, R.layout.inquiry_popup_dialog, null);
         setHeadDialog.getWindow().setContentView(dialogView);
         WindowManager.LayoutParams lp = setHeadDialog.getWindow()
                 .getAttributes();
+        Window window = setHeadDialog.getWindow();
+
+        window.setWindowAnimations(0);
 
         setHeadDialog.getWindow().setAttributes(lp);
 
@@ -447,11 +463,47 @@ public class HomeActivity extends MyBaseActivity implements View.OnClickListener
         RelativeLayout rl_inquiry_dialog = (RelativeLayout) dialogView.findViewById(R.id.rl_inquiry_dialog);
         LinearLayout ll_serve_registration = (LinearLayout) dialogView.findViewById(R.id.ll_serve_registration);
         LinearLayout ll_online_inquiry = (LinearLayout) dialogView.findViewById(R.id.ll_online_inquiry);
+        final ImageView inquiry_dialog_tag = (ImageView) dialogView.findViewById(R.id.inquiry_dialog_tag);
+        final LinearLayout ll_online_inquiry1 = (LinearLayout) dialogView.findViewById(R.id.ll_online_inquiry1);
+        final LinearLayout ll_serve_registration1 = (LinearLayout) dialogView.findViewById(R.id.ll_serve_registration1);
 
         rl_inquiry_dialog.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                setHeadDialog.dismiss();
+                RotateAnimation myAnimation_Rotate = new RotateAnimation(45.0f, 90.0f,
+                        Animation.RELATIVE_TO_SELF, 0.5f, Animation.RELATIVE_TO_SELF, 0.5f);
+                inquiry_dialog_tag.startAnimation(myAnimation_Rotate);
+                myAnimation_Rotate.setDuration(150);
+                myAnimation_Rotate.setFillAfter(true);
+
+
+                //换取手机屏幕 宽和高
+                WindowManager wm = (WindowManager) HomeActivity.this.getSystemService(Context.WINDOW_SERVICE);
+
+                int width = wm.getDefaultDisplay().getWidth();
+                int height = wm.getDefaultDisplay().getHeight();
+
+                translateAnimation = new TranslateAnimation(0.1f, width / 4.6f, 0.1f, height * 0.163f);
+                translateAnimation.setDuration(150);
+                ll_online_inquiry1.startAnimation(translateAnimation);
+
+
+                translateAnimation1 = new TranslateAnimation(0.1f, -width / 4.6f, 0.1f, height * 0.163f);
+                translateAnimation1.setDuration(150);
+                ll_serve_registration1.startAnimation(translateAnimation1);
+
+                new Thread() {
+                    public void run() {
+                        try {
+                            sleep(150);
+                        } catch (InterruptedException e) {
+                            // TODO Auto-generated catch block
+                            e.printStackTrace();
+                        } finally {
+                            setHeadDialog.dismiss();
+                        }
+                    }
+                }.start();
             }
         });
 
@@ -472,6 +524,28 @@ public class HomeActivity extends MyBaseActivity implements View.OnClickListener
                 setHeadDialog.dismiss();
             }
         });
+        //旋转动画
+        RotateAnimation myAnimation_Rotate = new RotateAnimation(0.5f, -45.0f,
+                Animation.RELATIVE_TO_SELF, 0.5f, Animation.RELATIVE_TO_SELF, 0.5f);
+        inquiry_dialog_tag.startAnimation(myAnimation_Rotate);
+        myAnimation_Rotate.setDuration(150);
+        myAnimation_Rotate.setFillAfter(true);
+
+        WindowManager wm = (WindowManager) this.getSystemService(Context.WINDOW_SERVICE);
+
+        int width = wm.getDefaultDisplay().getWidth();
+        int height = wm.getDefaultDisplay().getHeight();
+
+        //平移动画
+        translateAnimation = new TranslateAnimation(width / 4.6f, 0.1f, height * 0.163f, 0.1f);
+
+        translateAnimation.setDuration(150);
+        ll_online_inquiry1.startAnimation(translateAnimation);
+
+
+        translateAnimation1 = new TranslateAnimation(-width / 4.6f, 0.1f, height * 0.163f, 0.1f);
+        translateAnimation1.setDuration(150);
+        ll_serve_registration1.startAnimation(translateAnimation1);
     }
 
 

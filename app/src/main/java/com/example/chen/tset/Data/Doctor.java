@@ -24,7 +24,9 @@ public class Doctor {
 
     private String seniority4;//资历4
 
-    public Doctor(String icon, String title, String name, String chatCost, String callCost, String adept, String hospital, String section, int commentCount, String seniority1, String seniority2, String seniority3, String seniority4) {
+    private String username;
+
+    public Doctor(String icon, String title, String name, String chatCost, String callCost, String adept, String hospital, String section, int commentCount, String seniority1, String seniority2, String seniority3, String seniority4, String username) {
         this.icon = icon;
         this.title = title;
         this.name = name;
@@ -38,6 +40,15 @@ public class Doctor {
         this.seniority2 = seniority2;
         this.seniority3 = seniority3;
         this.seniority4 = seniority4;
+        this.username = username;
+    }
+
+    public String getUsername() {
+        return username;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
     }
 
     public String getChatCost() {

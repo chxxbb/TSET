@@ -177,8 +177,6 @@ public class ChatpageActivity extends AppCompatActivity {
         btn_chat = (Button) findViewById(R.id.btn_chat);
 
 
-
-
         tv_doctorname.setText(doctorname);
 
         listView.setVerticalScrollBarEnabled(false);
@@ -373,19 +371,20 @@ public class ChatpageActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
+
                 try {
+
                     sdcardTempFile = File.createTempFile("textcamera", ".jpg", audioFile);
+                    //相机
+                    Intent intent1 = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+                    intent1.putExtra(MediaStore.EXTRA_OUTPUT, Uri.fromFile(sdcardTempFile));
+                    startActivityForResult(intent1, 100);
+                    setHeadDialog.dismiss();
 
-                } catch (IOException e) {
-
+                } catch (Exception e) {
                     e.printStackTrace();
+                    Toast.makeText(ChatpageActivity.this, "开启相机失败，请查看是否开启权限或稍后再试", Toast.LENGTH_SHORT).show();
                 }
-
-                //相机
-                Intent intent1 = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-                intent1.putExtra(MediaStore.EXTRA_OUTPUT, Uri.fromFile(sdcardTempFile));
-                startActivityForResult(intent1, 100);
-                setHeadDialog.dismiss();
 
 
             }
@@ -395,8 +394,14 @@ public class ChatpageActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
-                Crop.pickImage(ChatpageActivity.this);
-                setHeadDialog.dismiss();
+                try {
+                    Crop.pickImage(ChatpageActivity.this);
+                    setHeadDialog.dismiss();
+
+                } catch (Exception e) {
+                    e.printStackTrace();
+                    Toast.makeText(ChatpageActivity.this, "打开图库失败，请查看是否开启权限或稍后再试", Toast.LENGTH_SHORT).show();
+                }
             }
         });
 
@@ -430,25 +435,31 @@ public class ChatpageActivity extends AppCompatActivity {
             Thread thread = new Thread(new Runnable() {
                 @Override
                 public void run() {
+                    if (sdcardTempFile != null) {
+                        try {
+                            Conversation c = JMessageClient.getSingleConversation(username);
+                            if (c == null) {
+                                c = Conversation.createSingleConversation(username);
+                            }
 
-                    try {
-                        Conversation c = JMessageClient.getSingleConversation(username);
-                        if (c == null) {
-                            c = Conversation.createSingleConversation(username);
+                            ImageContent image = new ImageContent(sdcardTempFile);
+
+
+                            Message message = c.createSendMessage(image);
+                            JMessageClient.sendMessage(message);
+                            chatcontent = new Chatcontent("1*1", 0L, sdcardTempFile.getAbsolutePath(), sdcardTempFile.getAbsolutePath(), username, sp.getTag().getPhone());
+                            list.add(chatcontent);
+                            handler.sendEmptyMessage(1);
+                            db.addchatcont(chatcontent);
+                        } catch (Exception e) {
+                            e.printStackTrace();
+
+
                         }
-
-                        ImageContent image = new ImageContent(sdcardTempFile);
-
-                        Message message = c.createSendMessage(image);
-                        JMessageClient.sendMessage(message);
-                        chatcontent = new Chatcontent("1*1", 0L, sdcardTempFile.getAbsolutePath(), sdcardTempFile.getAbsolutePath(), username, sp.getTag().getPhone());
-                        list.add(chatcontent);
-                        handler.sendEmptyMessage(1);
-                        db.addchatcont(chatcontent);
-                    } catch (Exception e) {
-                        e.printStackTrace();
-
+                    } else {
+                        Toast.makeText(ChatpageActivity.this, "发送图片失败，请稍后再试", Toast.LENGTH_SHORT).show();
                     }
+
 
                     chatstate++;
                 }
@@ -536,13 +547,13 @@ public class ChatpageActivity extends AppCompatActivity {
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent result) {
         if (requestCode == Crop.REQUEST_PICK && resultCode == RESULT_OK) {
-            Log.e("111", "111");
+
             beginCrop(result.getData());
         } else if (requestCode == Crop.REQUEST_CROP) {
-            Log.e("222", "222");
+
             handleCrop(resultCode, result);
         } else if (resultCode == RESULT_OK && requestCode == 100) {
-            Log.e("333", "333");
+
             handleCrop(resultCode, result);
         }
     }
