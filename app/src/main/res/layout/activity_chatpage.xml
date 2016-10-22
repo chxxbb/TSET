@@ -12,77 +12,88 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <RelativeLayout
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="@dimen/y96"
-            android:layout_alignParentTop="true"
-            android:background="@color/white">
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
 
-            <LinearLayout
-                android:id="@+id/ll_consult_return"
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:orientation="horizontal">
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/y96"
+                android:background="@color/white">
 
-                <ImageView
-                    android:layout_width="@dimen/x20"
-                    android:layout_height="@dimen/y36"
-                    android:layout_gravity="center_vertical"
-                    android:layout_marginLeft="@dimen/x30"
-                    android:src="@drawable/opinion_return" />
+                <LinearLayout
+                    android:id="@+id/ll_consult_return"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:orientation="horizontal">
+
+                    <ImageView
+                        android:layout_width="@dimen/x20"
+                        android:layout_height="@dimen/y36"
+                        android:layout_gravity="center_vertical"
+                        android:layout_marginLeft="@dimen/x30"
+                        android:src="@drawable/opinion_return" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_vertical"
+                        android:layout_marginLeft="@dimen/x8"
+                        android:text="问诊"
+                        android:textColor="@color/backgroundblue"
+                        android:textSize="@dimen/x32" />
+                </LinearLayout>
 
                 <TextView
+                    android:id="@+id/tv_doctorname"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_gravity="center_vertical"
-                    android:layout_marginLeft="@dimen/x8"
-                    android:text="问诊"
-                    android:textColor="@color/backgroundblue"
-                    android:textSize="@dimen/x32" />
-            </LinearLayout>
+                    android:layout_centerInParent="true"
+                    android:text="name"
+                    android:textColor="@color/fontcolor"
+                    android:textSize="@dimen/x36" />
 
-            <TextView
-                android:id="@+id/tv_doctorname"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_centerInParent="true"
-                android:text="name"
-                android:textColor="@color/fontcolor"
-                android:textSize="@dimen/x36" />
+                <LinearLayout
+                    android:id="@+id/ll_doctor_particulars"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_alignParentRight="true">
 
-            <LinearLayout
-                android:id="@+id/ll_doctor_particulars"
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:layout_alignParentRight="true">
+                    <ImageView
+                        android:layout_width="@dimen/x34"
+                        android:layout_height="@dimen/y40"
+                        android:layout_gravity="center_vertical"
+                        android:layout_marginRight="@dimen/x30"
+                        android:src="@drawable/chat_right" />
+                </LinearLayout>
+            </RelativeLayout>
 
-                <ImageView
-                    android:layout_width="@dimen/x34"
-                    android:layout_height="@dimen/y40"
-                    android:layout_gravity="center_vertical"
-                    android:layout_marginRight="@dimen/x30"
-                    android:src="@drawable/chat_right" />
-            </LinearLayout>
-        </RelativeLayout>
 
-        <LinearLayout
-            android:id="@+id/jmui_chat_background"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:descendantFocusability="beforeDescendants"
-            android:focusableInTouchMode="true">
-
-            <ListView
-                android:id="@+id/listView"
+            <FrameLayout
+                android:id="@+id/jmui_chat_background"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="@dimen/y96"
-                android:layout_marginTop="@dimen/y96"
-                android:listSelector="@android:color/transparent"
-                android:overScrollMode="never"
-                android:stackFromBottom="true"
-                android:transcriptMode="alwaysScroll"></ListView>
+                android:layout_height="match_parent"
+                android:orientation="vertical"
+
+
+                >
+
+                <in.srain.cube.views.ptr.PtrClassicFrameLayout
+                    android:id="@+id/ptrClassicFrameLayout"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+                    <ListView
+                        android:id="@+id/listView"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="@dimen/y96"
+                        android:listSelector="@android:color/transparent" />
+                </in.srain.cube.views.ptr.PtrClassicFrameLayout>
+            </FrameLayout>
+
         </LinearLayout>
+
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -103,7 +114,7 @@
                 android:orientation="horizontal">
 
                 <LinearLayout
-                    android:layout_width="@dimen/x520"
+                    android:layout_width="@dimen/x450"
                     android:layout_height="@dimen/y72"
                     android:layout_marginLeft="@dimen/x30"
                     android:background="@drawable/chat_import_case"
@@ -117,25 +128,24 @@
                         android:layout_marginLeft="@dimen/x10"
                         android:layout_marginRight="@dimen/x10"
                         android:background="@null"
-                        android:textCursorDrawable="@drawable/deittext_cursor_blue_style"
                         android:textColor="@color/fontcolor"
+                        android:textCursorDrawable="@drawable/deittext_cursor_blue_style"
                         android:textSize="@dimen/y28" />
                 </LinearLayout>
 
                 <ImageView
-                android:id="@+id/iv_chat"
-                android:layout_width="@dimen/x56"
-                android:layout_height="@dimen/y56"
-                android:layout_marginLeft="@dimen/x20"
-                android:layout_marginRight="@dimen/x30"
-                android:src="@drawable/chat_more" />
-
+                    android:id="@+id/iv_chat"
+                    android:layout_width="@dimen/x56"
+                    android:layout_height="@dimen/y56"
+                    android:layout_marginLeft="@dimen/x20"
+                    android:layout_marginRight="@dimen/x30"
+                    android:src="@drawable/chat_more" />
 
                 <Button
                     android:id="@+id/btn_chat"
                     android:layout_width="@dimen/x120"
                     android:layout_height="@dimen/y65"
-                    android:layout_marginLeft="@dimen/x20"
+
                     android:layout_marginRight="@dimen/x30"
                     android:background="@drawable/chat_send_case"
                     android:text="发送"

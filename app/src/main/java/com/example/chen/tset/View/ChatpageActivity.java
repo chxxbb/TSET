@@ -12,8 +12,10 @@ import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.Environment;
 import android.os.Handler;
+import android.os.PersistableBundle;
 import android.os.SystemClock;
 import android.provider.MediaStore;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -64,9 +66,16 @@ import cn.jpush.im.android.api.event.MessageEvent;
 import cn.jpush.im.android.api.model.Conversation;
 import cn.jpush.im.android.api.model.Message;
 import cn.jpush.im.api.BasicCallback;
-import de.hdodenhof.circleimageview.CircleImageView;
+import in.srain.cube.views.ptr.PtrClassicFrameLayout;
+import in.srain.cube.views.ptr.PtrDefaultHandler;
+import in.srain.cube.views.ptr.PtrFrameLayout;
+import in.srain.cube.views.ptr.PtrHandler;
+import in.srain.cube.views.ptr.PtrUIHandler;
+import in.srain.cube.views.ptr.header.StoreHouseHeader;
+import in.srain.cube.views.ptr.indicator.PtrIndicator;
 
-public class ChatpageActivity extends AppCompatActivity {
+
+public class ChatpageActivity extends AppCompatActivity implements PtrUIHandler {
     private EditText et_chat;
     private ImageView iv_chat;
     private ListView listView;
@@ -79,6 +88,7 @@ public class ChatpageActivity extends AppCompatActivity {
     String doctorname;
     String doctoricon;
     private File sdcardTempFile;
+    private File sdcardTempFile1;
     private File audioFile;
     private Dialog setHeadDialog;
     private View dialogView;
@@ -93,9 +103,15 @@ public class ChatpageActivity extends AppCompatActivity {
 
     private Button btn_chat;
 
+    private PtrClassicFrameLayout ptrClassicFrameLayout;
 
     //用于判断用户是否和医生对话过
     int chatstate = 0;
+
+    //聊天记录页数
+    int chatrecordnumber = 1;
+
+    List<Chatcontent> numberlist;
 
 
     @Override
@@ -111,6 +127,8 @@ public class ChatpageActivity extends AppCompatActivity {
         data = new ArrayList<>();
 
 
+
+
     }
 
 
@@ -121,6 +139,7 @@ public class ChatpageActivity extends AppCompatActivity {
         db = new ChatpageDao(this);
         list = new ArrayList<>();
         historylist = new ArrayList<>();
+        numberlist = new ArrayList<>();
         findView();
         init();
         //设置后在此页面接收此用户消息不会再通知栏中显示
@@ -181,6 +200,17 @@ public class ChatpageActivity extends AppCompatActivity {
 
         listView.setVerticalScrollBarEnabled(false);
 
+        View view1 = View.inflate(this, R.layout.chatpage_listview_footview, null);
+
+        listView.addFooterView(view1);
+
+
+        //下拉加载更多的聊天记录
+        ptrClassicFrameLayout = (PtrClassicFrameLayout) findViewById(R.id.ptrClassicFrameLayout);
+        ptrClassicFrameLayout.setPadding(0, 0, 0, 50);
+        //2次下拉时间间隔
+        ptrClassicFrameLayout.setDurationToCloseHeader(1000);
+
 
         ll_doctor_particulars.setOnClickListener(doctorlisntener);
 
@@ -212,15 +242,28 @@ public class ChatpageActivity extends AppCompatActivity {
         historylist = db.chatfind(username);
         for (int i = 0; i < historylist.size(); i++) {
 
-
             if (historylist.get(i).getMyname().equals(sp.getTag().getPhone())) {
-                list.add(historylist.get(i));
-
+                numberlist.add(historylist.get(i));
 
             }
 
+        }
+
+        //进入聊天页面默认加载10天数据,如果少于或等于10条则全部显示
+        if (numberlist.size() > (chatrecordnumber * 10)) {
+            for (int j = numberlist.size() - (chatrecordnumber * 10); j < numberlist.size(); j++) {
+                Log.e("j", j + "");
+                list.add(numberlist.get(j));
+            }
+        } else {
+
+            for (int i = 0; i < numberlist.size(); i++) {
+                list.add(numberlist.get(i));
+            }
 
         }
+
+
         adapter = new ChatpageAdapter(this, list, doctoricon);
         listView.setAdapter(adapter);
 
@@ -230,6 +273,47 @@ public class ChatpageActivity extends AppCompatActivity {
 
         adapter.notifyDataSetChanged();
 
+
+
+
+
+        ptrClassicFrameLayout.setPtrHandler(new PtrDefaultHandler() {
+            @Override
+            public void onRefreshBegin(PtrFrameLayout frame) {
+                //加载更多的聊天记录，
+                list.clear();
+                chatrecordnumber++;
+
+                ptrClassicFrameLayout.postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        if (numberlist.size() > (chatrecordnumber * 10)) {
+                            for (int j = numberlist.size() - (chatrecordnumber * 10); j < numberlist.size(); j++) {
+                                list.add(numberlist.get(j));
+                            }
+                            handler.sendEmptyMessage(4);
+                        } else {
+
+                            for (int i = 0; i < numberlist.size(); i++) {
+                                list.add(numberlist.get(i));
+                            }
+
+                            handler.sendEmptyMessage(5);
+                        }
+
+
+                    }
+                }, 1000);
+
+
+            }
+
+            @Override
+            public boolean checkCanDoRefresh(PtrFrameLayout frame, View content, View header) {
+                return super.checkCanDoRefresh(frame, content, header);
+            }
+
+        });
 
     }
 
@@ -308,7 +392,23 @@ public class ChatpageActivity extends AppCompatActivity {
                     break;
                 case 2:
                     Toast.makeText(ChatpageActivity.this, "发送失败，请重新发送", Toast.LENGTH_SHORT).show();
+                    break;
 
+
+                case 3:
+                    Toast.makeText(ChatpageActivity.this, "发送图片失败，请稍后再试", Toast.LENGTH_SHORT).show();
+                    break;
+
+                case 4:
+                    adapter.notifyDataSetChanged();
+                    listView.setSelection(9);
+                    //收回加载显示框
+                    ptrClassicFrameLayout.refreshComplete();
+                    break;
+                case 5:
+                    adapter.notifyDataSetChanged();
+                    ptrClassicFrameLayout.refreshComplete();
+                    Toast.makeText(ChatpageActivity.this, "已经没有消息记录了", Toast.LENGTH_SHORT).show();
                     break;
 
 
@@ -359,6 +459,7 @@ public class ChatpageActivity extends AppCompatActivity {
     }
 
 
+
     //选择获取图片方式
     private void sendpictureclick() {
 
@@ -374,18 +475,18 @@ public class ChatpageActivity extends AppCompatActivity {
 
                 try {
 
-                    sdcardTempFile = File.createTempFile("textcamera", ".jpg", audioFile);
+                    sdcardTempFile1 = File.createTempFile("textcamera", ".jpg", audioFile);
                     //相机
                     Intent intent1 = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-                    intent1.putExtra(MediaStore.EXTRA_OUTPUT, Uri.fromFile(sdcardTempFile));
+                    intent1.putExtra(MediaStore.EXTRA_OUTPUT, Uri.fromFile(sdcardTempFile1));
                     startActivityForResult(intent1, 100);
                     setHeadDialog.dismiss();
 
+
                 } catch (Exception e) {
                     e.printStackTrace();
-                    Toast.makeText(ChatpageActivity.this, "开启相机失败，请查看是否开启权限或稍后再试", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(ChatpageActivity.this, "开启相机失败，请检查是否开启权限或稍后再试", Toast.LENGTH_SHORT).show();
                 }
-
 
             }
         });
@@ -400,7 +501,7 @@ public class ChatpageActivity extends AppCompatActivity {
 
                 } catch (Exception e) {
                     e.printStackTrace();
-                    Toast.makeText(ChatpageActivity.this, "打开图库失败，请查看是否开启权限或稍后再试", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(ChatpageActivity.this, "打开图库失败，请检查是否开启权限或稍后再试", Toast.LENGTH_SHORT).show();
                 }
             }
         });
@@ -453,11 +554,12 @@ public class ChatpageActivity extends AppCompatActivity {
                             db.addchatcont(chatcontent);
                         } catch (Exception e) {
                             e.printStackTrace();
+                            handler.sendEmptyMessage(3);
 
 
                         }
                     } else {
-                        Toast.makeText(ChatpageActivity.this, "发送图片失败，请稍后再试", Toast.LENGTH_SHORT).show();
+                        handler.sendEmptyMessage(3);
                     }
 
 
@@ -500,6 +602,15 @@ public class ChatpageActivity extends AppCompatActivity {
                 WindowManager.LayoutParams lp = setHeadDialog.getWindow().getAttributes();
 
                 setHeadDialog.getWindow().setAttributes(lp);
+
+                RelativeLayout rl_chat_diss = (RelativeLayout) dialogView.findViewById(R.id.rl_chat_diss);
+
+                rl_chat_diss.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        setHeadDialog.dismiss();
+                    }
+                });
             }
 
         }
@@ -554,7 +665,39 @@ public class ChatpageActivity extends AppCompatActivity {
             handleCrop(resultCode, result);
         } else if (resultCode == RESULT_OK && requestCode == 100) {
 
-            handleCrop(resultCode, result);
+
+            Thread thread = new Thread(new Runnable() {
+                @Override
+                public void run() {
+
+                    try {
+                        Conversation c = JMessageClient.getSingleConversation(username);
+
+                        if (c == null) {
+                            c = Conversation.createSingleConversation(username);
+
+                        }
+                        Log.e("图片地址", sdcardTempFile1.getAbsolutePath());
+                        ImageContent image = new ImageContent(sdcardTempFile1);
+
+
+                        Message message = c.createSendMessage(image);
+
+                        JMessageClient.sendMessage(message);
+                        chatcontent = new Chatcontent("1*1", 0L, sdcardTempFile1.getAbsolutePath(), sdcardTempFile1.getAbsolutePath(), username, sp.getTag().getPhone());
+                        list.add(chatcontent);
+                        handler.sendEmptyMessage(1);
+                        db.addchatcont(chatcontent);
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                        handler.sendEmptyMessage(3);
+
+                    }
+
+                    chatstate++;
+                }
+            });
+            thread.start();
         }
     }
 
@@ -592,10 +735,39 @@ public class ChatpageActivity extends AppCompatActivity {
 
     }
 
+    int l = 0;
+
 
     @Override
     protected void onResume() {
         super.onResume();
         JPushInterface.onResume(this);
+    }
+
+    @Override
+    public void onUIReset(PtrFrameLayout frame) {
+
+    }
+
+    @Override
+    public void onUIRefreshPrepare(PtrFrameLayout frame) {
+
+        l = list.size();
+
+    }
+
+    @Override
+    public void onUIRefreshBegin(PtrFrameLayout frame) {
+
+    }
+
+    @Override
+    public void onUIRefreshComplete(PtrFrameLayout frame) {
+
+    }
+
+    @Override
+    public void onUIPositionChange(PtrFrameLayout frame, boolean isUnderTouch, byte status, PtrIndicator ptrIndicator) {
+
     }
 }

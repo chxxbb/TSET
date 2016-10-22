@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/white"
+    android:background="@color/backgroundgray"
     android:orientation="vertical"
     tools:context="com.example.chen.tset.View.ReservationlistActivity">
 
@@ -113,16 +113,16 @@
                         android:textSize="@dimen/y24" />
 
 
-
                     <TextView
                         android:id="@+id/tv_appointment_time"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="@dimen/x30"
                         android:layout_marginTop="@dimen/y30"
-
                         android:textColor="@color/xmgray"
-                        android:textSize="@dimen/y24" />
+
+                        android:textSize="@dimen/y24"
+                        android:visibility="gone" />
 
                     <View
                         android:layout_width="match_parent"
@@ -135,13 +135,12 @@
                         android:id="@+id/tv_address"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:layout_gravity="center_vertical"
+                        android:layout_marginBottom="@dimen/y24"
                         android:layout_marginLeft="@dimen/x30"
                         android:layout_marginTop="@dimen/y22"
-
                         android:textColor="@color/xmgray"
                         android:textSize="@dimen/y24" />
-
-
 
 
                 </LinearLayout>
@@ -149,7 +148,7 @@
                 <View
                     android:layout_width="match_parent"
                     android:layout_height="@dimen/y30"
-                    android:background="@color/backgroundgray"/>
+                    android:background="@color/backgroundgray" />
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -165,6 +164,7 @@
                         android:text="预约挂号订单"
                         android:textColor="@color/fontcolor"
                         android:textSize="@dimen/y28" />
+
                     <TextView
                         android:id="@+id/tv_patient_name"
                         android:layout_width="wrap_content"
@@ -173,6 +173,7 @@
                         android:layout_marginTop="@dimen/y30"
                         android:textColor="@color/xmgray"
                         android:textSize="@dimen/y24" />
+
                     <TextView
                         android:id="@+id/tv_patient_phone"
                         android:layout_width="wrap_content"
@@ -251,128 +252,125 @@
                 <View
                     android:layout_width="match_parent"
                     android:layout_height="@dimen/y30"
-                    android:background="@color/backgroundgray"/>
+                    android:background="@color/backgroundgray" />
 
                 <!--<RelativeLayout-->
-                    <!--android:layout_width="match_parent"-->
-                    <!--android:layout_height="@dimen/y80"-->
-                    <!--android:background="@color/white">-->
+                <!--android:layout_width="match_parent"-->
+                <!--android:layout_height="@dimen/y80"-->
+                <!--android:background="@color/white">-->
 
-                    <!--<LinearLayout-->
-                        <!--android:layout_width="wrap_content"-->
-                        <!--android:layout_height="match_parent">-->
+                <!--<LinearLayout-->
+                <!--android:layout_width="wrap_content"-->
+                <!--android:layout_height="match_parent">-->
 
-                        <!--<TextView-->
-                            <!--android:layout_width="wrap_content"-->
-                            <!--android:layout_height="wrap_content"-->
-                            <!--android:layout_gravity="center_vertical"-->
-                            <!--android:layout_marginLeft="@dimen/x30"-->
-                            <!--android:text="医生嘱咐"-->
-                            <!--android:textColor="#eb686c"-->
-                            <!--android:textSize="@dimen/y28" />-->
-                    <!--</LinearLayout>-->
+                <!--<TextView-->
+                <!--android:layout_width="wrap_content"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:layout_gravity="center_vertical"-->
+                <!--android:layout_marginLeft="@dimen/x30"-->
+                <!--android:text="医生嘱咐"-->
+                <!--android:textColor="#eb686c"-->
+                <!--android:textSize="@dimen/y28" />-->
+                <!--</LinearLayout>-->
 
-                    <!--<LinearLayout-->
-                        <!--android:layout_width="wrap_content"-->
-                        <!--android:layout_height="wrap_content"-->
-                        <!--android:layout_alignParentRight="true">-->
+                <!--<LinearLayout-->
+                <!--android:layout_width="wrap_content"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:layout_alignParentRight="true">-->
 
-                        <!--<ImageView-->
-                            <!--android:layout_width="@dimen/x34"-->
-                            <!--android:layout_height="@dimen/y64"-->
-                            <!--android:layout_marginRight="@dimen/x30"-->
-                            <!--android:src="@drawable/reservation_particulars" />-->
-                    <!--</LinearLayout>-->
+                <!--<ImageView-->
+                <!--android:layout_width="@dimen/x34"-->
+                <!--android:layout_height="@dimen/y64"-->
+                <!--android:layout_marginRight="@dimen/x30"-->
+                <!--android:src="@drawable/reservation_particulars" />-->
+                <!--</LinearLayout>-->
                 <!--</RelativeLayout>-->
 
                 <!--<View-->
-                    <!--android:layout_width="match_parent"-->
-                    <!--android:layout_height="@dimen/y1"-->
-                    <!--android:background="@color/linegray" />-->
+                <!--android:layout_width="match_parent"-->
+                <!--android:layout_height="@dimen/y1"-->
+                <!--android:background="@color/linegray" />-->
 
                 <!--<LinearLayout-->
-                    <!--android:layout_width="match_parent"-->
-                    <!--android:layout_height="wrap_content"-->
-                    <!--android:background="@color/white"-->
-                    <!--android:orientation="horizontal">-->
+                <!--android:layout_width="match_parent"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:background="@color/white"-->
+                <!--android:orientation="horizontal">-->
 
-                    <!--<LinearLayout-->
-                        <!--android:layout_width="wrap_content"-->
-                        <!--android:layout_height="match_parent">-->
+                <!--<LinearLayout-->
+                <!--android:layout_width="wrap_content"-->
+                <!--android:layout_height="match_parent">-->
 
-                        <!--<de.hdodenhof.circleimageview.CircleImageView-->
-                            <!--android:id="@+id/iv_icon"-->
-                            <!--android:layout_width="@dimen/x84"-->
-                            <!--android:layout_height="@dimen/y84"-->
-                            <!--android:layout_marginLeft="@dimen/x30"-->
-                            <!--android:layout_marginTop="@dimen/x30"-->
-                            <!--android:src="@color/backgroundblue"-->
-                            <!--app:civ_border_color="@color/linegray"-->
-                            <!--app:civ_border_width="@dimen/x2"></de.hdodenhof.circleimageview.CircleImageView>-->
-                    <!--</LinearLayout>-->
+                <!--<de.hdodenhof.circleimageview.CircleImageView-->
+                <!--android:id="@+id/iv_icon"-->
+                <!--android:layout_width="@dimen/x84"-->
+                <!--android:layout_height="@dimen/y84"-->
+                <!--android:layout_marginLeft="@dimen/x30"-->
+                <!--android:layout_marginTop="@dimen/x30"-->
+                <!--android:src="@color/backgroundblue"-->
+                <!--app:civ_border_color="@color/linegray"-->
+                <!--app:civ_border_width="@dimen/x2"></de.hdodenhof.circleimageview.CircleImageView>-->
+                <!--</LinearLayout>-->
 
-                    <!--<FrameLayout-->
-                        <!--android:layout_width="wrap_content"-->
-                        <!--android:layout_height="wrap_content">-->
+                <!--<FrameLayout-->
+                <!--android:layout_width="wrap_content"-->
+                <!--android:layout_height="wrap_content">-->
 
-                        <!--<LinearLayout-->
-                            <!--android:layout_width="wrap_content"-->
-                            <!--android:layout_height="wrap_content"-->
-                            <!--android:layout_marginLeft="@dimen/x16"-->
-                            <!--android:layout_marginTop="@dimen/y34"-->
-                            <!--android:orientation="vertical">-->
+                <!--<LinearLayout-->
+                <!--android:layout_width="wrap_content"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:layout_marginLeft="@dimen/x16"-->
+                <!--android:layout_marginTop="@dimen/y34"-->
+                <!--android:orientation="vertical">-->
 
-                            <!--<LinearLayout-->
-                                <!--android:layout_width="wrap_content"-->
-                                <!--android:layout_height="wrap_content"-->
-                                <!--android:orientation="horizontal">-->
+                <!--<LinearLayout-->
+                <!--android:layout_width="wrap_content"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:orientation="horizontal">-->
 
-                                <!--<TextView-->
-                                    <!--android:id="@+id/tv_doctor_name"-->
-                                    <!--android:layout_width="wrap_content"-->
-                                    <!--android:layout_height="wrap_content"-->
+                <!--<TextView-->
+                <!--android:id="@+id/tv_doctor_name"-->
+                <!--android:layout_width="wrap_content"-->
+                <!--android:layout_height="wrap_content"-->
 
-                                    <!--android:textColor="@color/xmgray"-->
-                                    <!--android:textSize="@dimen/y22" />-->
+                <!--android:textColor="@color/xmgray"-->
+                <!--android:textSize="@dimen/y22" />-->
 
-                                <!--<TextView-->
-                                    <!--android:id="@+id/tv_doctor_section"-->
-                                    <!--android:layout_width="wrap_content"-->
-                                    <!--android:layout_height="wrap_content"-->
-                                    <!--android:layout_marginLeft="@dimen/x20"-->
-                                    <!--android:textColor="@color/xmgray"-->
-                                    <!--android:textSize="@dimen/y22" />-->
-                            <!--</LinearLayout>-->
+                <!--<TextView-->
+                <!--android:id="@+id/tv_doctor_section"-->
+                <!--android:layout_width="wrap_content"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:layout_marginLeft="@dimen/x20"-->
+                <!--android:textColor="@color/xmgray"-->
+                <!--android:textSize="@dimen/y22" />-->
+                <!--</LinearLayout>-->
 
-                            <!--<TextView-->
-                                <!--android:id="@+id/tv_content"-->
-                                <!--android:layout_width="@dimen/y474"-->
-                                <!--android:layout_height="wrap_content"-->
-                                <!--android:layout_marginRight="@dimen/x112"-->
-                                <!--android:layout_marginTop="@dimen/y16"-->
-                                <!--android:background="@drawable/reservationlist_background"-->
-                                <!--android:paddingBottom="@dimen/x26"-->
-                                <!--android:paddingLeft="@dimen/x20"-->
-                                <!--android:paddingRight="@dimen/x20"-->
-                                <!--android:paddingTop="@dimen/x16"-->
-                                <!--android:text="你死定了你死定了你死定了你死定了你死定了你死定了你死定了你死定了你死定了你死定了你死定了你死定了"-->
-                                <!--android:textColor="@color/fontcolor"-->
-                                <!--android:textSize="@dimen/y28"></TextView>-->
-                        <!--</LinearLayout>-->
+                <!--<TextView-->
+                <!--android:id="@+id/tv_content"-->
+                <!--android:layout_width="@dimen/y474"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:layout_marginRight="@dimen/x112"-->
+                <!--android:layout_marginTop="@dimen/y16"-->
+                <!--android:background="@drawable/reservationlist_background"-->
+                <!--android:paddingBottom="@dimen/x26"-->
+                <!--android:paddingLeft="@dimen/x20"-->
+                <!--android:paddingRight="@dimen/x20"-->
+                <!--android:paddingTop="@dimen/x16"-->
+                <!--android:text="你死定了你死定了你死定了你死定了你死定了你死定了你死定了你死定了你死定了你死定了你死定了你死定了"-->
+                <!--android:textColor="@color/fontcolor"-->
+                <!--android:textSize="@dimen/y28"></TextView>-->
+                <!--</LinearLayout>-->
 
-                        <!--<ImageView-->
-                            <!--android:layout_width="@dimen/x20"-->
-                            <!--android:layout_height="wrap_content"-->
-                            <!--android:layout_marginTop="@dimen/y110"-->
-                            <!--android:src="@drawable/reservation_arrows" />-->
-                    <!--</FrameLayout>-->
+                <!--<ImageView-->
+                <!--android:layout_width="@dimen/x20"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:layout_marginTop="@dimen/y110"-->
+                <!--android:src="@drawable/reservation_arrows" />-->
+                <!--</FrameLayout>-->
 
                 <!--</LinearLayout>-->
 
-                <View
-                    android:layout_width="wrap_content"
-                    android:layout_height="@dimen/y30"
-                    android:background="@color/white" />
+
             </LinearLayout>
         </ScrollView>
 
@@ -391,9 +389,9 @@
                 android:orientation="vertical">
 
                 <ImageView
-                    android:layout_marginTop="@dimen/y150"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/y150"
                     android:src="@drawable/loadfail" />
 
                 <TextView

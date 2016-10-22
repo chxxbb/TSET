@@ -46,7 +46,7 @@ public class InquiryActivity extends AppCompatActivity {
     //职称列表
     List<Inquiry> titlelist;
     List<String> data;
-    private LinearLayout ll_city, ll_development, ll_sort;
+    private LinearLayout ll_city, ll_development, ll_sort, ll_rutre_inquiry;
     private Dialog setHeadDialog;
     private View dialogView;
     private RelativeLayout rl_nonetwork, rl_loading;
@@ -75,11 +75,13 @@ public class InquiryActivity extends AppCompatActivity {
         tv_city = (TextView) findViewById(R.id.tv_city);
         rl_nonetwork = (RelativeLayout) findViewById(R.id.rl_nonetwork);
         rl_loading = (RelativeLayout) findViewById(R.id.rl_loading);
+        ll_rutre_inquiry = (LinearLayout) findViewById(R.id.ll_rutre_inquiry);
         tv_sort = (TextView) findViewById(R.id.tv_sort);
         lv_inquiry.setVerticalScrollBarEnabled(false);
         ll_city.setOnClickListener(listener);
         ll_development.setOnClickListener(listener);
         ll_sort.setOnClickListener(listener);
+        ll_rutre_inquiry.setOnClickListener(listener);
 
         View view1 = View.inflate(this, R.layout.inquiry_listview_stern, null);
 
@@ -159,6 +161,9 @@ public class InquiryActivity extends AppCompatActivity {
                 case R.id.ll_sort:
                     //选择默认排序
                     sortshowDialog();
+                    break;
+                case R.id.ll_rutre_inquiry:
+                    finish();
                     break;
             }
 
