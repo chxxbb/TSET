@@ -35,7 +35,9 @@ import java.util.List;
 
 import okhttp3.Call;
 
-//问诊页面
+/**
+ * 问诊页面，已更改，变为了一个activity
+ */
 public class InquiryFragment extends Fragment {
     View view;
     InquiryAdapter adapter;

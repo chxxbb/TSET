@@ -11,6 +11,7 @@ import com.example.chen.tset.R;
 
 /**
  * Created by Administrator on 2016/9/6 0006.
+ * 自定义圆
  */
 public class RegistrationView extends View {
     private Paint paint;

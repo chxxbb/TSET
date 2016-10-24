@@ -13,6 +13,7 @@ import java.util.List;
 
 /**
  * Created by Administrator on 2016/10/7 0007.
+ * 用于保存问诊记录
  */
 public class InquiryrecordDao {
     private Context context;

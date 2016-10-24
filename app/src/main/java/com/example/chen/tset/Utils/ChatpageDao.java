@@ -13,6 +13,7 @@ import java.util.List;
 
 /**
  * Created by Administrator on 2016/9/19 0019.
+ * 用于保存聊天记录
  */
 public class ChatpageDao {
     private Context context;

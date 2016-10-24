@@ -165,7 +165,6 @@ public class DiseaselibFragment extends Fragment {
                     rl_nonetwork.setVisibility(View.VISIBLE);
                     break;
                 case 2:
-
                     diseaselibrecyvAdapter.setList(list1);
                     rl_nonetwork.setVisibility(View.GONE);
                     rl_loading.setVisibility(View.GONE);

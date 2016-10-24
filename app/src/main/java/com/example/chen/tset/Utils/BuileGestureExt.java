@@ -5,7 +5,8 @@ import android.view.GestureDetector;
 import android.view.MotionEvent;
 
 /**
- * Created by Administrator on 2016/9/24 0024.
+ * Created by Administrator on 2016/9/24 0024
+ * 这个好像没用了.
  */
 public class  BuileGestureExt  {
     public static final int GESTURE_UP=0;

@@ -196,9 +196,11 @@ public class CompileremindActivity extends MyBaseActivity implements IListener{
         public void onClick(View v) {
             switch (v.getId()) {
                 case R.id.rl_starttime:
+                    //选择用药开始的日期
                     acquisitionstatrtime();
                     break;
                 case R.id.rl_endtime:
+                    //选择用药结束的日期
                     acquisitionendtime();
                     break;
 
@@ -215,8 +217,10 @@ public class CompileremindActivity extends MyBaseActivity implements IListener{
                     if (et_pharmacy_compile.getText().length() == 0) {
                         Toast.makeText(CompileremindActivity.this, "请输入用药", Toast.LENGTH_SHORT).show();
                     } else {
+                        //将所选时间和所填用药记录显示
                         tv_time1.setText(timepicker.getCurrentHour() + "" + ":" + timepicker.getCurrentMinute() + "");
                         tv_content1.setText(et_pharmacy_compile.getText().toString());
+                        //隐藏设置时间，输入用药
                         ll_contnt1.setVisibility(View.VISIBLE);
                         ll_compile.setVisibility(View.GONE);
 
@@ -232,6 +236,7 @@ public class CompileremindActivity extends MyBaseActivity implements IListener{
                     handler.post(new Runnable() {
                         @Override
                         public void run() {
+                            //使ScrollView一直显示到底部
                             scrollView.fullScroll(ScrollView.FOCUS_DOWN);
                         }
                     });
@@ -251,6 +256,7 @@ public class CompileremindActivity extends MyBaseActivity implements IListener{
                     if (et_pharmacy_compile1.getText().length() == 0) {
                         Toast.makeText(CompileremindActivity.this, "请输入用药", Toast.LENGTH_SHORT).show();
                     } else {
+                        //将所选时间和所填用药记录显示
                         tv_time2.setText(timepicker1.getCurrentHour() + "" + ":" + timepicker1.getCurrentMinute() + "");
                         tv_content2.setText(et_pharmacy_compile1.getText().toString());
                         ll_compile1.setVisibility(View.GONE);
@@ -268,6 +274,7 @@ public class CompileremindActivity extends MyBaseActivity implements IListener{
                     handle1.post(new Runnable() {
                         @Override
                         public void run() {
+                            scrollView.fullScroll(ScrollView.FOCUS_DOWN);
                             scrollView.fullScroll(ScrollView.FOCUS_DOWN);
                         }
                     });
@@ -287,6 +294,7 @@ public class CompileremindActivity extends MyBaseActivity implements IListener{
                     if (et_pharmacy_compile3.getText().length() == 0) {
                         Toast.makeText(CompileremindActivity.this, "请输入用药", Toast.LENGTH_SHORT).show();
                     } else {
+                        //将所选时间和所填用药记录显示
                         tv_time3.setText(timepicker3.getCurrentHour() + "" + ":" + timepicker3.getCurrentMinute() + "");
                         tv_content3.setText(et_pharmacy_compile3.getText().toString());
                         ll_compile3.setVisibility(View.GONE);
@@ -337,6 +345,7 @@ public class CompileremindActivity extends MyBaseActivity implements IListener{
                                     public void onResponse(String response, int id) {
                                         Log.e("用药提醒返回", response);
                                         if (response.equals("0")) {
+                                            //发送广播通知诊疗页面更新
                                             ListenerManager.getInstance().sendBroadCast("更新日历页面");
                                             Toast.makeText(CompileremindActivity.this, "添加成功，你可以在用药提醒页面查看", Toast.LENGTH_SHORT).show();
                                             finish();

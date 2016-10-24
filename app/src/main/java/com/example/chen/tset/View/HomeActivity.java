@@ -49,6 +49,7 @@ import com.example.chen.tset.Utils.InquiryrecordDao;
 import com.example.chen.tset.Utils.MyBaseActivity;
 import com.example.chen.tset.Utils.PharmacyDao;
 import com.example.chen.tset.Utils.SharedPsaveuser;
+import com.example.chen.tset.page.AFragment;
 import com.example.chen.tset.page.ConsultingFragment;
 import com.example.chen.tset.page.EncyclopediaFragment;
 import com.example.chen.tset.R;
@@ -98,6 +99,7 @@ public class HomeActivity extends MyBaseActivity implements View.OnClickListener
     private MypageFragment mypageFragment;
     private InquiryFragment inquiryFragment;
     private ConsultingFragment consultingFragment;
+    private AFragment a;
     private ImageView iv_inquiry;
     ChatpageDao db;
     Set<User> set;
@@ -126,13 +128,14 @@ public class HomeActivity extends MyBaseActivity implements View.OnClickListener
 
         text_homeactivity = this;
 
-
+        //即时通信，用于接收消息
         JMessageClient.registerEventReceiver(this);
         JMessageClient.setNotificationMode(JMessageClient.NOTI_MODE_DEFAULT);
         db = new ChatpageDao(this);
         findView();
         init();
 
+        //将用户的手机号保存在本地
         Chatcontent chatcontent = new Chatcontent(null, 0L, null, null, null, User_Http.user.getPhone());
         db.addchatcont(chatcontent);
         sp = new SharedPsaveuser(HomeActivity.this);
@@ -188,7 +191,7 @@ public class HomeActivity extends MyBaseActivity implements View.OnClickListener
                     String urlPath = User_Http.user.getIcon();
                     URL url = new URL(urlPath);
                     HttpURLConnection conn = (HttpURLConnection) url.openConnection();
-                    conn.setConnectTimeout(6 * 1000);  // 注意要设置超时，设置时间不要超过10秒，避免被android系统回收
+                    conn.setConnectTimeout(6 * 1000);  // 设置时间不要超过10秒，避免被android系统回收
                     if (conn.getResponseCode() != 200) throw new RuntimeException("请求url失败");
                     InputStream inSream = conn.getInputStream();
                     //把图片保存到项目的根目录
@@ -304,6 +307,7 @@ public class HomeActivity extends MyBaseActivity implements View.OnClickListener
 
                 Date dt = new Date();
                 Long time = dt.getTime();
+                //将接送到的文本消息保存在本地数据库中，给予标记用于去区分是接送到的消息还是发送的消息
                 Chatcontent chatcontent = new Chatcontent("2" + content, time, null, null, username, sp.getTag().getPhone());
                 db.addchatcont(chatcontent);
                 break;
@@ -316,6 +320,7 @@ public class HomeActivity extends MyBaseActivity implements View.OnClickListener
 
                 Date dt1 = new Date();
                 Long time1 = dt1.getTime();
+                //将接送到的文本消息保存在本地数据库中，给予标记用于去区分是接送到的消息还是发送的消息
                 chatcontent = new Chatcontent("2*2", time1, file, file, msg.getTargetID(), sp.getTag().getPhone());
                 db.addchatcont(chatcontent);
 
@@ -323,12 +328,13 @@ public class HomeActivity extends MyBaseActivity implements View.OnClickListener
 
     }
 
+
+    //接送到的消息显示到通知栏，点击后跳转到对应的聊天页面
     public void onEvent(NotificationClickEvent event) {
 
         InquiryrecordDao db = new InquiryrecordDao(this);
         Message msg = event.getMessage();
         Inquiryrecord inquiryrecord = db.chatfinddoctor(msg.getTargetID());
-
 
         Intent intent = new Intent(HomeActivity.this, ChatpageActivity.class);
         intent.putExtra("doctorID", inquiryrecord.getId());
@@ -369,11 +375,10 @@ public class HomeActivity extends MyBaseActivity implements View.OnClickListener
         if (encyclopediaFragment != null) fragmentTransaction.hide(encyclopediaFragment);
         if (lectureroomFragment != null) fragmentTransaction.hide(lectureroomFragment);
         if (mypageFragment != null) fragmentTransaction.hide(mypageFragment);
-
         if (consultingFragment != null) fragmentTransaction.hide(consultingFragment);
     }
 
-
+    //viewpage中fragment的show,hide
     @Override
     public void onClick(View v) {
         ft = fm.beginTransaction();
@@ -442,9 +447,11 @@ public class HomeActivity extends MyBaseActivity implements View.OnClickListener
 
     //服务弹出框
     public void serveshowDialog() {
+        //设置弹出框主题
         setHeadDialog = new Dialog(this, R.style.CustomDialog);
 
         setHeadDialog.show();
+        //设置弹出框视图
         dialogView = View.inflate(this, R.layout.inquiry_popup_dialog, null);
         setHeadDialog.getWindow().setContentView(dialogView);
         WindowManager.LayoutParams lp = setHeadDialog.getWindow()
@@ -470,6 +477,10 @@ public class HomeActivity extends MyBaseActivity implements View.OnClickListener
         rl_inquiry_dialog.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                /**
+                 * 服务按钮的动画，包含在线问诊，一键挂号按钮的平移动画，
+                 * 服务按钮的旋转豆花
+                 */
                 RotateAnimation myAnimation_Rotate = new RotateAnimation(45.0f, 90.0f,
                         Animation.RELATIVE_TO_SELF, 0.5f, Animation.RELATIVE_TO_SELF, 0.5f);
                 inquiry_dialog_tag.startAnimation(myAnimation_Rotate);
@@ -492,6 +503,7 @@ public class HomeActivity extends MyBaseActivity implements View.OnClickListener
                 translateAnimation1.setDuration(150);
                 ll_serve_registration1.startAnimation(translateAnimation1);
 
+                //设置再次点击服务按钮及弹出框其他地方时，隐藏弹出框所寻妖的时间
                 new Thread() {
                     public void run() {
                         try {
@@ -510,6 +522,7 @@ public class HomeActivity extends MyBaseActivity implements View.OnClickListener
         ll_serve_registration.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                //跳转至一键挂号
                 Intent intent = new Intent(HomeActivity.this, RegistrationAtivity.class);
                 startActivity(intent);
                 setHeadDialog.dismiss();
@@ -519,6 +532,7 @@ public class HomeActivity extends MyBaseActivity implements View.OnClickListener
         ll_online_inquiry.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                //跳转至在线问诊
                 Intent intent = new Intent(HomeActivity.this, InquiryActivity.class);
                 startActivity(intent);
                 setHeadDialog.dismiss();

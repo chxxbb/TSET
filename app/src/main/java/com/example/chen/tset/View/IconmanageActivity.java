@@ -31,7 +31,8 @@ import java.net.URL;
 
 import okhttp3.Call;
 /**
- * 个人资料
+ * 修改头像，此activity已不使用，修改头像
+ * 变为个人资料页面点击头像直接修改头像
  */
 public class IconmanageActivity extends MyBaseActivity {
     private ImageView iv_manage, iv_ico;

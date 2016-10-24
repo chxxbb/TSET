@@ -13,6 +13,7 @@ import java.util.List;
 
 /**
  * Created by Administrator on 2016/10/8 0008.
+ * 用于保存用药提醒，后变更用药提醒保存在服务器中
  */
 public class PharmacyDao {
     private Context context;

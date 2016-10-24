@@ -8,7 +8,9 @@ import android.util.AttributeSet;
 import android.view.View;
 
 import com.example.chen.tset.R;
-
+/**
+ *一个自定义圆
+ */
 public class InquiryView extends View {
     private Paint paint;
     private RectF oval;

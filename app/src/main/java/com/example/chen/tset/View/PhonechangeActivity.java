@@ -48,6 +48,8 @@ public class PhonechangeActivity extends MyBaseActivity {
         tv_pas.setOnClickListener(listener);
     }
 
+
+    //判断是否已输出，旧密码和新密码，如果输出则保存按钮状态改变，可以点击
     private TextWatcher textListener = new TextWatcher() {
         @Override
         public void beforeTextChanged(CharSequence s, int start, int count, int after) {

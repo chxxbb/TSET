@@ -70,7 +70,7 @@ public class MypageFragment extends Fragment {
     public void onStart() {
         super.onStart();
 
-        //判断是否为联网状态
+        //判断是否为联网状态，选择显示从后台获取的数据或本地数据
         if ((User_Http.user.getIcon() == null || User_Http.user.getIcon().equals("")) && (sp.getTag().getIcon() == null || sp.getTag().getIcon().equals(""))) {
 
             iv_ico.setImageResource(R.drawable.default_icon);

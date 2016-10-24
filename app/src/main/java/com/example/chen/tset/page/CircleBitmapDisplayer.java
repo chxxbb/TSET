@@ -7,7 +7,9 @@ import com.nostra13.universalimageloader.core.display.BitmapDisplayer;
 import com.nostra13.universalimageloader.core.imageaware.ImageAware;
 import com.nostra13.universalimageloader.core.imageaware.ImageViewAware;
 
-
+/**
+ * 这个忘了是做什么的
+ */
 public class CircleBitmapDisplayer implements BitmapDisplayer {
 
     protected final int margin;

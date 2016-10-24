@@ -1,376 +1,382 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/white"
-    android:focusable="true"
-    android:focusableInTouchMode="true"
-    android:gravity="center_horizontal"
-    android:orientation="vertical"
+
     tools:context="com.example.chen.tset.View.HealthconditionActivity">
-
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="@dimen/y96"
-        android:background="@color/white">
-
-        <LinearLayout
-            android:id="@+id/ll_consult_return"
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:orientation="horizontal">
-
-            <ImageView
-                android:layout_width="@dimen/x20"
-                android:layout_height="@dimen/y36"
-                android:layout_gravity="center_vertical"
-                android:layout_marginLeft="@dimen/x30"
-                android:src="@drawable/opinion_return" />
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center_vertical"
-                android:layout_marginLeft="@dimen/x8"
-                android:text="问诊"
-                android:textColor="@color/backgroundblue"
-                android:textSize="@dimen/x32" />
-        </LinearLayout>
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_centerInParent="true"
-            android:text="健康状况"
-            android:textColor="@color/fontcolor"
-            android:textSize="@dimen/x36" />
-
-        <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:layout_alignParentRight="true">
-
-            <TextView
-                android:id="@+id/tv_heath_save"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center_vertical"
-                android:layout_marginRight="@dimen/x30"
-                android:text="保存"
-                android:textColor="@color/backgroundblue"
-                android:textSize="@dimen/y32" />
-        </LinearLayout>
-    </RelativeLayout>
-
-
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="match_parent"
+        android:background="@color/white"
+        android:focusable="true"
+        android:focusableInTouchMode="true"
+        android:gravity="center_horizontal"
         android:orientation="vertical">
-
-        <LinearLayout
+        <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:gravity="center_horizontal"
-            android:orientation="vertical">
-
-            <TextView
-                android:id="@+id/tv_henlth"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center_horizontal"
-                android:layout_marginTop="@dimen/y60"
-                android:text="我的身体状况不太好"
-                android:textColor="@color/fontcolor"
-                android:textSize="@dimen/y24" />
+            android:layout_height="@dimen/y96"
+            android:background="@color/white">
 
             <LinearLayout
+                android:id="@+id/ll_consult_return"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/y40"
-                android:orientation="horizontal">
-
-                <ToggleButton
-                    android:id="@+id/tb1"
-                    android:layout_width="wrap_content"
-                    android:layout_height="@dimen/y70"
-                    android:layout_marginRight="@dimen/x20"
-                    android:background="@drawable/healthcondition_rbtn_onclick_greencase"
-                    android:button="@null"
-                    android:textColor="@drawable/healthcondition_font_green"
-                    android:textOff="流涕"
-                    android:textOn="流涕" />
-
-                <ToggleButton
-                    android:id="@+id/tb2"
-                    android:layout_width="wrap_content"
-                    android:layout_height="@dimen/y70"
-                    android:background="@drawable/healthcondition_rbtn_onclick_greencase"
-                    android:button="@null"
-                    android:paddingLeft="@dimen/x20"
-                    android:paddingRight="@dimen/x20"
-                    android:textColor="@drawable/healthcondition_font_green"
-                    android:textOff="咳嗽"
-                    android:textOn="咳嗽" />
-
-                <ToggleButton
-                    android:id="@+id/tb3"
-                    android:layout_width="wrap_content"
-                    android:layout_height="@dimen/y70"
-                    android:layout_marginLeft="@dimen/x20"
-                    android:background="@drawable/healthcondition_rbtn_onclick_greencase"
-                    android:button="@null"
-                    android:paddingLeft="@dimen/x20"
-                    android:paddingRight="@dimen/x20"
-                    android:textColor="@drawable/healthcondition_font_green"
-                    android:textOff="头疼"
-                    android:textOn="头疼" />
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/y26"
-                android:orientation="horizontal">
-
-                <ToggleButton
-                    android:id="@+id/tb4"
-                    android:layout_width="wrap_content"
-                    android:layout_height="@dimen/y70"
-                    android:layout_marginRight="@dimen/x20"
-                    android:background="@drawable/healthcondition_rbtn_onclick_yellowcase"
-                    android:button="@null"
-                    android:paddingLeft="@dimen/x20"
-                    android:paddingRight="@dimen/x20"
-                    android:textColor="@drawable/healthcondition_font_yollow"
-                    android:textOff="发热"
-                    android:textOn="发热" />
-
-                <ToggleButton
-                    android:id="@+id/tb5"
-                    android:layout_width="wrap_content"
-                    android:layout_height="@dimen/y70"
-                    android:layout_marginRight="@dimen/x20"
-                    android:background="@drawable/healthcondition_rbtn_onclick_yellowcase"
-                    android:button="@null"
-                    android:paddingLeft="@dimen/x20"
-                    android:paddingRight="@dimen/x20"
-                    android:textColor="@drawable/healthcondition_font_yollow"
-                    android:textOff="口腔溃疡"
-                    android:textOn="口腔溃疡" />
-
-                <ToggleButton
-                    android:id="@+id/tb6"
-                    android:layout_width="wrap_content"
-                    android:layout_height="@dimen/y70"
-                    android:layout_marginRight="@dimen/x20"
-                    android:background="@drawable/healthcondition_rbtn_onclick_yellowcase"
-                    android:button="@null"
-                    android:paddingLeft="@dimen/x20"
-                    android:paddingRight="@dimen/x20"
-                    android:textColor="@drawable/healthcondition_font_yollow"
-                    android:textOff="口干口渴"
-                    android:textOn="口干口渴" />
-
-                <ToggleButton
-                    android:id="@+id/tb7"
-                    android:layout_width="wrap_content"
-                    android:layout_height="@dimen/y70"
-                    android:background="@drawable/healthcondition_rbtn_onclick_yellowcase"
-                    android:button="@null"
-                    android:paddingLeft="@dimen/x20"
-                    android:paddingRight="@dimen/x20"
-                    android:textColor="@drawable/healthcondition_font_yollow"
-                    android:textOff="鼻塞"
-                    android:textOn="鼻塞" />
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/y26"
-                android:orientation="horizontal">
-
-                <ToggleButton
-                    android:id="@+id/tb8"
-                    android:layout_width="wrap_content"
-                    android:layout_height="@dimen/y70"
-                    android:layout_marginRight="@dimen/x20"
-                    android:background="@drawable/healthcondition_rbtn_onclick_redcase"
-                    android:button="@null"
-                    android:paddingLeft="@dimen/x20"
-                    android:paddingRight="@dimen/x20"
-                    android:textColor="@drawable/healthcondition_font_red"
-                    android:textOff="咽疼"
-                    android:textOn="咽疼" />
-
-                <ToggleButton
-                    android:id="@+id/tb9"
-                    android:layout_width="wrap_content"
-                    android:layout_height="@dimen/y70"
-                    android:layout_marginRight="@dimen/x20"
-                    android:background="@drawable/healthcondition_rbtn_onclick_redcase"
-                    android:button="@null"
-                    android:paddingLeft="@dimen/x20"
-                    android:paddingRight="@dimen/x20"
-                    android:textColor="@drawable/healthcondition_font_red"
-                    android:textOff="出疹"
-                    android:textOn="出疹" />
-
-                <ToggleButton
-                    android:id="@+id/tb10"
-                    android:layout_width="wrap_content"
-                    android:layout_height="@dimen/y70"
-                    android:layout_marginRight="@dimen/x20"
-                    android:background="@drawable/healthcondition_rbtn_onclick_redcase"
-                    android:button="@null"
-                    android:paddingLeft="@dimen/x20"
-                    android:paddingRight="@dimen/x20"
-                    android:textColor="@drawable/healthcondition_font_red"
-                    android:textOff="睡眠问题"
-                    android:textOn="睡眠问题" />
-
-                <ToggleButton
-                    android:id="@+id/tb11"
-                    android:layout_width="wrap_content"
-                    android:layout_height="@dimen/y70"
-                    android:background="@drawable/healthcondition_rbtn_onclick_redcase"
-                    android:button="@null"
-                    android:paddingLeft="@dimen/x20"
-                    android:paddingRight="@dimen/x20"
-                    android:textColor="@drawable/healthcondition_font_red"
-                    android:textOff="腹泻"
-                    android:textOn="腹泻" />
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="@dimen/y30"
-                android:layout_marginTop="@dimen/y26"
-                android:orientation="horizontal">
-
-                <ToggleButton
-                    android:id="@+id/tb12"
-                    android:layout_width="wrap_content"
-                    android:layout_height="@dimen/y70"
-                    android:layout_marginRight="@dimen/x20"
-                    android:background="@drawable/healthcondition_rbtn_onclick_redcase"
-                    android:button="@null"
-                    android:paddingLeft="@dimen/x20"
-                    android:paddingRight="@dimen/x20"
-                    android:textColor="@drawable/healthcondition_font_red"
-                    android:textOff="腹疼"
-                    android:textOn="腹疼" />
-
-                <ToggleButton
-                    android:id="@+id/tb13"
-                    android:layout_width="wrap_content"
-                    android:layout_height="@dimen/y70"
-                    android:background="@drawable/healthcondition_rbtn_onclick_redcase"
-                    android:button="@null"
-                    android:paddingLeft="@dimen/x20"
-                    android:paddingRight="@dimen/x20"
-                    android:textColor="@drawable/healthcondition_font_red"
-                    android:textOff="腹胀"
-                    android:textOn="腹胀" />
-
-                <ToggleButton
-                    android:id="@+id/tb14"
-                    android:layout_width="wrap_content"
-                    android:layout_height="@dimen/y70"
-                    android:layout_marginLeft="@dimen/x20"
-                    android:background="@drawable/healthcondition_rbtn_onclick_redcase"
-                    android:button="@null"
-                    android:paddingLeft="@dimen/x20"
-                    android:paddingRight="@dimen/x20"
-                    android:textColor="@drawable/healthcondition_font_red"
-                    android:textOff="呕吐"
-                    android:textOn="呕吐" />
-            </LinearLayout>
-        </LinearLayout>
-
-
-        <LinearLayout
-            android:id="@+id/cv_healthcondition_condition_describe"
-            android:layout_width="match_parent"
-            android:layout_height="@dimen/y94"
-            android:layout_marginLeft="@dimen/x30"
-            android:layout_marginRight="@dimen/x30"
-            android:layout_marginTop="@dimen/y62"
-            android:background="@drawable/health_backgroud">
-
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="@dimen/y40"
-                android:layout_gravity="center_vertical"
-                android:gravity="center_vertical"
+                android:layout_height="match_parent"
                 android:orientation="horizontal">
 
                 <ImageView
-                    android:layout_width="@dimen/x27"
-                    android:layout_height="@dimen/y27"
-                    android:layout_marginLeft="@dimen/x34"
-                    android:src="@drawable/healthcondition_describe" />
+                    android:layout_width="@dimen/x20"
+                    android:layout_height="@dimen/y36"
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginLeft="@dimen/x30"
+                    android:src="@drawable/opinion_return" />
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginLeft="@dimen/x12"
-                    android:text="病情描述"
-                    android:textColor="@color/linegray1"
-                    android:textSize="@dimen/y28" />
-
-
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginLeft="@dimen/x8"
+                    android:text="问诊"
+                    android:textColor="@color/backgroundblue"
+                    android:textSize="@dimen/x32" />
             </LinearLayout>
 
-        </LinearLayout>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:text="健康状况"
+                android:textColor="@color/fontcolor"
+                android:textSize="@dimen/x36" />
 
-        <android.support.v7.widget.CardView
-            android:id="@+id/cv_healthcondition_condition_import"
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_alignParentRight="true">
+
+                <TextView
+                    android:id="@+id/tv_heath_save"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginRight="@dimen/x30"
+                    android:text="保存"
+                    android:textColor="@color/backgroundblue"
+                    android:textSize="@dimen/y32" />
+            </LinearLayout>
+        </RelativeLayout>
+
+
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="@dimen/x30"
-            android:layout_marginRight="@dimen/x30"
-            android:layout_marginTop="@dimen/y68"
-            android:visibility="gone"
-            app:cardBackgroundColor="@color/white"
-            app:cardCornerRadius="@dimen/y15"
-            app:cardElevation="@dimen/y8">
+            android:orientation="vertical">
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="@dimen/y400"
-                android:orientation="horizontal">
+                android:layout_height="wrap_content"
+                android:gravity="center_horizontal"
+                android:orientation="vertical">
 
-                <ImageView
-                    android:layout_width="@dimen/x27"
-                    android:layout_height="@dimen/y27"
-                    android:layout_marginLeft="@dimen/x34"
-                    android:layout_marginTop="@dimen/y28"
-                    android:src="@drawable/healthcondition_describe" />
-
-                <com.example.chen.tset.page.NoteEditor
-                    android:id="@+id/et_healthcondition"
-                    android:layout_width="match_parent"
+                <TextView
+                    android:id="@+id/tv_henlth"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginLeft="@dimen/x12"
-                    android:layout_marginRight="@dimen/x34"
-                    android:layout_marginTop="@dimen/x20"
-                    android:background="@null"
-                    android:gravity="top"
-                    android:lineSpacingExtra="@dimen/y40"
-                    android:textColor="@color/fontgray"
-                    android:textSize="@dimen/y28" />
+                    android:layout_gravity="center_horizontal"
+                    android:layout_marginTop="@dimen/y60"
+                    android:text="我的身体状况不太好"
+                    android:textColor="@color/fontcolor"
+                    android:textSize="@dimen/y24" />
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/y40"
+                    android:orientation="horizontal">
+
+                    <ToggleButton
+                        android:id="@+id/tb1"
+                        android:layout_width="wrap_content"
+                        android:layout_height="@dimen/y70"
+                        android:layout_marginRight="@dimen/x20"
+                        android:background="@drawable/healthcondition_rbtn_onclick_greencase"
+                        android:button="@null"
+                        android:textColor="@drawable/healthcondition_font_green"
+                        android:textOff="流涕"
+                        android:textOn="流涕" />
+
+                    <ToggleButton
+                        android:id="@+id/tb2"
+                        android:layout_width="wrap_content"
+                        android:layout_height="@dimen/y70"
+                        android:background="@drawable/healthcondition_rbtn_onclick_greencase"
+                        android:button="@null"
+                        android:paddingLeft="@dimen/x20"
+                        android:paddingRight="@dimen/x20"
+                        android:textColor="@drawable/healthcondition_font_green"
+                        android:textOff="咳嗽"
+                        android:textOn="咳嗽" />
+
+                    <ToggleButton
+                        android:id="@+id/tb3"
+                        android:layout_width="wrap_content"
+                        android:layout_height="@dimen/y70"
+                        android:layout_marginLeft="@dimen/x20"
+                        android:background="@drawable/healthcondition_rbtn_onclick_greencase"
+                        android:button="@null"
+                        android:paddingLeft="@dimen/x20"
+                        android:paddingRight="@dimen/x20"
+                        android:textColor="@drawable/healthcondition_font_green"
+                        android:textOff="头疼"
+                        android:textOn="头疼" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/y26"
+                    android:orientation="horizontal">
+
+                    <ToggleButton
+                        android:id="@+id/tb4"
+                        android:layout_width="wrap_content"
+                        android:layout_height="@dimen/y70"
+                        android:layout_marginRight="@dimen/x20"
+                        android:background="@drawable/healthcondition_rbtn_onclick_yellowcase"
+                        android:button="@null"
+                        android:paddingLeft="@dimen/x20"
+                        android:paddingRight="@dimen/x20"
+                        android:textColor="@drawable/healthcondition_font_yollow"
+                        android:textOff="发热"
+                        android:textOn="发热" />
+
+                    <ToggleButton
+                        android:id="@+id/tb5"
+                        android:layout_width="wrap_content"
+                        android:layout_height="@dimen/y70"
+                        android:layout_marginRight="@dimen/x20"
+                        android:background="@drawable/healthcondition_rbtn_onclick_yellowcase"
+                        android:button="@null"
+                        android:paddingLeft="@dimen/x20"
+                        android:paddingRight="@dimen/x20"
+                        android:textColor="@drawable/healthcondition_font_yollow"
+                        android:textOff="口腔溃疡"
+                        android:textOn="口腔溃疡" />
+
+                    <ToggleButton
+                        android:id="@+id/tb6"
+                        android:layout_width="wrap_content"
+                        android:layout_height="@dimen/y70"
+                        android:layout_marginRight="@dimen/x20"
+                        android:background="@drawable/healthcondition_rbtn_onclick_yellowcase"
+                        android:button="@null"
+                        android:paddingLeft="@dimen/x20"
+                        android:paddingRight="@dimen/x20"
+                        android:textColor="@drawable/healthcondition_font_yollow"
+                        android:textOff="口干口渴"
+                        android:textOn="口干口渴" />
+
+                    <ToggleButton
+                        android:id="@+id/tb7"
+                        android:layout_width="wrap_content"
+                        android:layout_height="@dimen/y70"
+                        android:background="@drawable/healthcondition_rbtn_onclick_yellowcase"
+                        android:button="@null"
+                        android:paddingLeft="@dimen/x20"
+                        android:paddingRight="@dimen/x20"
+                        android:textColor="@drawable/healthcondition_font_yollow"
+                        android:textOff="鼻塞"
+                        android:textOn="鼻塞" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/y26"
+                    android:orientation="horizontal">
+
+                    <ToggleButton
+                        android:id="@+id/tb8"
+                        android:layout_width="wrap_content"
+                        android:layout_height="@dimen/y70"
+                        android:layout_marginRight="@dimen/x20"
+                        android:background="@drawable/healthcondition_rbtn_onclick_redcase"
+                        android:button="@null"
+                        android:paddingLeft="@dimen/x20"
+                        android:paddingRight="@dimen/x20"
+                        android:textColor="@drawable/healthcondition_font_red"
+                        android:textOff="咽疼"
+                        android:textOn="咽疼" />
+
+                    <ToggleButton
+                        android:id="@+id/tb9"
+                        android:layout_width="wrap_content"
+                        android:layout_height="@dimen/y70"
+                        android:layout_marginRight="@dimen/x20"
+                        android:background="@drawable/healthcondition_rbtn_onclick_redcase"
+                        android:button="@null"
+                        android:paddingLeft="@dimen/x20"
+                        android:paddingRight="@dimen/x20"
+                        android:textColor="@drawable/healthcondition_font_red"
+                        android:textOff="出疹"
+                        android:textOn="出疹" />
+
+                    <ToggleButton
+                        android:id="@+id/tb10"
+                        android:layout_width="wrap_content"
+                        android:layout_height="@dimen/y70"
+                        android:layout_marginRight="@dimen/x20"
+                        android:background="@drawable/healthcondition_rbtn_onclick_redcase"
+                        android:button="@null"
+                        android:paddingLeft="@dimen/x20"
+                        android:paddingRight="@dimen/x20"
+                        android:textColor="@drawable/healthcondition_font_red"
+                        android:textOff="睡眠问题"
+                        android:textOn="睡眠问题" />
+
+                    <ToggleButton
+                        android:id="@+id/tb11"
+                        android:layout_width="wrap_content"
+                        android:layout_height="@dimen/y70"
+                        android:background="@drawable/healthcondition_rbtn_onclick_redcase"
+                        android:button="@null"
+                        android:paddingLeft="@dimen/x20"
+                        android:paddingRight="@dimen/x20"
+                        android:textColor="@drawable/healthcondition_font_red"
+                        android:textOff="腹泻"
+                        android:textOn="腹泻" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="@dimen/y30"
+                    android:layout_marginTop="@dimen/y26"
+                    android:orientation="horizontal">
+
+                    <ToggleButton
+                        android:id="@+id/tb12"
+                        android:layout_width="wrap_content"
+                        android:layout_height="@dimen/y70"
+                        android:layout_marginRight="@dimen/x20"
+                        android:background="@drawable/healthcondition_rbtn_onclick_redcase"
+                        android:button="@null"
+                        android:paddingLeft="@dimen/x20"
+                        android:paddingRight="@dimen/x20"
+                        android:textColor="@drawable/healthcondition_font_red"
+                        android:textOff="腹疼"
+                        android:textOn="腹疼" />
+
+                    <ToggleButton
+                        android:id="@+id/tb13"
+                        android:layout_width="wrap_content"
+                        android:layout_height="@dimen/y70"
+                        android:background="@drawable/healthcondition_rbtn_onclick_redcase"
+                        android:button="@null"
+                        android:paddingLeft="@dimen/x20"
+                        android:paddingRight="@dimen/x20"
+                        android:textColor="@drawable/healthcondition_font_red"
+                        android:textOff="腹胀"
+                        android:textOn="腹胀" />
+
+                    <ToggleButton
+                        android:id="@+id/tb14"
+                        android:layout_width="wrap_content"
+                        android:layout_height="@dimen/y70"
+                        android:layout_marginLeft="@dimen/x20"
+                        android:background="@drawable/healthcondition_rbtn_onclick_redcase"
+                        android:button="@null"
+                        android:paddingLeft="@dimen/x20"
+                        android:paddingRight="@dimen/x20"
+                        android:textColor="@drawable/healthcondition_font_red"
+                        android:textOff="呕吐"
+                        android:textOn="呕吐" />
+                </LinearLayout>
             </LinearLayout>
 
-        </android.support.v7.widget.CardView>
 
+            <LinearLayout
+                android:id="@+id/cv_healthcondition_condition_describe"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/y94"
+                android:layout_marginLeft="@dimen/x30"
+                android:layout_marginRight="@dimen/x30"
+                android:layout_marginTop="@dimen/y62"
+                android:background="@drawable/health_backgroud">
+
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/y40"
+                    android:layout_gravity="center_vertical"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal">
+
+                    <ImageView
+                        android:layout_width="@dimen/x27"
+                        android:layout_height="@dimen/y27"
+                        android:layout_marginLeft="@dimen/x34"
+                        android:src="@drawable/healthcondition_describe" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="@dimen/x12"
+                        android:text="病情描述"
+                        android:textColor="@color/linegray1"
+                        android:textSize="@dimen/y28" />
+
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+            <android.support.v7.widget.CardView
+                android:id="@+id/cv_healthcondition_condition_import"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/x30"
+                android:layout_marginRight="@dimen/x30"
+                android:layout_marginTop="@dimen/y68"
+                android:visibility="gone"
+                app:cardBackgroundColor="@color/white"
+                app:cardCornerRadius="@dimen/y15"
+                app:cardElevation="@dimen/y8">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/y400"
+                    android:orientation="horizontal">
+
+                    <ImageView
+                        android:layout_width="@dimen/x27"
+                        android:layout_height="@dimen/y27"
+                        android:layout_marginLeft="@dimen/x34"
+                        android:layout_marginTop="@dimen/y28"
+                        android:src="@drawable/healthcondition_describe" />
+
+                    <com.example.chen.tset.page.NoteEditor
+                        android:id="@+id/et_healthcondition"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="@dimen/x12"
+                        android:layout_marginRight="@dimen/x34"
+                        android:layout_marginTop="@dimen/x20"
+                        android:background="@null"
+                        android:gravity="top"
+                        android:lineSpacingExtra="@dimen/y40"
+                        android:textColor="@color/fontgray"
+                        android:textSize="@dimen/y28" />
+                </LinearLayout>
+
+            </android.support.v7.widget.CardView>
+
+
+        </LinearLayout>
 
     </LinearLayout>
 
 
-</LinearLayout>
+
+</ScrollView>

@@ -33,6 +33,9 @@ import java.util.List;
 
 import okhttp3.Call;
 
+/**
+ * 在线问诊页面
+ */
 public class InquiryActivity extends AppCompatActivity {
     View view;
     InquiryAdapter adapter;
@@ -92,19 +95,22 @@ public class InquiryActivity extends AppCompatActivity {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
 
-                Intent intent = new Intent(InquiryActivity.this, DoctorparticularsActivity.class);
-                //根据所选择的排序，点击时获取所点击医生ID
-                if (tv_section.getText().toString().equals("全部科室") || tv_city.getText().toString().equals("全部地区") || tv_sort.getText().toString().equals("智能排序") || tv_sort.getText().toString().equals("默认排序")) {
-                    intent.putExtra("doctot_id", list.get(position).getId());
-                } else if (tv_city.getText().toString().equals("成都") || tv_city.getText().toString().equals("重庆")) {
-                    intent.putExtra("doctot_id", citylist.get(position).getId());
-                } else if (tv_sort.getText().toString().equals("职称排序")) {
-                    intent.putExtra("doctot_id", titlelist.get(position).getId());
-                } else {
-                    intent.putExtra("doctot_id", selectlist.get(position).getId());
+                if(list.size()!=0){
+                    Intent intent = new Intent(InquiryActivity.this, DoctorparticularsActivity.class);
+                    //根据所选择的排序，点击时获取所点击医生ID，跳转到医生详情页面，跳转到聊天页面写在adapter中
+                    if (tv_section.getText().toString().equals("全部科室") || tv_city.getText().toString().equals("全部地区") || tv_sort.getText().toString().equals("智能排序") || tv_sort.getText().toString().equals("默认排序")) {
+                        intent.putExtra("doctot_id", list.get(position).getId());
+                    } else if (tv_city.getText().toString().equals("成都") || tv_city.getText().toString().equals("重庆")) {
+                        intent.putExtra("doctot_id", citylist.get(position).getId());
+                    } else if (tv_sort.getText().toString().equals("职称排序")) {
+                        intent.putExtra("doctot_id", titlelist.get(position).getId());
+                    } else {
+                        intent.putExtra("doctot_id", selectlist.get(position).getId());
+                    }
+
+                    startActivity(intent);
                 }
 
-                startActivity(intent);
             }
         });
     }
@@ -170,8 +176,10 @@ public class InquiryActivity extends AppCompatActivity {
         }
     };
 
+    //默认排序
     private void sortshowDialog() {
 //        setHeadDialog = new AlertDialog.Builder(getContext()).create();
+        //设置弹出框主题
         setHeadDialog = new Dialog(InquiryActivity.this, R.style.CustomDialog);
         setHeadDialog.show();
         dialogView = View.inflate(InquiryActivity.this, R.layout.inquiry_sort_dialog, null);

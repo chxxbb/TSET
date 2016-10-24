@@ -62,11 +62,13 @@ public class HealthparticularsActivity extends AppCompatActivity {
 
     private void init() {
         String[] strArray = null;
+        //去除逗号
         strArray = tag.split(",");
         List<String> wordList = Arrays.asList(strArray);
 
-
+        //判断接收到的标签标记，并且显示对应的标签
         for (int i = 0; i < wordList.size(); i++) {
+            //.trim用于去除空格
             if (wordList.get(i).trim().equals("流涕")) {
                 ll_tag1.setVisibility(View.VISIBLE);
             } else if (wordList.get(i).trim().equals("咳嗽")) {

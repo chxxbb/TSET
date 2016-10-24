@@ -91,7 +91,7 @@ public class ConsultPageActivity extends MyBaseActivity implements View.OnClickL
 
     }
 
-    //判断文章是否收藏过
+    //判断文章是否收藏过,已更改为无论是否收藏过都显示点赞按钮
     private void findCollectExistByUserIdAndCyclopediaId() {
         new Thread(new Runnable() {
             @Override
@@ -234,6 +234,7 @@ public class ConsultPageActivity extends MyBaseActivity implements View.OnClickL
         }
     };
 
+    //点击点赞收藏资讯
     private View.OnClickListener collectlistener = new View.OnClickListener() {
         @Override
         public void onClick(View v) {
@@ -269,7 +270,7 @@ public class ConsultPageActivity extends MyBaseActivity implements View.OnClickL
         }
     };
 
-
+    //如果以收藏则显示“已赞”,再次点击则取消收藏
     private View.OnClickListener unfavoritelistener = new View.OnClickListener() {
         @Override
         public void onClick(View v) {
@@ -290,6 +291,7 @@ public class ConsultPageActivity extends MyBaseActivity implements View.OnClickL
                         public void onResponse(String response, int id) {
                             Log.e("取消收藏返回", response);
                             if (response.equals("0")) {
+                                //取消收藏后发生广播通知我的收藏更新数据，“点赞”按钮改变
                                 ListenerManager.getInstance().sendBroadCast("更新我的收藏");
                                 Toast.makeText(ConsultPageActivity.this, "删除成功", Toast.LENGTH_SHORT).show();
                                 tv_collsult.setTextColor(android.graphics.Color.parseColor("#6fc9e6"));

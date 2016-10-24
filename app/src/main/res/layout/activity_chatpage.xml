@@ -82,7 +82,9 @@
                 <in.srain.cube.views.ptr.PtrClassicFrameLayout
                     android:id="@+id/ptrClassicFrameLayout"
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent">
+                    android:layout_height="match_parent"
+                    android:listSelector="@android:color/transparent">
+
                     <ListView
                         android:id="@+id/listView"
                         android:layout_width="match_parent"

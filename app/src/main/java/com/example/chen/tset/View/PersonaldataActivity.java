@@ -37,7 +37,7 @@ import java.util.Locale;
 import okhttp3.Call;
 
 /**
- * 修改头像页面,已改为个人资料页面点击修改头像
+ * 个人资料，修改头像此页面可直接修改
  */
 public class PersonaldataActivity extends MyBaseActivity {
     private RelativeLayout rl_name, rl_gender, rl_phone, rl_icon;
@@ -55,6 +55,7 @@ public class PersonaldataActivity extends MyBaseActivity {
         setContentView(R.layout.activity_personaldata);
         sp = new SharedPsaveuser(PersonaldataActivity.this);
         findView();
+        //头像的保存文件夹
         audioFile = new File(Environment.getExternalStorageDirectory().getAbsolutePath() + "/text/icon/");
         audioFile.mkdirs();//创建文件夹
     }
@@ -80,7 +81,9 @@ public class PersonaldataActivity extends MyBaseActivity {
     protected void onStart() {
         super.onStart();
 
-        //判断是否是联网状态 如果用户实体类中数据为空 则使用本地保存的数据
+        /**
+         * 判断是否是联网状态 如果用户实体类中数据为空 则使用本地保存的数据，显示头像，昵称等
+         */
         if (User_Http.user.getGender() == null) {
             tv_sex.setText(sp.getTag().getGender());
         } else {
@@ -104,6 +107,7 @@ public class PersonaldataActivity extends MyBaseActivity {
         }
 
 
+        //如果从后台获取到的头像为空，则显示默认头像
         if ((User_Http.user.getIcon() == null || User_Http.user.getIcon().equals("")) && (sp.getTag().getIcon() == null || sp.getTag().getIcon().equals(""))) {
 
             iv_icon.setBackgroundResource(R.drawable.default_icon);
@@ -142,6 +146,8 @@ public class PersonaldataActivity extends MyBaseActivity {
 
 
                         try {
+
+                            //打开图片选择需要截取的图片
                             Crop.pickImage(PersonaldataActivity.this);
                         } catch (Exception e) {
                             e.printStackTrace();
@@ -166,6 +172,7 @@ public class PersonaldataActivity extends MyBaseActivity {
     //截取图片
     private void beginCrop(Uri source) {
         try {
+            //图片文件，icon前面+“.”用于可以在用户手机上隐藏此头像，避免用户误删除
             sdcardTempFile = File.createTempFile(".icon", ".jpg", audioFile);
         } catch (IOException e) {
 
@@ -173,6 +180,7 @@ public class PersonaldataActivity extends MyBaseActivity {
         }
 
         Uri destination = Uri.fromFile(sdcardTempFile);
+        //获取到了需要截取的头像，将头像给予截取页面进行截取
         Crop.of(source, destination).asSquare().start(this);
     }
 
@@ -206,7 +214,7 @@ public class PersonaldataActivity extends MyBaseActivity {
 
                             String icon = sdcardTempFile.getAbsolutePath();
 
-                            //将更改过的头像保存在本地，并清除用户实体类中头像
+                            //将更改过的头像保存在本地，并清除用户实体类中头像，使显示的头像为当前最新头像
                             sp.setUsericon(icon);
                             User_Http.user.setIcon(null);
 

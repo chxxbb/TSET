@@ -79,6 +79,7 @@ public class DiseaselibrecyvAdapter extends RecyclerView.Adapter {
             viewholder.view.setVisibility(View.GONE);
         }
 
+        //点击跳转到疾病详情页面
         viewholder.linearLayout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

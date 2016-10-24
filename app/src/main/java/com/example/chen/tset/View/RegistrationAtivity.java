@@ -258,6 +258,7 @@ public class RegistrationAtivity extends MyBaseActivity {
                                     } else if (response.equals("1")) {
                                         handler.sendEmptyMessage(1);
                                     } else {
+                                        //挂号完成通知诊疗页面更新
                                         ListenerManager.getInstance().sendBroadCast("更新日历页面");
                                         orderCode = response;
                                         handler.sendEmptyMessage(2);
@@ -317,7 +318,7 @@ public class RegistrationAtivity extends MyBaseActivity {
                                 public void run() {
                                     int progressBarMax = progressBar.getMax();
                                     try {
-                                        //设置progressBar时间
+                                        //设置progressBar时间,3分钟内未支付则关闭此页面
                                         while (progressBarMax != progressBar.getProgress()) {
                                             int stepProgress = progressBarMax / 1000;
                                             int currentprogress = progressBar.getProgress();

@@ -79,6 +79,7 @@ import okhttp3.Response;
 
 /**
  * Created by Administrator on 2016/9/21 0021.
+ * 诊疗页面，还包括健康日历的左右滑动
  */
 public class ConsultingFragment extends Fragment implements View.OnClickListener, IListener {
     View view;
@@ -163,6 +164,7 @@ public class ConsultingFragment extends Fragment implements View.OnClickListener
         sp = new SharedPsaveuser(getContext());
 
         clist = new ArrayList<>();
+        //设置预加载页面
         new Thread(new Runnable() {
             @Override
             public void run() {
@@ -196,9 +198,11 @@ public class ConsultingFragment extends Fragment implements View.OnClickListener
 
     }
 
+
+    //更新诊疗页面
     @Override
     public void notifyAllActivity(String str) {
-        Log.e("日历页面",str);
+        Log.e("日历页面", str);
         if (str.equals("更新日历页面")) {
 
 
@@ -255,6 +259,13 @@ public class ConsultingFragment extends Fragment implements View.OnClickListener
 
                     break;
                 case 4:
+                    /**
+                     * 判断当天或点击的日期中是否有挂号，健康状况，用药
+                     * 如果有则显示条目，并显示详细信息
+                     * 如果没有则隐藏条目
+                     */
+
+                    //挂号
                     if (calendarinit.getRegistrationId() == 0) {
                         ll_registration_info.setVisibility(View.GONE);
                     } else {
@@ -262,6 +273,7 @@ public class ConsultingFragment extends Fragment implements View.OnClickListener
                         tv_registration_info.setText("有挂号" + ",请于" + pharmacydate + "准时就诊");
 
                         SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMdd");
+
 
                         ll_registration_info.setOnClickListener(new View.OnClickListener() {
                             @Override
@@ -274,6 +286,7 @@ public class ConsultingFragment extends Fragment implements View.OnClickListener
                         });
                     }
 
+                    //健康状况
                     if (calendarinit.getTag() == null && calendarinit.getContent() == null) {
                         ll_consulting_health.setVisibility(View.GONE);
                     } else {
@@ -291,12 +304,12 @@ public class ConsultingFragment extends Fragment implements View.OnClickListener
                         });
                     }
 
-
+                    //用药
                     if (calendarinit.getTime1() == null && calendarinit.getTime2() == null && calendarinit.getTime3() == null) {
                         ll_consulting_phramacy.setVisibility(View.GONE);
                     } else {
                         ll_consulting_phramacy.setVisibility(View.VISIBLE);
-                        tv_consulting_pharmacy.setText(calendarinit.getTime1() + "   " + calendarinit.getTime2() + "   " + calendarinit.getTime3());
+                        tv_consulting_pharmacy.setText("用药时间：  " + calendarinit.getTime1() + "   " + calendarinit.getTime2() + "   " + calendarinit.getTime3());
                         ll_consulting_phramacy.setOnClickListener(new View.OnClickListener() {
                             @Override
                             public void onClick(View v) {
@@ -460,12 +473,12 @@ public class ConsultingFragment extends Fragment implements View.OnClickListener
         flipper.addView(gridView, 0);
         addTextToTopTextView(currentMonth);
 
-
+        //默认提醒设置为圈选中
         calV.pharmacyremind(1);
         calV.registrationremind(1);
         calV.healthremind(1);
 
-
+        //判断提醒设置是否被选中，选中则改变健康日历上面的标记
         tb_pharmacy.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
@@ -513,48 +526,48 @@ public class ConsultingFragment extends Fragment implements View.OnClickListener
     }
 
 
-    private void printDay(String startDay, String endDay) {
-
-        try {
-
-            DateFormat FORMATTER = new SimpleDateFormat("yyyy年MM月dd日");
-            Calendar startDay1 = Calendar.getInstance();
-            Calendar endDay1 = Calendar.getInstance();
-            startDay1.setTime(FORMATTER.parse(startDay));
-            endDay1.setTime(FORMATTER.parse(endDay));
-
-            // 给出的日期开始日比终了日大则不执行打印
-            if (startDay.compareTo(endDay) >= 0) {
-                return;
-            }
-            // 现在打印中的日期
-            Calendar currentPrintDay = startDay1;
-            while (true) {
-                // 日期加一
-                currentPrintDay.add(Calendar.DATE, 1);
-                // 日期加一后判断是否达到终了日，达到则终止打印
-                if (currentPrintDay.compareTo(endDay1) == 0) {
-                    break;
-                }
-                // 打印日期
-                SimpleDateFormat dd = new SimpleDateFormat("yyyy年MM月dd日");
-                String date1 = dd.format(currentPrintDay.getTime());
-
-                PharmacyState calendarSign = new PharmacyState(date1, 9);
-                PharmacyState calendarSign1 = new PharmacyState(startDay, 9);
-                PharmacyState calendarSign2 = new PharmacyState(endDay, 9);
-                list.add(calendarSign);
-                list.add(calendarSign1);
-                list.add(calendarSign2);
-
-
-            }
-
-
-        } catch (ParseException e) {
-            e.printStackTrace();
-        }
-    }
+//    private void printDay(String startDay, String endDay) {
+//
+//        try {
+//
+//            DateFormat FORMATTER = new SimpleDateFormat("yyyy年MM月dd日");
+//            Calendar startDay1 = Calendar.getInstance();
+//            Calendar endDay1 = Calendar.getInstance();
+//            startDay1.setTime(FORMATTER.parse(startDay));
+//            endDay1.setTime(FORMATTER.parse(endDay));
+//
+//            // 给出的日期开始日比终了日大则不执行打印
+//            if (startDay.compareTo(endDay) >= 0) {
+//                return;
+//            }
+//            // 现在打印中的日期
+//            Calendar currentPrintDay = startDay1;
+//            while (true) {
+//                // 日期加一
+//                currentPrintDay.add(Calendar.DATE, 1);
+//                // 日期加一后判断是否达到终了日，达到则终止打印
+//                if (currentPrintDay.compareTo(endDay1) == 0) {
+//                    break;
+//                }
+//                // 打印日期
+//                SimpleDateFormat dd = new SimpleDateFormat("yyyy年MM月dd日");
+//                String date1 = dd.format(currentPrintDay.getTime());
+//
+//                PharmacyState calendarSign = new PharmacyState(date1, 9);
+//                PharmacyState calendarSign1 = new PharmacyState(startDay, 9);
+//                PharmacyState calendarSign2 = new PharmacyState(endDay, 9);
+//                list.add(calendarSign);
+//                list.add(calendarSign1);
+//                list.add(calendarSign2);
+//
+//
+//            }
+//
+//
+//        } catch (ParseException e) {
+//            e.printStackTrace();
+//        }
+//    }
 
 
     private class MyGestureListener extends GestureDetector.SimpleOnGestureListener {
@@ -585,13 +598,8 @@ public class ConsultingFragment extends Fragment implements View.OnClickListener
     }
 
 
-    /**
-     * 移动到下一个月
-     *
-     * @param gvFlag
-     */
+    //移动到下一个月
     private void enterNextMonth(int gvFlag) {
-
 
         addGridView(); // 添加一个gridView
         jumpMonth++; // 下一个月
@@ -600,7 +608,8 @@ public class ConsultingFragment extends Fragment implements View.OnClickListener
         gridView.setAdapter(calV);
         addTextToTopTextView(currentMonth); // 移动到下一月后，将当月显示在头标题中
 
-//        findAllByDate(calV.getShowYear() + "-" + calV.getShowMonth());
+        //加载滑动到的页面日期数据
+        findAllByDate(calV.getShowYear() + "-" + calV.getShowMonth());
 
 
         gvFlag++;
@@ -610,6 +619,7 @@ public class ConsultingFragment extends Fragment implements View.OnClickListener
         flipper.showNext();
         flipper.removeViewAt(0);
 
+        //滑动页面后提醒设置选中变为默认全被选中
         calV.pharmacyremind(1);
         calV.registrationremind(1);
         calV.healthremind(1);
@@ -617,14 +627,9 @@ public class ConsultingFragment extends Fragment implements View.OnClickListener
         tb_registration.setChecked(true);
         tb_health.setChecked(true);
 
-
     }
 
-    /**
-     * 移动到上一个月
-     *
-     * @param gvFlag
-     */
+    //移动到上一个月
     private void enterPrevMonth(int gvFlag) {
 
 
@@ -635,8 +640,16 @@ public class ConsultingFragment extends Fragment implements View.OnClickListener
         gridView.setAdapter(calV);
         gvFlag++;
         addTextToTopTextView(currentMonth); // 移动到上一月后，将当月显示在头标题中
+        String str=null;
+        //调整日期格式，如果月份为各位数则在其他前面+1
+        if (calV.getShowMonth().equals("1") || calV.getShowMonth().equals("2") || calV.getShowMonth().equals("3") || calV.getShowMonth().equals("4") || calV.getShowMonth().equals("5") || calV.getShowMonth().equals("6") || calV.getShowMonth().equals("7") || calV.getShowMonth().equals("8") || calV.getShowMonth().equals("9")) {
+            str=calV.getShowYear() + "-0" + calV.getShowMonth();
+        } else {
+            str=calV.getShowYear() + "-" + calV.getShowMonth();
+        }
 
-//        findAllByDate(calV.getShowYear() + "-" + calV.getShowMonth());
+        //加载滑动到的页面日期数据
+        findAllByDate(str);
 
         flipper.addView(gridView, gvFlag);
 
@@ -716,7 +729,7 @@ public class ConsultingFragment extends Fragment implements View.OnClickListener
                     String scheduleYear = calV.getShowYear();
                     String scheduleMonth = calV.getShowMonth();
 
-
+                    //调整日期格式，如果月份为各位数则在其他前面+1
                     if (scheduleMonth.equals("1") || scheduleMonth.equals("2") || scheduleMonth.equals("3") || scheduleMonth.equals("4") || scheduleMonth.equals("5") || scheduleMonth.equals("6") || scheduleMonth.equals("7") || scheduleMonth.equals("8") || scheduleMonth.equals("9")) {
                         date = scheduleYear + "-0" + scheduleMonth + "-" + scheduleDay;
                         pharmacydate = scheduleYear + "-0" + scheduleMonth + "-" + scheduleDay;
@@ -768,6 +781,7 @@ public class ConsultingFragment extends Fragment implements View.OnClickListener
 
     public void findAllByDate(final String str) {
 
+
         Thread thread = new Thread(new Runnable() {
             @Override
             public void run() {
@@ -786,6 +800,8 @@ public class ConsultingFragment extends Fragment implements View.OnClickListener
 
                             @Override
                             public void onResponse(String response, int id) {
+
+                                Log.e("诊疗返回",response);
 
                                 Type listtype = new TypeToken<LinkedList<ConsultingRemindState>>() {
                                 }.getType();

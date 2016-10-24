@@ -22,6 +22,7 @@ public class LeadActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_lead);
+        //打开APP时，判断是否是第一次使用APP如果是则直接跳转至首页，如果不是则显示此页面
         SharedPreferences sp = getSharedPreferences("lead", MODE_PRIVATE);
         boolean isclick = sp.getBoolean("isclick", true);
         if (!isclick) {
@@ -80,6 +81,7 @@ public class LeadActivity extends AppCompatActivity {
         }
     };
 
+    //设置viewpage每个页面不同的布局
     private void imageDate() {
         viewpager = (ViewPager) findViewById(R.id.viewpager);
         adapter = new LeadAdapter();
@@ -101,6 +103,7 @@ public class LeadActivity extends AppCompatActivity {
         adapter.notifyDataSetChanged();
     }
 
+    //点击按钮后保存状态，使下一次登录不再出现引导页面，跳转到首页
     private void btclick() {
         tv_click = (Button) findViewById(R.id.tv_click);
         tv_click.setVisibility(View.INVISIBLE);

@@ -80,6 +80,9 @@ public class ChatpageAdapter extends BaseAdapter {
         ViewHolder1 viewHolder1 = null;
         ViewHolder2 viewHolder2 = null;
         int type = getItemViewType(position);
+        /**
+         * 根据不同的消息标记判断是否是接送或发送的消息，显示在不同的位置，
+         */
         if (convertView == null) {
             switch (type) {
                 case TYPE1:

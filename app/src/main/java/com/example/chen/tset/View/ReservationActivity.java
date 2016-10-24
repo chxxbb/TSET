@@ -108,7 +108,7 @@ public class ReservationActivity extends MyBaseActivity implements View.OnClickL
                             Reservation reservation = (Reservation) it.next();
                             list.add(reservation);
                         }
-                        //使list倒序排列
+                        //使list倒序排列，从而最上面显示的是最新的一条挂号
                         Collections.reverse(list);
                         adapter.notifyDataSetChanged();
                         rl_loading.setVisibility(View.GONE);
@@ -131,9 +131,10 @@ public class ReservationActivity extends MyBaseActivity implements View.OnClickL
         }
     };
 
+
+    //从其他页面发送的广播，如果为“更新我的预约”则刷新此页面
     @Override
     public void notifyAllActivity(String str) {
-        Log.e("我的预约",str);
         if(str.equals("更新我的预约")){
             init();
         }

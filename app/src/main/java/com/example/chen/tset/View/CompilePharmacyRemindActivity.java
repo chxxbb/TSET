@@ -92,6 +92,7 @@ public class CompilePharmacyRemindActivity extends AppCompatActivity {
                         tv_content1.setText(pharmacyremindinit.getContent1());
                         tv_content2.setText(pharmacyremindinit.getContent2());
                         tv_content3.setText(pharmacyremindinit.getContent3());
+                        //如果只有1条或2条健康记录则隐藏，空白的记录栏
                         if (pharmacyremindinit.getTime2() == null || pharmacyremindinit.getTime2().equals("")) {
                             ll_time2.setVisibility(View.GONE);
                         }
@@ -120,6 +121,7 @@ public class CompilePharmacyRemindActivity extends AppCompatActivity {
                         @Override
                         public void onResponse(String response, int id) {
                             if (response.equals("0")) {
+                                //发送广播通知诊疗页面健康日历更新
                                 ListenerManager.getInstance().sendBroadCast("更新日历页面");
                                 Toast.makeText(CompilePharmacyRemindActivity.this, "删除成功", Toast.LENGTH_SHORT).show();
                                 finish();

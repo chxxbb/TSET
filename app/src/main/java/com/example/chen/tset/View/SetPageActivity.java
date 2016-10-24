@@ -73,7 +73,7 @@ public class SetPageActivity extends MyBaseActivity implements View.OnClickListe
             case R.id.rl_exit:
                 //退出登录
 
-                //清除本地用户信息
+                //清除本地用户信息，重新跳转到登录页面
                 sp.clearinit();
                 Intent intent5 = new Intent(SetPageActivity.this, LoginActivity.class);
                 startActivity(intent5);

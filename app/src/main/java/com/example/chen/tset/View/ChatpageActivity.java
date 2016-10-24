@@ -43,6 +43,7 @@ import com.example.chen.tset.Data.User_Http;
 import com.example.chen.tset.Data.Userinfo;
 import com.example.chen.tset.R;
 import com.example.chen.tset.Utils.ChatpageDao;
+import com.example.chen.tset.Utils.ContextUtil;
 import com.example.chen.tset.Utils.InquiryrecordDao;
 import com.example.chen.tset.Utils.SharedPsaveuser;
 import com.example.chen.tset.page.ChatpageAdapter;
@@ -125,8 +126,6 @@ public class ChatpageActivity extends AppCompatActivity implements PtrUIHandler 
         audioFile = new File(Environment.getExternalStorageDirectory().getAbsolutePath() + "/text/chatprint/");
         audioFile.mkdirs();//创建文件夹
         data = new ArrayList<>();
-
-
 
 
     }
@@ -227,6 +226,7 @@ public class ChatpageActivity extends AppCompatActivity implements PtrUIHandler 
 
     }
 
+    //查看医生详情
     private View.OnClickListener doctorlisntener = new View.OnClickListener() {
         @Override
         public void onClick(View v) {
@@ -241,18 +241,17 @@ public class ChatpageActivity extends AppCompatActivity implements PtrUIHandler 
         //从数据库中获取此用户聊天记录
         historylist = db.chatfind(username);
         for (int i = 0; i < historylist.size(); i++) {
-
+            //获取所有的聊天记录
             if (historylist.get(i).getMyname().equals(sp.getTag().getPhone())) {
                 numberlist.add(historylist.get(i));
 
             }
-
         }
 
         //进入聊天页面默认加载10天数据,如果少于或等于10条则全部显示
         if (numberlist.size() > (chatrecordnumber * 10)) {
             for (int j = numberlist.size() - (chatrecordnumber * 10); j < numberlist.size(); j++) {
-                Log.e("j", j + "");
+
                 list.add(numberlist.get(j));
             }
         } else {
@@ -273,27 +272,25 @@ public class ChatpageActivity extends AppCompatActivity implements PtrUIHandler 
 
         adapter.notifyDataSetChanged();
 
-
-
-
-
+        //加载更多的聊天记录，
         ptrClassicFrameLayout.setPtrHandler(new PtrDefaultHandler() {
             @Override
             public void onRefreshBegin(PtrFrameLayout frame) {
-                //加载更多的聊天记录，
+                //将list清空,聊天页面页数+1
                 list.clear();
                 chatrecordnumber++;
 
                 ptrClassicFrameLayout.postDelayed(new Runnable() {
                     @Override
                     public void run() {
+                        //根据页数，获取所需数据
                         if (numberlist.size() > (chatrecordnumber * 10)) {
                             for (int j = numberlist.size() - (chatrecordnumber * 10); j < numberlist.size(); j++) {
                                 list.add(numberlist.get(j));
                             }
                             handler.sendEmptyMessage(4);
                         } else {
-
+                            //如果所取的数据条数大于已有数据条数则全部显示
                             for (int i = 0; i < numberlist.size(); i++) {
                                 list.add(numberlist.get(i));
                             }
@@ -303,6 +300,7 @@ public class ChatpageActivity extends AppCompatActivity implements PtrUIHandler 
 
 
                     }
+                    //设定加载更多聊天记录需要的时间
                 }, 1000);
 
 
@@ -343,11 +341,13 @@ public class ChatpageActivity extends AppCompatActivity implements PtrUIHandler 
             TextContent textContent = new TextContent(et_chat.getText().toString());
             Message message = c.createSendMessage(textContent);
             JMessageClient.sendMessage(message);
+            //获取发送时间
             Date dt = new Date();
             Long time = dt.getTime();
             //存取到数据库中，+1用于判断是发送的消息还是接收的消息,1为自己发送的消息,2为接送到的消息
             String content = "1" + et_chat.getText().toString();
             chatcontent = new Chatcontent(content, time, null, null, username, sp.getTag().getPhone());
+            //保存在list集合中，清空输入框，并刷新页面
             list.add(chatcontent);
             et_chat.setText("");
 //                            handler.sendEmptyMessage(0);
@@ -357,11 +357,11 @@ public class ChatpageActivity extends AppCompatActivity implements PtrUIHandler 
 
         } catch (Exception e) {
             e.printStackTrace();
+
             jmessage();
             handler.sendEmptyMessage(2);
         }
 
-//                }
     }
 
 
@@ -401,8 +401,9 @@ public class ChatpageActivity extends AppCompatActivity implements PtrUIHandler 
 
                 case 4:
                     adapter.notifyDataSetChanged();
+                    //使Listview一直显示在头部
                     listView.setSelection(9);
-                    //收回加载显示框
+                    //收回加载更多显示框
                     ptrClassicFrameLayout.refreshComplete();
                     break;
                 case 5:
@@ -417,7 +418,7 @@ public class ChatpageActivity extends AppCompatActivity implements PtrUIHandler 
     };
 
 
-    //发送图片
+
     private View.OnClickListener lisntener = new View.OnClickListener() {
 
         @Override
@@ -432,6 +433,7 @@ public class ChatpageActivity extends AppCompatActivity implements PtrUIHandler 
                     break;
 
                 case R.id.iv_chat:
+                    //发送图片
                     sendpictureDialog();
                     break;
             }
@@ -442,22 +444,25 @@ public class ChatpageActivity extends AppCompatActivity implements PtrUIHandler 
     @Override
     protected void onStop() {
         super.onStop();
+        //关闭聊天页面，再次收到这个医生消息会显示到通知栏
         JMessageClient.exitConversation();
     }
 
     //图片发送弹出框
     private void sendpictureDialog() {
         jmessage();
-//        setHeadDialog = new AlertDialog.Builder(this).create();
+
+        //为dialog设置主题为透明，
         setHeadDialog = new Dialog(this, R.style.CustomDialog);
         setHeadDialog.show();
         dialogView = View.inflate(getApplicationContext(), R.layout.chatpage_picture_dialog, null);
+        //设置弹窗的布局
         setHeadDialog.getWindow().setContentView(dialogView);
         WindowManager.LayoutParams lp = setHeadDialog.getWindow().getAttributes();
         setHeadDialog.getWindow().setAttributes(lp);
+        //弹窗点击事件
         sendpictureclick();
     }
-
 
 
     //选择获取图片方式
@@ -467,14 +472,14 @@ public class ChatpageActivity extends AppCompatActivity implements PtrUIHandler 
         Button btn_cutout = (Button) dialogView.findViewById(R.id.btn_cutout);
         Button btn_cancel = (Button) dialogView.findViewById(R.id.btn_cancel);
 
-
+        //点击相机
         btn_camera.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
 
                 try {
-
+                    //设置相机拍照后的路径
                     sdcardTempFile1 = File.createTempFile("textcamera", ".jpg", audioFile);
                     //相机
                     Intent intent1 = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
@@ -490,7 +495,7 @@ public class ChatpageActivity extends AppCompatActivity implements PtrUIHandler 
 
             }
         });
-
+        //开启图库
         btn_cutout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -526,6 +531,7 @@ public class ChatpageActivity extends AppCompatActivity implements PtrUIHandler 
         }
 
         Uri destination = Uri.fromFile(sdcardTempFile);
+        //将从图库中选中的图片进行截取
         Crop.of(source, destination).asSquare().start(this);
     }
 
@@ -545,10 +551,11 @@ public class ChatpageActivity extends AppCompatActivity implements PtrUIHandler 
 
                             ImageContent image = new ImageContent(sdcardTempFile);
 
-
                             Message message = c.createSendMessage(image);
                             JMessageClient.sendMessage(message);
+                            //将发送的图片本地地址保存在数据库中，加标示用于判断是否是发送图片或接收图片
                             chatcontent = new Chatcontent("1*1", 0L, sdcardTempFile.getAbsolutePath(), sdcardTempFile.getAbsolutePath(), username, sp.getTag().getPhone());
+                            //将消息显示在界面中，并保存到数据库中
                             list.add(chatcontent);
                             handler.sendEmptyMessage(1);
                             db.addchatcont(chatcontent);
@@ -568,7 +575,7 @@ public class ChatpageActivity extends AppCompatActivity implements PtrUIHandler 
             });
             thread.start();
         } else if (resultCode == Crop.RESULT_ERROR) {
-            Toast.makeText(this, Crop.getError(result).getMessage(), Toast.LENGTH_SHORT).show();
+//            Toast.makeText(this, Crop.getError(result).getMessage(), Toast.LENGTH_SHORT).show();
         }
 
 
@@ -588,12 +595,15 @@ public class ChatpageActivity extends AppCompatActivity implements PtrUIHandler 
         @Override
         public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
             if (list.get(position).getMasterfile() != null) {
+                //设置弹出框主题
                 setHeadDialog = new Dialog(ChatpageActivity.this, R.style.Dialog_Fullscreen);
 
                 setHeadDialog.show();
                 dialogView = View.inflate(getApplicationContext(), R.layout.chat_imgv_dialog, null);
 
                 ImageView iv_chat_dial = (ImageView) dialogView.findViewById(R.id.iv_chat_dial);
+
+                //加载图片
 
                 ImageLoader.getInstance().displayImage("file:///" + list.get(position).getMasterfile(), iv_chat_dial);
 
@@ -605,6 +615,7 @@ public class ChatpageActivity extends AppCompatActivity implements PtrUIHandler 
 
                 RelativeLayout rl_chat_diss = (RelativeLayout) dialogView.findViewById(R.id.rl_chat_diss);
 
+                //点击任何地方关闭弹出框视图
                 rl_chat_diss.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
@@ -622,12 +633,13 @@ public class ChatpageActivity extends AppCompatActivity implements PtrUIHandler 
         Message msg = event.getMessage();
         switch (msg.getContentType()) {
             case text:
-                //文本消息
+                //处理接收到的文本消息
                 TextContent textContent = (TextContent) msg.getContent();
 
                 String content = "2" + textContent.getText();
                 Date dt = new Date();
                 Long time = dt.getTime();
+                //判断是否为当前聊天对象，如果是则保存在数据库中并在listview中显示，，如果不是则保存在数据库中（保存到数据库方法写在了HomeActivity中），并且发送到通知栏
                 if (msg.getTargetID().equals(username)) {
                     chatcontent = new Chatcontent(content, time, null, null, msg.getTargetID(), sp.getTag().getPhone());
                     list.add(chatcontent);
@@ -637,12 +649,14 @@ public class ChatpageActivity extends AppCompatActivity implements PtrUIHandler 
                 break;
 
             case image:
-                //处理图片消息
+                //处理接收到的图片消息
                 ImageContent imageContent = (ImageContent) msg.getContent();
                 imageContent.getLocalPath();//图片本地地址
                 String file = imageContent.getLocalThumbnailPath();//图片对应缩略图的本地地址
+                //获取发送消息时间
                 Date dt1 = new Date();
                 Long time1 = dt1.getTime();
+                //判断是否为当前聊天对象，如果是则保存在数据库中并在listview中显示，如果不是则保存在数据库中（保存到数据库方法写在了HomeActivity中），并且发送到通知栏
                 chatcontent = new Chatcontent("2*2", time1, file, file, msg.getTargetID(), sp.getTag().getPhone());
                 if (msg.getTargetID().equals(username)) {
                     list.add(chatcontent);
@@ -657,14 +671,15 @@ public class ChatpageActivity extends AppCompatActivity implements PtrUIHandler 
     //发送图片
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent result) {
+        //判断是否是从图片中选择图片
         if (requestCode == Crop.REQUEST_PICK && resultCode == RESULT_OK) {
-
             beginCrop(result.getData());
+            //获取到从图库选择的图片，进行截取
         } else if (requestCode == Crop.REQUEST_CROP) {
 
             handleCrop(resultCode, result);
+            //拍照，点击确定发送图片
         } else if (resultCode == RESULT_OK && requestCode == 100) {
-
 
             Thread thread = new Thread(new Runnable() {
                 @Override
@@ -677,13 +692,13 @@ public class ChatpageActivity extends AppCompatActivity implements PtrUIHandler 
                             c = Conversation.createSingleConversation(username);
 
                         }
-                        Log.e("图片地址", sdcardTempFile1.getAbsolutePath());
-                        ImageContent image = new ImageContent(sdcardTempFile1);
 
+                        ImageContent image = new ImageContent(sdcardTempFile1);
 
                         Message message = c.createSendMessage(image);
 
                         JMessageClient.sendMessage(message);
+                        //保存发送的图片地址并显示在聊天界面
                         chatcontent = new Chatcontent("1*1", 0L, sdcardTempFile1.getAbsolutePath(), sdcardTempFile1.getAbsolutePath(), username, sp.getTag().getPhone());
                         list.add(chatcontent);
                         handler.sendEmptyMessage(1);
@@ -691,7 +706,6 @@ public class ChatpageActivity extends AppCompatActivity implements PtrUIHandler 
                     } catch (Exception e) {
                         e.printStackTrace();
                         handler.sendEmptyMessage(3);
-
                     }
 
                     chatstate++;
@@ -711,6 +725,7 @@ public class ChatpageActivity extends AppCompatActivity implements PtrUIHandler 
         SimpleDateFormat formatter = new SimpleDateFormat("yyyy/MM/dd  HH:mm:ss");
         Date curDate = new Date(System.currentTimeMillis());//获取当前时间
         String str = formatter.format(curDate);
+        //获取当前用户手机号
         if (User_Http.user.getPhone() != null) {
             ilist = inquiryrecorddb.chatfind(sp.getTag().getPhone());
         } else {
@@ -720,13 +735,15 @@ public class ChatpageActivity extends AppCompatActivity implements PtrUIHandler 
         }
 
 
-        //判断数据库中是否有这个医生的聊天记录
+        //查找数据库中是否有这个医生的聊天记录
         for (int i = 0; i < ilist.size(); i++) {
             if (username.equals(ilist.get(i).getDoctorid())) {
                 j++;
             }
         }
+        //如果数据库没有这个医生的聊天记录，并且chatstate大于0则保存
 
+        //chatstate用于判断是否发送过消息
         if (j == 0 && chatstate != 0) {
             Inquiryrecord inquiryrecord = new Inquiryrecord(sp.getTag().getPhone(), username, doctorID, doctorname, doctoricon, str, "");
             inquiryrecorddb.addInquiryrecord(inquiryrecord);
@@ -751,7 +768,6 @@ public class ChatpageActivity extends AppCompatActivity implements PtrUIHandler 
 
     @Override
     public void onUIRefreshPrepare(PtrFrameLayout frame) {
-
         l = list.size();
 
     }

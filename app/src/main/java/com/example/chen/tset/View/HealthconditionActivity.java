@@ -20,7 +20,6 @@ import com.example.chen.tset.R;
 import com.example.chen.tset.Utils.IListener;
 import com.example.chen.tset.Utils.ListenerManager;
 import com.example.chen.tset.Utils.MyBaseActivity;
-import com.example.chen.tset.Utils.MyEditText;
 import com.example.chen.tset.Utils.SharedPsaveuser;
 import com.example.chen.tset.page.NoteEditor;
 import com.zhy.http.okhttp.OkHttpUtils;
@@ -116,7 +115,7 @@ public class HealthconditionActivity extends MyBaseActivity implements IListener
 
     }
 
-
+    //点击收藏后，判断标签是否被选中，如果选中则放入标签集合中，发送至后台
     private CompoundButton.OnCheckedChangeListener tblistener = new CompoundButton.OnCheckedChangeListener() {
         @Override
         public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
@@ -299,7 +298,7 @@ public class HealthconditionActivity extends MyBaseActivity implements IListener
         }
     };
 
-
+    //判断是否选中过疾病标签或输入疾病详情，如果是则改变保存按钮状态并且可以点击
     private TextWatcher textchanglistener = new TextWatcher() {
         @Override
         public void beforeTextChanged(CharSequence s, int start, int count, int after) {
@@ -384,6 +383,7 @@ public class HealthconditionActivity extends MyBaseActivity implements IListener
                         if (response.equals("1")) {
                             Toast.makeText(HealthconditionActivity.this, "今天你已经添加过你的健康状况了", Toast.LENGTH_SHORT).show();
                         } else {
+                            //发送广播通知诊疗页面更新
                             ListenerManager.getInstance().sendBroadCast("更新日历页面");
                             Toast.makeText(HealthconditionActivity.this, "保存成功，你可以在健康日历上面查看", Toast.LENGTH_SHORT).show();
                             finish();

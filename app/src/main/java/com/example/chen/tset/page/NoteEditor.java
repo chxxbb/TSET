@@ -7,6 +7,10 @@ import android.graphics.Rect;
 import android.util.AttributeSet;
 import android.widget.EditText;
 
+
+/**
+ * 自带下划线的editText
+ */
 public class NoteEditor extends EditText {
     /**
      * 提前需要画的线的条数

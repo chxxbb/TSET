@@ -110,7 +110,7 @@ public class PasswordSettingActivity extends MyBaseActivity implements View.OnCl
                                 Toast.makeText(PasswordSettingActivity.this, "修改失败", Toast.LENGTH_SHORT).show();
                             } else {
                                 User_Http.user.setPhone(et_newpassword.getText().toString());
-                                //清除本地用户信息
+                                //清除本地用户信息，修改密码后需要重新登录
                                 sp.clearinit();
                                 Intent intent5 = new Intent(PasswordSettingActivity.this, LoginActivity.class);
                                 startActivity(intent5);

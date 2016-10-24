@@ -46,7 +46,7 @@ import okhttp3.Call;
 /**
  * 我的收藏
  */
-public class MycollectActivity extends MyBaseActivity implements IListener{
+public class MycollectActivity extends MyBaseActivity implements IListener {
     private SwipeMenuListView lv_collect;
     CharactersafeAdapter adapter;
     List<Information> list;
@@ -70,7 +70,6 @@ public class MycollectActivity extends MyBaseActivity implements IListener{
         super.onStart();
 
 
-
     }
 
     private void findView() {
@@ -86,9 +85,11 @@ public class MycollectActivity extends MyBaseActivity implements IListener{
         dm = this.getResources().getDisplayMetrics();
         final float density = dm.density;
 
+        //listview的item向左滑动可出现删除收藏按钮
         SwipeMenuCreator creator = new SwipeMenuCreator() {
             @Override
             public void create(SwipeMenu menu) {
+                //设置删除收藏按钮长宽，颜色，字体
                 SwipeMenuItem openItem = new SwipeMenuItem(getApplicationContext());
                 openItem.setBackground(new ColorDrawable(Color.RED));
                 openItem.setWidth((int) (75 * density));
@@ -114,7 +115,7 @@ public class MycollectActivity extends MyBaseActivity implements IListener{
 
 
     private void initHttp() {
-        sp=new SharedPsaveuser(this);
+        sp = new SharedPsaveuser(this);
         OkHttpUtils
                 .post()
                 .url(Http_data.http_data + "/findCollectList")
@@ -195,10 +196,12 @@ public class MycollectActivity extends MyBaseActivity implements IListener{
         }
     };
 
+
+    //从其他页面接送到广播，如果为“更新我的收藏”则此页面刷新
     @Override
     public void notifyAllActivity(String str) {
-        Log.e("我的收藏",str);
-        if(str.equals("更新我的收藏")){
+        if (str.equals("更新我的收藏")) {
+
             initHttp();
         }
     }

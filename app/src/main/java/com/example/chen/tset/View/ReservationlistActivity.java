@@ -156,7 +156,9 @@ public class ReservationlistActivity extends MyBaseActivity implements View.OnCl
                     }
                     tv_section.setText("科室：" + reservationlist.getSection());
 
-
+                    /**
+                     * 判断是否支付的状态，并使按钮显示不同的背景，文字，颜色
+                     */
                     if (reservationlist.getOrderStatus().equals("已预约")) {
 
                         btn_cancel.setOnClickListener(listener);

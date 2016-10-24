@@ -62,6 +62,8 @@ public class MyDoctorAdapter extends BaseAdapter {
         viewHolder.tv_intro.setText("擅长：" + list.get(position).getAdept());
         viewHolder.tv_section.setText(list.get(position).getDoctorSection());
         ImageLoader.getInstance().displayImage(list.get(position).getDoctorIcon(), viewHolder.iv_icon);
+
+        //跳转到聊天页面
         viewHolder.fl_chat.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

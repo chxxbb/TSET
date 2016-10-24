@@ -65,6 +65,8 @@ public class LectureroomAdapter extends RecyclerView.Adapter {
         viewholder.tv_lectr.setText(list.get(position).getTitle());
         String uri = list.get(position).getCover();
         ImageLoader.getInstance().displayImage(uri, viewholder.rcImageView);
+
+        //点击打开手机自带播放器播放视频
         viewholder.linearLayout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

@@ -26,7 +26,7 @@ import okhttp3.Call;
 
 
 /**
- * 用药提醒页面
+ * 用药提醒页面，已废除
  */
 public class PharmacyremindActivity extends MyBaseActivity {
     private LinearLayout ll_return;

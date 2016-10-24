@@ -71,7 +71,7 @@ public class MyDoctorActivity extends MyBaseActivity {
 
 
     private void httpinit() {
-//        new Thread(new R)
+
         SharedPsaveuser sp=new SharedPsaveuser(this);
         gson = new Gson();
         OkHttpUtils
@@ -122,7 +122,7 @@ public class MyDoctorActivity extends MyBaseActivity {
         @Override
         public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
             Intent intent = new Intent(MyDoctorActivity.this, DoctorparticularsActivity.class);
-            //医生ID
+            //医生ID，用于在医生详情页面获取医生详情
             intent.putExtra("doctot_id", list.get(position).getDoctorId() + "");
             startActivity(intent);
         }

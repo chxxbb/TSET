@@ -74,6 +74,7 @@ public class DiseaseliblistvAdapter extends BaseAdapter {
         viewHolder.tv_dislistv.setText(list.get(position).getName());
         ImageLoader.getInstance().displayImage(list.get(position).getIcon1(), viewHolder.iv_dislistv);
         ImageLoader.getInstance().displayImage(list.get(position).getIcon2(), viewHolder.iv_dislistv1);
+        //根据点击的条目，改变此条目的背景，及疾病图片
         if (mSelect == position) {
             viewHolder.iv_dislistv1.setVisibility(View.VISIBLE);
             viewHolder.iv_dislistv.setVisibility(View.GONE);

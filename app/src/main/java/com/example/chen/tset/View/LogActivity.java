@@ -23,6 +23,7 @@ import com.zhy.http.okhttp.callback.StringCallback;
 import cn.jpush.android.api.JPushInterface;
 import okhttp3.Call;
 
+
 public class LogActivity extends AppCompatActivity {
     SharedPsaveuser sp;
 
@@ -54,6 +55,7 @@ public class LogActivity extends AppCompatActivity {
 
             @Override
             public void onAnimationEnd(Animation animation) {
+                //判断是否是第一次登录，如果是则跳转到登录页面，如果不是则跳转到首页
 
                 if (i == 1) {
                     Intent intent = new Intent(LogActivity.this, HomeActivity.class);
