@@ -56,6 +56,7 @@ public class ReservationlistvAdapter extends BaseAdapter {
         viewHolder.tv_order.setText("订单号：" + list.get(position).getOrderCode());
         viewHolder.tv_status.setText(list.get(position).getOrderStatus());
         viewHolder.tv_money.setText("￥" + list.get(position).getMoney());
+
         if (list.get(position).getOrderStatus().equals("已取消") || list.get(position).getOrderStatus().equals("已过期")) {
             viewHolder.tv_status.setTextColor(android.graphics.Color.parseColor("#999999"));
         } else {

@@ -299,6 +299,7 @@ public class ConsultingFragment extends Fragment implements View.OnClickListener
                                 intent.putExtra("time", pharmacydate);
                                 intent.putExtra("tag", calendarinit.getTag());
                                 intent.putExtra("content", calendarinit.getContent());
+                                intent.putExtra("healthId", calendarinit.getHealth_id());
                                 startActivity(intent);
                             }
                         });
@@ -526,50 +527,6 @@ public class ConsultingFragment extends Fragment implements View.OnClickListener
     }
 
 
-//    private void printDay(String startDay, String endDay) {
-//
-//        try {
-//
-//            DateFormat FORMATTER = new SimpleDateFormat("yyyy年MM月dd日");
-//            Calendar startDay1 = Calendar.getInstance();
-//            Calendar endDay1 = Calendar.getInstance();
-//            startDay1.setTime(FORMATTER.parse(startDay));
-//            endDay1.setTime(FORMATTER.parse(endDay));
-//
-//            // 给出的日期开始日比终了日大则不执行打印
-//            if (startDay.compareTo(endDay) >= 0) {
-//                return;
-//            }
-//            // 现在打印中的日期
-//            Calendar currentPrintDay = startDay1;
-//            while (true) {
-//                // 日期加一
-//                currentPrintDay.add(Calendar.DATE, 1);
-//                // 日期加一后判断是否达到终了日，达到则终止打印
-//                if (currentPrintDay.compareTo(endDay1) == 0) {
-//                    break;
-//                }
-//                // 打印日期
-//                SimpleDateFormat dd = new SimpleDateFormat("yyyy年MM月dd日");
-//                String date1 = dd.format(currentPrintDay.getTime());
-//
-//                PharmacyState calendarSign = new PharmacyState(date1, 9);
-//                PharmacyState calendarSign1 = new PharmacyState(startDay, 9);
-//                PharmacyState calendarSign2 = new PharmacyState(endDay, 9);
-//                list.add(calendarSign);
-//                list.add(calendarSign1);
-//                list.add(calendarSign2);
-//
-//
-//            }
-//
-//
-//        } catch (ParseException e) {
-//            e.printStackTrace();
-//        }
-//    }
-
-
     private class MyGestureListener extends GestureDetector.SimpleOnGestureListener {
         @Override
         public boolean onFling(MotionEvent e1, MotionEvent e2, float velocityX, float velocityY) {
@@ -640,12 +597,12 @@ public class ConsultingFragment extends Fragment implements View.OnClickListener
         gridView.setAdapter(calV);
         gvFlag++;
         addTextToTopTextView(currentMonth); // 移动到上一月后，将当月显示在头标题中
-        String str=null;
+        String str = null;
         //调整日期格式，如果月份为各位数则在其他前面+1
         if (calV.getShowMonth().equals("1") || calV.getShowMonth().equals("2") || calV.getShowMonth().equals("3") || calV.getShowMonth().equals("4") || calV.getShowMonth().equals("5") || calV.getShowMonth().equals("6") || calV.getShowMonth().equals("7") || calV.getShowMonth().equals("8") || calV.getShowMonth().equals("9")) {
-            str=calV.getShowYear() + "-0" + calV.getShowMonth();
+            str = calV.getShowYear() + "-0" + calV.getShowMonth();
         } else {
-            str=calV.getShowYear() + "-" + calV.getShowMonth();
+            str = calV.getShowYear() + "-" + calV.getShowMonth();
         }
 
         //加载滑动到的页面日期数据
@@ -764,6 +721,7 @@ public class ConsultingFragment extends Fragment implements View.OnClickListener
 
                             @Override
                             public void onResponse(String response, int id) {
+                                Log.e("111", response);
                                 if (response.equals("{}")) {
                                     handler.sendEmptyMessage(3);
                                 } else {
@@ -801,7 +759,7 @@ public class ConsultingFragment extends Fragment implements View.OnClickListener
                             @Override
                             public void onResponse(String response, int id) {
 
-                                Log.e("诊疗返回",response);
+                                Log.e("诊疗返回", response);
 
                                 Type listtype = new TypeToken<LinkedList<ConsultingRemindState>>() {
                                 }.getType();

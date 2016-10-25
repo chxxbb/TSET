@@ -11,8 +11,9 @@ public class Calendarinit {
     private int registrationId;
     private String tag;
     private int remindId;
+    private String health_id;
 
-    public Calendarinit(String content, String time3, String time2, String time1, int registrationId, String tag, int remindId) {
+    public Calendarinit(String content, String time3, String time2, String time1, int registrationId, String tag, int remindId, String health_id) {
         this.content = content;
         this.time3 = time3;
         this.time2 = time2;
@@ -20,6 +21,15 @@ public class Calendarinit {
         this.registrationId = registrationId;
         this.tag = tag;
         this.remindId = remindId;
+        this.health_id = health_id;
+    }
+
+    public String getHealth_id() {
+        return health_id;
+    }
+
+    public void setHealth_id(String health_id) {
+        this.health_id = health_id;
     }
 
     public String getContent() {

@@ -42,7 +42,7 @@ import okhttp3.Call;
  * 预约订单详情
  */
 public class ReservationlistActivity extends MyBaseActivity implements View.OnClickListener, IListener {
-    private LinearLayout ll_myreservationg;
+    private LinearLayout ll_myreservationg, ll_order_remind;
     private ScrollView scrollView;
     private TextView tv_content, tv_title, tv_appointment_time, tv_valid_time, tv_address, tv_patient_name, tv_money, tv_patient_phone, tv_order_no, tv_hospital, tv_section;
     private CircleImageView iv_icon;
@@ -90,6 +90,8 @@ public class ReservationlistActivity extends MyBaseActivity implements View.OnCl
         iv_icon = (CircleImageView) findViewById(R.id.iv_icon);
         rl_nonetwork = (RelativeLayout) findViewById(R.id.rl_nonetwork);
         rl_loading = (RelativeLayout) findViewById(R.id.rl_loading);
+
+        ll_order_remind = (LinearLayout) findViewById(R.id.ll_order_remind);
         btn_cancel = (Button) findViewById(R.id.btn_cancel);
         ll_myreservationg.setOnClickListener(this);
 
@@ -160,7 +162,7 @@ public class ReservationlistActivity extends MyBaseActivity implements View.OnCl
                      * 判断是否支付的状态，并使按钮显示不同的背景，文字，颜色
                      */
                     if (reservationlist.getOrderStatus().equals("已预约")) {
-
+                        ll_order_remind.setVisibility(View.VISIBLE);
                         btn_cancel.setOnClickListener(listener);
 
                     } else if (reservationlist.getOrderStatus().equals("待支付")) {
@@ -169,9 +171,9 @@ public class ReservationlistActivity extends MyBaseActivity implements View.OnCl
 
                     } else if (reservationlist.getOrderStatus().equals("已取消")) {
                         btn_cancel.setBackgroundResource(R.drawable.reservationlist_btn_graycase);
-                        btn_cancel.setText("已取消");
+                        btn_cancel.setText("删除");
                         btn_cancel.setTextColor(android.graphics.Color.parseColor("#bbbbbb"));
-                        btn_cancel.setOnClickListener(null);
+                        btn_cancel.setOnClickListener(deletelistener);
                     } else if (reservationlist.getOrderStatus().equals("已完成")) {
                         btn_cancel.setBackgroundResource(R.drawable.reservationlist_btn_graycase);
                         btn_cancel.setText("已完成");
@@ -192,7 +194,7 @@ public class ReservationlistActivity extends MyBaseActivity implements View.OnCl
                     ListenerManager.getInstance().sendBroadCast("更新我的预约");
                     Toast.makeText(ReservationlistActivity.this, "取消成功", Toast.LENGTH_SHORT).show();
                     btn_cancel.setBackgroundResource(R.drawable.reservationlist_btn_graycase);
-                    btn_cancel.setText("已取消");
+                    btn_cancel.setText("删除");
                     btn_cancel.setTextColor(android.graphics.Color.parseColor("#bbbbbb"));
                     btn_cancel.setOnClickListener(null);
                     break;
@@ -270,6 +272,34 @@ public class ReservationlistActivity extends MyBaseActivity implements View.OnCl
             }
         });
     }
+
+    //删除订单
+    private View.OnClickListener deletelistener = new View.OnClickListener() {
+        @Override
+        public void onClick(View v) {
+
+            OkHttpUtils
+                    .post()
+                    .url(Http_data.http_data + "/DeleteRegistrationById")
+                    .addParams("orderCode", reservationlist.getOrderCode())
+                    .build()
+                    .execute(new StringCallback() {
+                        @Override
+                        public void onError(Call call, Exception e, int id) {
+                            Toast.makeText(ReservationlistActivity.this, "网络连接失败", Toast.LENGTH_SHORT).show();
+                        }
+
+                        @Override
+                        public void onResponse(String response, int id) {
+                            ListenerManager.getInstance().sendBroadCast("更新我的预约");
+                            Toast.makeText(ReservationlistActivity.this, "删除成功", Toast.LENGTH_SHORT).show();
+                            finish();
+
+
+                        }
+                    });
+        }
+    };
 
     private View.OnClickListener paylistener = new View.OnClickListener() {
         @Override

@@ -64,10 +64,10 @@
             android:src="@color/backgroundblue" />
 
         <TextView
+            android:id="@+id/tv_aboutus_version_umber"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/y30"
-            android:text="版本号 1.0.1"
             android:textColor="@color/xmgray"
             android:textSize="@dimen/y30" />
     </LinearLayout>

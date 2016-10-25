@@ -44,18 +44,18 @@
             android:textColor="@color/fontcolor"
             android:textSize="@dimen/x36" />
 
-        <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:layout_alignParentRight="true">
+        <!--<LinearLayout-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="match_parent"-->
+        <!--android:layout_alignParentRight="true">-->
 
-            <ImageView
-                android:layout_width="@dimen/x36"
-                android:layout_height="@dimen/y38"
-                android:layout_gravity="center_vertical"
-                android:layout_marginRight="@dimen/x30"
-                android:src="@drawable/consult_share" />
-        </LinearLayout>
+        <!--<ImageView-->
+        <!--android:layout_width="@dimen/x36"-->
+        <!--android:layout_height="@dimen/y38"-->
+        <!--android:layout_gravity="center_vertical"-->
+        <!--android:layout_marginRight="@dimen/x30"-->
+        <!--android:src="@drawable/consult_share" />-->
+        <!--</LinearLayout>-->
     </RelativeLayout>
 
     <RelativeLayout

@@ -63,10 +63,12 @@
 
 
                 <LinearLayout
+                    android:id="@+id/ll_order_remind"
                     android:layout_width="match_parent"
                     android:layout_height="@dimen/y60"
                     android:background="#fff0d6"
-                    android:gravity="center">
+                    android:gravity="center"
+                    android:visibility="gone">
 
                     <TextView
                         android:layout_width="wrap_content"

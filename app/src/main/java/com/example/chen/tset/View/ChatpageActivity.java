@@ -120,7 +120,6 @@ public class ChatpageActivity extends AppCompatActivity implements PtrUIHandler 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_chatpage);
         JMessageClient.registerEventReceiver(this);
-
         inquiryrecorddb = new InquiryrecordDao(this);
 
         audioFile = new File(Environment.getExternalStorageDirectory().getAbsolutePath() + "/text/chatprint/");
@@ -482,6 +481,8 @@ public class ChatpageActivity extends AppCompatActivity implements PtrUIHandler 
                     //设置相机拍照后的路径
                     sdcardTempFile1 = File.createTempFile("textcamera", ".jpg", audioFile);
                     //相机
+
+                    Log.e("相机",sdcardTempFile1.toString());
                     Intent intent1 = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
                     intent1.putExtra(MediaStore.EXTRA_OUTPUT, Uri.fromFile(sdcardTempFile1));
                     startActivityForResult(intent1, 100);
@@ -595,7 +596,7 @@ public class ChatpageActivity extends AppCompatActivity implements PtrUIHandler 
         @Override
         public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
             if (list.get(position).getMasterfile() != null) {
-                //设置弹出框主题
+                //设置弹出框主题为全屏
                 setHeadDialog = new Dialog(ChatpageActivity.this, R.style.Dialog_Fullscreen);
 
                 setHeadDialog.show();
@@ -645,7 +646,6 @@ public class ChatpageActivity extends AppCompatActivity implements PtrUIHandler 
                     list.add(chatcontent);
                     adapter.notifyDataSetChanged();
                 }
-
                 break;
 
             case image:
@@ -662,7 +662,6 @@ public class ChatpageActivity extends AppCompatActivity implements PtrUIHandler 
                     list.add(chatcontent);
                     adapter.notifyDataSetChanged();
                 }
-
                 break;
         }
     }
