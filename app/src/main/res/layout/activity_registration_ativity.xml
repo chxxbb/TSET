@@ -419,8 +419,6 @@
                         android:layout_marginRight="@dimen/x30"
                         android:layout_marginTop="@dimen/y20"
                         android:background="@drawable/registrtion_case"
-                        android:focusable="true"
-                        android:focusableInTouchMode="true"
                         android:orientation="horizontal">
 
                         <ImageView
@@ -443,8 +441,6 @@
                             android:textColorHint="@color/linegray1"
                             android:textSize="@dimen/x28" />
                     </LinearLayout>
-
-
                 </LinearLayout>
             </ScrollView>
 

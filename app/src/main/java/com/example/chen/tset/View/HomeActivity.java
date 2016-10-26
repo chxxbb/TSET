@@ -200,7 +200,7 @@ public class HomeActivity extends MyBaseActivity implements View.OnClickListener
         jmessage();
 
 
-//        updatedetection();
+        updatedetection();
 
         updatedialog();
 
@@ -225,8 +225,8 @@ public class HomeActivity extends MyBaseActivity implements View.OnClickListener
                             @Override
                             public void onResponse(String response, int id) {
                                 Log.e("更新返回", response);
-//
-//
+
+
 //                                Map<String, Object> map = gson.fromJson(response, new TypeToken<Map<String, Object>>() {}.getType());
 //.
 //

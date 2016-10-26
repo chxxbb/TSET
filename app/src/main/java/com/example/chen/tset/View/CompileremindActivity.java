@@ -11,6 +11,7 @@ import android.os.Bundle;
 import android.text.format.DateFormat;
 import android.util.Log;
 import android.view.View;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.FrameLayout;
@@ -45,7 +46,7 @@ import okhttp3.Call;
 /**
  * 添加提醒页面
  */
-public class CompileremindActivity extends MyBaseActivity implements IListener{
+public class CompileremindActivity extends MyBaseActivity implements IListener {
     private RelativeLayout rl_starttime, rl_endtiem;
     private TextView tv_starttime, tv_endtiem, tv_time_complete, tv_remind_set;
     int myear, mmonth, mday;
@@ -76,6 +77,8 @@ public class CompileremindActivity extends MyBaseActivity implements IListener{
     String time3;
     String content3;
     SharedPsaveuser sp;
+
+    private LinearLayout ll_cursor_blue_style, ll_pharmacy_compile, ll_cursor_blue_style2;
 
 
     @Override
@@ -155,6 +158,19 @@ public class CompileremindActivity extends MyBaseActivity implements IListener{
 
         et_pharmacy_compile3 = (EditText) findViewById(R.id.et_pharmacy_compile3);
 
+
+        ll_cursor_blue_style = (LinearLayout) findViewById(R.id.ll_cursor_blue_style);
+
+        ll_pharmacy_compile = (LinearLayout) findViewById(R.id.ll_pharmacy_compile);
+
+        ll_cursor_blue_style2 = (LinearLayout) findViewById(R.id.ll_cursor_blue_style2);
+
+        ll_cursor_blue_style.setOnClickListener(lllistener);
+
+        ll_pharmacy_compile.setOnClickListener(lllistener);
+
+        ll_cursor_blue_style2.setOnClickListener(lllistener);
+
         tv_time_complete1.setOnClickListener(listener);
 
         ll_add_remind2.setOnClickListener(listener);
@@ -189,6 +205,32 @@ public class CompileremindActivity extends MyBaseActivity implements IListener{
 
 
     }
+
+    //点击输入区域edittexr获取焦点，弹出键盘
+    private View.OnClickListener lllistener = new View.OnClickListener() {
+        @Override
+        public void onClick(View v) {
+
+            switch (v.getId()) {
+                case R.id.ll_cursor_blue_style:
+                    et_pharmacy_compile1.requestFocus();
+                    InputMethodManager imm = (InputMethodManager) CompileremindActivity.this.getSystemService(Context.INPUT_METHOD_SERVICE);
+                    imm.toggleSoftInput(0, InputMethodManager.HIDE_NOT_ALWAYS);
+                    break;
+                case R.id.ll_pharmacy_compile:
+                    et_pharmacy_compile.requestFocus();
+                    InputMethodManager imm1 = (InputMethodManager) CompileremindActivity.this.getSystemService(Context.INPUT_METHOD_SERVICE);
+                    imm1.toggleSoftInput(0, InputMethodManager.HIDE_NOT_ALWAYS);
+                    break;
+                case R.id.ll_cursor_blue_style2:
+                    et_pharmacy_compile3.requestFocus();
+                    InputMethodManager imm2 = (InputMethodManager) CompileremindActivity.this.getSystemService(Context.INPUT_METHOD_SERVICE);
+                    imm2.toggleSoftInput(0, InputMethodManager.HIDE_NOT_ALWAYS);
+                    break;
+            }
+
+        }
+    };
 
 
     private View.OnClickListener listener = new View.OnClickListener() {
@@ -418,10 +460,11 @@ public class CompileremindActivity extends MyBaseActivity implements IListener{
 
 
     @Override
-    public void notifyAllActivity(String str)
-    {
+    public void notifyAllActivity(String str) {
 
-    };
+    }
+
+    ;
 
 }
 

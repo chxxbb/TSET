@@ -48,7 +48,7 @@
                 android:layout_centerInParent="true"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="品格与安全"
+                android:text="安全教育"
                 android:textSize="@dimen/y28"
                 android:textColor="@color/xmgray"
                 />
@@ -98,7 +98,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content">
                 <View
-                    android:layout_marginLeft="@dimen/x65"
+                    android:layout_marginLeft="@dimen/x63"
                     android:id="@+id/view1"
                     android:layout_width="@dimen/x24"
                     android:layout_height="@dimen/y5"
@@ -117,7 +117,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content">
                 <View
-                    android:layout_marginLeft="@dimen/x95"
+                    android:layout_marginLeft="@dimen/x96"
                     android:id="@+id/view2"
                     android:layout_width="@dimen/x24"
                     android:layout_height="@dimen/y5"

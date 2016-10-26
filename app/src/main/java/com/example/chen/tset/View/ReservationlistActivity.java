@@ -171,9 +171,9 @@ public class ReservationlistActivity extends MyBaseActivity implements View.OnCl
 
                     } else if (reservationlist.getOrderStatus().equals("已取消")) {
                         btn_cancel.setBackgroundResource(R.drawable.reservationlist_btn_graycase);
-                        btn_cancel.setText("删除");
+                        btn_cancel.setText("已取消");
                         btn_cancel.setTextColor(android.graphics.Color.parseColor("#bbbbbb"));
-                        btn_cancel.setOnClickListener(deletelistener);
+//                        btn_cancel.setOnClickListener(deletelistener);
                     } else if (reservationlist.getOrderStatus().equals("已完成")) {
                         btn_cancel.setBackgroundResource(R.drawable.reservationlist_btn_graycase);
                         btn_cancel.setText("已完成");
@@ -194,7 +194,7 @@ public class ReservationlistActivity extends MyBaseActivity implements View.OnCl
                     ListenerManager.getInstance().sendBroadCast("更新我的预约");
                     Toast.makeText(ReservationlistActivity.this, "取消成功", Toast.LENGTH_SHORT).show();
                     btn_cancel.setBackgroundResource(R.drawable.reservationlist_btn_graycase);
-                    btn_cancel.setText("删除");
+                    btn_cancel.setText("已取消");
                     btn_cancel.setTextColor(android.graphics.Color.parseColor("#bbbbbb"));
                     btn_cancel.setOnClickListener(null);
                     break;

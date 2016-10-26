@@ -20,7 +20,7 @@ public class EncyclopediaAdapter extends FragmentPagerAdapter {
         this.flist = flist;
         slist = new ArrayList<String>();
         slist.add("疾病库");
-        slist.add("品格与安全");
+        slist.add("安全教育");
         slist.add("营养保健");
         slist.add("育儿知识");
     }

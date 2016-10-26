@@ -275,11 +275,25 @@ public class ChatpageActivity extends AppCompatActivity implements PtrUIHandler 
         ptrClassicFrameLayout.setPtrHandler(new PtrDefaultHandler() {
             @Override
             public void onRefreshBegin(PtrFrameLayout frame) {
+
                 //将list清空,聊天页面页数+1
+                historylist.clear();
+                numberlist.clear();
                 list.clear();
                 chatrecordnumber++;
 
+                historylist = db.chatfind(username);
+                for (int i = 0; i < historylist.size(); i++) {
+                    //获取所有的聊天记录
+                    if (historylist.get(i).getMyname().equals(sp.getTag().getPhone())) {
+                        numberlist.add(historylist.get(i));
+
+                    }
+                }
+
                 ptrClassicFrameLayout.postDelayed(new Runnable() {
+
+
                     @Override
                     public void run() {
                         //根据页数，获取所需数据
@@ -518,7 +532,6 @@ public class ChatpageActivity extends AppCompatActivity implements PtrUIHandler 
                 setHeadDialog.dismiss();
             }
         });
-
 
     }
 

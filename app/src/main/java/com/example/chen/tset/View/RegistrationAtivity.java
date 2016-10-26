@@ -184,6 +184,7 @@ public class RegistrationAtivity extends MyBaseActivity {
                     finish();
                     break;
                 case R.id.ll_et_describe:
+
                     et_describe.requestFocus();
                     //点击后弹出软键盘
                     InputMethodManager imm = (InputMethodManager) RegistrationAtivity.this.getSystemService(Context.INPUT_METHOD_SERVICE);
