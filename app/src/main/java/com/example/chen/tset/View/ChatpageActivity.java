@@ -15,6 +15,7 @@ import android.os.Handler;
 import android.os.PersistableBundle;
 import android.os.SystemClock;
 import android.provider.MediaStore;
+import android.support.v4.app.ActivityManagerCompat;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -36,6 +37,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.chen.tset.Data.Chatcontent;
+import com.example.chen.tset.Data.Http_data;
 import com.example.chen.tset.Data.Inquiryrecord;
 import com.example.chen.tset.Data.User;
 import com.example.chen.tset.Data.User_Http;
@@ -49,9 +51,12 @@ import com.example.chen.tset.Utils.SharedPsaveuser;
 import com.example.chen.tset.page.ChatpageAdapter;
 import com.nostra13.universalimageloader.core.ImageLoader;
 import com.soundcloud.android.crop.Crop;
+import com.zhy.http.okhttp.OkHttpUtils;
+import com.zhy.http.okhttp.callback.StringCallback;
 
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -74,6 +79,7 @@ import in.srain.cube.views.ptr.PtrHandler;
 import in.srain.cube.views.ptr.PtrUIHandler;
 import in.srain.cube.views.ptr.header.StoreHouseHeader;
 import in.srain.cube.views.ptr.indicator.PtrIndicator;
+import okhttp3.Call;
 
 
 public class ChatpageActivity extends AppCompatActivity implements PtrUIHandler {
@@ -127,6 +133,45 @@ public class ChatpageActivity extends AppCompatActivity implements PtrUIHandler 
         data = new ArrayList<>();
 
 
+        db = new ChatpageDao(this);
+        list = new ArrayList<>();
+        historylist = new ArrayList<>();
+        numberlist = new ArrayList<>();
+        findView();
+        init();
+        addMyDoctor();
+        //设置后在此页面接收此用户消息不会再通知栏中显示
+        JMessageClient.enterSingleConversation(username);
+
+
+    }
+
+    //添加我的医生
+    private void addMyDoctor() {
+        Thread thread = new Thread(new Runnable() {
+            @Override
+            public void run() {
+                OkHttpUtils
+                        .post()
+                        .url(Http_data.http_data + "/AddMyDoctor")
+                        .addParams("userId", sp.getTag().getId() + "")
+                        .addParams("doctorId", doctorID)
+                        .build()
+                        .execute(new StringCallback() {
+                            @Override
+                            public void onError(Call call, Exception e, int id) {
+
+                            }
+
+                            @Override
+                            public void onResponse(String response, int id) {
+
+                            }
+                        });
+            }
+        });
+
+        thread.start();
     }
 
 
@@ -134,16 +179,8 @@ public class ChatpageActivity extends AppCompatActivity implements PtrUIHandler 
     protected void onStart() {
         super.onStart();
 
-        db = new ChatpageDao(this);
-        list = new ArrayList<>();
-        historylist = new ArrayList<>();
-        numberlist = new ArrayList<>();
-        findView();
-        init();
-        //设置后在此页面接收此用户消息不会再通知栏中显示
-        JMessageClient.enterSingleConversation(username);
-
     }
+
 
     //登录jmeeage
     private void jmessage() {
@@ -431,7 +468,6 @@ public class ChatpageActivity extends AppCompatActivity implements PtrUIHandler 
     };
 
 
-
     private View.OnClickListener lisntener = new View.OnClickListener() {
 
         @Override
@@ -459,6 +495,7 @@ public class ChatpageActivity extends AppCompatActivity implements PtrUIHandler 
         super.onStop();
         //关闭聊天页面，再次收到这个医生消息会显示到通知栏
         JMessageClient.exitConversation();
+        Log.e("聊天页面暂停", "聊天页面暂停");
     }
 
     //图片发送弹出框
@@ -493,13 +530,14 @@ public class ChatpageActivity extends AppCompatActivity implements PtrUIHandler 
 
                 try {
                     //设置相机拍照后的路径
-                    sdcardTempFile1 = File.createTempFile("textcamera", ".jpg", audioFile);
+//                    sdcardTempFile1 = File.createTempFile("textcamera", ".jpg", audioFile);
                     //相机
 
-                    Log.e("相机",sdcardTempFile1.toString());
+//                    Log.e("相机", sdcardTempFile1.toString());
                     Intent intent1 = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-                    intent1.putExtra(MediaStore.EXTRA_OUTPUT, Uri.fromFile(sdcardTempFile1));
-                    startActivityForResult(intent1, 100);
+//                    intent1.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+//                    intent1.putExtra(MediaStore.EXTRA_OUTPUT, Uri.fromFile(sdcardTempFile1));
+                    startActivityForResult(intent1, 1);
                     setHeadDialog.dismiss();
 
 
@@ -682,7 +720,7 @@ public class ChatpageActivity extends AppCompatActivity implements PtrUIHandler 
 
     //发送图片
     @Override
-    protected void onActivityResult(int requestCode, int resultCode, Intent result) {
+    protected void onActivityResult(int requestCode, int resultCode, final Intent result) {
         //判断是否是从图片中选择图片
         if (requestCode == Crop.REQUEST_PICK && resultCode == RESULT_OK) {
             beginCrop(result.getData());
@@ -691,11 +729,31 @@ public class ChatpageActivity extends AppCompatActivity implements PtrUIHandler 
 
             handleCrop(resultCode, result);
             //拍照，点击确定发送图片
-        } else if (resultCode == RESULT_OK && requestCode == 100) {
+        } else if (resultCode == RESULT_OK && requestCode == 1) {
+
 
             Thread thread = new Thread(new Runnable() {
                 @Override
                 public void run() {
+                    //获取拍照返回的对象，获得bitmap，将图片保存在本地
+                    Bundle bundle = result.getExtras();
+                    Bitmap bitmap = (Bitmap) bundle.get("data");
+                    FileOutputStream fileOutputStream = null;
+                    try {
+                        sdcardTempFile1 = File.createTempFile("textcamera", ".jpg", audioFile);
+                        fileOutputStream = new FileOutputStream(sdcardTempFile1);
+                        bitmap.compress(Bitmap.CompressFormat.JPEG, 100, fileOutputStream);// 把数据写入文件
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    } finally {
+                        try {
+                            fileOutputStream.flush();
+                            fileOutputStream.close();
+                        } catch (IOException e) {
+                            e.printStackTrace();
+                        }
+                    }
+
 
                     try {
                         Conversation c = JMessageClient.getSingleConversation(username);
@@ -798,4 +856,6 @@ public class ChatpageActivity extends AppCompatActivity implements PtrUIHandler 
     public void onUIPositionChange(PtrFrameLayout frame, boolean isUnderTouch, byte status, PtrIndicator ptrIndicator) {
 
     }
+
+
 }

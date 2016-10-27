@@ -211,7 +211,7 @@ public class ReservationlistActivity extends MyBaseActivity implements View.OnCl
 
         }
     };
-
+    //取消订单
     public void cancelindent() {
         setHeadDialog = new Dialog(this, R.style.CustomDialog);
         setHeadDialog.show();

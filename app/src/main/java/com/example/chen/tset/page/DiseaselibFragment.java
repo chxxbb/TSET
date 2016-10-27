@@ -59,6 +59,8 @@ public class DiseaselibFragment extends Fragment {
     int mSelect = 0;
     int pos = 0;
 
+    private BannerView bannerView;
+
 
     @Nullable
     @Override
@@ -81,6 +83,7 @@ public class DiseaselibFragment extends Fragment {
         view1 = view.findViewById(R.id.view1);
         rl_nonetwork = (RelativeLayout) view.findViewById(R.id.rl_nonetwork);
         rl_loading = (RelativeLayout) view.findViewById(R.id.rl_loading);
+        bannerView= (BannerView) view.findViewById(R.id.bannerView);
         listview_dise.setOnItemClickListener(listener);
         listview_dise.setOnItemSelectedListener(slistener);
         recyv_dise.setHasFixedSize(true);
@@ -228,6 +231,17 @@ public class DiseaselibFragment extends Fragment {
         thread1.start();
 
 
+    }
+
+    public void onResume() {
+        super.onResume();
+        bannerView.bannerStartPlay();
+    }
+
+    @Override
+    public void onPause() {
+        super.onPause();
+        bannerView.bannerStopPlay();
     }
 
 }

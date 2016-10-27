@@ -1,61 +1,50 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/rl_inquiry_sort"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:background="#00000000"
-    android:id="@+id/rl_inquiry_sort">
+    android:layout_height="match_parent">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:orientation="vertical">
+        android:orientation="vertical"
+        android:background="@color/white">
 
         <LinearLayout
+            android:id="@+id/ll_capacity_sort"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="@dimen/x30"
-            android:layout_marginRight="@dimen/x30"
-            android:background="@drawable/registration_btn_case"
-            android:orientation="vertical">
+            android:layout_height="@dimen/y78">
 
-            <Button
-                android:id="@+id/btn_default"
-                android:layout_width="match_parent"
-                android:layout_height="@dimen/y110"
-                android:background="@drawable/dialoge_btn_top_case"
-                android:text="默认排序"
-                android:textColor="@color/backgroundblue"
-                android:textSize="@dimen/y38" />
-
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="@dimen/y1"
-                android:background="@color/linegray1" />
-
-            <Button
-                android:id="@+id/btn_title"
-                android:layout_width="match_parent"
-                android:layout_height="@dimen/y110"
-                android:background="@drawable/dialoge_btn_bottom_case"
-                android:text="职称排序"
-                android:textColor="@color/backgroundblue"
-                android:textSize="@dimen/y38" />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:layout_marginLeft="@dimen/x30"
+                android:text="智能排序"
+                android:textColor="@color/fontcolor"
+                android:textSize="@dimen/y28" />
         </LinearLayout>
 
-        <Button
-            android:id="@+id/btn_sortcancel"
+        <View
             android:layout_width="match_parent"
-            android:layout_height="@dimen/y110"
-            android:layout_marginBottom="@dimen/y20"
-            android:layout_marginLeft="@dimen/x30"
-            android:layout_marginRight="@dimen/x30"
-            android:layout_marginTop="@dimen/y16"
-            android:background="@drawable/registration_btn_case"
-            android:text="取消"
-            android:textColor="@color/backgroundblue"
-            android:textSize="@dimen/y38" />
-    </LinearLayout>
+            android:layout_height="@dimen/y1"
+            android:background="@color/xmgray" />
 
+        <LinearLayout
+            android:id="@+id/ll_title_sort"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/y78">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:layout_marginLeft="@dimen/x30"
+                android:text="职称排序"
+                android:textColor="@color/fontcolor"
+                android:textSize="@dimen/y28" />
+        </LinearLayout>
+
+    </LinearLayout>
 
 </RelativeLayout>

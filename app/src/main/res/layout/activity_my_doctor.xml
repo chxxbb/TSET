@@ -54,12 +54,13 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:orientation="vertical">
-
-            <ListView
+            <com.baoyz.swipemenulistview.SwipeMenuListView
                 android:id="@+id/lv_mydoctor"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:overScrollMode="never"></ListView>
+                android:overScrollMode="never"></com.baoyz.swipemenulistview.SwipeMenuListView>
+
+
         </LinearLayout>
 
         <RelativeLayout

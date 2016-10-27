@@ -12,6 +12,8 @@ import android.widget.ImageView;
 import com.example.chen.tset.R;
 import com.example.chen.tset.page.LeadAdapter;
 
+import cn.jpush.android.api.JPushInterface;
+
 public class LeadActivity extends AppCompatActivity {
     private ViewPager viewpager;
     private Button tv_click;
@@ -34,6 +36,7 @@ public class LeadActivity extends AppCompatActivity {
             imageDate();
         }
         fidView();
+
     }
 
     private void fidView() {
@@ -41,6 +44,7 @@ public class LeadActivity extends AppCompatActivity {
         iv_lead_spot2 = (ImageView) findViewById(R.id.iv_lead_spot2);
         iv_lead_spot3 = (ImageView) findViewById(R.id.iv_lead_spot3);
         iv_lead_spot4 = (ImageView) findViewById(R.id.iv_lead_spot4);
+
 
     }
 
@@ -120,5 +124,19 @@ public class LeadActivity extends AppCompatActivity {
             }
         });
     }
+
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        JPushInterface.onPause(this);
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        JPushInterface.onResume(this);
+    }
+
 
 }

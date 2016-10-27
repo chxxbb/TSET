@@ -1,76 +1,70 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/rl_city"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:id="@+id/rl_city">
-
+    android:orientation="vertical"
+>
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:orientation="vertical">
-
+        android:orientation="vertical"
+        android:background="@color/white">
         <LinearLayout
+            android:id="@+id/ll_all_areas"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="@dimen/x30"
-            android:layout_marginRight="@dimen/x30"
-            android:background="@drawable/registration_btn_case"
-            android:orientation="vertical">
+            android:layout_height="@dimen/y78">
 
-            <Button
-                android:id="@+id/btn_region"
-                android:layout_width="match_parent"
-                android:layout_height="@dimen/y110"
-
-                android:background="@drawable/dialoge_btn_top_case"
+            <TextView
+                android:layout_marginLeft="@dimen/x30"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
                 android:text="全部地区"
-                android:textColor="@color/backgroundblue"
-                android:textSize="@dimen/y38" />
-
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="@dimen/y1"
-                android:background="@color/linegray1" />
-
-            <Button
-                android:id="@+id/btn_chengdu"
-                android:layout_width="match_parent"
-                android:layout_height="@dimen/y110"
-
-                android:background="@color/white"
-                android:text="成都"
-                android:textColor="@color/backgroundblue"
-                android:textSize="@dimen/y38" />
-
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="@dimen/y1"
-                android:background="@color/linegray1" />
-
-            <Button
-                android:id="@+id/btn_shenzheng"
-                android:layout_width="match_parent"
-                android:layout_height="@dimen/y110"
-                android:background="@drawable/dialoge_btn_bottom_case"
-                android:text="深圳"
-                android:textColor="@color/backgroundblue"
-                android:textSize="@dimen/y38" />
+                android:textColor="@color/fontcolor"
+                android:textSize="@dimen/y28" />
         </LinearLayout>
 
-        <Button
-            android:id="@+id/btn_cancel"
+        <View
             android:layout_width="match_parent"
-            android:layout_height="@dimen/y110"
-            android:layout_marginBottom="@dimen/y20"
-            android:layout_marginLeft="@dimen/x30"
-            android:layout_marginRight="@dimen/x30"
-            android:layout_marginTop="@dimen/y16"
-            android:background="@drawable/registration_btn_case"
-            android:text="取消"
-            android:textColor="@color/backgroundblue"
-            android:textSize="@dimen/y38" />
+            android:layout_height="@dimen/y1"
+            android:background="@color/xmgray"/>
+        <LinearLayout
+            android:id="@+id/ll_city_shenzheng"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/y78">
+
+            <TextView
+                android:layout_marginLeft="@dimen/x30"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:text="深圳天使儿童医院"
+                android:textColor="@color/fontcolor"
+                android:textSize="@dimen/y28" />
+        </LinearLayout>
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/y1"
+            android:background="@color/xmgray"/>
+
+        <LinearLayout
+            android:id="@+id/ll_city_chengdu"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/y78">
+
+            <TextView
+                android:layout_marginLeft="@dimen/x30"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:text="成都天使儿童医院"
+                android:textColor="@color/fontcolor"
+                android:textSize="@dimen/y28" />
+        </LinearLayout>
     </LinearLayout>
 
 
-</RelativeLayout>
+
+
+</LinearLayout>

@@ -24,9 +24,12 @@ import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import com.zhy.http.okhttp.OkHttpUtils;
 import com.zhy.http.okhttp.callback.StringCallback;
+import com.zxl.library.DropDownMenu;
 
 import java.lang.reflect.Type;
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.HashMap;
 import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
@@ -49,20 +52,25 @@ public class InquiryActivity extends AppCompatActivity {
     //职称列表
     List<Inquiry> titlelist;
     List<String> data;
-    private LinearLayout ll_city, ll_development, ll_sort, ll_rutre_inquiry;
+    private LinearLayout ll_rutre_inquiry;
+    //    ll_city, ll_development, ll_sort,
     private Dialog setHeadDialog;
     private View dialogView;
     private RelativeLayout rl_nonetwork, rl_loading;
     Gson gson;
     InquirylistAdapter listadapter;
     private TextView tv_section, tv_city, tv_sort;
+    private DropDownMenu dropDownMenu;
+    private String headers[] = {"全部地区", "全部科室", "智能排序"};
+    View contentView;
+
+    String tag = null;
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_inquiry);
-
         list = new ArrayList<>();
         findView();
         listinit(list);
@@ -70,23 +78,22 @@ public class InquiryActivity extends AppCompatActivity {
     }
 
     private void findView() {
-        lv_inquiry = (ListView) findViewById(R.id.lv_inquiry);
-        ll_city = (LinearLayout) findViewById(R.id.ll_city);
-        ll_development = (LinearLayout) findViewById(R.id.ll_development);
-        ll_sort = (LinearLayout) findViewById(R.id.ll_sort);
+        citylist = new ArrayList<>();
+        contentView = getLayoutInflater().inflate(R.layout.contentview, null);
+        lv_inquiry = (ListView) contentView.findViewById(R.id.lv_inquiry);
+
         tv_section = (TextView) findViewById(R.id.tv_section);
         tv_city = (TextView) findViewById(R.id.tv_city);
         rl_nonetwork = (RelativeLayout) findViewById(R.id.rl_nonetwork);
         rl_loading = (RelativeLayout) findViewById(R.id.rl_loading);
         ll_rutre_inquiry = (LinearLayout) findViewById(R.id.ll_rutre_inquiry);
-        tv_sort = (TextView) findViewById(R.id.tv_sort);
+        dropDownMenu = (DropDownMenu) findViewById(R.id.dropDownMenu);
         lv_inquiry.setVerticalScrollBarEnabled(false);
-        ll_city.setOnClickListener(listener);
-        ll_development.setOnClickListener(listener);
-        ll_sort.setOnClickListener(listener);
         ll_rutre_inquiry.setOnClickListener(listener);
-
         View view1 = View.inflate(this, R.layout.inquiry_listview_stern, null);
+
+        dropDownMenu.setDropDownMenu(Arrays.asList(headers), initViewData(), contentView);
+
 
         lv_inquiry.addFooterView(view1);
 
@@ -94,32 +101,171 @@ public class InquiryActivity extends AppCompatActivity {
         lv_inquiry.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+//
+//                if (list.size() != 0) {
+//                    Intent intent = new Intent(InquiryActivity.this, DoctorparticularsActivity.class);
+//                    //根据所选择的排序，点击时获取所点击医生ID，跳转到医生详情页面，跳转到聊天页面写在adapter中
+//                    if (tv_section.getText().toString().equals("全部科室") || tv_city.getText().toString().equals("全部地区") || tv_sort.getText().toString().equals("智能排序") || tv_sort.getText().toString().equals("默认排序")) {
+//                        intent.putExtra("doctot_id", list.get(position).getId());
+//                    } else if (tv_city.getText().toString().equals("成都") || tv_city.getText().toString().equals("重庆")) {
+//                        intent.putExtra("doctot_id", citylist.get(position).getId());
+//                    } else if (tv_sort.getText().toString().equals("职称排序")) {
+//                        intent.putExtra("doctot_id", titlelist.get(position).getId());
+//                    } else {
+//                        intent.putExtra("doctot_id", selectlist.get(position).getId());
+//                    }
+//
+//                    startActivity(intent);
+//                }
 
-                if(list.size()!=0){
-                    Intent intent = new Intent(InquiryActivity.this, DoctorparticularsActivity.class);
-                    //根据所选择的排序，点击时获取所点击医生ID，跳转到医生详情页面，跳转到聊天页面写在adapter中
-                    if (tv_section.getText().toString().equals("全部科室") || tv_city.getText().toString().equals("全部地区") || tv_sort.getText().toString().equals("智能排序") || tv_sort.getText().toString().equals("默认排序")) {
-                        intent.putExtra("doctot_id", list.get(position).getId());
-                    } else if (tv_city.getText().toString().equals("成都") || tv_city.getText().toString().equals("重庆")) {
-                        intent.putExtra("doctot_id", citylist.get(position).getId());
-                    } else if (tv_sort.getText().toString().equals("职称排序")) {
-                        intent.putExtra("doctot_id", titlelist.get(position).getId());
-                    } else {
-                        intent.putExtra("doctot_id", selectlist.get(position).getId());
-                    }
-
-                    startActivity(intent);
+                Intent intent = new Intent(InquiryActivity.this, DoctorparticularsActivity.class);
+                //根据所选择的排序，点击时获取所点击医生ID
+                if (tag.equals("全部地区") || tag == null || tag.equals("")) {
+                    intent.putExtra("doctot_id", list.get(position).getId());
+                } else if (tag.equals("成都") || tag.equals("深圳")) {
+                    intent.putExtra("doctot_id", citylist.get(position).getId());
                 }
+
+                startActivity(intent);
 
             }
         });
     }
 
+    private List<HashMap<String, Object>> initViewData() {
+        List<HashMap<String, Object>> viewDatas = new ArrayList<>();
+        HashMap<String, Object> map;
+        for (int i = 0; i < headers.length; i++) {
+            map = new HashMap<String, Object>();
+            map.put(DropDownMenu.KEY, DropDownMenu.TYPE_CUSTOM);
+
+            if (i == 0) {
+                map.put(DropDownMenu.VALUE, citydialog());
+                map.put(DropDownMenu.SELECT_POSITION, 0);
+            } else if (i == 1) {
+                map.put(DropDownMenu.VALUE, citydialog());
+                map.put(DropDownMenu.SELECT_POSITION, 0);
+            } else {
+                map.put(DropDownMenu.VALUE, defaultsort());
+                map.put(DropDownMenu.SELECT_POSITION, 0);
+            }
+
+            viewDatas.add(map);
+        }
+        return viewDatas;
+    }
+
+    //设置智能排序及点击事件
+    private View defaultsort() {
+        View v = View.inflate(InquiryActivity.this, R.layout.inquiry_sort_dialog, null);
+        //智能排序
+        LinearLayout ll_capacity_sort = (LinearLayout) v.findViewById(R.id.ll_capacity_sort);
+        //职称排序
+        LinearLayout ll_title_sort = (LinearLayout) v.findViewById(R.id.ll_title_sort);
+
+        ll_capacity_sort.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                dropDownMenu.setTabText(0, "全部地区");//设置tab标签文字
+                dropDownMenu.closeMenu();//关闭menu
+                dropDownMenu.setTabText(1, "全部科室");
+                dropDownMenu.setTabText(2, "智能排序");
+                tag = "智能排序";
+                listinit(list);
+            }
+        });
+
+        ll_title_sort.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                dropDownMenu.setTabText(0, "全部地区");//设置tab标签文字
+                dropDownMenu.closeMenu();//关闭menu
+                dropDownMenu.setTabText(1, "全部科室");
+                dropDownMenu.setTabText(2, "职称排序");
+            }
+        });
+        return v;
+    }
+
+
+    //设定地区排序菜单及点击事件
+    private View citydialog() {
+        View v = View.inflate(InquiryActivity.this, R.layout.inquiry_city_dialog, null);
+        //全部地区
+        LinearLayout ll_all_areas = (LinearLayout) v.findViewById(R.id.ll_all_areas);
+        //深圳
+        LinearLayout ll_city_shenzheng = (LinearLayout) v.findViewById(R.id.ll_city_shenzheng);
+        //成都
+        LinearLayout ll_city_chengdu = (LinearLayout) v.findViewById(R.id.ll_city_chengdu);
+
+        ll_all_areas.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                dropDownMenu.setTabText(0, "全部地区");//设置tab标签文字
+                dropDownMenu.closeMenu();//关闭menu
+                dropDownMenu.setTabText(1, "全部科室");
+                dropDownMenu.setTabText(2, "智能排序");
+                tag = "全部地区";
+                listinit(list);
+            }
+        });
+
+        ll_city_shenzheng.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                dropDownMenu.setTabText(0, "深圳");//设置tab标签文字
+                dropDownMenu.setTabText(1, "全部科室");
+                dropDownMenu.setTabText(2, "智能排序");
+                dropDownMenu.closeMenu();//关闭menu
+                tag = "深圳";
+                citylist.clear();
+                for (int i = 0; i < list.size(); i++) {
+                    if (list.get(i).getHospital().equals("深圳天使儿童医院")) {
+                        citylist.add(list.get(i));
+                    }
+                }
+                listinit(citylist);
+            }
+        });
+
+        ll_city_chengdu.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                dropDownMenu.setTabText(0, "成都");//设置tab标签文字
+                dropDownMenu.setTabText(1, "全部科室");
+                dropDownMenu.setTabText(2, "智能排序");
+                dropDownMenu.closeMenu();//关闭menu
+                tag = "成都";
+                citylist.clear();
+                for (int i = 0; i < list.size(); i++) {
+                    if (list.get(i).getHospital().equals("成都天使儿童医院")) {
+                        citylist.add(list.get(i));
+                    }
+                }
+                listinit(citylist);
+            }
+        });
+
+
+        return v;
+    }
+
+
+    @Override
+    public void onBackPressed() {
+        //退出activity前关闭菜单
+        if (dropDownMenu.isShowing()) {
+            dropDownMenu.closeMenu();
+        } else {
+            super.onBackPressed();
+        }
+    }
 
     private void listinit(List<Inquiry> list) {
         adapter = new InquiryAdapter(InquiryActivity.this, list);
         lv_inquiry.setAdapter(adapter);
     }
+
 
     private void httpinit() {
         gson = new Gson();
@@ -156,18 +302,6 @@ public class InquiryActivity extends AppCompatActivity {
         @Override
         public void onClick(View v) {
             switch (v.getId()) {
-                case R.id.ll_city:
-                    //选择城市排序
-                    cityshowDialog();
-                    break;
-                case R.id.ll_development:
-                    //选择科室排序
-                    developmentshowDialog();
-                    break;
-                case R.id.ll_sort:
-                    //选择默认排序
-                    sortshowDialog();
-                    break;
                 case R.id.ll_rutre_inquiry:
                     finish();
                     break;
@@ -357,97 +491,5 @@ public class InquiryActivity extends AppCompatActivity {
 
     }
 
-    //城市弹出框
-    public void cityshowDialog() {
-        setHeadDialog = new Dialog(InquiryActivity.this, R.style.CustomDialog);
-        setHeadDialog.show();
-        dialogView = View.inflate(InquiryActivity.this, R.layout.inquiry_city_dialog, null);
-        setHeadDialog.getWindow().setContentView(dialogView);
-        WindowManager.LayoutParams lp = setHeadDialog.getWindow()
-                .getAttributes();
 
-        setHeadDialog.getWindow().setAttributes(lp);
-        citydialogclick();
-    }
-
-    //城市点击事件
-    private void citydialogclick() {
-        citylist = new ArrayList<>();
-        Button btn_region = (Button) dialogView.findViewById(R.id.btn_region);
-        Button btn_cancel = (Button) dialogView.findViewById(R.id.btn_cancel);
-        Button btn_chnegdu = (Button) dialogView.findViewById(R.id.btn_chengdu);
-        Button btn_shenzheng = (Button) dialogView.findViewById(R.id.btn_shenzheng);
-        RelativeLayout rl = (RelativeLayout) dialogView.findViewById(R.id.rl);
-        RelativeLayout rl_city = (RelativeLayout) dialogView.findViewById(R.id.rl_city);
-        rl_city.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                setHeadDialog.dismiss();
-            }
-        });
-        btn_cancel.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                setHeadDialog.dismiss();
-            }
-        });
-        //在集合中查找所选城市的医生，放入一个新的集合中
-        btn_region.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                listinit(list);
-                tv_sort.setText("默认排序");
-                tv_section.setText("全部科室");
-                tv_city.setText("全部地区");
-                setHeadDialog.dismiss();
-            }
-        });
-        btn_chnegdu.setOnClickListener(new View.OnClickListener() {
-
-            @Override
-            public void onClick(View v) {
-                tv_sort.setText("默认排序");
-                tv_section.setText("全部科室");
-                tv_city.setText("成都");
-                for (int i = 0; i < list.size(); i++) {
-                    if (list.get(i).getHospital().equals("成都天使儿童医院")) {
-                        citylist.add(list.get(i));
-                    }
-                }
-                listinit(citylist);
-                setHeadDialog.dismiss();
-            }
-        });
-        btn_shenzheng.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                tv_sort.setText("默认排序");
-                tv_section.setText("全部科室");
-                tv_city.setText("深圳");
-                for (int i = 0; i < list.size(); i++) {
-                    if (list.get(i).getHospital().equals("深圳天使儿童医院")) {
-                        citylist.add(list.get(i));
-                    }
-                }
-                listinit(citylist);
-                setHeadDialog.dismiss();
-            }
-        });
-
-
-        lv_inquiry.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                Intent intent = new Intent(InquiryActivity.this, DoctorparticularsActivity.class);
-                //根据所选择的排序，点击时获取所点击医生ID
-                if (tv_city.getText().toString().equals("全部地区")) {
-                    intent.putExtra("doctot_id", list.get(position).getId());
-                } else if (tv_city.getText().toString().equals("成都") || tv_city.getText().toString().equals("深圳")) {
-                    intent.putExtra("doctot_id", citylist.get(position).getId());
-                }
-
-                startActivity(intent);
-            }
-        });
-    }
 }

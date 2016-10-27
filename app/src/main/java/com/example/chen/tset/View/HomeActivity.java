@@ -62,7 +62,7 @@ import com.example.chen.tset.page.AFragment;
 import com.example.chen.tset.page.ConsultingFragment;
 import com.example.chen.tset.page.EncyclopediaFragment;
 import com.example.chen.tset.R;
-import com.example.chen.tset.page.InquiryFragment;
+
 import com.example.chen.tset.page.InquiryView;
 import com.example.chen.tset.page.LectureroomFragment;
 import com.example.chen.tset.page.MypageFragment;
@@ -113,7 +113,7 @@ public class HomeActivity extends MyBaseActivity implements View.OnClickListener
     private EncyclopediaFragment encyclopediaFragment;
     private LectureroomFragment lectureroomFragment;
     private MypageFragment mypageFragment;
-    private InquiryFragment inquiryFragment;
+//    private InquiryFragment inquiryFragment;
     private ConsultingFragment consultingFragment;
     private AFragment a;
     private ImageView iv_inquiry;

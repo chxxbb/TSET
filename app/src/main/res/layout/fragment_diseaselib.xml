@@ -30,18 +30,36 @@
                     android:layout_height="wrap_content"
                     android:divider="@null"
                     android:fastScrollEnabled="false"
-                    android:overScrollMode="never"></ListView>
+                    android:overScrollMode="never" />
             </LinearLayout>
 
-            <android.support.v7.widget.RecyclerView
-                android:id="@+id/recyv_dise"
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="@dimen/x38"
-                android:layout_marginRight="@dimen/x30"
-                android:divider="@color/linegray"
-                android:dividerHeight="1dp"
-                android:overScrollMode="never"></android.support.v7.widget.RecyclerView>
+                android:orientation="vertical">
+
+                <com.example.chen.tset.page.BannerView
+                    android:id="@+id/bannerView"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/y160"
+                    android:layout_marginBottom="@dimen/y20"
+                    android:layout_marginLeft="@dimen/x30"
+                    android:layout_marginRight="@dimen/x30"
+                    android:layout_marginTop="@dimen/y20"
+                    android:orientation="vertical" />
+
+
+                <android.support.v7.widget.RecyclerView
+                    android:id="@+id/recyv_dise"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/x38"
+                    android:layout_marginRight="@dimen/x30"
+                    android:divider="@color/linegray"
+                    android:dividerHeight="1dp"
+                    android:overScrollMode="never" />
+            </LinearLayout>
+
 
         </LinearLayout>
 

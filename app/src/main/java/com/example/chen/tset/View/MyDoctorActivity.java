@@ -2,9 +2,12 @@ package com.example.chen.tset.View;
 
 
 import android.content.Intent;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Handler;
 import android.os.Message;
 import android.os.Bundle;
+import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
@@ -13,6 +16,10 @@ import android.widget.ListView;
 import android.widget.RelativeLayout;
 import android.widget.Toast;
 
+import com.baoyz.swipemenulistview.SwipeMenu;
+import com.baoyz.swipemenulistview.SwipeMenuCreator;
+import com.baoyz.swipemenulistview.SwipeMenuItem;
+import com.baoyz.swipemenulistview.SwipeMenuListView;
 import com.example.chen.tset.Data.Http_data;
 import com.example.chen.tset.Data.MyDoctor;
 import com.example.chen.tset.Data.User_Http;
@@ -37,12 +44,14 @@ import okhttp3.Call;
  * 我的医生
  */
 public class MyDoctorActivity extends MyBaseActivity {
-    private ListView lv_mydoctor;
+    private SwipeMenuListView lv_mydoctor;
     Gson gson;
     MyDoctorAdapter adapter;
     List<MyDoctor> list;
     private LinearLayout ll_rut;
     private RelativeLayout rl_nonetwork, rl_loading;
+    SharedPsaveuser sp;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -54,25 +63,81 @@ public class MyDoctorActivity extends MyBaseActivity {
     }
 
     private void findView() {
-        lv_mydoctor = (ListView) findViewById(R.id.lv_mydoctor);
+        lv_mydoctor = (SwipeMenuListView) findViewById(R.id.lv_mydoctor);
         ll_rut = (LinearLayout) findViewById(R.id.ll_rut);
         rl_nonetwork = (RelativeLayout) findViewById(R.id.rl_nonetwork);
         rl_loading = (RelativeLayout) findViewById(R.id.rl_loading);
         ll_rut.setOnClickListener(listener);
         lv_mydoctor.setOnItemClickListener(lvlistener);
         lv_mydoctor.setVerticalScrollBarEnabled(false);
+
+        DisplayMetrics dm = new DisplayMetrics();
+        dm = this.getResources().getDisplayMetrics();
+        final float density = dm.density;
+
+        //listview的item向左滑动可出现删除收藏按钮
+        SwipeMenuCreator creator = new SwipeMenuCreator() {
+            @Override
+            public void create(SwipeMenu menu) {
+                //设置删除收藏按钮长宽，颜色，字体
+                SwipeMenuItem openItem = new SwipeMenuItem(getApplicationContext());
+                openItem.setBackground(new ColorDrawable(Color.RED));
+                openItem.setWidth((int) (100 * density));
+                openItem.setTitle("删除");
+                openItem.setTitleSize(17);
+                openItem.setTitleColor(Color.WHITE);
+                menu.addMenuItem(openItem);
+            }
+        };
+
+        lv_mydoctor.setMenuCreator(creator);
+        lv_mydoctor.setOnMenuItemClickListener(onmentlistener);
     }
 
     private void init() {
+        sp = new SharedPsaveuser(this);
         list = new ArrayList<>();
         adapter = new MyDoctorAdapter(MyDoctorActivity.this, list);
         lv_mydoctor.setAdapter(adapter);
     }
 
 
+    //滑动删除我的医生
+    private SwipeMenuListView.OnMenuItemClickListener onmentlistener = new SwipeMenuListView.OnMenuItemClickListener() {
+        @Override
+        public boolean onMenuItemClick(int position, SwipeMenu menu, int index) {
+            OkHttpUtils
+                    .post()
+                    .url(Http_data.http_data + "/DeleteMyDoctor")
+                    .addParams("userId", sp.getTag().getId() + "")
+                    .addParams("doctorId", list.get(position).getDoctorId() + "")
+                    .build()
+                    .execute(new StringCallback() {
+                        @Override
+                        public void onError(Call call, Exception e, int id) {
+                            Toast.makeText(MyDoctorActivity.this, "网络连接失败", Toast.LENGTH_SHORT).show();
+                        }
+
+                        @Override
+                        public void onResponse(String response, int id) {
+                            if (response.equals("0")) {
+                                Toast.makeText(MyDoctorActivity.this, "删除成功", Toast.LENGTH_SHORT).show();
+                                list.clear();
+                                httpinit();
+                            } else {
+                                Toast.makeText(MyDoctorActivity.this, "删除成功", Toast.LENGTH_SHORT).show();
+                            }
+                        }
+                    });
+
+            return false;
+        }
+    };
+
+
+    //我的医生数据
     private void httpinit() {
 
-        SharedPsaveuser sp=new SharedPsaveuser(this);
         gson = new Gson();
         OkHttpUtils
                 .post()
