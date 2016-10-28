@@ -68,6 +68,7 @@ public class FeedbackActivity extends MyBaseActivity implements View.OnClickList
         @Override
         public void onTextChanged(CharSequence s, int start, int before, int count) {
 
+            //判断是否输入评论，如果没有则显示灰色，并且不可点击，如果输入则变为蓝色，可点击
             if (et_feedback.getText().toString().length() == 0) {
                 tv_feedback.setTextColor(android.graphics.Color.parseColor("#e0e0e0"));
                 tv_feedback.setOnClickListener(null);

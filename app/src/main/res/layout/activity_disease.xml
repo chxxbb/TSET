@@ -387,6 +387,7 @@
                         android:background="@color/backgroundgray" />
 
                     <LinearLayout
+                        android:id="@+id/doctor_recommend"
                         android:layout_width="match_parent"
                         android:layout_height="@dimen/y80">
 
@@ -401,12 +402,14 @@
                     </LinearLayout>
 
                     <View
+                        android:id="@+id/view"
                         android:layout_width="match_parent"
                         android:layout_height="@dimen/y1"
                         android:layout_marginLeft="@dimen/x30"
                         android:background="@color/linegray" />
 
                     <LinearLayout
+                        android:id="@+id/ll_doctor_recommend"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:orientation="vertical">
@@ -451,7 +454,6 @@
                                                 android:id="@+id/tv_name"
                                                 android:layout_width="wrap_content"
                                                 android:layout_height="wrap_content"
-                                                android:text="程伟伟"
                                                 android:textColor="@color/backgroundblue"
                                                 android:textSize="@dimen/y30" />
 
@@ -469,7 +471,6 @@
                                             android:id="@+id/tv_dactor_title"
                                             android:layout_width="wrap_content"
                                             android:layout_height="wrap_content"
-                                            android:text="主治医生"
                                             android:textColor="@color/xmgray"
                                             android:textSize="@dimen/y26" />
 
@@ -477,7 +478,6 @@
                                             android:id="@+id/tv_dactor_section"
                                             android:layout_width="wrap_content"
                                             android:layout_height="wrap_content"
-                                            android:text="行为发育科"
                                             android:textColor="@color/fontgray"
                                             android:textSize="@dimen/y24" />
                                     </LinearLayout>
@@ -582,6 +582,7 @@
                             android:layout_marginTop="@dimen/y50"
                             android:text="内容被外星人劫持了"
                             android:textColor="@color/linegray"
+                            android:layout_marginBottom="@dimen/y400"
                             android:textSize="@dimen/y32" />
                     </LinearLayout>
                 </RelativeLayout>

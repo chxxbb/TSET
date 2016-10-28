@@ -5,6 +5,9 @@ import android.os.Bundle;
 
 import com.example.chen.tset.R;
 
+/**
+ * 一键登录页面
+ */
 public class OnekeyLoinActivity extends AppCompatActivity {
 
     @Override

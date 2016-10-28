@@ -150,4 +150,23 @@ public class Disease {
     public void setSectionName(String sectionName) {
         this.sectionName = sectionName;
     }
+
+    @Override
+    public String toString() {
+        return "Disease{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", bio='" + bio + '\'' +
+                ", userIcon='" + userIcon + '\'' +
+                ", userName='" + userName + '\'' +
+                ", userPutQuestion='" + userPutQuestion + '\'' +
+                ", doctorIcon='" + doctorIcon + '\'' +
+                ", doctorName='" + doctorName + '\'' +
+                ", doctorAnswerQuestion='" + doctorAnswerQuestion + '\'' +
+                ", symptom='" + symptom + '\'' +
+                ", cure='" + cure + '\'' +
+                ", prompt='" + prompt + '\'' +
+                ", sectionName='" + sectionName + '\'' +
+                '}';
+    }
 }

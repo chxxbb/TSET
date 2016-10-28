@@ -110,9 +110,11 @@ public class ChatpageActivity extends AppCompatActivity implements PtrUIHandler 
 
     private Button btn_chat;
 
+
+    //下拉加载更多
     private PtrClassicFrameLayout ptrClassicFrameLayout;
 
-    //用于判断用户是否和医生对话过
+    //用于判断用户是否和医生对话过,如果不为0则表示用户与该用户对话过，关闭页面如果数据没有与此医生的聊天记录则加入数据库中
     int chatstate = 0;
 
     //聊天记录页数
@@ -215,6 +217,8 @@ public class ChatpageActivity extends AppCompatActivity implements PtrUIHandler 
         doctoricon = getIntent().getStringExtra("icon");
         username = getIntent().getStringExtra("username");
 
+
+
         iv_chat = (ImageView) findViewById(R.id.iv_chat);
         et_chat = (EditText) findViewById(R.id.et_chat);
 
@@ -233,10 +237,14 @@ public class ChatpageActivity extends AppCompatActivity implements PtrUIHandler 
 
         tv_doctorname.setText(doctorname);
 
+
+        //屏蔽listview滚动条
         listView.setVerticalScrollBarEnabled(false);
 
         View view1 = View.inflate(this, R.layout.chatpage_listview_footview, null);
 
+
+        //添加listview头部
         listView.addFooterView(view1);
 
 
@@ -246,12 +254,12 @@ public class ChatpageActivity extends AppCompatActivity implements PtrUIHandler 
         //2次下拉时间间隔
         ptrClassicFrameLayout.setDurationToCloseHeader(1000);
 
-
+        //点击进去医生详情
         ll_doctor_particulars.setOnClickListener(doctorlisntener);
 
         listView.setTranscriptMode(AbsListView.TRANSCRIPT_MODE_NORMAL);
 
-
+        //点击查看图片
         listView.setOnItemClickListener(listvlistener);
 
         iv_chat.setOnClickListener(lisntener);
@@ -380,6 +388,8 @@ public class ChatpageActivity extends AppCompatActivity implements PtrUIHandler 
     };
 
 
+
+    //文本消息
     private void sendmessage() {
         try {
             //发送文本消息
@@ -400,14 +410,16 @@ public class ChatpageActivity extends AppCompatActivity implements PtrUIHandler 
             //保存在list集合中，清空输入框，并刷新页面
             list.add(chatcontent);
             et_chat.setText("");
-//                            handler.sendEmptyMessage(0);
             db.addchatcont(chatcontent);
             adapter.notifyDataSetChanged();
+
+
             chatstate++;
 
         } catch (Exception e) {
             e.printStackTrace();
 
+            //发送失败，重新登录
             jmessage();
             handler.sendEmptyMessage(2);
         }
@@ -495,7 +507,7 @@ public class ChatpageActivity extends AppCompatActivity implements PtrUIHandler 
         super.onStop();
         //关闭聊天页面，再次收到这个医生消息会显示到通知栏
         JMessageClient.exitConversation();
-        Log.e("聊天页面暂停", "聊天页面暂停");
+
     }
 
     //图片发送弹出框
@@ -529,14 +541,9 @@ public class ChatpageActivity extends AppCompatActivity implements PtrUIHandler 
 
 
                 try {
-                    //设置相机拍照后的路径
-//                    sdcardTempFile1 = File.createTempFile("textcamera", ".jpg", audioFile);
-                    //相机
 
-//                    Log.e("相机", sdcardTempFile1.toString());
+                    //开启相机
                     Intent intent1 = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-//                    intent1.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-//                    intent1.putExtra(MediaStore.EXTRA_OUTPUT, Uri.fromFile(sdcardTempFile1));
                     startActivityForResult(intent1, 1);
                     setHeadDialog.dismiss();
 
@@ -548,7 +555,7 @@ public class ChatpageActivity extends AppCompatActivity implements PtrUIHandler 
 
             }
         });
-        //开启图库
+        //开启图库，获取图片后由第三方截取图片
         btn_cutout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -627,7 +634,6 @@ public class ChatpageActivity extends AppCompatActivity implements PtrUIHandler 
             });
             thread.start();
         } else if (resultCode == Crop.RESULT_ERROR) {
-//            Toast.makeText(this, Crop.getError(result).getMessage(), Toast.LENGTH_SHORT).show();
         }
 
 
@@ -831,6 +837,7 @@ public class ChatpageActivity extends AppCompatActivity implements PtrUIHandler 
         JPushInterface.onResume(this);
     }
 
+
     @Override
     public void onUIReset(PtrFrameLayout frame) {
 
@@ -842,6 +849,8 @@ public class ChatpageActivity extends AppCompatActivity implements PtrUIHandler 
 
     }
 
+
+    //这是下拉控件弄的，不知道有啥用
     @Override
     public void onUIRefreshBegin(PtrFrameLayout frame) {
 

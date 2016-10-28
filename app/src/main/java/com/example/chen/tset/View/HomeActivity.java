@@ -165,7 +165,7 @@ public class HomeActivity extends MyBaseActivity implements View.OnClickListener
         }
 
 
-        Log.e("版本号", version_numberSp.getversionNumber());
+
 
 
         text_homeactivity = this;
@@ -194,6 +194,7 @@ public class HomeActivity extends MyBaseActivity implements View.OnClickListener
             saveicon();
         }
 
+
         updateaudioFile = new File(Environment.getExternalStorageDirectory().getAbsolutePath() + "/text/update/");
         updateaudioFile.mkdirs();//创建更新文件夹
 
@@ -207,6 +208,9 @@ public class HomeActivity extends MyBaseActivity implements View.OnClickListener
 
     }
 
+
+
+    //检测是否有更新
     private void updatedetection() {
         final Gson gson = new Gson();
         Thread thread = new Thread(new Runnable() {
@@ -386,7 +390,7 @@ public class HomeActivity extends MyBaseActivity implements View.OnClickListener
     }
 
 
-    //打开下载的文件
+    //打开下载的文件，自动跳转到安装页面
     private void openFile(File file) {
         // TODO Auto-generated method stub
 
@@ -644,6 +648,8 @@ public class HomeActivity extends MyBaseActivity implements View.OnClickListener
 
                 break;
 
+
+            //讲堂页面，更改为百科页面，讲堂改为一个单独的Activity
             case R.id.rb_lectureroom:
                 fl_registration.setVisibility(View.GONE);
                 radioGroup_left.clearCheck();
@@ -656,6 +662,8 @@ public class HomeActivity extends MyBaseActivity implements View.OnClickListener
 
 
                 break;
+
+            //我的
             case R.id.rb_mypage:
                 fl_registration.setVisibility(View.GONE);
                 radioGroup_left.clearCheck();
@@ -666,6 +674,8 @@ public class HomeActivity extends MyBaseActivity implements View.OnClickListener
                     ft.show(mypageFragment);
                 }
                 break;
+
+            //诊疗页面
             case R.id.rb_diagnosis:
                 fl_registration.setVisibility(View.GONE);
                 radioGroup_right.clearCheck();
@@ -731,7 +741,7 @@ public class HomeActivity extends MyBaseActivity implements View.OnClickListener
             public void onClick(View v) {
                 /**
                  * 服务按钮的动画，包含在线问诊，一键挂号按钮的平移动画，
-                 * 服务按钮的旋转豆花
+                 * 服务按钮的旋转动画
                  */
                 RotateAnimation myAnimation_Rotate = new RotateAnimation(45.0f, 90.0f,
                         Animation.RELATIVE_TO_SELF, 0.5f, Animation.RELATIVE_TO_SELF, 0.5f);
@@ -746,6 +756,8 @@ public class HomeActivity extends MyBaseActivity implements View.OnClickListener
                 int width = wm.getDefaultDisplay().getWidth();
                 int height = wm.getDefaultDisplay().getHeight();
 
+
+                //通过获取的屏幕宽高，确定2个按钮的移动位置
                 translateAnimation = new TranslateAnimation(0.1f, width / 4.6f, 0.1f, height * 0.163f);
                 translateAnimation.setDuration(150);
                 ll_online_inquiry1.startAnimation(translateAnimation);
@@ -755,7 +767,7 @@ public class HomeActivity extends MyBaseActivity implements View.OnClickListener
                 translateAnimation1.setDuration(150);
                 ll_serve_registration1.startAnimation(translateAnimation1);
 
-                //设置再次点击服务按钮及弹出框其他地方时，隐藏弹出框所寻妖的时间
+                //设置再次点击服务按钮及弹出框其他地方时，隐藏弹出框所需要的时间
                 new Thread() {
                     public void run() {
                         try {

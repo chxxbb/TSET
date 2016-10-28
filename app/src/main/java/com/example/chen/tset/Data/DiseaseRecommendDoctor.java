@@ -1,10 +1,11 @@
 package com.example.chen.tset.Data;
 
 /**
- * Created by Administrator on 2016/9/2 0002.
- * 问诊
+ * Created by Administrator on 2016/10/28 0028.
+ *
+ * 推荐医生实体类
  */
-public class Inquiry {
+public class DiseaseRecommendDoctor {
     private String icon;
     private String title;
     private String name;
@@ -12,10 +13,10 @@ public class Inquiry {
     private String adept;
     private String section;
     private String hospital;
-    private String id;
+    private int id;
     private String username;
 
-    public Inquiry(String icon, String title, String name, String chatCost, String adept, String section, String hospital, String id, String username) {
+    public DiseaseRecommendDoctor(String icon, String title, String name, String chatCost, String adept, String section, String hospital, int id, String username) {
         this.icon = icon;
         this.title = title;
         this.name = name;
@@ -24,14 +25,6 @@ public class Inquiry {
         this.section = section;
         this.hospital = hospital;
         this.id = id;
-        this.username = username;
-    }
-
-    public String getUsername() {
-        return username;
-    }
-
-    public void setUsername(String username) {
         this.username = username;
     }
 
@@ -91,17 +84,25 @@ public class Inquiry {
         this.hospital = hospital;
     }
 
-    public String getId() {
+    public int getId() {
         return id;
     }
 
-    public void setId(String id) {
+    public void setId(int id) {
         this.id = id;
+    }
+
+    public String getUsername() {
+        return username;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
     }
 
     @Override
     public String toString() {
-        return "Inquiry{" +
+        return "DiseaseRecommendDoctor{" +
                 "icon='" + icon + '\'' +
                 ", title='" + title + '\'' +
                 ", name='" + name + '\'' +
@@ -109,7 +110,7 @@ public class Inquiry {
                 ", adept='" + adept + '\'' +
                 ", section='" + section + '\'' +
                 ", hospital='" + hospital + '\'' +
-                ", id='" + id + '\'' +
+                ", id=" + id +
                 ", username='" + username + '\'' +
                 '}';
     }

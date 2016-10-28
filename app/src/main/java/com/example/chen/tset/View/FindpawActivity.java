@@ -50,6 +50,7 @@ public class FindpawActivity extends MyBaseActivity {
         sp=new SharedPsaveuser(this);
 
         initView();
+        //设定再次获取验证码需要的时间
         time = new TimeCount(60000, 1000);
         initOnClick();
 
@@ -183,6 +184,8 @@ public class FindpawActivity extends MyBaseActivity {
 
 
 
+
+    //再次获取验证码
     class TimeCount extends CountDownTimer {
 
         public TimeCount(long millisInFuture, long countDownInterval) {

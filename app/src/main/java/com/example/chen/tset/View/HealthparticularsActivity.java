@@ -36,6 +36,7 @@ public class HealthparticularsActivity extends AppCompatActivity implements ILis
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_healthparticulars);
+        //注册通知广播，用于用户保存了今天的健康状况后通知诊疗页面刷新
         ListenerManager.getInstance().registerListtener(this);
         findView();
         init();

@@ -12,6 +12,7 @@ import android.text.format.DateFormat;
 import android.util.Log;
 import android.view.Display;
 import android.view.View;
+import android.view.ViewGroup;
 import android.view.Window;
 import android.view.WindowManager;
 import android.view.inputmethod.InputMethodManager;
@@ -26,6 +27,7 @@ import android.widget.ProgressBar;
 import android.widget.RadioButton;
 import android.widget.RelativeLayout;
 import android.app.AlertDialog.Builder;
+import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -37,6 +39,7 @@ import com.example.chen.tset.R;
 import com.example.chen.tset.Utils.ListenerManager;
 import com.example.chen.tset.Utils.MyBaseActivity;
 import com.example.chen.tset.Utils.SharedPsaveuser;
+import com.example.chen.tset.page.MySpinnerAdapter;
 import com.example.chen.tset.page.RegistrationageAdapter;
 import com.example.chen.tset.page.RegistrationdivisionAdapter;
 import com.google.gson.Gson;
@@ -92,6 +95,8 @@ public class RegistrationAtivity extends MyBaseActivity {
     SharedPsaveuser sp;
 
 
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -129,6 +134,7 @@ public class RegistrationAtivity extends MyBaseActivity {
         ll_et_describe = (LinearLayout) findViewById(R.id.ll_et_describe);
         rl_departments.setOnClickListener(listener);
         rl_city.setOnClickListener(listener);
+
         rl_gender.setOnClickListener(listener);
         rl_age.setOnClickListener(listener);
         rl_time.setOnClickListener(listener);
@@ -143,7 +149,9 @@ public class RegistrationAtivity extends MyBaseActivity {
         mday = c.get(Calendar.DAY_OF_MONTH);
         data = new ArrayList<>();
         data1 = new ArrayList<>();
-        gson = new Gson();
+        gson = new
+
+                Gson();
 //        professionaltitleinit();
 
     }

@@ -62,7 +62,7 @@ public class InquiryrecordActivity extends MyBaseActivity {
     }
 
     private void init() {
-        //判断是否已经登录，如果没有从SharedPreferences中获取用户手机号
+        //判断是否已经登录，如果没有从SharedPreferences中获取用户手机号，问诊历史数据保存在SQL数据库中
         if (User_Http.user.getPhone() != null) {
             list = db.chatfind(User_Http.user.getPhone());
         } else {

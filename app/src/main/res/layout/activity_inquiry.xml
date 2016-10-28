@@ -68,16 +68,12 @@
             app:paddingStart="0dp"
             app:paddingEnd="0dp"
             app:ddmenuMaxHeight="@dimen/y460"
-            app:ddmenuSelectedIcon="@mipmap/drop_down_selected_icon"
+            app:ddmenuSelectedIcon="@drawable/menu_selected_icon_swingto"
             app:ddmenuTextSize="@dimen/y26"
-            app:ddmenuUnselectedIcon="@mipmap/drop_down_unselected_icon"
+            app:ddmenuUnselectedIcon="@drawable/menu_selected_icon"
             app:ddneedSetSlectedColor="true"
             app:ddtextUnselectedColor="@color/xmgray"
             app:ddtextSelectedColor="@color/xmgray" />
-
-
-
-
 
 
         <RelativeLayout

@@ -331,7 +331,7 @@ public class HealthconditionActivity extends MyBaseActivity implements IListener
 
                 case R.id.cv_healthcondition_condition_describe:
                     et_healthcondition.requestFocus();
-                    //点击后弹出软键盘
+                    //点击后弹出软键盘,edittext获取焦点
                     InputMethodManager imm = (InputMethodManager) HealthconditionActivity.this.getSystemService(Context.INPUT_METHOD_SERVICE);
                     imm.toggleSoftInput(0, InputMethodManager.HIDE_NOT_ALWAYS);
                     cv_healthcondition_condition_describe.setVisibility(View.GONE);

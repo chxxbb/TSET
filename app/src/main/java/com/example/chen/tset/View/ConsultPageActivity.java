@@ -60,6 +60,8 @@ public class ConsultPageActivity extends MyBaseActivity implements View.OnClickL
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_consult_page);
         sp = new SharedPsaveuser(ConsultPageActivity.this);
+
+        //注册广播接口，点用户点击取消点赞时用于刷新 我的收藏页面
         ListenerManager.getInstance().registerListtener(this);
         findview();
 

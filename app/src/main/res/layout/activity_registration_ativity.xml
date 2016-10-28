@@ -4,10 +4,10 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/backgroundgray"
-    android:orientation="vertical"
-    android:padding="0px"
     android:focusable="true"
     android:focusableInTouchMode="true"
+    android:orientation="vertical"
+    android:padding="0px"
     tools:context="com.example.chen.tset.View.RegistrationAtivity">
 
     <RelativeLayout
@@ -102,6 +102,7 @@
                                 android:src="@drawable/registration_select" />
                         </LinearLayout>
                     </RelativeLayout>
+
 
                     <RelativeLayout
                         android:id="@+id/rl_departments"
@@ -256,10 +257,10 @@
                                 android:layout_gravity="center_vertical"
                                 android:layout_marginLeft="@dimen/x16"
                                 android:background="@null"
-                                android:textCursorDrawable="@drawable/deittext_cursor_blue_style"
                                 android:hint="患者姓名"
                                 android:textColor="@color/fontcolor"
                                 android:textColorHint="@color/linegray1"
+                                android:textCursorDrawable="@drawable/deittext_cursor_blue_style"
                                 android:textSize="@dimen/y32" />
                         </LinearLayout>
 
@@ -387,12 +388,12 @@
                                 android:layout_gravity="center_vertical"
                                 android:layout_marginLeft="@dimen/x16"
                                 android:background="@null"
-                                android:textCursorDrawable="@drawable/deittext_cursor_blue_style"
                                 android:hint="联系方式"
                                 android:inputType="phone"
                                 android:maxLength="11"
                                 android:textColor="@color/fontcolor"
                                 android:textColorHint="@color/linegray1"
+                                android:textCursorDrawable="@drawable/deittext_cursor_blue_style"
                                 android:textSize="@dimen/y32" />
                         </LinearLayout>
 
@@ -435,10 +436,10 @@
                             android:layout_marginLeft="@dimen/x16"
                             android:layout_marginTop="@dimen/y18"
                             android:background="@null"
-                            android:textCursorDrawable="@drawable/deittext_cursor_blue_style"
                             android:hint="病情描述"
                             android:textColor="@color/fontcolor"
                             android:textColorHint="@color/linegray1"
+                            android:textCursorDrawable="@drawable/deittext_cursor_blue_style"
                             android:textSize="@dimen/x28" />
                     </LinearLayout>
                 </LinearLayout>

@@ -36,4 +36,10 @@
         <item name="android:background">@android:color/transparent</item>
     </style>
 
+    <style name="spinner_style">
+        <item name="android:background">@drawable/registration_spinner_case</item>
+        <item name="android:textColor">#ffffff</item>
+        <item name="android:paddingLeft">5dip</item>
+    </style>
+
 </resources>
