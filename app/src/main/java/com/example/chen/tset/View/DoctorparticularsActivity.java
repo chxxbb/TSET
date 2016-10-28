@@ -215,6 +215,7 @@ public class DoctorparticularsActivity extends MyBaseActivity {
                     rl_loading.setVisibility(View.GONE);
                     rl_nonetwork.setVisibility(View.VISIBLE);
                     view.setVisibility(View.GONE);
+                    lv_docttorparticulas.setVisibility(View.GONE);
                     lv_docttorparticulas.setBackgroundColor(android.graphics.Color.parseColor("#ffffff"));
                     list = null;
                     break;
@@ -237,7 +238,6 @@ public class DoctorparticularsActivity extends MyBaseActivity {
                     break;
 
                 case 2:
-
 
                     lv_docttorparticulas.setBackgroundColor(android.graphics.Color.parseColor("#ffffff"));
                     break;

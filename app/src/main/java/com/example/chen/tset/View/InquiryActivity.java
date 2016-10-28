@@ -64,7 +64,7 @@ public class InquiryActivity extends AppCompatActivity {
     private String headers[] = {"全部地区", "全部科室", "智能排序"};
     View contentView;
 
-    String tag = null;
+    String tag = "默认";
 
 
     @Override
@@ -78,7 +78,12 @@ public class InquiryActivity extends AppCompatActivity {
     }
 
     private void findView() {
+        //城市的集合
         citylist = new ArrayList<>();
+        //职称排序，智能排序集合
+        titlelist = new ArrayList<>();
+        //科室排序
+        selectlist = new ArrayList<>();
         contentView = getLayoutInflater().inflate(R.layout.contentview, null);
         lv_inquiry = (ListView) contentView.findViewById(R.id.lv_inquiry);
 
@@ -101,29 +106,19 @@ public class InquiryActivity extends AppCompatActivity {
         lv_inquiry.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-//
-//                if (list.size() != 0) {
-//                    Intent intent = new Intent(InquiryActivity.this, DoctorparticularsActivity.class);
-//                    //根据所选择的排序，点击时获取所点击医生ID，跳转到医生详情页面，跳转到聊天页面写在adapter中
-//                    if (tv_section.getText().toString().equals("全部科室") || tv_city.getText().toString().equals("全部地区") || tv_sort.getText().toString().equals("智能排序") || tv_sort.getText().toString().equals("默认排序")) {
-//                        intent.putExtra("doctot_id", list.get(position).getId());
-//                    } else if (tv_city.getText().toString().equals("成都") || tv_city.getText().toString().equals("重庆")) {
-//                        intent.putExtra("doctot_id", citylist.get(position).getId());
-//                    } else if (tv_sort.getText().toString().equals("职称排序")) {
-//                        intent.putExtra("doctot_id", titlelist.get(position).getId());
-//                    } else {
-//                        intent.putExtra("doctot_id", selectlist.get(position).getId());
-//                    }
-//
-//                    startActivity(intent);
-//                }
+
+                Log.e("标签",tag);
 
                 Intent intent = new Intent(InquiryActivity.this, DoctorparticularsActivity.class);
                 //根据所选择的排序，点击时获取所点击医生ID
-                if (tag.equals("全部地区") || tag == null || tag.equals("")) {
+                if (tag.equals("全部地区") || tag == null || tag.equals("") || tag.equals("智能排序") || tag.equals("全部科室")||tag.equals("默认")) {
                     intent.putExtra("doctot_id", list.get(position).getId());
                 } else if (tag.equals("成都") || tag.equals("深圳")) {
                     intent.putExtra("doctot_id", citylist.get(position).getId());
+                } else if (tag.equals("职称排序")) {
+                    intent.putExtra("doctot_id", titlelist.get(position).getId());
+                } else {
+                    intent.putExtra("doctot_id", selectlist.get(position).getId());
                 }
 
                 startActivity(intent);
@@ -143,7 +138,7 @@ public class InquiryActivity extends AppCompatActivity {
                 map.put(DropDownMenu.VALUE, citydialog());
                 map.put(DropDownMenu.SELECT_POSITION, 0);
             } else if (i == 1) {
-                map.put(DropDownMenu.VALUE, citydialog());
+                map.put(DropDownMenu.VALUE, sectionsort());
                 map.put(DropDownMenu.SELECT_POSITION, 0);
             } else {
                 map.put(DropDownMenu.VALUE, defaultsort());
@@ -154,6 +149,66 @@ public class InquiryActivity extends AppCompatActivity {
         }
         return viewDatas;
     }
+
+
+    //科室排序及点击事件
+    private View sectionsort() {
+        View v = View.inflate(InquiryActivity.this, R.layout.registration_dialog, null);
+        ListView lv_registration = (ListView) v.findViewById(R.id.lv_registration);
+        data = new ArrayList<>();
+        //添加科室到菜单中
+        data.add("全部科室");
+        data.add("行为发育");
+        data.add("小儿神经");
+        data.add("内分泌");
+        data.add("儿童皮肤");
+        data.add("耳鼻喉");
+        data.add("小儿外科");
+        data.add("眼科");
+        data.add("儿童口腔");
+        data.add("小儿呼吸");
+        data.add("儿童保健");
+        data.add("小儿消化");
+        data.add("其他");
+        //屏蔽listview滑动条
+        lv_registration.setVerticalScrollBarEnabled(false);
+        listadapter = new InquirylistAdapter(InquiryActivity.this, data);
+        lv_registration.setAdapter(listadapter);
+        listadapter.notifyDataSetChanged();
+
+        lv_registration.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                dropDownMenu.setTabText(0, "全部地区");//设置tab标签文字
+                dropDownMenu.closeMenu();//关闭menu
+                dropDownMenu.setTabText(2, "智能排序");
+                selectlist.clear();
+                if (position == 0) {
+                    listinit(list);
+                    tag="全部科室";
+                    dropDownMenu.setTabText(1, "全部科室");
+                } else {
+                    for (int i = 0; i < list.size(); i++) {
+                        //在集合中查找所选科室的医生，放入一个新的集合中
+                        if ((data.get(position)).equals(list.get(i).getSection())) {
+                            selectlist.add(list.get(i));
+                            tag=data.get(position);
+                        }
+                    }
+                    if (selectlist.size() == 0) {
+                        Toast.makeText(InquiryActivity.this, "没有此科室的医生", Toast.LENGTH_SHORT).show();
+                    } else {
+                        listinit(selectlist);
+                    }
+                    dropDownMenu.setTabText(1, data.get(position));
+                }
+
+            }
+        });
+
+        return v;
+    }
+
 
     //设置智能排序及点击事件
     private View defaultsort() {
@@ -182,6 +237,28 @@ public class InquiryActivity extends AppCompatActivity {
                 dropDownMenu.closeMenu();//关闭menu
                 dropDownMenu.setTabText(1, "全部科室");
                 dropDownMenu.setTabText(2, "职称排序");
+                tag = "职称排序";
+                for (int i = 0; i < list.size(); i++) {
+                    if (list.get(i).getTitle().equals("主任医师")) {
+                        titlelist.add(list.get(i));
+                    }
+                }
+                for (int i = 0; i < list.size(); i++) {
+                    if (list.get(i).getTitle().equals("副主任医师")) {
+                        titlelist.add(list.get(i));
+                    }
+                }
+                for (int i = 0; i < list.size(); i++) {
+                    if (list.get(i).getTitle().equals("主治医师")) {
+                        titlelist.add(list.get(i));
+                    }
+                }
+                for (int i = 0; i < list.size(); i++) {
+                    if (list.get(i).getTitle().equals("执业医师")) {
+                        titlelist.add(list.get(i));
+                    }
+                }
+                listinit(titlelist);
             }
         });
         return v;
@@ -278,6 +355,7 @@ public class InquiryActivity extends AppCompatActivity {
                     public void onError(Call call, Exception e, int id) {
                         rl_loading.setVisibility(View.GONE);
                         rl_nonetwork.setVisibility(View.VISIBLE);
+                        dropDownMenu.setVisibility(View.GONE);
                     }
 
                     @Override
@@ -310,126 +388,6 @@ public class InquiryActivity extends AppCompatActivity {
         }
     };
 
-    //默认排序
-    private void sortshowDialog() {
-//        setHeadDialog = new AlertDialog.Builder(getContext()).create();
-        //设置弹出框主题
-        setHeadDialog = new Dialog(InquiryActivity.this, R.style.CustomDialog);
-        setHeadDialog.show();
-        dialogView = View.inflate(InquiryActivity.this, R.layout.inquiry_sort_dialog, null);
-        setHeadDialog.getWindow().setContentView(dialogView);
-        WindowManager.LayoutParams lp = setHeadDialog.getWindow()
-                .getAttributes();
-        setHeadDialog.getWindow().setAttributes(lp);
-        sortdialogclick();
-    }
-
-    private void sortdialogclick() {
-        titlelist = new ArrayList<>();
-        Button btn_sortcancel = (Button) dialogView.findViewById(R.id.btn_sortcancel);
-        Button btn_default = (Button) dialogView.findViewById(R.id.btn_default);
-        Button btn_title = (Button) dialogView.findViewById(R.id.btn_title);
-        RelativeLayout rl_inquiry_sort = (RelativeLayout) dialogView.findViewById(R.id.rl_inquiry_sort);
-
-        rl_inquiry_sort.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                setHeadDialog.dismiss();
-            }
-        });
-        btn_sortcancel.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                setHeadDialog.dismiss();
-            }
-        });
-        btn_default.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                listinit(list);
-                tv_city.setText("全部地区");
-                tv_sort.setText("职称排序");
-                tv_sort.setText("默认排序");
-                setHeadDialog.dismiss();
-            }
-        });
-        btn_title.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                tv_city.setText("全部地区");
-                tv_sort.setText("职称排序");
-                tv_section.setText("全部科室");
-                for (int i = 0; i < list.size(); i++) {
-                    if (list.get(i).getTitle().equals("主任医师")) {
-                        titlelist.add(list.get(i));
-                    }
-                }
-                for (int i = 0; i < list.size(); i++) {
-                    if (list.get(i).getTitle().equals("副主任医师")) {
-                        titlelist.add(list.get(i));
-                    }
-                }
-                for (int i = 0; i < list.size(); i++) {
-                    if (list.get(i).getTitle().equals("主治医师")) {
-                        titlelist.add(list.get(i));
-                    }
-                }
-                for (int i = 0; i < list.size(); i++) {
-                    if (list.get(i).getTitle().equals("执业医师")) {
-                        titlelist.add(list.get(i));
-                    }
-                }
-                listinit(titlelist);
-                setHeadDialog.dismiss();
-            }
-        });
-        lv_inquiry.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                Intent intent = new Intent(InquiryActivity.this, DoctorparticularsActivity.class);
-                //根据所选择的排序，点击时获取所点击医生ID
-                if (tv_sort.getText().toString().equals("智能排序") || tv_sort.getText().toString().equals("默认排序")) {
-                    intent.putExtra("doctot_id", list.get(position).getId());
-                } else if (tv_sort.getText().toString().equals("职称排序")) {
-                    intent.putExtra("doctot_id", titlelist.get(position).getId());
-                }
-                startActivity(intent);
-            }
-        });
-
-
-    }
-
-    //科室弹出框
-    private void developmentshowDialog() {
-//        setHeadDialog = new AlertDialog.Builder(getContext()).create();
-        setHeadDialog = new Dialog(InquiryActivity.this, R.style.CustomDialog);
-        setHeadDialog.show();
-        dialogView = View.inflate(InquiryActivity.this, R.layout.registration_dialog, null);
-        ListView lv_registration = (ListView) dialogView.findViewById(R.id.lv_registration);
-        data = new ArrayList<>();
-        data.add("全部科室");
-        data.add("行为发育");
-        data.add("小儿神经");
-        data.add("内分泌");
-        data.add("儿童皮肤");
-        data.add("耳鼻喉");
-        data.add("小儿外科");
-        data.add("眼科");
-        data.add("儿童口腔");
-        data.add("小儿呼吸");
-        data.add("儿童保健");
-        data.add("小儿消化");
-        data.add("其他");
-        lv_registration.setVerticalScrollBarEnabled(false);
-        listadapter = new InquirylistAdapter(InquiryActivity.this, data);
-        lv_registration.setAdapter(listadapter);
-        listadapter.notifyDataSetChanged();
-        setHeadDialog.getWindow().setContentView(dialogView);
-        WindowManager.LayoutParams lp = setHeadDialog.getWindow().getAttributes();
-        setHeadDialog.getWindow().setAttributes(lp);
-        developmentdialogclick();
-    }
 
     private void developmentdialogclick() {
         selectlist = new ArrayList<>();
@@ -479,11 +437,7 @@ public class InquiryActivity extends AppCompatActivity {
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 Intent intent = new Intent(InquiryActivity.this, DoctorparticularsActivity.class);
                 //根据所选择的排序，点击时获取所点击医生ID
-                if (tv_section.getText().toString().equals("全部科室")) {
-                    intent.putExtra("doctot_id", list.get(position).getId());
-                } else {
-                    intent.putExtra("doctot_id", selectlist.get(position).getId());
-                }
+
 
                 startActivity(intent);
             }
