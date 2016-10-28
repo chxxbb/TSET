@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:descendantFocusability="blocksDescendants"
+    android:orientation="vertical">
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/y1"
+        android:background="@color/xmgray" />
+
+    <LinearLayout
+        android:id="@+id/ll_city_shenzheng"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/y78">
+
+        <TextView
+            android:id="@+id/textView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:layout_marginLeft="@dimen/x30"
+            android:textColor="@color/fontcolor"
+            android:textSize="@dimen/y28" />
+    </LinearLayout>
+
+</LinearLayout>

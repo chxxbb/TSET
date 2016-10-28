@@ -19,6 +19,7 @@ import com.example.chen.tset.Data.Http_data;
 import com.example.chen.tset.Data.Inquiry;
 import com.example.chen.tset.R;
 import com.example.chen.tset.page.InquiryAdapter;
+import com.example.chen.tset.page.InquirySecletAdapter;
 import com.example.chen.tset.page.InquirylistAdapter;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
@@ -65,6 +66,7 @@ public class InquiryActivity extends AppCompatActivity {
     View contentView;
 
     String tag = "默认";
+    InquirySecletAdapter secletAdapter;
 
 
     @Override
@@ -153,7 +155,7 @@ public class InquiryActivity extends AppCompatActivity {
 
     //科室排序及点击事件
     private View sectionsort() {
-        View v = View.inflate(InquiryActivity.this, R.layout.registration_dialog, null);
+        View v = View.inflate(InquiryActivity.this, R.layout.inquiry_select_dialog, null);
         ListView lv_registration = (ListView) v.findViewById(R.id.lv_registration);
         data = new ArrayList<>();
         //添加科室到菜单中
@@ -172,9 +174,9 @@ public class InquiryActivity extends AppCompatActivity {
         data.add("其他");
         //屏蔽listview滑动条
         lv_registration.setVerticalScrollBarEnabled(false);
-        listadapter = new InquirylistAdapter(InquiryActivity.this, data);
-        lv_registration.setAdapter(listadapter);
-        listadapter.notifyDataSetChanged();
+        secletAdapter = new InquirySecletAdapter(InquiryActivity.this, data);
+        lv_registration.setAdapter(secletAdapter);
+        secletAdapter.notifyDataSetChanged();
 
         lv_registration.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override

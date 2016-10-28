@@ -40,19 +40,21 @@
     <uses-feature android:name="android.hardware.camera" />
     <uses-feature android:name="android.hardware.camera.autofocus" />
 
-    <span style="font-size:14px;"><uses-permission android:name="android.permission.CAMERA"/>
-        <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/></span>
+    <span style="font-size:14px;">
+        <uses-permission android:name="android.permission.CAMERA" />
+        <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    </span>
 
     <application
         android:name=".Utils.ContextUtil"
         android:allowBackup="true"
+        android:configChanges="orientation|screenSize|keyboardHidden|keyboard|"
         android:hardwareAccelerated="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:persistent="true"
         android:screenOrientation="portrait"
         android:supportsRtl="true"
-        android:configChanges="orientation|screenSize|keyboardHidden|keyboard|"
         android:theme="@style/Theme.AppCompat.NoActionBar">
         <activity android:name=".View.LeadActivity">
             <intent-filter>
@@ -214,7 +216,8 @@
         <activity android:name=".View.LogActivity" />
         <activity android:name=".View.OnekeyLoinActivity" />
         <activity android:name=".View.HealthparticularsActivity" />
-        <activity android:name=".View.InquiryActivity"></activity>
+        <activity android:name=".View.InquiryActivity" />
+        <activity android:name=".View.LectureoomActivity"></activity>
     </application>
 
 </manifest>

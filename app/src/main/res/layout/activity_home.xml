@@ -51,7 +51,7 @@
                         android:button="@null"
                         android:drawableTop="@drawable/encyclopedia_onclick"
                         android:gravity="center"
-                        android:text="百科"
+                        android:text="首页"
                         android:textColor="@drawable/encyclopedia_color"
                         android:textSize="@dimen/x24" />
 
@@ -87,7 +87,7 @@
                         android:button="@null"
                         android:drawableTop="@drawable/lecture_onclick"
                         android:gravity="center"
-                        android:text="讲堂"
+                        android:text="百科"
                         android:textColor="@drawable/encyclopedia_color"
                         android:textSize="@dimen/x24" />
 

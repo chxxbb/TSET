@@ -380,6 +380,182 @@
                         </LinearLayout>
 
                     </android.support.v7.widget.CardView>
+
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/y20"
+                        android:background="@color/backgroundgray" />
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/y80">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center_vertical"
+                            android:layout_marginLeft="@dimen/x30"
+                            android:text="医生推荐"
+                            android:textColor="@color/fontcolor"
+                            android:textSize="@dimen/y28" />
+                    </LinearLayout>
+
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/y1"
+                        android:layout_marginLeft="@dimen/x30"
+                        android:background="@color/linegray" />
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical">
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="@dimen/y216"
+                            android:background="@color/white"
+                            android:orientation="vertical">
+
+                            <RelativeLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:gravity="center_horizontal">
+
+                                <LinearLayout
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:orientation="horizontal">
+
+                                    <de.hdodenhof.circleimageview.CircleImageView
+                                        android:id="@+id/iv_dactor_icon"
+                                        android:layout_width="@dimen/x112"
+                                        android:layout_height="@dimen/y112"
+                                        android:layout_marginLeft="@dimen/x30"
+                                        android:layout_marginTop="@dimen/y20"
+                                        android:src="@color/backgroundblue" />
+
+                                    <LinearLayout
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:layout_marginLeft="@dimen/x26"
+                                        android:orientation="vertical">
+
+                                        <LinearLayout
+                                            android:layout_width="wrap_content"
+                                            android:layout_height="wrap_content"
+                                            android:layout_marginTop="@dimen/y20"
+                                            android:orientation="horizontal">
+
+                                            <TextView
+                                                android:id="@+id/tv_name"
+                                                android:layout_width="wrap_content"
+                                                android:layout_height="wrap_content"
+                                                android:text="程伟伟"
+                                                android:textColor="@color/backgroundblue"
+                                                android:textSize="@dimen/y30" />
+
+                                            <TextView
+                                                android:id="@+id/textView"
+                                                android:layout_width="wrap_content"
+                                                android:layout_height="wrap_content"
+                                                android:layout_marginLeft="@dimen/x24"
+                                                android:text="9.9分"
+                                                android:textColor="#fb878f"
+                                                android:textSize="@dimen/y24" />
+                                        </LinearLayout>
+
+                                        <TextView
+                                            android:id="@+id/tv_dactor_title"
+                                            android:layout_width="wrap_content"
+                                            android:layout_height="wrap_content"
+                                            android:text="主治医生"
+                                            android:textColor="@color/xmgray"
+                                            android:textSize="@dimen/y26" />
+
+                                        <TextView
+                                            android:id="@+id/tv_dactor_section"
+                                            android:layout_width="wrap_content"
+                                            android:layout_height="wrap_content"
+                                            android:text="行为发育科"
+                                            android:textColor="@color/fontgray"
+                                            android:textSize="@dimen/y24" />
+                                    </LinearLayout>
+                                </LinearLayout>
+
+                                <LinearLayout
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_alignParentRight="true">
+
+                                    <LinearLayout
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:layout_marginTop="@dimen/y46"
+                                        android:gravity="center_vertical">
+
+                                        <FrameLayout
+                                            android:id="@+id/fl_chat"
+                                            android:layout_width="wrap_content"
+                                            android:layout_height="wrap_content"
+                                            android:layout_marginRight="@dimen/x30">
+
+                                            <RelativeLayout
+                                                android:layout_width="@dimen/x155"
+                                                android:layout_height="@dimen/y72">
+
+                                                <Button
+                                                    android:id="@+id/btn_money"
+                                                    android:layout_width="@dimen/x120"
+                                                    android:layout_height="@dimen/y60"
+                                                    android:layout_centerInParent="true"
+                                                    android:background="@drawable/inquiry_btn_case"
+                                                    android:clickable="false"
+                                                    android:focusable="false"
+                                                    android:focusableInTouchMode="false"
+                                                    android:text="￥25.00"
+                                                    android:textColor="#fb878f"
+                                                    android:textSize="@dimen/y26" />
+                                            </RelativeLayout>
+
+                                            <ImageView
+                                                android:layout_width="@dimen/x30"
+                                                android:layout_height="@dimen/y30"
+                                                android:src="@drawable/inquiry_isclick" />
+                                        </FrameLayout>
+                                    </LinearLayout>
+                                </LinearLayout>
+                            </RelativeLayout>
+
+                            <View
+                                android:layout_width="match_parent"
+                                android:layout_height="@dimen/y1"
+                                android:layout_marginLeft="@dimen/x30"
+                                android:layout_marginRight="@dimen/x30"
+                                android:layout_marginTop="@dimen/y20"
+                                android:background="@color/linegray" />
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="@dimen/y64"
+                                android:layout_marginLeft="@dimen/x30"
+                                android:layout_marginRight="@dimen/x30"
+                                android:gravity="center_vertical">
+
+                                <TextView
+                                    android:id="@+id/tv_intro"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:layout_gravity="center_vertical"
+                                    android:ellipsize="end"
+                                    android:lines="1"
+                                    android:text="擅长：儿童发育行为的多动症，自闭症，遗尿症，疑难杂症等等什么的"
+                                    android:textColor="@color/xmgray"
+                                    android:textSize="@dimen/y24" />
+                            </LinearLayout>
+                        </LinearLayout>
+
+                    </LinearLayout>
                 </LinearLayout>
 
                 <RelativeLayout

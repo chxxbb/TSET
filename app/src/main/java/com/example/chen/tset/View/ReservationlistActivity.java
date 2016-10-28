@@ -192,6 +192,7 @@ public class ReservationlistActivity extends MyBaseActivity implements View.OnCl
                     break;
                 case 3:
                     ListenerManager.getInstance().sendBroadCast("更新我的预约");
+                    ListenerManager.getInstance().sendBroadCast("更新日历页面");
                     Toast.makeText(ReservationlistActivity.this, "取消成功", Toast.LENGTH_SHORT).show();
                     btn_cancel.setBackgroundResource(R.drawable.reservationlist_btn_graycase);
                     btn_cancel.setText("已取消");
@@ -211,6 +212,7 @@ public class ReservationlistActivity extends MyBaseActivity implements View.OnCl
 
         }
     };
+
     //取消订单
     public void cancelindent() {
         setHeadDialog = new Dialog(this, R.style.CustomDialog);
@@ -261,6 +263,7 @@ public class ReservationlistActivity extends MyBaseActivity implements View.OnCl
 
                             @Override
                             public void onResponse(String response, int id) {
+                                Log.e("取消预约返回", response);
 
                                 if (response.equals("0")) {
 

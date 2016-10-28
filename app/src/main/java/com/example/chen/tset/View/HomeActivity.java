@@ -640,22 +640,21 @@ public class HomeActivity extends MyBaseActivity implements View.OnClickListener
             case R.id.rb_encyclopedia:
                 radioGroup_right.clearCheck();
                 fl_registration.setVisibility(View.GONE);
+                //首页
+
+                break;
+
+            case R.id.rb_lectureroom:
+                fl_registration.setVisibility(View.GONE);
+                radioGroup_left.clearCheck();
                 if (encyclopediaFragment == null) {
                     encyclopediaFragment = new EncyclopediaFragment();
                     ft.add(R.id.framelayout, encyclopediaFragment);
                 } else {
                     ft.show(encyclopediaFragment);
                 }
-                break;
-            case R.id.rb_lectureroom:
-                fl_registration.setVisibility(View.GONE);
-                radioGroup_left.clearCheck();
-                if (lectureroomFragment == null) {
-                    lectureroomFragment = new LectureroomFragment();
-                    ft.add(R.id.framelayout, lectureroomFragment);
-                } else {
-                    ft.show(lectureroomFragment);
-                }
+
+
                 break;
             case R.id.rb_mypage:
                 fl_registration.setVisibility(View.GONE);

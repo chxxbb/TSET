@@ -83,7 +83,7 @@ public class DiseaselibFragment extends Fragment {
         view1 = view.findViewById(R.id.view1);
         rl_nonetwork = (RelativeLayout) view.findViewById(R.id.rl_nonetwork);
         rl_loading = (RelativeLayout) view.findViewById(R.id.rl_loading);
-        bannerView= (BannerView) view.findViewById(R.id.bannerView);
+        bannerView = (BannerView) view.findViewById(R.id.bannerView);
         listview_dise.setOnItemClickListener(listener);
         listview_dise.setOnItemSelectedListener(slistener);
         recyv_dise.setHasFixedSize(true);
@@ -165,6 +165,7 @@ public class DiseaselibFragment extends Fragment {
                     view1.setVisibility(View.GONE);
                     rl_loading.setVisibility(View.GONE);
                     recyv_dise.setVisibility(View.GONE);
+                    bannerView.setVisibility(View.GONE);
                     rl_nonetwork.setVisibility(View.VISIBLE);
                     break;
                 case 2:
