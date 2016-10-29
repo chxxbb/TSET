@@ -217,7 +217,7 @@ public class ConsultPageActivity extends MyBaseActivity implements View.OnClickL
 
                     tv_title.setText(consultparticulars.getTitle());
                     tv_time.setText("天使资讯  " + consultparticulars.getTime());
-                    tv_content.setText("        " + consultparticulars.getContent() + " \n" + " \n");
+                    tv_content.setText("        " + consultparticulars.getContent() + " \n" + " \n" + "\n");
                     ImageLoader.getInstance().displayImage(consultparticulars.getIcon(), iv_icon);
                     rl_loading.setVisibility(View.GONE);
 

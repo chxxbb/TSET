@@ -49,6 +49,7 @@ import com.example.chen.tset.Data.Http_data;
 import com.example.chen.tset.Data.Inquiryrecord;
 import com.example.chen.tset.Data.JPErrorCode;
 import com.example.chen.tset.Data.Pharmacyremind;
+import com.example.chen.tset.Data.Update;
 import com.example.chen.tset.Data.User;
 import com.example.chen.tset.Data.User_Http;
 import com.example.chen.tset.Data.VersionsUpdate;
@@ -68,9 +69,16 @@ import com.example.chen.tset.page.LectureroomFragment;
 import com.example.chen.tset.page.MypageFragment;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
+import com.google.gson.JsonArray;
+import com.google.gson.JsonObject;
+import com.google.gson.internal.ObjectConstructor;
 import com.google.gson.reflect.TypeToken;
 import com.zhy.http.okhttp.OkHttpUtils;
 import com.zhy.http.okhttp.callback.StringCallback;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -87,6 +95,7 @@ import java.text.ParsePosition;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
@@ -113,7 +122,7 @@ public class HomeActivity extends MyBaseActivity implements View.OnClickListener
     private EncyclopediaFragment encyclopediaFragment;
     private LectureroomFragment lectureroomFragment;
     private MypageFragment mypageFragment;
-//    private InquiryFragment inquiryFragment;
+    //    private InquiryFragment inquiryFragment;
     private ConsultingFragment consultingFragment;
     private AFragment a;
     private ImageView iv_inquiry;
@@ -149,6 +158,8 @@ public class HomeActivity extends MyBaseActivity implements View.OnClickListener
 
     VersionsUpdate versionsUpdate;
 
+    Update update;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -163,9 +174,6 @@ public class HomeActivity extends MyBaseActivity implements View.OnClickListener
         if (version_numberSp.getversionNumber() == null || version_numberSp.getversionNumber().equals("")) {
             version_numberSp.setspversionNumber(Http_data.version_number);
         }
-
-
-
 
 
         text_homeactivity = this;
@@ -200,14 +208,9 @@ public class HomeActivity extends MyBaseActivity implements View.OnClickListener
 
         jmessage();
 
-
         updatedetection();
 
-        updatedialog();
-
-
     }
-
 
 
     //检测是否有更新
@@ -223,31 +226,24 @@ public class HomeActivity extends MyBaseActivity implements View.OnClickListener
                         .execute(new StringCallback() {
                             @Override
                             public void onError(Call call, Exception e, int id) {
+                                Log.e("检查更新失败", "检查更新失败");
 
                             }
 
                             @Override
                             public void onResponse(String response, int id) {
-                                Log.e("更新返回", response);
 
+                                update = gson.fromJson(response, Update.class);
 
-//                                Map<String, Object> map = gson.fromJson(response, new TypeToken<Map<String, Object>>() {}.getType());
-//.
-//
-//
-//                                Log.e("版本更新解析",map.get("downloadPath")+"      "+map.get("updateLog")+"　　　　"+map.get("version"));
+                                //检查当前版本与获取的版本是否一致,如果不一致则弹出更新框提示更新
+                                if (update.getVersion().trim().equals(version_numberSp.getversionNumber().trim())) {
 
-
-//                                if (versionsUpdate.equals(version_numberSp.getversionNumber())) {
-//
-//                                } else {
-//                                    handler.sendEmptyMessage(3);
-//                                }
-
+                                } else {
+                                    updatedialog();
+                                }
 
                             }
                         });
-
             }
         });
 
@@ -280,22 +276,31 @@ public class HomeActivity extends MyBaseActivity implements View.OnClickListener
         final TextView tv_update_confirm = (TextView) dialogView.findViewById(R.id.tv_update_confirm);
         final TextView tv_update_cancel = (TextView) dialogView.findViewById(R.id.tv_update_cancel);
         LinearLayout linearlayout = (LinearLayout) dialogView.findViewById(R.id.linearlayout);
+        TextView tv_version = (TextView) dialogView.findViewById(R.id.tv_version);
+        TextView tv_updateLog = (TextView) dialogView.findViewById(R.id.tv_updateLog);
+
+
+        //更新版本
+        tv_version.setText("最新版本：" + update.getVersion());
+
+        //更新内容
+        tv_updateLog.setText(update.getUpdateLog());
 
         linearlayout.setOnClickListener(null);
 
-//        rl_update_confirm.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                versionUpdate();
-//                tv_update.setText("下载中，请稍等...");
-//                rl_update_confirm.setOnClickListener(null);
-//                tv_update_confirm.setTextColor(getResources().getColor(R.color.xmgray));
-//                rl_update_cancel.setOnClickListener(null);
-//                tv_update_cancel.setTextColor(getResources().getColor(R.color.xmgray));
-//                //设置点击手机返回键都不会隐藏下载框
-//                setHeadDialog.setOnKeyListener(keylistener);
-//            }
-//        });
+        rl_update_confirm.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                versionUpdate();
+                tv_update.setText("下载中，请稍等...");
+                rl_update_confirm.setOnClickListener(null);
+                tv_update_confirm.setTextColor(getResources().getColor(R.color.xmgray));
+                rl_update_cancel.setOnClickListener(null);
+                tv_update_cancel.setTextColor(getResources().getColor(R.color.xmgray));
+                //设置点击手机返回键都不会隐藏下载框
+                setHeadDialog.setOnKeyListener(keylistener);
+            }
+        });
 
 
         rl_update_cancel.setOnClickListener(new View.OnClickListener() {
@@ -307,6 +312,8 @@ public class HomeActivity extends MyBaseActivity implements View.OnClickListener
 
     }
 
+
+    //如果点击确认更新，则所有界面不可点击，返回键也不可点击，一直到下载文件完成
     DialogInterface.OnKeyListener keylistener = new DialogInterface.OnKeyListener() {
         public boolean onKey(DialogInterface dialog, int keyCode, KeyEvent event) {
             if (keyCode == KeyEvent.KEYCODE_BACK && event.getRepeatCount() == 0) {

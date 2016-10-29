@@ -150,6 +150,7 @@ public class ChatpageActivity extends AppCompatActivity implements PtrUIHandler 
 
     //添加我的医生
     private void addMyDoctor() {
+
         Thread thread = new Thread(new Runnable() {
             @Override
             public void run() {
@@ -307,6 +308,9 @@ public class ChatpageActivity extends AppCompatActivity implements PtrUIHandler 
         }
 
 
+
+
+
         adapter = new ChatpageAdapter(this, list, doctoricon);
         listView.setAdapter(adapter);
 
@@ -322,6 +326,7 @@ public class ChatpageActivity extends AppCompatActivity implements PtrUIHandler 
             public void onRefreshBegin(PtrFrameLayout frame) {
 
                 //将list清空,聊天页面页数+1
+
                 historylist.clear();
                 numberlist.clear();
                 list.clear();

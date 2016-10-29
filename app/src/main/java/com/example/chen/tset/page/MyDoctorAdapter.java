@@ -2,6 +2,7 @@ package com.example.chen.tset.page;
 
 import android.content.Context;
 import android.content.Intent;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -70,7 +71,7 @@ public class MyDoctorAdapter extends BaseAdapter {
                 Intent intent = new Intent(context, ChatpageActivity.class);
                 intent.putExtra("name", list.get(position).getDoctorName());
                 intent.putExtra("icon", list.get(position).getDoctorIcon());
-                intent.putExtra("doctorID", list.get(position).getDoctorId());
+                intent.putExtra("doctorID", list.get(position).getDoctorId()+"");
                 intent.putExtra("username", list.get(position).getDoctorUserName());
                 context.startActivity(intent);
             }

@@ -36,6 +36,7 @@
             android:progressDrawable="@drawable/progresscolor" />
 
         <TextView
+            android:id="@+id/tv_version"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginLeft="@dimen/x30"
@@ -56,6 +57,7 @@
             android:textSize="@dimen/y28" />
 
         <TextView
+            android:id="@+id/tv_updateLog"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginBottom="@dimen/y48"

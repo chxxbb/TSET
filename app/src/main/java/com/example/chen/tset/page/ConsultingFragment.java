@@ -686,14 +686,26 @@ public class ConsultingFragment extends Fragment implements View.OnClickListener
                     String scheduleYear = calV.getShowYear();
                     String scheduleMonth = calV.getShowMonth();
 
+                    String month = null;
+                    String day = null;
+
                     //调整日期格式，如果月份为各位数则在其他前面+1
                     if (scheduleMonth.equals("1") || scheduleMonth.equals("2") || scheduleMonth.equals("3") || scheduleMonth.equals("4") || scheduleMonth.equals("5") || scheduleMonth.equals("6") || scheduleMonth.equals("7") || scheduleMonth.equals("8") || scheduleMonth.equals("9")) {
-                        date = scheduleYear + "-0" + scheduleMonth + "-" + scheduleDay;
-                        pharmacydate = scheduleYear + "-0" + scheduleMonth + "-" + scheduleDay;
+                        month = "0" + scheduleMonth;
                     } else {
-                        date = scheduleYear + "-" + scheduleMonth + "-" + scheduleDay;
-                        pharmacydate = scheduleYear + "-" + scheduleMonth + "-" + scheduleDay;
+                        month = scheduleMonth;
                     }
+
+                    if (scheduleDay.equals("1") || scheduleDay.equals("2") || scheduleDay.equals("3") || scheduleDay.equals("4") || scheduleDay.equals("5") || scheduleDay.equals("6") || scheduleDay.equals("7") || scheduleDay.equals("8") || scheduleDay.equals("9")) {
+                        day = "0" + scheduleDay;
+                    } else {
+                        day = scheduleDay;
+                    }
+
+
+                    date = scheduleYear + "-" + month + "-" + day;
+                    pharmacydate = scheduleYear + "-" + month + "-" + day;
+
 
                     findCalendar(date);
                 }
@@ -702,8 +714,10 @@ public class ConsultingFragment extends Fragment implements View.OnClickListener
         gridView.setLayoutParams(params);
     }
 
-
+    //点击日期获取当天信息
     public void findCalendar(final String date1) {
+
+
         Thread thread = new Thread(new Runnable() {
             @Override
             public void run() {
@@ -721,7 +735,7 @@ public class ConsultingFragment extends Fragment implements View.OnClickListener
 
                             @Override
                             public void onResponse(String response, int id) {
-                                Log.e("111", response);
+
                                 if (response.equals("{}")) {
                                     handler.sendEmptyMessage(3);
                                 } else {
@@ -737,8 +751,9 @@ public class ConsultingFragment extends Fragment implements View.OnClickListener
         thread.start();
     }
 
-    public void findAllByDate(final String str) {
 
+    //获取健康日历页面数据
+    public void findAllByDate(final String str) {
 
         Thread thread = new Thread(new Runnable() {
             @Override
@@ -759,7 +774,6 @@ public class ConsultingFragment extends Fragment implements View.OnClickListener
                             @Override
                             public void onResponse(String response, int id) {
 
-                                Log.e("诊疗返回", response);
 
                                 Type listtype = new TypeToken<LinkedList<ConsultingRemindState>>() {
                                 }.getType();

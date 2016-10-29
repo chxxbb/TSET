@@ -12,6 +12,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -42,9 +43,7 @@ public class LoginActivity extends AppCompatActivity {
     Activity activity = this;
     SharedPsaveuser sp;
 
-
-
-
+    LinearLayout activity_login_exit;
 
 
     @Override
@@ -58,8 +57,7 @@ public class LoginActivity extends AppCompatActivity {
         initOnclick();
 
 
-        sp=new SharedPsaveuser(LoginActivity.this);
-
+        sp = new SharedPsaveuser(LoginActivity.this);
 
 
     }
@@ -99,7 +97,6 @@ public class LoginActivity extends AppCompatActivity {
                                     sp.setUserpassworde(login_password_edittext.getText().toString());
 
 
-
                                     if (user.getName() != null && !"".equals(user.getName())) {
                                         System.out.println(user.toString());
                                         Intent intent = new Intent(activity, HomeActivity.class);
@@ -133,6 +130,14 @@ public class LoginActivity extends AppCompatActivity {
             }
         });
 
+        //回退到一键登录页面
+        activity_login_exit.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(LoginActivity.this, OnekeyLoinActivity.class);
+                startActivity(intent);
+            }
+        });
 
 
     }
@@ -145,10 +150,9 @@ public class LoginActivity extends AppCompatActivity {
         login_new_user = (TextView) findViewById(R.id.login_new_user);
         login_find_password = (TextView) findViewById(R.id.login_find_password);
 
+        activity_login_exit = (LinearLayout) findViewById(R.id.activity_login_exit);
+
     }
-
-
-
 
 
     @Override
