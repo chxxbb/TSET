@@ -202,7 +202,6 @@ public class ConsultingFragment extends Fragment implements View.OnClickListener
     //更新诊疗页面
     @Override
     public void notifyAllActivity(String str) {
-        Log.e("日历页面", str);
         if (str.equals("更新日历页面")) {
 
 
@@ -218,13 +217,11 @@ public class ConsultingFragment extends Fragment implements View.OnClickListener
 
         }
 
-        start();
+
 
     }
 
-    private void start() {
 
-    }
 
 
     Handler handler = new Handler() {

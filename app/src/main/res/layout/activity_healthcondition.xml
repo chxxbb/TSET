@@ -22,19 +22,13 @@
             android:layout_height="match_parent"
             android:orientation="horizontal">
 
-            <ImageView
-                android:layout_width="@dimen/x20"
-                android:layout_height="@dimen/y36"
-                android:layout_gravity="center_vertical"
-                android:layout_marginLeft="@dimen/x30"
-                android:src="@drawable/opinion_return" />
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_vertical"
-                android:layout_marginLeft="@dimen/x8"
-                android:text="问诊"
+                android:layout_marginLeft="@dimen/x30"
+                android:text="取消"
                 android:textColor="@color/backgroundblue"
                 android:textSize="@dimen/x32" />
         </LinearLayout>

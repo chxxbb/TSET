@@ -7,6 +7,7 @@ import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.StaggeredGridLayoutManager;
 import android.util.Log;
 import android.view.View;
+import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 
 import com.example.chen.tset.Data.Http_data;
@@ -30,8 +31,10 @@ public class LectureoomActivity extends AppCompatActivity {
     private RecyclerView recyclerView;
     private LectureroomAdapter adapter;
     private RelativeLayout rl_nonetwork, rl_loading;
+    private LinearLayout ll_lecure_room_reuter;
     List<Lecture> list;
     Gson gson;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -51,6 +54,7 @@ public class LectureoomActivity extends AppCompatActivity {
         recyclerView = (RecyclerView) findViewById(R.id.recyclerView);
         rl_nonetwork = (RelativeLayout) findViewById(R.id.rl_nonetwork);
         rl_loading = (RelativeLayout) findViewById(R.id.rl_loading);
+        ll_lecure_room_reuter= (LinearLayout) findViewById(R.id.ll_lecure_room_reuter);
         recyclerView.setVerticalScrollBarEnabled(false);
         //RelativeLayout分成2列
         recyclerView.setLayoutManager(new StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL));
@@ -58,7 +62,17 @@ public class LectureoomActivity extends AppCompatActivity {
         adapter = new LectureroomAdapter(this, list);
         recyclerView.setAdapter(adapter);
 
+        ll_lecure_room_reuter.setOnClickListener(listener);
+
     }
+
+    private View.OnClickListener listener=new View.OnClickListener() {
+        @Override
+        public void onClick(View v) {
+            finish();
+        }
+    };
+
 
 
     private void init() {

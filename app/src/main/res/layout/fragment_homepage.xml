@@ -1,335 +1,439 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/scrollView"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    android:overScrollMode="never">
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="match_parent"
         android:orientation="vertical">
 
-        <RelativeLayout
+        <com.example.chen.tset.page.BannerView
+            android:id="@+id/bannerView"
             android:layout_width="match_parent"
-            android:layout_height="@dimen/y96"
-            android:layout_marginLeft="15dp"
-            android:layout_marginRight="15dp"
-            android:orientation="horizontal">
+            android:layout_height="@dimen/y350"
+            android:orientation="vertical" />
 
-            <ImageView
-                android:layout_width="24dp"
-                android:layout_height="24dp"
-                android:layout_centerVertical="true"
-                android:src="@drawable/home_page_03" />
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_centerInParent="true"
-                android:layout_centerVertical="true"
-                android:layout_marginRight="69dp"
-                android:background="@drawable/ll_circularbead"
-                android:gravity="center"
-                android:orientation="horizontal">
-
-                <LinearLayout
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:gravity="center_vertical">
-
-                    <ImageView
-                        android:layout_width="13.5dp"
-                        android:layout_height="13.5dp"
-                        android:src="@drawable/app_index_08" />
-
-                    <EditText
-                        android:layout_width="match_parent"
-                        android:layout_height="22dp"
-                        android:background="@null"
-                        android:hint="【营养保健】来医院，大屏开奥运"
-                        android:textColor="#bbbbbb"
-                        android:textSize="12sp" />
-                </LinearLayout>
-
-            </LinearLayout>
-
-            <ImageView
-                android:layout_width="24dp"
-                android:layout_height="24dp"
-                android:layout_alignParentRight="true"
-                android:layout_centerVertical="true"
-                android:src="@drawable/home_page_05" />
-        </RelativeLayout>
-
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="10dp"
-            android:background="#eaedf4"></View>
-
-        <ImageView
-            android:layout_width="match_parent"
-            android:layout_height="@dimen/y232"
-            android:src="@drawable/home_page_019" />
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="34dp"
+            android:layout_height="@dimen/y68"
+            android:gravity="center_vertical"
             android:orientation="horizontal">
-
-            <ImageView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center_vertical"
-                android:layout_marginLeft="15dp"
-                android:src="@drawable/home_page_09" />
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_gravity="center_vertical"
-                android:text="【营养保健】来医院，大屏开奥运" />
-        </LinearLayout>
+                android:layout_marginLeft="@dimen/x30"
+                android:text="热点推荐"
+                android:textColor="@color/pink"
+                android:textSize="@dimen/y28" />
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="@dimen/y360"
-            android:background="#ffffff"
-            android:orientation="horizontal">
-
-            <RelativeLayout
-                android:layout_width="0dp"
+            <TextView
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_weight="1">
-
-                <ImageView
-
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:src="@drawable/home_page_12" />
-            </RelativeLayout>
-
-            <RelativeLayout
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:orientation="vertical">
-
-                <LinearLayout
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_alignParentLeft="true"
-                    android:orientation="vertical">
-
-                    <ImageView
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:src="@drawable/home_page_13" />
-
-                    <ImageView
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:src="@drawable/home_page_14" />
-
-                    <ImageView
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:src="@drawable/home_page_15" />
-                </LinearLayout>
-
-            </RelativeLayout>
+                android:layout_marginLeft="@dimen/x15"
+                android:text="【营养保健】来医院，看大保健"
+                android:textColor="@color/fontcolor"
+                android:textSize="@dimen/y24" />
         </LinearLayout>
 
         <View
             android:layout_width="match_parent"
             android:layout_height="@dimen/y20"
-            android:background="#eaedf4"></View>
+            android:background="@color/backgroundgray" />
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="@dimen/y240"
-            android:background="#ffffff"
+            android:layout_height="wrap_content"
             android:orientation="horizontal">
 
             <LinearLayout
-                android:layout_width="0dp"
+                android:id="@+id/ll_patriarch_lecture_room"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_weight="1">
-
-                <ImageView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_alignParentRight="true"
-                    android:src="@drawable/home_page_17" />
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
+                android:layout_marginBottom="@dimen/y40"
+                android:layout_marginTop="@dimen/y34"
                 android:layout_weight="1"
+                android:gravity="center_horizontal"
                 android:orientation="vertical">
 
                 <ImageView
-                    android:layout_width="match_parent"
-                    android:layout_height="0dp"
-                    android:layout_weight="1"
-                    android:src="@drawable/home_page_18" />
+                    android:layout_width="@dimen/x44"
+                    android:layout_height="@dimen/y44"
+                    android:src="@drawable/home_patriarch_lecture_room" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/y30"
+                    android:text="家长课堂"
+                    android:textColor="@color/homefont"
+                    android:textSize="@dimen/y28" />
+
+            </LinearLayout>
+
+
+            <LinearLayout
+                android:id="@+id/ll_home_order_registration"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="@dimen/y40"
+                android:layout_marginTop="@dimen/y34"
+                android:layout_weight="1"
+                android:gravity="center_horizontal"
+                android:orientation="vertical">
 
                 <ImageView
-                    android:layout_width="match_parent"
+                    android:layout_width="@dimen/x44"
+                    android:layout_height="@dimen/y44"
+                    android:src="@drawable/home_order_registration" />
+
+                <TextView
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:src="@drawable/home_page_19" />
+                    android:layout_marginTop="@dimen/y30"
+                    android:text="预约挂号"
+                    android:textColor="@color/homefont"
+                    android:textSize="@dimen/y28" />
+
+            </LinearLayout>
+
+
+            <LinearLayout
+                android:id="@+id/ll_home_health_record"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="@dimen/y40"
+                android:layout_marginTop="@dimen/y34"
+                android:layout_weight="1"
+                android:gravity="center_horizontal"
+                android:orientation="vertical">
+
+                <ImageView
+                    android:layout_width="@dimen/x44"
+                    android:layout_height="@dimen/y44"
+                    android:src="@drawable/home_health_record" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/y30"
+                    android:text="健康小记"
+                    android:textColor="@color/homefont"
+                    android:textSize="@dimen/y28" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/ll_diagnosistreat_manage"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="@dimen/y40"
+                android:layout_marginTop="@dimen/y34"
+                android:layout_weight="1"
+                android:gravity="center_horizontal"
+                android:orientation="vertical">
+
+                <ImageView
+                    android:layout_width="@dimen/x44"
+                    android:layout_height="@dimen/y44"
+                    android:src="@drawable/diagnosis_unmep" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/y30"
+                    android:text="诊疗管理"
+                    android:textColor="@color/homefont"
+                    android:textSize="@dimen/y28" />
+
             </LinearLayout>
         </LinearLayout>
 
         <View
             android:layout_width="match_parent"
             android:layout_height="@dimen/y20"
-            android:background="#eaedf4"></View>
+            android:background="@color/backgroundgray" />
 
         <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="@dimen/y80">
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="22dp"
-                android:orientation="horizontal">
-
-                <View
-                    android:layout_width="3dp"
-                    android:layout_height="match_parent"
-                    android:background="#d92727"></View>
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center_vertical"
-                    android:layout_marginLeft="7dp"
-                    android:text="名医库"
-                    android:textColor="#323232"
-                    android:textSize="15sp" />
-            </LinearLayout>
+            android:layout_height="wrap_content">
 
             <LinearLayout
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_height="match_parent">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_marginBottom="@dimen/y30"
+                    android:layout_marginLeft="@dimen/x30"
+                    android:layout_marginTop="@dimen/y24"
+                    android:text="热门文章"
+                    android:textColor="@color/linegray1"
+                    android:textSize="@dimen/y28" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/ll_home_article_more"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
                 android:layout_alignParentRight="true"
-                android:layout_marginRight="15dp">
+                android:orientation="horizontal">
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginLeft="15dp"
+                    android:layout_marginBottom="@dimen/y30"
+                    android:layout_marginTop="@dimen/y24"
                     android:text="更多"
-                    android:textColor="#e22020"
-                    android:textSize="12sp" />
+                    android:textColor="@color/linegray1"
+                    android:textSize="@dimen/y24" />
 
                 <ImageView
+                    android:layout_width="@dimen/x10"
+                    android:layout_height="@dimen/y18"
+                    android:layout_marginLeft="@dimen/x10"
+                    android:layout_marginRight="@dimen/x30"
+                    android:layout_marginTop="@dimen/y31"
+                    android:src="@drawable/home_article_doctor_more" />
 
-                    android:layout_width="9dp"
-                    android:layout_height="14dp"
-                    android:src="@drawable/home_page_1" />
             </LinearLayout>
-
         </RelativeLayout>
 
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="1dp"
-            android:background="#e0e0e0"></View>
 
         <LinearLayout
+
             android:layout_width="match_parent"
-            android:layout_height="@dimen/y230"
+            android:layout_height="wrap_content"
             android:orientation="horizontal">
 
-            <ImageView
-                android:layout_width="80dp"
-                android:layout_height="80dp"
-                android:layout_marginBottom="20dp"
-                android:layout_marginLeft="15dp"
-                android:layout_marginTop="15dp"
-                android:src="@drawable/home_page_28" />
+            <com.example.chen.tset.page.RoundCornerImageView
+                android:id="@+id/iv_img"
+                android:layout_width="@dimen/x120"
+                android:layout_height="@dimen/y100"
+                android:layout_marginBottom="@dimen/y20"
+                android:layout_marginLeft="@dimen/x30"
+                android:adjustViewBounds="true"
+                android:scaleType="centerCrop"
+                android:src="#d21010" />
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/x30"
                 android:orientation="vertical">
 
-                <LinearLayout
+                <TextView
+
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/y2"
+                    android:text="吃喝拉撒无小事"
+                    android:textColor="@color/fontcolor"
+                    android:textSize="@dimen/x28" />
+
+                <TextView
+
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="@dimen/x30"
+                    android:layout_marginTop="@dimen/y4"
+                    android:ellipsize="end"
+                    android:lines="1"
+                    android:text="很多人认为，他是健身是一种有益的运动动方法方法发"
+                    android:textColor="@color/xmgray"
+                    android:textSize="@dimen/x24" />
+
+                <RelativeLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_gravity="center"
-                    android:orientation="horizontal">
+                    android:layout_marginTop="@dimen/y6">
 
                     <TextView
+
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="20dp"
-                        android:text="柳跃新"
-                        android:textSize="14sp" />
+                        android:layout_alignParentLeft="true"
+                        android:text="08-25"
+                        android:textColor="@color/linegray1"
+                        android:textSize="@dimen/x22" />
 
-                    <TextView
+                    <LinearLayout
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginLeft="8dp"
-                        android:layout_marginTop="20dp"
-                        android:text="主治医生，行为发育科"
-                        android:textColor="#666666"
-                        android:textSize="12sp" />
-                </LinearLayout>
+                        android:layout_alignParentRight="true"
+                        android:orientation="horizontal">
 
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal">
+                        <ImageView
+                            android:layout_width="@dimen/x26"
+                            android:layout_height="@dimen/y26"
+                            android:src="@drawable/encyclopedialike" />
 
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="8dp"
-                        android:text="简介"
-                        android:textSize="14sp" />
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginLeft="8dp"
-                        android:layout_marginRight="13dp"
-                        android:layout_marginTop="7dp"
-                        android:text="行为发育科主治医生，毕业于广州医学院，9余年三级医院临床工作经验"
-                        android:textColor="#666666"
-                        android:textSize="13sp" />
-                </LinearLayout>
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="7dp"
-                    android:orientation="horizontal">
-
-                    <Button
-                        android:layout_width="80dp"
-                        android:layout_height="22dp"
-                        android:background="@drawable/btn_circularbead1"
-                        android:text="点击预约"
-                        android:textSize="10sp" />
-
-                    <Button
-                        android:layout_width="80dp"
-                        android:layout_height="22dp"
-                        android:layout_marginLeft="10dp"
-                        android:background="@drawable/btn_circularbead2"
-                        android:text="点击预约"
-                        android:textSize="10sp" />
-                </LinearLayout>
-
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="@dimen/x14"
+                            android:layout_marginRight="@dimen/x42"
+                            android:text="21"
+                            android:textColor="@color/linegray1"
+                            android:textSize="@dimen/x22" />
+                    </LinearLayout>
+                </RelativeLayout>
             </LinearLayout>
         </LinearLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/y1"
+            android:layout_marginLeft="@dimen/x30"
+            android:background="@color/linegray" />
+
+
+        <LinearLayout
+
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <com.example.chen.tset.page.RoundCornerImageView
+                android:layout_width="@dimen/x120"
+                android:layout_height="@dimen/y100"
+                android:layout_marginBottom="@dimen/y20"
+                android:layout_marginLeft="@dimen/x30"
+                android:layout_marginTop="@dimen/y20"
+                android:adjustViewBounds="true"
+                android:scaleType="centerCrop"
+                android:src="#d21010" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/x30"
+                android:orientation="vertical">
+
+                <TextView
+
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/y22"
+                    android:text="吃喝拉撒无小事"
+                    android:textColor="@color/fontcolor"
+                    android:textSize="@dimen/x28" />
+
+                <TextView
+
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="@dimen/x30"
+                    android:layout_marginTop="@dimen/y4"
+                    android:ellipsize="end"
+                    android:lines="1"
+                    android:text="很多人认为，他是健身是一种有益的运动动方法方法发"
+                    android:textColor="@color/xmgray"
+                    android:textSize="@dimen/x24" />
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/y6">
+
+                    <TextView
+
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentLeft="true"
+                        android:text="08-25"
+                        android:textColor="@color/linegray1"
+                        android:textSize="@dimen/x22" />
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentRight="true"
+                        android:orientation="horizontal">
+
+                        <ImageView
+                            android:layout_width="@dimen/x26"
+                            android:layout_height="@dimen/y26"
+                            android:src="@drawable/encyclopedialike" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="@dimen/x14"
+                            android:layout_marginRight="@dimen/x42"
+                            android:text="21"
+                            android:textColor="@color/linegray1"
+                            android:textSize="@dimen/x22" />
+                    </LinearLayout>
+                </RelativeLayout>
+            </LinearLayout>
+        </LinearLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/y20"
+            android:background="@color/backgroundgray" />
+
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+
+                    android:layout_marginLeft="@dimen/x30"
+                    android:layout_marginTop="@dimen/y24"
+                    android:text="名医推荐"
+                    android:textColor="@color/linegray1"
+                    android:textSize="@dimen/y28" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/ll_home_doctor_more"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_alignParentRight="true"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+
+                    android:layout_marginTop="@dimen/y24"
+                    android:text="更多"
+                    android:textColor="@color/linegray1"
+                    android:textSize="@dimen/y24" />
+
+                <ImageView
+                    android:layout_width="@dimen/x10"
+                    android:layout_height="@dimen/y18"
+                    android:layout_marginLeft="@dimen/x10"
+                    android:layout_marginRight="@dimen/x30"
+                    android:layout_marginTop="@dimen/y31"
+                    android:src="@drawable/home_article_doctor_more" />
+            </LinearLayout>
+        </RelativeLayout>
+
+        <com.example.chen.tset.page.ListViewForScrollView
+            android:id="@+id/home_listView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:overScrollMode="never" />
+
+
     </LinearLayout>
 
-</RelativeLayout>
+
+</ScrollView>

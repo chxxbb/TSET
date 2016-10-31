@@ -2,17 +2,23 @@ package com.example.chen.tset.page;
 
 
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
 import android.support.annotation.Nullable;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.view.ViewPager;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import com.example.chen.tset.Data.Http_data;
 import com.example.chen.tset.R;
+import com.example.chen.tset.Utils.IListener;
+import com.example.chen.tset.Utils.ListenerManager;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -20,7 +26,7 @@ import java.util.List;
 /**
  * Created by Administrator on 2016/8/25 0025.
  */
-public class EncyclopediaFragment extends Fragment {
+public class EncyclopediaFragment extends Fragment implements IListener {
     View view;
     EncyclopediaAdapter adapter;
     List<Fragment> flist;
@@ -37,11 +43,19 @@ public class EncyclopediaFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         view = inflater.inflate(R.layout.fragment_encyclopedia, null);
+
+        //注册广播
+        ListenerManager.getInstance().registerListtener(this);
         findView();
         init();
+
+        if (Http_data.state == 2) {
+            //使viewpage显示在第二页
+            vp_encyclopedia.setCurrentItem(1);
+            Http_data.state = 1;
+        }
         return view;
     }
-
 
 
     private void findView() {
@@ -147,6 +161,14 @@ public class EncyclopediaFragment extends Fragment {
 
         }
     };
+
+
+    @Override
+    public void onStart() {
+        super.onStart();
+
+    }
+
     private View.OnClickListener rllistener = new View.OnClickListener() {
         @Override
         public void onClick(View v) {
@@ -166,4 +188,16 @@ public class EncyclopediaFragment extends Fragment {
             }
         }
     };
+
+    @Override
+    public void notifyAllActivity(String str) {
+
+        if (str.equals("显示资讯页面")) {
+            //使viewpage显示在第二页
+            vp_encyclopedia.setCurrentItem(1);
+
+        }
+    }
+
+
 }

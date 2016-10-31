@@ -12,4 +12,6 @@ public class Http_data {
 
     public static final String version_number = "1.0.0";
 
+    public static  int state=1;
+
 }

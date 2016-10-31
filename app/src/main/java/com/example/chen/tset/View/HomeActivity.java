@@ -54,7 +54,9 @@ import com.example.chen.tset.Data.User;
 import com.example.chen.tset.Data.User_Http;
 import com.example.chen.tset.Data.VersionsUpdate;
 import com.example.chen.tset.Utils.ChatpageDao;
+import com.example.chen.tset.Utils.IListener;
 import com.example.chen.tset.Utils.InquiryrecordDao;
+import com.example.chen.tset.Utils.ListenerManager;
 import com.example.chen.tset.Utils.MyBaseActivity;
 import com.example.chen.tset.Utils.PharmacyDao;
 import com.example.chen.tset.Utils.SharedPsaveuser;
@@ -64,6 +66,7 @@ import com.example.chen.tset.page.ConsultingFragment;
 import com.example.chen.tset.page.EncyclopediaFragment;
 import com.example.chen.tset.R;
 
+import com.example.chen.tset.page.HomepageFragment;
 import com.example.chen.tset.page.InquiryView;
 import com.example.chen.tset.page.LectureroomFragment;
 import com.example.chen.tset.page.MypageFragment;
@@ -113,7 +116,7 @@ import cn.jpush.im.api.BasicCallback;
 import okhttp3.Call;
 import okhttp3.Response;
 
-public class HomeActivity extends MyBaseActivity implements View.OnClickListener {
+public class HomeActivity extends MyBaseActivity implements View.OnClickListener, IListener {
     FragmentManager fm;
     FragmentTransaction ft;
     private RadioButton rb_encyclopedia, rb_lectureroom, rb_mypage, rb_diagnosis;
@@ -160,11 +163,17 @@ public class HomeActivity extends MyBaseActivity implements View.OnClickListener
 
     Update update;
 
+    HomepageFragment homepageFragment;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
+
+
+        //注册广播
+        ListenerManager.getInstance().registerListtener(this);
 
         //版本号
         version_numberSp = new Version_numberSP(this);
@@ -328,7 +337,7 @@ public class HomeActivity extends MyBaseActivity implements View.OnClickListener
     private void versionUpdate() {
 
 
-        updateurl = "http://p.gdown.baidu.com/140a92cd4b56515db0a270958e5b5e31c4e2554e228b41c0f4dc3bc6c63ecff10febba708325074d3c1f73df1a3c428aed5e7b7d92a3c1e4b1b6c25b1f0902711538926fee90cd0031220c659d3057c5224615b2e403fdb53af2a062c5cace8c160bceb1e1804d404ade30b1313d42525406ea3b85ad1764b383636decab26f58b7653dea430cc39f5f7a7629c78b2c0889c389ea7559b7e";
+        updateurl = update.getDownloadPath();
 
 
         new Thread() {
@@ -637,7 +646,7 @@ public class HomeActivity extends MyBaseActivity implements View.OnClickListener
 
     private void hideAllFragment(FragmentTransaction fragmentTransaction) {
         if (encyclopediaFragment != null) fragmentTransaction.hide(encyclopediaFragment);
-        if (lectureroomFragment != null) fragmentTransaction.hide(lectureroomFragment);
+        if (homepageFragment != null) fragmentTransaction.hide(homepageFragment);
         if (mypageFragment != null) fragmentTransaction.hide(mypageFragment);
         if (consultingFragment != null) fragmentTransaction.hide(consultingFragment);
     }
@@ -652,6 +661,13 @@ public class HomeActivity extends MyBaseActivity implements View.OnClickListener
                 radioGroup_right.clearCheck();
                 fl_registration.setVisibility(View.GONE);
                 //首页
+                if (homepageFragment == null) {
+                    homepageFragment = new HomepageFragment();
+                    ft.add(R.id.framelayout, homepageFragment);
+                } else {
+                    ft.show(homepageFragment);
+                }
+
 
                 break;
 
@@ -847,11 +863,67 @@ public class HomeActivity extends MyBaseActivity implements View.OnClickListener
     }
 
 
+
+
+
+
     @Override
-    protected void onSaveInstanceState(Bundle outState) {
-        // TODO Auto-generated method stub
-        super.onSaveInstanceState(outState);
+    public void notifyAllActivity(String str) {
+        ft = fm.beginTransaction();
+        hideAllFragment(ft);
+
+        //接收到广播显示不同的页面
+        if (str.equals("显示诊疗页面")) {
+            fl_registration.setVisibility(View.GONE);
+            rb_diagnosis.setChecked(true);
+            if (consultingFragment == null) {
+                consultingFragment = new ConsultingFragment();
+                ft.add(R.id.framelayout, consultingFragment);
+            } else {
+                ft.show(consultingFragment);
+            }
+
+            ft.commit();
+
+
+        } else if (str.equals("显示资讯页面")) {
+            fl_registration.setVisibility(View.GONE);
+            radioGroup_left.clearCheck();
+            rb_lectureroom.setChecked(true);
+
+            if (encyclopediaFragment == null) {
+
+                encyclopediaFragment = new EncyclopediaFragment();
+                ft.add(R.id.framelayout, encyclopediaFragment);
+            } else {
+
+                ft.show(encyclopediaFragment);
+            }
+
+            ft.commit();
+        }
+
+
     }
 
 
+
+
+    private long exitTime = 0;
+
+
+    @Override
+    public boolean onKeyDown(int keyCode, KeyEvent event) {
+        if(keyCode == KeyEvent.KEYCODE_BACK && event.getAction() == KeyEvent.ACTION_DOWN){
+            if((System.currentTimeMillis()-exitTime) > 2000){
+                Toast.makeText(getApplicationContext(), "再按一次退出", Toast.LENGTH_SHORT).show();
+                exitTime = System.currentTimeMillis();
+            } else {
+                finish();
+                System.exit(0);
+            }
+            return true;
+        }
+        return super.onKeyDown(keyCode, event);
+    }
 }
