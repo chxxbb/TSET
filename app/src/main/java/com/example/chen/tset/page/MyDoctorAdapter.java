@@ -56,8 +56,7 @@ public class MyDoctorAdapter extends BaseAdapter {
             convertView.setTag(new ViewHolder(convertView));
         }
         final ViewHolder viewHolder = (ViewHolder) convertView.getTag();
-        viewHolder.textView.setText(9.9 + "分");
-        viewHolder.tv_title.setText(list.get(position).getDoctorTitle());
+        viewHolder.textView.setText(list.get(position).getDoctorTitle());
         viewHolder.tv_name.setText(list.get(position).getDoctorName());
         viewHolder.btn_money.setText("￥" + list.get(position).getChatCost());
         viewHolder.tv_intro.setText("擅长：" + list.get(position).getAdept());
@@ -71,7 +70,7 @@ public class MyDoctorAdapter extends BaseAdapter {
                 Intent intent = new Intent(context, ChatpageActivity.class);
                 intent.putExtra("name", list.get(position).getDoctorName());
                 intent.putExtra("icon", list.get(position).getDoctorIcon());
-                intent.putExtra("doctorID", list.get(position).getDoctorId()+"");
+                intent.putExtra("doctorID", list.get(position).getDoctorId() + "");
                 intent.putExtra("username", list.get(position).getDoctorUserName());
                 context.startActivity(intent);
             }

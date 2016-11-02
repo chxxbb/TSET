@@ -102,7 +102,7 @@ public class InquiryActivity extends AppCompatActivity {
         //设置二级菜单内容体（listview，listview没有放在布局中，放在了二级菜单内容体重）
         dropDownMenu.setDropDownMenu(Arrays.asList(headers), initViewData(), contentView);
 
-        lv_inquiry.addFooterView(view1);
+
 
 
 

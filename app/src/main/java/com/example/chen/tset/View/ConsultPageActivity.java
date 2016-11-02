@@ -67,6 +67,9 @@ public class ConsultPageActivity extends MyBaseActivity implements View.OnClickL
 
     }
 
+
+
+
     private void findview() {
         scrollview = (ScrollView) findViewById(R.id.scrollview);
         ll_consult_return = (LinearLayout) findViewById(R.id.ll_consult_return);

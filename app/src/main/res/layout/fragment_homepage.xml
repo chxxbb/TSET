@@ -32,13 +32,13 @@
                 android:textColor="@color/pink"
                 android:textSize="@dimen/y28" />
 
-            <TextView
+            <com.example.chen.tset.page.AutoVerticalScrollTextView
+                android:id="@+id/textview_auto_roll"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
                 android:layout_marginLeft="@dimen/x15"
-                android:text="【营养保健】来医院，看大保健"
-                android:textColor="@color/fontcolor"
-                android:textSize="@dimen/y24" />
+                android:layout_marginTop="@dimen/y3" />
         </LinearLayout>
 
         <View
@@ -141,7 +141,7 @@
                 <ImageView
                     android:layout_width="@dimen/x44"
                     android:layout_height="@dimen/y44"
-                    android:src="@drawable/diagnosis_unmep" />
+                    android:src="@drawable/home_consulting_manage" />
 
                 <TextView
                     android:layout_width="wrap_content"

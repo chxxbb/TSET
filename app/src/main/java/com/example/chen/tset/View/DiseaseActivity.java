@@ -158,7 +158,7 @@ public class DiseaseActivity extends MyBaseActivity {
                             //医生头像
                             intent.putExtra("icon", inquiry.getIcon());
                             //医生ID
-                            intent.putExtra("doctorID", inquiry.getId()+"");
+                            intent.putExtra("doctorID", inquiry.getId() + "");
                             //医生聊天账号
                             intent.putExtra("username", inquiry.getUsername());
                             startActivity(intent);

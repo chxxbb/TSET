@@ -16,6 +16,7 @@ import com.example.chen.tset.Data.User_Http;
 import com.example.chen.tset.R;
 import com.example.chen.tset.Utils.SharedPsaveuser;
 import com.example.chen.tset.View.InquiryrecordActivity;
+import com.example.chen.tset.View.MyCashCouponsActivity;
 import com.example.chen.tset.View.MyDoctorActivity;
 import com.example.chen.tset.View.MycollectActivity;
 import com.example.chen.tset.View.PersonaldataActivity;
@@ -32,7 +33,7 @@ import de.hdodenhof.circleimageview.CircleImageView;
 public class MypageFragment extends Fragment {
     View view;
     private RelativeLayout rl_set;
-    private RelativeLayout rl_mycollect, rl_myreservation, rl_personaldata, rl_mydpctor, rl_inquiryrecord;
+    private RelativeLayout rl_mycollect, rl_myreservation, rl_personaldata, rl_mydpctor, rl_inquiryrecord, rl_MyCashCoupons;
     private CircleImageView iv_ico;
     private TextView tv_name;
     SharedPsaveuser sp;
@@ -58,12 +59,14 @@ public class MypageFragment extends Fragment {
         rl_inquiryrecord = (RelativeLayout) view.findViewById(R.id.rl_inquiryrecord);
         iv_ico = (CircleImageView) view.findViewById(R.id.iv_icon);
         tv_name = (TextView) view.findViewById(R.id.tv_name);
+        rl_MyCashCoupons = (RelativeLayout) view.findViewById(R.id.rl_MyCashCoupons);
         rl_set.setOnClickListener(listerer);
         rl_mycollect.setOnClickListener(listerer);
         rl_myreservation.setOnClickListener(listerer);
         rl_personaldata.setOnClickListener(listerer);
         rl_mydpctor.setOnClickListener(listerer);
         rl_inquiryrecord.setOnClickListener(listerer);
+        rl_MyCashCoupons.setOnClickListener(listerer);
     }
 
     @Override
@@ -80,7 +83,7 @@ public class MypageFragment extends Fragment {
 
             ImageLoader.getInstance().displayImage("file:///" + sp.getTag().getIcon(), iv_ico);
 
-           
+
         } else {
 
             ImageLoader.getInstance().displayImage(User_Http.user.getIcon(), iv_ico);
@@ -100,34 +103,46 @@ public class MypageFragment extends Fragment {
         public void onClick(View v) {
             switch (v.getId()) {
                 case R.id.rl_set:
+                    //设置页面
                     Intent intent = new Intent(getContext(), SetPageActivity.class);
 
                     startActivity(intent);
                     break;
                 case R.id.rl_mycollect:
+                    //我的收藏
                     Intent intent1 = new Intent(getContext(), MycollectActivity.class);
 
                     startActivity(intent1);
                     break;
                 case R.id.rl_myreservation:
+                    //我的浴液
                     Intent intent2 = new Intent(getContext(), ReservationActivity.class);
 
                     startActivity(intent2);
                     break;
                 case R.id.rl_personaldata:
+                    //个人资料
                     Intent intent3 = new Intent(getContext(), PersonaldataActivity.class);
 
                     startActivity(intent3);
                     break;
                 case R.id.rl_mydpctor:
+                    //我的医生
                     Intent intent4 = new Intent(getContext(), MyDoctorActivity.class);
 
                     startActivity(intent4);
                     break;
                 case R.id.rl_inquiryrecord:
+
+                    //问诊历史
                     Intent intent5 = new Intent(getContext(), InquiryrecordActivity.class);
 
                     startActivity(intent5);
+                    break;
+
+                case R.id.rl_MyCashCoupons:
+                    Intent intent6 = new Intent(getContext(), MyCashCouponsActivity.class);
+                    startActivity(intent6);
                     break;
 
             }

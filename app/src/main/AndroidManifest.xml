@@ -55,11 +55,11 @@
         android:persistent="true"
         android:screenOrientation="portrait"
         android:supportsRtl="true"
-
         android:theme="@style/Theme.AppCompat.NoActionBar">
         <activity android:name=".View.LeadActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
@@ -217,7 +217,10 @@
         <activity android:name=".View.OnekeyLoinActivity" />
         <activity android:name=".View.HealthparticularsActivity" />
         <activity android:name=".View.InquiryActivity" />
-        <activity android:name=".View.LectureoomActivity"></activity>
+        <activity android:name=".View.LectureoomActivity" />
+        <activity android:name=".View.MyCashCouponsActivity"></activity>
+
+        <service android:name=".page.MyService"></service>
     </application>
 
 </manifest>

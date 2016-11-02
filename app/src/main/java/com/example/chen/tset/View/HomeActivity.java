@@ -222,6 +222,9 @@ public class HomeActivity extends MyBaseActivity implements View.OnClickListener
     }
 
 
+
+
+
     //检测是否有更新
     private void updatedetection() {
         final Gson gson = new Gson();

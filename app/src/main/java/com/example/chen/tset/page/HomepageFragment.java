@@ -3,6 +3,9 @@ package com.example.chen.tset.page;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
+import android.os.SystemClock;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 
@@ -13,6 +16,7 @@ import android.view.ViewGroup;
 import android.widget.LinearLayout;
 
 import android.widget.ScrollView;
+import android.widget.Toast;
 
 import com.example.chen.tset.Data.Http_data;
 import com.example.chen.tset.Data.User_Http;
@@ -35,6 +39,9 @@ import java.util.List;
  */
 public class HomepageFragment extends Fragment implements IListener {
     View view;
+    private AutoVerticalScrollTextView verticalScrollTV;
+    private int number = 0;
+    private boolean isRunning = true;
     private BannerView bannerView;
     private ScrollView scrollView;
     private LinearLayout ll_patriarch_lecture_room, ll_home_order_registration, ll_home_health_record, ll_diagnosistreat_manage, ll_home_article_more, ll_home_doctor_more;
@@ -42,6 +49,7 @@ public class HomepageFragment extends Fragment implements IListener {
     HomeDoctorRecommendAdapter adapter;
     List<String> list;
 
+    private List<String> strings = new ArrayList<>();
 
     @Nullable
     @Override
@@ -83,12 +91,15 @@ public class HomepageFragment extends Fragment implements IListener {
 
         home_listView = (ListViewForScrollView) view.findViewById(R.id.home_listView);
 
+        //一个自定义可以上下滚动的textview
+        verticalScrollTV = (AutoVerticalScrollTextView) view.findViewById(R.id.textview_auto_roll);
 
-        //隐藏滚动条
-        scrollView.setVerticalScrollBarEnabled(false);
 
         //使scrollView显示在头部，重写listview解决了scrollview与listview冲突，但会出现默认显示listview
         scrollView.smoothScrollTo(0, 0);
+
+        //隐藏滚动条
+        scrollView.setVerticalScrollBarEnabled(false);
 
 
         ll_patriarch_lecture_room.setOnClickListener(listener);
@@ -99,8 +110,50 @@ public class HomepageFragment extends Fragment implements IListener {
         ll_home_article_more.setOnClickListener(listener);
     }
 
+    @Override
+    public void onStart() {
+        super.onStart();
+
+    }
+
+    @Override
+    public void onHiddenChanged(boolean hidden) {
+        super.onHiddenChanged(hidden);
+        scrollView.smoothScrollTo(0, 0);
+    }
 
     private void init() {
+
+        //设置滚动条目
+        strings.add("吾之旧友吊似汝");
+        strings.add("而今坟头草丈五");
+
+
+        //设置第一个条目
+        verticalScrollTV.setText(strings.get(0));
+
+
+        //设置滚动时间
+        new Thread() {
+            @Override
+            public void run() {
+                while (isRunning) {
+                    SystemClock.sleep(3000);
+                    handler.sendEmptyMessage(0);
+                }
+            }
+        }.start();
+
+
+        //上下文滚动的textView的点击事件
+        verticalScrollTV.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Toast.makeText(getContext(), strings.get(number % strings.size()), Toast.LENGTH_SHORT).show();
+            }
+        });
+
+
         list = new ArrayList<>();
         list.add("姓名1");
         list.add("姓名2");
@@ -109,6 +162,26 @@ public class HomepageFragment extends Fragment implements IListener {
         adapter.notifyDataSetChanged();
     }
 
+    //设置滚动方式及滚动完成设置textView
+    private Handler handler = new Handler() {
+        @Override
+        public void handleMessage(Message msg) {
+            switch (msg.what) {
+                case 0:
+                    verticalScrollTV.next();
+                    number++;
+                    verticalScrollTV.setText(strings.get(number % strings.size()));
+                    break;
+            }
+
+        }
+    };
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        isRunning = false;
+    }
 
     private View.OnClickListener listener = new View.OnClickListener() {
         @Override
@@ -142,7 +215,7 @@ public class HomepageFragment extends Fragment implements IListener {
                 //资讯页面
                 case R.id.ll_home_article_more:
                     ListenerManager.getInstance().sendBroadCast("显示资讯页面");
-                    Http_data.state=2;
+                    Http_data.state = 2;
                     break;
             }
         }

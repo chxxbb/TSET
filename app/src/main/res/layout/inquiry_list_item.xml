@@ -5,14 +5,14 @@
     android:orientation="vertical">
 
     <View
+        android:id="@+id/view"
         android:layout_width="match_parent"
-        android:layout_height="@dimen/y20"
-        android:background="@color/backgroundgray" />
-
+        android:layout_height="@dimen/y1"
+        android:background="@color/linegray" />
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="@dimen/y216"
+        android:layout_height="wrap_content"
         android:background="@color/white"
         android:orientation="vertical">
 
@@ -51,33 +51,52 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="程伟伟"
-                            android:textColor="@color/backgroundblue"
+                            android:textColor="@color/fontcolor"
                             android:textSize="@dimen/y30" />
 
-                        <TextView
-                            android:id="@+id/textView"
+                        <LinearLayout
                             android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
+                            android:layout_height="@dimen/y34"
                             android:layout_marginLeft="@dimen/x24"
-                            android:text="9.9分"
-                            android:textColor="#fb878f"
-                            android:textSize="@dimen/y24" />
-                    </LinearLayout>
+                            android:layout_marginTop="@dimen/y5"
+                            android:background="@drawable/home_doctor_title_case"
+                            android:gravity="center_horizontal">
 
-                    <TextView
-                        android:id="@+id/tv_title"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="主治医生"
-                        android:textColor="@color/xmgray"
-                        android:textSize="@dimen/y26" />
+                            <TextView
+                                android:id="@+id/textView"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center_vertical"
+                                android:layout_marginLeft="@dimen/x14"
+                                android:layout_marginRight="@dimen/x14"
+                                android:text="主治医生"
+                                android:textColor="@color/backgroundblue"
+                                android:textSize="@dimen/y20" />
+                        </LinearLayout>
+
+
+                    </LinearLayout>
 
                     <TextView
                         android:id="@+id/tv_section"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/y5"
                         android:text="行为发育科"
-                        android:textColor="@color/fontgray"
+                        android:textColor="@color/xmgray"
+                        android:textSize="@dimen/y24" />
+
+                    <TextView
+                        android:id="@+id/tv_intro"
+                        android:layout_width="@dimen/x350"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_vertical"
+                        android:layout_marginBottom="@dimen/y20"
+                        android:layout_marginTop="@dimen/y5"
+                        android:ellipsize="end"
+                        android:lines="1"
+                        android:text="擅长：儿童发育行为的多动症，自闭症，遗尿症，疑难杂症等等什么的"
+                        android:textColor="@color/xmgray"
                         android:textSize="@dimen/y24" />
                 </LinearLayout>
             </LinearLayout>
@@ -90,7 +109,7 @@
                 <LinearLayout
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/y46"
+                    android:layout_marginTop="@dimen/y30"
                     android:gravity="center_vertical">
 
                     <FrameLayout
@@ -101,7 +120,8 @@
 
                         <RelativeLayout
                             android:layout_width="@dimen/x155"
-                            android:layout_height="@dimen/y72">
+                            android:layout_height="@dimen/y72"
+                            android:layout_marginTop="@dimen/x13">
 
                             <Button
                                 android:id="@+id/btn_money"
@@ -120,46 +140,21 @@
                         <ImageView
                             android:layout_width="@dimen/x30"
                             android:layout_height="@dimen/y30"
+                            android:layout_marginTop="@dimen/x13"
                             android:src="@drawable/inquiry_isclick" />
+
+                        <ImageView
+                            android:layout_width="@dimen/x80"
+                            android:layout_height="@dimen/y34"
+                            android:layout_marginLeft="@dimen/x62"
+                            android:src="@drawable/home_doctor_state"
+
+                            />
                     </FrameLayout>
                 </LinearLayout>
             </LinearLayout>
         </RelativeLayout>
-
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="@dimen/y1"
-            android:layout_marginLeft="@dimen/x30"
-            android:layout_marginRight="@dimen/x30"
-            android:layout_marginTop="@dimen/y20"
-            android:background="@color/linegray" />
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="@dimen/y64"
-            android:layout_marginLeft="@dimen/x30"
-            android:layout_marginRight="@dimen/x30"
-            android:gravity="center_vertical">
-
-            <TextView
-                android:id="@+id/tv_intro"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center_vertical"
-                android:ellipsize="end"
-                android:lines="1"
-                android:text="擅长：儿童发育行为的多动症，自闭症，遗尿症，疑难杂症等等什么的"
-                android:textColor="@color/xmgray"
-                android:textSize="@dimen/y24" />
-        </LinearLayout>
     </LinearLayout>
-
-    <View
-        android:id="@+id/view"
-        android:visibility="gone"
-        android:layout_width="match_parent"
-        android:layout_height="@dimen/y50"
-        android:background="@color/white"/>
 
 
 </LinearLayout>
