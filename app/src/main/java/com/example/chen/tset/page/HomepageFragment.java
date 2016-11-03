@@ -9,29 +9,47 @@ import android.os.SystemClock;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 
-import android.support.v4.app.FragmentManager;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.LinearLayout;
 
 import android.widget.ScrollView;
+import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.chen.tset.Data.Consult;
+import com.example.chen.tset.Data.ConsultingRemindState;
+import com.example.chen.tset.Data.FindAllHot;
 import com.example.chen.tset.Data.Http_data;
-import com.example.chen.tset.Data.User_Http;
+import com.example.chen.tset.Data.Inquiry;
 import com.example.chen.tset.R;
 import com.example.chen.tset.Utils.IListener;
 import com.example.chen.tset.Utils.ListenerManager;
+import com.example.chen.tset.View.ConsultPageActivity;
+import com.example.chen.tset.View.DoctorparticularsActivity;
 import com.example.chen.tset.View.HealthconditionActivity;
 import com.example.chen.tset.View.InquiryActivity;
 import com.example.chen.tset.View.LectureoomActivity;
 import com.example.chen.tset.View.RegistrationAtivity;
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
+import com.nostra13.universalimageloader.core.ImageLoader;
+import com.zhy.http.okhttp.OkHttpUtils;
+import com.zhy.http.okhttp.callback.StringCallback;
 
 
+import java.lang.reflect.Type;
 import java.util.ArrayList;
 
+import java.util.Iterator;
+import java.util.LinkedList;
 import java.util.List;
+import java.util.Random;
+
+import okhttp3.Call;
 
 /**
  * Created by Administrator on 2016/9/14 0014.
@@ -42,14 +60,37 @@ public class HomepageFragment extends Fragment implements IListener {
     private AutoVerticalScrollTextView verticalScrollTV;
     private int number = 0;
     private boolean isRunning = true;
-    private BannerView bannerView;
+    private HomeBannerView diseaseBannerView;
     private ScrollView scrollView;
     private LinearLayout ll_patriarch_lecture_room, ll_home_order_registration, ll_home_health_record, ll_diagnosistreat_manage, ll_home_article_more, ll_home_doctor_more;
     private ListViewForScrollView home_listView;
     HomeDoctorRecommendAdapter adapter;
-    List<String> list;
+
 
     private List<String> strings = new ArrayList<>();
+
+    Gson gson = new Gson();
+
+    List<FindAllHot> findAllHotList;
+
+    List<Consult> consultList = new ArrayList<>();
+
+    List<Inquiry> inquiryList = new ArrayList<>();
+
+    //文章标题
+    private TextView tv_home_essay_title, tv_home_essay_title1;
+
+    //文章图片
+    private RoundCornerImageView tv_home_essay_icon, tv_home_essay_icon1;
+
+    //文章内容
+    private TextView tv_home_essay_content, tv_home_essay_content1;
+
+    //文章时间
+    private TextView tv_home_essay_time, tv_home_essay_time1;
+
+    private LinearLayout ll_home_essay, ll_home_essay1;
+
 
     @Nullable
     @Override
@@ -62,14 +103,46 @@ public class HomepageFragment extends Fragment implements IListener {
 
         findView();
 
+        //热点推荐
+        findAllHotinit();
+
+
+        homeEssayinit();
+
+        //医生推荐
+        homeDoctorInit();
+
+
         init();
         return view;
     }
 
 
     private void findView() {
-        bannerView = (BannerView) view.findViewById(R.id.bannerView);
+        findAllHotList = new ArrayList<>();
+        //疾病库banner
+        diseaseBannerView = (HomeBannerView) view.findViewById(R.id.bannerView);
         scrollView = (ScrollView) view.findViewById(R.id.scrollView);
+
+        tv_home_essay_title = (TextView) view.findViewById(R.id.tv_home_essay_title);
+
+        tv_home_essay_title1 = (TextView) view.findViewById(R.id.tv_home_essay_title1);
+
+        tv_home_essay_icon = (RoundCornerImageView) view.findViewById(R.id.tv_home_essay_icon);
+
+        tv_home_essay_icon1 = (RoundCornerImageView) view.findViewById(R.id.tv_home_essay_icon1);
+
+        tv_home_essay_content = (TextView) view.findViewById(R.id.tv_home_essay_content);
+
+        tv_home_essay_content1 = (TextView) view.findViewById(R.id.tv_home_essay_content1);
+
+        tv_home_essay_time = (TextView) view.findViewById(R.id.tv_home_essay_time);
+
+        tv_home_essay_time1 = (TextView) view.findViewById(R.id.tv_home_essay_time1);
+
+        ll_home_essay = (LinearLayout) view.findViewById(R.id.ll_home_essay);
+
+        ll_home_essay1 = (LinearLayout) view.findViewById(R.id.ll_home_essay1);
 
         //家长讲堂
         ll_patriarch_lecture_room = (LinearLayout) view.findViewById(R.id.ll_patriarch_lecture_room);
@@ -95,7 +168,7 @@ public class HomepageFragment extends Fragment implements IListener {
         verticalScrollTV = (AutoVerticalScrollTextView) view.findViewById(R.id.textview_auto_roll);
 
 
-        //使scrollView显示在头部，重写listview解决了scrollview与listview冲突，但会出现默认显示listview
+        //使scrollView显示在头部，重写了listview解决scrollview与listview冲突，但会出现默认显示listview的情况
         scrollView.smoothScrollTo(0, 0);
 
         //隐藏滚动条
@@ -108,78 +181,211 @@ public class HomepageFragment extends Fragment implements IListener {
         ll_diagnosistreat_manage.setOnClickListener(listener);
         ll_home_doctor_more.setOnClickListener(listener);
         ll_home_article_more.setOnClickListener(listener);
+        ll_home_essay.setOnClickListener(listener);
+        ll_home_essay1.setOnClickListener(listener);
+        home_listView.setOnItemClickListener(lvlistener);
     }
 
-    @Override
-    public void onStart() {
-        super.onStart();
-
-    }
-
+    //使首页一直保持在头部，当fragment处于暂停或显示状态时都会调用此方法
     @Override
     public void onHiddenChanged(boolean hidden) {
         super.onHiddenChanged(hidden);
         scrollView.smoothScrollTo(0, 0);
     }
 
-    private void init() {
 
-        //设置滚动条目
-        strings.add("吾之旧友吊似汝");
-        strings.add("而今坟头草丈五");
-
-
-        //设置第一个条目
-        verticalScrollTV.setText(strings.get(0));
-
-
-        //设置滚动时间
-        new Thread() {
+    //热点推荐数据
+    private void findAllHotinit() {
+        new Thread(new Runnable() {
             @Override
             public void run() {
-                while (isRunning) {
-                    SystemClock.sleep(3000);
-                    handler.sendEmptyMessage(0);
-                }
+                OkHttpUtils
+                        .post()
+                        .url(Http_data.http_data + "/FindAllHot")
+                        .build()
+                        .execute(new StringCallback() {
+                            @Override
+                            public void onError(Call call, Exception e, int id) {
+
+                            }
+
+                            @Override
+                            public void onResponse(String response, int id) {
+                                Type listtype = new TypeToken<LinkedList<FindAllHot>>() {
+                                }.getType();
+                                LinkedList<FindAllHot> leclist = gson.fromJson(response, listtype);
+                                for (Iterator it = leclist.iterator(); it.hasNext(); ) {
+                                    FindAllHot findAllHot = (FindAllHot) it.next();
+                                    //获取到的数据放入集合中
+                                    findAllHotList.add(findAllHot);
+                                    //设置滚动条目
+                                    strings.add(findAllHot.getTitle());
+                                }
+
+                                //设置第一次显示的数据
+                                verticalScrollTV.setText(strings.get(0));
+                                //设置滚动时间
+                                new Thread() {
+                                    @Override
+                                    public void run() {
+                                        while (isRunning) {
+                                            //每隔3000通知滚动一次
+                                            SystemClock.sleep(3000);
+                                            handler.sendEmptyMessage(0);
+                                        }
+                                    }
+                                }.start();
+                            }
+                        });
+
+
             }
-        }.start();
+        }).start();
+
+
+    }
+
+
+    //文章数据
+    private void homeEssayinit() {
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                OkHttpUtils
+                        .post()
+                        .url(Http_data.http_data + "/FindCyclopediaRandomTwo")
+                        .build()
+                        .execute(new StringCallback() {
+                            @Override
+                            public void onError(Call call, Exception e, int id) {
+
+                            }
+
+                            @Override
+                            public void onResponse(String response, int id) {
+
+                                Type listtype = new TypeToken<LinkedList<Consult>>() {
+                                }.getType();
+                                LinkedList<Consult> leclist = gson.fromJson(response, listtype);
+                                for (Iterator it = leclist.iterator(); it.hasNext(); ) {
+                                    Consult consult = (Consult) it.next();
+                                    consultList.add(consult);
+
+                                }
+                                handler.sendEmptyMessage(1);
+
+                            }
+                        });
+
+            }
+        }).start();
+
+    }
+
+    //推荐医生数据
+    private void homeDoctorInit() {
+
+        OkHttpUtils
+                .post()
+                .url(Http_data.http_data + "/FindDoctorRandomFive")
+                .build()
+                .execute(new StringCallback() {
+                    @Override
+                    public void onError(Call call, Exception e, int id) {
+
+                    }
+
+                    @Override
+                    public void onResponse(String response, int id) {
+
+
+                        Type listtype = new TypeToken<LinkedList<Inquiry>>() {
+                        }.getType();
+                        LinkedList<Inquiry> leclist = gson.fromJson(response, listtype);
+                        for (Iterator it = leclist.iterator(); it.hasNext(); ) {
+                            Inquiry inquiry = (Inquiry) it.next();
+                            inquiryList.add(inquiry);
+
+                        }
+                        handler.sendEmptyMessage(2);
+
+                    }
+                });
+    }
+
+
+    private void init() {
 
 
         //上下文滚动的textView的点击事件
         verticalScrollTV.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(getContext(), strings.get(number % strings.size()), Toast.LENGTH_SHORT).show();
+                Toast.makeText(getContext(), "链接:" + findAllHotList.get(number % strings.size()).getSite(), Toast.LENGTH_SHORT).show();
             }
         });
 
 
-        list = new ArrayList<>();
-        list.add("姓名1");
-        list.add("姓名2");
-        adapter = new HomeDoctorRecommendAdapter(getContext(), list);
+        //实例化适配器
+        adapter = new HomeDoctorRecommendAdapter(getContext(), inquiryList);
         home_listView.setAdapter(adapter);
-        adapter.notifyDataSetChanged();
+
     }
 
-    //设置滚动方式及滚动完成设置textView
+
     private Handler handler = new Handler() {
         @Override
         public void handleMessage(Message msg) {
+            Random r=new Random();
+
             switch (msg.what) {
                 case 0:
+                    //设置滚动方式及滚动完成设置textView
                     verticalScrollTV.next();
+                    //获取滚动的次数
                     number++;
                     verticalScrollTV.setText(strings.get(number % strings.size()));
                     break;
+                case 1:
+                    //设置文章标题
+                    tv_home_essay_title.setText(consultList.get(0).getTitle());
+                    tv_home_essay_title1.setText(consultList.get(1).getTitle());
+                    //设置文章内容
+                    tv_home_essay_content.setText(consultList.get(0).getContent());
+                    tv_home_essay_content1.setText(consultList.get(1).getContent());
+                    //设置文章时间
+                    tv_home_essay_time.setText(consultList.get(0).getTime());
+                    tv_home_essay_time1.setText(consultList.get(1).getTime());
+                    //设置文章图片
+                    ImageLoader.getInstance().displayImage(consultList.get(0).getIcon(), tv_home_essay_icon);
+                    ImageLoader.getInstance().displayImage(consultList.get(1).getIcon(), tv_home_essay_icon1);
+                    break;
+
+                case 2:
+                    //listView刷新
+                    adapter.notifyDataSetChanged();
+                    break;
+
             }
 
         }
     };
 
+    //推荐医生点击事件
+    private AdapterView.OnItemClickListener lvlistener = new AdapterView.OnItemClickListener() {
+        @Override
+        public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+            Intent intent = new Intent(getContext(), DoctorparticularsActivity.class);
+            intent.putExtra("doctot_id", inquiryList.get(position).getId());
+            startActivity(intent);
+        }
+    };
+
+
     @Override
     public void onDestroy() {
         super.onDestroy();
+        //关闭滚动
         isRunning = false;
     }
 
@@ -214,22 +420,42 @@ public class HomepageFragment extends Fragment implements IListener {
                     break;
                 //资讯页面
                 case R.id.ll_home_article_more:
+                    //发送广播通知显示资讯页面，并且viewPage滑动到第二页
                     ListenerManager.getInstance().sendBroadCast("显示资讯页面");
                     Http_data.state = 2;
+                    break;
+
+                //跳转至资讯详情页面
+                case R.id.ll_home_essay1:
+                    Intent intent4 = new Intent(getContext(), ConsultPageActivity.class);
+                    intent4.putExtra("information", consultList.get(1).getId() + "");
+                    intent4.putExtra("collect", "0");
+                    startActivity(intent4);
+                    break;
+
+                case R.id.ll_home_essay:
+                    Intent intent5 = new Intent(getContext(), ConsultPageActivity.class);
+                    intent5.putExtra("information", consultList.get(0).getId() + "");
+                    intent5.putExtra("collect", "0");
+                    startActivity(intent5);
                     break;
             }
         }
     };
 
+
+    //banner开始滑动
     public void onResume() {
         super.onResume();
-        bannerView.bannerStartPlay();
+        diseaseBannerView.bannerStartPlay();
     }
 
+
+    //banner停止滑动
     @Override
     public void onPause() {
         super.onPause();
-        bannerView.bannerStopPlay();
+        diseaseBannerView.bannerStopPlay();
     }
 
     @Override

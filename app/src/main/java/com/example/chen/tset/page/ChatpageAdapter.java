@@ -164,6 +164,8 @@ public class ChatpageAdapter extends BaseAdapter {
 
         }
 
+
+
         return convertView;
     }
 

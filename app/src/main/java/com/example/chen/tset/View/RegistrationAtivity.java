@@ -36,9 +36,11 @@ import com.example.chen.tset.Data.Http_data;
 import com.example.chen.tset.Data.Registration;
 import com.example.chen.tset.Data.User_Http;
 import com.example.chen.tset.R;
+import com.example.chen.tset.Utils.IListener;
 import com.example.chen.tset.Utils.ListenerManager;
 import com.example.chen.tset.Utils.MyBaseActivity;
 import com.example.chen.tset.Utils.SharedPsaveuser;
+import com.example.chen.tset.page.MyCashCouponsAdapter;
 import com.example.chen.tset.page.MySpinnerAdapter;
 import com.example.chen.tset.page.RegistrationageAdapter;
 import com.example.chen.tset.page.RegistrationdivisionAdapter;
@@ -65,12 +67,12 @@ import okhttp3.Call;
 /**
  * 一键挂号
  */
-public class RegistrationAtivity extends MyBaseActivity {
-    private RelativeLayout rl_city, rl_gender, rl_time, rl_age, rl_professionaltitle, rl_departments, rl_nonetwork, rl_loading;
+public class RegistrationAtivity extends MyBaseActivity implements IListener {
+    private RelativeLayout rl_city, rl_gender, rl_time, rl_age, rl_professionaltitle, rl_departments, rl_nonetwork, rl_loading, rl_use_cash_coupons;
     private LinearLayout ll_rutregistration, ll_cancel, ll_registr, ll_et_describe;
     private Dialog setHeadDialog;
     private View dialogView;
-    private TextView tv_city, tv_gender, tv_time, tv_age, tv_professionaltitle, tv_departments;
+    private TextView tv_city, tv_gender, tv_time, tv_age, tv_professionaltitle, tv_departments, tv_cash_coupons_stater;
     private ProgressBar progressBar;
     private EditText et_phone, et_name, et_describe;
     private Button btn_pay;
@@ -95,11 +97,10 @@ public class RegistrationAtivity extends MyBaseActivity {
     SharedPsaveuser sp;
 
 
-
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        ListenerManager.getInstance().registerListtener(this);
         requestWindowFeature(Window.FEATURE_NO_TITLE);
         setContentView(R.layout.activity_registration_ativity);
         sp = new SharedPsaveuser(this);
@@ -312,8 +313,15 @@ public class RegistrationAtivity extends MyBaseActivity {
                     rb_zhifb = (RadioButton) dialogView.findViewById(R.id.rb_zhifb);
                     ll_cancel = (LinearLayout) dialogView.findViewById(R.id.ll_cancel);
 
+                    tv_cash_coupons_stater = (TextView) dialogView.findViewById(R.id.tv_cash_coupons_stater);
+
+                    //使用现金卷
+                    rl_use_cash_coupons = (RelativeLayout) dialogView.findViewById(R.id.rl_use_cash_coupons);
+
+
                     //确认支付
                     btn_confirm_payment = (Button) dialogView.findViewById(R.id.btn_confirm_payment);
+
 
                     rb_wenx.setChecked(true);
                     progressBar = (ProgressBar) dialogView.findViewById(R.id.progressBar);
@@ -363,6 +371,7 @@ public class RegistrationAtivity extends MyBaseActivity {
                 rb_zhifb.setChecked(false);
             }
         });
+        //确认挂号
         ll_cancel.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -371,6 +380,16 @@ public class RegistrationAtivity extends MyBaseActivity {
                 startActivity(intent);
                 Toast.makeText(RegistrationAtivity.this, "你可以在我的预约查看未完成的订单", Toast.LENGTH_SHORT).show();
                 finish();
+            }
+        });
+
+        //使用现金卷
+        rl_use_cash_coupons.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(RegistrationAtivity.this, MyCashCouponsActivity.class);
+                intent.putExtra("type", "registration");
+                startActivity(intent);
             }
         });
 
@@ -742,5 +761,13 @@ public class RegistrationAtivity extends MyBaseActivity {
                     }
 
                 });
+    }
+
+    @Override
+    public void notifyAllActivity(String str) {
+        if (str.equals("更新支付弹出框")) {
+            tv_cash_coupons_stater.setText("快速挂号劵(￥25)");
+            btn_confirm_payment.setText("确认支付0￥");
+        }
     }
 }

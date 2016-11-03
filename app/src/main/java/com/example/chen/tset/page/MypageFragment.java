@@ -142,6 +142,7 @@ public class MypageFragment extends Fragment {
 
                 case R.id.rl_MyCashCoupons:
                     Intent intent6 = new Intent(getContext(), MyCashCouponsActivity.class);
+                    intent6.putExtra("type","mypage");
                     startActivity(intent6);
                     break;
 

@@ -115,9 +115,9 @@ public class InquiryAdapter extends BaseAdapter {
 
 
 
-                if (str.equals("12") || str.equals("13")) {
-                    Toast.makeText(context, "现在医生不在，请稍后再来", Toast.LENGTH_SHORT).show();
-                }
+//                if (str.equals("12") || str.equals("13")) {
+//                    Toast.makeText(context, "现在医生不在，请稍后再来", Toast.LENGTH_SHORT).show();
+//                }
 
 //                else if(Integer.getInteger(str)>18||Integer.getInteger(str)<=8){
 //                    Toast.makeText(context, "医生已经下班了", Toast.LENGTH_SHORT).show();

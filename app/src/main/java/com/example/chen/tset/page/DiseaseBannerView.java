@@ -36,9 +36,9 @@ import okhttp3.Call;
 
 
 /**
- *
+ *疾病库banner
  */
-public class BannerView extends LinearLayout {
+public class DiseaseBannerView extends LinearLayout {
     private ViewPager adViewPager;
     private List<ImageView> bannerViewList = new ArrayList<ImageView>();
     private Timer bannerTimer;
@@ -53,12 +53,12 @@ public class BannerView extends LinearLayout {
     List<String> data;
 
 
-    public BannerView(Context context) {
+    public DiseaseBannerView(Context context) {
         super(context);
 
     }
 
-    public BannerView(final Context context, AttributeSet attrs) {
+    public DiseaseBannerView(final Context context, AttributeSet attrs) {
         super(context, attrs);
         data = new ArrayList<>();
         init();
@@ -102,12 +102,12 @@ public class BannerView extends LinearLayout {
 
                             @Override
                             public void onError(Call call, Exception e, int id) {
-                                Log.e("banner失败", "失败");
+
                             }
 
                             @Override
                             public void onResponse(String response, int id) {
-                                Log.e("banner返回", response);
+
 
                                 Type listtype = new TypeToken<LinkedList<DiseaseBanner>>() {
                                 }.getType();

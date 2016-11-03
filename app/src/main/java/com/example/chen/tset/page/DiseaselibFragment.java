@@ -8,20 +8,13 @@ import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.StaggeredGridLayoutManager;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
-import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.RelativeLayout;
-import android.widget.TextView;
-import android.widget.Toast;
 
-import com.daimajia.androidanimations.library.Techniques;
-import com.daimajia.androidanimations.library.YoYo;
 import com.example.chen.tset.Data.DiseaseDepartment;
 import com.example.chen.tset.Data.Http_data;
 import com.example.chen.tset.R;
@@ -59,7 +52,7 @@ public class DiseaselibFragment extends Fragment {
     int mSelect = 0;
     int pos = 0;
 
-    private BannerView bannerView;
+    private DiseaseBannerView diseaseBannerView;
 
 
     @Nullable
@@ -83,7 +76,7 @@ public class DiseaselibFragment extends Fragment {
         view1 = view.findViewById(R.id.view1);
         rl_nonetwork = (RelativeLayout) view.findViewById(R.id.rl_nonetwork);
         rl_loading = (RelativeLayout) view.findViewById(R.id.rl_loading);
-        bannerView = (BannerView) view.findViewById(R.id.bannerView);
+        diseaseBannerView = (DiseaseBannerView) view.findViewById(R.id.bannerView);
         listview_dise.setOnItemClickListener(listener);
         listview_dise.setOnItemSelectedListener(slistener);
         recyv_dise.setHasFixedSize(true);
@@ -165,7 +158,7 @@ public class DiseaselibFragment extends Fragment {
                     view1.setVisibility(View.GONE);
                     rl_loading.setVisibility(View.GONE);
                     recyv_dise.setVisibility(View.GONE);
-                    bannerView.setVisibility(View.GONE);
+                    diseaseBannerView.setVisibility(View.GONE);
                     rl_nonetwork.setVisibility(View.VISIBLE);
                     break;
                 case 2:
@@ -236,13 +229,13 @@ public class DiseaselibFragment extends Fragment {
 
     public void onResume() {
         super.onResume();
-        bannerView.bannerStartPlay();
+        diseaseBannerView.bannerStartPlay();
     }
 
     @Override
     public void onPause() {
         super.onPause();
-        bannerView.bannerStopPlay();
+        diseaseBannerView.bannerStopPlay();
     }
 
 }

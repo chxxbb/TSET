@@ -166,6 +166,7 @@
             android:background="@color/linegray" />
 
         <RelativeLayout
+            android:id="@+id/rl_use_cash_coupons"
             android:layout_width="match_parent"
             android:layout_height="@dimen/y80">
 
@@ -198,9 +199,10 @@
                 android:orientation="horizontal">
 
                 <TextView
+                    android:id="@+id/tv_cash_coupons_stater"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="暂无可用"
+                    android:text="可用"
                     android:textColor="@color/linegray1"
                     android:textSize="@dimen/y32" />
 

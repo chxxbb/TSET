@@ -11,7 +11,7 @@
         android:layout_height="match_parent"
         android:orientation="vertical">
 
-        <com.example.chen.tset.page.BannerView
+        <com.example.chen.tset.page.HomeBannerView
             android:id="@+id/bannerView"
             android:layout_width="match_parent"
             android:layout_height="@dimen/y350"
@@ -207,20 +207,19 @@
 
 
         <LinearLayout
-
+            android:id="@+id/ll_home_essay"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal">
 
             <com.example.chen.tset.page.RoundCornerImageView
-                android:id="@+id/iv_img"
+                android:id="@+id/tv_home_essay_icon"
                 android:layout_width="@dimen/x120"
                 android:layout_height="@dimen/y100"
                 android:layout_marginBottom="@dimen/y20"
                 android:layout_marginLeft="@dimen/x30"
                 android:adjustViewBounds="true"
-                android:scaleType="centerCrop"
-                android:src="#d21010" />
+                android:scaleType="centerCrop" />
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -229,23 +228,21 @@
                 android:orientation="vertical">
 
                 <TextView
-
+                    android:id="@+id/tv_home_essay_title"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/y2"
-                    android:text="吃喝拉撒无小事"
                     android:textColor="@color/fontcolor"
                     android:textSize="@dimen/x28" />
 
                 <TextView
-
+                    android:id="@+id/tv_home_essay_content"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginRight="@dimen/x30"
+                    android:layout_marginRight="@dimen/x50"
                     android:layout_marginTop="@dimen/y4"
                     android:ellipsize="end"
                     android:lines="1"
-                    android:text="很多人认为，他是健身是一种有益的运动动方法方法发"
                     android:textColor="@color/xmgray"
                     android:textSize="@dimen/x24" />
 
@@ -255,11 +252,10 @@
                     android:layout_marginTop="@dimen/y6">
 
                     <TextView
-
+                        android:id="@+id/tv_home_essay_time"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_alignParentLeft="true"
-                        android:text="08-25"
                         android:textColor="@color/linegray1"
                         android:textSize="@dimen/x22" />
 
@@ -295,20 +291,20 @@
 
 
         <LinearLayout
-
+            android:id="@+id/ll_home_essay1"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal">
 
             <com.example.chen.tset.page.RoundCornerImageView
+                android:id="@+id/tv_home_essay_icon1"
                 android:layout_width="@dimen/x120"
                 android:layout_height="@dimen/y100"
                 android:layout_marginBottom="@dimen/y20"
                 android:layout_marginLeft="@dimen/x30"
                 android:layout_marginTop="@dimen/y20"
                 android:adjustViewBounds="true"
-                android:scaleType="centerCrop"
-                android:src="#d21010" />
+                android:scaleType="centerCrop" />
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -317,23 +313,21 @@
                 android:orientation="vertical">
 
                 <TextView
-
+                    android:id="@+id/tv_home_essay_title1"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/y22"
-                    android:text="吃喝拉撒无小事"
                     android:textColor="@color/fontcolor"
                     android:textSize="@dimen/x28" />
 
                 <TextView
-
+                    android:id="@+id/tv_home_essay_content1"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginRight="@dimen/x30"
+                    android:layout_marginRight="@dimen/x50"
                     android:layout_marginTop="@dimen/y4"
                     android:ellipsize="end"
                     android:lines="1"
-                    android:text="很多人认为，他是健身是一种有益的运动动方法方法发"
                     android:textColor="@color/xmgray"
                     android:textSize="@dimen/x24" />
 
@@ -343,11 +337,10 @@
                     android:layout_marginTop="@dimen/y6">
 
                     <TextView
-
+                        android:id="@+id/tv_home_essay_time1"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_alignParentLeft="true"
-                        android:text="08-25"
                         android:textColor="@color/linegray1"
                         android:textSize="@dimen/x22" />
 

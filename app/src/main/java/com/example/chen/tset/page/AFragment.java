@@ -11,6 +11,7 @@ import com.example.chen.tset.R;
 
 /**
  * Created by Administrator on 2016/10/24 0024.
+ * 旧版本首页
  */
 public class AFragment extends Fragment{
     View view;

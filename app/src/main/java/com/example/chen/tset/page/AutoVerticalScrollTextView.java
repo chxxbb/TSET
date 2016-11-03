@@ -84,6 +84,7 @@ public class AutoVerticalScrollTextView extends TextSwitcher implements ViewSwit
         textView.setGravity(Gravity.CENTER_VERTICAL);
         textView.setEllipsize(TextUtils.TruncateAt.END);
         textView.setTextColor(Color.BLACK);
+        textView.setPadding(0,0,20,0);
         return textView;
 
     }

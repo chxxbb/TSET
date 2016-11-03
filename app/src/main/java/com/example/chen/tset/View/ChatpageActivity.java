@@ -219,7 +219,6 @@ public class ChatpageActivity extends AppCompatActivity implements PtrUIHandler 
         username = getIntent().getStringExtra("username");
 
 
-
         iv_chat = (ImageView) findViewById(R.id.iv_chat);
         et_chat = (EditText) findViewById(R.id.et_chat);
 
@@ -245,8 +244,8 @@ public class ChatpageActivity extends AppCompatActivity implements PtrUIHandler 
         View view1 = View.inflate(this, R.layout.chatpage_listview_footview, null);
 
 
-        //添加listview头部
-        listView.addFooterView(view1);
+        //添加listview尾部，防止底部发送栏覆盖消息
+//        listView.addFooterView(view1);
 
 
         //下拉加载更多的聊天记录
@@ -306,9 +305,6 @@ public class ChatpageActivity extends AppCompatActivity implements PtrUIHandler 
             }
 
         }
-
-
-
 
 
         adapter = new ChatpageAdapter(this, list, doctoricon);
@@ -383,7 +379,8 @@ public class ChatpageActivity extends AppCompatActivity implements PtrUIHandler 
     private View.OnClickListener btnlistener = new View.OnClickListener() {
         @Override
         public void onClick(View v) {
-            if (et_chat.getText().length() == 0) {
+            //先判断发送的消息是否为空，或者是否全部未空格
+            if (et_chat.getText().length() == 0||et_chat.getText().toString().trim().equals("")) {
 
             } else {
                 sendmessage();
@@ -391,7 +388,6 @@ public class ChatpageActivity extends AppCompatActivity implements PtrUIHandler 
 
         }
     };
-
 
 
     //文本消息
@@ -414,10 +410,12 @@ public class ChatpageActivity extends AppCompatActivity implements PtrUIHandler 
             chatcontent = new Chatcontent(content, time, null, null, username, sp.getTag().getPhone());
             //保存在list集合中，清空输入框，并刷新页面
             list.add(chatcontent);
-            et_chat.setText("");
-            db.addchatcont(chatcontent);
+
             adapter.notifyDataSetChanged();
 
+            et_chat.setText("");
+
+            db.addchatcont(chatcontent);
 
             chatstate++;
 
@@ -448,14 +446,7 @@ public class ChatpageActivity extends AppCompatActivity implements PtrUIHandler 
 
                     break;
                 case 1:
-                    try {
 
-                        adapter.notifyDataSetChanged();
-                        et_chat.setText("");
-                    } catch (Exception e) {
-                        e.printStackTrace();
-                        Toast.makeText(ChatpageActivity.this, "发送失败，请重新发送", Toast.LENGTH_SHORT).show();
-                    }
                     break;
                 case 2:
                     Toast.makeText(ChatpageActivity.this, "发送失败，请重新发送", Toast.LENGTH_SHORT).show();
@@ -603,41 +594,38 @@ public class ChatpageActivity extends AppCompatActivity implements PtrUIHandler 
     //保存发送图片
     private void handleCrop(int resultCode, Intent result) {
         if (resultCode == RESULT_OK) {
-            Thread thread = new Thread(new Runnable() {
-                @Override
-                public void run() {
-                    if (sdcardTempFile != null) {
-                        try {
-                            Conversation c = JMessageClient.getSingleConversation(username);
-                            if (c == null) {
-                                c = Conversation.createSingleConversation(username);
-                            }
-
-                            ImageContent image = new ImageContent(sdcardTempFile);
-
-                            Message message = c.createSendMessage(image);
-                            JMessageClient.sendMessage(message);
-                            //将发送的图片本地地址保存在数据库中，加标示用于判断是否是发送图片或接收图片
-                            chatcontent = new Chatcontent("1*1", 0L, sdcardTempFile.getAbsolutePath(), sdcardTempFile.getAbsolutePath(), username, sp.getTag().getPhone());
-                            //将消息显示在界面中，并保存到数据库中
-                            list.add(chatcontent);
-                            handler.sendEmptyMessage(1);
-                            db.addchatcont(chatcontent);
-                        } catch (Exception e) {
-                            e.printStackTrace();
-                            handler.sendEmptyMessage(3);
 
 
-                        }
-                    } else {
-                        handler.sendEmptyMessage(3);
+            if (sdcardTempFile != null) {
+                try {
+                    Conversation c = JMessageClient.getSingleConversation(username);
+                    if (c == null) {
+                        c = Conversation.createSingleConversation(username);
                     }
 
+                    ImageContent image = new ImageContent(sdcardTempFile);
 
-                    chatstate++;
+                    Message message = c.createSendMessage(image);
+                    JMessageClient.sendMessage(message);
+                    //将发送的图片本地地址保存在数据库中，加标示用于判断是否是发送图片或接收图片
+                    chatcontent = new Chatcontent("1*1", 0L, sdcardTempFile.getAbsolutePath(), sdcardTempFile.getAbsolutePath(), username, sp.getTag().getPhone());
+                    //将消息显示在界面中，并保存到数据库中
+                    list.add(chatcontent);
+                    adapter.notifyDataSetChanged();
+                    et_chat.setText("");
+                    db.addchatcont(chatcontent);
+                } catch (Exception e) {
+                    e.printStackTrace();
+                    Toast.makeText(ChatpageActivity.this, "发送图片失败，请重新发送", Toast.LENGTH_SHORT).show();
+
+
                 }
-            });
-            thread.start();
+            } else {
+                handler.sendEmptyMessage(3);
+            }
+
+            chatstate++;
+
         } else if (resultCode == Crop.RESULT_ERROR) {
         }
 
@@ -743,56 +731,53 @@ public class ChatpageActivity extends AppCompatActivity implements PtrUIHandler 
         } else if (resultCode == RESULT_OK && requestCode == 1) {
 
 
-            Thread thread = new Thread(new Runnable() {
-                @Override
-                public void run() {
-                    //获取拍照返回的对象，获得bitmap，将图片保存在本地
-                    Bundle bundle = result.getExtras();
-                    Bitmap bitmap = (Bitmap) bundle.get("data");
-                    FileOutputStream fileOutputStream = null;
-                    try {
-                        sdcardTempFile1 = File.createTempFile("textcamera", ".jpg", audioFile);
-                        fileOutputStream = new FileOutputStream(sdcardTempFile1);
-                        bitmap.compress(Bitmap.CompressFormat.JPEG, 100, fileOutputStream);// 把数据写入文件
-                    } catch (Exception e) {
-                        e.printStackTrace();
-                    } finally {
-                        try {
-                            fileOutputStream.flush();
-                            fileOutputStream.close();
-                        } catch (IOException e) {
-                            e.printStackTrace();
-                        }
-                    }
-
-
-                    try {
-                        Conversation c = JMessageClient.getSingleConversation(username);
-
-                        if (c == null) {
-                            c = Conversation.createSingleConversation(username);
-
-                        }
-
-                        ImageContent image = new ImageContent(sdcardTempFile1);
-
-                        Message message = c.createSendMessage(image);
-
-                        JMessageClient.sendMessage(message);
-                        //保存发送的图片地址并显示在聊天界面
-                        chatcontent = new Chatcontent("1*1", 0L, sdcardTempFile1.getAbsolutePath(), sdcardTempFile1.getAbsolutePath(), username, sp.getTag().getPhone());
-                        list.add(chatcontent);
-                        handler.sendEmptyMessage(1);
-                        db.addchatcont(chatcontent);
-                    } catch (Exception e) {
-                        e.printStackTrace();
-                        handler.sendEmptyMessage(3);
-                    }
-
-                    chatstate++;
+            //获取拍照返回的对象，获得bitmap，将图片保存在本地
+            Bundle bundle = result.getExtras();
+            Bitmap bitmap = (Bitmap) bundle.get("data");
+            FileOutputStream fileOutputStream = null;
+            try {
+                sdcardTempFile1 = File.createTempFile("textcamera", ".jpg", audioFile);
+                fileOutputStream = new FileOutputStream(sdcardTempFile1);
+                bitmap.compress(Bitmap.CompressFormat.JPEG, 100, fileOutputStream);// 把数据写入文件
+            } catch (Exception e) {
+                e.printStackTrace();
+            } finally {
+                try {
+                    fileOutputStream.flush();
+                    fileOutputStream.close();
+                } catch (IOException e) {
+                    e.printStackTrace();
                 }
-            });
-            thread.start();
+            }
+
+
+            try {
+                Conversation c = JMessageClient.getSingleConversation(username);
+
+                if (c == null) {
+                    c = Conversation.createSingleConversation(username);
+
+                }
+
+                ImageContent image = new ImageContent(sdcardTempFile1);
+
+                Message message = c.createSendMessage(image);
+
+                JMessageClient.sendMessage(message);
+                //保存发送的图片地址并显示在聊天界面
+                chatcontent = new Chatcontent("1*1", 0L, sdcardTempFile1.getAbsolutePath(), sdcardTempFile1.getAbsolutePath(), username, sp.getTag().getPhone());
+                list.add(chatcontent);
+                adapter.notifyDataSetChanged();
+                et_chat.setText("");
+                db.addchatcont(chatcontent);
+            } catch (Exception e) {
+                e.printStackTrace();
+                Toast.makeText(ChatpageActivity.this, "发送失败，请重新发送", Toast.LENGTH_SHORT).show();
+            }
+
+            chatstate++;
+
+
         }
     }
 

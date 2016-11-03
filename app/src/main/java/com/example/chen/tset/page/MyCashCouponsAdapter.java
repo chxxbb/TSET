@@ -55,16 +55,23 @@ public class MyCashCouponsAdapter extends BaseAdapter {
             viewHolder.tv_mycash_use_stater.setText("已使用");
         }
 
+        if (position == 2) {
+            viewHolder.tv_cash_coupons_type.setText("快速挂号劵");
+        }
+
         return convertView;
     }
 
     static class ViewHolder {
         TextView tv_mycash_use_stater;
         RelativeLayout rl_mycash_use_background;
+        //现金卷类型
+        TextView tv_cash_coupons_type;
 
         ViewHolder(View v) {
             tv_mycash_use_stater = (TextView) v.findViewById(R.id.tv_mycash_use_stater);
             rl_mycash_use_background = (RelativeLayout) v.findViewById(R.id.rl_mycash_use_background);
+            tv_cash_coupons_type = (TextView) v.findViewById(R.id.tv_cash_coupons_type);
 
         }
     }
