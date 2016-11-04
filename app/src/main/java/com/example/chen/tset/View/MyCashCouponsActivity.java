@@ -18,7 +18,7 @@ import com.example.chen.tset.page.MyCashCouponsAdapter;
 import java.util.ArrayList;
 import java.util.List;
 
-public class MyCashCouponsActivity extends AppCompatActivity implements IListener{
+public class MyCashCouponsActivity extends AppCompatActivity implements IListener {
     private LinearLayout ll_rut;
     private ListView lv_mycash;
     MyCashCouponsAdapter adapter;
@@ -75,6 +75,25 @@ public class MyCashCouponsActivity extends AppCompatActivity implements IListene
                     finish();
 
                 }
+
+            } else {
+                if (position == 0) {
+                    finish();
+                    if (type.equals("inquiry")) {
+                        ListenerManager.getInstance().sendBroadCast("更新问诊支付弹出框");
+                    } else if (type.equals("HomeDoctorRecommend")) {
+                        ListenerManager.getInstance().sendBroadCast("更新首页问诊支付弹出框");
+                    } else if (type.equals("disease")) {
+                        ListenerManager.getInstance().sendBroadCast("更新疾病详情问诊支付弹出框");
+                    }
+
+
+                } else if (position == 1) {
+                    Toast.makeText(MyCashCouponsActivity.this, "已经使用过了", Toast.LENGTH_SHORT).show();
+                } else if (position == 2) {
+                    Toast.makeText(MyCashCouponsActivity.this, "不可使用", Toast.LENGTH_SHORT).show();
+
+                }
             }
         }
     };
@@ -91,5 +110,11 @@ public class MyCashCouponsActivity extends AppCompatActivity implements IListene
     @Override
     public void notifyAllActivity(String str) {
 
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        ListenerManager.getInstance().unRegisterListener(this);
     }
 }

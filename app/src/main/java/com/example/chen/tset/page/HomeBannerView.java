@@ -13,6 +13,7 @@ import android.widget.LinearLayout;
 import com.example.chen.tset.Data.DiseaseBanner;
 import com.example.chen.tset.Data.Http_data;
 import com.example.chen.tset.R;
+import com.example.chen.tset.Utils.HomeBannerDao;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import com.nostra13.universalimageloader.core.ImageLoader;
@@ -47,6 +48,8 @@ public class HomeBannerView extends LinearLayout {
 
     List<String> data;
 
+    HomeBannerDao db;
+
 
     public HomeBannerView(Context context) {
         super(context);
@@ -55,13 +58,37 @@ public class HomeBannerView extends LinearLayout {
 
     public HomeBannerView(final Context context, AttributeSet attrs) {
         super(context, attrs);
+        db = new HomeBannerDao(context);
         data = new ArrayList<>();
         init();
         handler1 = new Handler() {
             @Override
             public void handleMessage(Message msg) {
                 super.handleMessage(msg);
-                initView(context);
+                switch (msg.what) {
+                    case 0:
+                        //如果无数据则使用数据库数据显示
+                        if (db.findHomebanner().size() != 0) {
+
+                            new Thread(new Runnable() {
+                                @Override
+                                public void run() {
+                                    List<DiseaseBanner> list = db.findHomebanner();
+                                    for (int i = 0; i < list.size(); i++) {
+                                        pics.add(list.get(i).getCover());
+                                        data.add(list.get(i).getSite());
+                                    }
+                                    handler1.sendEmptyMessage(1);
+                                }
+                            }).start();
+
+                        }
+
+                        break;
+                    case 1:
+                        initView(context);
+                        break;
+                }
             }
         };
 
@@ -97,18 +124,20 @@ public class HomeBannerView extends LinearLayout {
 
                             @Override
                             public void onError(Call call, Exception e, int id) {
-
+                                handler1.sendEmptyMessage(0);
                             }
 
                             @Override
                             public void onResponse(String response, int id) {
 
-
                                 Type listtype = new TypeToken<LinkedList<DiseaseBanner>>() {
                                 }.getType();
                                 LinkedList<DiseaseBanner> leclist = gson.fromJson(response, listtype);
+                                db.delbanner();
                                 for (Iterator it = leclist.iterator(); it.hasNext(); ) {
                                     DiseaseBanner diseaseBanner = (DiseaseBanner) it.next();
+                                    //将banner数据添加到数据库中
+                                    db.addbanner(diseaseBanner);
 
                                     pics.add(diseaseBanner.getCover());
 

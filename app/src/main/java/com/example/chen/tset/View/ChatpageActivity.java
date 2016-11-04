@@ -394,14 +394,18 @@ public class ChatpageActivity extends AppCompatActivity implements PtrUIHandler 
     private void sendmessage() {
         try {
             //发送文本消息
+
             Conversation c = JMessageClient.getSingleConversation(username);
             if (c == null) {
                 c = Conversation.createSingleConversation(username);
 
             }
             TextContent textContent = new TextContent(et_chat.getText().toString());
+
             Message message = c.createSendMessage(textContent);
+
             JMessageClient.sendMessage(message);
+
             //获取发送时间
             Date dt = new Date();
             Long time = dt.getTime();

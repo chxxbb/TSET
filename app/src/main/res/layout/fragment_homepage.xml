@@ -6,6 +6,7 @@
     android:background="@color/white"
     android:overScrollMode="never">
 
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -271,11 +272,11 @@
                             android:src="@drawable/encyclopedialike" />
 
                         <TextView
+                            android:id="@+id/tv_home_essay_collectnumber"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginLeft="@dimen/x14"
                             android:layout_marginRight="@dimen/x42"
-                            android:text="21"
                             android:textColor="@color/linegray1"
                             android:textSize="@dimen/x22" />
                     </LinearLayout>
@@ -356,11 +357,11 @@
                             android:src="@drawable/encyclopedialike" />
 
                         <TextView
+                            android:id="@+id/tv_home_essay_collectnumber1"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginLeft="@dimen/x14"
                             android:layout_marginRight="@dimen/x42"
-                            android:text="21"
                             android:textColor="@color/linegray1"
                             android:textSize="@dimen/x22" />
                     </LinearLayout>
@@ -371,6 +372,7 @@
         <View
             android:layout_width="match_parent"
             android:layout_height="@dimen/y20"
+            android:layout_marginTop="@dimen/x10"
             android:background="@color/backgroundgray" />
 
 

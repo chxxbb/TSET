@@ -202,7 +202,7 @@
                     android:id="@+id/tv_cash_coupons_stater"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="可用"
+                    android:text="不可用"
                     android:textColor="@color/linegray1"
                     android:textSize="@dimen/y32" />
 

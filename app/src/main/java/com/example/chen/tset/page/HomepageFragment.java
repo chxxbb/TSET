@@ -16,6 +16,7 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.LinearLayout;
 
+import android.widget.RelativeLayout;
 import android.widget.ScrollView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -26,6 +27,10 @@ import com.example.chen.tset.Data.FindAllHot;
 import com.example.chen.tset.Data.Http_data;
 import com.example.chen.tset.Data.Inquiry;
 import com.example.chen.tset.R;
+import com.example.chen.tset.Utils.HomeDoctorDao;
+import com.example.chen.tset.Utils.HomeDoctorHelper;
+import com.example.chen.tset.Utils.HomeEassayDao;
+import com.example.chen.tset.Utils.HomeFindAllHotDao;
 import com.example.chen.tset.Utils.IListener;
 import com.example.chen.tset.Utils.ListenerManager;
 import com.example.chen.tset.View.ConsultPageActivity;
@@ -91,6 +96,15 @@ public class HomepageFragment extends Fragment implements IListener {
 
     private LinearLayout ll_home_essay, ll_home_essay1;
 
+    //收藏数
+    private TextView tv_home_essay_collectnumber, tv_home_essay_collectnumber1;
+
+    HomeDoctorDao db;
+
+    HomeFindAllHotDao findAllHotdb;
+
+    HomeEassayDao homeEassaydb;
+
 
     @Nullable
     @Override
@@ -106,7 +120,7 @@ public class HomepageFragment extends Fragment implements IListener {
         //热点推荐
         findAllHotinit();
 
-
+        //热门文章
         homeEssayinit();
 
         //医生推荐
@@ -119,6 +133,12 @@ public class HomepageFragment extends Fragment implements IListener {
 
 
     private void findView() {
+        db = new HomeDoctorDao(getContext());
+
+        findAllHotdb = new HomeFindAllHotDao(getContext());
+
+        homeEassaydb = new HomeEassayDao(getContext());
+
         findAllHotList = new ArrayList<>();
         //疾病库banner
         diseaseBannerView = (HomeBannerView) view.findViewById(R.id.bannerView);
@@ -143,6 +163,10 @@ public class HomepageFragment extends Fragment implements IListener {
         ll_home_essay = (LinearLayout) view.findViewById(R.id.ll_home_essay);
 
         ll_home_essay1 = (LinearLayout) view.findViewById(R.id.ll_home_essay1);
+
+        tv_home_essay_collectnumber = (TextView) view.findViewById(R.id.tv_home_essay_collectnumber);
+        tv_home_essay_collectnumber1 = (TextView) view.findViewById(R.id.tv_home_essay_collectnumber1);
+
 
         //家长讲堂
         ll_patriarch_lecture_room = (LinearLayout) view.findViewById(R.id.ll_patriarch_lecture_room);
@@ -184,6 +208,17 @@ public class HomepageFragment extends Fragment implements IListener {
         ll_home_essay.setOnClickListener(listener);
         ll_home_essay1.setOnClickListener(listener);
         home_listView.setOnItemClickListener(lvlistener);
+
+
+        //上下文滚动的textView的点击事件
+        verticalScrollTV.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Toast.makeText(getContext(), "链接:" + findAllHotList.get(number % strings.size()).getSite(), Toast.LENGTH_SHORT).show();
+            }
+        });
+
+
     }
 
     //使首页一直保持在头部，当fragment处于暂停或显示状态时都会调用此方法
@@ -206,35 +241,37 @@ public class HomepageFragment extends Fragment implements IListener {
                         .execute(new StringCallback() {
                             @Override
                             public void onError(Call call, Exception e, int id) {
-
+                                handler.sendEmptyMessage(7);
                             }
 
                             @Override
                             public void onResponse(String response, int id) {
+
                                 Type listtype = new TypeToken<LinkedList<FindAllHot>>() {
                                 }.getType();
                                 LinkedList<FindAllHot> leclist = gson.fromJson(response, listtype);
+
+
+                                //清空热点推荐数据库
+                                findAllHotdb.delHomeFindAllHot();
+
+                                strings.clear();
+
+                                findAllHotList.clear();
                                 for (Iterator it = leclist.iterator(); it.hasNext(); ) {
                                     FindAllHot findAllHot = (FindAllHot) it.next();
                                     //获取到的数据放入集合中
                                     findAllHotList.add(findAllHot);
                                     //设置滚动条目
                                     strings.add(findAllHot.getTitle());
+
+                                    //将获取到的最新热点推荐数据添加到数据库中
+                                    findAllHotdb.addHomeFindAllHot(findAllHot);
                                 }
 
-                                //设置第一次显示的数据
-                                verticalScrollTV.setText(strings.get(0));
-                                //设置滚动时间
-                                new Thread() {
-                                    @Override
-                                    public void run() {
-                                        while (isRunning) {
-                                            //每隔3000通知滚动一次
-                                            SystemClock.sleep(3000);
-                                            handler.sendEmptyMessage(0);
-                                        }
-                                    }
-                                }.start();
+                                handler.sendEmptyMessage(3);
+
+
                             }
                         });
 
@@ -258,7 +295,7 @@ public class HomepageFragment extends Fragment implements IListener {
                         .execute(new StringCallback() {
                             @Override
                             public void onError(Call call, Exception e, int id) {
-
+                                handler.sendEmptyMessage(5);
                             }
 
                             @Override
@@ -267,9 +304,14 @@ public class HomepageFragment extends Fragment implements IListener {
                                 Type listtype = new TypeToken<LinkedList<Consult>>() {
                                 }.getType();
                                 LinkedList<Consult> leclist = gson.fromJson(response, listtype);
+
+                                homeEassaydb.delHomeEassay();
+                                consultList.clear();
                                 for (Iterator it = leclist.iterator(); it.hasNext(); ) {
                                     Consult consult = (Consult) it.next();
                                     consultList.add(consult);
+                                    //将数据添加到数据库中
+                                    homeEassaydb.addHomeEassay(consult);
 
                                 }
                                 handler.sendEmptyMessage(1);
@@ -299,6 +341,8 @@ public class HomepageFragment extends Fragment implements IListener {
                     public void onResponse(String response, int id) {
 
 
+                        inquiryList.clear();
+
                         Type listtype = new TypeToken<LinkedList<Inquiry>>() {
                         }.getType();
                         LinkedList<Inquiry> leclist = gson.fromJson(response, listtype);
@@ -316,19 +360,23 @@ public class HomepageFragment extends Fragment implements IListener {
 
     private void init() {
 
-
-        //上下文滚动的textView的点击事件
-        verticalScrollTV.setOnClickListener(new View.OnClickListener() {
+        //先使用数据局库数据显示医生推荐
+        new Thread(new Runnable() {
             @Override
-            public void onClick(View v) {
-                Toast.makeText(getContext(), "链接:" + findAllHotList.get(number % strings.size()).getSite(), Toast.LENGTH_SHORT).show();
+            public void run() {
+                if (db.findHomeDoctor().size() != 0) {
+                    inquiryList.addAll(db.findHomeDoctor());
+                }
+
+                handler.sendEmptyMessage(4);
             }
-        });
+        }).start();
 
 
         //实例化适配器
         adapter = new HomeDoctorRecommendAdapter(getContext(), inquiryList);
         home_listView.setAdapter(adapter);
+
 
     }
 
@@ -336,16 +384,19 @@ public class HomepageFragment extends Fragment implements IListener {
     private Handler handler = new Handler() {
         @Override
         public void handleMessage(Message msg) {
-            Random r=new Random();
+
 
             switch (msg.what) {
+                //设置热点推荐滑动数据
                 case 0:
                     //设置滚动方式及滚动完成设置textView
                     verticalScrollTV.next();
                     //获取滚动的次数
                     number++;
+                    //设置滚动后的text
                     verticalScrollTV.setText(strings.get(number % strings.size()));
                     break;
+                //设置文章内容
                 case 1:
                     //设置文章标题
                     tv_home_essay_title.setText(consultList.get(0).getTitle());
@@ -359,11 +410,77 @@ public class HomepageFragment extends Fragment implements IListener {
                     //设置文章图片
                     ImageLoader.getInstance().displayImage(consultList.get(0).getIcon(), tv_home_essay_icon);
                     ImageLoader.getInstance().displayImage(consultList.get(1).getIcon(), tv_home_essay_icon1);
-                    break;
 
+                    //设置点赞数
+                    tv_home_essay_collectnumber.setText("21");
+                    tv_home_essay_collectnumber1.setText("32");
+                    break;
+                //设置医生推荐数据
                 case 2:
                     //listView刷新
                     adapter.notifyDataSetChanged();
+                    //清空医生推荐数据库，并添加数据到数据库中
+                    db.deldotor();
+                    for (int i = 0; i < inquiryList.size(); i++) {
+                        db.addHomeDoctor(inquiryList.get(i));
+                    }
+
+
+                    break;
+                //设置热点推荐滑动时间
+                case 3:
+
+
+                    //设置第一次显示的数据
+                    verticalScrollTV.setText(strings.get(0));
+                    //设置滚动时间
+                    new Thread() {
+                        @Override
+                        public void run() {
+                            while (isRunning) {
+                                //每隔3000通知滚动一次
+                                SystemClock.sleep(3000);
+                                handler.sendEmptyMessage(0);
+                            }
+                        }
+                    }.start();
+
+
+                    break;
+
+                case 4:
+                    adapter.notifyDataSetChanged();
+                    break;
+
+                //设置网络连接失败时文章数据
+                case 5:
+                    new Thread(new Runnable() {
+                        @Override
+                        public void run() {
+                            if (homeEassaydb.findHomeEassay().size() != 0) {
+                                consultList.addAll(homeEassaydb.findHomeEassay());
+                            }
+                            handler.sendEmptyMessage(1);
+
+                        }
+                    }).start();
+                    break;
+
+                case 7:
+
+                    //如果为断网状态则使用数据库数据
+                    List<FindAllHot> findList;
+                    findList = findAllHotdb.findHomeFindAllHot();
+                    findAllHotList.addAll(findList);
+
+                    if (findList.size() != 0) {
+
+                        for (int i = 0; i < findList.size(); i++) {
+
+                            strings.add(findList.get(i).getTitle());
+                        }
+                        handler.sendEmptyMessage(3);
+                    }
                     break;
 
             }
@@ -421,8 +538,9 @@ public class HomepageFragment extends Fragment implements IListener {
                 //资讯页面
                 case R.id.ll_home_article_more:
                     //发送广播通知显示资讯页面，并且viewPage滑动到第二页
-                    ListenerManager.getInstance().sendBroadCast("显示资讯页面");
                     Http_data.state = 2;
+                    ListenerManager.getInstance().sendBroadCast("显示资讯页面");
+
                     break;
 
                 //跳转至资讯详情页面
@@ -433,6 +551,7 @@ public class HomepageFragment extends Fragment implements IListener {
                     startActivity(intent4);
                     break;
 
+                //跳转到资讯详情页面
                 case R.id.ll_home_essay:
                     Intent intent5 = new Intent(getContext(), ConsultPageActivity.class);
                     intent5.putExtra("information", consultList.get(0).getId() + "");
@@ -456,6 +575,13 @@ public class HomepageFragment extends Fragment implements IListener {
     public void onPause() {
         super.onPause();
         diseaseBannerView.bannerStopPlay();
+    }
+
+    @Override
+    public void onDetach() {
+        super.onDetach();
+        ListenerManager.getInstance().unRegisterListener(this);
+
     }
 
     @Override

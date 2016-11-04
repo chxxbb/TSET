@@ -26,7 +26,10 @@ import com.example.chen.tset.Data.Http_data;
 import com.example.chen.tset.Data.Inquiry;
 import com.example.chen.tset.Data.User_Http;
 import com.example.chen.tset.R;
+import com.example.chen.tset.Utils.IListener;
+import com.example.chen.tset.Utils.ListenerManager;
 import com.example.chen.tset.View.ChatpageActivity;
+import com.example.chen.tset.View.MyCashCouponsActivity;
 import com.example.chen.tset.View.ReservationActivity;
 import com.nostra13.universalimageloader.core.DisplayImageOptions;
 import com.nostra13.universalimageloader.core.ImageLoader;
@@ -51,7 +54,7 @@ import okhttp3.Call;
 /**
  * Created by Administrator on 2016/9/1 0001.
  */
-public class InquiryAdapter extends BaseAdapter {
+public class InquiryAdapter extends BaseAdapter implements IListener {
     private Context context;
     private List<Inquiry> list;
     private Dialog setHeadDialog;
@@ -68,9 +71,16 @@ public class InquiryAdapter extends BaseAdapter {
 
     ProgressBar progressBar;
 
+    TextView tv_cash_coupons_stater;
+
+    RelativeLayout rl_use_cash_coupons;
+
+
     public InquiryAdapter(Context context, List<Inquiry> list) {
         this.context = context;
         this.list = list;
+        ListenerManager.getInstance().registerListtener(this);
+
     }
 
     @Override
@@ -104,24 +114,12 @@ public class InquiryAdapter extends BaseAdapter {
         ImageLoader.getInstance().displayImage(list.get(position).getIcon(), viewHolder.iv_icon);
 
 
-
         viewHolder.fl_chat.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 SimpleDateFormat formatter = new SimpleDateFormat("HH");
                 Date curDate = new Date(System.currentTimeMillis());//获取当前时间
                 String str = formatter.format(curDate);
-
-
-
-
-//                if (str.equals("12") || str.equals("13")) {
-//                    Toast.makeText(context, "现在医生不在，请稍后再来", Toast.LENGTH_SHORT).show();
-//                }
-
-//                else if(Integer.getInteger(str)>18||Integer.getInteger(str)<=8){
-//                    Toast.makeText(context, "医生已经下班了", Toast.LENGTH_SHORT).show();
-//                }
 
 
                 setHeadDialog = new Dialog(context, R.style.CustomDialog);
@@ -147,39 +145,13 @@ public class InquiryAdapter extends BaseAdapter {
                 rl_confirm.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        Intent intent = new Intent(context, ChatpageActivity.class);
-                        intent.putExtra("name", list.get(position).getName());
-                        intent.putExtra("icon", list.get(position).getIcon());
-                        intent.putExtra("doctorID", list.get(position).getId());
-                        intent.putExtra("username", list.get(position).getUsername());
-                        context.startActivity(intent);
+
                         setHeadDialog.dismiss();
+
+                        payDialog(position);
                     }
                 });
-//                payDialog(position);
 
-//                OkHttpUtils
-//                        .post()
-//                        .url(Http_data.http_data)
-//                        .build()
-//                        .execute(new StringCallback() {
-//                            @Override
-//                            public void onError(Call call, Exception e, int id) {
-//
-//                            }
-//
-//                            @Override
-//                            public void onResponse(String response, int id) {
-//
-//                            }
-//                        });
-
-
-//                Intent intent = new Intent(context, ChatpageActivity.class);
-//                intent.putExtra("name", list.get(position).getName());
-//                intent.putExtra("icon", list.get(position).getIcon());
-//                intent.putExtra("doctorID", list.get(position).getId());
-//                context.startActivity(intent);
             }
 
         });
@@ -199,6 +171,12 @@ public class InquiryAdapter extends BaseAdapter {
         rb_wenx = (RadioButton) dialogView.findViewById(R.id.rb_wenx);
         rb_zhifb = (RadioButton) dialogView.findViewById(R.id.rb_zhifb);
         ll_cancel = (LinearLayout) dialogView.findViewById(R.id.ll_cancel);
+        tv_cash_coupons_stater = (TextView) dialogView.findViewById(R.id.tv_cash_coupons_stater);
+
+        rl_use_cash_coupons = (RelativeLayout) dialogView.findViewById(R.id.rl_use_cash_coupons);
+
+
+        tv_cash_coupons_stater.setText("可用");
 
         //确认支付
         btn_confirm_payment = (Button) dialogView.findViewById(R.id.btn_confirm_payment);
@@ -209,6 +187,8 @@ public class InquiryAdapter extends BaseAdapter {
         WindowManager.LayoutParams lp = setHeadDialog.getWindow().getAttributes();
         lp.width = display.getWidth();
         setHeadDialog.getWindow().setAttributes(lp);
+
+        //设置支付时间1800后未支付则关闭
         Thread thread = new Thread(new Runnable() {
             @Override
             public void run() {
@@ -221,6 +201,7 @@ public class InquiryAdapter extends BaseAdapter {
                         progressBar.setProgress(currentprogress + stepProgress);
                         Thread.sleep(180);
                     }
+                    setHeadDialog.dismiss();
 
                 } catch (InterruptedException e) {
                     e.printStackTrace();
@@ -256,13 +237,46 @@ public class InquiryAdapter extends BaseAdapter {
             }
         });
 
+
+        //确认支付
         btn_confirm_payment.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                if (btn_confirm_payment.getText().toString().equals("确认支付 ￥25")) {
+                    Toast.makeText(context, "请支付", Toast.LENGTH_SHORT).show();
+                } else {
+                    Intent intent = new Intent(context, ChatpageActivity.class);
+                    intent.putExtra("name", list.get(pos).getName());
+                    intent.putExtra("icon", list.get(pos).getIcon());
+                    intent.putExtra("doctorID", list.get(pos).getId());
+                    intent.putExtra("username", list.get(pos).getUsername());
+                    context.startActivity(intent);
+                    setHeadDialog.dismiss();
+                }
             }
         });
 
+
+        rl_use_cash_coupons.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(context, MyCashCouponsActivity.class);
+                intent.putExtra("type", "inquiry");
+                context.startActivity(intent);
+            }
+        });
+
+    }
+
+
+    //从现金卷页面收到的广播，如果使用了现金卷则修改现金卷item和去人按钮
+    @Override
+    public void notifyAllActivity(String str) {
+        if (str.equals("更新问诊支付弹出框")) {
+            tv_cash_coupons_stater.setText("快速问诊劵 ￥25");
+
+            btn_confirm_payment.setText("确认支付￥0");
+        }
     }
 
 
@@ -286,7 +300,9 @@ public class InquiryAdapter extends BaseAdapter {
             tv_intro = (TextView) v.findViewById(R.id.tv_intro);
             tv_section = (TextView) v.findViewById(R.id.tv_section);
             fl_chat = (FrameLayout) v.findViewById(R.id.fl_chat);
-            view=v.findViewById(R.id.view);
+            view = v.findViewById(R.id.view);
         }
     }
+
+
 }

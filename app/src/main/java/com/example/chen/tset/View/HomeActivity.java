@@ -116,7 +116,7 @@ import cn.jpush.im.api.BasicCallback;
 import okhttp3.Call;
 import okhttp3.Response;
 
-public class HomeActivity extends MyBaseActivity implements View.OnClickListener, IListener {
+public class HomeActivity extends AppCompatActivity implements View.OnClickListener, IListener {
     FragmentManager fm;
     FragmentTransaction ft;
     private RadioButton rb_encyclopedia, rb_lectureroom, rb_mypage, rb_diagnosis;
@@ -220,9 +220,6 @@ public class HomeActivity extends MyBaseActivity implements View.OnClickListener
         updatedetection();
 
     }
-
-
-
 
 
     //检测是否有更新
@@ -866,10 +863,6 @@ public class HomeActivity extends MyBaseActivity implements View.OnClickListener
     }
 
 
-
-
-
-
     @Override
     public void notifyAllActivity(String str) {
         ft = fm.beginTransaction();
@@ -886,8 +879,6 @@ public class HomeActivity extends MyBaseActivity implements View.OnClickListener
                 ft.show(consultingFragment);
             }
 
-            ft.commit();
-
 
         } else if (str.equals("显示资讯页面")) {
             fl_registration.setVisibility(View.GONE);
@@ -903,13 +894,13 @@ public class HomeActivity extends MyBaseActivity implements View.OnClickListener
                 ft.show(encyclopediaFragment);
             }
 
-            ft.commit();
+
         }
+
+        ft.commit();
 
 
     }
-
-
 
 
     private long exitTime = 0;
@@ -917,8 +908,8 @@ public class HomeActivity extends MyBaseActivity implements View.OnClickListener
 
     @Override
     public boolean onKeyDown(int keyCode, KeyEvent event) {
-        if(keyCode == KeyEvent.KEYCODE_BACK && event.getAction() == KeyEvent.ACTION_DOWN){
-            if((System.currentTimeMillis()-exitTime) > 2000){
+        if (keyCode == KeyEvent.KEYCODE_BACK && event.getAction() == KeyEvent.ACTION_DOWN) {
+            if ((System.currentTimeMillis() - exitTime) > 2000) {
                 Toast.makeText(getApplicationContext(), "再按一次退出", Toast.LENGTH_SHORT).show();
                 exitTime = System.currentTimeMillis();
             } else {

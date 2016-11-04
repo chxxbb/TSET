@@ -42,7 +42,7 @@ public class LogActivity extends AppCompatActivity {
         //初始化
         Animation alphaAnimation = new AlphaAnimation(0.5f, 1.0f);
         //设置动画时间
-        alphaAnimation.setDuration(2000);
+        alphaAnimation.setDuration(1);
 
         rl_log.startAnimation(alphaAnimation);
 

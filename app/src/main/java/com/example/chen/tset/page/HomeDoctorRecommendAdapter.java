@@ -3,6 +3,8 @@ package com.example.chen.tset.page;
 import android.app.Dialog;
 import android.content.Context;
 import android.content.Intent;
+import android.util.Log;
+import android.view.Display;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -10,13 +12,20 @@ import android.view.WindowManager;
 import android.widget.BaseAdapter;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
+import android.widget.ProgressBar;
+import android.widget.RadioButton;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.chen.tset.Data.Information;
 import com.example.chen.tset.Data.Inquiry;
 import com.example.chen.tset.R;
+import com.example.chen.tset.Utils.IListener;
+import com.example.chen.tset.Utils.ListenerManager;
 import com.example.chen.tset.View.ChatpageActivity;
+import com.example.chen.tset.View.MyCashCouponsActivity;
 import com.nostra13.universalimageloader.core.ImageLoader;
 
 import java.util.List;
@@ -26,16 +35,32 @@ import de.hdodenhof.circleimageview.CircleImageView;
 /**
  * Created by Administrator on 2016/10/31 0031.
  */
-public class HomeDoctorRecommendAdapter extends BaseAdapter {
+public class HomeDoctorRecommendAdapter extends BaseAdapter implements IListener {
     Context context;
     List<Inquiry> list;
     private Dialog setHeadDialog;
     private View dialogView;
 
 
+    RadioButton rb_wenx;
+
+    RadioButton rb_zhifb;
+
+    LinearLayout ll_cancel;
+
+    Button btn_confirm_payment;
+
+    ProgressBar progressBar;
+
+    TextView tv_cash_coupons_stater;
+
+    RelativeLayout rl_use_cash_coupons;
+
+
     public HomeDoctorRecommendAdapter(Context context, List<Inquiry> list) {
         this.context = context;
         this.list = list;
+        ListenerManager.getInstance().registerListtener(this);
     }
 
     @Override
@@ -94,18 +119,139 @@ public class HomeDoctorRecommendAdapter extends BaseAdapter {
                 rl_confirm.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        Intent intent = new Intent(context, ChatpageActivity.class);
-                        intent.putExtra("name", list.get(position).getName());
-                        intent.putExtra("icon", list.get(position).getIcon());
-                        intent.putExtra("doctorID", list.get(position).getId());
-                        intent.putExtra("username", list.get(position).getUsername());
-                        context.startActivity(intent);
+
                         setHeadDialog.dismiss();
+                        payDialog(position);
                     }
                 });
             }
         });
         return convertView;
+    }
+
+
+    //支付弹出框
+    private void payDialog(int pos) {
+
+        setHeadDialog = new Dialog(context, R.style.CustomDialog);
+        setHeadDialog.show();
+        WindowManager windowManager = (WindowManager) context.getSystemService(Context.WINDOW_SERVICE);
+        Display display = windowManager.getDefaultDisplay();
+        dialogView = View.inflate(context, R.layout.payment_dialog, null);
+
+
+        rb_wenx = (RadioButton) dialogView.findViewById(R.id.rb_wenx);
+        rb_zhifb = (RadioButton) dialogView.findViewById(R.id.rb_zhifb);
+        ll_cancel = (LinearLayout) dialogView.findViewById(R.id.ll_cancel);
+
+        tv_cash_coupons_stater = (TextView) dialogView.findViewById(R.id.tv_cash_coupons_stater);
+
+        rl_use_cash_coupons = (RelativeLayout) dialogView.findViewById(R.id.rl_use_cash_coupons);
+
+
+        tv_cash_coupons_stater.setText("可用");
+
+        //确认支付
+        btn_confirm_payment = (Button) dialogView.findViewById(R.id.btn_confirm_payment);
+
+        rb_wenx.setChecked(true);
+        progressBar = (ProgressBar) dialogView.findViewById(R.id.progressBar);
+        setHeadDialog.getWindow().setContentView(dialogView);
+        WindowManager.LayoutParams lp = setHeadDialog.getWindow().getAttributes();
+        lp.width = display.getWidth();
+        setHeadDialog.getWindow().setAttributes(lp);
+
+        //设置支付时间1800后未支付则关闭
+        Thread thread = new Thread(new Runnable() {
+            @Override
+            public void run() {
+                int progressBarMax = progressBar.getMax();
+                try {
+                    //设置progressBar时间
+                    while (progressBarMax != progressBar.getProgress()) {
+                        int stepProgress = progressBarMax / 1000;
+                        int currentprogress = progressBar.getProgress();
+                        progressBar.setProgress(currentprogress + stepProgress);
+                        Thread.sleep(180);
+                    }
+                    setHeadDialog.dismiss();
+
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+
+                }
+            }
+        });
+        thread.start();
+
+        paydialogonclick(pos);
+
+    }
+
+
+    //支付点击事件
+    private void paydialogonclick(final int pos) {
+        rb_zhifb.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                rb_wenx.setChecked(false);
+            }
+        });
+        rb_wenx.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                rb_zhifb.setChecked(false);
+            }
+        });
+        ll_cancel.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                setHeadDialog.dismiss();
+            }
+        });
+
+
+        //确认支付
+        btn_confirm_payment.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (btn_confirm_payment.getText().toString().equals("确认支付 ￥25")) {
+                    Toast.makeText(context, "请支付", Toast.LENGTH_SHORT).show();
+                } else {
+                    Intent intent = new Intent(context, ChatpageActivity.class);
+                    intent.putExtra("name", list.get(pos).getName());
+                    intent.putExtra("icon", list.get(pos).getIcon());
+                    intent.putExtra("doctorID", list.get(pos).getId());
+                    intent.putExtra("username", list.get(pos).getUsername());
+                    context.startActivity(intent);
+                    setHeadDialog.dismiss();
+                }
+            }
+        });
+
+
+        rl_use_cash_coupons.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(context, MyCashCouponsActivity.class);
+                intent.putExtra("type", "HomeDoctorRecommend");
+                context.startActivity(intent);
+            }
+        });
+
+    }
+
+
+    //从现金卷页面收到的广播，如果使用了现金卷则修改现金卷item和去人按钮
+    @Override
+    public void notifyAllActivity(String str) {
+        if (str.equals("更新首页问诊支付弹出框")) {
+
+            tv_cash_coupons_stater.setText("快速问诊劵 ￥25");
+            btn_confirm_payment.setText("确认支付￥0");
+
+        }
     }
 
 

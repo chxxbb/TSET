@@ -384,14 +384,14 @@ public class RegistrationAtivity extends MyBaseActivity implements IListener {
         });
 
         //使用现金卷
-        rl_use_cash_coupons.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(RegistrationAtivity.this, MyCashCouponsActivity.class);
-                intent.putExtra("type", "registration");
-                startActivity(intent);
-            }
-        });
+//        rl_use_cash_coupons.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                Intent intent = new Intent(RegistrationAtivity.this, MyCashCouponsActivity.class);
+//                intent.putExtra("type", "registration");
+//                startActivity(intent);
+//            }
+//        });
 
         btn_confirm_payment.setOnClickListener(new View.OnClickListener() {
             @Override

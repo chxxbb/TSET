@@ -18,6 +18,8 @@ import android.widget.Toast;
 import com.example.chen.tset.Data.Http_data;
 import com.example.chen.tset.Data.Inquiry;
 import com.example.chen.tset.R;
+import com.example.chen.tset.Utils.IListener;
+import com.example.chen.tset.Utils.ListenerManager;
 import com.example.chen.tset.page.InquiryAdapter;
 import com.example.chen.tset.page.InquirySecletAdapter;
 import com.example.chen.tset.page.InquirylistAdapter;
@@ -40,7 +42,7 @@ import okhttp3.Call;
 /**
  * 在线问诊页面
  */
-public class InquiryActivity extends AppCompatActivity {
+public class InquiryActivity extends AppCompatActivity implements IListener {
     View view;
     InquiryAdapter adapter;
     private ListView lv_inquiry;
@@ -103,9 +105,6 @@ public class InquiryActivity extends AppCompatActivity {
         dropDownMenu.setDropDownMenu(Arrays.asList(headers), initViewData(), contentView);
 
 
-
-
-
         //点击进入医生详情页面
         lv_inquiry.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
@@ -113,7 +112,7 @@ public class InquiryActivity extends AppCompatActivity {
 
                 Intent intent = new Intent(InquiryActivity.this, DoctorparticularsActivity.class);
                 //根据所选择的排序，点击时获取所点击医生ID
-                if (tag.equals("全部地区") || tag == null || tag.equals("") || tag.equals("智能排序") || tag.equals("全部科室")||tag.equals("默认")) {
+                if (tag.equals("全部地区") || tag == null || tag.equals("") || tag.equals("智能排序") || tag.equals("全部科室") || tag.equals("默认")) {
                     intent.putExtra("doctot_id", list.get(position).getId());
                 } else if (tag.equals("成都") || tag.equals("深圳")) {
                     intent.putExtra("doctot_id", citylist.get(position).getId());
@@ -191,14 +190,14 @@ public class InquiryActivity extends AppCompatActivity {
                 selectlist.clear();
                 if (position == 0) {
                     listinit(list);
-                    tag="全部科室";
+                    tag = "全部科室";
                     dropDownMenu.setTabText(1, "全部科室");
                 } else {
                     for (int i = 0; i < list.size(); i++) {
                         //在集合中查找所选科室的医生，放入一个新的集合中
                         if ((data.get(position)).equals(list.get(i).getSection())) {
                             selectlist.add(list.get(i));
-                            tag=data.get(position);
+                            tag = data.get(position);
                         }
                     }
                     if (selectlist.size() == 0) {
@@ -354,7 +353,6 @@ public class InquiryActivity extends AppCompatActivity {
     }
 
 
-
     //医生列表数据
     private void httpinit() {
         gson = new Gson();
@@ -401,8 +399,14 @@ public class InquiryActivity extends AppCompatActivity {
         }
     };
 
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        ListenerManager.getInstance().unRegisterListener(this);
+    }
 
+    @Override
+    public void notifyAllActivity(String str) {
 
-
-
+    }
 }
