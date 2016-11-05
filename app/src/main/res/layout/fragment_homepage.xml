@@ -6,429 +6,465 @@
     android:background="@color/white"
     android:overScrollMode="never">
 
-
-    <LinearLayout
+    <FrameLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical">
-
-        <com.example.chen.tset.page.HomeBannerView
-            android:id="@+id/bannerView"
-            android:layout_width="match_parent"
-            android:layout_height="@dimen/y350"
-            android:orientation="vertical" />
-
+        android:layout_height="match_parent">
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="@dimen/y68"
-            android:gravity="center_vertical"
-            android:orientation="horizontal">
+            android:layout_height="match_parent"
+            android:orientation="vertical">
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="@dimen/x30"
-                android:text="热点推荐"
-                android:textColor="@color/pink"
-                android:textSize="@dimen/y28" />
-
-            <com.example.chen.tset.page.AutoVerticalScrollTextView
-                android:id="@+id/textview_auto_roll"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center_vertical"
-                android:layout_marginLeft="@dimen/x15"
-                android:layout_marginTop="@dimen/y3" />
-        </LinearLayout>
-
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="@dimen/y20"
-            android:background="@color/backgroundgray" />
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal">
-
-            <LinearLayout
-                android:id="@+id/ll_patriarch_lecture_room"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="@dimen/y40"
-                android:layout_marginTop="@dimen/y34"
-                android:layout_weight="1"
-                android:gravity="center_horizontal"
-                android:orientation="vertical">
-
-                <ImageView
-                    android:layout_width="@dimen/x44"
-                    android:layout_height="@dimen/y44"
-                    android:src="@drawable/home_patriarch_lecture_room" />
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/y30"
-                    android:text="家长课堂"
-                    android:textColor="@color/homefont"
-                    android:textSize="@dimen/y28" />
-
-            </LinearLayout>
+            <com.example.chen.tset.page.HomeBannerView
+                android:id="@+id/bannerView"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/y350"
+                android:orientation="vertical" />
 
 
             <LinearLayout
-                android:id="@+id/ll_home_order_registration"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="@dimen/y40"
-                android:layout_marginTop="@dimen/y34"
-                android:layout_weight="1"
-                android:gravity="center_horizontal"
-                android:orientation="vertical">
-
-                <ImageView
-                    android:layout_width="@dimen/x44"
-                    android:layout_height="@dimen/y44"
-                    android:src="@drawable/home_order_registration" />
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/y30"
-                    android:text="预约挂号"
-                    android:textColor="@color/homefont"
-                    android:textSize="@dimen/y28" />
-
-            </LinearLayout>
-
-
-            <LinearLayout
-                android:id="@+id/ll_home_health_record"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="@dimen/y40"
-                android:layout_marginTop="@dimen/y34"
-                android:layout_weight="1"
-                android:gravity="center_horizontal"
-                android:orientation="vertical">
-
-                <ImageView
-                    android:layout_width="@dimen/x44"
-                    android:layout_height="@dimen/y44"
-                    android:src="@drawable/home_health_record" />
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/y30"
-                    android:text="健康小记"
-                    android:textColor="@color/homefont"
-                    android:textSize="@dimen/y28" />
-
-            </LinearLayout>
-
-            <LinearLayout
-                android:id="@+id/ll_diagnosistreat_manage"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="@dimen/y40"
-                android:layout_marginTop="@dimen/y34"
-                android:layout_weight="1"
-                android:gravity="center_horizontal"
-                android:orientation="vertical">
-
-                <ImageView
-                    android:layout_width="@dimen/x44"
-                    android:layout_height="@dimen/y44"
-                    android:src="@drawable/home_consulting_manage" />
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/y30"
-                    android:text="诊疗管理"
-                    android:textColor="@color/homefont"
-                    android:textSize="@dimen/y28" />
-
-            </LinearLayout>
-        </LinearLayout>
-
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="@dimen/y20"
-            android:background="@color/backgroundgray" />
-
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
-
-            <LinearLayout
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent">
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
-                    android:layout_marginBottom="@dimen/y30"
-                    android:layout_marginLeft="@dimen/x30"
-                    android:layout_marginTop="@dimen/y24"
-                    android:text="热门文章"
-                    android:textColor="@color/linegray1"
-                    android:textSize="@dimen/y28" />
-            </LinearLayout>
-
-            <LinearLayout
-                android:id="@+id/ll_home_article_more"
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:layout_alignParentRight="true"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/y68"
+                android:gravity="center_vertical"
                 android:orientation="horizontal">
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginBottom="@dimen/y30"
-                    android:layout_marginTop="@dimen/y24"
-                    android:text="更多"
-                    android:textColor="@color/linegray1"
-                    android:textSize="@dimen/y24" />
+                    android:layout_marginLeft="@dimen/x30"
+                    android:text="热点推荐"
+                    android:textColor="@color/pink"
+                    android:textSize="@dimen/y28" />
 
-                <ImageView
-                    android:layout_width="@dimen/x10"
-                    android:layout_height="@dimen/y18"
-                    android:layout_marginLeft="@dimen/x10"
-                    android:layout_marginRight="@dimen/x30"
-                    android:layout_marginTop="@dimen/y31"
-                    android:src="@drawable/home_article_doctor_more" />
-
+                <com.example.chen.tset.page.AutoVerticalScrollTextView
+                    android:id="@+id/textview_auto_roll"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginLeft="@dimen/x15"
+                    android:layout_marginTop="@dimen/y3" />
             </LinearLayout>
-        </RelativeLayout>
 
-
-        <LinearLayout
-            android:id="@+id/ll_home_essay"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal">
-
-            <com.example.chen.tset.page.RoundCornerImageView
-                android:id="@+id/tv_home_essay_icon"
-                android:layout_width="@dimen/x120"
-                android:layout_height="@dimen/y100"
-                android:layout_marginBottom="@dimen/y20"
-                android:layout_marginLeft="@dimen/x30"
-                android:adjustViewBounds="true"
-                android:scaleType="centerCrop" />
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/y20"
+                android:background="@color/backgroundgray" />
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="@dimen/x30"
-                android:orientation="vertical">
+                android:orientation="horizontal">
 
-                <TextView
-                    android:id="@+id/tv_home_essay_title"
+                <LinearLayout
+                    android:id="@+id/ll_patriarch_lecture_room"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/y2"
-                    android:textColor="@color/fontcolor"
-                    android:textSize="@dimen/x28" />
+                    android:layout_marginBottom="@dimen/y40"
+                    android:layout_marginTop="@dimen/y34"
+                    android:layout_weight="1"
+                    android:gravity="center_horizontal"
+                    android:orientation="vertical">
 
-                <TextView
-                    android:id="@+id/tv_home_essay_content"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginRight="@dimen/x50"
-                    android:layout_marginTop="@dimen/y4"
-                    android:ellipsize="end"
-                    android:lines="1"
-                    android:textColor="@color/xmgray"
-                    android:textSize="@dimen/x24" />
-
-                <RelativeLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/y6">
+                    <ImageView
+                        android:layout_width="@dimen/x44"
+                        android:layout_height="@dimen/y44"
+                        android:src="@drawable/home_patriarch_lecture_room" />
 
                     <TextView
-                        android:id="@+id/tv_home_essay_time"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_alignParentLeft="true"
-                        android:textColor="@color/linegray1"
-                        android:textSize="@dimen/x22" />
+                        android:layout_marginTop="@dimen/y30"
+                        android:text="家长课堂"
+                        android:textColor="@color/homefont"
+                        android:textSize="@dimen/y28" />
 
-                    <LinearLayout
+                </LinearLayout>
+
+
+                <LinearLayout
+                    android:id="@+id/ll_home_order_registration"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="@dimen/y40"
+                    android:layout_marginTop="@dimen/y34"
+                    android:layout_weight="1"
+                    android:gravity="center_horizontal"
+                    android:orientation="vertical">
+
+                    <ImageView
+                        android:layout_width="@dimen/x44"
+                        android:layout_height="@dimen/y44"
+                        android:src="@drawable/home_order_registration" />
+
+                    <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_alignParentRight="true"
-                        android:orientation="horizontal">
+                        android:layout_marginTop="@dimen/y30"
+                        android:text="预约挂号"
+                        android:textColor="@color/homefont"
+                        android:textSize="@dimen/y28" />
 
-                        <ImageView
-                            android:layout_width="@dimen/x26"
-                            android:layout_height="@dimen/y26"
-                            android:src="@drawable/encyclopedialike" />
+                </LinearLayout>
 
-                        <TextView
-                            android:id="@+id/tv_home_essay_collectnumber"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginLeft="@dimen/x14"
-                            android:layout_marginRight="@dimen/x42"
-                            android:textColor="@color/linegray1"
-                            android:textSize="@dimen/x22" />
-                    </LinearLayout>
-                </RelativeLayout>
+
+                <LinearLayout
+                    android:id="@+id/ll_home_health_record"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="@dimen/y40"
+                    android:layout_marginTop="@dimen/y34"
+                    android:layout_weight="1"
+                    android:gravity="center_horizontal"
+                    android:orientation="vertical">
+
+                    <ImageView
+                        android:layout_width="@dimen/x44"
+                        android:layout_height="@dimen/y44"
+                        android:src="@drawable/home_health_record" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/y30"
+                        android:text="健康小记"
+                        android:textColor="@color/homefont"
+                        android:textSize="@dimen/y28" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/ll_diagnosistreat_manage"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="@dimen/y40"
+                    android:layout_marginTop="@dimen/y34"
+                    android:layout_weight="1"
+                    android:gravity="center_horizontal"
+                    android:orientation="vertical">
+
+                    <ImageView
+                        android:layout_width="@dimen/x44"
+                        android:layout_height="@dimen/y44"
+                        android:src="@drawable/home_consulting_manage" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/y30"
+                        android:text="诊疗管理"
+                        android:textColor="@color/homefont"
+                        android:textSize="@dimen/y28" />
+
+                </LinearLayout>
             </LinearLayout>
-        </LinearLayout>
 
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="@dimen/y1"
-            android:layout_marginLeft="@dimen/x30"
-            android:background="@color/linegray" />
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/y20"
+                android:background="@color/backgroundgray" />
 
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
 
-        <LinearLayout
-            android:id="@+id/ll_home_essay1"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal">
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent">
 
-            <com.example.chen.tset.page.RoundCornerImageView
-                android:id="@+id/tv_home_essay_icon1"
-                android:layout_width="@dimen/x120"
-                android:layout_height="@dimen/y100"
-                android:layout_marginBottom="@dimen/y20"
-                android:layout_marginLeft="@dimen/x30"
-                android:layout_marginTop="@dimen/y20"
-                android:adjustViewBounds="true"
-                android:scaleType="centerCrop" />
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:layout_marginBottom="@dimen/y30"
+                        android:layout_marginLeft="@dimen/x30"
+                        android:layout_marginTop="@dimen/y24"
+                        android:text="热门文章"
+                        android:textColor="@color/linegray1"
+                        android:textSize="@dimen/y28" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/ll_home_article_more"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_alignParentRight="true"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="@dimen/y30"
+                        android:layout_marginTop="@dimen/y24"
+                        android:text="更多"
+                        android:textColor="@color/linegray1"
+                        android:textSize="@dimen/y24" />
+
+                    <ImageView
+                        android:layout_width="@dimen/x10"
+                        android:layout_height="@dimen/y18"
+                        android:layout_marginLeft="@dimen/x10"
+                        android:layout_marginRight="@dimen/x30"
+                        android:layout_marginTop="@dimen/y31"
+                        android:src="@drawable/home_article_doctor_more" />
+
+                </LinearLayout>
+            </RelativeLayout>
+
 
             <LinearLayout
+                android:id="@+id/ll_home_essay"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="@dimen/x30"
-                android:orientation="vertical">
+                android:orientation="horizontal">
 
-                <TextView
-                    android:id="@+id/tv_home_essay_title1"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/y22"
-                    android:textColor="@color/fontcolor"
-                    android:textSize="@dimen/x28" />
+                <com.example.chen.tset.page.RoundCornerImageView
+                    android:id="@+id/tv_home_essay_icon"
+                    android:layout_width="@dimen/x120"
+                    android:layout_height="@dimen/y100"
+                    android:layout_marginBottom="@dimen/y20"
+                    android:layout_marginLeft="@dimen/x30"
+                    android:adjustViewBounds="true"
+                    android:scaleType="centerCrop" />
 
-                <TextView
-                    android:id="@+id/tv_home_essay_content1"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginRight="@dimen/x50"
-                    android:layout_marginTop="@dimen/y4"
-                    android:ellipsize="end"
-                    android:lines="1"
-                    android:textColor="@color/xmgray"
-                    android:textSize="@dimen/x24" />
-
-                <RelativeLayout
+                <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/y6">
+                    android:layout_marginLeft="@dimen/x30"
+                    android:orientation="vertical">
 
                     <TextView
-                        android:id="@+id/tv_home_essay_time1"
+                        android:id="@+id/tv_home_essay_title"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_alignParentLeft="true"
-                        android:textColor="@color/linegray1"
-                        android:textSize="@dimen/x22" />
+                        android:layout_marginTop="@dimen/y2"
+                        android:textColor="@color/fontcolor"
+                        android:textSize="@dimen/x28" />
 
-                    <LinearLayout
+                    <TextView
+                        android:id="@+id/tv_home_essay_content"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_alignParentRight="true"
-                        android:orientation="horizontal">
+                        android:layout_marginRight="@dimen/x50"
+                        android:layout_marginTop="@dimen/y4"
+                        android:ellipsize="end"
+                        android:maxEms="20"
+                        android:singleLine="true"
+                        android:textColor="@color/xmgray"
+                        android:textSize="@dimen/x24" />
 
-                        <ImageView
-                            android:layout_width="@dimen/x26"
-                            android:layout_height="@dimen/y26"
-                            android:src="@drawable/encyclopedialike" />
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/y6">
 
                         <TextView
-                            android:id="@+id/tv_home_essay_collectnumber1"
+                            android:id="@+id/tv_home_essay_time"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:layout_marginLeft="@dimen/x14"
-                            android:layout_marginRight="@dimen/x42"
+                            android:layout_alignParentLeft="true"
                             android:textColor="@color/linegray1"
                             android:textSize="@dimen/x22" />
-                    </LinearLayout>
-                </RelativeLayout>
-            </LinearLayout>
-        </LinearLayout>
 
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="@dimen/y20"
-            android:layout_marginTop="@dimen/x10"
-            android:background="@color/backgroundgray" />
+                        <LinearLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_alignParentRight="true"
+                            android:orientation="horizontal">
+
+                            <ImageView
+                                android:layout_width="@dimen/x26"
+                                android:layout_height="@dimen/y26"
+                                android:src="@drawable/encyclopedialike" />
+
+                            <TextView
+                                android:id="@+id/tv_home_essay_collectnumber"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginLeft="@dimen/x14"
+                                android:layout_marginRight="@dimen/x42"
+                                android:textColor="@color/linegray1"
+                                android:textSize="@dimen/x22" />
+                        </LinearLayout>
+                    </RelativeLayout>
+                </LinearLayout>
+            </LinearLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/y1"
+                android:layout_marginLeft="@dimen/x30"
+                android:background="@color/linegray" />
+
+
+            <LinearLayout
+                android:id="@+id/ll_home_essay1"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <com.example.chen.tset.page.RoundCornerImageView
+                    android:id="@+id/tv_home_essay_icon1"
+                    android:layout_width="@dimen/x120"
+                    android:layout_height="@dimen/y100"
+                    android:layout_marginBottom="@dimen/y20"
+                    android:layout_marginLeft="@dimen/x30"
+                    android:layout_marginTop="@dimen/y20"
+                    android:adjustViewBounds="true"
+                    android:scaleType="centerCrop" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/x30"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:id="@+id/tv_home_essay_title1"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/y22"
+                        android:textColor="@color/fontcolor"
+                        android:textSize="@dimen/x28" />
+
+                    <TextView
+                        android:id="@+id/tv_home_essay_content1"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginRight="@dimen/x50"
+                        android:layout_marginTop="@dimen/y4"
+                        android:ellipsize="end"
+                        android:maxEms="20"
+                        android:singleLine="true"
+                        android:textColor="@color/xmgray"
+                        android:textSize="@dimen/x24" />
+
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/y6">
+
+                        <TextView
+                            android:id="@+id/tv_home_essay_time1"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_alignParentLeft="true"
+                            android:textColor="@color/linegray1"
+                            android:textSize="@dimen/x22" />
+
+                        <LinearLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_alignParentRight="true"
+                            android:orientation="horizontal">
+
+                            <ImageView
+                                android:layout_width="@dimen/x26"
+                                android:layout_height="@dimen/y26"
+                                android:src="@drawable/encyclopedialike" />
+
+                            <TextView
+                                android:id="@+id/tv_home_essay_collectnumber1"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginLeft="@dimen/x14"
+                                android:layout_marginRight="@dimen/x42"
+                                android:textColor="@color/linegray1"
+                                android:textSize="@dimen/x22" />
+                        </LinearLayout>
+                    </RelativeLayout>
+                </LinearLayout>
+            </LinearLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/y20"
+                android:layout_marginTop="@dimen/x10"
+                android:background="@color/backgroundgray" />
+
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+
+                        android:layout_marginLeft="@dimen/x30"
+                        android:layout_marginTop="@dimen/y24"
+                        android:text="名医推荐"
+                        android:textColor="@color/linegray1"
+                        android:textSize="@dimen/y28" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/ll_home_doctor_more"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_alignParentRight="true"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+
+                        android:layout_marginTop="@dimen/y24"
+                        android:text="更多"
+                        android:textColor="@color/linegray1"
+                        android:textSize="@dimen/y24" />
+
+                    <ImageView
+                        android:layout_width="@dimen/x10"
+                        android:layout_height="@dimen/y18"
+                        android:layout_marginLeft="@dimen/x10"
+                        android:layout_marginRight="@dimen/x30"
+                        android:layout_marginTop="@dimen/y31"
+                        android:src="@drawable/home_article_doctor_more" />
+                </LinearLayout>
+            </RelativeLayout>
+
+            <com.example.chen.tset.page.ListViewForScrollView
+                android:id="@+id/home_listView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:overScrollMode="never" />
+
+
+        </LinearLayout>
 
 
         <RelativeLayout
+            android:id="@+id/rl_loading"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            android:background="@color/white">
 
             <LinearLayout
                 android:layout_width="wrap_content"
-                android:layout_height="match_parent">
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:orientation="vertical">
 
-                <TextView
+                <ImageView
+                    android:id="@+id/iv_lading"
                     android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
-
-                    android:layout_marginLeft="@dimen/x30"
-                    android:layout_marginTop="@dimen/y24"
-                    android:text="名医推荐"
-                    android:textColor="@color/linegray1"
-                    android:textSize="@dimen/y28" />
-            </LinearLayout>
-
-            <LinearLayout
-                android:id="@+id/ll_home_doctor_more"
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:layout_alignParentRight="true"
-                android:orientation="horizontal">
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/y450"
+                    android:src="@drawable/loading" />
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-
-                    android:layout_marginTop="@dimen/y24"
-                    android:text="更多"
-                    android:textColor="@color/linegray1"
-                    android:textSize="@dimen/y24" />
-
-                <ImageView
-                    android:layout_width="@dimen/x10"
-                    android:layout_height="@dimen/y18"
-                    android:layout_marginLeft="@dimen/x10"
-                    android:layout_marginRight="@dimen/x30"
-                    android:layout_marginTop="@dimen/y31"
-                    android:src="@drawable/home_article_doctor_more" />
+                    android:layout_gravity="center_horizontal"
+                    android:text="内容加载中"
+                    android:textColor="@color/linegray"
+                    android:textSize="@dimen/y32" />
             </LinearLayout>
         </RelativeLayout>
-
-        <com.example.chen.tset.page.ListViewForScrollView
-            android:id="@+id/home_listView"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:overScrollMode="never" />
-
-
-    </LinearLayout>
+    </FrameLayout>
 
 
 </ScrollView>

@@ -105,6 +105,9 @@ public class HomepageFragment extends Fragment implements IListener {
 
     HomeEassayDao homeEassaydb;
 
+    //加载中
+    RelativeLayout rl_loading;
+
 
     @Nullable
     @Override
@@ -163,6 +166,8 @@ public class HomepageFragment extends Fragment implements IListener {
         ll_home_essay = (LinearLayout) view.findViewById(R.id.ll_home_essay);
 
         ll_home_essay1 = (LinearLayout) view.findViewById(R.id.ll_home_essay1);
+
+        rl_loading = (RelativeLayout) view.findViewById(R.id.rl_loading);
 
         tv_home_essay_collectnumber = (TextView) view.findViewById(R.id.tv_home_essay_collectnumber);
         tv_home_essay_collectnumber1 = (TextView) view.findViewById(R.id.tv_home_essay_collectnumber1);
@@ -414,6 +419,9 @@ public class HomepageFragment extends Fragment implements IListener {
                     //设置点赞数
                     tv_home_essay_collectnumber.setText("21");
                     tv_home_essay_collectnumber1.setText("32");
+
+                    //隐藏加载中
+                    rl_loading.setVisibility(View.GONE);
                     break;
                 //设置医生推荐数据
                 case 2:
@@ -425,26 +433,24 @@ public class HomepageFragment extends Fragment implements IListener {
                         db.addHomeDoctor(inquiryList.get(i));
                     }
 
-
                     break;
                 //设置热点推荐滑动时间
                 case 3:
 
-
                     //设置第一次显示的数据
                     verticalScrollTV.setText(strings.get(0));
+
                     //设置滚动时间
                     new Thread() {
                         @Override
                         public void run() {
                             while (isRunning) {
-                                //每隔3000通知滚动一次
+                                //每隔3秒通知滚动一次
                                 SystemClock.sleep(3000);
                                 handler.sendEmptyMessage(0);
                             }
                         }
                     }.start();
-
 
                     break;
 
@@ -480,6 +486,7 @@ public class HomepageFragment extends Fragment implements IListener {
                             strings.add(findList.get(i).getTitle());
                         }
                         handler.sendEmptyMessage(3);
+                        Toast.makeText(getContext(), "网络连接失败", Toast.LENGTH_SHORT).show();
                     }
                     break;
 
@@ -499,12 +506,16 @@ public class HomepageFragment extends Fragment implements IListener {
     };
 
 
+
+
     @Override
     public void onDestroy() {
         super.onDestroy();
         //关闭滚动
         isRunning = false;
     }
+
+
 
     private View.OnClickListener listener = new View.OnClickListener() {
         @Override

@@ -166,12 +166,12 @@ public class InquiryAdapter extends BaseAdapter implements IListener {
         WindowManager windowManager = (WindowManager) context.getSystemService(Context.WINDOW_SERVICE);
         Display display = windowManager.getDefaultDisplay();
         dialogView = View.inflate(context, R.layout.payment_dialog, null);
-
+        tv_cash_coupons_stater = (TextView) dialogView.findViewById(R.id.tv_cash_coupons_stater);
 
         rb_wenx = (RadioButton) dialogView.findViewById(R.id.rb_wenx);
         rb_zhifb = (RadioButton) dialogView.findViewById(R.id.rb_zhifb);
         ll_cancel = (LinearLayout) dialogView.findViewById(R.id.ll_cancel);
-        tv_cash_coupons_stater = (TextView) dialogView.findViewById(R.id.tv_cash_coupons_stater);
+
 
         rl_use_cash_coupons = (RelativeLayout) dialogView.findViewById(R.id.rl_use_cash_coupons);
 
@@ -273,7 +273,12 @@ public class InquiryAdapter extends BaseAdapter implements IListener {
     @Override
     public void notifyAllActivity(String str) {
         if (str.equals("更新问诊支付弹出框")) {
-            tv_cash_coupons_stater.setText("快速问诊劵 ￥25");
+            try {
+                tv_cash_coupons_stater.setText("快速问诊劵 ￥25");
+            }catch (Exception e){
+                e.printStackTrace();
+            }
+
 
             btn_confirm_payment.setText("确认支付￥0");
         }

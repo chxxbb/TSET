@@ -116,7 +116,7 @@ import cn.jpush.im.api.BasicCallback;
 import okhttp3.Call;
 import okhttp3.Response;
 
-public class HomeActivity extends AppCompatActivity implements View.OnClickListener, IListener {
+public class HomeActivity extends MyBaseActivity implements View.OnClickListener, IListener {
     FragmentManager fm;
     FragmentTransaction ft;
     private RadioButton rb_encyclopedia, rb_lectureroom, rb_mypage, rb_diagnosis;
@@ -879,7 +879,8 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
                 ft.show(consultingFragment);
             }
 
-
+            ft.commitAllowingStateLoss();
+            //显示到资讯页面
         } else if (str.equals("显示资讯页面")) {
             fl_registration.setVisibility(View.GONE);
             radioGroup_left.clearCheck();
@@ -894,10 +895,8 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
                 ft.show(encyclopediaFragment);
             }
 
-
+            ft.commitAllowingStateLoss();
         }
-
-        ft.commit();
 
 
     }
