@@ -44,8 +44,13 @@ public class MyCashCouponsActivity extends AppCompatActivity implements IListene
         lv_mycash = (ListView) findViewById(R.id.lv_mycash);
 
         ll_rut.setOnClickListener(listener);
+        try {
+            lv_mycash.setOnItemClickListener(lvlistener);
+        } catch (Exception e) {
+            e.printStackTrace();
+            finish();
+        }
 
-        lv_mycash.setOnItemClickListener(lvlistener);
     }
 
     private View.OnClickListener listener = new View.OnClickListener() {
@@ -66,15 +71,15 @@ public class MyCashCouponsActivity extends AppCompatActivity implements IListene
             if (type.equals("mypage")) {
 
             } else if (type.equals("registration")) {
-                if (position == 0) {
-                    Toast.makeText(MyCashCouponsActivity.this, "不可使用", Toast.LENGTH_SHORT).show();
-                } else if (position == 1) {
-                    Toast.makeText(MyCashCouponsActivity.this, "已经使用过了", Toast.LENGTH_SHORT).show();
-                } else if (position == 2) {
-                    ListenerManager.getInstance().sendBroadCast("更新支付弹出框");
-                    finish();
+//                if (position == 0) {
+//                    Toast.makeText(MyCashCouponsActivity.this, "不可使用", Toast.LENGTH_SHORT).show();
+//                } else if (position == 1) {
+//                    Toast.makeText(MyCashCouponsActivity.this, "已经使用过了", Toast.LENGTH_SHORT).show();
+//                } else if (position == 2) {
+//                    ListenerManager.getInstance().sendBroadCast("更新支付弹出框");
 
-                }
+//                    finish();
+//                }
 
             } else {
                 if (position == 0) {

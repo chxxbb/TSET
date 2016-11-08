@@ -404,137 +404,202 @@
                 <LinearLayout
                     android:id="@+id/ll_registration_info"
                     android:layout_width="match_parent"
-                    android:layout_height="@dimen/y114"
-                    android:layout_marginBottom="@dimen/y5"
-                    android:layout_marginLeft="@dimen/x20"
-                    android:layout_marginRight="@dimen/x20"
-                    android:layout_marginTop="@dimen/y5"
-                    android:gravity="center_vertical"
-                    android:orientation="horizontal"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/x30"
+                    android:layout_marginRight="@dimen/x30"
+                    android:layout_marginTop="@dimen/y20"
+                    android:background="@drawable/consulting_remid_case"
+                    android:orientation="vertical"
                     android:visibility="gone">
-
-                    <ImageView
-                        android:layout_width="@dimen/x48"
-                        android:layout_height="@dimen/y100"
-                        android:background="@drawable/cousulting_yellow_side" />
 
                     <LinearLayout
                         android:layout_width="match_parent"
-                        android:layout_height="@dimen/y100"
-                        android:background="@drawable/cousulting_option_background"
-                        android:orientation="vertical">
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal">
+
+                        <ImageView
+                            android:layout_width="@dimen/x40"
+                            android:layout_height="@dimen/y38"
+                            android:layout_marginLeft="@dimen/x30"
+                            android:layout_marginTop="@dimen/y30"
+                            android:src="@drawable/consulting_page_register" />
 
                         <TextView
-                            android:layout_width="match_parent"
+                            android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:layout_marginLeft="@dimen/x30"
-                            android:layout_marginTop="@dimen/y8"
-                            android:text="挂号详情"
-                            android:textColor="@color/xmgray"
-                            android:textSize="@dimen/y28" />
+                            android:layout_marginLeft="@dimen/x20"
+                            android:layout_marginTop="@dimen/y27"
+                            android:text="挂号提醒"
+                            android:textColor="@color/colorAccent"
+                            android:textSize="@dimen/y32" />
 
-                        <TextView
-                            android:id="@+id/tv_registration_info"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_marginLeft="@dimen/x30"
-                            android:layout_marginTop="@dimen/y5"
-
-                            android:textColor="#777777"
-                            android:textSize="@dimen/y24" />
                     </LinearLayout>
+
+                    <TextView
+                        android:id="@+id/tv_registration_info"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="@dimen/y30"
+                        android:layout_marginLeft="@dimen/x90"
+                        android:layout_marginTop="@dimen/y24"
+                        android:textColor="#777777"
+                        android:textSize="@dimen/y28" />
+
                 </LinearLayout>
+
 
                 <LinearLayout
                     android:id="@+id/ll_consulting_phramacy"
                     android:layout_width="match_parent"
-                    android:layout_height="@dimen/y114"
+                    android:layout_height="wrap_content"
                     android:layout_marginBottom="@dimen/y5"
-                    android:layout_marginLeft="@dimen/x20"
-                    android:layout_marginRight="@dimen/x20"
-                    android:layout_marginTop="@dimen/y5"
-                    android:gravity="center_vertical"
-                    android:orientation="horizontal"
+                    android:layout_marginLeft="@dimen/x30"
+                    android:layout_marginRight="@dimen/x30"
+                    android:layout_marginTop="@dimen/y20"
+                    android:background="@drawable/consulting_remid_case"
+                    android:orientation="vertical"
                     android:visibility="gone">
-
-                    <ImageView
-                        android:layout_width="@dimen/x48"
-                        android:layout_height="@dimen/y100"
-                        android:background="@drawable/cousulting_green_side" />
 
                     <LinearLayout
                         android:layout_width="match_parent"
-                        android:layout_height="@dimen/y100"
-                        android:background="@drawable/cousulting_option_background"
-                        android:orientation="vertical">
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal">
+
+                        <ImageView
+                            android:layout_width="@dimen/x40"
+                            android:layout_height="@dimen/y38"
+                            android:layout_marginLeft="@dimen/x30"
+                            android:layout_marginTop="@dimen/y30"
+                            android:src="@drawable/consulting_page_use_medicine" />
 
                         <TextView
-                            android:layout_width="match_parent"
+                            android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:layout_marginLeft="@dimen/x30"
-                            android:layout_marginTop="@dimen/y8"
+                            android:layout_marginLeft="@dimen/x20"
+                            android:layout_marginTop="@dimen/y27"
                             android:text="用药提醒"
-                            android:textColor="@color/xmgray"
-                            android:textSize="@dimen/y28" />
+                            android:textColor="@color/colorAccent"
+                            android:textSize="@dimen/y32" />
 
-                        <TextView
-                            android:id="@+id/tv_consulting_pharmacy"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_marginLeft="@dimen/x30"
-                            android:layout_marginTop="@dimen/y5"
-                            android:textColor="#777777"
-                            android:textSize="@dimen/y24" />
                     </LinearLayout>
+
+                    <TextView
+                        android:id="@+id/tv_consulting_pharmacy"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="@dimen/y30"
+                        android:layout_marginLeft="@dimen/x90"
+                        android:layout_marginTop="@dimen/y24"
+                        android:textColor="#777777"
+                        android:textSize="@dimen/y28" />
+
                 </LinearLayout>
+
 
                 <LinearLayout
                     android:id="@+id/ll_consulting_health"
                     android:layout_width="match_parent"
-                    android:layout_height="@dimen/y114"
-                    android:layout_marginBottom="@dimen/y20"
-                    android:layout_marginLeft="@dimen/x20"
-                    android:layout_marginRight="@dimen/x20"
-                    android:layout_marginTop="@dimen/y5"
-                    android:gravity="center_vertical"
-                    android:orientation="horizontal"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="@dimen/y5"
+                    android:layout_marginLeft="@dimen/x30"
+                    android:layout_marginRight="@dimen/x30"
+                    android:layout_marginTop="@dimen/y20"
+                    android:background="@drawable/consulting_remid_case"
+                    android:orientation="vertical"
                     android:visibility="gone">
-
-                    <ImageView
-                        android:layout_width="@dimen/x48"
-                        android:layout_height="@dimen/y100"
-                        android:background="@drawable/cousulting_red_side" />
 
                     <LinearLayout
                         android:layout_width="match_parent"
-                        android:layout_height="@dimen/y100"
-                        android:background="@drawable/cousulting_option_background"
-                        android:orientation="vertical">
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal">
+
+                        <ImageView
+                            android:layout_width="@dimen/x40"
+                            android:layout_height="@dimen/y38"
+                            android:layout_marginLeft="@dimen/x30"
+                            android:layout_marginTop="@dimen/y30"
+                            android:src="@drawable/home_health_record" />
 
                         <TextView
-                            android:layout_width="match_parent"
+                            android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:layout_marginLeft="@dimen/x30"
-                            android:layout_marginTop="@dimen/y8"
+                            android:layout_marginLeft="@dimen/x20"
+                            android:layout_marginTop="@dimen/y27"
                             android:text="健康状况"
-                            android:textColor="@color/xmgray"
-                            android:textSize="@dimen/y28" />
+                            android:textColor="@color/colorAccent"
+                            android:textSize="@dimen/y32" />
 
-                        <TextView
-                            android:id="@+id/tv_consulting_health"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_marginLeft="@dimen/x30"
-                            android:layout_marginTop="@dimen/y5"
-                            android:ellipsize="end"
-                            android:includeFontPadding="false"
-                            android:maxLines="1"
-                            android:textColor="#777777"
-                            android:textSize="@dimen/y24" />
                     </LinearLayout>
-                </LinearLayout>
-            </LinearLayout>
 
+                    <TextView
+                        android:id="@+id/tv_consulting_health"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="@dimen/y30"
+                        android:layout_marginLeft="@dimen/x90"
+                        android:layout_marginTop="@dimen/y24"
+                        android:textColor="#777777"
+                        android:textSize="@dimen/y28" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/ll_add_medicine_remind"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/y90"
+                    android:layout_marginLeft="@dimen/x30"
+                    android:layout_marginRight="@dimen/x30"
+                    android:layout_marginTop="@dimen/y20"
+                    android:background="@drawable/consulting_remid_case"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal">
+
+                    <ImageView
+                        android:layout_width="@dimen/x40"
+                        android:layout_height="@dimen/x40"
+                        android:layout_marginLeft="@dimen/x26"
+                        android:src="@drawable/consulting_page_add_remind" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="@dimen/x20"
+                        android:text="添加用药提醒"
+                        android:textColor="@color/xmgray"
+                        android:textSize="@dimen/y32" />
+                </LinearLayout>
+
+
+                <LinearLayout
+                    android:id="@+id/ll_add_health_condition"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/y90"
+                    android:layout_marginLeft="@dimen/x30"
+                    android:layout_marginRight="@dimen/x30"
+                    android:layout_marginTop="@dimen/y20"
+                    android:background="@drawable/consulting_remid_case"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal">
+
+                    <ImageView
+                        android:layout_width="@dimen/x40"
+                        android:layout_height="@dimen/x40"
+                        android:layout_marginLeft="@dimen/x26"
+                        android:src="@drawable/consulting_page_add_remind" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="@dimen/x20"
+                        android:text="添加健康状况"
+                        android:textColor="@color/xmgray"
+                        android:textSize="@dimen/y32" />
+                </LinearLayout>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/y20"/>
+
+            </LinearLayout>
 
         </LinearLayout>
 

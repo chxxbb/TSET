@@ -1,19 +1,33 @@
 package com.example.chen.tset.View;
 
+import android.graphics.Color;
+import android.os.Build;
 import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.StaggeredGridLayoutManager;
+import android.text.SpannableString;
+import android.text.Spanned;
+import android.text.TextPaint;
+import android.text.style.StyleSpan;
 import android.util.Log;
 import android.view.View;
+import android.view.Window;
+import android.view.WindowManager;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
+import android.widget.ScrollView;
+import android.widget.TextView;
 
 import com.example.chen.tset.Data.Http_data;
 import com.example.chen.tset.Data.Lecture;
 import com.example.chen.tset.R;
+import com.example.chen.tset.page.LectureListAdapter;
+import com.example.chen.tset.page.LecturereoomTopBanner;
 import com.example.chen.tset.page.LectureroomAdapter;
+import com.example.chen.tset.page.LectureroomAmongBanner;
+import com.example.chen.tset.page.ListViewForScrollView;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import com.zhy.http.okhttp.OkHttpUtils;
@@ -28,6 +42,7 @@ import java.util.List;
 import okhttp3.Call;
 
 public class LectureoomActivity extends AppCompatActivity {
+
     private RecyclerView recyclerView;
     private LectureroomAdapter adapter;
     private RelativeLayout rl_nonetwork, rl_loading;
@@ -129,4 +144,93 @@ public class LectureoomActivity extends AppCompatActivity {
             }
         }
     };
+
+
+    /**
+     * 这是一条分割线
+     */
+
+//    LecturereoomTopBanner banner_lectureoom_top;
+//
+//    LectureroomAmongBanner banner_lectureoom_among;
+//
+//    TextView tv_lectureroom, tv_lectureroom_among_bannertext, tv_lecure_beforetext;
+//
+//    ListViewForScrollView lecture_room_listView;
+//
+//    ScrollView scrollView;
+//
+//    List<String> list = new ArrayList<>();
+//    LectureListAdapter adapter;
+//
+//
+//    @Override
+//    protected void onCreate(Bundle savedInstanceState) {
+//        super.onCreate(savedInstanceState);
+//
+//        if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
+//            //透明状态栏
+//            getWindow().addFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
+//            //透明导航栏
+//            getWindow().addFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_NAVIGATION);
+//        }
+//
+//
+//        setContentView(R.layout.fragment_lectureroom);
+//        findView();
+//        init();
+//
+//
+//    }
+//
+//    private void findView() {
+//        banner_lectureoom_top = (LecturereoomTopBanner) findViewById(R.id.banner_lectureoom_top);
+//        tv_lectureroom = (TextView) findViewById(R.id.tv_lectureroom);
+//        banner_lectureoom_among = (LectureroomAmongBanner) findViewById(R.id.banner_lectureoom_among);
+//        tv_lectureroom_among_bannertext = (TextView) findViewById(R.id.tv_lectureroom_among_bannertext);
+//        lecture_room_listView = (ListViewForScrollView) findViewById(R.id.lecture_room_listView);
+//        scrollView = (ScrollView) findViewById(R.id.scrollView);
+//        tv_lecure_beforetext = (TextView) findViewById(R.id.tv_lecure_beforetext);
+//
+//        lecture_room_listView.setVerticalScrollBarEnabled(false);
+//        scrollView.setVerticalScrollBarEnabled(false);
+//
+//        TextPaint tp = tv_lectureroom.getPaint();
+//        tp.setFakeBoldText(true);
+//
+//        TextPaint tp1 = tv_lectureroom_among_bannertext.getPaint();
+//        tp1.setFakeBoldText(true);
+//
+//        TextPaint tp2 = tv_lecure_beforetext.getPaint();
+//        tp2.setFakeBoldText(true);
+//    }
+//
+//    private void init() {
+//        list.add("1");
+//        list.add("2");
+//        list.add("3");
+//        list.add("4");
+//        list.add("5");
+//
+//        adapter = new LectureListAdapter(this, list);
+//        lecture_room_listView.setAdapter(adapter);
+//        adapter.notifyDataSetChanged();
+//    }
+//
+//
+//    //banner开始滑动
+//    public void onResume() {
+//        super.onResume();
+//        banner_lectureoom_top.bannerStartPlay();
+//        banner_lectureoom_among.bannerStartPlay();
+//    }
+//
+//
+//    //banner停止滑动
+//    @Override
+//    public void onPause() {
+//        super.onPause();
+//        banner_lectureoom_top.bannerStopPlay();
+//        banner_lectureoom_among.bannerStopPlay();
+//    }
 }

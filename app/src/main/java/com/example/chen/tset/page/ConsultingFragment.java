@@ -154,6 +154,12 @@ public class ConsultingFragment extends Fragment implements View.OnClickListener
 
     String pharmacydate;
 
+    //添加用药提醒
+    LinearLayout ll_add_medicine_remind;
+
+    //添加健康状况
+    LinearLayout ll_add_health_condition;
+
 
     @Nullable
     @Override
@@ -218,10 +224,7 @@ public class ConsultingFragment extends Fragment implements View.OnClickListener
         }
 
 
-
     }
-
-
 
 
     Handler handler = new Handler() {
@@ -237,7 +240,7 @@ public class ConsultingFragment extends Fragment implements View.OnClickListener
                     calV.notifyDataSetChanged();
                     break;
                 case 2:
-                    Toast.makeText(getContext(), "网络连接失败", Toast.LENGTH_SHORT).show();
+//                    Toast.makeText(getContext(), "网络连接失败", Toast.LENGTH_SHORT).show();
                     break;
                 case 3:
                     ll_registration_info.setVisibility(View.GONE);
@@ -333,6 +336,10 @@ public class ConsultingFragment extends Fragment implements View.OnClickListener
         prevMonth = (ImageView) view.findViewById(R.id.prevMonth);
         nextMonth = (ImageView) view.findViewById(R.id.nextMonth);
 
+        ll_add_health_condition = (LinearLayout) view.findViewById(R.id.ll_add_health_condition);
+
+        ll_add_medicine_remind = (LinearLayout) view.findViewById(R.id.ll_add_medicine_remind);
+
         ll_right = (LinearLayout) view.findViewById(R.id.ll_right);
         ll_left = (LinearLayout) view.findViewById(R.id.ll_left);
 
@@ -361,6 +368,8 @@ public class ConsultingFragment extends Fragment implements View.OnClickListener
 
         tv_consulting_pharmacy = (TextView) view.findViewById(R.id.tv_consulting_pharmacy);
 
+        ll_add_medicine_remind.setOnClickListener(addlistener);
+        ll_add_health_condition.setOnClickListener(addlistener);
 
         ll_left.setOnClickListener(this);
         ll_right.setOnClickListener(this);
@@ -600,6 +609,7 @@ public class ConsultingFragment extends Fragment implements View.OnClickListener
             str = calV.getShowYear() + "-0" + calV.getShowMonth();
         } else {
             str = calV.getShowYear() + "-" + calV.getShowMonth();
+
         }
 
         //加载滑动到的页面日期数据
@@ -629,9 +639,10 @@ public class ConsultingFragment extends Fragment implements View.OnClickListener
      */
     public void addTextToTopTextView(TextView view) {
         StringBuffer textDate = new StringBuffer();
-        textDate.append(calV.getShowYear()).append("年").append(calV.getShowMonth()).append("月").append("\t");
+        textDate.append(calV.getShowYear()).append("年").append(calV.getShowMonth()).append("月");
         view.setText(textDate);
     }
+
 
 
     private void addGridView() {
@@ -852,6 +863,24 @@ public class ConsultingFragment extends Fragment implements View.OnClickListener
                     startActivity(intent);
                 }
             });
+        }
+    };
+
+    private View.OnClickListener addlistener = new View.OnClickListener() {
+        @Override
+        public void onClick(View v) {
+            switch (v.getId()) {
+                //跳转至用药设置
+                case R.id.ll_add_medicine_remind:
+                    Intent intent = new Intent(getContext(), CompileremindActivity.class);
+                    startActivity(intent);
+                    break;
+                //跳转至健康状况
+                case R.id.ll_add_health_condition:
+                    Intent intent1 = new Intent(getContext(), HealthconditionActivity.class);
+                    startActivity(intent1);
+                    break;
+            }
         }
     };
 

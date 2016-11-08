@@ -1,8 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
+
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical">
+
 
     <RelativeLayout
         android:layout_width="match_parent"
@@ -33,10 +35,11 @@
             android:textColor="@color/fontcolor"
             android:textSize="@dimen/x36" />
     </RelativeLayout>
+
     <View
         android:layout_width="match_parent"
         android:layout_height="@dimen/y1"
-        android:background="@color/linegray"/>
+        android:background="@color/linegray" />
 
     <FrameLayout
         android:layout_width="match_parent"
@@ -113,5 +116,35 @@
         </RelativeLayout>
     </FrameLayout>
 
-
 </LinearLayout>
+
+
+    <!--这是一条分割线-->
+
+    <!--<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"--><!--android:id="@+id/scrollView"--><!--android:layout_width="match_parent"--><!--android:layout_height="match_parent"--><!--android:background="@color/white">-->
+
+    <!--<LinearLayout--><!--android:layout_width="match_parent"--><!--android:layout_height="wrap_content"--><!--android:orientation="vertical">-->
+
+
+    <!--<com.example.chen.tset.page.LecturereoomTopBanner--><!--android:id="@+id/banner_lectureoom_top"--><!--android:layout_width="match_parent"--><!--android:layout_height="@dimen/y480" />-->
+
+
+    <!--<LinearLayout--><!--android:layout_width="match_parent"--><!--android:layout_height="wrap_content"--><!--android:gravity="center_horizontal">-->
+
+    <!--<TextView--><!--android:id="@+id/tv_lectureroom"--><!--android:layout_width="wrap_content"--><!--android:layout_height="wrap_content"--><!--android:layout_marginBottom="@dimen/y44"--><!--android:layout_marginTop="@dimen/y38"--><!--android:text="最新上传视频"--><!--android:textColor="@color/fontcolor"--><!--android:textSize="@dimen/y28" />--><!--</LinearLayout>-->
+
+    <!--<com.example.chen.tset.page.LectureroomAmongBanner--><!--android:id="@+id/banner_lectureoom_among"--><!--android:layout_width="match_parent"--><!--android:layout_height="wrap_content" />-->
+
+    <!--<View--><!--android:layout_width="match_parent"--><!--android:layout_height="@dimen/y20"--><!--android:background="@color/backgroundgray" />-->
+
+    <!--<LinearLayout--><!--android:layout_width="match_parent"--><!--android:layout_height="wrap_content"--><!--android:layout_marginBottom="@dimen/y44"--><!--android:layout_marginTop="@dimen/y38"--><!--android:gravity="center_horizontal">-->
+
+    <!--<TextView--><!--android:id="@+id/tv_lecure_beforetext"--><!--android:layout_width="wrap_content"--><!--android:layout_height="wrap_content"--><!--android:layout_gravity="center_horizontal"--><!--android:text="往期精选视频"--><!--android:textColor="@color/fontcolor"--><!--android:textSize="@dimen/y28" />--><!--</LinearLayout>-->
+
+    <!--<com.example.chen.tset.page.ListViewForScrollView--><!--android:id="@+id/lecture_room_listView"--><!--android:layout_width="match_parent"--><!--android:layout_height="wrap_content" />-->
+
+
+    <!--</LinearLayout>-->
+
+
+    <!--</ScrollView>-->

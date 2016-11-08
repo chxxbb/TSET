@@ -169,6 +169,7 @@ public class HomeActivity extends MyBaseActivity implements View.OnClickListener
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
         setContentView(R.layout.activity_home);
 
 
@@ -870,6 +871,7 @@ public class HomeActivity extends MyBaseActivity implements View.OnClickListener
 
         //接收到广播显示不同的页面
         if (str.equals("显示诊疗页面")) {
+            Log.e("显示诊疗页面", "显示诊疗页面");
             fl_registration.setVisibility(View.GONE);
             rb_diagnosis.setChecked(true);
             if (consultingFragment == null) {
@@ -880,8 +882,10 @@ public class HomeActivity extends MyBaseActivity implements View.OnClickListener
             }
 
             ft.commitAllowingStateLoss();
+
             //显示到资讯页面
         } else if (str.equals("显示资讯页面")) {
+            Log.e("显示资讯页面", "显示资讯页面");
             fl_registration.setVisibility(View.GONE);
             radioGroup_left.clearCheck();
             rb_lectureroom.setChecked(true);
@@ -896,6 +900,8 @@ public class HomeActivity extends MyBaseActivity implements View.OnClickListener
             }
 
             ft.commitAllowingStateLoss();
+        } else {
+
         }
 
 

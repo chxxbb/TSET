@@ -53,7 +53,7 @@
                         android:gravity="center"
                         android:text="首页"
                         android:textColor="@drawable/encyclopedia_color"
-                        android:textSize="@dimen/x24" />
+                        android:textSize="@dimen/y24" />
 
                     <RadioButton
                         android:id="@+id/rb_diagnosis"
@@ -66,7 +66,7 @@
                         android:gravity="center"
                         android:text="诊疗"
                         android:textColor="@drawable/encyclopedia_color"
-                        android:textSize="@dimen/x24" />
+                        android:textSize="@dimen/y24" />
 
                 </RadioGroup>
 
@@ -89,7 +89,7 @@
                         android:gravity="center"
                         android:text="百科"
                         android:textColor="@drawable/encyclopedia_color"
-                        android:textSize="@dimen/x24" />
+                        android:textSize="@dimen/y24" />
 
                     <RadioButton
                         android:id="@+id/rb_mypage"
@@ -102,7 +102,7 @@
                         android:gravity="center"
                         android:text="我的"
                         android:textColor="@drawable/encyclopedia_color"
-                        android:textSize="@dimen/x24" />
+                        android:textSize="@dimen/y24" />
                 </RadioGroup>
             </RelativeLayout>
         </RelativeLayout>
@@ -135,14 +135,12 @@
                     android:layout_width="@dimen/x104"
                     android:layout_height="@dimen/y94"
                     android:src="@drawable/inquiry_plus_sign"
-
                     />
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
-
                     android:text="服务"
                     android:textColor="#9fa5a8"
                     android:textSize="@dimen/x24" />

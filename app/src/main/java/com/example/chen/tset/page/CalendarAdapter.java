@@ -1,5 +1,6 @@
 package com.example.chen.tset.page;
 
+import android.Manifest;
 import android.content.Context;
 import android.content.res.Resources;
 import android.graphics.drawable.Drawable;
@@ -187,14 +188,18 @@ public class CalendarAdapter extends BaseAdapter {
         String d = dayNumber[position].split("\\.")[0];
         String dv = dayNumber[position].split("\\.")[1];
 
+        //设置日期格式
         SpannableString sp = new SpannableString(d + "\n" + dv);
 
         sp.setSpan(new RelativeSizeSpan(1.2f), 0, d.length(), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
         if (dv != null || dv != "") {
             sp.setSpan(new RelativeSizeSpan(0.75f), d.length() + 1, dayNumber[position].length(), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
         }
+
+        //设置显示的日期
         textView.setText(sp);
-//        textView.setTextColor(Color.GRAY);
+//        textView.setTextSize(15);
+
 
         if (position < daysOfMonth + dayOfWeek && position >= dayOfWeek) {
             // 当前月信息显示
@@ -425,7 +430,7 @@ public class CalendarAdapter extends BaseAdapter {
         daysOfMonth = sc.getDaysOfMonth(isLeapyear, month); // 某月的总天数
         dayOfWeek = sc.getWeekdayOfMonth(year, month); // 某月第一天为星期几
         lastDaysOfMonth = sc.getDaysOfMonth(isLeapyear, month - 1); // 上一个月的总天数
-        Log.d("DAY", isLeapyear + " ======  " + daysOfMonth + "  ============  " + dayOfWeek + "  =========   " + lastDaysOfMonth);
+
         getweek(year, month);
     }
 
@@ -472,7 +477,7 @@ public class CalendarAdapter extends BaseAdapter {
         for (int i = 0; i < dayNumber.length; i++) {
             abc = abc + dayNumber[i] + ":";
         }
-        Log.d("DAYNUMBER", abc);
+
 
     }
 

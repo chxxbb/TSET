@@ -1,7 +1,9 @@
 package com.example.chen.tset.page;
 
 
+import android.content.Context;
 import android.content.Intent;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
@@ -13,6 +15,8 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.Window;
+import android.view.WindowManager;
 import android.widget.AdapterView;
 import android.widget.LinearLayout;
 
@@ -108,10 +112,13 @@ public class HomepageFragment extends Fragment implements IListener {
     //加载中
     RelativeLayout rl_loading;
 
+    Context c;
+
 
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+
         view = inflater.inflate(R.layout.fragment_homepage, null);
 
         //注册广播
@@ -506,15 +513,12 @@ public class HomepageFragment extends Fragment implements IListener {
     };
 
 
-
-
     @Override
     public void onDestroy() {
         super.onDestroy();
         //关闭滚动
         isRunning = false;
     }
-
 
 
     private View.OnClickListener listener = new View.OnClickListener() {
@@ -599,4 +603,6 @@ public class HomepageFragment extends Fragment implements IListener {
     public void notifyAllActivity(String str) {
 
     }
+
+
 }

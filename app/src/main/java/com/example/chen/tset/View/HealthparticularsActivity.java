@@ -135,7 +135,7 @@ public class HealthparticularsActivity extends AppCompatActivity implements ILis
                     .execute(new StringCallback() {
                         @Override
                         public void onError(Call call, Exception e, int id) {
-                            Toast.makeText(HealthparticularsActivity.this, "网络连接失败", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(HealthparticularsActivity.this, "网络连接失败", Toast.LENGTH_LONG).show();
                         }
 
                         @Override
