@@ -84,7 +84,7 @@
                         android:layout_width="@dimen/x36"
                         android:layout_height="@dimen/y36"
                         android:layout_marginRight="@dimen/x30"
-                        android:src="@drawable/consulting_more" />
+                        android:src="@drawable/cpmsulting_right_top_set" />
                 </LinearLayout>
             </RelativeLayout>
 
@@ -597,7 +597,7 @@
 
                 <View
                     android:layout_width="match_parent"
-                    android:layout_height="@dimen/y20"/>
+                    android:layout_height="@dimen/y20" />
 
             </LinearLayout>
 

@@ -598,6 +598,7 @@ public class HomeActivity extends MyBaseActivity implements View.OnClickListener
                 chatcontent = new Chatcontent("2*2", time1, file, file, msg.getTargetID(), sp.getTag().getPhone());
                 db.addchatcont(chatcontent);
 
+
         }
 
     }
@@ -866,42 +867,49 @@ public class HomeActivity extends MyBaseActivity implements View.OnClickListener
 
     @Override
     public void notifyAllActivity(String str) {
-        ft = fm.beginTransaction();
-        hideAllFragment(ft);
+        try {
 
-        //接收到广播显示不同的页面
-        if (str.equals("显示诊疗页面")) {
-            Log.e("显示诊疗页面", "显示诊疗页面");
-            fl_registration.setVisibility(View.GONE);
-            rb_diagnosis.setChecked(true);
-            if (consultingFragment == null) {
-                consultingFragment = new ConsultingFragment();
-                ft.add(R.id.framelayout, consultingFragment);
+            ft = fm.beginTransaction();
+            hideAllFragment(ft);
+
+            //接收到广播显示不同的页面
+            if (str.equals("显示诊疗页面")) {
+                Log.e("显示诊疗页面", "显示诊疗页面");
+
+                fl_registration.setVisibility(View.GONE);
+                rb_diagnosis.setChecked(true);
+                if (consultingFragment == null) {
+                    consultingFragment = new ConsultingFragment();
+                    ft.add(R.id.framelayout, consultingFragment);
+                } else {
+                    ft.show(consultingFragment);
+                }
+
+                ft.commitAllowingStateLoss();
+
+                //显示到资讯页面
+            } else if (str.equals("显示资讯页面")) {
+                Log.e("显示资讯页面", "显示资讯页面");
+                fl_registration.setVisibility(View.GONE);
+                radioGroup_left.clearCheck();
+                rb_lectureroom.setChecked(true);
+
+                if (encyclopediaFragment == null) {
+
+                    encyclopediaFragment = new EncyclopediaFragment();
+                    ft.add(R.id.framelayout, encyclopediaFragment);
+                } else {
+
+                    ft.show(encyclopediaFragment);
+                }
+                ft.commitAllowingStateLoss();
             } else {
-                ft.show(consultingFragment);
+
             }
 
-            ft.commitAllowingStateLoss();
 
-            //显示到资讯页面
-        } else if (str.equals("显示资讯页面")) {
-            Log.e("显示资讯页面", "显示资讯页面");
-            fl_registration.setVisibility(View.GONE);
-            radioGroup_left.clearCheck();
-            rb_lectureroom.setChecked(true);
-
-            if (encyclopediaFragment == null) {
-
-                encyclopediaFragment = new EncyclopediaFragment();
-                ft.add(R.id.framelayout, encyclopediaFragment);
-            } else {
-
-                ft.show(encyclopediaFragment);
-            }
-
-            ft.commitAllowingStateLoss();
-        } else {
-
+        } catch (Exception e) {
+            e.printStackTrace();
         }
 
 

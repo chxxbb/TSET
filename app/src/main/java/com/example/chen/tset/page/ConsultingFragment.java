@@ -373,7 +373,7 @@ public class ConsultingFragment extends Fragment implements View.OnClickListener
 
         ll_left.setOnClickListener(this);
         ll_right.setOnClickListener(this);
-        ll_consulting_popup_case.setOnClickListener(listener);
+//        ll_consulting_popup_case.setOnClickListener(listener);
 
 
         if (tb_registration.isChecked()) {
@@ -644,7 +644,6 @@ public class ConsultingFragment extends Fragment implements View.OnClickListener
     }
 
 
-
     private void addGridView() {
         LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(AbsListView.LayoutParams.MATCH_PARENT, AbsListView.LayoutParams.MATCH_PARENT);
         // 取得屏幕的宽度和高度
@@ -820,51 +819,6 @@ public class ConsultingFragment extends Fragment implements View.OnClickListener
         }
     }
 
-    //诊疗页面弹出框
-    private View.OnClickListener listener = new View.OnClickListener() {
-        @Override
-        public void onClick(View v) {
-
-            //获取手机密度
-            DisplayMetrics dm = new DisplayMetrics();
-            dm = getContext().getResources().getDisplayMetrics();
-            final float density = dm.density;
-
-
-            View mPopWindowView = View.inflate(getContext(), R.layout.consulting_popuwidow_case, null);
-            //调整弹出框位置
-            final PopupWindow mPopWindow = new PopupWindow(mPopWindowView, (int) (density * 90), (int) (density * 100), true);
-            mPopWindow.setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
-            mPopWindow.showAsDropDown(v);
-
-
-            LinearLayout ll_pharmacy = (LinearLayout) mPopWindowView.findViewById(R.id.ll_pharmacy);
-
-
-            LinearLayout ll_health = (LinearLayout) mPopWindowView.findViewById(R.id.ll_health);
-
-            //用药提醒
-            ll_pharmacy.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    mPopWindow.dismiss();
-                    Intent intent = new Intent(getContext(), CompileremindActivity.class);
-                    startActivity(intent);
-                }
-            });
-
-
-            //健康状况
-            ll_health.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    mPopWindow.dismiss();
-                    Intent intent = new Intent(getContext(), HealthconditionActivity.class);
-                    startActivity(intent);
-                }
-            });
-        }
-    };
 
     private View.OnClickListener addlistener = new View.OnClickListener() {
         @Override

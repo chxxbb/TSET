@@ -145,7 +145,6 @@ public class HomeDoctorRecommendAdapter extends BaseAdapter implements IListener
         ll_cancel = (LinearLayout) dialogView.findViewById(R.id.ll_cancel);
 
 
-
         rl_use_cash_coupons = (RelativeLayout) dialogView.findViewById(R.id.rl_use_cash_coupons);
 
 
@@ -249,11 +248,14 @@ public class HomeDoctorRecommendAdapter extends BaseAdapter implements IListener
         if (str.equals("更新首页问诊支付弹出框")) {
             try {
                 tv_cash_coupons_stater.setText("快速问诊劵 ￥25");
+                btn_confirm_payment.setText("确认支付￥0");
             } catch (Exception e) {
                 e.printStackTrace();
+            }finally {
+                tv_cash_coupons_stater.setText("快速问诊劵 ￥25");
+                btn_confirm_payment.setText("确认支付￥0");
             }
 
-            btn_confirm_payment.setText("确认支付￥0");
 
         }
     }

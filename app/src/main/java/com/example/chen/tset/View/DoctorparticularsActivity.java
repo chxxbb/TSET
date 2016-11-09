@@ -2,12 +2,20 @@ package com.example.chen.tset.View;
 
 import android.app.ExpandableListActivity;
 import android.content.Intent;
+import android.os.Build;
 import android.os.Handler;
 import android.os.Message;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.text.Spannable;
+import android.text.SpannableString;
+import android.text.style.ImageSpan;
 import android.util.Log;
 import android.view.View;
+import android.view.WindowManager;
+import android.view.animation.Animation;
+import android.view.animation.RotateAnimation;
+import android.view.animation.Transformation;
 import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.ListView;
@@ -190,11 +198,11 @@ public class DoctorparticularsActivity extends MyBaseActivity {
                     finish();
                     break;
                 case R.id.ll_chatmoney:
-                    Intent intent=new Intent(DoctorparticularsActivity.this,ChatpageActivity.class);
-                    intent.putExtra("name",doctor.getName());
-                    intent.putExtra("icon",doctor.getIcon());
-                    intent.putExtra("doctorID",doctor_id);
-                    intent.putExtra("username",doctor.getUsername());
+                    Intent intent = new Intent(DoctorparticularsActivity.this, ChatpageActivity.class);
+                    intent.putExtra("name", doctor.getName());
+                    intent.putExtra("icon", doctor.getIcon());
+                    intent.putExtra("doctorID", doctor_id);
+                    intent.putExtra("username", doctor.getUsername());
                     startActivity(intent);
 
                     break;
@@ -248,4 +256,95 @@ public class DoctorparticularsActivity extends MyBaseActivity {
             }
         }
     };
+
+    /**
+     * 华丽的分割线
+     */
+
+//    TextView descriptionView;
+//    View expandView;
+//    int maxDescripLine = 1;
+//    RelativeLayout rl_look_full_introduce;
+//    TextView tv_doctor_look_all;
+//
+//    @Override
+//    protected void onCreate(Bundle savedInstanceState) {
+//        super.onCreate(savedInstanceState);
+//
+//        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
+//            //透明状态栏
+//            getWindow().addFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
+//            //透明导航栏
+//            getWindow().addFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_NAVIGATION);
+//        }
+//
+//        setContentView(R.layout.activity_doctorparticulars);
+//
+//        findView();
+//
+//        lookfullintroduce();
+//    }
+//
+//
+//    private void findView() {
+//        descriptionView = (TextView) findViewById(R.id.description_view);
+//        rl_look_full_introduce = (RelativeLayout) findViewById(R.id.rl_look_full_introduce);
+//        tv_doctor_look_all = (TextView) findViewById(R.id.tv_doctor_look_all);
+//        descriptionView.setText("三甲医院主任医生 \n四甲医院主任医生  \n五甲医院主任医生 \n六甲医院主任医生 \n七甲医院主任医生");
+//        expandView = findViewById(R.id.expand_view);
+//        descriptionView.setHeight(descriptionView.getLineHeight() * maxDescripLine);
+//    }
+//
+//    private void lookfullintroduce() {
+//        descriptionView.post(new Runnable() {
+//
+//            @Override
+//            public void run() {
+//                expandView.setVisibility(descriptionView.getLineCount() > maxDescripLine ? View.VISIBLE : View.GONE);
+//
+//            }
+//        });
+//        rl_look_full_introduce.setOnClickListener(new View.OnClickListener() {
+//            boolean isExpand;
+//
+//            @Override
+//            public void onClick(View v) {
+//                isExpand = !isExpand;
+//                descriptionView.clearAnimation();
+//                final int deltaValue;
+//                final int startValue = descriptionView.getHeight();
+//                int durationMillis = 350;
+//                if (isExpand) {
+//                    deltaValue = descriptionView.getLineHeight() * descriptionView.getLineCount() - startValue;
+//                    RotateAnimation animation = new RotateAnimation(0, 180, Animation.RELATIVE_TO_SELF, 0.5f, Animation.RELATIVE_TO_SELF, 0.5f);
+//                    animation.setDuration(durationMillis);
+//                    animation.setFillAfter(true);
+//                    expandView.startAnimation(animation);
+//                    tv_doctor_look_all.setText("收回");
+//
+//                } else {
+//
+//                    deltaValue = descriptionView.getLineHeight() * maxDescripLine - startValue;
+//                    RotateAnimation animation = new RotateAnimation(180, 0, Animation.RELATIVE_TO_SELF, 0.5f, Animation.RELATIVE_TO_SELF, 0.5f);
+//                    animation.setDuration(durationMillis);
+//                    animation.setFillAfter(true);
+//                    expandView.startAnimation(animation);
+//                    tv_doctor_look_all.setText("完整介绍");
+//                }
+//                Animation animation = new Animation() {
+//                    protected void applyTransformation(float interpolatedTime, Transformation t) {
+//                        descriptionView.setHeight((int) (startValue + deltaValue * interpolatedTime));
+//                    }
+//
+//                };
+//                animation.setDuration(durationMillis);
+//                descriptionView.startAnimation(animation);
+//                descriptionView.setAutoLinkMask(1);
+//
+//            }
+//        });
+//
+//    }
+
+
 }
