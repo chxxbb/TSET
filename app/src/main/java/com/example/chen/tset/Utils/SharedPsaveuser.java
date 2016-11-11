@@ -2,14 +2,8 @@ package com.example.chen.tset.Utils;
 
 import android.content.Context;
 import android.content.SharedPreferences;
-import android.graphics.Bitmap;
 
-import com.example.chen.tset.Data.User;
-import com.example.chen.tset.Data.Userinfo;
-
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Set;
+import com.example.chen.tset.Data.entity.Userinfo;
 
 /**
  * Created by Administrator on 2016/9/23 0023.

@@ -5,7 +5,7 @@
     android:layout_height="match_parent"
     android:background="@color/backgroundgray"
     android:orientation="vertical"
-    tools:context="com.example.chen.tset.View.RemindsetActivity">
+    tools:context=".View.activity.RemindsetActivity">
 
     <RelativeLayout
         android:layout_width="match_parent"

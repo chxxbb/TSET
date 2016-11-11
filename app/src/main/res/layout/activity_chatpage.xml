@@ -6,7 +6,7 @@
     android:background="@color/backgroundgray"
     android:focusable="true"
     android:focusableInTouchMode="true"
-    tools:context="com.example.chen.tset.View.ChatpageActivity">
+    tools:context=".View.activity.ChatpageActivity">
 
     <RelativeLayout
         android:layout_width="match_parent"

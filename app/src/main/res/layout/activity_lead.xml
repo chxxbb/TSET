@@ -8,7 +8,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent" />
 
-    <LinearLayout
+    <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
@@ -18,12 +18,13 @@
             android:id="@+id/tv_click"
             android:layout_width="@dimen/x460"
             android:layout_height="@dimen/y70"
+            android:layout_centerInParent="true"
             android:layout_marginBottom="@dimen/y152"
             android:background="@drawable/lead_item_case"
             android:text="开始体验"
             android:textColor="@color/white"
             android:textSize="@dimen/y32" />
-    </LinearLayout>
+    </RelativeLayout>
 
     <LinearLayout
         android:layout_width="match_parent"

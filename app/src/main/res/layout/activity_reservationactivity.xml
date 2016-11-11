@@ -5,7 +5,7 @@
     android:layout_height="match_parent"
     android:background="@color/backgroundgray"
     android:orientation="vertical"
-    tools:context=".View.ReservationActivity">
+    tools:context=".View.activity.ReservationActivity">
 
     <RelativeLayout
         android:layout_width="match_parent"

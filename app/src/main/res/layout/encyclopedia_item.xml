@@ -11,7 +11,7 @@
         android:layout_height="@dimen/y150"
         android:orientation="horizontal">
 
-        <com.example.chen.tset.page.RoundCornerImageView
+        <com.example.chen.tset.page.view.RoundCornerImageView
             android:id="@+id/iv_img"
             android:layout_width="@dimen/x120"
             android:layout_height="@dimen/y110"

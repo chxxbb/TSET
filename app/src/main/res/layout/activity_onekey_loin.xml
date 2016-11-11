@@ -7,7 +7,7 @@
     android:focusable="true"
     android:focusableInTouchMode="true"
     android:orientation="vertical"
-    tools:context="com.example.chen.tset.View.OnekeyLoinActivity">
+    tools:context=".View.activity.OnekeyLoinActivity">
 
     <LinearLayout
         android:id="@+id/onekeylogin_phone_relayout"

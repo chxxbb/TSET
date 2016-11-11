@@ -5,7 +5,7 @@
     android:layout_height="match_parent"
     android:background="@color/backgroundgray"
     android:id="@+id/scrollview"
-    tools:context="com.example.chen.tset.View.CompilePharmacyRemindActivity">
+    tools:context=".View.activity.CompilePharmacyRemindActivity">
 
     <LinearLayout
         android:layout_width="match_parent"

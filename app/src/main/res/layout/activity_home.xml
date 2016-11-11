@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/white"
-    tools:context=".View.HomeActivity">
+    tools:context=".View.activity.HomeActivity">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -156,7 +156,7 @@
             android:layout_centerInParent="true"
             android:visibility="gone">
 
-            <com.example.chen.tset.page.RegistrationView
+            <com.example.chen.tset.page.view.RegistrationView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:src="@color/backgroundblue" />

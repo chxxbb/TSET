@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/linearLayout"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:padding="0dp"
-    android:id="@+id/linearLayout">
+    android:padding="0dp">
 
     <LinearLayout
         android:layout_width="wrap_content"
@@ -14,7 +14,7 @@
         android:layout_weight="1"
         android:orientation="vertical">
 
-        <com.example.chen.tset.page.RoundCornerImageView
+        <com.example.chen.tset.page.view.RoundCornerImageView
             android:id="@+id/rcImageView"
             android:layout_width="match_parent"
             android:layout_height="@dimen/y196"
@@ -40,32 +40,32 @@
         </FrameLayout>
 
 
+        </LinearLayout>
+
+        <!--<LinearLayout-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:layout_marginLeft="@dimen/x14"-->
+        <!--android:layout_marginRight="@dimen/x30"-->
+        <!--android:layout_marginTop="@dimen/y20"-->
+        <!--android:layout_weight="1"-->
+        <!--android:orientation="vertical">-->
+
+        <!--<com.example.chen.tset.page.view.RoundCornerImageView-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="@dimen/y196"-->
+        <!--android:scaleType="centerCrop"-->
+        <!--android:src="#e90d0d" />-->
+
+        <!--<TextView-->
+        <!--android:id="@+id/tv_lectr1"-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:layout_marginLeft="@dimen/x32"-->
+        <!--android:text="张老师为你讲解膝盖积水的处理和治疗"-->
+        <!--android:textColor="#323232"-->
+        <!--android:textSize="@dimen/x24" />-->
+        <!--</LinearLayout>-->
+
+
     </LinearLayout>
-
-    <!--<LinearLayout-->
-    <!--android:layout_width="wrap_content"-->
-    <!--android:layout_height="wrap_content"-->
-    <!--android:layout_marginLeft="@dimen/x14"-->
-    <!--android:layout_marginRight="@dimen/x30"-->
-    <!--android:layout_marginTop="@dimen/y20"-->
-    <!--android:layout_weight="1"-->
-    <!--android:orientation="vertical">-->
-
-    <!--<com.example.chen.tset.page.RoundCornerImageView-->
-    <!--android:layout_width="match_parent"-->
-    <!--android:layout_height="@dimen/y196"-->
-    <!--android:scaleType="centerCrop"-->
-    <!--android:src="#e90d0d" />-->
-
-    <!--<TextView-->
-    <!--android:id="@+id/tv_lectr1"-->
-    <!--android:layout_width="wrap_content"-->
-    <!--android:layout_height="wrap_content"-->
-    <!--android:layout_marginLeft="@dimen/x32"-->
-    <!--android:text="张老师为你讲解膝盖积水的处理和治疗"-->
-    <!--android:textColor="#323232"-->
-    <!--android:textSize="@dimen/x24" />-->
-    <!--</LinearLayout>-->
-
-
-</LinearLayout>

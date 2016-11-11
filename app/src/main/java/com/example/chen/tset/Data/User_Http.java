@@ -1,6 +1,7 @@
 package com.example.chen.tset.Data;
 
-import com.example.chen.tset.View.HomeActivity;
+import com.example.chen.tset.Data.entity.User;
+import com.example.chen.tset.View.activity.HomeActivity;
 
 /**
  * Created by Chen on 2016/8/25.

@@ -7,7 +7,7 @@
     android:orientation="vertical"
     android:focusable="true"
     android:focusableInTouchMode="true"
-    tools:context="com.example.chen.tset.View.FeedbackActivity">
+    tools:context=".View.activity.FeedbackActivity">
 
     <RelativeLayout
         android:layout_width="match_parent"

@@ -3,8 +3,6 @@ package com.example.chen.tset.Utils;
 import android.content.Context;
 import android.content.SharedPreferences;
 
-import com.example.chen.tset.Data.Userinfo;
-
 /**
  * Created by Administrator on 2016/10/25 0025.
  */

@@ -7,7 +7,7 @@
     android:id="@+id/scrollView"
     android:focusable="true"
     android:focusableInTouchMode="true"
-    tools:context="com.example.chen.tset.View.CompileremindActivity">
+    tools:context=".View.activity.CompileremindActivity">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -392,13 +392,13 @@
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/y400">
 
-                <com.example.chen.tset.View.CustomTimePicker
+                <com.example.chen.tset.page.view.CustomTimePicker
                     android:id="@+id/timepicker1"
                     android:layout_width="match_parent"
                     android:layout_height="@dimen/y400"
                     android:amPmTextColor="@color/fontcolor"
                     android:background="@color/white"
-                    android:theme="@style/Theme.picker"></com.example.chen.tset.View.CustomTimePicker>
+                    android:theme="@style/Theme.picker"></com.example.chen.tset.page.view.CustomTimePicker>
 
                 <View
                     android:layout_width="match_parent"
@@ -535,13 +535,13 @@
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/y400">
 
-                <com.example.chen.tset.View.CustomTimePicker
+                <com.example.chen.tset.page.view.CustomTimePicker
                     android:id="@+id/timepicker"
                     android:layout_width="match_parent"
                     android:layout_height="@dimen/y400"
                     android:amPmTextColor="@color/fontcolor"
                     android:background="@color/white"
-                    android:theme="@style/Theme.picker"></com.example.chen.tset.View.CustomTimePicker>
+                    android:theme="@style/Theme.picker"></com.example.chen.tset.page.view.CustomTimePicker>
 
                 <View
                     android:layout_width="match_parent"
@@ -676,13 +676,13 @@
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/y400">
 
-                <com.example.chen.tset.View.CustomTimePicker
+                <com.example.chen.tset.page.view.CustomTimePicker
                     android:id="@+id/timepicker3"
                     android:layout_width="match_parent"
                     android:layout_height="@dimen/y400"
                     android:amPmTextColor="@color/fontcolor"
                     android:background="@color/white"
-                    android:theme="@style/Theme.picker"></com.example.chen.tset.View.CustomTimePicker>
+                    android:theme="@style/Theme.picker"></com.example.chen.tset.page.view.CustomTimePicker>
 
                 <View
                     android:layout_width="match_parent"

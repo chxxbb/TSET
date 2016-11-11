@@ -7,9 +7,11 @@
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/colorAccent</item>
     </style>
+
     <style name="TabLayoutTextStyle">
         <item name="android:textSize">@dimen/x28</item>
     </style>
+
     <style name="Theme.picker" parent="android:Theme.Holo.Light">
         <item name="android:editTextStyle">@style/Widget.EditText.White</item>
     </style>
@@ -17,13 +19,16 @@
     <style name="Widget.EditText.White" parent="@android:style/Widget.EditText">
         <item name="android:textColor">@color/fontcolor</item>
     </style>
+
     <style name="MyTabLayoutTextAppearance" parent="TextAppearance.AppCompat.Widget.ActionBar.Title">
         <item name="android:textSize">@dimen/y28</item>
     </style>
+
     <style name="Dialog_Fullscreen">
         <item name="android:windowFullscreen">true</item>
 
     </style>
+
     <style name="CustomDialog" parent="@android:style/Theme.Dialog">
         <item name="android:windowNoTitle">true</item>
         <item name="android:windowBackground">@android:color/transparent</item>
@@ -41,5 +46,23 @@
         <item name="android:textColor">#ffffff</item>
         <item name="android:paddingLeft">5dip</item>
     </style>
+
+    <style name="WelcomeStyle" parent="android:Theme">
+        <item name="android:windowBackground">@color/backgroundblue</item>
+        <item name="android:windowNoTitle">true</item>
+    </style>
+
+    <style name="Appwelcome" parent="android:Theme.NoTitleBar.Fullscreen"></style>
+
+    <style name="LauncherTheme">
+        <item name="android:windowBackground">@color/backgroundblue</item>
+    </style>
+
+
+    <style name="defaultTheme">
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
+    </style>
+
 
 </resources>

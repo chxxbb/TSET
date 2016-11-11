@@ -38,7 +38,7 @@
                 android:layout_height="wrap_content"
                 android:orientation="vertical">
 
-                <com.example.chen.tset.page.DiseaseBannerView
+                <com.example.chen.tset.page.view.DiseaseBannerView
                     android:id="@+id/bannerView"
                     android:layout_width="match_parent"
                     android:layout_height="@dimen/y160"
