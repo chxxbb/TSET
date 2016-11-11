@@ -103,7 +103,7 @@ public class AboutusActivity extends MyBaseActivity {
                         .execute(new StringCallback() {
                             @Override
                             public void onError(Call call, Exception e, int id) {
-                                Log.e("检查更新失败", "检查更新失败");
+                                Toast.makeText(AboutusActivity.this, "检查更新失败", Toast.LENGTH_SHORT).show();
 
                             }
 

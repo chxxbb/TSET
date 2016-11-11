@@ -16,6 +16,8 @@ import com.example.chen.tset.Data.Http_data;
 import com.example.chen.tset.Data.entity.User;
 import com.example.chen.tset.Data.User_Http;
 import com.example.chen.tset.R;
+import com.example.chen.tset.Utils.IListener;
+import com.example.chen.tset.Utils.ListenerManager;
 import com.example.chen.tset.Utils.MyBaseActivity;
 import com.example.chen.tset.Utils.SharedPsaveuser;
 import com.zhy.http.okhttp.OkHttpUtils;
@@ -26,7 +28,7 @@ import okhttp3.Call;
 /**
  * 注册设置昵称，性别
  */
-public class SetdataActivity extends MyBaseActivity {
+public class SetdataActivity extends MyBaseActivity implements IListener{
     private EditText et_nickname;
     private RadioButton rbtn_man, rb_madam;
     private Button btn;
@@ -42,6 +44,8 @@ public class SetdataActivity extends MyBaseActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_setdata);
+        //注册广播
+        ListenerManager.getInstance().registerListtener(this);
         sp=new SharedPsaveuser(this);
         finView();
     }
@@ -118,11 +122,12 @@ public class SetdataActivity extends MyBaseActivity {
 
                         @Override
                         public void onResponse(String response, int id) {
-                            Log.e("信息返回", response);
+
                             if (response.equals("0")) {
                                 Toast.makeText(SetdataActivity.this, "修改成功", Toast.LENGTH_SHORT).show();
                                 User_Http.user.setName(et_nickname.getText().toString());
                                 User_Http.user.setGender(sex);
+                                ListenerManager.getInstance().sendBroadCast("第一次登录");
                                 Intent intent = new Intent(SetdataActivity.this, HomeActivity.class);
                                 startActivity(intent);
                                 finish();
@@ -134,4 +139,8 @@ public class SetdataActivity extends MyBaseActivity {
         }
     };
 
+    @Override
+    public void notifyAllActivity(String str) {
+
+    }
 }

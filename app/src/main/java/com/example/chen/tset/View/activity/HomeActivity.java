@@ -20,6 +20,7 @@ import android.view.WindowManager;
 import android.view.animation.Animation;
 import android.view.animation.RotateAnimation;
 import android.view.animation.TranslateAnimation;
+import android.widget.Button;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -50,7 +51,6 @@ import com.example.chen.tset.page.fragment.EncyclopediaFragment;
 import com.example.chen.tset.R;
 
 import com.example.chen.tset.page.fragment.HomepageFragment;
-import com.example.chen.tset.page.fragment.LectureroomFragment;
 import com.example.chen.tset.page.fragment.MypageFragment;
 import com.google.gson.Gson;
 import com.zhy.http.okhttp.OkHttpUtils;
@@ -83,7 +83,6 @@ public class HomeActivity extends MyBaseActivity implements View.OnClickListener
     private RadioGroup radioGroup_right, radioGroup_left;
     private FrameLayout framelayout, fl_registration;
     private EncyclopediaFragment encyclopediaFragment;
-    private LectureroomFragment lectureroomFragment;
     private MypageFragment mypageFragment;
     //    private InquiryFragment inquiryFragment;
     private ConsultingFragment consultingFragment;
@@ -166,6 +165,7 @@ public class HomeActivity extends MyBaseActivity implements View.OnClickListener
         WindowManager windowManager = (WindowManager) context.getSystemService(Context.WINDOW_SERVICE);
         windowManager.getDefaultDisplay().getMetrics(dm);
 
+
         //保存头像
         if (sp.getTag().getIcon() == null && User_Http.user.getIcon() != null) {
 
@@ -196,7 +196,7 @@ public class HomeActivity extends MyBaseActivity implements View.OnClickListener
                         .execute(new StringCallback() {
                             @Override
                             public void onError(Call call, Exception e, int id) {
-                                Log.e("检查更新失败", "检查更新失败");
+
 
                             }
 
@@ -209,7 +209,7 @@ public class HomeActivity extends MyBaseActivity implements View.OnClickListener
                                 if (update.getVersion().trim().equals(version_numberSp.getversionNumber().trim())) {
 
                                 } else {
-                                    updatedialog();
+//                                    updatedialog();
                                 }
 
                             }
@@ -354,7 +354,7 @@ public class HomeActivity extends MyBaseActivity implements View.OnClickListener
         try {
             is.close();
         } catch (Exception ex) {
-            Log.e("下载错误", "下载错误");
+            Toast.makeText(HomeActivity.this, "下载错误", Toast.LENGTH_SHORT).show();
         }
 
     }
@@ -747,7 +747,7 @@ public class HomeActivity extends MyBaseActivity implements View.OnClickListener
                 translateAnimation.setDuration(150);
                 ll_online_inquiry1.startAnimation(translateAnimation);
 
-
+                //
                 translateAnimation1 = new TranslateAnimation(0.1f, -width / 4.6f, 0.1f, height * 0.163f);
                 translateAnimation1.setDuration(150);
                 ll_serve_registration1.startAnimation(translateAnimation1);
@@ -834,7 +834,7 @@ public class HomeActivity extends MyBaseActivity implements View.OnClickListener
 
             //接收到广播显示不同的页面
             if (str.equals("显示诊疗页面")) {
-                Log.e("显示诊疗页面", "显示诊疗页面");
+
 
                 fl_registration.setVisibility(View.GONE);
                 rb_diagnosis.setChecked(true);
@@ -849,7 +849,6 @@ public class HomeActivity extends MyBaseActivity implements View.OnClickListener
 
                 //显示到资讯页面
             } else if (str.equals("显示资讯页面")) {
-                Log.e("显示资讯页面", "显示资讯页面");
                 fl_registration.setVisibility(View.GONE);
                 radioGroup_left.clearCheck();
                 rb_lectureroom.setChecked(true);
@@ -863,6 +862,8 @@ public class HomeActivity extends MyBaseActivity implements View.OnClickListener
                     ft.show(encyclopediaFragment);
                 }
                 ft.commitAllowingStateLoss();
+            } else if (str.equals("第一次登录")) {
+                giveCashCoupons();
             } else {
 
             }
@@ -871,8 +872,40 @@ public class HomeActivity extends MyBaseActivity implements View.OnClickListener
         } catch (Exception e) {
             e.printStackTrace();
         }
+    }
 
+    public void giveCashCoupons() {
+        //为dialog设置主题为透明，
+        setHeadDialog = new Dialog(this, R.style.CustomDialog);
+        setHeadDialog.show();
+        dialogView = View.inflate(getApplicationContext(), R.layout.home_give_cash_coupons_dialog, null);
+        setHeadDialog.setCanceledOnTouchOutside(true);// 设置点击屏幕dialog消失
+        //设置弹窗的布局
+        setHeadDialog.getWindow().setContentView(dialogView);
+        WindowManager.LayoutParams lp = setHeadDialog.getWindow().getAttributes();
+        setHeadDialog.getWindow().setAttributes(lp);
+        giveCashCouponsClick();
+    }
 
+    private void giveCashCouponsClick() {
+        Button btn_look_cash_coupons = (Button) dialogView.findViewById(R.id.btn_look_cash_coupons);
+
+        LinearLayout ll_give_cash_coupons = (LinearLayout) dialogView.findViewById(R.id.ll_give_cash_coupons);
+
+        ll_give_cash_coupons.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+//                setHeadDialog.dismiss();
+            }
+        });
+        btn_look_cash_coupons.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                setHeadDialog.dismiss();
+                Intent intent = new Intent(HomeActivity.this, MyCashCouponsActivity.class);
+                startActivity(intent);
+            }
+        });
     }
 
 

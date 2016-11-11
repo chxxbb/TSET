@@ -199,7 +199,7 @@ public class PersonaldataActivity extends MyBaseActivity {
 
                         @Override
                         public void onResponse(String response, int id) {
-                            Log.e("头像返回", response);
+
 
                             Bitmap bmp = BitmapFactory.decodeFile(sdcardTempFile.getAbsolutePath());
 

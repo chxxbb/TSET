@@ -59,6 +59,8 @@ public class LoginActivity extends AppCompatActivity {
         login_button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {           //点击登录后的触发
+                login_button.setClickable(false);
+                login_button.setText("登录中，请稍等...");
                 OkHttpUtils
                         .post()
                         .url(Http_data.http_data + "/login")
@@ -69,22 +71,28 @@ public class LoginActivity extends AppCompatActivity {
                             @Override
                             public void onError(Call call, Exception e, int id) {
                                 Toast.makeText(activity, "网络连接失败", Toast.LENGTH_LONG).show();
+                                login_button.setClickable(true);
+                                login_button.setText("登录");
                             }
 
                             @Override
                             public void onResponse(String response, int id) {
-                                Log.e("返回", response);
+
 
                                 if (response.equals("1")) {
-                                    System.out.println("失败");
+
+                                    login_button.setClickable(true);
+                                    login_button.setText("登录");
                                     Toast.makeText(LoginActivity.this, "账号或密码错误", Toast.LENGTH_SHORT).show();
                                 } else if (response.equals("2")) {
+                                    login_button.setClickable(true);
+                                    login_button.setText("登录");
                                     Toast.makeText(LoginActivity.this, "未知错误", Toast.LENGTH_SHORT).show();
                                 } else {
                                     User user = gson.fromJson(response, User.class);
                                     Log.e("user", user.toString());
                                     User_Http.user.setUser(user);
-                                    System.out.println(user.getName() + "-----------1---------");
+
 
                                     //第一次登陆保存用户密码
                                     SharedPsaveuser sp = new SharedPsaveuser(LoginActivity.this);
@@ -92,7 +100,6 @@ public class LoginActivity extends AppCompatActivity {
 
 
                                     if (user.getName() != null && !"".equals(user.getName())) {
-                                        System.out.println(user.toString());
                                         Intent intent = new Intent(activity, HomeActivity.class);
                                         startActivity(intent);
 

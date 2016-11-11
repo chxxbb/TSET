@@ -152,7 +152,7 @@ public class MyDoctorActivity extends MyBaseActivity {
 
                     @Override
                     public void onResponse(String response, int id) {
-                        Log.e("我的医生返回", response);
+
                         Type listtype = new TypeToken<LinkedList<MyDoctor>>() {
                         }.getType();
                         LinkedList<MyDoctor> leclist = gson.fromJson(response, listtype);

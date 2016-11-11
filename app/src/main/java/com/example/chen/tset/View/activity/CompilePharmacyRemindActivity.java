@@ -115,7 +115,7 @@ public class CompilePharmacyRemindActivity extends AppCompatActivity {
                     .execute(new StringCallback() {
                         @Override
                         public void onError(Call call, Exception e, int id) {
-                            Log.e("失败", "失败");
+                            Toast.makeText(CompilePharmacyRemindActivity.this, "网络连接失败", Toast.LENGTH_SHORT).show();
                         }
 
                         @Override

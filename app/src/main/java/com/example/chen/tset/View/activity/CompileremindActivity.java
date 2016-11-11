@@ -346,7 +346,6 @@ public class CompileremindActivity extends MyBaseActivity implements IListener {
 
                     time1 = tv_time1.getText().toString();
 
-                    Log.e("11", time1);
                     content1 = tv_content1.getText().toString();
                     time2 = tv_time2.getText().toString();
                     content2 = tv_content2.getText().toString();
@@ -376,7 +375,7 @@ public class CompileremindActivity extends MyBaseActivity implements IListener {
 
                                     @Override
                                     public void onResponse(String response, int id) {
-                                        Log.e("用药提醒返回", response);
+
                                         if (response.equals("0")) {
                                             //发送广播通知诊疗页面更新
                                             ListenerManager.getInstance().sendBroadCast("更新日历页面");
@@ -413,12 +412,18 @@ public class CompileremindActivity extends MyBaseActivity implements IListener {
                 //设置最小设置时间只能为当前时间
                 c1.set(myear, mmonth, mday);
                 dialog.getDatePicker().setMinDate(c1.getTimeInMillis());
+
                 //判断设定的时间,不能为以前的时间
                 if (year < myear || (year == myear && monthOfYear < mmonth) || (year == myear && monthOfYear == mmonth && dayOfMonth < mday)) {
+
                     Toast.makeText(CompileremindActivity.this, "不能选择以前的时间", Toast.LENGTH_SHORT).show();
+
                 } else {
+
                     c1.set(year, monthOfYear, dayOfMonth);
+
                     date = (String) DateFormat.format("yyy-MM-dd", c1);
+
                     tv_starttime.setText(date);
                 }
 
@@ -434,13 +439,17 @@ public class CompileremindActivity extends MyBaseActivity implements IListener {
             public void onDateSet(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
                 //设置最小设置时间只能为当前时间
                 c1.set(myear, mmonth, mday);
+
                 dialog.getDatePicker().setMinDate(c1.getTimeInMillis());
                 //判断设定的时间,不能为以前的时间
                 if (year < myear || (year == myear && monthOfYear < mmonth) || (year == myear && monthOfYear == mmonth && dayOfMonth < mday)) {
+
                     Toast.makeText(CompileremindActivity.this, "不能选择以前的时间", Toast.LENGTH_SHORT).show();
                 } else {
                     c1.set(year, monthOfYear, dayOfMonth);
+
                     date = (String) DateFormat.format("yyy-MM-dd", c1);
+
                     tv_endtiem.setText(date);
                 }
 

@@ -366,7 +366,7 @@ public class InquiryActivity extends AppCompatActivity implements IListener {
 
                     @Override
                     public void onResponse(String response, int id) {
-                        Log.e("问诊返回", response);
+
                         Type listtype = new TypeToken<LinkedList<Inquiry>>() {
                         }.getType();
                         LinkedList<Inquiry> leclist = gson.fromJson(response, listtype);

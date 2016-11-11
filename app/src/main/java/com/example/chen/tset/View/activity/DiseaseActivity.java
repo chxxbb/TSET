@@ -198,7 +198,7 @@ public class DiseaseActivity extends MyBaseActivity implements IListener {
 
                             @Override
                             public void onResponse(String response, int id) {
-                                Log.e("疾病详情返回", response);
+
                                 if (response.equals("[]") || response.equals("") || response == null) {
                                     handler.sendEmptyMessage(1);
                                 } else {

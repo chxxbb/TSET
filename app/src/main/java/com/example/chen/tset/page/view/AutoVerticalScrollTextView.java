@@ -72,19 +72,18 @@ public class AutoVerticalScrollTextView extends TextSwitcher implements ViewSwit
 
         TextView textView = new TextView(mContext);
         textView.setGravity(Gravity.LEFT);
-        if(density==4.0){
+        if (density == 4.0) {
             textView.setTextSize((float) (3.25 * density));
-        }else {
+        } else {
             textView.setTextSize((float) (6.5 * density));
         }
 
 
-        Log.e("123",(float) (6.5 * density)+"");
         textView.setSingleLine(true);
         textView.setGravity(Gravity.CENTER_VERTICAL);
         textView.setEllipsize(TextUtils.TruncateAt.END);
         textView.setTextColor(Color.BLACK);
-        textView.setPadding(0,0,20,0);
+        textView.setPadding(0, 0, 20, 0);
         return textView;
 
     }

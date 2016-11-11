@@ -103,7 +103,7 @@ public class ReservationlistActivity extends MyBaseActivity implements View.OnCl
 
                     @Override
                     public void onResponse(String response, int id) {
-                        Log.e("预约详情返回", response);
+
                         reservationlist = gson.fromJson(response, Reservationlist.class);
                         handler.sendEmptyMessage(1);
 
@@ -252,7 +252,7 @@ public class ReservationlistActivity extends MyBaseActivity implements View.OnCl
 
                             @Override
                             public void onResponse(String response, int id) {
-                                Log.e("取消预约返回", response);
+
 
                                 if (response.equals("0")) {
 

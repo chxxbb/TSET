@@ -123,7 +123,7 @@ public class DoctorparticularsActivity extends MyBaseActivity {
 
                             @Override
                             public void onResponse(String response, int id) {
-                                Log.e("医生详情返回", response);
+
                                 doctor = gson.fromJson(response, Doctor.class);
 
                                 handler.sendEmptyMessage(1);

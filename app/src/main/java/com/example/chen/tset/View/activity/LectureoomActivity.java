@@ -94,7 +94,7 @@ public class LectureoomActivity extends AppCompatActivity {
 
                             @Override
                             public void onResponse(String response, int id) {
-                                Log.e("讲堂返回", response);
+
                                 Type listtype = new TypeToken<LinkedList<Lecture>>() {
                                 }.getType();
                                 LinkedList<Lecture> leclist = gson.fromJson(response, listtype);

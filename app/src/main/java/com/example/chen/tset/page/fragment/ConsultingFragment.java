@@ -7,9 +7,9 @@ import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
+import android.support.annotation.AnimRes;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
-import android.util.Log;
 import android.view.Display;
 import android.view.GestureDetector;
 import android.view.Gravity;
@@ -272,7 +272,6 @@ public class ConsultingFragment extends Fragment implements View.OnClickListener
                             @Override
                             public void onClick(View v) {
                                 Intent intent = new Intent(getContext(), ReservationlistActivity.class);
-                                Log.e("111", calendarinit.getRegistrationId() + "");
                                 intent.putExtra("ReservationID", calendarinit.getRegistrationId() + "");
                                 startActivity(intent);
                             }
@@ -479,6 +478,7 @@ public class ConsultingFragment extends Fragment implements View.OnClickListener
         calV.registrationremind(1);
         calV.healthremind(1);
 
+
         //判断提醒设置是否被选中，选中则改变健康日历上面的标记
         tb_pharmacy.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
@@ -565,12 +565,16 @@ public class ConsultingFragment extends Fragment implements View.OnClickListener
         gridView.setAdapter(calV);
         addTextToTopTextView(currentMonth); // 移动到下一月后，将当月显示在头标题中
 
+
         //加载滑动到的页面日期数据
         findAllByDate(calV.getShowYear() + "-" + calV.getShowMonth());
 
 
         gvFlag++;
         flipper.addView(gridView, gvFlag);
+
+
+        //设置滑动动画
         flipper.setInAnimation(AnimationUtils.loadAnimation(getContext(), R.anim.push_left_in));
         flipper.setOutAnimation(AnimationUtils.loadAnimation(getContext(), R.anim.push_left_out));
         flipper.showNext();

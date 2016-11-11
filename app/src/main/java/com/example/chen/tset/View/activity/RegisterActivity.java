@@ -80,7 +80,7 @@ public class RegisterActivity extends MyBaseActivity {
 
                                 @Override
                                 public void onResponse(String response, int id) {
-                                    Log.e("验证码返回", response);
+
                                     if ("0".equals(response)) {
                                         time.start();
                                         Toast.makeText(activity, "验证码已发送", Toast.LENGTH_LONG).show();
@@ -133,7 +133,7 @@ public class RegisterActivity extends MyBaseActivity {
 
                                 @Override
                                 public void onResponse(String response, int id) {
-                                    System.out.println(response);
+
                                     if ("1".equals(response)) {
                                         Toast.makeText(activity, "用户已注册", Toast.LENGTH_LONG).show();
                                     } else if ("2".equals(response)) {

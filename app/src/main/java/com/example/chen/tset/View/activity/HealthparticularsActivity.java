@@ -61,7 +61,7 @@ public class HealthparticularsActivity extends AppCompatActivity implements ILis
     }
 
     private void init() {
-        Log.e("11", tag);
+
         String[] strArray = null;
         //去除逗号
         strArray = tag.split(",");

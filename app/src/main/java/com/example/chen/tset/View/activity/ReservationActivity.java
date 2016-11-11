@@ -94,7 +94,7 @@ public class ReservationActivity extends MyBaseActivity implements View.OnClickL
 
                     @Override
                     public void onResponse(String response, int id) {
-                        Log.e("我的预约返回", response);
+
                         list.clear();
                         Type listtype = new TypeToken<LinkedList<Reservation>>() {
                         }.getType();

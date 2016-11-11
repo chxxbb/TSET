@@ -247,7 +247,7 @@ public class RegistrationAtivity extends MyBaseActivity implements IListener {
 
                                 @Override
                                 public void onResponse(String response, int id) {
-                                    Log.e("一键挂号支付返回", response);
+
 
                                     if (response.equals("2")) {
                                         handler.sendEmptyMessage(0);
@@ -397,7 +397,7 @@ public class RegistrationAtivity extends MyBaseActivity implements IListener {
 
                             @Override
                             public void onResponse(String response, int id) {
-                                Log.e("支付", response);
+
 
                                 if (response.equals("0")) {
                                     setHeadDialog.dismiss();
@@ -718,7 +718,7 @@ public class RegistrationAtivity extends MyBaseActivity implements IListener {
 
                     @Override
                     public void onResponse(String response, int id) {
-                        Log.e("一键挂号返回", response);
+
 
 
                         Type listtype = new TypeToken<List<List<String>>>() {

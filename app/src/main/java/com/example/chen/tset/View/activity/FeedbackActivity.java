@@ -100,7 +100,7 @@ public class FeedbackActivity extends MyBaseActivity implements View.OnClickList
                             }
                             @Override
                             public void onResponse(String response, int id) {
-                                Log.e("反馈",response);
+
                                 if (response.equals("0")) {
                                     Toast.makeText(FeedbackActivity.this, "提交成功", Toast.LENGTH_SHORT).show();
                                     finish();

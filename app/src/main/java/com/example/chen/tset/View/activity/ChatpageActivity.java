@@ -284,7 +284,6 @@ public class ChatpageActivity extends AppCompatActivity implements PtrUIHandler 
             for (int i = 0; i < numberlist.size(); i++) {
                 list.add(numberlist.get(i));
             }
-
         }
 
 

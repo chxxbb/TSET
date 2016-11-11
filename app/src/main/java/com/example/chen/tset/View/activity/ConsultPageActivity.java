@@ -54,8 +54,6 @@ public class ConsultPageActivity extends MyBaseActivity implements View.OnClickL
     }
 
 
-
-
     private void findview() {
         scrollview = (ScrollView) findViewById(R.id.scrollview);
         ll_consult_return = (LinearLayout) findViewById(R.id.ll_consult_return);
@@ -121,7 +119,6 @@ public class ConsultPageActivity extends MyBaseActivity implements View.OnClickL
 
     //获取文章详情
     private void informationinit() {
-        Log.e("文章ID", information);
         new Thread(new Runnable() {
             @Override
             public void run() {
@@ -139,7 +136,6 @@ public class ConsultPageActivity extends MyBaseActivity implements View.OnClickL
 
                             @Override
                             public void onResponse(String response, int id) {
-                                Log.e("咨询详情返回", response);
                                 if (response.equals("[]") || response.equals("")) {
                                     handler.sendEmptyMessage(4);
 
@@ -247,7 +243,6 @@ public class ConsultPageActivity extends MyBaseActivity implements View.OnClickL
 
                                 @Override
                                 public void onResponse(String response, int id) {
-                                    Log.e("咨询详情收藏返回", response);
                                     if (response.equals("0")) {
                                         handler.sendEmptyMessage(6);
 
@@ -275,18 +270,20 @@ public class ConsultPageActivity extends MyBaseActivity implements View.OnClickL
                     .execute(new StringCallback() {
                         @Override
                         public void onError(Call call, Exception e, int id) {
-                            Log.e("失败", "失败");
+                            Toast.makeText(ConsultPageActivity.this, "网络连接失败", Toast.LENGTH_SHORT).show();
                         }
 
                         @Override
                         public void onResponse(String response, int id) {
-                            Log.e("取消收藏返回", response);
                             if (response.equals("0")) {
                                 //取消收藏后发生广播通知我的收藏更新数据，“点赞”按钮改变
                                 ListenerManager.getInstance().sendBroadCast("更新我的收藏");
                                 Toast.makeText(ConsultPageActivity.this, "删除成功", Toast.LENGTH_SHORT).show();
+
                                 tv_collsult.setTextColor(android.graphics.Color.parseColor("#6fc9e6"));
+
                                 iv_collsult.setBackgroundResource(R.drawable.consult_isonclickpraise);
+
                                 tv_collsult.setText("赞");
                                 ll_consult_collect.setOnClickListener(collectlistener);
 

@@ -121,7 +121,7 @@ public class LogActivity extends AppCompatActivity {
 
                     @Override
                     public void onResponse(String response, int id) {
-                        Log.e("返回", response);
+
 
                         if (response.equals("1")) {
                             Toast.makeText(LogActivity.this, "密码被修改", Toast.LENGTH_SHORT).show();

@@ -143,7 +143,7 @@ public class FindpawActivity extends MyBaseActivity {
                                 public void onResponse(Object response, int id) {
                                     int t = (int) response;
 
-                                    if (ASCII(t) == 1) {          //
+                                    if (ASCII(t) == 1) {
                                         Toast.makeText(activity, "修改失败", Toast.LENGTH_LONG).show();
                                     } else if (ASCII(t) == 2) {
                                         Toast.makeText(activity, "请先发送验证码", Toast.LENGTH_LONG).show();
