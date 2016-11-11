@@ -57,42 +57,49 @@
         android:sharedUserId="android.uid.system"
         android:supportsRtl="true"
         android:theme="@style/Theme.AppCompat.NoActionBar">
-        <activity android:name=".View.LeadActivity">
+        <activity android:name=".View.activity.LeadActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".View.RegisterActivity" />
-        <activity android:name=".View.SetdataActivity" />
-        <activity android:name=".View.FindpawActivity" />
-        <activity android:name=".View.ReservationlistActivity" />
-        <activity android:name=".View.MycollectActivity" />
-        <activity android:name=".View.ReservationActivity" />
-        <activity android:name=".View.PasswordSettingActivity" />
-        <activity android:name=".View.ThemeselectActivity" />
-        <activity android:name=".View.SetPageActivity" />
-        <activity android:name=".View.FeedbackActivity" />
-        <activity android:name=".View.AboutusActivity" />
-        <activity android:name=".View.EvaluatepageActivity" />
-        <activity android:name=".View.NamepageActivity" />
-        <activity android:name=".View.HealthconditionActivity" />
-        <activity android:name=".View.IconmanageActivity" />
-        <activity android:name=".View.DiseaseActivity" />
-        <activity android:name=".View.SexpageActivity" />
-        <activity android:name=".View.PhonechangeActivity" />
-        <activity android:name=".View.ConsultPageActivity" />
-        <activity android:name=".View.PersonaldataActivity" />
-        <activity android:name=".View.RegistrationAtivity" />
-        <activity android:name=".View.PharmacyremindActivity" />
-        <activity android:name=".View.CompileremindActivity" />
-        <activity android:name=".View.RemindsetActivity" />
-        <activity android:name=".View.DoctorparticularsActivity" />
-        <activity android:name=".View.MyDoctorActivity" />
-        <activity android:name=".View.InquiryrecordActivity" />
-        <activity android:name=".View.HomeActivity" />
+        <activity
+            android:name=".View.activity.LogActivity"
+            android:theme="@style/WelcomeStyle" >
+
+        </activity>
+        <activity android:name=".View.activity.RegisterActivity" />
+        <activity android:name=".View.activity.SetdataActivity" />
+        <activity android:name=".View.activity.FindpawActivity" />
+        <activity android:name=".View.activity.ReservationlistActivity" />
+        <activity android:name=".View.activity.MycollectActivity" />
+        <activity android:name=".View.activity.ReservationActivity" />
+        <activity android:name=".View.activity.PasswordSettingActivity" />
+        <activity android:name=".View.activity.ThemeselectActivity" />
+        <activity android:name=".View.activity.SetPageActivity" />
+        <activity android:name=".View.activity.FeedbackActivity" />
+        <activity android:name=".View.activity.AboutusActivity" />
+        <activity android:name=".View.activity.EvaluatepageActivity" />
+        <activity android:name=".View.activity.NamepageActivity" />
+        <activity android:name=".View.activity.HealthconditionActivity" />
+        <activity android:name=".View.activity.IconmanageActivity" />
+        <activity android:name=".View.activity.DiseaseActivity" />
+        <activity android:name=".View.activity.SexpageActivity" />
+        <activity android:name=".View.activity.PhonechangeActivity" />
+        <activity android:name=".View.activity.ConsultPageActivity" />
+        <activity android:name=".View.activity.PersonaldataActivity" />
+        <activity android:name=".View.activity.RegistrationAtivity" />
+        <activity android:name=".View.activity.PharmacyremindActivity" />
+        <activity android:name=".View.activity.CompileremindActivity" />
+        <activity android:name=".View.activity.RemindsetActivity" />
+        <activity android:name=".View.activity.DoctorparticularsActivity" />
+        <activity android:name=".View.activity.MyDoctorActivity" />
+        <activity android:name=".View.activity.InquiryrecordActivity" />
+        <activity android:name=".View.activity.HomeActivity" />
         <activity android:name="com.soundcloud.android.crop.CropImageActivity" />
+
 
         <service
             android:name="cn.jpush.android.service.PushService"
@@ -211,17 +218,17 @@
             android:name="JPUSH_APPKEY"
             android:value="" />
 
-        <activity android:name=".View.ChatpageActivity" />
-        <activity android:name=".View.LoginActivity" />
-        <activity android:name=".View.CompilePharmacyRemindActivity" />
-        <activity android:name=".View.LogActivity" />
-        <activity android:name=".View.OnekeyLoinActivity" />
-        <activity android:name=".View.HealthparticularsActivity" />
-        <activity android:name=".View.InquiryActivity" />
-        <activity android:name=".View.LectureoomActivity" />
-        <activity android:name=".View.MyCashCouponsActivity"></activity>
+        <activity android:name=".View.activity.ChatpageActivity" />
+        <activity android:name=".View.activity.LoginActivity" />
+        <activity android:name=".View.activity.CompilePharmacyRemindActivity" />
 
-        <service android:name=".page.MyService"></service>
+        <activity android:name=".View.activity.OnekeyLoinActivity" />
+        <activity android:name=".View.activity.HealthparticularsActivity" />
+        <activity android:name=".View.activity.InquiryActivity" />
+        <activity android:name=".View.activity.LectureoomActivity" />
+        <activity android:name=".View.activity.MyCashCouponsActivity"></activity>
+
+        <service android:name=".Utils.MyService"></service>
     </application>
 
 </manifest>

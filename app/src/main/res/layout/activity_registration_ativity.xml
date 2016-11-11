@@ -8,7 +8,7 @@
     android:focusableInTouchMode="true"
     android:orientation="vertical"
     android:padding="0px"
-    tools:context="com.example.chen.tset.View.RegistrationAtivity">
+    tools:context=".View.activity.RegistrationAtivity">
 
     <RelativeLayout
         android:layout_width="match_parent"

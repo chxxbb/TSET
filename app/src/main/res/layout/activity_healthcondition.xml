@@ -9,7 +9,7 @@
     android:focusableInTouchMode="true"
     android:gravity="center_horizontal"
     android:orientation="vertical"
-    tools:context="com.example.chen.tset.View.HealthconditionActivity">
+    tools:context=".View.activity.HealthconditionActivity">
 
     <RelativeLayout
         android:layout_width="match_parent"
@@ -347,7 +347,7 @@
                     android:layout_marginTop="@dimen/y28"
                     android:src="@drawable/healthcondition_describe" />
 
-                <com.example.chen.tset.page.NoteEditor
+                <com.example.chen.tset.page.view.NoteEditor
                     android:id="@+id/et_healthcondition"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"

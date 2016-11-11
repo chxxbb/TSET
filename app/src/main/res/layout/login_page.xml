@@ -9,7 +9,7 @@
     android:orientation="vertical"
     android:paddingLeft="@dimen/x30"
     android:paddingRight="@dimen/x30"
-    tools:context=".View.LoginActivity">
+    tools:context=".View.activity.LoginActivity">
 
     <RelativeLayout
         android:layout_width="match_parent"

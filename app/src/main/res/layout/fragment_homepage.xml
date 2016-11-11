@@ -15,7 +15,7 @@
             android:layout_height="match_parent"
             android:orientation="vertical">
 
-            <com.example.chen.tset.page.HomeBannerView
+            <com.example.chen.tset.page.view.HomeBannerView
                 android:id="@+id/bannerView"
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/y350"
@@ -36,7 +36,7 @@
                     android:textColor="@color/pink"
                     android:textSize="@dimen/y28" />
 
-                <com.example.chen.tset.page.AutoVerticalScrollTextView
+                <com.example.chen.tset.page.view.AutoVerticalScrollTextView
                     android:id="@+id/textview_auto_roll"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -216,7 +216,7 @@
                 android:layout_height="wrap_content"
                 android:orientation="horizontal">
 
-                <com.example.chen.tset.page.RoundCornerImageView
+                <com.example.chen.tset.page.view.RoundCornerImageView
                     android:id="@+id/tv_home_essay_icon"
                     android:layout_width="@dimen/x120"
                     android:layout_height="@dimen/y100"
@@ -301,7 +301,7 @@
                 android:layout_height="wrap_content"
                 android:orientation="horizontal">
 
-                <com.example.chen.tset.page.RoundCornerImageView
+                <com.example.chen.tset.page.view.RoundCornerImageView
                     android:id="@+id/tv_home_essay_icon1"
                     android:layout_width="@dimen/x120"
                     android:layout_height="@dimen/y100"
@@ -426,7 +426,7 @@
                 </LinearLayout>
             </RelativeLayout>
 
-            <com.example.chen.tset.page.ListViewForScrollView
+            <com.example.chen.tset.page.view.ListViewForScrollView
                 android:id="@+id/home_listView"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"

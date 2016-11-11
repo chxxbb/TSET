@@ -5,7 +5,7 @@
     android:layout_height="match_parent"
     android:background="@color/white"
     android:orientation="vertical"
-    tools:context="com.example.chen.tset.View.MycollectActivity">
+    tools:context=".View.activity.MycollectActivity">
 
     <RelativeLayout
         android:layout_width="match_parent"

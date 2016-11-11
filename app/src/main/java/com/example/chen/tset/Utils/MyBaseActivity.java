@@ -1,7 +1,5 @@
 package com.example.chen.tset.Utils;
 
-import android.app.Application;
-import android.content.Context;
 import android.content.Intent;
 import android.content.pm.ActivityInfo;
 import android.os.Bundle;
@@ -11,17 +9,14 @@ import android.util.Log;
 import android.widget.Toast;
 
 import com.example.chen.tset.Data.Http_data;
-import com.example.chen.tset.Data.User;
+import com.example.chen.tset.Data.entity.User;
 import com.example.chen.tset.Data.User_Http;
-import com.example.chen.tset.View.LogActivity;
-import com.example.chen.tset.View.LoginActivity;
+import com.example.chen.tset.View.activity.LogActivity;
+import com.example.chen.tset.View.activity.LoginActivity;
 import com.google.gson.Gson;
 import com.zhy.http.okhttp.OkHttpUtils;
 import com.zhy.http.okhttp.callback.StringCallback;
 
-import java.util.ArrayList;
-
-import cn.jpush.im.android.api.JMessageClient;
 import okhttp3.Call;
 
 /**
