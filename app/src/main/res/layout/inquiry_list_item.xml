@@ -32,7 +32,7 @@
                     android:layout_height="@dimen/y112"
                     android:layout_marginLeft="@dimen/x30"
                     android:layout_marginTop="@dimen/y20"
-                    android:src="@color/backgroundblue" />
+                  />
 
                 <LinearLayout
                     android:layout_width="wrap_content"
@@ -50,7 +50,7 @@
                             android:id="@+id/tv_name"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="程伟伟"
+
                             android:textColor="@color/fontcolor"
                             android:textSize="@dimen/y30" />
 
@@ -69,7 +69,7 @@
                                 android:layout_gravity="center_vertical"
                                 android:layout_marginLeft="@dimen/x14"
                                 android:layout_marginRight="@dimen/x14"
-                                android:text="主治医生"
+
                                 android:textColor="@color/backgroundblue"
                                 android:textSize="@dimen/y20" />
                         </LinearLayout>
@@ -82,20 +82,20 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="@dimen/y5"
-                        android:text="行为发育科"
+
                         android:textColor="@color/xmgray"
                         android:textSize="@dimen/y24" />
 
                     <TextView
                         android:id="@+id/tv_intro"
-                        android:layout_width="@dimen/x350"
+                        android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center_vertical"
                         android:layout_marginBottom="@dimen/y20"
                         android:layout_marginTop="@dimen/y5"
                         android:ellipsize="end"
-                        android:lines="1"
-                        android:text="擅长：儿童发育行为的多动症，自闭症，遗尿症，疑难杂症等等什么的"
+                        android:maxEms="12"
+                        android:singleLine="true"
                         android:textColor="@color/xmgray"
                         android:textSize="@dimen/y24" />
                 </LinearLayout>

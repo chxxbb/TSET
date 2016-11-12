@@ -1,23 +1,41 @@
 package com.example.chen.tset.View.activity;
 
+import android.app.Dialog;
+import android.content.Context;
 import android.content.Intent;
+import android.os.Build;
 import android.os.Handler;
 import android.os.Message;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.Display;
 import android.view.View;
+import android.view.WindowManager;
+import android.view.animation.Animation;
+import android.view.animation.RotateAnimation;
+import android.view.animation.Transformation;
+import android.widget.BaseAdapter;
+import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
+import android.widget.ProgressBar;
+import android.widget.RadioButton;
 import android.widget.RelativeLayout;
+import android.widget.ScrollView;
 import android.widget.TextView;
 import android.widget.Toast;
+
 
 import com.example.chen.tset.Data.entity.Doctor;
 import com.example.chen.tset.Data.entity.Doctorcomment;
 import com.example.chen.tset.Data.Http_data;
 import com.example.chen.tset.R;
+import com.example.chen.tset.Utils.IListener;
+import com.example.chen.tset.Utils.ListenerManager;
 import com.example.chen.tset.Utils.MyBaseActivity;
 import com.example.chen.tset.page.adapter.DoctorparticularsAdapter;
+import com.example.chen.tset.page.view.ListViewForScrollView;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import com.nostra13.universalimageloader.core.ImageLoader;
@@ -36,76 +54,121 @@ import okhttp3.Call;
 /**
  * 医生详情页面，与我的医生详情，问诊详情共用同一个接口
  */
-public class DoctorparticularsActivity extends MyBaseActivity {
-    private ListView lv_docttorparticulas;
-    private DoctorparticularsAdapter adapter;
-    private LinearLayout ll_return;
-    private View view;
-    List<Doctorcomment> list;
-    List<Doctor> list1;
-    Gson gson = new Gson();
-    private TextView tv_title, tv_name, tv_hospital, tv_bioo, tv_bis, tv_bit, tv_bif, tv_sum, tv_adept, tv_grade;
+public class DoctorparticularsActivity extends MyBaseActivity implements IListener {
+    /**
+     * 华丽的分割线
+     */
+    ImageView expandView;
 
-    private TextView btn_chatmoney, btn_callmoney;
-    private CircleImageView iv_icon;
-    private RelativeLayout rl_nonetwork, rl_loading;
-    String doctor_id = null;
+    int maxDescripLine = 1;
+
+    RelativeLayout rl_look_full_introduce, rl_loading, rl_nonetwork;
+
+    TextView tv_doctor_look_all, tv_doctor_top_name, tv_doctor_name, tv_doctor_title, tv_hospital_address, tv_doctor_name_intro, tv_doctor_intro, tv_doctor_name_aptitude, tv_doctor_aptitude, tv_doctor_commenCount;
+
+    CircleImageView tv_doctor_icon;
+
+    private DoctorparticularsAdapter adapter;
+
+    List<Doctorcomment> list = new ArrayList<>();
+
+    ListViewForScrollView lv_doctor_particulars_assess;
+
+    ScrollView scrovView;
+
     Doctor doctor;
 
-    private LinearLayout ll_chatmoney;
+    Gson gson = new Gson();
+
+    String doctor_id;
+
+    LinearLayout ll_doctor_find;
+
+    Button btn_pay;
+
+    private Dialog setHeadDialog;
+
+    private View dialogView;
+
+
+    RadioButton rb_wenx;
+
+    RadioButton rb_zhifb;
+
+    LinearLayout ll_cancel;
+
+    Button btn_confirm_payment;
+
+    ProgressBar progressBar;
+
+    TextView tv_cash_coupons_stater;
+
+    RelativeLayout rl_use_cash_coupons;
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
+            //透明状态栏
+            getWindow().addFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
+            //透明导航栏
+            getWindow().addFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_NAVIGATION);
+        }
+
         setContentView(R.layout.activity_doctorparticulars);
 
-        findView();
-        httpinit();
+        //注册广播
+        ListenerManager.getInstance().registerListtener(this);
 
-    }
-
-    @Override
-    protected void onStart() {
-        super.onStart();
-        comment();
-    }
-
-    private void findView() {
         doctor_id = getIntent().getStringExtra("doctot_id");
-        tv_title = (TextView) findViewById(R.id.tv_title);
-        tv_name = (TextView) findViewById(R.id.tv_name);
-        btn_chatmoney = (TextView) findViewById(R.id.btn_chatmoney);
-        btn_callmoney = (TextView) findViewById(R.id.btn_callmoney);
-        tv_hospital = (TextView) findViewById(R.id.tv_hospital);
-        iv_icon = (CircleImageView) findViewById(R.id.iv_icon);
-        lv_docttorparticulas = (ListView) findViewById(R.id.lv_docttorparticulas);
-        ll_return = (LinearLayout) findViewById(R.id.ll_return);
-        //添加listview头部
-        view = View.inflate(this, R.layout.doctorparticulars_listv_headerview, null);
-        lv_docttorparticulas.addHeaderView(view);
-        tv_bif = (TextView) view.findViewById(R.id.tv_bif);
-        tv_bioo = (TextView) view.findViewById(R.id.tv_bioo);
-        tv_bit = (TextView) view.findViewById(R.id.tv_bit);
-        tv_bis = (TextView) view.findViewById(R.id.tv_bis);
-        tv_sum = (TextView) view.findViewById(R.id.tv_sum);
-        tv_grade = (TextView) view.findViewById(R.id.tv_grade);
-        tv_adept = (TextView) view.findViewById(R.id.tv_adept);
-        rl_nonetwork = (RelativeLayout) findViewById(R.id.rl_nonetwork);
-        rl_loading = (RelativeLayout) findViewById(R.id.rl_loading);
-        ll_chatmoney = (LinearLayout) findViewById(R.id.ll_chatmoney);
-        lv_docttorparticulas.setVerticalScrollBarEnabled(false);
-        list = new ArrayList<>();
-        adapter = new DoctorparticularsAdapter(this, list);
-        lv_docttorparticulas.setAdapter(adapter);
-        ll_return.setOnClickListener(listener);
-        ll_chatmoney.setOnClickListener(listener);
+        Doctorcomment doctorcomment = new Doctorcomment("李狗蛋", "垃圾", null, "2011-11-11", 1);
+        Doctorcomment doctorcomment1 = new Doctorcomment("李狗带", "傻吊", null, "2011-11-11", 1);
+        Doctorcomment doctorcomment2 = new Doctorcomment("李XX", "SB", null, "2011-11-11", 1);
+        Doctorcomment doctorcomment3 = new Doctorcomment("李嗯哼", "2货", null, "2011-11-11", 1);
+
+        list.add(doctorcomment);
+        list.add(doctorcomment1);
+        list.add(doctorcomment2);
+        list.add(doctorcomment3);
+
+
+        findView();
+
+
+        doctorinit();
+
+        commenInit();
 
 
     }
 
-    //医生信息
-    private void httpinit() {
+    private void commenInit() {
+        OkHttpUtils
+                .post()
+                .url(Http_data.http_data + "/FindDoctorCommentByDoctorId")
+                .addParams("doctorId", doctor_id)
+                .build()
+                .execute(new StringCallback() {
+                    @Override
+                    public void onError(Call call, Exception e, int id) {
+
+                    }
+
+                    @Override
+                    public void onResponse(String response, int id) {
+                        Log.e("111", response);
+                    }
+                });
+    }
+
+    private void doctorinit() {
+
+        adapter = new DoctorparticularsAdapter(this, list);
+        lv_doctor_particulars_assess.setAdapter(adapter);
+        adapter.notifyDataSetChanged();
+
         new Thread(new Runnable() {
             @Override
             public void run() {
@@ -125,214 +188,324 @@ public class DoctorparticularsActivity extends MyBaseActivity {
                             public void onResponse(String response, int id) {
 
                                 doctor = gson.fromJson(response, Doctor.class);
-
                                 handler.sendEmptyMessage(1);
 
                             }
                         });
             }
         }).start();
-        list1 = new ArrayList<>();
 
     }
 
-    //医生评论
-    private void comment() {
-        new Thread(new Runnable() {
-            @Override
-            public void run() {
 
+    Handler handler = new Handler() {
+        @Override
+        public void handleMessage(Message msg) {
+            super.handleMessage(msg);
+            switch (msg.what) {
+                case 0:
+                    rl_loading.setVisibility(View.GONE);
+                    rl_nonetwork.setVisibility(View.VISIBLE);
+                    Toast.makeText(DoctorparticularsActivity.this, "网络连接失败", Toast.LENGTH_SHORT).show();
+                    break;
+                case 1:
+                    tv_doctor_top_name.setText(doctor.getName());
 
-                OkHttpUtils
-                        .post()
-                        .url(Http_data.http_data + "/FindDoctorCommentByDoctorId")
-                        .addParams("doctorId", doctor_id)
-                        .build()
-                        .execute(new StringCallback() {
-                            @Override
-                            public void onError(Call call, Exception e, int id) {
-                                handler.sendEmptyMessage(2);
+                    tv_doctor_name.setText(doctor.getName());
 
-                            }
+                    tv_doctor_title.setText(doctor.getTitle() + "/" + doctor.getSection());
 
-                            @Override
-                            public void onResponse(String response, int id) {
-                                Type listtype = new TypeToken<LinkedList<Doctorcomment>>() {
-                                }.getType();
-                                LinkedList<Doctorcomment> leclist = gson.fromJson(response, listtype);
-                                for (Iterator it = leclist.iterator(); it.hasNext(); ) {
-                                    Doctorcomment doctorcomment = (Doctorcomment) it.next();
-                                    list.add(doctorcomment);
-                                }
+                    tv_hospital_address.setText(doctor.getHospital());
 
-                                handler.sendEmptyMessage(3);
+                    tv_doctor_name_intro.setText(doctor.getName() + "简介");
 
-                            }
-                        });
+                    tv_doctor_intro.setText(doctor.getAdept());
+
+                    tv_doctor_name_aptitude.setText(doctor.getName() + "资历");
+
+                    String a = doctor.getSeniority().replace(",", "\n");
+
+                    tv_doctor_aptitude.setText(a);
+
+                    ImageLoader.getInstance().displayImage(doctor.getIcon(), tv_doctor_icon);
+
+                    tv_doctor_commenCount.setText("用户评价(" + doctor.getCommentCount() + "人)");
+
+                    rl_loading.setVisibility(View.GONE);
+
+                    lookfullintroduce();
+                    break;
             }
-        }).start();
+        }
+    };
 
+
+    private void findView() {
+        tv_doctor_aptitude = (TextView) findViewById(R.id.tv_doctor_aptitude);
+        rl_look_full_introduce = (RelativeLayout) findViewById(R.id.rl_look_full_introduce);
+        tv_doctor_look_all = (TextView) findViewById(R.id.tv_doctor_look_all);
+        scrovView = (ScrollView) findViewById(R.id.scrovView);
+
+        ll_doctor_find = (LinearLayout) findViewById(R.id.ll_doctor_find);
+
+        tv_doctor_top_name = (TextView) findViewById(R.id.tv_doctor_top_name);
+        tv_doctor_name = (TextView) findViewById(R.id.tv_doctor_name);
+        tv_doctor_title = (TextView) findViewById(R.id.tv_doctor_title);
+        tv_hospital_address = (TextView) findViewById(R.id.tv_hospital_address);
+        tv_doctor_name_intro = (TextView) findViewById(R.id.tv_doctor_name_intro);
+        tv_doctor_intro = (TextView) findViewById(R.id.tv_doctor_intro);
+        tv_doctor_name_aptitude = (TextView) findViewById(R.id.tv_doctor_name_aptitude);
+        tv_doctor_icon = (CircleImageView) findViewById(R.id.tv_doctor_icon);
+        tv_doctor_commenCount = (TextView) findViewById(R.id.tv_doctor_commenCount);
+
+
+        rl_nonetwork = (RelativeLayout) findViewById(R.id.rl_nonetwork);
+        rl_loading = (RelativeLayout) findViewById(R.id.rl_loading);
+
+        btn_pay = (Button) findViewById(R.id.btn_pay);
+
+        lv_doctor_particulars_assess = (ListViewForScrollView) findViewById(R.id.lv_doctor_particulars_assess);
+
+        //使scrollView显示在头部，重写了listview解决scrollview与listview冲突，但会出现默认显示listview的情况
+        scrovView.smoothScrollTo(0, 0);
+
+        lv_doctor_particulars_assess.setVerticalScrollBarEnabled(false);
+        scrovView.setVerticalScrollBarEnabled(false);
+
+
+        expandView = (ImageView) findViewById(R.id.expand_view);
+        tv_doctor_aptitude.setHeight(tv_doctor_aptitude.getLineHeight() * maxDescripLine);
+
+        ll_doctor_find.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
+
+
+        btn_pay.setOnClickListener(listener);
     }
 
 
     private View.OnClickListener listener = new View.OnClickListener() {
         @Override
         public void onClick(View v) {
+            affirm();
+        }
+    };
 
-            switch (v.getId()) {
+    private void affirm() {
+        setHeadDialog = new Dialog(this, R.style.CustomDialog);
+        setHeadDialog.show();
+        dialogView = View.inflate(this, R.layout.inquiry_chat_dialog, null);
+        setHeadDialog.getWindow().setContentView(dialogView);
+        WindowManager.LayoutParams lp = setHeadDialog.getWindow()
+                .getAttributes();
+        setHeadDialog.getWindow().setAttributes(lp);
+
+        RelativeLayout rl_confirm = (RelativeLayout) dialogView.findViewById(R.id.rl_confirm);
+        RelativeLayout lr_cancel = (RelativeLayout) dialogView.findViewById(R.id.lr_cancel);
 
 
-                case R.id.ll_return:
-                    finish();
-                    break;
-                case R.id.ll_chatmoney:
+        lr_cancel.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                setHeadDialog.dismiss();
+            }
+        });
+
+
+        rl_confirm.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                setHeadDialog.dismiss();
+
+                payDialog();
+            }
+        });
+    }
+
+    //支付弹出框
+    private void payDialog() {
+
+        setHeadDialog = new Dialog(this, R.style.CustomDialog);
+        setHeadDialog.show();
+        WindowManager windowManager = (WindowManager) this.getSystemService(Context.WINDOW_SERVICE);
+        Display display = windowManager.getDefaultDisplay();
+        dialogView = View.inflate(this, R.layout.payment_dialog, null);
+        tv_cash_coupons_stater = (TextView) dialogView.findViewById(R.id.tv_cash_coupons_stater);
+
+        rb_wenx = (RadioButton) dialogView.findViewById(R.id.rb_wenx);
+        rb_zhifb = (RadioButton) dialogView.findViewById(R.id.rb_zhifb);
+        ll_cancel = (LinearLayout) dialogView.findViewById(R.id.ll_cancel);
+
+
+        rl_use_cash_coupons = (RelativeLayout) dialogView.findViewById(R.id.rl_use_cash_coupons);
+
+
+        tv_cash_coupons_stater.setText("可用");
+
+        //确认支付
+        btn_confirm_payment = (Button) dialogView.findViewById(R.id.btn_confirm_payment);
+
+        rb_wenx.setChecked(true);
+        progressBar = (ProgressBar) dialogView.findViewById(R.id.progressBar);
+        setHeadDialog.getWindow().setContentView(dialogView);
+        WindowManager.LayoutParams lp = setHeadDialog.getWindow().getAttributes();
+        lp.width = display.getWidth();
+        setHeadDialog.getWindow().setAttributes(lp);
+
+        //设置支付时间1800后未支付则关闭
+        Thread thread = new Thread(new Runnable() {
+            @Override
+            public void run() {
+                int progressBarMax = progressBar.getMax();
+                try {
+                    //设置progressBar时间
+                    while (progressBarMax != progressBar.getProgress()) {
+                        int stepProgress = progressBarMax / 1000;
+                        int currentprogress = progressBar.getProgress();
+                        progressBar.setProgress(currentprogress + stepProgress);
+                        Thread.sleep(180);
+                    }
+                    setHeadDialog.dismiss();
+
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+
+                }
+            }
+        });
+        thread.start();
+
+        paydialogonclick();
+
+    }
+
+
+    //支付点击事件
+    private void paydialogonclick() {
+        rb_zhifb.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                rb_wenx.setChecked(false);
+            }
+        });
+        rb_wenx.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                rb_zhifb.setChecked(false);
+            }
+        });
+        ll_cancel.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                setHeadDialog.dismiss();
+            }
+        });
+
+
+        //确认支付
+        btn_confirm_payment.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (btn_confirm_payment.getText().toString().equals("确认支付 ￥25")) {
+                    Toast.makeText(DoctorparticularsActivity.this, "请支付", Toast.LENGTH_SHORT).show();
+                } else {
                     Intent intent = new Intent(DoctorparticularsActivity.this, ChatpageActivity.class);
+
                     intent.putExtra("name", doctor.getName());
                     intent.putExtra("icon", doctor.getIcon());
                     intent.putExtra("doctorID", doctor_id);
                     intent.putExtra("username", doctor.getUsername());
                     startActivity(intent);
+                    setHeadDialog.dismiss();
+                }
+            }
+        });
 
-                    break;
 
+        rl_use_cash_coupons.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(DoctorparticularsActivity.this, MyCashCouponsActivity.class);
+                intent.putExtra("type", "inquiry");
+                startActivity(intent);
+            }
+        });
+
+    }
+
+    private void lookfullintroduce() {
+        tv_doctor_aptitude.post(new Runnable() {
+
+            @Override
+            public void run() {
+                expandView.setVisibility(tv_doctor_aptitude.getLineCount() > maxDescripLine ? View.VISIBLE : View.GONE);
 
             }
-        }
-    };
+        });
+
+        rl_look_full_introduce.setOnClickListener(new View.OnClickListener() {
+            boolean isExpand;
+
+            @Override
+            public void onClick(View v) {
+                isExpand = !isExpand;
+                tv_doctor_aptitude.clearAnimation();
+                final int deltaValue;
+                final int startValue = tv_doctor_aptitude.getHeight();
+                int durationMillis = 350;
+                if (isExpand) {
+                    deltaValue = tv_doctor_aptitude.getLineHeight() * tv_doctor_aptitude.getLineCount() - startValue;
+                    RotateAnimation animation = new RotateAnimation(0, 180, Animation.RELATIVE_TO_SELF, 0.5f, Animation.RELATIVE_TO_SELF, 0.5f);
+                    animation.setDuration(durationMillis);
+                    animation.setFillAfter(true);
+                    expandView.startAnimation(animation);
+                    tv_doctor_look_all.setText("收回");
+
+                } else {
+
+                    deltaValue = tv_doctor_aptitude.getLineHeight() * maxDescripLine - startValue;
+                    RotateAnimation animation = new RotateAnimation(180, 0, Animation.RELATIVE_TO_SELF, 0.5f, Animation.RELATIVE_TO_SELF, 0.5f);
+                    animation.setDuration(durationMillis);
+                    animation.setFillAfter(true);
+                    expandView.startAnimation(animation);
+                    tv_doctor_look_all.setText("完整介绍");
+                }
+                Animation animation = new Animation() {
+                    protected void applyTransformation(float interpolatedTime, Transformation t) {
+                        tv_doctor_aptitude.setHeight((int) (startValue + deltaValue * interpolatedTime));
+                    }
+
+                };
+                animation.setDuration(durationMillis);
+                tv_doctor_aptitude.startAnimation(animation);
+                tv_doctor_aptitude.setAutoLinkMask(1);
+
+            }
+        });
+
+    }
 
 
-    Handler handler = new Handler() {
-        @Override
-        public void handleMessage(Message msg) {
-            switch (msg.what) {
-                case 0:
-
-                    Toast.makeText(DoctorparticularsActivity.this, "网络连接失败", Toast.LENGTH_SHORT).show();
-                    rl_loading.setVisibility(View.GONE);
-                    rl_nonetwork.setVisibility(View.VISIBLE);
-                    view.setVisibility(View.GONE);
-                    lv_docttorparticulas.setVisibility(View.GONE);
-                    lv_docttorparticulas.setBackgroundColor(android.graphics.Color.parseColor("#ffffff"));
-                    list = null;
-                    break;
-
-                case 1:
-
-                    tv_name.setText(doctor.getName());
-                    tv_title.setText(doctor.getTitle());
-                    tv_hospital.setText(doctor.getHospital());
-                    btn_callmoney.setText("￥" + doctor.getCallCost() + "/10分钟");
-                    btn_chatmoney.setText("￥" + doctor.getChatCost() + "/次");
-                    ImageLoader.getInstance().displayImage(doctor.getIcon(), iv_icon);
-                    tv_bioo.setText(doctor.getSeniority1());
-                    tv_bis.setText(doctor.getSeniority2());
-                    tv_bit.setText(doctor.getSeniority3());
-                    tv_bif.setText(doctor.getSeniority4());
-                    tv_sum.setText("用户评论 （" + doctor.getCommentCount() + "人）");
-                    tv_adept.setText(doctor.getAdept());
-                    rl_loading.setVisibility(View.GONE);
-                    break;
-
-                case 2:
-
-                    lv_docttorparticulas.setBackgroundColor(android.graphics.Color.parseColor("#ffffff"));
-                    break;
-                case 3:
-
-                    adapter.notifyDataSetChanged();
-                    break;
+    @Override
+    public void notifyAllActivity(String str) {
+        if (str.equals("更新问诊支付弹出框")) {
+            try {
+                tv_cash_coupons_stater.setText("快速问诊劵 ￥25");
+                btn_confirm_payment.setText("确认支付 ￥0");
+            } catch (Exception e) {
+                e.printStackTrace();
+            } finally {
+                dialogView = View.inflate(this, R.layout.payment_dialog, null);
+                tv_cash_coupons_stater = (TextView) dialogView.findViewById(R.id.tv_cash_coupons_stater);
+                btn_confirm_payment = (Button) dialogView.findViewById(R.id.btn_confirm_payment);
+                tv_cash_coupons_stater.setText("快速问诊劵 ￥25");
+                btn_confirm_payment.setText("确认支付 ￥0");
             }
         }
-    };
-
-    /**
-     * 华丽的分割线
-     */
-
-//    TextView descriptionView;
-//    View expandView;
-//    int maxDescripLine = 1;
-//    RelativeLayout rl_look_full_introduce;
-//    TextView tv_doctor_look_all;
-//
-//    @Override
-//    protected void onCreate(Bundle savedInstanceState) {
-//        super.onCreate(savedInstanceState);
-//
-//        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
-//            //透明状态栏
-//            getWindow().addFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
-//            //透明导航栏
-//            getWindow().addFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_NAVIGATION);
-//        }
-//
-//        setContentView(R.layout.activity_doctorparticulars);
-//
-//        findView();
-//
-//        lookfullintroduce();
-//    }
-//
-//
-//    private void findView() {
-//        descriptionView = (TextView) findViewById(R.id.description_view);
-//        rl_look_full_introduce = (RelativeLayout) findViewById(R.id.rl_look_full_introduce);
-//        tv_doctor_look_all = (TextView) findViewById(R.id.tv_doctor_look_all);
-//        descriptionView.setText("三甲医院主任医生 \n四甲医院主任医生  \n五甲医院主任医生 \n六甲医院主任医生 \n七甲医院主任医生");
-//        expandView = findViewById(R.id.expand_view);
-//        descriptionView.setHeight(descriptionView.getLineHeight() * maxDescripLine);
-//    }
-//
-//    private void lookfullintroduce() {
-//        descriptionView.post(new Runnable() {
-//
-//            @Override
-//            public void run() {
-//                expandView.setVisibility(descriptionView.getLineCount() > maxDescripLine ? View.VISIBLE : View.GONE);
-//
-//            }
-//        });
-//        rl_look_full_introduce.setOnClickListener(new View.OnClickListener() {
-//            boolean isExpand;
-//
-//            @Override
-//            public void onClick(View v) {
-//                isExpand = !isExpand;
-//                descriptionView.clearAnimation();
-//                final int deltaValue;
-//                final int startValue = descriptionView.getHeight();
-//                int durationMillis = 350;
-//                if (isExpand) {
-//                    deltaValue = descriptionView.getLineHeight() * descriptionView.getLineCount() - startValue;
-//                    RotateAnimation animation = new RotateAnimation(0, 180, Animation.RELATIVE_TO_SELF, 0.5f, Animation.RELATIVE_TO_SELF, 0.5f);
-//                    animation.setDuration(durationMillis);
-//                    animation.setFillAfter(true);
-//                    expandView.startAnimation(animation);
-//                    tv_doctor_look_all.setText("收回");
-//
-//                } else {
-//
-//                    deltaValue = descriptionView.getLineHeight() * maxDescripLine - startValue;
-//                    RotateAnimation animation = new RotateAnimation(180, 0, Animation.RELATIVE_TO_SELF, 0.5f, Animation.RELATIVE_TO_SELF, 0.5f);
-//                    animation.setDuration(durationMillis);
-//                    animation.setFillAfter(true);
-//                    expandView.startAnimation(animation);
-//                    tv_doctor_look_all.setText("完整介绍");
-//                }
-//                Animation animation = new Animation() {
-//                    protected void applyTransformation(float interpolatedTime, Transformation t) {
-//                        descriptionView.setHeight((int) (startValue + deltaValue * interpolatedTime));
-//                    }
-//
-//                };
-//                animation.setDuration(durationMillis);
-//                descriptionView.startAnimation(animation);
-//                descriptionView.setAutoLinkMask(1);
-//
-//            }
-//        });
-//
-//    }
-
-
+    }
 }

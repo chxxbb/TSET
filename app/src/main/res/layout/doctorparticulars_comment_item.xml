@@ -5,63 +5,64 @@
     android:background="@color/white"
     android:orientation="vertical">
 
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="@dimen/y1"
-        android:background="@color/linegray"/>
-
-
-
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal">
 
         <de.hdodenhof.circleimageview.CircleImageView
-            android:id="@+id/iv_icon"
+            android:id="@+id/iv_user_icon"
             android:layout_width="@dimen/x60"
             android:layout_height="@dimen/y60"
             android:layout_marginLeft="@dimen/x30"
-            android:layout_marginTop="@dimen/y30"
-            android:src="@color/backgroundblue" />
+            android:layout_marginTop="@dimen/y30" />
 
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="@dimen/x24"
-            android:layout_marginTop="@dimen/y32"
+            android:layout_marginLeft="@dimen/x20"
             android:orientation="vertical">
 
             <TextView
-                android:id="@+id/tv_name"
+                android:id="@+id/tv_user_name"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="八百"
+                android:layout_marginTop="@dimen/y35"
+                android:includeFontPadding="false"
+                android:lineSpacingMultiplier="0.9"
                 android:textColor="@color/fontgray"
                 android:textSize="@dimen/y24" />
 
             <TextView
-                android:id="@+id/tv_time"
+                android:id="@+id/tv_comment_time"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/y5"
-                android:text="2016-09-05"
+                android:includeFontPadding="false"
+                android:lineSpacingMultiplier="0.9"
                 android:textColor="@color/linegray1"
-                android:textSize="@dimen/y22" />
+                android:textSize="@dimen/y20" />
+
+            <TextView
+                android:id="@+id/tv_comment_content"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/y21"
+                android:includeFontPadding="false"
+                android:lineSpacingMultiplier="0.9"
+                android:textColor="@color/fontcolor"
+                android:textSize="@dimen/y28"
+
+                />
         </LinearLayout>
 
     </LinearLayout>
 
-    <TextView
-        android:id="@+id/tv_content"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="@dimen/y30"
-        android:layout_marginLeft="@dimen/x30"
-        android:layout_marginRight="@dimen/x30"
-        android:layout_marginTop="@dimen/y20"
-        android:text="医生很耐心，很好，非常满意"
-        android:textColor="@color/fontcolor"
-        android:textSize="@dimen/y28" />
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1px"
+        android:layout_marginLeft="@dimen/x110"
+        android:layout_marginTop="@dimen/y28"
+        android:background="@color/linegray" />
 
 </LinearLayout>

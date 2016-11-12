@@ -5,9 +5,7 @@ package com.example.chen.tset.Data.entity;
  * 医生列表
  */
 public class Doctor {
-
     private String icon;
-
     private String title;
     private String name;
     private String chatCost;
@@ -16,17 +14,10 @@ public class Doctor {
     private String hospital;
     private String section;
     private int commentCount;
-    private String seniority1;//资历1
-
-    private String seniority2;//资历2
-
-    private String seniority3;//资历3
-
-    private String seniority4;//资历4
-
+    private String seniority;
     private String username;
 
-    public Doctor(String icon, String title, String name, String chatCost, String callCost, String adept, String hospital, String section, int commentCount, String seniority1, String seniority2, String seniority3, String seniority4, String username) {
+    public Doctor(String icon, String title, String name, String chatCost, String callCost, String adept, String hospital, String section, int commentCount, String seniority, String username) {
         this.icon = icon;
         this.title = title;
         this.name = name;
@@ -36,35 +27,8 @@ public class Doctor {
         this.hospital = hospital;
         this.section = section;
         this.commentCount = commentCount;
-        this.seniority1 = seniority1;
-        this.seniority2 = seniority2;
-        this.seniority3 = seniority3;
-        this.seniority4 = seniority4;
+        this.seniority = seniority;
         this.username = username;
-    }
-
-    public String getUsername() {
-        return username;
-    }
-
-    public void setUsername(String username) {
-        this.username = username;
-    }
-
-    public String getChatCost() {
-        return chatCost;
-    }
-
-    public void setChatCost(String chatCost) {
-        this.chatCost = chatCost;
-    }
-
-    public String getCallCost() {
-        return callCost;
-    }
-
-    public void setCallCost(String callCost) {
-        this.callCost = callCost;
     }
 
     public String getIcon() {
@@ -91,7 +55,21 @@ public class Doctor {
         this.name = name;
     }
 
+    public String getChatCost() {
+        return chatCost;
+    }
 
+    public void setChatCost(String chatCost) {
+        this.chatCost = chatCost;
+    }
+
+    public String getCallCost() {
+        return callCost;
+    }
+
+    public void setCallCost(String callCost) {
+        this.callCost = callCost;
+    }
 
     public String getAdept() {
         return adept;
@@ -125,35 +103,19 @@ public class Doctor {
         this.commentCount = commentCount;
     }
 
-    public String getSeniority1() {
-        return seniority1;
+    public String getSeniority() {
+        return seniority;
     }
 
-    public void setSeniority1(String seniority1) {
-        this.seniority1 = seniority1;
+    public void setSeniority(String seniority) {
+        this.seniority = seniority;
     }
 
-    public String getSeniority2() {
-        return seniority2;
+    public String getUsername() {
+        return username;
     }
 
-    public void setSeniority2(String seniority2) {
-        this.seniority2 = seniority2;
-    }
-
-    public String getSeniority3() {
-        return seniority3;
-    }
-
-    public void setSeniority3(String seniority3) {
-        this.seniority3 = seniority3;
-    }
-
-    public String getSeniority4() {
-        return seniority4;
-    }
-
-    public void setSeniority4(String seniority4) {
-        this.seniority4 = seniority4;
+    public void setUsername(String username) {
+        this.username = username;
     }
 }

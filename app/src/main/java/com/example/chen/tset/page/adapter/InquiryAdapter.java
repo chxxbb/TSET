@@ -3,6 +3,7 @@ package com.example.chen.tset.page.adapter;
 import android.app.Dialog;
 import android.content.Context;
 import android.content.Intent;
+import android.util.Log;
 import android.view.Display;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -36,6 +37,7 @@ import de.hdodenhof.circleimageview.CircleImageView;
  * Created by Administrator on 2016/9/1 0001.
  */
 public class InquiryAdapter extends BaseAdapter implements IListener {
+
     private Context context;
     private List<Inquiry> list;
     private Dialog setHeadDialog;
@@ -90,7 +92,7 @@ public class InquiryAdapter extends BaseAdapter implements IListener {
         viewHolder.textView.setText(list.get(position).getTitle());
         viewHolder.tv_name.setText(list.get(position).getName());
         viewHolder.btn_money.setText("￥" + list.get(position).getChatCost());
-        viewHolder.tv_intro.setText("擅长：" + list.get(position).getAdept());
+        viewHolder.tv_intro.setText( list.get(position).getAdept());
         viewHolder.tv_section.setText(list.get(position).getSection());
         ImageLoader.getInstance().displayImage(list.get(position).getIcon(), viewHolder.iv_icon);
 
@@ -113,6 +115,7 @@ public class InquiryAdapter extends BaseAdapter implements IListener {
 
                 RelativeLayout rl_confirm = (RelativeLayout) dialogView.findViewById(R.id.rl_confirm);
                 RelativeLayout lr_cancel = (RelativeLayout) dialogView.findViewById(R.id.lr_cancel);
+
 
 
                 lr_cancel.setOnClickListener(new View.OnClickListener() {
@@ -256,12 +259,18 @@ public class InquiryAdapter extends BaseAdapter implements IListener {
         if (str.equals("更新问诊支付弹出框")) {
             try {
                 tv_cash_coupons_stater.setText("快速问诊劵 ￥25");
-            }catch (Exception e){
+                btn_confirm_payment.setText("确认支付 ￥0");
+            } catch (Exception e) {
                 e.printStackTrace();
+            } finally {
+                dialogView = View.inflate(context, R.layout.payment_dialog, null);
+                tv_cash_coupons_stater = (TextView) dialogView.findViewById(R.id.tv_cash_coupons_stater);
+                btn_confirm_payment = (Button) dialogView.findViewById(R.id.btn_confirm_payment);
+                tv_cash_coupons_stater.setText("快速问诊劵 ￥25");
+                btn_confirm_payment.setText("确认支付 ￥0");
             }
 
 
-            btn_confirm_payment.setText("确认支付￥0");
         }
     }
 

@@ -127,7 +127,7 @@ public class SetdataActivity extends MyBaseActivity implements IListener{
                                 Toast.makeText(SetdataActivity.this, "修改成功", Toast.LENGTH_SHORT).show();
                                 User_Http.user.setName(et_nickname.getText().toString());
                                 User_Http.user.setGender(sex);
-                                ListenerManager.getInstance().sendBroadCast("第一次登录");
+                                Http_data.giveCashState=2;
                                 Intent intent = new Intent(SetdataActivity.this, HomeActivity.class);
                                 startActivity(intent);
                                 finish();

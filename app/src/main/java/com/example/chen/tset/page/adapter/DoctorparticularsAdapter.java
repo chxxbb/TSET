@@ -22,6 +22,8 @@ public class DoctorparticularsAdapter extends BaseAdapter {
     private Context context;
     private List<Doctorcomment> list;
 
+//    Doctorcomment
+
     public DoctorparticularsAdapter(Context context, List<Doctorcomment> list) {
         this.context = context;
         this.list = list;
@@ -50,22 +52,29 @@ public class DoctorparticularsAdapter extends BaseAdapter {
             convertView.setTag(new ViewHolder(convertView));
         }
         ViewHolder viewHolder = (ViewHolder) convertView.getTag();
-        ImageLoader.getInstance().displayImage(list.get(position).getUserIcon(), viewHolder.iv_icon);
-        viewHolder.tv_content.setText(list.get(position).getContent());
-        viewHolder.tv_name.setText(list.get(position).getUserName());
-        viewHolder.tv_time.setText(list.get(position).getTime());
+        viewHolder.tv_user_name.setText(list.get(position).getUserName());
+        viewHolder.tv_comment_time.setText(list.get(position).getTime());
+        viewHolder.tv_comment_content.setText(list.get(position).getContent());
+        if (list.get(position).getUserIcon() == null || list.get(position).getUserIcon().equals("")) {
+            viewHolder.iv_user_icon.setImageResource(R.drawable.default_icon);
+        } else {
+            ImageLoader.getInstance().displayImage(list.get(position).getUserIcon(), viewHolder.iv_user_icon);
+        }
+
         return convertView;
     }
 
     static class ViewHolder {
-        private TextView tv_content, tv_time, tv_name;
-        private CircleImageView iv_icon;
+        private TextView tv_user_name;
+        private TextView tv_comment_time, tv_comment_content;
+        CircleImageView iv_user_icon;
+
 
         ViewHolder(View v) {
-            tv_content = (TextView) v.findViewById(R.id.tv_content);
-            tv_time = (TextView) v.findViewById(R.id.tv_time);
-            tv_name = (TextView) v.findViewById(R.id.tv_name);
-            iv_icon = (CircleImageView) v.findViewById(R.id.iv_icon);
+            tv_user_name = (TextView) v.findViewById(R.id.tv_user_name);
+            tv_comment_time = (TextView) v.findViewById(R.id.tv_comment_time);
+            tv_comment_content = (TextView) v.findViewById(R.id.tv_comment_content);
+            iv_user_icon = (CircleImageView) v.findViewById(R.id.iv_user_icon);
         }
     }
 }

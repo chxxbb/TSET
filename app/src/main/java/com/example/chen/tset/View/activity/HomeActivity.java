@@ -180,6 +180,11 @@ public class HomeActivity extends MyBaseActivity implements View.OnClickListener
 
         updatedetection();
 
+        if (Http_data.giveCashState == 2) {
+            giveCashCoupons();
+            Http_data.giveCashState = 1;
+        }
+
     }
 
 
@@ -369,13 +374,14 @@ public class HomeActivity extends MyBaseActivity implements View.OnClickListener
 
     //打开下载的文件，自动跳转到安装页面
     private void openFile(File file) {
-        // TODO Auto-generated method stub
-
         Intent intent = new Intent();
+
         intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+
         intent.setAction(android.content.Intent.ACTION_VIEW);
-        intent.setDataAndType(Uri.fromFile(file),
-                "application/vnd.android.package-archive");
+
+        intent.setDataAndType(Uri.fromFile(file), "application/vnd.android.package-archive");
+
         startActivity(intent);
     }
 
@@ -756,15 +762,18 @@ public class HomeActivity extends MyBaseActivity implements View.OnClickListener
                 new Thread() {
                     public void run() {
                         try {
-                            sleep(150);
+                            sleep(200);
                         } catch (InterruptedException e) {
                             // TODO Auto-generated catch block
                             e.printStackTrace();
                         } finally {
                             setHeadDialog.dismiss();
                         }
+
+
                     }
                 }.start();
+
             }
         });
 
@@ -862,8 +871,6 @@ public class HomeActivity extends MyBaseActivity implements View.OnClickListener
                     ft.show(encyclopediaFragment);
                 }
                 ft.commitAllowingStateLoss();
-            } else if (str.equals("第一次登录")) {
-                giveCashCoupons();
             } else {
 
             }
@@ -887,6 +894,7 @@ public class HomeActivity extends MyBaseActivity implements View.OnClickListener
         giveCashCouponsClick();
     }
 
+    //点击查看现金卷
     private void giveCashCouponsClick() {
         Button btn_look_cash_coupons = (Button) dialogView.findViewById(R.id.btn_look_cash_coupons);
 
@@ -898,6 +906,7 @@ public class HomeActivity extends MyBaseActivity implements View.OnClickListener
 //                setHeadDialog.dismiss();
             }
         });
+
         btn_look_cash_coupons.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
