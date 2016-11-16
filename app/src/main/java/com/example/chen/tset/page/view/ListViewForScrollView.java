@@ -19,7 +19,7 @@ public class ListViewForScrollView extends ListView {
     }
     @Override
     /**
-     * 重写该方法，达到使ListView适应ScrollView的效果
+     * 重写该方法，使ListView适应ScrollView的效果
      */
     protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
         int expandSpec = MeasureSpec.makeMeasureSpec(Integer.MAX_VALUE >> 2,

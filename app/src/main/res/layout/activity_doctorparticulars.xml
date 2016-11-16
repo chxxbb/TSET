@@ -270,11 +270,11 @@
                     android:layout_height="@dimen/y80">
 
                     <TextView
+                        android:id="@+id/tv_doctor_commenCount"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center_vertical"
                         android:layout_marginLeft="@dimen/x30"
-                        android:id="@+id/tv_doctor_commenCount"
                         android:textColor="@color/fontcolor"
                         android:textSize="@dimen/y30" />
                 </LinearLayout>
@@ -288,7 +288,7 @@
                     android:id="@+id/lv_doctor_particulars_assess"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginBottom="@dimen/y80"></com.example.chen.tset.page.view.ListViewForScrollView>
+                    android:layout_marginBottom="@dimen/y80" />
             </LinearLayout>
 
 

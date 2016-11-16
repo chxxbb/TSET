@@ -10,6 +10,7 @@ import android.os.SystemClock;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -56,6 +57,7 @@ import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
 
+import in.srain.cube.views.ptr.util.PtrLocalDisplay;
 import okhttp3.Call;
 
 /**
@@ -70,7 +72,9 @@ public class HomepageFragment extends Fragment implements IListener {
     private HomeBannerView diseaseBannerView;
     private ScrollView scrollView;
     private LinearLayout ll_patriarch_lecture_room, ll_home_order_registration, ll_home_health_record, ll_diagnosistreat_manage, ll_home_article_more, ll_home_doctor_more;
+
     private ListViewForScrollView home_listView;
+
     HomeDoctorRecommendAdapter adapter;
 
 
@@ -227,6 +231,7 @@ public class HomepageFragment extends Fragment implements IListener {
                 Toast.makeText(getContext(), "链接:" + findAllHotList.get(number % strings.size()).getSite(), Toast.LENGTH_SHORT).show();
             }
         });
+
 
 
     }
@@ -395,7 +400,6 @@ public class HomepageFragment extends Fragment implements IListener {
         @Override
         public void handleMessage(Message msg) {
 
-
             switch (msg.what) {
                 //设置热点推荐滑动数据
                 case 0:
@@ -462,6 +466,7 @@ public class HomepageFragment extends Fragment implements IListener {
                 case 4:
                     adapter.notifyDataSetChanged();
                     break;
+
 
                 //设置网络连接失败时文章数据
                 case 5:

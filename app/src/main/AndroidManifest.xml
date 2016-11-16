@@ -50,7 +50,7 @@
         android:allowBackup="true"
         android:configChanges="orientation|screenSize|keyboardHidden|keyboard|"
         android:hardwareAccelerated="true"
-        android:icon="@mipmap/ic_launcher"
+        android:icon="@drawable/log"
         android:label="@string/app_name"
         android:persistent="true"
         android:screenOrientation="portrait"
@@ -67,7 +67,7 @@
         </activity>
         <activity
             android:name=".View.activity.LogActivity"
-            android:theme="@style/WelcomeStyle" >
+            android:theme="@style/WelcomeStyle">
 
         </activity>
         <activity android:name=".View.activity.RegisterActivity" />

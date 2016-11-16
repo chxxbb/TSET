@@ -134,8 +134,7 @@
                     android:id="@+id/iv_inquiry"
                     android:layout_width="@dimen/x104"
                     android:layout_height="@dimen/y94"
-                    android:src="@drawable/inquiry_plus_sign"
-                    />
+                    android:src="@drawable/inquiry_plus_sign" />
 
                 <TextView
                     android:layout_width="wrap_content"

@@ -1,6 +1,7 @@
 package com.example.chen.tset.page.fragment;
 
 
+import android.app.Activity;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
@@ -8,6 +9,7 @@ import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.StaggeredGridLayoutManager;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -18,11 +20,14 @@ import android.widget.RelativeLayout;
 import com.example.chen.tset.Data.entity.DiseaseDepartment;
 import com.example.chen.tset.Data.Http_data;
 import com.example.chen.tset.R;
+import com.example.chen.tset.Utils.IListener;
+import com.example.chen.tset.Utils.MyBaseActivity;
 import com.example.chen.tset.page.view.DiseaseBannerView;
 import com.example.chen.tset.page.adapter.DiseaseliblistvAdapter;
 import com.example.chen.tset.page.adapter.DiseaselibrecyvAdapter;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
+import com.nostra13.universalimageloader.core.ImageLoader;
 import com.zhy.http.okhttp.OkHttpUtils;
 import com.zhy.http.okhttp.callback.StringCallback;
 
@@ -101,8 +106,15 @@ public class DiseaselibFragment extends Fragment {
         rl_nonetwork.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
                 rl_loading.setVisibility(View.VISIBLE);
+
+                diseaseBannerView.setVisibility(View.VISIBLE);
+
+                diseaseBannerView.bannerStartPlay();
+
                 httpinit(1);
+
                 listviewinit();
 
 
@@ -155,6 +167,7 @@ public class DiseaselibFragment extends Fragment {
             switch (msg.what) {
                 case 0:
                     adapter.notifyDataSetChanged();
+
                     view1.setVisibility(View.VISIBLE);
                     break;
                 case 1:
@@ -165,10 +178,14 @@ public class DiseaselibFragment extends Fragment {
                     rl_nonetwork.setVisibility(View.VISIBLE);
                     break;
                 case 2:
+
                     diseaselibrecyvAdapter.setList(list1);
+                    diseaselibrecyvAdapter.notifyDataSetChanged();
+
                     rl_nonetwork.setVisibility(View.GONE);
                     rl_loading.setVisibility(View.GONE);
                     break;
+
             }
         }
     };

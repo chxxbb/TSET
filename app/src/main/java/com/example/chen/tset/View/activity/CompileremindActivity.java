@@ -1,6 +1,7 @@
 package com.example.chen.tset.View.activity;
 
 import android.app.DatePickerDialog;
+import android.app.TimePickerDialog;
 import android.content.Context;
 import android.os.Handler;
 import android.os.Bundle;
@@ -31,6 +32,7 @@ import com.zhy.http.okhttp.callback.StringCallback;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.Locale;
 
 import okhttp3.Call;
 
@@ -38,39 +40,37 @@ import okhttp3.Call;
  * 添加提醒页面
  */
 public class CompileremindActivity extends MyBaseActivity implements IListener {
-    private RelativeLayout rl_starttime, rl_endtiem;
-    private TextView tv_starttime, tv_endtiem, tv_time_complete, tv_remind_set;
+    private RelativeLayout rl_starttime, rl_endtiem, rl_time_select1, rl_add_remind, rl_add_remind1, rl_time_select2, rl_time_select3;
+    private TextView tv_starttime, tv_endtiem, tv_pas, tv_time1, tv_time2, tv_time3;
+    private EditText et_compile_remind_content1, et_compile_remind_content2, et_compile_remind_content3;
     int myear, mmonth, mday;
-    Calendar c;
     DatePickerDialog dialog;
+    Calendar c;
     private String date;
-    private TimePicker timepicker, timepicker1, timepicker3;
-    String aMPM = null;
-    private LinearLayout ll_add_remind1, ll_rutname;
-    private EditText et_pharmacy_compile, et_pharmacy_compile1, et_pharmacy_compile3;
-
-    private TextView tv_time1, tv_content1, tv_time_complete1, tv_time2, tv_content2, tv_time3, tv_content3, tv_time_complete3, tv_pas;
-
-    private LinearLayout ll_contnt1, ll_compile, ll_compile1, ll_contnt2, ll_contnt3, ll_compile3, ll_add_remind2;
-
     private ScrollView scrollView;
-
-    PharmacyDao db;
-
-    Pharmacyremind pharmacyrmind;
-
-    String startdate;
-    String overdate;
-    String time1;
-    String content1;
-    String time2;
-    String content2;
-    String time3;
-    String content3;
     SharedPsaveuser sp;
 
-    private LinearLayout ll_cursor_blue_style, ll_pharmacy_compile, ll_cursor_blue_style2;
+    Calendar dateAndTime = Calendar.getInstance(Locale.CHINA);
 
+    SimpleDateFormat fmtTime = new SimpleDateFormat("HH:mm");
+
+    LinearLayout ll_remind_case1, ll_remind_case2;
+
+    String startDay;
+
+    String endDay;
+
+    String time1;
+
+    String content1;
+
+    String time2;
+
+    String content2;
+
+    String time3;
+
+    String content3;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -78,7 +78,7 @@ public class CompileremindActivity extends MyBaseActivity implements IListener {
         setContentView(R.layout.activity_compileremind);
         findView();
         sp = new SharedPsaveuser(CompileremindActivity.this);
-        db = new PharmacyDao(this);
+
 
     }
 
@@ -88,103 +88,76 @@ public class CompileremindActivity extends MyBaseActivity implements IListener {
         rl_endtiem = (RelativeLayout) findViewById(R.id.rl_endtime);
         //开始时间
         rl_starttime = (RelativeLayout) findViewById(R.id.rl_starttime);
+
         tv_endtiem = (TextView) findViewById(R.id.tv_endtime);
+
         tv_starttime = (TextView) findViewById(R.id.tv_starttime);
-        //时间选择
-        timepicker = (TimePicker) findViewById(R.id.timepicker);
-        //设置时间完成
-        tv_time_complete = (TextView) findViewById(R.id.tv_time_complete);
-        //内容设置
-        tv_remind_set = (TextView) findViewById(R.id.tv_remind_set);
-        ll_add_remind1 = (LinearLayout) findViewById(R.id.ll_add_remind1);
+
+        tv_pas = (TextView) findViewById(R.id.tv_pas);
 
         scrollView = (ScrollView) findViewById(R.id.scrollView);
 
         scrollView.setVerticalScrollBarEnabled(false);
 
-        tv_pas = (TextView) findViewById(R.id.tv_pas);
-
-
-        ll_rutname = (LinearLayout) findViewById(R.id.ll_rutname);
-
-        et_pharmacy_compile = (EditText) findViewById(R.id.et_pharmacy_compile);
-
-        tv_content1 = (TextView) findViewById(R.id.tv_content1);
+        rl_time_select1 = (RelativeLayout) findViewById(R.id.rl_time_select1);
 
         tv_time1 = (TextView) findViewById(R.id.tv_time1);
 
-        ll_contnt1 = (LinearLayout) findViewById(R.id.ll_contnt1);
+        et_compile_remind_content1 = (EditText) findViewById(R.id.et_compile_remind_content1);
 
-        ll_compile = (LinearLayout) findViewById(R.id.ll_compile);
+        rl_add_remind = (RelativeLayout) findViewById(R.id.rl_add_remind);
 
-        ll_compile1 = (LinearLayout) findViewById(R.id.ll_compile1);
+        ll_remind_case1 = (LinearLayout) findViewById(R.id.ll_remind_case1);
 
-        tv_time_complete1 = (TextView) findViewById(R.id.tv_time_complete1);
+        rl_add_remind1 = (RelativeLayout) findViewById(R.id.rl_add_remind1);
 
-        timepicker1 = (TimePicker) findViewById(R.id.timepicker1);
-
-        et_pharmacy_compile1 = (EditText) findViewById(R.id.et_pharmacy_compile1);
+        rl_time_select2 = (RelativeLayout) findViewById(R.id.rl_time_select2);
 
         tv_time2 = (TextView) findViewById(R.id.tv_time2);
 
-        tv_content2 = (TextView) findViewById(R.id.tv_content2);
+        et_compile_remind_content2 = (EditText) findViewById(R.id.et_compile_remind_content2);
 
-        ll_contnt2 = (LinearLayout) findViewById(R.id.ll_contnt2);
+        ll_remind_case2 = (LinearLayout) findViewById(R.id.ll_remind_case2);
 
-        ll_contnt3 = (LinearLayout) findViewById(R.id.ll_contnt3);
+        rl_time_select3 = (RelativeLayout) findViewById(R.id.rl_time_select3);
 
         tv_time3 = (TextView) findViewById(R.id.tv_time3);
 
-        tv_content3 = (TextView) findViewById(R.id.tv_content3);
+        et_compile_remind_content3 = (EditText) findViewById(R.id.et_compile_remind_content3);
 
-        ll_compile3 = (LinearLayout) findViewById(R.id.ll_compile3);
-
-        ll_add_remind2 = (LinearLayout) findViewById(R.id.ll_add_remind2);
-
-        ll_compile3 = (LinearLayout) findViewById(R.id.ll_compile3);
-
-        tv_time_complete3 = (TextView) findViewById(R.id.tv_time_complete3);
-
-        timepicker3 = (TimePicker) findViewById(R.id.timepicker3);
-
-        et_pharmacy_compile3 = (EditText) findViewById(R.id.et_pharmacy_compile3);
-
-
-        ll_cursor_blue_style = (LinearLayout) findViewById(R.id.ll_cursor_blue_style);
-
-        ll_pharmacy_compile = (LinearLayout) findViewById(R.id.ll_pharmacy_compile);
-
-        ll_cursor_blue_style2 = (LinearLayout) findViewById(R.id.ll_cursor_blue_style2);
-
-        ll_cursor_blue_style.setOnClickListener(lllistener);
-
-        ll_pharmacy_compile.setOnClickListener(lllistener);
-
-        ll_cursor_blue_style2.setOnClickListener(lllistener);
-
-        tv_time_complete1.setOnClickListener(listener);
-
-        ll_add_remind2.setOnClickListener(listener);
-
-        tv_time_complete3.setOnClickListener(listener);
-
-        //获取当前时间
-        SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
-        Date curDate = new Date(System.currentTimeMillis());
-        tv_starttime.setText(formatter.format(curDate));
-        tv_endtiem.setText(formatter.format(curDate));
 
         rl_starttime.setOnClickListener(listener);
 
         rl_endtiem.setOnClickListener(listener);
 
-        tv_time_complete.setOnClickListener(listener);
-
-        ll_add_remind1.setOnClickListener(listener);
-
-        ll_rutname.setOnClickListener(listener);
-
         tv_pas.setOnClickListener(listener);
+
+        rl_time_select1.setOnClickListener(listener);
+
+        rl_add_remind.setOnClickListener(listener);
+
+        rl_time_select2.setOnClickListener(listener);
+
+        rl_add_remind1.setOnClickListener(listener);
+
+        rl_time_select3.setOnClickListener(listener);
+
+
+        tv_time1.setText("8:00");
+
+        tv_time2.setText("13:00");
+
+        tv_time3.setText("18:00");
+
+
+        //获取当前日期
+        SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
+
+        Date curDate = new Date(System.currentTimeMillis());
+
+        tv_starttime.setText(formatter.format(curDate));
+
+        tv_endtiem.setText(formatter.format(curDate));
 
         c = Calendar.getInstance();
 
@@ -196,32 +169,6 @@ public class CompileremindActivity extends MyBaseActivity implements IListener {
 
 
     }
-
-    //点击输入区域edittexr获取焦点，弹出键盘
-    private View.OnClickListener lllistener = new View.OnClickListener() {
-        @Override
-        public void onClick(View v) {
-
-            switch (v.getId()) {
-                case R.id.ll_cursor_blue_style:
-                    et_pharmacy_compile1.requestFocus();
-                    InputMethodManager imm = (InputMethodManager) CompileremindActivity.this.getSystemService(Context.INPUT_METHOD_SERVICE);
-                    imm.toggleSoftInput(0, InputMethodManager.HIDE_NOT_ALWAYS);
-                    break;
-                case R.id.ll_pharmacy_compile:
-                    et_pharmacy_compile.requestFocus();
-                    InputMethodManager imm1 = (InputMethodManager) CompileremindActivity.this.getSystemService(Context.INPUT_METHOD_SERVICE);
-                    imm1.toggleSoftInput(0, InputMethodManager.HIDE_NOT_ALWAYS);
-                    break;
-                case R.id.ll_cursor_blue_style2:
-                    et_pharmacy_compile3.requestFocus();
-                    InputMethodManager imm2 = (InputMethodManager) CompileremindActivity.this.getSystemService(Context.INPUT_METHOD_SERVICE);
-                    imm2.toggleSoftInput(0, InputMethodManager.HIDE_NOT_ALWAYS);
-                    break;
-            }
-
-        }
-    };
 
 
     private View.OnClickListener listener = new View.OnClickListener() {
@@ -237,129 +184,70 @@ public class CompileremindActivity extends MyBaseActivity implements IListener {
                     acquisitionendtime();
                     break;
 
+                //选择第一个用药时间
+                case R.id.rl_time_select1:
+                    TimePickerDialog timeDlg = new TimePickerDialog(CompileremindActivity.this, t, dateAndTime.get(Calendar.HOUR_OF_DAY), dateAndTime.get(Calendar.MINUTE), true);
+                    timeDlg.show();
+                    break;
 
-                case R.id.tv_time_complete:
-                    timepicker.setIs24HourView(true);
-                    //判断所选时间为上午还是下午
-                    if (timepicker.getCurrentHour() > 11 && timepicker.getCurrentHour() < 24) {
-                        aMPM = "下午";
+                case R.id.rl_add_remind:
+                    if (et_compile_remind_content1.getText().toString() == null || et_compile_remind_content1.getText().toString().trim().equals("")) {
+                        Toast.makeText(CompileremindActivity.this, "你的第一条用药提醒还未设置用药", Toast.LENGTH_SHORT).show();
                     } else {
-                        aMPM = "上午";
-                    }
-                    timepicker.setIs24HourView(false);
-                    if (et_pharmacy_compile.getText().length() == 0) {
-                        Toast.makeText(CompileremindActivity.this, "请输入用药", Toast.LENGTH_SHORT).show();
-                    } else {
-                        //将所选时间和所填用药记录显示
-                        tv_time1.setText(timepicker.getCurrentHour() + "" + ":" + timepicker.getCurrentMinute() + "");
-                        tv_content1.setText(et_pharmacy_compile.getText().toString());
-                        //隐藏设置时间，输入用药
-                        ll_contnt1.setVisibility(View.VISIBLE);
-                        ll_compile.setVisibility(View.GONE);
 
-
+                        rl_add_remind.setVisibility(View.GONE);
+                        ll_remind_case1.setVisibility(View.VISIBLE);
+                        rl_add_remind1.setVisibility(View.VISIBLE);
                     }
                     break;
 
 
-                case R.id.ll_add_remind1:
-                    ll_add_remind1.setVisibility(View.GONE);
-                    ll_compile1.setVisibility(View.VISIBLE);
-                    Handler handler = new Handler();
-                    handler.post(new Runnable() {
-                        @Override
-                        public void run() {
-                            //使ScrollView一直显示到底部
-                            scrollView.fullScroll(ScrollView.FOCUS_DOWN);
-                        }
-                    });
-
+                case R.id.rl_time_select2:
+                    TimePickerDialog timeDlg1 = new TimePickerDialog(CompileremindActivity.this, t1, dateAndTime.get(Calendar.HOUR_OF_DAY), dateAndTime.get(Calendar.MINUTE), true);
+                    timeDlg1.show();
                     break;
 
 
-                case R.id.tv_time_complete1:
-                    timepicker1.setIs24HourView(true);
-                    //判断所选时间为上午还是下午
-                    if (timepicker1.getCurrentHour() > 11 && timepicker1.getCurrentHour() < 24) {
-                        aMPM = "下午";
-                    } else {
-                        aMPM = "上午";
-                    }
-                    timepicker1.setIs24HourView(false);
-                    if (et_pharmacy_compile1.getText().length() == 0) {
-                        Toast.makeText(CompileremindActivity.this, "请输入用药", Toast.LENGTH_SHORT).show();
-                    } else {
-                        //将所选时间和所填用药记录显示
-                        tv_time2.setText(timepicker1.getCurrentHour() + "" + ":" + timepicker1.getCurrentMinute() + "");
-                        tv_content2.setText(et_pharmacy_compile1.getText().toString());
-                        ll_compile1.setVisibility(View.GONE);
-                        ll_contnt2.setVisibility(View.VISIBLE);
+                case R.id.rl_add_remind1:
 
+                    if (et_compile_remind_content2.getText().toString() == null || et_compile_remind_content2.getText().toString().trim().equals("")) {
+                        Toast.makeText(CompileremindActivity.this, "你的第二条用药提醒还未设置用药", Toast.LENGTH_SHORT).show();
+                    } else {
+                        rl_add_remind1.setVisibility(View.GONE);
+                        ll_remind_case2.setVisibility(View.VISIBLE);
                     }
-
                     break;
 
-
-                case R.id.ll_add_remind2:
-                    ll_add_remind2.setVisibility(View.GONE);
-                    ll_compile3.setVisibility(View.VISIBLE);
-                    Handler handle1 = new Handler();
-                    handle1.post(new Runnable() {
-                        @Override
-                        public void run() {
-                            scrollView.fullScroll(ScrollView.FOCUS_DOWN);
-                            scrollView.fullScroll(ScrollView.FOCUS_DOWN);
-                        }
-                    });
-
-                    break;
-
-
-                case R.id.tv_time_complete3:
-                    timepicker3.setIs24HourView(true);
-                    //判断所选时间为上午还是下午
-                    if (timepicker3.getCurrentHour() > 11 && timepicker3.getCurrentHour() < 24) {
-                        aMPM = "下午";
-                    } else {
-                        aMPM = "上午";
-                    }
-                    timepicker3.setIs24HourView(false);
-                    if (et_pharmacy_compile3.getText().length() == 0) {
-                        Toast.makeText(CompileremindActivity.this, "请输入用药", Toast.LENGTH_SHORT).show();
-                    } else {
-                        //将所选时间和所填用药记录显示
-                        tv_time3.setText(timepicker3.getCurrentHour() + "" + ":" + timepicker3.getCurrentMinute() + "");
-                        tv_content3.setText(et_pharmacy_compile3.getText().toString());
-                        ll_compile3.setVisibility(View.GONE);
-                        ll_contnt3.setVisibility(View.VISIBLE);
-
-                    }
-
+                case R.id.rl_time_select3:
+                    TimePickerDialog timeDlg2 = new TimePickerDialog(CompileremindActivity.this, t2, dateAndTime.get(Calendar.HOUR_OF_DAY), dateAndTime.get(Calendar.MINUTE), true);
+                    timeDlg2.show();
                     break;
 
 
                 case R.id.tv_pas:
+                    startDay=tv_starttime.getText().toString();
+                    endDay=tv_endtiem.getText().toString();
+                    time1=tv_time1.getText().toString();
+                    content1=et_compile_remind_content1.getText().toString();
+                    if(et_compile_remind_content2.getText().toString()==null||et_compile_remind_content2.getText().toString().trim().equals("")){
+                        time2=null;
+                        content2=null;
 
-                    startdate = tv_starttime.getText().toString();
-                    overdate = tv_endtiem.getText().toString();
+                    }else {
+                        time2=tv_time2.getText().toString();
+                        content2=et_compile_remind_content2.getText().toString();
+                    }
 
 
-                    time1 = tv_time1.getText().toString();
 
-                    content1 = tv_content1.getText().toString();
-                    time2 = tv_time2.getText().toString();
-                    content2 = tv_content2.getText().toString();
-                    time3 = tv_time3.getText().toString();
-                    content3 = tv_content3.getText().toString();
-
-                    if (!tv_time1.getText().toString().equals("") && !tv_content1.getText().toString().equals("")) {
+                    if (!tv_time1.getText().toString().equals("") && !et_compile_remind_content1.getText().toString().equals("")) {
 
                         OkHttpUtils
                                 .post()
                                 .url(Http_data.http_data + "/AddRemind")
                                 .addParams("userId", sp.getTag().getId() + "")
-                                .addParams("startDay", startdate)
-                                .addParams("endDay", overdate)
+                                .addParams("startDay", startDay)
+                                .addParams("endDay", endDay)
                                 .addParams("time1", time1)
                                 .addParams("content1", content1)
                                 .addParams("time2", time2)
@@ -401,6 +289,44 @@ public class CompileremindActivity extends MyBaseActivity implements IListener {
                     finish();
                     break;
             }
+        }
+    };
+
+
+    TimePickerDialog.OnTimeSetListener t = new TimePickerDialog.OnTimeSetListener() {
+
+        //同DatePickerDialog控件
+        @Override
+        public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
+            dateAndTime.set(Calendar.HOUR_OF_DAY, hourOfDay);
+            dateAndTime.set(Calendar.MINUTE, minute);
+            tv_time1.setText(fmtTime.format(dateAndTime.getTime()));
+
+        }
+    };
+
+
+    TimePickerDialog.OnTimeSetListener t1 = new TimePickerDialog.OnTimeSetListener() {
+
+        //同DatePickerDialog控件
+        @Override
+        public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
+            dateAndTime.set(Calendar.HOUR_OF_DAY, hourOfDay);
+            dateAndTime.set(Calendar.MINUTE, minute);
+            tv_time2.setText(fmtTime.format(dateAndTime.getTime()));
+
+        }
+    };
+
+    TimePickerDialog.OnTimeSetListener t2 = new TimePickerDialog.OnTimeSetListener() {
+
+        //同DatePickerDialog控件
+        @Override
+        public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
+            dateAndTime.set(Calendar.HOUR_OF_DAY, hourOfDay);
+            dateAndTime.set(Calendar.MINUTE, minute);
+            tv_time3.setText(fmtTime.format(dateAndTime.getTime()));
+
         }
     };
 
@@ -464,7 +390,6 @@ public class CompileremindActivity extends MyBaseActivity implements IListener {
 
     }
 
-    ;
 
 }
 

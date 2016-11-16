@@ -78,7 +78,7 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_vertical"
                     android:layout_marginRight="@dimen/x30"
-                    android:text="1"
+
                     android:textColor="@color/fontcolor"
                     android:textSize="@dimen/y32" />
             </LinearLayout>
@@ -115,7 +115,7 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_vertical"
                     android:layout_marginLeft="@dimen/x30"
-                    android:text="3"
+
                     android:textColor="@color/fontcolor"
                     android:textSize="@dimen/y32" />
             </LinearLayout>
@@ -138,7 +138,7 @@
                     android:layout_marginBottom="@dimen/y29"
                     android:layout_marginLeft="@dimen/x30"
                     android:layout_marginTop="@dimen/y29"
-                    android:text="4"
+
                     android:textColor="@color/fontcolor"
                     android:textSize="@dimen/y32" />
             </LinearLayout>
@@ -167,7 +167,7 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_vertical"
                     android:layout_marginLeft="@dimen/x30"
-                    android:text="3"
+
                     android:textColor="@color/fontcolor"
                     android:textSize="@dimen/y32" />
             </LinearLayout>
@@ -190,7 +190,7 @@
                     android:layout_marginBottom="@dimen/y29"
                     android:layout_marginLeft="@dimen/x30"
                     android:layout_marginTop="@dimen/y29"
-                    android:text="4"
+
                     android:textColor="@color/fontcolor"
                     android:textSize="@dimen/y32" />
             </LinearLayout>
@@ -219,7 +219,7 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_vertical"
                     android:layout_marginLeft="@dimen/x30"
-                    android:text="3"
+
                     android:textColor="@color/fontcolor"
                     android:textSize="@dimen/y32" />
             </LinearLayout>
@@ -242,7 +242,7 @@
                     android:layout_marginBottom="@dimen/y29"
                     android:layout_marginLeft="@dimen/x30"
                     android:layout_marginTop="@dimen/y29"
-                    android:text="4"
+
                     android:textColor="@color/fontcolor"
                     android:textSize="@dimen/y32" />
             </LinearLayout>

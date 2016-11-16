@@ -123,15 +123,15 @@ public class DoctorparticularsActivity extends MyBaseActivity implements IListen
         ListenerManager.getInstance().registerListtener(this);
 
         doctor_id = getIntent().getStringExtra("doctot_id");
-        Doctorcomment doctorcomment = new Doctorcomment("李狗蛋", "垃圾", null, "2011-11-11", 1);
-        Doctorcomment doctorcomment1 = new Doctorcomment("李狗带", "傻吊", null, "2011-11-11", 1);
-        Doctorcomment doctorcomment2 = new Doctorcomment("李XX", "SB", null, "2011-11-11", 1);
-        Doctorcomment doctorcomment3 = new Doctorcomment("李嗯哼", "2货", null, "2011-11-11", 1);
+        Doctorcomment doctorcomment = new Doctorcomment("李狗蛋", "哟西", null, "2011-11-11", 1);
+        Doctorcomment doctorcomment1 = new Doctorcomment("李狗带", "纳尼", null, "2011-11-11", 1);
+        Doctorcomment doctorcomment2 = new Doctorcomment("李XX", "啊哈", null, "2011-11-11", 1);
+
 
         list.add(doctorcomment);
         list.add(doctorcomment1);
         list.add(doctorcomment2);
-        list.add(doctorcomment3);
+
 
 
         findView();

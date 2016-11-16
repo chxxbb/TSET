@@ -296,18 +296,19 @@ public class ChatpageActivity extends AppCompatActivity implements PtrUIHandler 
 
         adapter.notifyDataSetChanged();
 
+
         //加载更多的聊天记录，
         ptrClassicFrameLayout.setPtrHandler(new PtrDefaultHandler() {
             @Override
             public void onRefreshBegin(PtrFrameLayout frame) {
 
                 //将list清空,聊天页面页数+1
-
                 historylist.clear();
                 numberlist.clear();
                 list.clear();
                 chatrecordnumber++;
 
+                //从数据库获取聊天记录
                 historylist = db.chatfind(username);
                 for (int i = 0; i < historylist.size(); i++) {
                     //获取所有的聊天记录
@@ -317,9 +318,8 @@ public class ChatpageActivity extends AppCompatActivity implements PtrUIHandler 
                     }
                 }
 
+                //加载更多聊天记录
                 ptrClassicFrameLayout.postDelayed(new Runnable() {
-
-
                     @Override
                     public void run() {
                         //根据页数，获取所需数据
@@ -360,7 +360,7 @@ public class ChatpageActivity extends AppCompatActivity implements PtrUIHandler 
         @Override
         public void onClick(View v) {
             //先判断发送的消息是否为空，或者是否全部未空格
-            if (et_chat.getText().length() == 0||et_chat.getText().toString().trim().equals("")) {
+            if (et_chat.getText().length() == 0 || et_chat.getText().toString().trim().equals("")) {
 
             } else {
                 sendmessage();
@@ -824,7 +824,7 @@ public class ChatpageActivity extends AppCompatActivity implements PtrUIHandler 
     }
 
 
-    //这是下拉控件弄的，不知道有啥用
+    //这是下拉控件弄的 - -
     @Override
     public void onUIRefreshBegin(PtrFrameLayout frame) {
 

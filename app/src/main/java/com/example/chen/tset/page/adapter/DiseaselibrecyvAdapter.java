@@ -66,7 +66,9 @@ public class DiseaselibrecyvAdapter extends RecyclerView.Adapter {
     public void onBindViewHolder(RecyclerView.ViewHolder holder, final int position) {
 
         Viewholder viewholder = (Viewholder) holder;
+
         viewholder.tv_disease.setText(list.get(position));
+
         if (position % 2 == 0) {
             viewholder.view.setVisibility(View.VISIBLE);
         } else {

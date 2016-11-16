@@ -100,6 +100,7 @@
         android:textSize="@dimen/y32" />
 
     <LinearLayout
+        android:id="@+id/ll_use_password_login"
         android:layout_marginTop="@dimen/y46"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

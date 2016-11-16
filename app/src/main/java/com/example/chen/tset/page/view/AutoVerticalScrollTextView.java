@@ -72,6 +72,9 @@ public class AutoVerticalScrollTextView extends TextSwitcher implements ViewSwit
 
         TextView textView = new TextView(mContext);
         textView.setGravity(Gravity.LEFT);
+
+
+        Log.e("111",density+"");
         if (density == 4.0) {
             textView.setTextSize((float) (3.25 * density));
         } else {

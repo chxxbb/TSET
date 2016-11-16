@@ -762,7 +762,7 @@ public class HomeActivity extends MyBaseActivity implements View.OnClickListener
                 new Thread() {
                     public void run() {
                         try {
-                            sleep(200);
+                            sleep(150);
                         } catch (InterruptedException e) {
                             // TODO Auto-generated catch block
                             e.printStackTrace();

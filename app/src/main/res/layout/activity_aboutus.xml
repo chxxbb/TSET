@@ -61,7 +61,7 @@
             android:layout_marginTop="@dimen/y60"
             android:adjustViewBounds="true"
             android:scaleType="centerCrop"
-            android:src="@color/backgroundblue" />
+            android:src="@drawable/log" />
 
         <TextView
             android:id="@+id/tv_aboutus_version_umber"

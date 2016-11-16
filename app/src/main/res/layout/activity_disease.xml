@@ -494,7 +494,8 @@
                                         android:layout_marginBottom="@dimen/y20"
                                         android:layout_marginTop="@dimen/y5"
                                         android:ellipsize="end"
-                                        android:lines="1"
+                                        android:maxEms="12"
+                                        android:singleLine="true"
                                         android:text="擅长：儿童发育行为的多动症，自闭症，遗尿症，疑难杂症等等什么的"
                                         android:textColor="@color/xmgray"
                                         android:textSize="@dimen/y24" />
