@@ -10,6 +10,7 @@ import android.os.Message;
 import android.support.annotation.AnimRes;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.Display;
 import android.view.GestureDetector;
 import android.view.Gravity;
@@ -35,6 +36,8 @@ import com.example.chen.tset.Data.entity.PharmacyState;
 import com.example.chen.tset.Data.entity.Calendarform;
 import com.example.chen.tset.Data.Http_data;
 import com.example.chen.tset.R;
+
+import com.example.chen.tset.Utils.CalendarUtil;
 import com.example.chen.tset.page.view.CalendarGridView;
 import com.example.chen.tset.Utils.IListener;
 import com.example.chen.tset.Utils.ListenerManager;
@@ -116,9 +119,10 @@ public class ConsultingFragment extends Fragment implements View.OnClickListener
     private LinearLayout ll_consulting_popup_case;
 
 
-    private LinearLayout ll_registration, ll_health, ll_pharmacy, ll_registration_info, ll_consulting_phramacy, ll_consulting_health;
+    private LinearLayout ll_registration_info, ll_consulting_phramacy, ll_consulting_health;
 
-    private ToggleButton tb_registration, tb_health, tb_pharmacy;
+//    private ToggleButton tb_registration, tb_health, tb_pharmacy;
+//    ll_health,ll_pharmacy,ll_registration,
 
     private TextView tv_registration_info, tv_consulting_pharmacy, tv_consulting_health;
 
@@ -154,6 +158,9 @@ public class ConsultingFragment extends Fragment implements View.OnClickListener
     LinearLayout ll_add_health_condition;
 
 
+    TextView tv_lunar_calendar, tv_solar_terms;
+
+
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -186,6 +193,7 @@ public class ConsultingFragment extends Fragment implements View.OnClickListener
         findAllByDate(str);
         //注册监听器
         ListenerManager.getInstance().registerListtener(this);
+
 
         return view;
     }
@@ -335,15 +343,19 @@ public class ConsultingFragment extends Fragment implements View.OnClickListener
         ll_right = (LinearLayout) view.findViewById(R.id.ll_right);
         ll_left = (LinearLayout) view.findViewById(R.id.ll_left);
 
-        ll_registration = (LinearLayout) view.findViewById(R.id.ll_registration);
-        tb_registration = (ToggleButton) view.findViewById(R.id.tb_registration);
+//        ll_registration = (LinearLayout) view.findViewById(R.id.ll_registration);
+//        tb_registration = (ToggleButton) view.findViewById(R.id.tb_registration);
+//
+//        tb_health = (ToggleButton) view.findViewById(R.id.tb_health);
+//        ll_health = (LinearLayout) view.findViewById(R.id.ll_health);
+//
+//
+//        tb_pharmacy = (ToggleButton) view.findViewById(R.id.tb_pharmacy);
+//        ll_pharmacy = (LinearLayout) view.findViewById(R.id.ll_pharmacy);
 
-        tb_health = (ToggleButton) view.findViewById(R.id.tb_health);
-        ll_health = (LinearLayout) view.findViewById(R.id.ll_health);
+        tv_solar_terms = (TextView) view.findViewById(R.id.tv_solar_terms);
 
-
-        tb_pharmacy = (ToggleButton) view.findViewById(R.id.tb_pharmacy);
-        ll_pharmacy = (LinearLayout) view.findViewById(R.id.ll_pharmacy);
+        tv_lunar_calendar = (TextView) view.findViewById(R.id.tv_lunar_calendar);
 
 
         ll_consulting_phramacy = (LinearLayout) view.findViewById(R.id.ll_consulting_phramacy);
@@ -365,87 +377,123 @@ public class ConsultingFragment extends Fragment implements View.OnClickListener
 
         ll_left.setOnClickListener(this);
         ll_right.setOnClickListener(this);
+
+
+        SimpleDateFormat s1 = new SimpleDateFormat("yyyy");
+        SimpleDateFormat s2 = new SimpleDateFormat("MM");
+        SimpleDateFormat s3 = new SimpleDateFormat("dd");
+        Date curDate = new Date(System.currentTimeMillis());//获取当前时间
+        String str1 = s1.format(curDate);
+        String str2 = s2.format(curDate);
+        String str3 = s3.format(curDate);
+
+        CalendarUtil c = new CalendarUtil();
+
+        int y = Integer.parseInt(str1);
+        int m = Integer.parseInt(str2);
+        int d = Integer.parseInt(str3);
+
+        String festival;
+
+        String lunarCalendar = c.getChineseMonth(y, m, d) + c.getChineseDay(y, m, d);
+
+
+        c.setGregorian(y, m, d);
+        c.computeChineseFields();
+        c.computeSolarTerms();
+
+
+        if (c.judgefestival(m, d, lunarCalendar).equals("")) {
+            tv_solar_terms.setText(c.getDateString());
+        } else {
+            tv_solar_terms.setText(c.judgefestival(m, d, lunarCalendar));
+        }
+
+
+        tv_lunar_calendar.setText("农历" + lunarCalendar);
+
+
 //        ll_consulting_popup_case.setOnClickListener(listener);
 
 
-        if (tb_registration.isChecked()) {
-            registrationSelect = 1;
-        } else {
-            registrationSelect = 2;
-        }
-
-        if (tb_health.isChecked()) {
-            healthSelect = 1;
-        } else {
-            healthSelect = 2;
-        }
-
-
-        if (tb_pharmacy.isChecked()) {
-            pharmacySelect = 1;
-
-        } else {
-            pharmacySelect = 2;
-
-        }
+//        if (tb_registration.isChecked()) {
+//            registrationSelect = 1;
+//        } else {
+//            registrationSelect = 2;
+//        }
+//
+//        if (tb_health.isChecked()) {
+//            healthSelect = 1;
+//        } else {
+//            healthSelect = 2;
+//        }
+//
+//
+//        if (tb_pharmacy.isChecked()) {
+//            pharmacySelect = 1;
+//
+//        } else {
+//            pharmacySelect = 2;
+//
+//        }
 
 
     }
 
 
-    private View.OnClickListener tblistener = new View.OnClickListener() {
-        @Override
-        public void onClick(View v) {
-            switch (v.getId()) {
-                case R.id.ll_registration:
-
-                    if (registrationSelect == 1) {
-                        tb_registration.setChecked(false);
-
-
-                        registrationSelect = 2;
-                    } else if (registrationSelect == 2) {
-                        tb_registration.setChecked(true);
-
-
-                        registrationSelect = 1;
-                    }
-                    break;
-
-
-                case R.id.ll_health:
-                    if (healthSelect == 1) {
-                        tb_health.setChecked(false);
-
-                        calV.healthremind(2);
-
-                        healthSelect = 2;
-                    } else if (healthSelect == 2) {
-                        tb_health.setChecked(true);
-
-                        calV.healthremind(1);
-
-                        healthSelect = 1;
-                    }
-                    break;
-
-
-                case R.id.ll_pharmacy:
-                    if (pharmacySelect == 1) {
-                        tb_pharmacy.setChecked(false);
-
-
-                        pharmacySelect = 2;
-                    } else if (pharmacySelect == 2) {
-                        tb_pharmacy.setChecked(true);
-
-
-                        pharmacySelect = 1;
-                    }
-                    break;
-            }
-        }
-    };
+//    private View.OnClickListener tblistener = new View.OnClickListener() {
+//        @Override
+//        public void onClick(View v) {
+//            switch (v.getId()) {
+//                case R.id.ll_registration:
+//
+//                    if (registrationSelect == 1) {
+//                        tb_registration.setChecked(false);
+//
+//
+//                        registrationSelect = 2;
+//                    } else if (registrationSelect == 2) {
+//                        tb_registration.setChecked(true);
+//
+//
+//                        registrationSelect = 1;
+//                    }
+//                    break;
+//
+//
+//                case R.id.ll_health:
+//                    if (healthSelect == 1) {
+//                        tb_health.setChecked(false);
+//
+//                        calV.healthremind(2);
+//
+//                        healthSelect = 2;
+//                    } else if (healthSelect == 2) {
+//                        tb_health.setChecked(true);
+//
+//                        calV.healthremind(1);
+//
+//                        healthSelect = 1;
+//                    }
+//                    break;
+//
+//
+//                case R.id.ll_pharmacy:
+//                    if (pharmacySelect == 1) {
+//                        tb_pharmacy.setChecked(false);
+//
+//
+//                        pharmacySelect = 2;
+//                    } else if (pharmacySelect == 2) {
+//                        tb_pharmacy.setChecked(true);
+//
+//
+//                        pharmacySelect = 1;
+//                    }
+//                    break;
+//            }
+//        }
+//    };
 
 
     private void init() {
@@ -479,45 +527,45 @@ public class ConsultingFragment extends Fragment implements View.OnClickListener
         calV.healthremind(1);
 
 
-        //判断提醒设置是否被选中，选中则改变健康日历上面的标记
-        tb_pharmacy.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-            @Override
-            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                if (isChecked) {
-                    calV.pharmacyremind(1);
-                } else {
-                    calV.pharmacyremind(2);
-                }
-            }
-        });
-
-
-        tb_registration.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-            @Override
-            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                if (isChecked) {
-                    calV.registrationremind(1);
-                } else {
-                    calV.registrationremind(2);
-                }
-            }
-        });
-
-
-        tb_health.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-            @Override
-            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                if (isChecked) {
-                    calV.healthremind(1);
-                } else {
-                    calV.healthremind(2);
-                }
-            }
-        });
-
-        ll_registration.setOnClickListener(tblistener);
-        ll_health.setOnClickListener(tblistener);
-        ll_pharmacy.setOnClickListener(tblistener);
+//        //判断提醒设置是否被选中，选中则改变健康日历上面的标记
+//        tb_pharmacy.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+//            @Override
+//            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+//                if (isChecked) {
+//                    calV.pharmacyremind(1);
+//                } else {
+//                    calV.pharmacyremind(2);
+//                }
+//            }
+//        });
+//
+//
+//        tb_registration.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+//            @Override
+//            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+//                if (isChecked) {
+//                    calV.registrationremind(1);
+//                } else {
+//                    calV.registrationremind(2);
+//                }
+//            }
+//        });
+//
+//
+//        tb_health.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+//            @Override
+//            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+//                if (isChecked) {
+//                    calV.healthremind(1);
+//                } else {
+//                    calV.healthremind(2);
+//                }
+//            }
+//        });
+//
+//        ll_registration.setOnClickListener(tblistener);
+//        ll_health.setOnClickListener(tblistener);
+//        ll_pharmacy.setOnClickListener(tblistener);
 
         SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd");//设置日期格式
 
@@ -585,9 +633,9 @@ public class ConsultingFragment extends Fragment implements View.OnClickListener
         calV.registrationremind(1);
         calV.healthremind(1);
 
-        tb_pharmacy.setChecked(true);
-        tb_registration.setChecked(true);
-        tb_health.setChecked(true);
+//        tb_pharmacy.setChecked(true);
+//        tb_registration.setChecked(true);
+//        tb_health.setChecked(true);
 
     }
 
@@ -624,9 +672,9 @@ public class ConsultingFragment extends Fragment implements View.OnClickListener
         calV.pharmacyremind(1);
         calV.registrationremind(1);
         calV.healthremind(1);
-        tb_pharmacy.setChecked(true);
-        tb_registration.setChecked(true);
-        tb_health.setChecked(true);
+//        tb_pharmacy.setChecked(true);
+//        tb_registration.setChecked(true);
+//        tb_health.setChecked(true);
 
     }
 
@@ -717,6 +765,30 @@ public class ConsultingFragment extends Fragment implements View.OnClickListener
 
 
                     findCalendar(date);
+
+                    CalendarUtil c = new CalendarUtil();
+
+
+                    int y = Integer.parseInt(scheduleYear);
+                    int m = Integer.parseInt(month);
+                    int d = Integer.parseInt(day);
+
+                    String lunarCalendar = c.getChineseMonth(y, m, d) + c.getChineseDay(y, m, d);
+
+                    c.setGregorian(y, m, d);
+                    c.computeChineseFields();
+                    c.computeSolarTerms();
+
+                    if (c.judgefestival(m, d, lunarCalendar).equals("")) {
+                        tv_solar_terms.setText(c.getDateString());
+                    } else {
+                        tv_solar_terms.setText(c.judgefestival(m, d, lunarCalendar));
+                    }
+
+
+                    tv_lunar_calendar.setText("农历" + lunarCalendar);
+
+
                 }
             }
         });

@@ -31,6 +31,9 @@ import java.util.LinkedList;
 import java.util.List;
 
 
+import in.srain.cube.views.ptr.PtrClassicFrameLayout;
+import in.srain.cube.views.ptr.PtrDefaultHandler;
+import in.srain.cube.views.ptr.PtrFrameLayout;
 import okhttp3.Call;
 
 /**
@@ -41,7 +44,7 @@ public class CharactersafeFragment extends Fragment {
     View view;
     CharactersafeAdapter1 adapter;
     private ListView lv_charactersafe;
-    private RelativeLayout rl_nonetwork,rl_loading;
+    private RelativeLayout rl_nonetwork, rl_loading;
     List<Consult> list;
     Gson gson;
     int i;
@@ -49,6 +52,8 @@ public class CharactersafeFragment extends Fragment {
     SharedPsaveuser sp;
 
     View footView;
+
+    PtrClassicFrameLayout ptrClassicFrameLayout;
 
 
     public int getI() {
@@ -80,7 +85,23 @@ public class CharactersafeFragment extends Fragment {
     private void findView() {
         lv_charactersafe = (ListView) view.findViewById(R.id.lv_charactersafe);
         rl_nonetwork = (RelativeLayout) view.findViewById(R.id.rl_nonetwork);
-        rl_loading= (RelativeLayout) view.findViewById(R.id.rl_loading);
+        rl_loading = (RelativeLayout) view.findViewById(R.id.rl_loading);
+        ptrClassicFrameLayout = (PtrClassicFrameLayout) view.findViewById(R.id.ptrClassicFrameLayout);
+
+        //2次下拉时间间隔
+        ptrClassicFrameLayout.setDurationToCloseHeader(10000);
+
+
+        //下拉刷新
+        ptrClassicFrameLayout.setPtrHandler(new PtrDefaultHandler() {
+            @Override
+            public void onRefreshBegin(PtrFrameLayout frame) {
+                list.clear();
+                init();
+
+            }
+        });
+
 
         lv_charactersafe.setOnItemClickListener(listener);
 
@@ -146,10 +167,14 @@ public class CharactersafeFragment extends Fragment {
         public void handleMessage(Message msg) {
             switch (msg.what) {
                 case 0:
+
+                    ptrClassicFrameLayout.refreshComplete();
                     adapter.notifyDataSetChanged();
                     rl_loading.setVisibility(View.GONE);
                     break;
                 case 1:
+
+                    ptrClassicFrameLayout.refreshComplete();
                     rl_loading.setVisibility(View.GONE);
                     rl_nonetwork.setVisibility(View.VISIBLE);
                     break;

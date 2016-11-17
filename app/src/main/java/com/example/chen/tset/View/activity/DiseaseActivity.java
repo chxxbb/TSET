@@ -217,7 +217,7 @@ public class DiseaseActivity extends MyBaseActivity implements IListener {
                                     //推荐医生数据
                                     inquiry = gson.fromJson(doctor_str, DiseaseRecommendDoctor.class);
 
-                                    Log.e("11", inquiry.toString());
+
 
                                     handler.sendEmptyMessage(2);
 

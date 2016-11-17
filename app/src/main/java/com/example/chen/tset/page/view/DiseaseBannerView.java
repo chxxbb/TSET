@@ -13,6 +13,8 @@ import android.widget.LinearLayout;
 import com.example.chen.tset.Data.entity.DiseaseBanner;
 import com.example.chen.tset.Data.Http_data;
 import com.example.chen.tset.R;
+import com.example.chen.tset.Utils.IListener;
+import com.example.chen.tset.Utils.ListenerManager;
 import com.example.chen.tset.page.adapter.BannerViewAdapter;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
@@ -34,7 +36,7 @@ import okhttp3.Call;
 /**
  *疾病库banner
  */
-public class DiseaseBannerView extends LinearLayout {
+public class DiseaseBannerView extends LinearLayout implements IListener{
     private ViewPager adViewPager;
     private List<ImageView> bannerViewList = new ArrayList<ImageView>();
     private Timer bannerTimer;
@@ -49,13 +51,19 @@ public class DiseaseBannerView extends LinearLayout {
     List<String> data;
 
 
+
+
     public DiseaseBannerView(Context context) {
         super(context);
+
 
     }
 
     public DiseaseBannerView(final Context context, AttributeSet attrs) {
         super(context, attrs);
+        //注册广播
+        ListenerManager.getInstance().registerListtener(this);
+
         data = new ArrayList<>();
         init();
         handler1 = new Handler() {
@@ -210,6 +218,15 @@ public class DiseaseBannerView extends LinearLayout {
     public void bannerStopPlay() {
         if (bannerTimerTask != null)
             bannerTimerTask.cancel();
+    }
+
+    @Override
+    public void notifyAllActivity(String str) {
+        if(str.equals("banner重新加载数据")){
+
+
+
+        }
     }
 
     class BannerTimerTask extends TimerTask {

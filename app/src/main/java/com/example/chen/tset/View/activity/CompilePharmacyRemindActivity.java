@@ -93,12 +93,19 @@ public class CompilePharmacyRemindActivity extends AppCompatActivity {
                         tv_content2.setText(pharmacyremindinit.getContent2());
                         tv_content3.setText(pharmacyremindinit.getContent3());
                         //如果只有1条或2条健康记录则隐藏，空白的记录栏
-                        if (pharmacyremindinit.getTime2() == null || pharmacyremindinit.getTime2().equals("")) {
+                        if (pharmacyremindinit.getContent2() == null || pharmacyremindinit.getContent2().equals("")) {
                             ll_time2.setVisibility(View.GONE);
+
+                        } else {
+                            ll_time2.setVisibility(View.VISIBLE);
                         }
 
-                        if (pharmacyremindinit.getTime3() == null || pharmacyremindinit.getTime3().equals("")) {
+
+                        if (pharmacyremindinit.getContent3() == null || pharmacyremindinit.getContent3().equals("")) {
                             ll_time3.setVisibility(View.GONE);
+
+                        } else {
+                            ll_time3.setVisibility(View.VISIBLE);
                         }
                     }
                 });

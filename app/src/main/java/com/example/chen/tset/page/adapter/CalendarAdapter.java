@@ -182,8 +182,8 @@ public class CalendarAdapter extends BaseAdapter {
         textView.setText(d);
 
         if (position < daysOfMonth + dayOfWeek && position >= dayOfWeek) {
-            // 当前月信息显示
-            textView.setTextColor(android.graphics.Color.parseColor("#ffffff"));// 当月字体
+//            // 当前月信息显示
+//            textView.setTextColor(android.graphics.Color.parseColor("#ffffff"));// 当月字体
 
         } else {
             ll_calendar.setVisibility(View.GONE);
@@ -192,7 +192,7 @@ public class CalendarAdapter extends BaseAdapter {
 
         if (currentFlag == position) {
             // 设置当天的背景
-            textView.setTextColor(android.graphics.Color.parseColor("#f9e491"));
+            textView.setTextColor(android.graphics.Color.parseColor("#6fc9e6"));
         }
 
         if (getDateByClickItem(position).equals("1") || getDateByClickItem(position).equals("2") || getDateByClickItem(position).equals("3") || getDateByClickItem(position).equals("4") || getDateByClickItem(position).equals("5") || getDateByClickItem(position).equals("6") || getDateByClickItem(position).equals("7") || getDateByClickItem(position).equals("8") || getDateByClickItem(position).equals("9")) {
@@ -211,9 +211,10 @@ public class CalendarAdapter extends BaseAdapter {
 
             textView.setBackgroundResource(R.drawable.cousulting_checked);
 
+
         } else {
 
-            textView.setBackgroundColor(android.graphics.Color.parseColor("#6FC9E6"));
+            textView.setBackgroundColor(android.graphics.Color.parseColor("#ffffff"));
 
 
         }

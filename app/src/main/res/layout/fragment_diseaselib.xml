@@ -55,6 +55,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="@dimen/x38"
                     android:layout_marginRight="@dimen/x30"
+                    android:background="@color/backgroundblue"
                     android:divider="@color/linegray"
                     android:dividerHeight="1dp"
                     android:overScrollMode="never" />

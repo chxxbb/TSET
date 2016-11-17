@@ -8,11 +8,22 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <ListView
-            android:id="@+id/lv_charactersafe"
+
+        <in.srain.cube.views.ptr.PtrClassicFrameLayout
+            android:id="@+id/ptrClassicFrameLayout"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:overScrollMode="never"></ListView>
+            android:layout_marginBottom="@dimen/y60"
+            android:listSelector="@android:color/transparent">
+
+            <ListView
+                android:id="@+id/lv_charactersafe"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:overScrollMode="never" />
+
+        </in.srain.cube.views.ptr.PtrClassicFrameLayout>
+
 
         <RelativeLayout
             android:id="@+id/rl_loading"
@@ -50,10 +61,10 @@
             android:visibility="gone">
 
             <LinearLayout
-                android:background="@color/white"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_centerInParent="true"
+                android:background="@color/white"
                 android:gravity="center_horizontal"
                 android:orientation="vertical">
 
@@ -78,11 +89,12 @@
                     android:text="点击刷新"
                     android:textColor="@color/backgroundblue"
                     android:textSize="@dimen/y36" />
+
                 <ImageView
                     android:id="@+id/iv_refresh"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:src="@drawable/refresh"/>
+                    android:src="@drawable/refresh" />
             </LinearLayout>
         </RelativeLayout>
     </FrameLayout>

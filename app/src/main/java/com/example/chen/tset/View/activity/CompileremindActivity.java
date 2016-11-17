@@ -43,6 +43,7 @@ public class CompileremindActivity extends MyBaseActivity implements IListener {
     private RelativeLayout rl_starttime, rl_endtiem, rl_time_select1, rl_add_remind, rl_add_remind1, rl_time_select2, rl_time_select3;
     private TextView tv_starttime, tv_endtiem, tv_pas, tv_time1, tv_time2, tv_time3;
     private EditText et_compile_remind_content1, et_compile_remind_content2, et_compile_remind_content3;
+    LinearLayout ll_rutname;
     int myear, mmonth, mday;
     DatePickerDialog dialog;
     Calendar c;
@@ -125,6 +126,8 @@ public class CompileremindActivity extends MyBaseActivity implements IListener {
 
         et_compile_remind_content3 = (EditText) findViewById(R.id.et_compile_remind_content3);
 
+        ll_rutname = (LinearLayout) findViewById(R.id.ll_rutname);
+
 
         rl_starttime.setOnClickListener(listener);
 
@@ -141,6 +144,8 @@ public class CompileremindActivity extends MyBaseActivity implements IListener {
         rl_add_remind1.setOnClickListener(listener);
 
         rl_time_select3.setOnClickListener(listener);
+
+        ll_rutname.setOnClickListener(listener);
 
 
         tv_time1.setText("8:00");
@@ -175,6 +180,7 @@ public class CompileremindActivity extends MyBaseActivity implements IListener {
         @Override
         public void onClick(View v) {
             switch (v.getId()) {
+
                 case R.id.rl_starttime:
                     //选择用药开始的日期
                     acquisitionstatrtime();
@@ -225,22 +231,29 @@ public class CompileremindActivity extends MyBaseActivity implements IListener {
 
 
                 case R.id.tv_pas:
-                    startDay=tv_starttime.getText().toString();
-                    endDay=tv_endtiem.getText().toString();
-                    time1=tv_time1.getText().toString();
-                    content1=et_compile_remind_content1.getText().toString();
-                    if(et_compile_remind_content2.getText().toString()==null||et_compile_remind_content2.getText().toString().trim().equals("")){
-                        time2=null;
-                        content2=null;
+                    startDay = tv_starttime.getText().toString();
+                    endDay = tv_endtiem.getText().toString();
+                    time1 = tv_time1.getText().toString();
+                    content1 = et_compile_remind_content1.getText().toString();
+                    if (et_compile_remind_content2.getText().toString() == null || et_compile_remind_content2.getText().toString().trim().equals("")) {
+                        time2 = "";
+                        content2 = "";
 
-                    }else {
-                        time2=tv_time2.getText().toString();
-                        content2=et_compile_remind_content2.getText().toString();
+                    } else {
+                        time2 = tv_time2.getText().toString();
+                        content2 = et_compile_remind_content2.getText().toString();
+                    }
+
+                    if (et_compile_remind_content3.getText().toString() == null || et_compile_remind_content3.getText().toString().trim().equals("")) {
+                        time3 = "";
+                        content3 = "";
+                    } else {
+                        time3 = tv_time3.getText().toString();
+                        content3 = et_compile_remind_content3.getText().toString();
                     }
 
 
-
-                    if (!tv_time1.getText().toString().equals("") && !et_compile_remind_content1.getText().toString().equals("")) {
+                    if (!tv_time1.getText().toString().equals("") && !et_compile_remind_content1.getText().toString().trim().equals("")) {
 
                         OkHttpUtils
                                 .post()

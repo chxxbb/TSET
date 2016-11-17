@@ -21,6 +21,7 @@ import com.example.chen.tset.Data.entity.DiseaseDepartment;
 import com.example.chen.tset.Data.Http_data;
 import com.example.chen.tset.R;
 import com.example.chen.tset.Utils.IListener;
+import com.example.chen.tset.Utils.ListenerManager;
 import com.example.chen.tset.Utils.MyBaseActivity;
 import com.example.chen.tset.page.view.DiseaseBannerView;
 import com.example.chen.tset.page.adapter.DiseaseliblistvAdapter;
@@ -43,7 +44,7 @@ import okhttp3.Call;
  * Created by Administrator on 2016/8/25 0025.
  * 疾病库页面
  */
-public class DiseaselibFragment extends Fragment {
+public class DiseaselibFragment extends Fragment implements IListener{
     View view;
     DiseaseliblistvAdapter adapter;
     DiseaselibrecyvAdapter diseaselibrecyvAdapter;
@@ -67,16 +68,14 @@ public class DiseaselibFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         view = inflater.inflate(R.layout.fragment_diseaselib, null);
+        //注册广播
+        ListenerManager.getInstance().registerListtener(this);
         findView();
         listviewinit();
         httpinit(0);
         return view;
     }
 
-    @Override
-    public void onStart() {
-        super.onStart();
-    }
 
     private void findView() {
         listview_dise = (ListView) view.findViewById(R.id.listview_dise);
@@ -107,13 +106,9 @@ public class DiseaselibFragment extends Fragment {
             @Override
             public void onClick(View v) {
 
-                rl_loading.setVisibility(View.VISIBLE);
+                ListenerManager.getInstance().sendBroadCast("banner重新加载数据");
 
-                diseaseBannerView.setVisibility(View.VISIBLE);
-
-                diseaseBannerView.bannerStartPlay();
-
-                httpinit(1);
+                httpinit(0);
 
                 listviewinit();
 
@@ -258,4 +253,8 @@ public class DiseaselibFragment extends Fragment {
         diseaseBannerView.bannerStopPlay();
     }
 
+    @Override
+    public void notifyAllActivity(String str) {
+
+    }
 }

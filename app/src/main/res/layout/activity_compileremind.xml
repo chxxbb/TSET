@@ -197,6 +197,7 @@
                         android:textColor="@color/backgroundblue"
                         android:textSize="@dimen/y28" />
                 </LinearLayout>
+
             </RelativeLayout>
 
             <View
@@ -223,6 +224,8 @@
                 android:textSize="@dimen/y26" />
 
         </LinearLayout>
+
+
 
         <RelativeLayout
             android:id="@+id/rl_add_remind"
