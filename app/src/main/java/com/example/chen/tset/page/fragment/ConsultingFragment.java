@@ -38,6 +38,7 @@ import com.example.chen.tset.Data.Http_data;
 import com.example.chen.tset.R;
 
 import com.example.chen.tset.Utils.CalendarUtil;
+import com.example.chen.tset.Utils.Lauar;
 import com.example.chen.tset.page.view.CalendarGridView;
 import com.example.chen.tset.Utils.IListener;
 import com.example.chen.tset.Utils.ListenerManager;
@@ -159,6 +160,8 @@ public class ConsultingFragment extends Fragment implements View.OnClickListener
 
 
     TextView tv_lunar_calendar, tv_solar_terms;
+
+    Lauar lauar = new Lauar();
 
 
     @Nullable
@@ -403,10 +406,12 @@ public class ConsultingFragment extends Fragment implements View.OnClickListener
         c.computeSolarTerms();
 
 
+        String lauar1 = lauar.getLunar(str1, str2, str3);
+
         if (c.judgefestival(m, d, lunarCalendar).equals("")) {
-            tv_solar_terms.setText(c.getDateString());
+            tv_solar_terms.setText(c.getDateString() + "   " + lauar1);
         } else {
-            tv_solar_terms.setText(c.judgefestival(m, d, lunarCalendar));
+            tv_solar_terms.setText(c.judgefestival(m, d, lunarCalendar) + "   " + lauar1);
         }
 
 

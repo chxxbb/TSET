@@ -6,6 +6,8 @@ import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.Environment;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
 import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
@@ -20,12 +22,23 @@ import com.example.chen.tset.R;
 import com.example.chen.tset.Utils.MyBaseActivity;
 import com.example.chen.tset.Utils.SharedPsaveuser;
 import com.nostra13.universalimageloader.core.ImageLoader;
+import com.qiniu.android.common.AutoZone;
+import com.qiniu.android.common.Zone;
+import com.qiniu.android.http.ResponseInfo;
+import com.qiniu.android.storage.Configuration;
+import com.qiniu.android.storage.UpCompletionHandler;
+import com.qiniu.android.storage.UploadManager;
+import com.qiniu.android.storage.UploadOptions;
 import com.soundcloud.android.crop.Crop;
 import com.zhy.http.okhttp.OkHttpUtils;
 import com.zhy.http.okhttp.callback.StringCallback;
 
+import org.json.JSONObject;
+
 import java.io.File;
 import java.io.IOException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 import okhttp3.Call;
 
@@ -178,29 +191,100 @@ public class PersonaldataActivity extends MyBaseActivity {
     }
 
 
+    String uptoken;
+
     //保存头像
     private void handleCrop(final int resultCode, Intent result) {
         if (resultCode == RESULT_OK) {
 
+
             OkHttpUtils
-                    .postFile()
-                    .url(Http_data.http_data + "/changeIcon" + "?" + User_Http.user.getId())
-                    .file(sdcardTempFile)
+                    .get()
+                    .url(Http_data.http_data + "/getToken")
                     .build()
                     .execute(new StringCallback() {
                         @Override
                         public void onError(Call call, Exception e, int id) {
-                            if (sdcardTempFile != null) {
-
-                            }
-                            Log.e("失败", "失败");
-
+                            Toast.makeText(PersonaldataActivity.this, "网络连接失败", Toast.LENGTH_SHORT).show();
                         }
 
                         @Override
                         public void onResponse(String response, int id) {
+                            uptoken = response;
+                            h.sendEmptyMessage(1);
+                        }
+                    });
 
 
+        } else if (resultCode == Crop.RESULT_ERROR) {
+
+        }
+    }
+
+
+    Handler h = new Handler() {
+        @Override
+        public void handleMessage(Message msg) {
+            super.handleMessage(msg);
+
+
+            boolean https = true;
+            Zone z1 = new AutoZone(https, null);
+            Configuration config = new Configuration.Builder().zone(z1).build();
+
+            //new一个uploadManager类
+            UploadManager uploadManager = new UploadManager(config);
+
+            //获取当前日期时间
+            SimpleDateFormat formatter = new SimpleDateFormat("yyyyMMddHHmmss");
+
+            Date curDate = new Date(System.currentTimeMillis());
+
+            String time = formatter.format(curDate);
+
+            //设置上传后文件的key
+            String upkey = sp.getTag().getId() + time;
+
+            uploadManager.put(sdcardTempFile, upkey, uptoken,
+                    new UpCompletionHandler() {
+                        @Override
+                        public void complete(String key, ResponseInfo info, JSONObject res) {
+                            //res包含hash、key等信息，具体字段取决于上传策略的设置
+                            Log.e("key", key + "");
+                            Log.e("info", info + "");
+                            Log.e("res", res + "");
+
+                            changeIcon(key);
+                        }
+                    }, null);
+
+
+        }
+    };
+
+
+    public void changeIcon(String key) {
+
+        OkHttpUtils
+                .post()
+                .url(Http_data.http_data + "/changeIcon")
+                .addParams("userId", sp.getTag().getId() + "")
+                .addParams("fileName", key)
+                .build()
+                .execute(new StringCallback() {
+                    @Override
+                    public void onError(Call call, Exception e, int id) {
+
+                        Toast.makeText(PersonaldataActivity.this, "网络连接失败", Toast.LENGTH_SHORT).show();
+
+                    }
+
+                    @Override
+                    public void onResponse(String response, int id) {
+
+                        if (response.equals("2")) {
+                            Toast.makeText(PersonaldataActivity.this, "修改头像失败", Toast.LENGTH_SHORT).show();
+                        } else {
                             Bitmap bmp = BitmapFactory.decodeFile(sdcardTempFile.getAbsolutePath());
 
                             iv_icon.setImageBitmap(bmp);
@@ -211,13 +295,11 @@ public class PersonaldataActivity extends MyBaseActivity {
                             sp.setUsericon(icon);
                             User_Http.user.setIcon(null);
 
+                            Toast.makeText(PersonaldataActivity.this, "修改头像成功", Toast.LENGTH_SHORT).show();
                         }
-                    });
 
-
-        } else if (resultCode == Crop.RESULT_ERROR) {
-
-        }
+                    }
+                });
     }
 
 

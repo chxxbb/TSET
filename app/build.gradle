@@ -64,5 +64,6 @@ dependencies {
     compile 'com.soundcloud.android:android-crop:1.0.1@aar'
     compile 'in.srain.cube:ultra-ptr:1.0.11'
     compile 'com.github.fg2q1q3q:DropDownMenu:1.1.1'
+    compile 'com.qiniu:qiniu-android-sdk:7.3.1'
 
 }

@@ -47,9 +47,7 @@
                 android:id="@+id/tv_comment_content"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/y21"
-                android:includeFontPadding="false"
-                android:lineSpacingMultiplier="0.9"
+                android:layout_marginTop="@dimen/y18"
                 android:textColor="@color/fontcolor"
                 android:textSize="@dimen/y28"
 

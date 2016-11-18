@@ -91,7 +91,7 @@
 
             <View
                 android:layout_width="match_parent"
-                android:layout_height="@dimen/y3"
+                android:layout_height="@dimen/y1"
                 android:background="@color/linegray" />
 
             <View
@@ -107,9 +107,6 @@
                 android:gravity="center_horizontal"
                 android:orientation="horizontal">
 
-                <View
-                    android:layout_width="@dimen/x7"
-                    android:layout_height="match_parent" />
 
                 <LinearLayout
                     android:layout_width="0dp"
@@ -215,8 +212,6 @@
             </LinearLayout>
 
 
-
-
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -232,10 +227,10 @@
             </LinearLayout>
 
 
-            <View
+            <ImageView
                 android:layout_width="match_parent"
-                android:layout_height="@dimen/y2"
-                android:background="@color/linegray" />
+                android:layout_height="@dimen/y6"
+                android:background="@drawable/consulting_cal_bottom_lintry" />
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -248,7 +243,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="@dimen/x30"
-                    android:layout_marginTop="@dimen/y30"
+                    android:layout_marginTop="@dimen/y24"
                     android:textColor="@color/fontcolor"
                     android:textSize="@dimen/y32" />
 
@@ -417,6 +412,10 @@
             <!--android:textSize="@dimen/y26" />-->
             <!--</LinearLayout>-->
             <!--</LinearLayout>-->
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/y1"
+                android:background="@color/linegray" />
 
             <LinearLayout
                 android:layout_width="match_parent"

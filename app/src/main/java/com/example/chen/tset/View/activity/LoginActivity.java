@@ -90,6 +90,7 @@ public class LoginActivity extends AppCompatActivity {
                                     Toast.makeText(LoginActivity.this, "未知错误", Toast.LENGTH_SHORT).show();
                                 } else {
                                     User user = gson.fromJson(response, User.class);
+
                                     Log.e("user", user.toString());
                                     User_Http.user.setUser(user);
 

@@ -9,7 +9,8 @@
         android:id="@+id/tvtext"
         android:layout_width="@dimen/x86"
         android:layout_height="@dimen/x97"
-        android:gravity="center"
+        android:gravity="center|top"
+        android:paddingTop="@dimen/y24"
         android:textColor="#000000"
         android:textSize="@dimen/y30" />
 

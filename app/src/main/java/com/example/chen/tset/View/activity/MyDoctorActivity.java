@@ -97,6 +97,8 @@ public class MyDoctorActivity extends MyBaseActivity {
         list = new ArrayList<>();
         adapter = new MyDoctorAdapter(MyDoctorActivity.this, list);
         lv_mydoctor.setAdapter(adapter);
+
+
     }
 
 

@@ -27,6 +27,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 
+import com.example.chen.tset.Data.entity.DiseaseDepartment;
 import com.example.chen.tset.Data.entity.Doctor;
 import com.example.chen.tset.Data.entity.Doctorcomment;
 import com.example.chen.tset.Data.Http_data;
@@ -54,7 +55,7 @@ import okhttp3.Call;
 /**
  * 医生详情页面，与我的医生详情，问诊详情共用同一个接口
  */
-public class DoctorparticularsActivity extends MyBaseActivity implements IListener {
+public class DoctorparticularsActivity extends MyBaseActivity {
     /**
      * 华丽的分割线
      */
@@ -119,19 +120,8 @@ public class DoctorparticularsActivity extends MyBaseActivity implements IListen
 
         setContentView(R.layout.activity_doctorparticulars);
 
-        //注册广播
-        ListenerManager.getInstance().registerListtener(this);
 
         doctor_id = getIntent().getStringExtra("doctot_id");
-        Doctorcomment doctorcomment = new Doctorcomment("李狗蛋", "哟西", null, "2011-11-11", 1);
-        Doctorcomment doctorcomment1 = new Doctorcomment("李狗带", "纳尼", null, "2011-11-11", 1);
-        Doctorcomment doctorcomment2 = new Doctorcomment("李XX", "啊哈", null, "2011-11-11", 1);
-
-
-        list.add(doctorcomment);
-        list.add(doctorcomment1);
-        list.add(doctorcomment2);
-
 
 
         findView();
@@ -158,16 +148,26 @@ public class DoctorparticularsActivity extends MyBaseActivity implements IListen
 
                     @Override
                     public void onResponse(String response, int id) {
-                        Log.e("111", response);
+                        Type listtype = new TypeToken<LinkedList<Doctorcomment>>() {
+                        }.getType();
+                        LinkedList<Doctorcomment> leclist = gson.fromJson(response, listtype);
+                        for (Iterator it = leclist.iterator(); it.hasNext(); ) {
+                            Doctorcomment doctorcomment = (Doctorcomment) it.next();
+                            list.add(doctorcomment);
+                        }
+
+                        adapter = new DoctorparticularsAdapter(DoctorparticularsActivity.this, list);
+
+                        lv_doctor_particulars_assess.setAdapter(adapter);
+
+                        adapter.notifyDataSetChanged();
+
                     }
                 });
     }
 
     private void doctorinit() {
 
-        adapter = new DoctorparticularsAdapter(this, list);
-        lv_doctor_particulars_assess.setAdapter(adapter);
-        adapter.notifyDataSetChanged();
 
         new Thread(new Runnable() {
             @Override
@@ -345,10 +345,11 @@ public class DoctorparticularsActivity extends MyBaseActivity implements IListen
         rl_use_cash_coupons = (RelativeLayout) dialogView.findViewById(R.id.rl_use_cash_coupons);
 
 
-        tv_cash_coupons_stater.setText("可用");
-
         //确认支付
         btn_confirm_payment = (Button) dialogView.findViewById(R.id.btn_confirm_payment);
+
+        tv_cash_coupons_stater.setText("快速问诊劵 ￥25");
+        btn_confirm_payment.setText("确认支付 ￥0");
 
         rb_wenx.setChecked(true);
         progressBar = (ProgressBar) dialogView.findViewById(R.id.progressBar);
@@ -431,7 +432,7 @@ public class DoctorparticularsActivity extends MyBaseActivity implements IListen
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(DoctorparticularsActivity.this, MyCashCouponsActivity.class);
-                intent.putExtra("type", "inquiry");
+                intent.putExtra("type", "pay");
                 startActivity(intent);
             }
         });
@@ -491,21 +492,21 @@ public class DoctorparticularsActivity extends MyBaseActivity implements IListen
     }
 
 
-    @Override
-    public void notifyAllActivity(String str) {
-        if (str.equals("更新问诊支付弹出框")) {
-            try {
-                tv_cash_coupons_stater.setText("快速问诊劵 ￥25");
-                btn_confirm_payment.setText("确认支付 ￥0");
-            } catch (Exception e) {
-                e.printStackTrace();
-            } finally {
-                dialogView = View.inflate(this, R.layout.payment_dialog, null);
-                tv_cash_coupons_stater = (TextView) dialogView.findViewById(R.id.tv_cash_coupons_stater);
-                btn_confirm_payment = (Button) dialogView.findViewById(R.id.btn_confirm_payment);
-                tv_cash_coupons_stater.setText("快速问诊劵 ￥25");
-                btn_confirm_payment.setText("确认支付 ￥0");
-            }
-        }
-    }
+//    @Override
+//    public void notifyAllActivity(String str) {
+//        if (str.equals("更新问诊支付弹出框")) {
+//            try {
+//                tv_cash_coupons_stater.setText("快速问诊劵 ￥25");
+//                btn_confirm_payment.setText("确认支付 ￥0");
+//            } catch (Exception e) {
+//                e.printStackTrace();
+//            } finally {
+//                dialogView = View.inflate(this, R.layout.payment_dialog, null);
+//                tv_cash_coupons_stater = (TextView) dialogView.findViewById(R.id.tv_cash_coupons_stater);
+//                btn_confirm_payment = (Button) dialogView.findViewById(R.id.btn_confirm_payment);
+//                tv_cash_coupons_stater.setText("快速问诊劵 ￥25");
+//                btn_confirm_payment.setText("确认支付 ￥0");
+//            }
+//        }
+//    }
 }

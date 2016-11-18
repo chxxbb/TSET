@@ -47,17 +47,8 @@ public class MyCashCouponsAdapter extends BaseAdapter {
             convertView.setTag(new ViewHolder(convertView));
         }
         ViewHolder viewHolder = (ViewHolder) convertView.getTag();
-        if (list.get(position).equals("")) {
-            viewHolder.rl_mycash_use_background.setBackgroundResource(R.drawable.my_cashcoupon_haveaccessto_background);
-            viewHolder.tv_mycash_use_stater.setText("");
-        } else {
-            viewHolder.rl_mycash_use_background.setBackgroundResource(R.drawable.my_cashcoupon_unavailable_background);
-            viewHolder.tv_mycash_use_stater.setText("已使用");
-        }
 
-        if (position == 2) {
-            viewHolder.tv_cash_coupons_type.setText("快速挂号劵");
-        }
+        viewHolder.tv_mycash_use_stater.setText("");
 
         return convertView;
     }

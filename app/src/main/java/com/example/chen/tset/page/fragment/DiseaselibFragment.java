@@ -44,7 +44,7 @@ import okhttp3.Call;
  * Created by Administrator on 2016/8/25 0025.
  * 疾病库页面
  */
-public class DiseaselibFragment extends Fragment implements IListener{
+public class DiseaselibFragment extends Fragment implements IListener {
     View view;
     DiseaseliblistvAdapter adapter;
     DiseaselibrecyvAdapter diseaselibrecyvAdapter;
@@ -108,6 +108,7 @@ public class DiseaselibFragment extends Fragment implements IListener{
 
                 ListenerManager.getInstance().sendBroadCast("banner重新加载数据");
 
+                diseaseBannerView.bannerStartPlay();
                 httpinit(0);
 
                 listviewinit();
@@ -161,6 +162,8 @@ public class DiseaselibFragment extends Fragment implements IListener{
         public void handleMessage(Message msg) {
             switch (msg.what) {
                 case 0:
+                    diseaseBannerView.setVisibility(View.VISIBLE);
+                    recyv_dise.setVisibility(View.VISIBLE);
                     adapter.notifyDataSetChanged();
 
                     view1.setVisibility(View.VISIBLE);
@@ -173,7 +176,8 @@ public class DiseaselibFragment extends Fragment implements IListener{
                     rl_nonetwork.setVisibility(View.VISIBLE);
                     break;
                 case 2:
-
+                    diseaseBannerView.setVisibility(View.VISIBLE);
+                    recyv_dise.setVisibility(View.VISIBLE);
                     diseaselibrecyvAdapter.setList(list1);
                     diseaselibrecyvAdapter.notifyDataSetChanged();
 

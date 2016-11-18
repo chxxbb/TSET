@@ -36,7 +36,7 @@ import de.hdodenhof.circleimageview.CircleImageView;
 /**
  * Created by Administrator on 2016/9/1 0001.
  */
-public class InquiryAdapter extends BaseAdapter implements IListener {
+public class InquiryAdapter extends BaseAdapter {
 
     private Context context;
     private List<Inquiry> list;
@@ -62,7 +62,7 @@ public class InquiryAdapter extends BaseAdapter implements IListener {
     public InquiryAdapter(Context context, List<Inquiry> list) {
         this.context = context;
         this.list = list;
-        ListenerManager.getInstance().registerListtener(this);
+
 
     }
 
@@ -92,7 +92,7 @@ public class InquiryAdapter extends BaseAdapter implements IListener {
         viewHolder.textView.setText(list.get(position).getTitle());
         viewHolder.tv_name.setText(list.get(position).getName());
         viewHolder.btn_money.setText("￥" + list.get(position).getChatCost());
-        viewHolder.tv_intro.setText( list.get(position).getAdept());
+        viewHolder.tv_intro.setText(list.get(position).getAdept());
         viewHolder.tv_section.setText(list.get(position).getSection());
         ImageLoader.getInstance().displayImage(list.get(position).getIcon(), viewHolder.iv_icon);
 
@@ -115,7 +115,6 @@ public class InquiryAdapter extends BaseAdapter implements IListener {
 
                 RelativeLayout rl_confirm = (RelativeLayout) dialogView.findViewById(R.id.rl_confirm);
                 RelativeLayout lr_cancel = (RelativeLayout) dialogView.findViewById(R.id.lr_cancel);
-
 
 
                 lr_cancel.setOnClickListener(new View.OnClickListener() {
@@ -160,10 +159,11 @@ public class InquiryAdapter extends BaseAdapter implements IListener {
         rl_use_cash_coupons = (RelativeLayout) dialogView.findViewById(R.id.rl_use_cash_coupons);
 
 
-        tv_cash_coupons_stater.setText("可用");
-
         //确认支付
         btn_confirm_payment = (Button) dialogView.findViewById(R.id.btn_confirm_payment);
+
+        tv_cash_coupons_stater.setText("快速问诊劵 ￥25");
+        btn_confirm_payment.setText("确认支付 ￥0");
 
         rb_wenx.setChecked(true);
         progressBar = (ProgressBar) dialogView.findViewById(R.id.progressBar);
@@ -245,7 +245,7 @@ public class InquiryAdapter extends BaseAdapter implements IListener {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(context, MyCashCouponsActivity.class);
-                intent.putExtra("type", "inquiry");
+                intent.putExtra("type", "pay");
                 context.startActivity(intent);
             }
         });
@@ -254,25 +254,24 @@ public class InquiryAdapter extends BaseAdapter implements IListener {
 
 
     //从现金卷页面收到的广播，如果使用了现金卷则修改现金卷item和去人按钮
-    @Override
-    public void notifyAllActivity(String str) {
-        if (str.equals("更新问诊支付弹出框")) {
-            try {
-                tv_cash_coupons_stater.setText("快速问诊劵 ￥25");
-                btn_confirm_payment.setText("确认支付 ￥0");
-            } catch (Exception e) {
-                e.printStackTrace();
-            } finally {
-                dialogView = View.inflate(context, R.layout.payment_dialog, null);
-                tv_cash_coupons_stater = (TextView) dialogView.findViewById(R.id.tv_cash_coupons_stater);
-                btn_confirm_payment = (Button) dialogView.findViewById(R.id.btn_confirm_payment);
-                tv_cash_coupons_stater.setText("快速问诊劵 ￥25");
-                btn_confirm_payment.setText("确认支付 ￥0");
-            }
-
-
-        }
-    }
+//    @Override
+//    public void notifyAllActivity(String str) {
+//        if (str.equals("更新问诊支付弹出框")) {
+//            try {
+//
+//            } catch (Exception e) {
+//                e.printStackTrace();
+//            } finally {
+//                dialogView = View.inflate(context, R.layout.payment_dialog, null);
+//                tv_cash_coupons_stater = (TextView) dialogView.findViewById(R.id.tv_cash_coupons_stater);
+//                btn_confirm_payment = (Button) dialogView.findViewById(R.id.btn_confirm_payment);
+//                tv_cash_coupons_stater.setText("快速问诊劵 ￥25");
+//                btn_confirm_payment.setText("确认支付 ￥0");
+//            }
+//
+//
+//        }
+//    }
 
 
     static class ViewHolder {

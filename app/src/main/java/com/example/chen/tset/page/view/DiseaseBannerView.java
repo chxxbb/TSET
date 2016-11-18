@@ -6,6 +6,7 @@ import android.os.Message;
 import android.support.v4.view.ViewPager;
 import android.support.v4.view.ViewPager.OnPageChangeListener;
 import android.util.AttributeSet;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -223,8 +224,7 @@ public class DiseaseBannerView extends LinearLayout implements IListener{
     @Override
     public void notifyAllActivity(String str) {
         if(str.equals("banner重新加载数据")){
-
-
+            init();
 
         }
     }

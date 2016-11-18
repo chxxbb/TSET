@@ -40,7 +40,7 @@ import okhttp3.Call;
 /**
  * 疾病详情页面
  */
-public class DiseaseActivity extends MyBaseActivity implements IListener {
+public class DiseaseActivity extends MyBaseActivity {
     private LinearLayout ll_return;
     private ScrollView scrollView;
     private TextView tv_content, tv_acontent, tv_acontent1, tv_title, tv_title1, tv_bcontent, tv_dcontent, tv_dname, tv_uname, tv_section, tv_ucontent, tv_name, tv_dactor_title, tv_dactor_section, tv_intro;
@@ -77,7 +77,7 @@ public class DiseaseActivity extends MyBaseActivity implements IListener {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_disease);
-        ListenerManager.getInstance().registerListtener(this);
+
         findView();
         httpinit();
     }
@@ -218,7 +218,6 @@ public class DiseaseActivity extends MyBaseActivity implements IListener {
                                     inquiry = gson.fromJson(doctor_str, DiseaseRecommendDoctor.class);
 
 
-
                                     handler.sendEmptyMessage(2);
 
 
@@ -309,10 +308,11 @@ public class DiseaseActivity extends MyBaseActivity implements IListener {
         rl_use_cash_coupons = (RelativeLayout) dialogView.findViewById(R.id.rl_use_cash_coupons);
 
 
-        tv_cash_coupons_stater.setText("可用");
-
         //确认支付
         btn_confirm_payment = (Button) dialogView.findViewById(R.id.btn_confirm_payment);
+
+        tv_cash_coupons_stater.setText("快速问诊劵 ￥25");
+        btn_confirm_payment.setText("确认支付 ￥0");
 
         rb_wenx.setChecked(true);
         progressBar = (ProgressBar) dialogView.findViewById(R.id.progressBar);
@@ -398,7 +398,7 @@ public class DiseaseActivity extends MyBaseActivity implements IListener {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(DiseaseActivity.this, MyCashCouponsActivity.class);
-                intent.putExtra("type", "disease");
+                intent.putExtra("type", "pay");
                 startActivity(intent);
             }
         });
@@ -407,30 +407,28 @@ public class DiseaseActivity extends MyBaseActivity implements IListener {
 
 
     //从现金卷页面收到的广播，如果使用了现金卷则修改现金卷item和去人按钮
-    @Override
-    public void notifyAllActivity(String str) {
-        if (str.equals("更新疾病详情问诊支付弹出框")) {
-            try {
-                tv_cash_coupons_stater.setText("快速问诊劵 ￥25");
-                btn_confirm_payment.setText("确认支付 ￥0");
-            } catch (Exception e) {
-                e.printStackTrace();
-            } finally {
-                dialogView = View.inflate(this, R.layout.payment_dialog, null);
-                tv_cash_coupons_stater = (TextView) dialogView.findViewById(R.id.tv_cash_coupons_stater);
-                btn_confirm_payment = (Button) dialogView.findViewById(R.id.btn_confirm_payment);
-                tv_cash_coupons_stater.setText("快速问诊劵 ￥25");
-                btn_confirm_payment.setText("确认支付 ￥0");
-            }
-
-        }
-    }
+//    @Override
+//    public void notifyAllActivity(String str) {
+//        if (str.equals("更新疾病详情问诊支付弹出框")) {
+//            try {
+//
+//            } catch (Exception e) {
+//                e.printStackTrace();
+//            } finally {
+//                dialogView = View.inflate(this, R.layout.payment_dialog, null);
+//                tv_cash_coupons_stater = (TextView) dialogView.findViewById(R.id.tv_cash_coupons_stater);
+//                btn_confirm_payment = (Button) dialogView.findViewById(R.id.btn_confirm_payment);
+//                tv_cash_coupons_stater.setText("快速问诊劵 ￥25");
+//                btn_confirm_payment.setText("确认支付 ￥0");
+//            }
+//
+//        }
+//    }
 
     @Override
     protected void onDestroy() {
         super.onDestroy();
 
-        ListenerManager.getInstance().unRegisterListener(this);
 
     }
 }

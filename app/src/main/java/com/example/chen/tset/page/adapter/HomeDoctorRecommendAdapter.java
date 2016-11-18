@@ -32,7 +32,7 @@ import de.hdodenhof.circleimageview.CircleImageView;
 /**
  * Created by Administrator on 2016/10/31 0031.
  */
-public class HomeDoctorRecommendAdapter extends BaseAdapter implements IListener {
+public class HomeDoctorRecommendAdapter extends BaseAdapter {
     Context context;
     List<Inquiry> list;
     private Dialog setHeadDialog;
@@ -57,7 +57,7 @@ public class HomeDoctorRecommendAdapter extends BaseAdapter implements IListener
     public HomeDoctorRecommendAdapter(Context context, List<Inquiry> list) {
         this.context = context;
         this.list = list;
-        ListenerManager.getInstance().registerListtener(this);
+
     }
 
     @Override
@@ -145,10 +145,11 @@ public class HomeDoctorRecommendAdapter extends BaseAdapter implements IListener
         rl_use_cash_coupons = (RelativeLayout) dialogView.findViewById(R.id.rl_use_cash_coupons);
 
 
-        tv_cash_coupons_stater.setText("可用");
-
         //确认支付
         btn_confirm_payment = (Button) dialogView.findViewById(R.id.btn_confirm_payment);
+
+        tv_cash_coupons_stater.setText("快速问诊劵 ￥25");
+        btn_confirm_payment.setText("确认支付 ￥0");
 
         rb_wenx.setChecked(true);
         progressBar = (ProgressBar) dialogView.findViewById(R.id.progressBar);
@@ -231,7 +232,7 @@ public class HomeDoctorRecommendAdapter extends BaseAdapter implements IListener
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(context, MyCashCouponsActivity.class);
-                intent.putExtra("type", "HomeDoctorRecommend");
+                intent.putExtra("type", "pay");
                 context.startActivity(intent);
             }
         });
@@ -240,24 +241,24 @@ public class HomeDoctorRecommendAdapter extends BaseAdapter implements IListener
 
 
     //从现金卷页面收到的广播，如果使用了现金卷则修改现金卷item和去人按钮
-    @Override
-    public void notifyAllActivity(String str) {
-        if (str.equals("更新首页问诊支付弹出框")) {
-            try {
-                tv_cash_coupons_stater.setText("快速问诊劵 ￥25");
-                btn_confirm_payment.setText("确认支付 ￥0");
-            } catch (Exception e) {
-                e.printStackTrace();
-            } finally {
-                dialogView = View.inflate(context, R.layout.payment_dialog, null);
-                tv_cash_coupons_stater = (TextView) dialogView.findViewById(R.id.tv_cash_coupons_stater);
-                btn_confirm_payment = (Button) dialogView.findViewById(R.id.btn_confirm_payment);
-                tv_cash_coupons_stater.setText("快速问诊劵 ￥25");
-                btn_confirm_payment.setText("确认支付 ￥0");
-            }
-
-        }
-    }
+//    @Override
+//    public void notifyAllActivity(String str) {
+//        if (str.equals("更新首页问诊支付弹出框")) {
+//            try {
+//                tv_cash_coupons_stater.setText("快速问诊劵 ￥25");
+//                btn_confirm_payment.setText("确认支付 ￥0");
+//            } catch (Exception e) {
+//                e.printStackTrace();
+//            } finally {
+//                dialogView = View.inflate(context, R.layout.payment_dialog, null);
+//                tv_cash_coupons_stater = (TextView) dialogView.findViewById(R.id.tv_cash_coupons_stater);
+//                btn_confirm_payment = (Button) dialogView.findViewById(R.id.btn_confirm_payment);
+//                tv_cash_coupons_stater.setText("快速问诊劵 ￥25");
+//                btn_confirm_payment.setText("确认支付 ￥0");
+//            }
+//
+//        }
+//    }
 
 
     static class ViewHolder {

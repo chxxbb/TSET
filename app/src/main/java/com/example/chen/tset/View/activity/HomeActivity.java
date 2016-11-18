@@ -140,7 +140,7 @@ public class HomeActivity extends MyBaseActivity implements View.OnClickListener
 
 
         //设置版本号
-        if (version_numberSp.getversionNumber() == null || version_numberSp.getversionNumber().equals("")) {
+        if (version_numberSp.getversionNumber() == null || version_numberSp.getversionNumber().equals("") || (!version_numberSp.getversionNumber().trim().equals(Http_data.version_number))) {
             version_numberSp.setspversionNumber(Http_data.version_number);
         }
 
@@ -209,12 +209,11 @@ public class HomeActivity extends MyBaseActivity implements View.OnClickListener
                             public void onResponse(String response, int id) {
 
                                 update = gson.fromJson(response, Update.class);
-
                                 //检查当前版本与获取的版本是否一致,如果不一致则弹出更新框提示更新
                                 if (update.getVersion().trim().equals(version_numberSp.getversionNumber().trim())) {
 
                                 } else {
-//                                    updatedialog();
+                                    updatedialog();
                                 }
 
                             }
@@ -603,6 +602,8 @@ public class HomeActivity extends MyBaseActivity implements View.OnClickListener
         rb_diagnosis.setOnClickListener(this);
         iv_inquiry.setOnClickListener(inquirylistener);
         fl_registration.setOnClickListener(listener);
+
+
     }
 
 
