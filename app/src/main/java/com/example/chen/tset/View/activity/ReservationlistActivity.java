@@ -4,6 +4,7 @@ import android.app.Dialog;
 import android.os.Handler;
 import android.os.Message;
 import android.os.Bundle;
+import android.system.ErrnoException;
 import android.util.Log;
 import android.view.View;
 import android.view.WindowManager;
@@ -197,7 +198,14 @@ public class ReservationlistActivity extends MyBaseActivity implements View.OnCl
     private View.OnClickListener listener = new View.OnClickListener() {
         @Override
         public void onClick(View v) {
-            cancelindent();
+            try {
+                cancelindent();
+            } catch (Exception e) {
+                e.printStackTrace();
+                Toast.makeText(ReservationlistActivity.this, "取消失败，请重试", Toast.LENGTH_SHORT).show();
+                finish();
+            }
+
 
         }
     };

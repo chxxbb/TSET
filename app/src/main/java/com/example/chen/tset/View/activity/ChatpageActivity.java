@@ -382,6 +382,7 @@ public class ChatpageActivity extends AppCompatActivity implements PtrUIHandler 
             }
             TextContent textContent = new TextContent(et_chat.getText().toString());
 
+
             Message message = c.createSendMessage(textContent);
 
             JMessageClient.sendMessage(message);

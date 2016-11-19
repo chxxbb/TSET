@@ -14,7 +14,10 @@ import android.widget.Toast;
 
 import com.example.chen.tset.Data.Http_data;
 import com.example.chen.tset.Data.User_Http;
+import com.example.chen.tset.Data.entity.User;
 import com.example.chen.tset.R;
+import com.example.chen.tset.Utils.SharedPsaveuser;
+import com.google.gson.Gson;
 import com.zhy.http.okhttp.OkHttpUtils;
 import com.zhy.http.okhttp.callback.StringCallback;
 
@@ -35,6 +38,8 @@ public class OnekeyLoinActivity extends AppCompatActivity {
     private Button activity_onekeyr_Verification_code_button, login_button;
 
     private TimeCount time;
+
+    Gson gson = new Gson();
 
 
     @Override
@@ -74,6 +79,7 @@ public class OnekeyLoinActivity extends AppCompatActivity {
 
                     Intent intent = new Intent(OnekeyLoinActivity.this, LoginActivity.class);
                     startActivity(intent);
+                    finish();
                     break;
 
 
@@ -82,6 +88,10 @@ public class OnekeyLoinActivity extends AppCompatActivity {
                     break;
 
                 case R.id.login_button:
+
+                    login_button.setClickable(false);
+                    login_button.setText("登录中，请稍等...");
+
                     login();
                     break;
             }
@@ -99,14 +109,51 @@ public class OnekeyLoinActivity extends AppCompatActivity {
                     @Override
                     public void onError(Call call, Exception e, int id) {
                         Toast.makeText(OnekeyLoinActivity.this, "网络连接失败", Toast.LENGTH_SHORT).show();
+                        login_button.setClickable(true);
+                        login_button.setText("登录");
                     }
 
                     @Override
                     public void onResponse(String response, int id) {
                         Log.e("一键登录返回", response);
+
+                        if (response.equals("2")) {
+
+                            login_button.setClickable(true);
+                            login_button.setText("登录");
+                            Toast.makeText(OnekeyLoinActivity.this, "登录失败", Toast.LENGTH_SHORT).show();
+                        } else if (response.equals("1")) {
+
+                            login_button.setClickable(true);
+                            login_button.setText("登录");
+                            Toast.makeText(OnekeyLoinActivity.this, "验证码错误", Toast.LENGTH_SHORT).show();
+                        } else {
+
+                            User user = gson.fromJson(response, User.class);
+
+                            User_Http.user.setUser(user);
+
+                            SharedPsaveuser sp = new SharedPsaveuser(OnekeyLoinActivity.this);
+
+
+                            if (user.getName() != null && !"".equals(user.getName())) {
+                                Intent intent = new Intent(OnekeyLoinActivity.this, HomeActivity.class);
+                                startActivity(intent);
+
+                            } else {
+                                Intent intent = new Intent(OnekeyLoinActivity.this, SetdataActivity.class);
+                                startActivity(intent);
+                            }
+
+                            finish();
+
+                        }
+
+
                     }
                 });
     }
+
 
     private void send() {
         if (TextUtils.isEmpty(onekeylogin_phone_edittext.getText())) {

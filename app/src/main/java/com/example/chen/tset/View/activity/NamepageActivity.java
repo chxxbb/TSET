@@ -78,28 +78,35 @@ public class NamepageActivity extends MyBaseActivity {
                     break;
                 case R.id.tv_pas:
                     SharedPsaveuser sp = new SharedPsaveuser(NamepageActivity.this);
-                    OkHttpUtils
-                            .post()
-                            .url(Http_data.http_data + "/ChangeName")
-                            .addParams("id", sp.getTag().getId() + "")
-                            .addParams("name", et_name_save.getText().toString())
-                            .build()
-                            .execute(new StringCallback() {
-                                @Override
-                                public void onError(Call call, Exception e, int id) {
-                                    Toast.makeText(NamepageActivity.this, "网络连接失败", Toast.LENGTH_SHORT).show();
-                                }
 
-                                @Override
-                                public void onResponse(String response, int id) {
-                                    if (response.equals("0")) {
-                                        User_Http.user.setName(et_name_save.getText().toString());
-                                        finish();
-                                    } else {
-                                        Toast.makeText(NamepageActivity.this, "修改失败", Toast.LENGTH_SHORT).show();
+                    if (et_name_save.getText().toString().trim().equals("") || et_name_save.getText().toString() == null) {
+                        Toast.makeText(NamepageActivity.this, "昵称不能为空", Toast.LENGTH_SHORT).show();
+
+                    } else {
+                        OkHttpUtils
+                                .post()
+                                .url(Http_data.http_data + "/ChangeName")
+                                .addParams("id", sp.getTag().getId() + "")
+                                .addParams("name", et_name_save.getText().toString())
+                                .build()
+                                .execute(new StringCallback() {
+                                    @Override
+                                    public void onError(Call call, Exception e, int id) {
+                                        Toast.makeText(NamepageActivity.this, "网络连接失败", Toast.LENGTH_SHORT).show();
                                     }
-                                }
-                            });
+
+                                    @Override
+                                    public void onResponse(String response, int id) {
+                                        if (response.equals("0")) {
+                                            User_Http.user.setName(et_name_save.getText().toString());
+                                            finish();
+                                        } else {
+                                            Toast.makeText(NamepageActivity.this, "修改失败", Toast.LENGTH_SHORT).show();
+                                        }
+                                    }
+                                });
+                    }
+
                     break;
             }
         }

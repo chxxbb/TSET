@@ -43,6 +43,7 @@
                     android:textSize="@dimen/x36" />
 
                 <Button
+                    android:id="@+id/btn_user_login_form"
                     android:layout_width="@dimen/x140"
                     android:layout_height="@dimen/y32"
                     android:layout_marginTop="@dimen/y14"

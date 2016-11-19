@@ -159,7 +159,7 @@ public class ConsultingFragment extends Fragment implements View.OnClickListener
     LinearLayout ll_add_health_condition;
 
 
-    TextView tv_lunar_calendar, tv_solar_terms;
+    TextView tv_lunar_calendar, tv_solar_terms, tv_chinese_era;
 
     Lauar lauar = new Lauar();
 
@@ -375,6 +375,8 @@ public class ConsultingFragment extends Fragment implements View.OnClickListener
 
         tv_consulting_pharmacy = (TextView) view.findViewById(R.id.tv_consulting_pharmacy);
 
+        tv_chinese_era = (TextView) view.findViewById(R.id.tv_chinese_era);
+
         ll_add_medicine_remind.setOnClickListener(addlistener);
         ll_add_health_condition.setOnClickListener(addlistener);
 
@@ -409,12 +411,20 @@ public class ConsultingFragment extends Fragment implements View.OnClickListener
         String lauar1 = lauar.getLunar(str1, str2, str3);
 
         if (c.judgefestival(m, d, lunarCalendar).equals("")) {
-            tv_solar_terms.setText(c.getDateString() + "   " + lauar1);
+            tv_solar_terms.setText(c.getDateString().trim());
         } else {
-            tv_solar_terms.setText(c.judgefestival(m, d, lunarCalendar) + "   " + lauar1);
+            tv_solar_terms.setText(c.judgefestival(m, d, lunarCalendar).trim());
         }
 
 
+        if (tv_solar_terms.getText().toString().equals("")) {
+            tv_solar_terms.setVisibility(View.GONE);
+        } else {
+            tv_solar_terms.setVisibility(View.VISIBLE);
+        }
+
+
+        tv_chinese_era.setText(lauar1);
         tv_lunar_calendar.setText("农历" + lunarCalendar);
 
 
@@ -790,6 +800,15 @@ public class ConsultingFragment extends Fragment implements View.OnClickListener
                         tv_solar_terms.setText(c.judgefestival(m, d, lunarCalendar));
                     }
 
+                    String lauar1 = lauar.getLunar(scheduleYear, month, day);
+
+                    if (tv_solar_terms.getText().toString().equals("")) {
+                        tv_solar_terms.setVisibility(View.GONE);
+                    } else {
+                        tv_solar_terms.setVisibility(View.VISIBLE);
+                    }
+
+                    tv_chinese_era.setText(lauar1);
 
                     tv_lunar_calendar.setText("农历" + lunarCalendar);
 

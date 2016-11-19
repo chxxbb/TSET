@@ -193,6 +193,9 @@ public class CalendarAdapter extends BaseAdapter {
         if (currentFlag == position) {
             // 设置当天的背景
             textView.setTextColor(android.graphics.Color.parseColor("#6fc9e6"));
+
+            textView.setText("今");
+
         }
 
         if (getDateByClickItem(position).equals("1") || getDateByClickItem(position).equals("2") || getDateByClickItem(position).equals("3") || getDateByClickItem(position).equals("4") || getDateByClickItem(position).equals("5") || getDateByClickItem(position).equals("6") || getDateByClickItem(position).equals("7") || getDateByClickItem(position).equals("8") || getDateByClickItem(position).equals("9")) {

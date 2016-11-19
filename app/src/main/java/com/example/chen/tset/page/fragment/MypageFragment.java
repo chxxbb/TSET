@@ -8,6 +8,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
@@ -35,6 +36,7 @@ public class MypageFragment extends Fragment {
     private CircleImageView iv_ico;
     private TextView tv_name;
     SharedPsaveuser sp;
+    Button btn_user_login_form;
 
 
     @Nullable
@@ -58,6 +60,7 @@ public class MypageFragment extends Fragment {
         iv_ico = (CircleImageView) view.findViewById(R.id.iv_icon);
         tv_name = (TextView) view.findViewById(R.id.tv_name);
         rl_MyCashCoupons = (RelativeLayout) view.findViewById(R.id.rl_MyCashCoupons);
+        btn_user_login_form = (Button) view.findViewById(R.id.btn_user_login_form);
         rl_set.setOnClickListener(listerer);
         rl_mycollect.setOnClickListener(listerer);
         rl_myreservation.setOnClickListener(listerer);
@@ -65,6 +68,9 @@ public class MypageFragment extends Fragment {
         rl_mydpctor.setOnClickListener(listerer);
         rl_inquiryrecord.setOnClickListener(listerer);
         rl_MyCashCoupons.setOnClickListener(listerer);
+
+
+
     }
 
     @Override
@@ -94,6 +100,14 @@ public class MypageFragment extends Fragment {
         } else {
             tv_name.setText(User_Http.user.getName());
         }
+
+        if (sp.getTag().getPassword() != null) {
+            btn_user_login_form.setText("注册登录用户");
+
+        } else {
+            btn_user_login_form.setText("一键登录用户");
+        }
+
 
     }
 
@@ -141,7 +155,7 @@ public class MypageFragment extends Fragment {
 
                 case R.id.rl_MyCashCoupons:
                     Intent intent6 = new Intent(getContext(), MyCashCouponsActivity.class);
-                    intent6.putExtra("type","mypage");
+                    intent6.putExtra("type", "mypage");
                     startActivity(intent6);
                     break;
 

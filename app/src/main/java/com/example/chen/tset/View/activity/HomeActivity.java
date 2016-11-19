@@ -466,6 +466,9 @@ public class HomeActivity extends MyBaseActivity implements View.OnClickListener
         spStorage();
 
 
+        Log.e("共享参数数据", sp.getTag().toString());
+
+
     }
 
     @Override
@@ -872,7 +875,10 @@ public class HomeActivity extends MyBaseActivity implements View.OnClickListener
                     ft.show(encyclopediaFragment);
                 }
                 ft.commitAllowingStateLoss();
-            } else {
+            }
+
+
+            else {
 
             }
 

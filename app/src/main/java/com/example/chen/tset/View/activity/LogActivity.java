@@ -47,7 +47,7 @@ public class LogActivity extends AppCompatActivity {
 
         rl_log = (RelativeLayout) findViewById(R.id.rl_log);
 
-        judgeWhetherRegister();
+
         //初始化
         Animation alphaAnimation = new AlphaAnimation(0.5f, 1.0f);
         //设置动画时间
@@ -66,15 +66,7 @@ public class LogActivity extends AppCompatActivity {
             public void onAnimationEnd(Animation animation) {
                 //判断是否是第一次登录，如果是则跳转到登录页面，如果不是则跳转到首页
 
-                if (i == 1) {
-                    Intent intent = new Intent(LogActivity.this, HomeActivity.class);
-                    startActivity(intent);
-                    finish();
-                } else {
-                    Intent intent = new Intent(LogActivity.this, LoginActivity.class);
-                    startActivity(intent);
-                    finish();
-                }
+                judgeWhetherRegister();
 
 
             }
@@ -92,14 +84,16 @@ public class LogActivity extends AppCompatActivity {
     //判断是否登录过
     private void judgeWhetherRegister() {
         sp = new SharedPsaveuser(LogActivity.this);
-        if (sp.getTag().getPhone() != null && sp.getTag().getPassword() != null) {
-            registerjudge();
+        if ((sp.getTag().getPhone() != null && sp.getTag().getPassword() != null)) {
 
-            i = 1;
+            registerjudge();
 
         } else {
 
-            i = 2;
+            Intent intent = new Intent(LogActivity.this, OnekeyLoinActivity.class);
+            startActivity(intent);
+            finish();
+
 
         }
     }
@@ -122,17 +116,24 @@ public class LogActivity extends AppCompatActivity {
                     @Override
                     public void onResponse(String response, int id) {
 
-
                         if (response.equals("1")) {
-                            Toast.makeText(LogActivity.this, "密码被修改", Toast.LENGTH_SHORT).show();
-                            sp.clearinit();
-                            Intent i = new Intent(LogActivity.this, LoginActivity.class);
+
+                            Toast.makeText(LogActivity.this, "密码被修改请重新登录", Toast.LENGTH_SHORT).show();
+
+
+                            Intent i = new Intent(LogActivity.this, OnekeyLoinActivity.class);
                             startActivity(i);
+
                             finish();
-                        }else if(response.equals("2")){
+
+
+                            sp.clearinit();
+
+
+                        } else if (response.equals("2")) {
                             Toast.makeText(LogActivity.this, "登录异常 请重新登录", Toast.LENGTH_SHORT).show();
                             sp.clearinit();
-                            Intent i = new Intent(LogActivity.this, LoginActivity.class);
+                            Intent i = new Intent(LogActivity.this, OnekeyLoinActivity.class);
                             startActivity(i);
                             finish();
                         } else {
@@ -140,6 +141,13 @@ public class LogActivity extends AppCompatActivity {
                             User user = gson.fromJson(response, User.class);
                             Log.e("user", user.toString());
                             User_Http.user.setUser(user);
+
+                            Intent intent = new Intent(LogActivity.this, HomeActivity.class);
+
+                            startActivity(intent);
+
+                            finish();
+
                         }
 
                     }

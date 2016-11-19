@@ -91,7 +91,6 @@ public class LoginActivity extends AppCompatActivity {
                                 } else {
                                     User user = gson.fromJson(response, User.class);
 
-                                    Log.e("user", user.toString());
                                     User_Http.user.setUser(user);
 
 
@@ -137,7 +136,10 @@ public class LoginActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(LoginActivity.this, OnekeyLoinActivity.class);
+
                 startActivity(intent);
+
+                finish();
             }
         });
 

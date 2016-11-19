@@ -102,40 +102,48 @@ public class SetdataActivity extends MyBaseActivity implements IListener{
             } else {
                 sex = "女";
             }
-            OkHttpUtils
-                    .post()
-                    .url(Http_data.http_data + "/AddNameAndGender")
-                    .addParams("id", User_Http.user.getId() + "")
-                    .addParams("name", et_nickname.getText().toString())
-                    .addParams("gender", sex)
-                    .build()
-                    .execute(new StringCallback() {
-                        @Override
-                        public void onError(Call call, Exception e, int id) {
-                            runOnUiThread(new Runnable() {
-                                @Override
-                                public void run() {
-                                    Toast.makeText(SetdataActivity.this, "网络连接失败", Toast.LENGTH_LONG).show();
-                                }
-                            });
-                        }
 
-                        @Override
-                        public void onResponse(String response, int id) {
+            if(et_nickname.getText().toString().trim().equals("")||et_nickname.getText().toString()==null){
+                Toast.makeText(SetdataActivity.this, "昵称不能为空", Toast.LENGTH_SHORT).show();
+            }else {
 
-                            if (response.equals("0")) {
-                                Toast.makeText(SetdataActivity.this, "修改成功", Toast.LENGTH_SHORT).show();
-                                User_Http.user.setName(et_nickname.getText().toString());
-                                User_Http.user.setGender(sex);
-                                Http_data.giveCashState=2;
-                                Intent intent = new Intent(SetdataActivity.this, HomeActivity.class);
-                                startActivity(intent);
-                                finish();
-                            } else {
-                                Toast.makeText(SetdataActivity.this, "注册失败", Toast.LENGTH_SHORT).show();
+                OkHttpUtils
+                        .post()
+                        .url(Http_data.http_data + "/AddNameAndGender")
+                        .addParams("id", User_Http.user.getId() + "")
+                        .addParams("name", et_nickname.getText().toString())
+                        .addParams("gender", sex)
+                        .build()
+                        .execute(new StringCallback() {
+                            @Override
+                            public void onError(Call call, Exception e, int id) {
+                                runOnUiThread(new Runnable() {
+                                    @Override
+                                    public void run() {
+                                        Toast.makeText(SetdataActivity.this, "网络连接失败", Toast.LENGTH_LONG).show();
+                                    }
+                                });
                             }
-                        }
-                    });
+
+                            @Override
+                            public void onResponse(String response, int id) {
+
+                                if (response.equals("0")) {
+                                    Toast.makeText(SetdataActivity.this, "修改成功", Toast.LENGTH_SHORT).show();
+                                    User_Http.user.setName(et_nickname.getText().toString());
+                                    User_Http.user.setGender(sex);
+                                    Http_data.giveCashState=2;
+                                    Intent intent = new Intent(SetdataActivity.this, HomeActivity.class);
+                                    startActivity(intent);
+                                    finish();
+                                } else {
+                                    Toast.makeText(SetdataActivity.this, "注册失败", Toast.LENGTH_SHORT).show();
+                                }
+                            }
+                        });
+
+            }
+
         }
     };
 

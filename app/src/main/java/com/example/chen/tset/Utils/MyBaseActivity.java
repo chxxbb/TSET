@@ -39,7 +39,7 @@ public class MyBaseActivity extends AppCompatActivity {
 
 
         if (null != savedInstanceState) {
-            Log.e("触发", "触发");
+
             //activity由系统加载的时候savedInstanceState不为空
             Intent intent = new Intent(MyBaseActivity.this, LogActivity.class);
             startActivity(intent);
