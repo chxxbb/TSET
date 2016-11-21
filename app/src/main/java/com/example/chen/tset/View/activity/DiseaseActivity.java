@@ -199,6 +199,8 @@ public class DiseaseActivity extends MyBaseActivity {
                             @Override
                             public void onResponse(String response, int id) {
 
+                                Log.e("疾病详情", response);
+
                                 if (response.equals("[]") || response.equals("") || response == null) {
                                     handler.sendEmptyMessage(1);
                                 } else {
@@ -245,22 +247,68 @@ public class DiseaseActivity extends MyBaseActivity {
                     break;
 
                 case 2:
+                    if (disease.getBio() == null) {
+                        tv_content.setText("无");
+                    } else {
+                        tv_content.setText("        " + disease.getBio());
+                    }
 
-                    tv_content.setText("        " + disease.getBio());
-                    tv_acontent.setText("        " + disease.getCure());
+                    if (disease.getCure() == null) {
+                        tv_acontent.setText("无");
+                    } else {
+                        tv_acontent.setText("        " + disease.getCure());
+                    }
+
+
                     if (disease.getPrompt() == null) {
                         tv_acontent1.setText("无");
                     } else {
                         tv_acontent1.setText("        " + disease.getPrompt());
                     }
+
+
                     tv_title.setText(disease1);
                     tv_title1.setText(disease1);
-                    tv_bcontent.setText("        " + disease.getSymptom());
-                    tv_dcontent.setText("        " + disease.getDoctorAnswerQuestion());
-                    tv_dname.setText(disease.getDoctorName());
-                    tv_uname.setText(disease.getUserName());
-                    tv_section.setText(disease.getSectionName());
-                    tv_ucontent.setText("        " + disease.getUserPutQuestion());
+
+                    if (disease.getSymptom() == null) {
+                        tv_bcontent.setText("无");
+                    } else {
+                        tv_bcontent.setText("        " + disease.getSymptom());
+                    }
+
+
+                    if (disease.getDoctorAnswerQuestion() == null) {
+                        tv_dcontent.setText("无");
+                    } else {
+                        tv_dcontent.setText("        " + disease.getDoctorAnswerQuestion());
+                    }
+
+                    if (disease.getDoctorName() == null) {
+                        tv_dname.setText("无");
+                    } else {
+                        tv_dname.setText(disease.getDoctorName());
+                    }
+
+
+                    if (disease.getUserName() == null) {
+                        tv_uname.setText("无");
+                    } else {
+                        tv_uname.setText(disease.getUserName());
+                    }
+
+
+                    if (disease.getSectionName() == null) {
+                        tv_section.setText("无");
+                    } else {
+                        tv_section.setText(disease.getSectionName());
+                    }
+
+
+                    if (disease.getUserPutQuestion() == null) {
+                        tv_ucontent.setText("无");
+                    } else {
+                        tv_ucontent.setText("        " + disease.getUserPutQuestion());
+                    }
 
 
                     //如果ID为0，则表示没有医生推荐，则隐藏医生推荐栏

@@ -31,32 +31,32 @@
 
                 <ImageView
                     android:id="@+id/iv_lead_spot1"
-                    android:layout_width="@dimen/x7"
-                    android:layout_height="@dimen/x7"
+                    android:layout_width="@dimen/x10"
+                    android:layout_height="@dimen/x10"
                     android:layout_marginLeft="@dimen/x4"
                     android:layout_marginRight="@dimen/x4"
                     android:src="@drawable/lead_slide_sign" />
 
                 <ImageView
                     android:id="@+id/iv_lead_spot2"
-                    android:layout_width="@dimen/x7"
-                    android:layout_height="@dimen/x7"
+                    android:layout_width="@dimen/x10"
+                    android:layout_height="@dimen/x10"
                     android:layout_marginLeft="@dimen/x4"
                     android:layout_marginRight="@dimen/x4"
                     android:src="@drawable/lead_slide_sign1" />
 
                 <ImageView
                     android:id="@+id/iv_lead_spot3"
-                    android:layout_width="@dimen/x7"
-                    android:layout_height="@dimen/x7"
+                    android:layout_width="@dimen/x10"
+                    android:layout_height="@dimen/x10"
                     android:layout_marginLeft="@dimen/x4"
                     android:layout_marginRight="@dimen/x4"
                     android:src="@drawable/lead_slide_sign1" />
 
                 <ImageView
                     android:id="@+id/iv_lead_spot4"
-                    android:layout_width="@dimen/x7"
-                    android:layout_height="@dimen/x7"
+                    android:layout_width="@dimen/x10"
+                    android:layout_height="@dimen/x10"
                     android:layout_marginLeft="@dimen/x4"
                     android:layout_marginRight="@dimen/x4"
                     android:src="@drawable/lead_slide_sign1" />

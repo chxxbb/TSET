@@ -291,6 +291,7 @@ public class InquiryActivity extends AppCompatActivity implements IListener {
             }
         });
 
+
         ll_city_shenzheng.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -342,7 +343,7 @@ public class InquiryActivity extends AppCompatActivity implements IListener {
         }
     }
 
-    //
+
     private void listinit(List<Inquiry> list) {
         adapter = new InquiryAdapter(InquiryActivity.this, list);
         lv_inquiry.setAdapter(adapter);
@@ -364,17 +365,20 @@ public class InquiryActivity extends AppCompatActivity implements IListener {
                         dropDownMenu.setVisibility(View.GONE);
                     }
 
+
                     @Override
                     public void onResponse(String response, int id) {
 
+
                         Type listtype = new TypeToken<LinkedList<Inquiry>>() {
                         }.getType();
+
+
                         LinkedList<Inquiry> leclist = gson.fromJson(response, listtype);
                         for (Iterator it = leclist.iterator(); it.hasNext(); ) {
                             Inquiry inquiry = (Inquiry) it.next();
                             list.add(inquiry);
                         }
-
 
                         adapter.notifyDataSetChanged();
                         //隐藏加载中图标

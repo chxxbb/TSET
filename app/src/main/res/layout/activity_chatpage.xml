@@ -83,14 +83,14 @@
                     android:id="@+id/ptrClassicFrameLayout"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:listSelector="@android:color/transparent"
-                    android:layout_marginBottom="@dimen/y60">
+                    android:layout_marginBottom="@dimen/y55"
+                    android:listSelector="@android:color/transparent">
 
                     <ListView
                         android:id="@+id/listView"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginBottom="@dimen/y96"
+
                         android:listSelector="@android:color/transparent" />
                 </in.srain.cube.views.ptr.PtrClassicFrameLayout>
             </FrameLayout>
@@ -99,10 +99,10 @@
 
 
         <LinearLayout
-            android:layout_marginTop="@dimen/x20"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_alignParentBottom="true"
+            android:layout_marginTop="@dimen/x20"
             android:orientation="vertical">
 
             <View

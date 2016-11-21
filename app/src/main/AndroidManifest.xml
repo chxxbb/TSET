@@ -84,7 +84,6 @@
         <activity android:name=".View.activity.EvaluatepageActivity" />
         <activity android:name=".View.activity.NamepageActivity" />
         <activity android:name=".View.activity.HealthconditionActivity" />
-        <activity android:name=".View.activity.IconmanageActivity" />
         <activity android:name=".View.activity.DiseaseActivity" />
         <activity android:name=".View.activity.SexpageActivity" />
         <activity android:name=".View.activity.PhonechangeActivity" />

@@ -95,7 +95,7 @@ public class HomeBannerView extends LinearLayout {
 
         LayoutInflater inflater = (LayoutInflater) context
                 .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-        inflater.inflate(R.layout.banner_view, this);
+        inflater.inflate(R.layout.home_banner_view, this);
 
 
         handler = new Handler() {

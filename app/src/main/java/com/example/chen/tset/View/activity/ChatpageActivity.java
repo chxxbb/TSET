@@ -329,9 +329,11 @@ public class ChatpageActivity extends AppCompatActivity implements PtrUIHandler 
                             }
                             handler.sendEmptyMessage(4);
                         } else {
+
                             //如果所取的数据条数大于已有数据条数则全部显示
                             for (int i = 0; i < numberlist.size(); i++) {
                                 list.add(numberlist.get(i));
+
                             }
 
                             handler.sendEmptyMessage(5);
@@ -363,7 +365,14 @@ public class ChatpageActivity extends AppCompatActivity implements PtrUIHandler 
             if (et_chat.getText().length() == 0 || et_chat.getText().toString().trim().equals("")) {
 
             } else {
-                sendmessage();
+
+                try {
+                    sendmessage();
+                } catch (Exception e) {
+                    e.printStackTrace();
+                    Toast.makeText(ChatpageActivity.this, "发送失败，请重新发送", Toast.LENGTH_SHORT).show();
+                }
+
             }
 
         }
@@ -574,6 +583,7 @@ public class ChatpageActivity extends AppCompatActivity implements PtrUIHandler 
         //将从图库中选中的图片进行截取
         Crop.of(source, destination).asSquare().start(this);
     }
+
 
 
     //保存发送图片

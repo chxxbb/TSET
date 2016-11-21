@@ -353,7 +353,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="@dimen/x12"
                     android:layout_marginRight="@dimen/x34"
-                    android:layout_marginTop="@dimen/x20"
+                    android:layout_marginTop="@dimen/y20"
                     android:background="@null"
                     android:gravity="top"
                     android:lineSpacingExtra="@dimen/y40"

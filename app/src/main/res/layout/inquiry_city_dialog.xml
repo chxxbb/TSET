@@ -3,23 +3,24 @@
     android:id="@+id/rl_city"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
->
+    android:orientation="vertical">
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:background="@color/white">
+        android:background="@color/white"
+        android:orientation="vertical">
+
         <LinearLayout
             android:id="@+id/ll_all_areas"
             android:layout_width="match_parent"
             android:layout_height="@dimen/y78">
 
             <TextView
-                android:layout_marginLeft="@dimen/x30"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_vertical"
+                android:layout_marginLeft="@dimen/x30"
                 android:text="全部地区"
                 android:textColor="@color/fontcolor"
                 android:textSize="@dimen/y28" />
@@ -28,25 +29,27 @@
         <View
             android:layout_width="match_parent"
             android:layout_height="@dimen/y1"
-            android:background="@color/xmgray"/>
+            android:background="@color/xmgray" />
+
         <LinearLayout
             android:id="@+id/ll_city_shenzheng"
             android:layout_width="match_parent"
             android:layout_height="@dimen/y78">
 
             <TextView
-                android:layout_marginLeft="@dimen/x30"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_vertical"
-                android:text="深圳天使儿童医院"
+                android:layout_marginLeft="@dimen/x30"
+                android:text="深圳"
                 android:textColor="@color/fontcolor"
                 android:textSize="@dimen/y28" />
         </LinearLayout>
+
         <View
             android:layout_width="match_parent"
             android:layout_height="@dimen/y1"
-            android:background="@color/xmgray"/>
+            android:background="@color/xmgray" />
 
         <LinearLayout
             android:id="@+id/ll_city_chengdu"
@@ -54,17 +57,75 @@
             android:layout_height="@dimen/y78">
 
             <TextView
-                android:layout_marginLeft="@dimen/x30"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_vertical"
-                android:text="成都天使儿童医院"
+                android:layout_marginLeft="@dimen/x30"
+                android:text="成都"
+                android:textColor="@color/fontcolor"
+                android:textSize="@dimen/y28" />
+        </LinearLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/y1"
+            android:background="@color/xmgray" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/y78">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:layout_marginLeft="@dimen/x30"
+                android:text="北"
+                android:textColor="@color/fontcolor"
+                android:textSize="@dimen/y28" />
+        </LinearLayout>
+
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/y1"
+            android:background="@color/xmgray" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/y78">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:layout_marginLeft="@dimen/x30"
+                android:text="上"
+                android:textColor="@color/fontcolor"
+                android:textSize="@dimen/y28" />
+        </LinearLayout>
+
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/y1"
+            android:background="@color/xmgray" />
+
+        <LinearLayout
+
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/y78">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:layout_marginLeft="@dimen/x30"
+                android:text="广"
                 android:textColor="@color/fontcolor"
                 android:textSize="@dimen/y28" />
         </LinearLayout>
     </LinearLayout>
-
-
 
 
 </LinearLayout>

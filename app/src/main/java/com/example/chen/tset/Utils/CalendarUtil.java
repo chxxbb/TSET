@@ -540,17 +540,24 @@ public class CalendarUtil {
         if (cd.length() == 1)
             cd = ' ' + cd;
 
-        if (gregorianDate == sectionalTerm) {
-            str = sectionalTermNames[gregorianMonth - 2];
-        } else if (gregorianDate == principleTerm) {
-            str = principleTermNames[gregorianMonth - 2];
-        } else if (chineseDate == 1 && chineseMonth > 0) {
-            str = chineseMonthNames[chineseMonth - 1] + "月";
-        } else if (chineseDate == 1 && chineseMonth < 0) {
-            str = chineseMonthNames[-chineseMonth - 1] + "月";
-        } else {
-            str = "";
+        try {
+            if (gregorianDate == sectionalTerm) {
+                str = sectionalTermNames[gregorianMonth - 2];
+            } else if (gregorianDate == principleTerm) {
+                str = principleTermNames[gregorianMonth - 2];
+            } else if (chineseDate == 1 && chineseMonth > 0) {
+                str = chineseMonthNames[chineseMonth - 1] + "月";
+            } else if (chineseDate == 1 && chineseMonth < 0) {
+                str = chineseMonthNames[-chineseMonth - 1] + "月";
+            } else {
+                str = "";
+            }
+
+        }catch (Exception e){
+            e.printStackTrace();
+            str="";
         }
+
         return str;
     }
 

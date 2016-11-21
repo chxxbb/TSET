@@ -51,7 +51,7 @@ public class LogActivity extends AppCompatActivity {
         //初始化
         Animation alphaAnimation = new AlphaAnimation(0.5f, 1.0f);
         //设置动画时间
-        alphaAnimation.setDuration(1);
+        alphaAnimation.setDuration(300);
 
         rl_log.startAnimation(alphaAnimation);
 
@@ -86,7 +86,14 @@ public class LogActivity extends AppCompatActivity {
         sp = new SharedPsaveuser(LogActivity.this);
         if ((sp.getTag().getPhone() != null && sp.getTag().getPassword() != null)) {
 
+            Intent intent = new Intent(LogActivity.this, HomeActivity.class);
+
+            startActivity(intent);
+
+            finish();
+
             registerjudge();
+
 
         } else {
 
@@ -116,37 +123,43 @@ public class LogActivity extends AppCompatActivity {
                     @Override
                     public void onResponse(String response, int id) {
 
+
                         if (response.equals("1")) {
 
-                            Toast.makeText(LogActivity.this, "密码被修改请重新登录", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(HomeActivity.text_homeactivity, "密码被修改请重新登录", Toast.LENGTH_SHORT).show();
 
 
-                            Intent i = new Intent(LogActivity.this, OnekeyLoinActivity.class);
+                            Intent i = new Intent(HomeActivity.text_homeactivity, OnekeyLoinActivity.class);
+
                             startActivity(i);
 
-                            finish();
+
+                            HomeActivity.text_homeactivity.finish();
 
 
                             sp.clearinit();
 
 
                         } else if (response.equals("2")) {
-                            Toast.makeText(LogActivity.this, "登录异常 请重新登录", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(HomeActivity.text_homeactivity, "登录异常，请重新登录", Toast.LENGTH_SHORT).show();
+
                             sp.clearinit();
-                            Intent i = new Intent(LogActivity.this, OnekeyLoinActivity.class);
+
+                            Intent i = new Intent(HomeActivity.text_homeactivity, OnekeyLoinActivity.class);
+
                             startActivity(i);
-                            finish();
+
+                            HomeActivity.text_homeactivity.finish();
                         } else {
                             Gson gson = new Gson();
+
                             User user = gson.fromJson(response, User.class);
-                            Log.e("user", user.toString());
+
+
                             User_Http.user.setUser(user);
 
-                            Intent intent = new Intent(LogActivity.this, HomeActivity.class);
+                            Log.e("user", User_Http.user.toString());
 
-                            startActivity(intent);
-
-                            finish();
 
                         }
 

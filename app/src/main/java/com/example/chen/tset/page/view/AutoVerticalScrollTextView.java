@@ -17,6 +17,8 @@ import android.widget.TextSwitcher;
 import android.widget.TextView;
 import android.widget.ViewSwitcher;
 
+import com.example.chen.tset.R;
+
 /**
  * 自动垂直滚动的TextView
  */
@@ -66,28 +68,31 @@ public class AutoVerticalScrollTextView extends TextSwitcher implements ViewSwit
     //这里返回的TextView，就是我们看到的View,可以设置自己想要的效果
     public View makeView() {
 
-        DisplayMetrics dm = new DisplayMetrics();
-        dm = this.getResources().getDisplayMetrics();
-        final float density = dm.density;
 
-        TextView textView = new TextView(mContext);
-        textView.setGravity(Gravity.LEFT);
+//        DisplayMetrics dm = new DisplayMetrics();
+//        dm = this.getResources().getDisplayMetrics();
+//        final float density = dm.density;
+//
+//        TextView textView = new TextView(mContext);
+//        textView.setGravity(Gravity.LEFT);
+//
+//
+//        if (density == 4.0) {
+//            textView.setTextSize((float) (3.25 * density));
+//        } else {
+//            textView.setTextSize((float) (6.5 * density));
+//        }
+//
+//
+//        textView.setSingleLine(true);
+//        textView.setGravity(Gravity.CENTER_VERTICAL);
+//        textView.setEllipsize(TextUtils.TruncateAt.END);
+//        textView.setTextColor(Color.BLACK);
+//        textView.setPadding(0, 0, 20, 0);
 
+        View v = View.inflate(mContext, R.layout.auto_text_view, null);
 
-        Log.e("111",density+"");
-        if (density == 4.0) {
-            textView.setTextSize((float) (3.25 * density));
-        } else {
-            textView.setTextSize((float) (6.5 * density));
-        }
-
-
-        textView.setSingleLine(true);
-        textView.setGravity(Gravity.CENTER_VERTICAL);
-        textView.setEllipsize(TextUtils.TruncateAt.END);
-        textView.setTextColor(Color.BLACK);
-        textView.setPadding(0, 0, 20, 0);
-        return textView;
+        return v;
 
     }
 

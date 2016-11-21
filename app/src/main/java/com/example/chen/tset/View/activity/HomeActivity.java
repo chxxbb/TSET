@@ -45,7 +45,6 @@ import com.example.chen.tset.Utils.ListenerManager;
 import com.example.chen.tset.Utils.MyBaseActivity;
 import com.example.chen.tset.Utils.SharedPsaveuser;
 import com.example.chen.tset.Utils.Version_numberSP;
-import com.example.chen.tset.page.fragment.AFragment;
 import com.example.chen.tset.page.fragment.ConsultingFragment;
 import com.example.chen.tset.page.fragment.EncyclopediaFragment;
 import com.example.chen.tset.R;
@@ -86,7 +85,6 @@ public class HomeActivity extends MyBaseActivity implements View.OnClickListener
     private MypageFragment mypageFragment;
     //    private InquiryFragment inquiryFragment;
     private ConsultingFragment consultingFragment;
-    private AFragment a;
     private ImageView iv_inquiry;
     ChatpageDao db;
     Set<User> set;
@@ -465,10 +463,6 @@ public class HomeActivity extends MyBaseActivity implements View.OnClickListener
 
         spStorage();
 
-
-        Log.e("共享参数数据", sp.getTag().toString());
-
-
     }
 
     @Override
@@ -476,6 +470,7 @@ public class HomeActivity extends MyBaseActivity implements View.OnClickListener
         JMessageClient.unRegisterEventReceiver(this);
         super.onDestroy();
     }
+
 
     //将用户基本信息保存在本地
     private void spStorage() {
@@ -493,6 +488,7 @@ public class HomeActivity extends MyBaseActivity implements View.OnClickListener
 
     //登录jmeeage
     private void jmessage() {
+
 
         String username = null;
         if (User_Http.user.getPhone() == null) {
@@ -558,6 +554,8 @@ public class HomeActivity extends MyBaseActivity implements View.OnClickListener
                 //处理图片消息
                 ImageContent imageContent = (ImageContent) msg.getContent();
                 String mfile = imageContent.getLocalPath();//图片本地地址 无效
+
+
                 String file = imageContent.getLocalThumbnailPath();//图片对应缩略图的本地地址
 
                 Date dt1 = new Date();
@@ -875,10 +873,7 @@ public class HomeActivity extends MyBaseActivity implements View.OnClickListener
                     ft.show(encyclopediaFragment);
                 }
                 ft.commitAllowingStateLoss();
-            }
-
-
-            else {
+            } else {
 
             }
 

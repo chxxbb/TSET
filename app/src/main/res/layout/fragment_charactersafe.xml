@@ -13,7 +13,7 @@
             android:id="@+id/ptrClassicFrameLayout"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_marginBottom="@dimen/y60"
+
             android:listSelector="@android:color/transparent">
 
             <ListView

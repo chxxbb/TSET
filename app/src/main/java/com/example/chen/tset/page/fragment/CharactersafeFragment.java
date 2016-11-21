@@ -89,15 +89,25 @@ public class CharactersafeFragment extends Fragment {
         ptrClassicFrameLayout = (PtrClassicFrameLayout) view.findViewById(R.id.ptrClassicFrameLayout);
 
         //2次下拉时间间隔
-        ptrClassicFrameLayout.setDurationToCloseHeader(10000);
+        ptrClassicFrameLayout.setDurationToCloseHeader(1000);
 
 
         //下拉刷新
         ptrClassicFrameLayout.setPtrHandler(new PtrDefaultHandler() {
             @Override
             public void onRefreshBegin(PtrFrameLayout frame) {
-                list.clear();
-                init();
+
+                //加载更多聊天记录
+                ptrClassicFrameLayout.postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+
+                        list.clear();
+                        init();
+
+                    }
+                    //设定加载更多聊天记录需要的时间
+                }, 2000);
 
             }
         });
