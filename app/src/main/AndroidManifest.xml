@@ -45,6 +45,11 @@
         <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     </span>
 
+    <uses-permission android:name="android.permission.SEND_SMS" />
+    <uses-permission android:name="android.permission.READ_SMS" />
+    <uses-permission android:name="android.permission.WRITE_SMS" />
+    <uses-permission android:name="android.permission.RECEIVE_SMS" />
+
     <application
         android:name=".Utils.ContextUtil"
         android:allowBackup="true"

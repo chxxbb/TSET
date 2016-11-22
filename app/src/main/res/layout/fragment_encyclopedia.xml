@@ -3,8 +3,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/white"
-    android:orientation="vertical"
-  >
+    android:orientation="vertical">
 
     <RelativeLayout
         android:layout_width="match_parent"
@@ -18,72 +17,50 @@
             android:textColor="@color/fontcolor"
             android:textSize="@dimen/x36" />
     </RelativeLayout>
+
     <LinearLayout
+
         android:layout_width="match_parent"
         android:layout_height="@dimen/y52"
         android:orientation="horizontal">
+
         <RelativeLayout
             android:id="@+id/rl_tab1"
-            android:layout_weight="1"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content">
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_weight="1">
+
             <TextView
                 android:id="@+id/tv_tab1"
-                android:layout_centerInParent="true"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="疾病库"
-                android:textSize="@dimen/y28"
+                android:layout_alignParentRight="true"
+
+                android:paddingRight="@dimen/x80"
+                android:text="百科"
                 android:textColor="@color/xmgray"
-                />
+                android:textSize="@dimen/y28" />
         </RelativeLayout>
 
         <RelativeLayout
             android:id="@+id/rl_tab2"
-            android:layout_weight="1"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content">
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_weight="1">
+
             <TextView
                 android:id="@+id/tv_tab2"
-                android:layout_centerInParent="true"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="安全教育"
-                android:textSize="@dimen/y28"
+                android:paddingLeft="@dimen/x80"
+                android:text="疾病库"
                 android:textColor="@color/xmgray"
-                />
-        </RelativeLayout>
-        <RelativeLayout
-            android:id="@+id/rl_tab3"
-            android:layout_weight="1"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content">
-            <TextView
-                android:id="@+id/tv_tab3"
-                android:layout_centerInParent="true"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="营养保健"
-                android:textSize="@dimen/y28"
-                android:textColor="@color/xmgray"
-                />
-        </RelativeLayout>
-        <RelativeLayout
-            android:id="@+id/rl_tab4"
-            android:layout_weight="1"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content">
-            <TextView
-                android:id="@+id/tv_tab4"
-                android:layout_centerInParent="true"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="育儿知识"
-                android:textSize="@dimen/y28"
-                android:textColor="@color/xmgray"
-                />
+                android:textSize="@dimen/y28" />
         </RelativeLayout>
     </LinearLayout>
+
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -91,17 +68,20 @@
         android:orientation="horizontal">
 
         <RelativeLayout
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1">
+
             <LinearLayout
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content">
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true">
+
                 <View
-                    android:layout_marginLeft="@dimen/x63"
                     android:id="@+id/view1"
-                    android:layout_width="@dimen/x24"
+                    android:layout_width="@dimen/x120"
                     android:layout_height="@dimen/y5"
+                    android:layout_marginRight="@dimen/x47"
                     android:background="@color/backgroundblue" />
             </LinearLayout>
 
@@ -109,49 +89,27 @@
         </RelativeLayout>
 
         <RelativeLayout
-
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
+
             android:layout_weight="1">
+
             <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content">
+
                 <View
-                    android:layout_marginLeft="@dimen/x96"
                     android:id="@+id/view2"
-                    android:layout_width="@dimen/x24"
+                    android:layout_width="@dimen/x120"
                     android:layout_height="@dimen/y5"
+                    android:layout_marginLeft="@dimen/x63"
                     android:background="@color/backgroundblue" />
             </LinearLayout>
 
 
         </RelativeLayout>
 
-        <RelativeLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="1">
 
-            <View
-                android:id="@+id/view3"
-                android:layout_width="@dimen/x24"
-                android:layout_height="@dimen/y5"
-                android:layout_centerInParent="true"
-                android:background="@color/backgroundblue" />
-        </RelativeLayout>
-
-        <RelativeLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="1">
-
-            <View
-                android:id="@+id/view4"
-                android:layout_width="@dimen/x24"
-                android:layout_height="@dimen/y5"
-                android:layout_centerInParent="true"
-                android:background="@color/backgroundblue" />
-        </RelativeLayout>
     </LinearLayout>
 
     <View

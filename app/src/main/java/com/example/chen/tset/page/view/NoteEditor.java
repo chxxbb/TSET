@@ -37,6 +37,7 @@ public class NoteEditor extends EditText {
         setMinLines(lines);
     }
 
+
     @Override
     protected void onDraw(Canvas canvas) {
         int count = getLineCount();

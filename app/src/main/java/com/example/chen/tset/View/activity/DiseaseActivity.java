@@ -199,10 +199,9 @@ public class DiseaseActivity extends MyBaseActivity {
                             @Override
                             public void onResponse(String response, int id) {
 
-                                Log.e("疾病详情", response);
-
                                 if (response.equals("[]") || response.equals("") || response == null) {
                                     handler.sendEmptyMessage(1);
+
                                 } else {
                                     Type type = new TypeToken<List<Object>>() {
                                     }.getType();

@@ -2,8 +2,11 @@ package com.example.chen.tset.View.activity;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.net.Uri;
 import android.os.CountDownTimer;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
@@ -16,6 +19,7 @@ import com.example.chen.tset.Data.Http_data;
 import com.example.chen.tset.Data.entity.User;
 import com.example.chen.tset.R;
 import com.example.chen.tset.Utils.MyBaseActivity;
+import com.example.chen.tset.Utils.SmsObserver;
 import com.google.gson.Gson;
 import com.zhy.http.okhttp.OkHttpUtils;
 import com.zhy.http.okhttp.callback.StringCallback;
@@ -41,6 +45,11 @@ public class RegisterActivity extends MyBaseActivity {
 
     private TimeCount time;
 
+    SmsObserver mObserver;
+
+    public static int RMSG = 1;
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -51,7 +60,34 @@ public class RegisterActivity extends MyBaseActivity {
         time = new TimeCount(60000, 1000);
         initOnclick();
 
+
+        try {
+            mObserver = new SmsObserver(RegisterActivity.this, handler);
+            Uri uri = Uri.parse("content://sms");
+            //注册短信的监听
+            getContentResolver().registerContentObserver(uri, true, mObserver);
+        }catch (Exception e){
+            e.printStackTrace();
+            Toast.makeText(RegisterActivity.this, "自动获取验证码失败，请手动开启读取短信权限", Toast.LENGTH_SHORT).show();
+        }
+
+
+
     }
+
+    Handler handler = new Handler() {
+        @Override
+        public void handleMessage(Message msg) {
+            super.handleMessage(msg);
+
+            if (msg.what == RMSG) {
+                String c = (String) msg.obj;
+
+                activity_register_Verification_code.setText(c);
+
+            }
+        }
+    };
 
     private void initOnclick() {
         activity_register_Verification_code_button.setOnClickListener(new View.OnClickListener() {      //点击发送验证码后触发

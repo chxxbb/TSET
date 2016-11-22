@@ -13,30 +13,16 @@ public class Information {
     private String time;
     private String cyclopediaId;
     private int id;
+    private int collectCount;
 
-    public Information(String content, String icon, String title, String time, String cyclopediaId, int id) {
+    public Information(String content, String icon, String title, String time, String cyclopediaId, int id, int collectCount) {
         this.content = content;
         this.icon = icon;
         this.title = title;
         this.time = time;
         this.cyclopediaId = cyclopediaId;
         this.id = id;
-    }
-
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
-    }
-
-    public String getCyclopediaId() {
-        return cyclopediaId;
-    }
-
-    public void setCyclopediaId(String cyclopediaId) {
-        this.cyclopediaId = cyclopediaId;
+        this.collectCount = collectCount;
     }
 
     public String getContent() {
@@ -69,5 +55,29 @@ public class Information {
 
     public void setTime(String time) {
         this.time = time;
+    }
+
+    public String getCyclopediaId() {
+        return cyclopediaId;
+    }
+
+    public void setCyclopediaId(String cyclopediaId) {
+        this.cyclopediaId = cyclopediaId;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public int getCollectCount() {
+        return collectCount;
+    }
+
+    public void setCollectCount(int collectCount) {
+        this.collectCount = collectCount;
     }
 }

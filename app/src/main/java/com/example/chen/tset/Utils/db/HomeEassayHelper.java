@@ -14,7 +14,7 @@ public class HomeEassayHelper extends SQLiteOpenHelper{
 
     @Override
     public void onCreate(SQLiteDatabase db) {
-        db.execSQL("create table essay(id text,icon text,title text,content text,time text)");
+        db.execSQL("create table essay(id text,icon text,title text,content text,time text,collectCount text)");
     }
 
     @Override

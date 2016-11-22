@@ -11,14 +11,16 @@ public class Consult {
     private String content;
     private String time;
     private int categoryId;
+    private int  collectCount;
 
-    public Consult(int id, String icon, String title, String content, String time, int categoryId) {
+    public Consult(int id, String icon, String title, String content, String time, int categoryId, int collectCount) {
         this.id = id;
         this.icon = icon;
         this.title = title;
         this.content = content;
         this.time = time;
         this.categoryId = categoryId;
+        this.collectCount = collectCount;
     }
 
     public int getId() {
@@ -69,6 +71,14 @@ public class Consult {
         this.categoryId = categoryId;
     }
 
+    public int getCollectCount() {
+        return collectCount;
+    }
+
+    public void setCollectCount(int collectCount) {
+        this.collectCount = collectCount;
+    }
+
     @Override
     public String toString() {
         return "Consult{" +
@@ -78,6 +88,7 @@ public class Consult {
                 ", content='" + content + '\'' +
                 ", time='" + time + '\'' +
                 ", categoryId=" + categoryId +
+                ", collectCount=" + collectCount +
                 '}';
     }
 }

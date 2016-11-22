@@ -75,11 +75,11 @@
                         android:src="@drawable/encyclopedialike" />
 
                     <TextView
+                        android:id="@+id/tv_characersafe_collectCount"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="@dimen/x14"
                         android:layout_marginRight="@dimen/x42"
-                        android:text="21"
                         android:textColor="@color/linegray1"
                         android:textSize="@dimen/x22" />
                 </LinearLayout>

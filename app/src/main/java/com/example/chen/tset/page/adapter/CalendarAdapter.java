@@ -183,7 +183,6 @@ public class CalendarAdapter extends BaseAdapter {
 
         if (position < daysOfMonth + dayOfWeek && position >= dayOfWeek) {
 //            // 当前月信息显示
-//            textView.setTextColor(android.graphics.Color.parseColor("#ffffff"));// 当月字体
 
         } else {
             ll_calendar.setVisibility(View.GONE);
@@ -192,7 +191,6 @@ public class CalendarAdapter extends BaseAdapter {
 
         if (currentFlag == position) {
             // 设置当天的背景
-            textView.setTextColor(android.graphics.Color.parseColor("#6fc9e6"));
 
             textView.setText("今");
 

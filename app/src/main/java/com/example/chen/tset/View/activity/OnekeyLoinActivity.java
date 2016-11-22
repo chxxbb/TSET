@@ -1,7 +1,10 @@
 package com.example.chen.tset.View.activity;
 
 import android.content.Intent;
+import android.net.Uri;
 import android.os.CountDownTimer;
+import android.os.Handler;
+import android.os.Message;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.TextUtils;
@@ -17,6 +20,7 @@ import com.example.chen.tset.Data.User_Http;
 import com.example.chen.tset.Data.entity.User;
 import com.example.chen.tset.R;
 import com.example.chen.tset.Utils.SharedPsaveuser;
+import com.example.chen.tset.Utils.SmsObserver;
 import com.google.gson.Gson;
 import com.zhy.http.okhttp.OkHttpUtils;
 import com.zhy.http.okhttp.callback.StringCallback;
@@ -40,6 +44,10 @@ public class OnekeyLoinActivity extends AppCompatActivity {
     private TimeCount time;
 
     Gson gson = new Gson();
+
+    SmsObserver mObserver;
+
+    public static int MSG = 1;
 
 
     @Override
@@ -68,7 +76,35 @@ public class OnekeyLoinActivity extends AppCompatActivity {
         activity_onekeyr_Verification_code_button.setOnClickListener(listener);
 
         login_button.setOnClickListener(listener);
+
+
+        try {
+            mObserver = new SmsObserver(OnekeyLoinActivity.this, handler);
+            Uri uri = Uri.parse("content://sms");
+            //注册短信的监听
+            getContentResolver().registerContentObserver(uri, true, mObserver);
+        }catch (Exception e){
+            e.printStackTrace();
+            Toast.makeText(OnekeyLoinActivity.this, "自动获取验证码失败，请手动开启读取短信权限", Toast.LENGTH_SHORT).show();
+        }
+
+
+
     }
+
+    Handler handler = new Handler() {
+        @Override
+        public void handleMessage(Message msg) {
+            super.handleMessage(msg);
+
+            if (msg.what == MSG) {
+                String c = (String) msg.obj;
+
+                activity_onekey_Verification_code.setText(c);
+
+            }
+        }
+    };
 
 
     private View.OnClickListener listener = new View.OnClickListener() {

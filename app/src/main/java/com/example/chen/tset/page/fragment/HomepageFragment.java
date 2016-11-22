@@ -56,6 +56,7 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Scanner;
 
 import in.srain.cube.views.ptr.util.PtrLocalDisplay;
 import okhttp3.Call;
@@ -64,7 +65,7 @@ import okhttp3.Call;
  * Created by Administrator on 2016/9/14 0014.
  * 首页
  */
-public class HomepageFragment extends Fragment implements IListener {
+public class HomepageFragment extends Fragment {
     View view;
     private AutoVerticalScrollTextView verticalScrollTV;
     private int number = 0;
@@ -123,8 +124,7 @@ public class HomepageFragment extends Fragment implements IListener {
 
         view = inflater.inflate(R.layout.fragment_homepage, null);
 
-        //注册广播
-        ListenerManager.getInstance().registerListtener(this);
+
 
 
         findView();
@@ -233,7 +233,6 @@ public class HomepageFragment extends Fragment implements IListener {
         });
 
 
-
     }
 
     //使首页一直保持在头部，当fragment处于暂停或显示状态时都会调用此方法
@@ -259,13 +258,15 @@ public class HomepageFragment extends Fragment implements IListener {
                                 handler.sendEmptyMessage(7);
                             }
 
+
                             @Override
                             public void onResponse(String response, int id) {
+
+
 
                                 Type listtype = new TypeToken<LinkedList<FindAllHot>>() {
                                 }.getType();
                                 LinkedList<FindAllHot> leclist = gson.fromJson(response, listtype);
-
 
                                 //清空热点推荐数据库
                                 findAllHotdb.delHomeFindAllHot();
@@ -285,7 +286,6 @@ public class HomepageFragment extends Fragment implements IListener {
                                 }
 
                                 handler.sendEmptyMessage(3);
-
 
                             }
                         });
@@ -315,6 +315,7 @@ public class HomepageFragment extends Fragment implements IListener {
 
                             @Override
                             public void onResponse(String response, int id) {
+
 
                                 Type listtype = new TypeToken<LinkedList<Consult>>() {
                                 }.getType();
@@ -426,8 +427,8 @@ public class HomepageFragment extends Fragment implements IListener {
                     ImageLoader.getInstance().displayImage(consultList.get(1).getIcon(), tv_home_essay_icon1);
 
                     //设置点赞数
-                    tv_home_essay_collectnumber.setText("21");
-                    tv_home_essay_collectnumber1.setText("32");
+                    tv_home_essay_collectnumber.setText(consultList.get(0).getCollectCount()+"");
+                    tv_home_essay_collectnumber1.setText(consultList.get(1).getCollectCount()+"");
 
                     //隐藏加载中
                     rl_loading.setVisibility(View.GONE);
@@ -555,8 +556,7 @@ public class HomepageFragment extends Fragment implements IListener {
                     break;
                 //资讯页面
                 case R.id.ll_home_article_more:
-                    //发送广播通知显示资讯页面，并且viewPage滑动到第二页
-                    Http_data.state = 2;
+                    //发送广播通知显示资讯页面
                     ListenerManager.getInstance().sendBroadCast("显示资讯页面");
 
                     break;
@@ -598,14 +598,10 @@ public class HomepageFragment extends Fragment implements IListener {
     @Override
     public void onDetach() {
         super.onDetach();
-        ListenerManager.getInstance().unRegisterListener(this);
 
     }
 
-    @Override
-    public void notifyAllActivity(String str) {
 
-    }
 
 
 }

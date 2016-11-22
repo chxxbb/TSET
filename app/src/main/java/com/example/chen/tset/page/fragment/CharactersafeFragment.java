@@ -6,12 +6,14 @@ import android.os.Handler;
 import android.os.Message;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.RelativeLayout;
+import android.widget.TextView;
 
 import com.example.chen.tset.Data.entity.Consult;
 import com.example.chen.tset.Data.Http_data;
@@ -47,22 +49,11 @@ public class CharactersafeFragment extends Fragment {
     private RelativeLayout rl_nonetwork, rl_loading;
     List<Consult> list;
     Gson gson;
-    int i;
 
     SharedPsaveuser sp;
 
-    View footView;
-
     PtrClassicFrameLayout ptrClassicFrameLayout;
 
-
-    public int getI() {
-        return i;
-    }
-
-    public void setI(int i) {
-        this.i = i;
-    }
 
     @Nullable
     @Override
@@ -87,6 +78,9 @@ public class CharactersafeFragment extends Fragment {
         rl_nonetwork = (RelativeLayout) view.findViewById(R.id.rl_nonetwork);
         rl_loading = (RelativeLayout) view.findViewById(R.id.rl_loading);
         ptrClassicFrameLayout = (PtrClassicFrameLayout) view.findViewById(R.id.ptrClassicFrameLayout);
+
+        lv_charactersafe.setVerticalScrollBarEnabled(false);
+
 
         //2次下拉时间间隔
         ptrClassicFrameLayout.setDurationToCloseHeader(1000);
@@ -141,8 +135,7 @@ public class CharactersafeFragment extends Fragment {
 
                 OkHttpUtils
                         .post()
-                        .url(Http_data.http_data + "/FindCyclopediaListByCategoryId")
-                        .addParams("categoryId", i + "")
+                        .url(Http_data.http_data + "/FindCyclopediaList")
                         .build()
                         .execute(new StringCallback() {
                             @Override
@@ -152,6 +145,7 @@ public class CharactersafeFragment extends Fragment {
 
                             @Override
                             public void onResponse(String response, int id) {
+
 
                                 if (!response.equals("1")) {
                                     Type listtype = new TypeToken<LinkedList<Consult>>() {

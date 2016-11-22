@@ -31,6 +31,7 @@ public class HomeEassayDao {
         values.put("title", consult.getTitle());
         values.put("content", consult.getContent());
         values.put("time", consult.getTime());
+        values.put("collectCount", consult.getCollectCount());
         db.insert("essay", null, values);
     }
 
@@ -43,7 +44,8 @@ public class HomeEassayDao {
             String title = cursor.getString(cursor.getColumnIndex("title"));
             String content = cursor.getString(cursor.getColumnIndex("content"));
             String time = cursor.getString(cursor.getColumnIndex("time"));
-            Consult consult = new Consult(id, icon, title, content, time, 0);
+            int collectCount = cursor.getInt(cursor.getColumnIndex("collectCount"));
+            Consult consult = new Consult(id, icon, title, content, time, 0, collectCount);
             consultArrayList.add(consult);
 
         }

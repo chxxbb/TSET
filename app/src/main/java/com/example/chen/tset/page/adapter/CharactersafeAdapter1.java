@@ -53,6 +53,8 @@ public class CharactersafeAdapter1 extends BaseAdapter {
         viewHolder.tv_content.setText(list.get(position).getContent());
         viewHolder.tv_time.setText(list.get(position).getTime());
         ImageLoader.getInstance().displayImage(list.get(position).getIcon(), viewHolder.iv_img);
+        viewHolder.tv_characersafe_collectCount.setText(list.get(position).getCollectCount()+"");
+
         return convertView;
     }
 
@@ -61,12 +63,14 @@ public class CharactersafeAdapter1 extends BaseAdapter {
         private ImageView iv_img;
         private TextView tv_content;
         private TextView tv_time;
+        private TextView tv_characersafe_collectCount;
 
         ViewHolder(View v) {
             tv_title = (TextView) v.findViewById(R.id.tv_title);
             iv_img = (ImageView) v.findViewById(R.id.iv_img);
             tv_content = (TextView) v.findViewById(R.id.tv_content);
             tv_time = (TextView) v.findViewById(R.id.tv_time);
+            tv_characersafe_collectCount = (TextView) v.findViewById(R.id.tv_characersafe_collectCount);
         }
     }
 }
