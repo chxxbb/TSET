@@ -41,7 +41,15 @@ public class NamepageActivity extends MyBaseActivity {
         et_name_save = (EditText) findViewById(R.id.et_name_save);
         tv_pas = (TextView) findViewById(R.id.tv_pas);
         ll_rutname = (LinearLayout) findViewById(R.id.ll_rutname);
-        et_name_save.setHint(User_Http.user.getName());
+
+
+        if (User_Http.user.getName() == null || User_Http.user.getName().equals("")) {
+            et_name_save.setHint(sp.getTag().getName());
+        } else {
+            et_name_save.setHint(User_Http.user.getName());
+        }
+
+
         et_name_save.addTextChangedListener(textListener);
         ll_rutname.setOnClickListener(listener);
     }

@@ -2,11 +2,14 @@ package com.example.chen.tset.View.activity;
 
 import android.app.Dialog;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Environment;
 import android.os.Handler;
 import android.provider.MediaStore;
+import android.support.v4.app.ActivityCompat;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -29,6 +32,7 @@ import com.example.chen.tset.Data.entity.Inquiryrecord;
 import com.example.chen.tset.Data.User_Http;
 
 import com.example.chen.tset.Data.entity.Userinfo;
+import com.example.chen.tset.Manifest;
 import com.example.chen.tset.R;
 import com.example.chen.tset.Utils.db.ChatpageDao;
 import com.example.chen.tset.Utils.db.InquiryrecordDao;
@@ -128,6 +132,7 @@ public class ChatpageActivity extends AppCompatActivity implements PtrUIHandler 
 
 
     }
+
 
     //添加我的医生
     private void addMyDoctor() {
@@ -574,16 +579,17 @@ public class ChatpageActivity extends AppCompatActivity implements PtrUIHandler 
     private void beginCrop(Uri source) {
         try {
             sdcardTempFile = File.createTempFile("textscreenshot", ".jpg", audioFile);
-        } catch (IOException e) {
-
+            Uri destination = Uri.fromFile(sdcardTempFile);
+            //将从图库中选中的图片进行截取
+            Crop.of(source, destination).asSquare().start(this);
+        } catch (Exception e) {
             e.printStackTrace();
+            Toast.makeText(ChatpageActivity.this, "选择图片失败，请稍后再试", Toast.LENGTH_SHORT).show();
+
         }
 
-        Uri destination = Uri.fromFile(sdcardTempFile);
-        //将从图库中选中的图片进行截取
-        Crop.of(source, destination).asSquare().start(this);
-    }
 
+    }
 
 
     //保存发送图片
@@ -820,6 +826,16 @@ public class ChatpageActivity extends AppCompatActivity implements PtrUIHandler 
     protected void onResume() {
         super.onResume();
         JPushInterface.onResume(this);
+
+
+        //动态获取相机权限
+        if (ContextCompat.checkSelfPermission(this, android.Manifest.permission.CAMERA) != PackageManager.PERMISSION_GRANTED) {
+
+            //申请WRITE_EXTERNAL_STORAGE权限
+            ActivityCompat.requestPermissions(this, new String[]{android.Manifest.permission.CAMERA}, 1);
+        }
+
+
     }
 
 

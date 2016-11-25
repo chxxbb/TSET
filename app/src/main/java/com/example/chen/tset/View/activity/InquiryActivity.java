@@ -1,9 +1,8 @@
 package com.example.chen.tset.View.activity;
 
 import android.content.Intent;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.util.Log;
+import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.LinearLayout;
@@ -97,8 +96,15 @@ public class InquiryActivity extends AppCompatActivity implements IListener {
         //listview头部布局,
         View view1 = View.inflate(this, R.layout.inquiry_listview_stern, null);
 
-        //设置二级菜单内容体（listview，listview没有放在布局中，放在了二级菜单内容体重）
-        dropDownMenu.setDropDownMenu(Arrays.asList(headers), initViewData(), contentView);
+
+        try {
+
+            //设置二级菜单内容体（listview，listview没有放在布局中，放在了二级菜单内容体重）
+            dropDownMenu.setDropDownMenu(Arrays.asList(headers), initViewData(), contentView);
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
 
 
         //点击进入医生详情页面

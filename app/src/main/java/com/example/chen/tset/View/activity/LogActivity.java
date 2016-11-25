@@ -150,7 +150,7 @@ public class LogActivity extends AppCompatActivity {
                             startActivity(i);
 
                             HomeActivity.text_homeactivity.finish();
-                        } else {
+                        } else if (response.length() != 1) {
                             Gson gson = new Gson();
 
                             User user = gson.fromJson(response, User.class);

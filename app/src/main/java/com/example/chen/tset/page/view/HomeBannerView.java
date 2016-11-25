@@ -41,6 +41,7 @@ public class HomeBannerView extends LinearLayout {
     private Handler handler;
     private Handler handler1;
 
+
     private BannerTimerTask bannerTimerTask;
     private ImageView iv_lead_spot1, iv_lead_spot2, iv_lead_spot3, iv_lead_spot4;
 
@@ -49,6 +50,8 @@ public class HomeBannerView extends LinearLayout {
     List<String> data;
 
     HomeBannerDao db;
+
+    final Gson gson = new Gson();
 
 
     public HomeBannerView(Context context) {
@@ -60,37 +63,42 @@ public class HomeBannerView extends LinearLayout {
         super(context, attrs);
         db = new HomeBannerDao(context);
         data = new ArrayList<>();
-        init();
+
+        pics = new ArrayList<>();
+
+
         handler1 = new Handler() {
             @Override
             public void handleMessage(Message msg) {
                 super.handleMessage(msg);
-                switch (msg.what) {
-                    case 0:
-                        //如果无数据则使用数据库数据显示
-                        if (db.findHomebanner().size() != 0) {
 
-                            new Thread(new Runnable() {
-                                @Override
-                                public void run() {
-                                    List<DiseaseBanner> list = db.findHomebanner();
-                                    for (int i = 0; i < list.size(); i++) {
-                                        pics.add(list.get(i).getCover());
-                                        data.add(list.get(i).getSite());
-                                    }
-                                    handler1.sendEmptyMessage(1);
-                                }
-                            }).start();
+                initView(context);
 
-                        }
-
-                        break;
-                    case 1:
-                        initView(context);
-                        break;
-                }
             }
         };
+
+
+        if (db.findHomebanner().size() != 0) {
+
+            new Thread(new Runnable() {
+                @Override
+                public void run() {
+
+                    List<DiseaseBanner> list = db.findHomebanner();
+
+                    for (int i = 0; i < list.size(); i++) {
+                        pics.add(list.get(i).getCover());
+                        data.add(list.get(i).getSite());
+                    }
+                    handler1.sendEmptyMessage(1);
+
+
+                }
+            }).start();
+
+        }
+
+        init();
 
 
         LayoutInflater inflater = (LayoutInflater) context
@@ -114,8 +122,7 @@ public class HomeBannerView extends LinearLayout {
         new Thread(new Runnable() {
             @Override
             public void run() {
-                pics = new ArrayList<>();
-                final Gson gson = new Gson();
+
                 OkHttpUtils
                         .post()
                         .url(Http_data.http_data + "/FindBannerListByCategoryCode1")

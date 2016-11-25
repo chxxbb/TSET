@@ -163,6 +163,8 @@ public class ConsultingFragment extends Fragment implements View.OnClickListener
 
     Lauar lauar = new Lauar();
 
+    private ToggleButton cal_toggleBtn, cal_toggleBtn1, cal_toggleBtn2;
+
 
     @Nullable
     @Override
@@ -346,15 +348,10 @@ public class ConsultingFragment extends Fragment implements View.OnClickListener
         ll_right = (LinearLayout) view.findViewById(R.id.ll_right);
         ll_left = (LinearLayout) view.findViewById(R.id.ll_left);
 
-//        ll_registration = (LinearLayout) view.findViewById(R.id.ll_registration);
-//        tb_registration = (ToggleButton) view.findViewById(R.id.tb_registration);
-//
-//        tb_health = (ToggleButton) view.findViewById(R.id.tb_health);
-//        ll_health = (LinearLayout) view.findViewById(R.id.ll_health);
-//
-//
-//        tb_pharmacy = (ToggleButton) view.findViewById(R.id.tb_pharmacy);
-//        ll_pharmacy = (LinearLayout) view.findViewById(R.id.ll_pharmacy);
+
+        cal_toggleBtn = (ToggleButton) view.findViewById(R.id.cal_toggleBtn);
+        cal_toggleBtn1 = (ToggleButton) view.findViewById(R.id.cal_toggleBtn1);
+        cal_toggleBtn2 = (ToggleButton) view.findViewById(R.id.cal_toggleBtn2);
 
         tv_solar_terms = (TextView) view.findViewById(R.id.tv_solar_terms);
 
@@ -428,87 +425,7 @@ public class ConsultingFragment extends Fragment implements View.OnClickListener
         tv_lunar_calendar.setText("农历" + lunarCalendar);
 
 
-//        ll_consulting_popup_case.setOnClickListener(listener);
-
-
-//        if (tb_registration.isChecked()) {
-//            registrationSelect = 1;
-//        } else {
-//            registrationSelect = 2;
-//        }
-//
-//        if (tb_health.isChecked()) {
-//            healthSelect = 1;
-//        } else {
-//            healthSelect = 2;
-//        }
-//
-//
-//        if (tb_pharmacy.isChecked()) {
-//            pharmacySelect = 1;
-//
-//        } else {
-//            pharmacySelect = 2;
-//
-//        }
-
-
     }
-
-
-//    private View.OnClickListener tblistener = new View.OnClickListener() {
-//        @Override
-//        public void onClick(View v) {
-//            switch (v.getId()) {
-//                case R.id.ll_registration:
-//
-//                    if (registrationSelect == 1) {
-//                        tb_registration.setChecked(false);
-//
-//
-//                        registrationSelect = 2;
-//                    } else if (registrationSelect == 2) {
-//                        tb_registration.setChecked(true);
-//
-//
-//                        registrationSelect = 1;
-//                    }
-//                    break;
-//
-//
-//                case R.id.ll_health:
-//                    if (healthSelect == 1) {
-//                        tb_health.setChecked(false);
-//
-//                        calV.healthremind(2);
-//
-//                        healthSelect = 2;
-//                    } else if (healthSelect == 2) {
-//                        tb_health.setChecked(true);
-//
-//                        calV.healthremind(1);
-//
-//                        healthSelect = 1;
-//                    }
-//                    break;
-//
-//
-//                case R.id.ll_pharmacy:
-//                    if (pharmacySelect == 1) {
-//                        tb_pharmacy.setChecked(false);
-//
-//
-//                        pharmacySelect = 2;
-//                    } else if (pharmacySelect == 2) {
-//                        tb_pharmacy.setChecked(true);
-//
-//
-//                        pharmacySelect = 1;
-//                    }
-//                    break;
-//            }
-//        }
-//    };
 
 
     private void init() {
@@ -542,45 +459,42 @@ public class ConsultingFragment extends Fragment implements View.OnClickListener
         calV.healthremind(1);
 
 
-//        //判断提醒设置是否被选中，选中则改变健康日历上面的标记
-//        tb_pharmacy.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-//            @Override
-//            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-//                if (isChecked) {
-//                    calV.pharmacyremind(1);
-//                } else {
-//                    calV.pharmacyremind(2);
-//                }
-//            }
-//        });
-//
-//
-//        tb_registration.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-//            @Override
-//            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-//                if (isChecked) {
-//                    calV.registrationremind(1);
-//                } else {
-//                    calV.registrationremind(2);
-//                }
-//            }
-//        });
-//
-//
-//        tb_health.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-//            @Override
-//            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-//                if (isChecked) {
-//                    calV.healthremind(1);
-//                } else {
-//                    calV.healthremind(2);
-//                }
-//            }
-//        });
-//
-//        ll_registration.setOnClickListener(tblistener);
-//        ll_health.setOnClickListener(tblistener);
-//        ll_pharmacy.setOnClickListener(tblistener);
+        //判断提醒设置是否被选中，选中则改变健康日历上面的标记
+        cal_toggleBtn1.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                if (isChecked) {
+                    calV.pharmacyremind(2);
+                } else {
+                    calV.pharmacyremind(1);
+                }
+            }
+        });
+
+
+        cal_toggleBtn.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                if (isChecked) {
+                    calV.registrationremind(2);
+                } else {
+                    calV.registrationremind(1);
+                }
+            }
+        });
+
+
+        cal_toggleBtn2.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                if (isChecked) {
+                    calV.healthremind(2);
+                } else {
+                    calV.healthremind(1);
+                }
+            }
+        });
+
 
         SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd");//设置日期格式
 
@@ -648,9 +562,10 @@ public class ConsultingFragment extends Fragment implements View.OnClickListener
         calV.registrationremind(1);
         calV.healthremind(1);
 
-//        tb_pharmacy.setChecked(true);
-//        tb_registration.setChecked(true);
-//        tb_health.setChecked(true);
+        cal_toggleBtn.setChecked(false);
+        cal_toggleBtn1.setChecked(false);
+        cal_toggleBtn2.setChecked(false);
+
 
     }
 
@@ -687,9 +602,11 @@ public class ConsultingFragment extends Fragment implements View.OnClickListener
         calV.pharmacyremind(1);
         calV.registrationremind(1);
         calV.healthremind(1);
-//        tb_pharmacy.setChecked(true);
-//        tb_registration.setChecked(true);
-//        tb_health.setChecked(true);
+
+        cal_toggleBtn.setChecked(false);
+        cal_toggleBtn1.setChecked(false);
+        cal_toggleBtn2.setChecked(false);
+
 
     }
 

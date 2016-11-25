@@ -382,7 +382,7 @@ public class RegistrationAtivity extends MyBaseActivity implements IListener {
         btn_confirm_payment.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Log.e("订单号", orderCode);
+
                 OkHttpUtils
                         .post()
                         .url(Http_data.http_data + "/ChangOrderStatusByOrderCode")
@@ -718,7 +718,6 @@ public class RegistrationAtivity extends MyBaseActivity implements IListener {
 
                     @Override
                     public void onResponse(String response, int id) {
-
 
 
                         Type listtype = new TypeToken<List<List<String>>>() {

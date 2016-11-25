@@ -125,8 +125,6 @@ public class HomepageFragment extends Fragment {
         view = inflater.inflate(R.layout.fragment_homepage, null);
 
 
-
-
         findView();
 
         //热点推荐
@@ -178,6 +176,8 @@ public class HomepageFragment extends Fragment {
 
         rl_loading = (RelativeLayout) view.findViewById(R.id.rl_loading);
 
+        rl_loading.setVisibility(View.GONE);
+
         tv_home_essay_collectnumber = (TextView) view.findViewById(R.id.tv_home_essay_collectnumber);
         tv_home_essay_collectnumber1 = (TextView) view.findViewById(R.id.tv_home_essay_collectnumber1);
 
@@ -211,6 +211,28 @@ public class HomepageFragment extends Fragment {
 
         //隐藏滚动条
         scrollView.setVerticalScrollBarEnabled(false);
+
+
+        //先使用数据局库数据显示
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                if (db.findHomeDoctor().size() != 0 && homeEassaydb.findHomeEassay().size() != 0) {
+                    inquiryList.addAll(db.findHomeDoctor());
+
+                    handler.sendEmptyMessage(4);
+                    handler.sendEmptyMessage(5);
+                    handler.sendEmptyMessage(7);
+
+                } else {
+
+                    handler.sendEmptyMessage(8);
+
+                }
+
+
+            }
+        }).start();
 
 
         ll_patriarch_lecture_room.setOnClickListener(listener);
@@ -255,13 +277,12 @@ public class HomepageFragment extends Fragment {
                         .execute(new StringCallback() {
                             @Override
                             public void onError(Call call, Exception e, int id) {
-                                handler.sendEmptyMessage(7);
+
                             }
 
 
                             @Override
                             public void onResponse(String response, int id) {
-
 
 
                                 Type listtype = new TypeToken<LinkedList<FindAllHot>>() {
@@ -283,13 +304,11 @@ public class HomepageFragment extends Fragment {
 
                                     //将获取到的最新热点推荐数据添加到数据库中
                                     findAllHotdb.addHomeFindAllHot(findAllHot);
+
                                 }
-
                                 handler.sendEmptyMessage(3);
-
                             }
                         });
-
 
             }
         }).start();
@@ -310,7 +329,7 @@ public class HomepageFragment extends Fragment {
                         .execute(new StringCallback() {
                             @Override
                             public void onError(Call call, Exception e, int id) {
-                                handler.sendEmptyMessage(5);
+
                             }
 
                             @Override
@@ -350,7 +369,7 @@ public class HomepageFragment extends Fragment {
                 .execute(new StringCallback() {
                     @Override
                     public void onError(Call call, Exception e, int id) {
-
+                        handler.sendEmptyMessage(9);
                     }
 
                     @Override
@@ -375,18 +394,6 @@ public class HomepageFragment extends Fragment {
 
 
     private void init() {
-
-        //先使用数据局库数据显示医生推荐
-        new Thread(new Runnable() {
-            @Override
-            public void run() {
-                if (db.findHomeDoctor().size() != 0) {
-                    inquiryList.addAll(db.findHomeDoctor());
-                }
-
-                handler.sendEmptyMessage(4);
-            }
-        }).start();
 
 
         //实例化适配器
@@ -426,9 +433,9 @@ public class HomepageFragment extends Fragment {
                     ImageLoader.getInstance().displayImage(consultList.get(0).getIcon(), tv_home_essay_icon);
                     ImageLoader.getInstance().displayImage(consultList.get(1).getIcon(), tv_home_essay_icon1);
 
-                    //设置点赞数
-                    tv_home_essay_collectnumber.setText(consultList.get(0).getCollectCount()+"");
-                    tv_home_essay_collectnumber1.setText(consultList.get(1).getCollectCount()+"");
+                    //设置收藏数
+                    tv_home_essay_collectnumber.setText(consultList.get(0).getCollectCount() + "");
+                    tv_home_essay_collectnumber1.setText(consultList.get(1).getCollectCount() + "");
 
                     //隐藏加载中
                     rl_loading.setVisibility(View.GONE);
@@ -465,9 +472,10 @@ public class HomepageFragment extends Fragment {
                     break;
 
                 case 4:
-                    adapter.notifyDataSetChanged();
-                    break;
 
+                    adapter.notifyDataSetChanged();
+
+                    break;
 
                 //设置网络连接失败时文章数据
                 case 5:
@@ -475,9 +483,15 @@ public class HomepageFragment extends Fragment {
                         @Override
                         public void run() {
                             if (homeEassaydb.findHomeEassay().size() != 0) {
+
                                 consultList.addAll(homeEassaydb.findHomeEassay());
                             }
+
                             handler.sendEmptyMessage(1);
+
+
+//                            ???????????
+
 
                         }
                     }).start();
@@ -497,8 +511,22 @@ public class HomepageFragment extends Fragment {
                             strings.add(findList.get(i).getTitle());
                         }
                         handler.sendEmptyMessage(3);
-                        Toast.makeText(getContext(), "网络连接失败", Toast.LENGTH_SHORT).show();
+
                     }
+                    break;
+
+                case 8:
+
+                    rl_loading.setVisibility(View.VISIBLE);
+
+                    break;
+
+                case 9:
+
+                    Toast.makeText(getContext(), "网络连接失败", Toast.LENGTH_SHORT).show();
+
+                    rl_loading.setVisibility(View.GONE);
+
                     break;
 
             }
@@ -600,8 +628,6 @@ public class HomepageFragment extends Fragment {
         super.onDetach();
 
     }
-
-
 
 
 }

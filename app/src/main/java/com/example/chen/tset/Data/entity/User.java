@@ -56,9 +56,21 @@ public class User {
 
     @Override
     public String toString() {
-        return "User [id=" + id + ", phone=" + phone + ", name=" + name + ", password=" + password + ", sex=" + gender
-                + ", age=" + age + ", icon=" + icon + ", qq=" + qq + ", weibo=" + weibo + ", wechat=" + wechat
-                + ", email=" + email + ", role=" + role + "]";
+        return "User{" +
+                "id=" + id +
+                ", phone='" + phone + '\'' +
+                ", name='" + name + '\'' +
+                ", password='" + password + '\'' +
+                ", gender='" + gender + '\'' +
+                ", age=" + age +
+                ", icon='" + icon + '\'' +
+                ", qq='" + qq + '\'' +
+                ", weibo='" + weibo + '\'' +
+                ", wechat='" + wechat + '\'' +
+                ", email='" + email + '\'' +
+                ", role=" + role +
+                ", bitmap_icon=" + bitmap_icon +
+                '}';
     }
 
     public Integer getId() {

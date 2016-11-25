@@ -106,9 +106,13 @@ public class DiseaselibFragment extends Fragment implements IListener {
             @Override
             public void onClick(View v) {
 
+                rl_loading.setVisibility(View.VISIBLE);
+
                 ListenerManager.getInstance().sendBroadCast("banner重新加载数据");
 
                 diseaseBannerView.bannerStartPlay();
+
+
                 httpinit(0);
 
                 listviewinit();
@@ -138,6 +142,7 @@ public class DiseaselibFragment extends Fragment implements IListener {
                             @Override
                             public void onResponse(String response, int id) {
 
+
                                 view1.setVisibility(View.GONE);
                                 Type listtype = new TypeToken<LinkedList<DiseaseDepartment>>() {
                                 }.getType();
@@ -147,7 +152,6 @@ public class DiseaselibFragment extends Fragment implements IListener {
                                     list.add(dd);
                                 }
                                 handler.sendEmptyMessage(0);
-
 
                             }
                         });
@@ -232,6 +236,8 @@ public class DiseaselibFragment extends Fragment implements IListener {
 
                             @Override
                             public void onResponse(String response, int id) {
+
+
 
                                 list1 = gson.fromJson(response, new TypeToken<List<String>>() {
                                 }.getType());

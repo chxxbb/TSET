@@ -1,10 +1,14 @@
 package com.example.chen.tset.View.activity;
 
+import android.Manifest;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.net.Uri;
 import android.os.CountDownTimer;
 import android.os.Handler;
 import android.os.Message;
+import android.support.v4.app.ActivityCompat;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.TextUtils;
@@ -83,11 +87,10 @@ public class OnekeyLoinActivity extends AppCompatActivity {
             Uri uri = Uri.parse("content://sms");
             //注册短信的监听
             getContentResolver().registerContentObserver(uri, true, mObserver);
-        }catch (Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
             Toast.makeText(OnekeyLoinActivity.this, "自动获取验证码失败，请手动开启读取短信权限", Toast.LENGTH_SHORT).show();
         }
-
 
 
     }
@@ -255,6 +258,18 @@ public class OnekeyLoinActivity extends AppCompatActivity {
             activity_onekeyr_Verification_code_button.setText("获取验证码");
             activity_onekeyr_Verification_code_button.setClickable(true);
             activity_onekeyr_Verification_code_button.setBackgroundResource(R.drawable.verification_btn_case);
+
+        }
+    }
+
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+
+        if (ContextCompat.checkSelfPermission(this, Manifest.permission.READ_SMS) != PackageManager.PERMISSION_GRANTED) {
+
+            ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.READ_SMS, Manifest.permission.SEND_SMS, Manifest.permission.RECEIVE_SMS, Manifest.permission.BROADCAST_SMS}, 1);
 
         }
     }

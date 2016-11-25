@@ -239,6 +239,9 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="@dimen/y2"
+                        android:ellipsize="end"
+                        android:maxEms="15"
+                        android:singleLine="true"
                         android:textColor="@color/fontcolor"
                         android:textSize="@dimen/x28" />
 
@@ -325,6 +328,9 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="@dimen/y22"
+                        android:ellipsize="end"
+                        android:maxEms="15"
+                        android:singleLine="true"
                         android:textColor="@color/fontcolor"
                         android:textSize="@dimen/x28" />
 

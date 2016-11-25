@@ -38,7 +38,7 @@
                 android:layout_alignParentRight="true"
 
                 android:paddingRight="@dimen/x80"
-                android:text="百科"
+                android:text="成长指南"
                 android:textColor="@color/xmgray"
                 android:textSize="@dimen/y28" />
         </RelativeLayout>
@@ -81,7 +81,7 @@
                     android:id="@+id/view1"
                     android:layout_width="@dimen/x120"
                     android:layout_height="@dimen/y5"
-                    android:layout_marginRight="@dimen/x47"
+                    android:layout_marginRight="@dimen/x77"
                     android:background="@color/backgroundblue" />
             </LinearLayout>
 

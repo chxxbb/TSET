@@ -14,6 +14,7 @@ import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.chen.tset.Data.entity.Consult;
 import com.example.chen.tset.Data.Http_data;
@@ -21,6 +22,7 @@ import com.example.chen.tset.R;
 import com.example.chen.tset.Utils.SharedPsaveuser;
 import com.example.chen.tset.View.activity.ConsultPageActivity;
 import com.example.chen.tset.page.adapter.CharactersafeAdapter1;
+import com.example.chen.tset.page.view.LoadListView;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import com.zhy.http.okhttp.OkHttpUtils;
@@ -42,10 +44,10 @@ import okhttp3.Call;
  * Created by Administrator on 2016/8/25 0025.
  * 资讯页面
  */
-public class CharactersafeFragment extends Fragment {
+public class CharactersafeFragment extends Fragment implements LoadListView.IloadListener {
     View view;
     CharactersafeAdapter1 adapter;
-    private ListView lv_charactersafe;
+    private LoadListView lv_charactersafe;
     private RelativeLayout rl_nonetwork, rl_loading;
     List<Consult> list;
     Gson gson;
@@ -53,6 +55,8 @@ public class CharactersafeFragment extends Fragment {
     SharedPsaveuser sp;
 
     PtrClassicFrameLayout ptrClassicFrameLayout;
+
+    int page = 0;
 
 
     @Nullable
@@ -74,10 +78,13 @@ public class CharactersafeFragment extends Fragment {
     }
 
     private void findView() {
-        lv_charactersafe = (ListView) view.findViewById(R.id.lv_charactersafe);
+        lv_charactersafe = (LoadListView) view.findViewById(R.id.lv_charactersafe);
         rl_nonetwork = (RelativeLayout) view.findViewById(R.id.rl_nonetwork);
         rl_loading = (RelativeLayout) view.findViewById(R.id.rl_loading);
         ptrClassicFrameLayout = (PtrClassicFrameLayout) view.findViewById(R.id.ptrClassicFrameLayout);
+
+
+        lv_charactersafe.setInterface(this);
 
         lv_charactersafe.setVerticalScrollBarEnabled(false);
 
@@ -95,7 +102,7 @@ public class CharactersafeFragment extends Fragment {
                 ptrClassicFrameLayout.postDelayed(new Runnable() {
                     @Override
                     public void run() {
-
+                        page = 0;
                         list.clear();
                         init();
 
@@ -113,9 +120,10 @@ public class CharactersafeFragment extends Fragment {
         rl_nonetwork.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
-                init();
+                rl_loading.setVisibility(View.VISIBLE);
                 rl_nonetwork.setVisibility(View.GONE);
+                init();
+
             }
         });
     }
@@ -129,6 +137,7 @@ public class CharactersafeFragment extends Fragment {
 
     private void init() {
 
+
         Thread thread = new Thread(new Runnable() {
             @Override
             public void run() {
@@ -136,6 +145,7 @@ public class CharactersafeFragment extends Fragment {
                 OkHttpUtils
                         .post()
                         .url(Http_data.http_data + "/FindCyclopediaList")
+                        .addParams("pageCount", page + "")
                         .build()
                         .execute(new StringCallback() {
                             @Override
@@ -147,17 +157,26 @@ public class CharactersafeFragment extends Fragment {
                             public void onResponse(String response, int id) {
 
 
-                                if (!response.equals("1")) {
+                                if (response.equals("1")) {
+                                    Toast.makeText(getContext(), "数据获取失败", Toast.LENGTH_SHORT).show();
+
+
+                                } else if (response.equals("[]")) {
+                                    Toast.makeText(getContext(), "已经没有更多数据了", Toast.LENGTH_SHORT).show();
+                                } else {
+
                                     Type listtype = new TypeToken<LinkedList<Consult>>() {
                                     }.getType();
+
                                     LinkedList<Consult> leclist = gson.fromJson(response, listtype);
                                     for (Iterator it = leclist.iterator(); it.hasNext(); ) {
                                         Consult consult = (Consult) it.next();
                                         list.add(consult);
                                     }
-                                    handler.sendEmptyMessage(0);
-                                }
 
+                                    handler.sendEmptyMessage(0);
+
+                                }
 
                             }
                         });
@@ -166,18 +185,19 @@ public class CharactersafeFragment extends Fragment {
         thread.start();
     }
 
+
     Handler handler = new Handler() {
         @Override
         public void handleMessage(Message msg) {
             switch (msg.what) {
                 case 0:
-
+                    lv_charactersafe.setVisibility(View.VISIBLE);
                     ptrClassicFrameLayout.refreshComplete();
                     adapter.notifyDataSetChanged();
                     rl_loading.setVisibility(View.GONE);
                     break;
                 case 1:
-
+                    lv_charactersafe.setVisibility(View.GONE);
                     ptrClassicFrameLayout.refreshComplete();
                     rl_loading.setVisibility(View.GONE);
                     rl_nonetwork.setVisibility(View.VISIBLE);
@@ -197,5 +217,26 @@ public class CharactersafeFragment extends Fragment {
             startActivity(intent);
         }
     };
+
+
+    @Override
+    public void onLoad() {
+        //加载更多延迟3秒
+        Handler handler = new Handler();
+        handler.postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                // TODO Auto-generated method stub
+
+                page = page + 20;
+                init();
+                // 通知listview加载完毕
+                lv_charactersafe.loadComplete();
+
+
+            }
+        }, 3000);
+    }
+
 
 }

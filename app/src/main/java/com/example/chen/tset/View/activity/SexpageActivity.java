@@ -1,6 +1,7 @@
 package com.example.chen.tset.View.activity;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.RadioButton;
@@ -23,12 +24,15 @@ public class SexpageActivity extends MyBaseActivity {
     private LinearLayout ll_rutgender;
     private RadioButton rb_man, rb_nman;
     SharedPsaveuser sp;
+    String gender;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_genderpage);
         sp = new SharedPsaveuser(this);
+
+
         findView();
     }
 
@@ -40,7 +44,15 @@ public class SexpageActivity extends MyBaseActivity {
         ll_rutgender.setOnClickListener(listener);
         rb_man.setOnClickListener(listener);
         rb_nman.setOnClickListener(listener);
-        if (User_Http.user.getGender().equals("男")) {
+
+        if (User_Http.user.getGender() == null || User_Http.user.getGender().equals("")) {
+            gender = sp.getTag().getGender();
+        } else {
+            gender = User_Http.user.getGender();
+        }
+
+
+        if (gender.equals("男")) {
             rb_man.setChecked(true);
         } else {
             rb_nman.setChecked(true);

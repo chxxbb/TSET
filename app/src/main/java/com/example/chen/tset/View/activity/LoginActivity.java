@@ -78,6 +78,8 @@ public class LoginActivity extends AppCompatActivity {
                             @Override
                             public void onResponse(String response, int id) {
 
+                                Log.e("登录返回", response);
+
 
                                 if (response.equals("1")) {
 
@@ -88,7 +90,7 @@ public class LoginActivity extends AppCompatActivity {
                                     login_button.setClickable(true);
                                     login_button.setText("登录");
                                     Toast.makeText(LoginActivity.this, "未知错误", Toast.LENGTH_SHORT).show();
-                                } else {
+                                } else if (response.length() != 1) {
                                     User user = gson.fromJson(response, User.class);
 
                                     User_Http.user.setUser(user);

@@ -13,10 +13,9 @@
             android:id="@+id/ptrClassicFrameLayout"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-
             android:listSelector="@android:color/transparent">
 
-            <ListView
+            <com.example.chen.tset.page.view.LoadListView
                 android:id="@+id/lv_charactersafe"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"

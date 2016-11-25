@@ -132,36 +132,33 @@ public class PersonaldataActivity extends MyBaseActivity {
     private View.OnClickListener listener = new View.OnClickListener() {
         @Override
         public void onClick(View v) {
-            if (User_Http.user.getName() == null & User_Http.user.getPhone() == null) {
-                Toast.makeText(PersonaldataActivity.this, "网络连接失败", Toast.LENGTH_SHORT).show();
-            } else {
-                switch (v.getId()) {
-                    case R.id.rl_name:
-                        Intent intent = new Intent(PersonaldataActivity.this, NamepageActivity.class);
-                        startActivity(intent);
-                        break;
-                    case R.id.rl_gender:
-                        Intent intent1 = new Intent(PersonaldataActivity.this, SexpageActivity.class);
-                        startActivity(intent1);
-                        break;
-                    case R.id.rl_phone:
-                        Intent intent2 = new Intent(PersonaldataActivity.this, PhonechangeActivity.class);
-                        startActivity(intent2);
-                        break;
-                    case R.id.rl_icon:
 
+            switch (v.getId()) {
+                case R.id.rl_name:
+                    Intent intent = new Intent(PersonaldataActivity.this, NamepageActivity.class);
+                    startActivity(intent);
+                    break;
+                case R.id.rl_gender:
+                    Intent intent1 = new Intent(PersonaldataActivity.this, SexpageActivity.class);
+                    startActivity(intent1);
+                    break;
+                case R.id.rl_phone:
+                    Intent intent2 = new Intent(PersonaldataActivity.this, PhonechangeActivity.class);
+                    startActivity(intent2);
+                    break;
+                case R.id.rl_icon:
 
-                        try {
+                    try {
 
-                            //打开图片选择需要截取的图片
-                            Crop.pickImage(PersonaldataActivity.this);
-                        } catch (Exception e) {
-                            e.printStackTrace();
-                            Toast.makeText(PersonaldataActivity.this, "打开图库失败，请查看是否开启权限或稍后再试", Toast.LENGTH_SHORT).show();
-                        }
+                        //打开图片选择需要截取的图片
+                        Crop.pickImage(PersonaldataActivity.this);
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                        Toast.makeText(PersonaldataActivity.this, "打开图库失败，请查看是否开启权限或稍后再试", Toast.LENGTH_SHORT).show();
+                    }
 
-                        break;
-                }
+                    break;
+
             }
 
 
