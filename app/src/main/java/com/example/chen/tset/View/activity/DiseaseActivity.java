@@ -434,6 +434,8 @@ public class DiseaseActivity extends MyBaseActivity {
                     intent.putExtra("doctorID", inquiry.getId() + "");
                     //医生聊天账号
                     intent.putExtra("username", inquiry.getUsername());
+
+                    intent.putExtra("page", "2");
                     startActivity(intent);
                     setHeadDialog.dismiss();
                 }

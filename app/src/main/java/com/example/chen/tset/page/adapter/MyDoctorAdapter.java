@@ -225,6 +225,7 @@ public class MyDoctorAdapter extends BaseAdapter {
                     intent.putExtra("icon", list.get(pos).getDoctorIcon());
                     intent.putExtra("doctorID", list.get(pos).getDoctorId() + "");
                     intent.putExtra("username", list.get(pos).getDoctorUserName());
+                    intent.putExtra("page", "2");
                     context.startActivity(intent);
                     setHeadDialog.dismiss();
                 }

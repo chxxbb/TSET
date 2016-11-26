@@ -247,9 +247,6 @@ public class PersonaldataActivity extends MyBaseActivity {
                         @Override
                         public void complete(String key, ResponseInfo info, JSONObject res) {
                             //res包含hash、key等信息，具体字段取决于上传策略的设置
-                            Log.e("key", key + "");
-                            Log.e("info", info + "");
-                            Log.e("res", res + "");
 
                             changeIcon(key);
                         }

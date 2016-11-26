@@ -100,10 +100,6 @@ public class InquiryAdapter extends BaseAdapter {
         viewHolder.fl_chat.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                SimpleDateFormat formatter = new SimpleDateFormat("HH");
-                Date curDate = new Date(System.currentTimeMillis());//获取当前时间
-                String str = formatter.format(curDate);
-
 
                 setHeadDialog = new Dialog(context, R.style.CustomDialog);
                 setHeadDialog.show();
@@ -234,6 +230,7 @@ public class InquiryAdapter extends BaseAdapter {
                     intent.putExtra("icon", list.get(pos).getIcon());
                     intent.putExtra("doctorID", list.get(pos).getId());
                     intent.putExtra("username", list.get(pos).getUsername());
+                    intent.putExtra("page", "2");
                     context.startActivity(intent);
                     setHeadDialog.dismiss();
                 }

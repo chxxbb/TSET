@@ -805,10 +805,13 @@ public class HomeActivity extends MyBaseActivity implements View.OnClickListener
         myAnimation_Rotate.setDuration(150);
         myAnimation_Rotate.setFillAfter(true);
 
+
+        //获取手机屏幕分辨率 宽和高
         WindowManager wm = (WindowManager) this.getSystemService(Context.WINDOW_SERVICE);
 
         int width = wm.getDefaultDisplay().getWidth();
         int height = wm.getDefaultDisplay().getHeight();
+
 
         //平移动画
         translateAnimation = new TranslateAnimation(width / 4.6f, 0.1f, height * 0.163f, 0.1f);
@@ -846,7 +849,6 @@ public class HomeActivity extends MyBaseActivity implements View.OnClickListener
             //接收到广播显示不同的页面
             if (str.equals("显示诊疗页面")) {
 
-
                 fl_registration.setVisibility(View.GONE);
                 rb_diagnosis.setChecked(true);
                 if (consultingFragment == null) {
@@ -876,7 +878,6 @@ public class HomeActivity extends MyBaseActivity implements View.OnClickListener
             } else {
 
             }
-
 
         } catch (Exception e) {
             e.printStackTrace();

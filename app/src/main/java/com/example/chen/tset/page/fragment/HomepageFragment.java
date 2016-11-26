@@ -222,7 +222,7 @@ public class HomepageFragment extends Fragment {
 
                     handler.sendEmptyMessage(4);
                     handler.sendEmptyMessage(5);
-                    handler.sendEmptyMessage(7);
+
 
                 } else {
 
@@ -277,7 +277,7 @@ public class HomepageFragment extends Fragment {
                         .execute(new StringCallback() {
                             @Override
                             public void onError(Call call, Exception e, int id) {
-
+                                handler.sendEmptyMessage(7);
                             }
 
 
@@ -462,8 +462,8 @@ public class HomepageFragment extends Fragment {
                         @Override
                         public void run() {
                             while (isRunning) {
-                                //每隔3秒通知滚动一次
-                                SystemClock.sleep(3000);
+                                //每隔5秒通知滚动一次
+                                SystemClock.sleep(5000);
                                 handler.sendEmptyMessage(0);
                             }
                         }
@@ -499,7 +499,7 @@ public class HomepageFragment extends Fragment {
 
                 case 7:
 
-                    //如果为断网状态则使用数据库数据
+                    //默认使用数据库数据
                     List<FindAllHot> findList;
                     findList = findAllHotdb.findHomeFindAllHot();
                     findAllHotList.addAll(findList);
@@ -612,6 +612,7 @@ public class HomepageFragment extends Fragment {
     //banner开始滑动
     public void onResume() {
         super.onResume();
+        diseaseBannerView.bannerStopPlay();
         diseaseBannerView.bannerStartPlay();
     }
 

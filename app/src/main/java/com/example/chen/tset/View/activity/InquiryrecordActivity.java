@@ -100,7 +100,14 @@ public class InquiryrecordActivity extends MyBaseActivity {
     private AdapterView.OnItemClickListener lvlistener = new AdapterView.OnItemClickListener() {
         @Override
         public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-            affirm(position);
+//            affirm(position);
+            Intent intent = new Intent(InquiryrecordActivity.this, ChatpageActivity.class);
+            intent.putExtra("name", list.get(position).getDoctorname());
+            intent.putExtra("icon", list.get(position).getDoctoricon());
+            intent.putExtra("doctorID", list.get(position).getId());
+            intent.putExtra("username", list.get(position).getDoctorid());
+            intent.putExtra("page", "1");
+            startActivity(intent);
 
         }
     };

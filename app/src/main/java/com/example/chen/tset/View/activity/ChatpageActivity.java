@@ -95,6 +95,8 @@ public class ChatpageActivity extends AppCompatActivity implements PtrUIHandler 
 
     private Button btn_chat;
 
+    private LinearLayout ll_bottom_send_case;
+
 
     //下拉加载更多
     private PtrClassicFrameLayout ptrClassicFrameLayout;
@@ -204,6 +206,8 @@ public class ChatpageActivity extends AppCompatActivity implements PtrUIHandler 
         doctoricon = getIntent().getStringExtra("icon");
         username = getIntent().getStringExtra("username");
 
+        String page = getIntent().getStringExtra("page");
+
 
         iv_chat = (ImageView) findViewById(R.id.iv_chat);
         et_chat = (EditText) findViewById(R.id.et_chat);
@@ -219,6 +223,12 @@ public class ChatpageActivity extends AppCompatActivity implements PtrUIHandler 
         ll_consult_return = (LinearLayout) findViewById(R.id.ll_consult_return);
 
         btn_chat = (Button) findViewById(R.id.btn_chat);
+
+        ll_bottom_send_case = (LinearLayout) findViewById(R.id.ll_bottom_send_case);
+
+        if (page.equals("1")) {
+            ll_bottom_send_case.setVisibility(View.GONE);
+        }
 
 
         tv_doctorname.setText(doctorname);

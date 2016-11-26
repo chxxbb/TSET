@@ -221,6 +221,7 @@ public class HomeDoctorRecommendAdapter extends BaseAdapter {
                     intent.putExtra("icon", list.get(pos).getIcon());
                     intent.putExtra("doctorID", list.get(pos).getId());
                     intent.putExtra("username", list.get(pos).getUsername());
+                    intent.putExtra("page","2");
                     context.startActivity(intent);
                     setHeadDialog.dismiss();
                 }

@@ -99,6 +99,7 @@
 
 
         <LinearLayout
+            android:id="@+id/ll_bottom_send_case"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_alignParentBottom="true"

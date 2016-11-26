@@ -5,6 +5,7 @@ import android.os.Handler;
 import android.os.Message;
 import android.support.v4.view.ViewPager;
 import android.util.AttributeSet;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -86,6 +87,10 @@ public class HomeBannerView extends LinearLayout {
 
                     List<DiseaseBanner> list = db.findHomebanner();
 
+                    pics.clear();
+
+                    data.clear();
+
                     for (int i = 0; i < list.size(); i++) {
                         pics.add(list.get(i).getCover());
                         data.add(list.get(i).getSite());
@@ -141,6 +146,11 @@ public class HomeBannerView extends LinearLayout {
                                 }.getType();
                                 LinkedList<DiseaseBanner> leclist = gson.fromJson(response, listtype);
                                 db.delbanner();
+
+                                pics.clear();
+
+                                data.clear();
+
                                 for (Iterator it = leclist.iterator(); it.hasNext(); ) {
                                     DiseaseBanner diseaseBanner = (DiseaseBanner) it.next();
                                     //将banner数据添加到数据库中
@@ -154,7 +164,6 @@ public class HomeBannerView extends LinearLayout {
 
                             }
 
-
                         });
 
             }
@@ -165,6 +174,7 @@ public class HomeBannerView extends LinearLayout {
 
 
     private void initView(final Context context) {
+
 
         adViewPager = (ViewPager) this.findViewById(R.id.viewPager1);
         iv_lead_spot1 = (ImageView) this.findViewById(R.id.iv_lead_spot1);
@@ -177,7 +187,6 @@ public class HomeBannerView extends LinearLayout {
 
 
         //初始化数据,改变图片
-
         for (int i = 0; i < pics.size(); i++) {
             imageView = new ImageView(context);
             //加载图片
@@ -185,7 +194,6 @@ public class HomeBannerView extends LinearLayout {
             //图片铺满
             imageView.setScaleType(ImageView.ScaleType.FIT_XY);
             bannerViewList.add(imageView);
-
         }
 
 
@@ -199,23 +207,24 @@ public class HomeBannerView extends LinearLayout {
 
             @Override
             public void onPageSelected(int position) {
+
                 //设置每一页的点
-                if (position == 3) {
+                if (position == 3 || position == 7) {
                     iv_lead_spot1.setImageResource(R.drawable.lead_slide_sign1);
                     iv_lead_spot2.setImageResource(R.drawable.lead_slide_sign1);
                     iv_lead_spot3.setImageResource(R.drawable.lead_slide_sign1);
                     iv_lead_spot4.setImageResource(R.drawable.lead_slide_sign);
-                } else if (position == 0) {
+                } else if (position == 0 || position == 4) {
                     iv_lead_spot1.setImageResource(R.drawable.lead_slide_sign);
                     iv_lead_spot2.setImageResource(R.drawable.lead_slide_sign1);
                     iv_lead_spot4.setImageResource(R.drawable.lead_slide_sign1);
                     iv_lead_spot3.setImageResource(R.drawable.lead_slide_sign1);
-                } else if (position == 1) {
+                } else if (position == 1 || position == 5) {
                     iv_lead_spot1.setImageResource(R.drawable.lead_slide_sign1);
                     iv_lead_spot2.setImageResource(R.drawable.lead_slide_sign);
                     iv_lead_spot4.setImageResource(R.drawable.lead_slide_sign1);
                     iv_lead_spot3.setImageResource(R.drawable.lead_slide_sign1);
-                } else if (position == 2) {
+                } else if (position == 2 || position == 6) {
                     iv_lead_spot1.setImageResource(R.drawable.lead_slide_sign1);
                     iv_lead_spot2.setImageResource(R.drawable.lead_slide_sign1);
                     iv_lead_spot4.setImageResource(R.drawable.lead_slide_sign1);

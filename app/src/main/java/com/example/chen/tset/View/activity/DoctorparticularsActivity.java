@@ -163,11 +163,11 @@ public class DoctorparticularsActivity extends MyBaseActivity {
                         adapter.notifyDataSetChanged();
 
                     }
+
                 });
     }
 
     private void doctorinit() {
-
 
         new Thread(new Runnable() {
             @Override
@@ -186,7 +186,6 @@ public class DoctorparticularsActivity extends MyBaseActivity {
 
                             @Override
                             public void onResponse(String response, int id) {
-
                                 doctor = gson.fromJson(response, Doctor.class);
                                 handler.sendEmptyMessage(1);
 
@@ -341,9 +340,7 @@ public class DoctorparticularsActivity extends MyBaseActivity {
         rb_zhifb = (RadioButton) dialogView.findViewById(R.id.rb_zhifb);
         ll_cancel = (LinearLayout) dialogView.findViewById(R.id.ll_cancel);
 
-
         rl_use_cash_coupons = (RelativeLayout) dialogView.findViewById(R.id.rl_use_cash_coupons);
-
 
         //确认支付
         btn_confirm_payment = (Button) dialogView.findViewById(R.id.btn_confirm_payment);
@@ -421,6 +418,7 @@ public class DoctorparticularsActivity extends MyBaseActivity {
                     intent.putExtra("icon", doctor.getIcon());
                     intent.putExtra("doctorID", doctor_id);
                     intent.putExtra("username", doctor.getUsername());
+                    intent.putExtra("page", "2");
                     startActivity(intent);
                     setHeadDialog.dismiss();
                 }
