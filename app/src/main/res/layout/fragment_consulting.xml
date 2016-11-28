@@ -542,7 +542,8 @@
                     android:layout_marginTop="@dimen/y20"
                     android:background="@drawable/consulting_remid_case"
                     android:gravity="center_vertical"
-                    android:orientation="horizontal">
+                    android:orientation="horizontal"
+                    android:visibility="gone">
 
                     <ImageView
                         android:layout_width="@dimen/x40"

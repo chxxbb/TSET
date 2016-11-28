@@ -38,7 +38,7 @@
                     android:id="@+id/tv_name"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="且听风鸣"
+
                     android:textColor="@color/fontcolor"
                     android:textSize="@dimen/x36" />
 
@@ -48,7 +48,7 @@
                     android:layout_height="@dimen/y32"
                     android:layout_marginTop="@dimen/y14"
                     android:background="@drawable/qqregister_btn_case"
-                    android:text="注册登录用户"
+
                     android:textColor="@color/backgroundblue"
                     android:textSize="@dimen/x20" />
             </LinearLayout>
@@ -356,6 +356,7 @@
         android:background="@color/linegray" />
 
     <RelativeLayout
+        android:id="@+id/rl_mypage_share"
         android:layout_width="match_parent"
         android:layout_height="@dimen/y90"
         android:background="@color/white"

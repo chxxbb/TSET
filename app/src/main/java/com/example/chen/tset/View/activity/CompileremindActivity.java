@@ -73,6 +73,13 @@ public class CompileremindActivity extends MyBaseActivity implements IListener {
 
     String content3;
 
+
+    int dataYears;
+
+    int dataMonth;
+
+    int dataDay;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -171,6 +178,13 @@ public class CompileremindActivity extends MyBaseActivity implements IListener {
         mmonth = c.get(Calendar.MONTH);
 
         mday = c.get(Calendar.DAY_OF_MONTH);
+
+
+        dataYears = c.get(Calendar.YEAR);
+
+        dataMonth = c.get(Calendar.MONTH);
+
+        dataDay = c.get(Calendar.DAY_OF_MONTH);
 
 
     }
@@ -363,7 +377,17 @@ public class CompileremindActivity extends MyBaseActivity implements IListener {
 
                     date = (String) DateFormat.format("yyy-MM-dd", c1);
 
+
+                    dataYears = Integer.parseInt((String) DateFormat.format("yyy", c1));
+
+                    dataMonth = Integer.parseInt((String) DateFormat.format("MM", c1));
+
+                    dataDay = Integer.parseInt((String) DateFormat.format("dd", c1));
+
                     tv_starttime.setText(date);
+
+                    tv_endtiem.setText(date);
+
                 }
 
             }
@@ -377,23 +401,30 @@ public class CompileremindActivity extends MyBaseActivity implements IListener {
             @Override
             public void onDateSet(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
                 //设置最小设置时间只能为当前时间
-                c1.set(myear, mmonth, mday);
+//                c1.set(myear, mmonth, mday);
+
+                c1.set(dataYears, dataMonth-1, dataDay);
 
                 dialog.getDatePicker().setMinDate(c1.getTimeInMillis());
                 //判断设定的时间,不能为以前的时间
-                if (year < myear || (year == myear && monthOfYear < mmonth) || (year == myear && monthOfYear == mmonth && dayOfMonth < mday)) {
 
-                    Toast.makeText(CompileremindActivity.this, "不能选择以前的时间", Toast.LENGTH_SHORT).show();
+
+                if (year < dataYears || (year == dataYears && monthOfYear < dataMonth - 1) || (year == dataYears && monthOfYear == dataMonth - 1 && dayOfMonth < dataDay)) {
+
+                    Toast.makeText(CompileremindActivity.this, "不能选择开始之前的时间", Toast.LENGTH_SHORT).show();
+
                 } else {
+
                     c1.set(year, monthOfYear, dayOfMonth);
 
                     date = (String) DateFormat.format("yyy-MM-dd", c1);
 
                     tv_endtiem.setText(date);
+
                 }
 
             }
-        }, myear, mmonth, mday);
+        }, dataYears, dataMonth-1, dataDay);
         dialog.show();
     }
 

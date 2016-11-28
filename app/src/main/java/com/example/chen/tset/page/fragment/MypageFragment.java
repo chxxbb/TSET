@@ -1,9 +1,14 @@
 package com.example.chen.tset.page.fragment;
 
+import android.app.Notification;
+import android.app.NotificationManager;
+import android.app.PendingIntent;
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v7.app.NotificationCompat;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -15,7 +20,10 @@ import android.widget.TextView;
 import com.example.chen.tset.Data.User_Http;
 import com.example.chen.tset.R;
 import com.example.chen.tset.Utils.SharedPsaveuser;
+import com.example.chen.tset.View.activity.HomeActivity;
 import com.example.chen.tset.View.activity.InquiryrecordActivity;
+import com.example.chen.tset.View.activity.LeadActivity;
+import com.example.chen.tset.View.activity.LogActivity;
 import com.example.chen.tset.View.activity.MyCashCouponsActivity;
 import com.example.chen.tset.View.activity.MyDoctorActivity;
 import com.example.chen.tset.View.activity.MycollectActivity;
@@ -32,7 +40,7 @@ import de.hdodenhof.circleimageview.CircleImageView;
 public class MypageFragment extends Fragment {
     View view;
     private RelativeLayout rl_set;
-    private RelativeLayout rl_mycollect, rl_myreservation, rl_personaldata, rl_mydpctor, rl_inquiryrecord, rl_MyCashCoupons;
+    private RelativeLayout rl_mycollect, rl_myreservation, rl_personaldata, rl_mydpctor, rl_inquiryrecord, rl_MyCashCoupons, rl_mypage_share;
     private CircleImageView iv_ico;
     private TextView tv_name;
     SharedPsaveuser sp;
@@ -61,6 +69,7 @@ public class MypageFragment extends Fragment {
         tv_name = (TextView) view.findViewById(R.id.tv_name);
         rl_MyCashCoupons = (RelativeLayout) view.findViewById(R.id.rl_MyCashCoupons);
         btn_user_login_form = (Button) view.findViewById(R.id.btn_user_login_form);
+        rl_mypage_share = (RelativeLayout) view.findViewById(R.id.rl_mypage_share);
         rl_set.setOnClickListener(listerer);
         rl_mycollect.setOnClickListener(listerer);
         rl_myreservation.setOnClickListener(listerer);
@@ -68,7 +77,7 @@ public class MypageFragment extends Fragment {
         rl_mydpctor.setOnClickListener(listerer);
         rl_inquiryrecord.setOnClickListener(listerer);
         rl_MyCashCoupons.setOnClickListener(listerer);
-
+        rl_mypage_share.setOnClickListener(listerer);
 
 
     }
@@ -159,8 +168,32 @@ public class MypageFragment extends Fragment {
                     startActivity(intent6);
                     break;
 
+                case R.id.rl_mypage_share:
+                    send();
+                    break;
+
             }
 
         }
     };
+
+    private void send() {
+
+        Intent intent = new Intent(getContext(), LeadActivity.class);
+        PendingIntent pendingIntent = PendingIntent.getActivity(
+                getContext(), 0, intent,
+                PendingIntent.FLAG_CANCEL_CURRENT);
+        Notification noti = new NotificationCompat.Builder(getContext())
+                .setSmallIcon(R.drawable.image_emoticon25)
+                .setContentText("骚年，该吃药了")
+                .setContentTitle("一条咸鱼干")
+                .setTicker("你有一包咸鱼干到了")
+                .setContentIntent(pendingIntent)
+                .build();
+        NotificationManager mNotificationManager = (NotificationManager) getContext().getSystemService(Context.NOTIFICATION_SERVICE);
+        noti.defaults = Notification.DEFAULT_ALL;
+        mNotificationManager.notify(0, noti);
+
+    }
+
 }

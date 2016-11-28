@@ -165,6 +165,10 @@ public class ConsultingFragment extends Fragment implements View.OnClickListener
 
     private ToggleButton cal_toggleBtn, cal_toggleBtn1, cal_toggleBtn2;
 
+    String str;
+
+    String today;
+
 
     @Nullable
     @Override
@@ -193,8 +197,9 @@ public class ConsultingFragment extends Fragment implements View.OnClickListener
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
         SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM");
         Date curDate = new Date(System.currentTimeMillis());//获取当前时间
-        String str = formatter.format(curDate);
+        str = formatter.format(curDate);
         pharmacydate = sdf.format(curDate);
+        today = sdf.format(curDate);
         findAllByDate(str);
         //注册监听器
         ListenerManager.getInstance().registerListtener(this);
@@ -291,10 +296,19 @@ public class ConsultingFragment extends Fragment implements View.OnClickListener
                         });
                     }
 
+
                     //健康状况
                     if (calendarinit.getTag() == null && calendarinit.getContent() == null) {
                         ll_consulting_health.setVisibility(View.GONE);
+                        if (date == null || date.equals(today)) {
+                            ll_add_health_condition.setVisibility(View.VISIBLE);
+                        } else {
+                            ll_add_health_condition.setVisibility(View.GONE);
+                        }
+
+
                     } else {
+                        ll_add_health_condition.setVisibility(View.GONE);
                         ll_consulting_health.setVisibility(View.VISIBLE);
                         tv_consulting_health.setText(calendarinit.getTag() + "  " + calendarinit.getContent());
                         ll_consulting_health.setOnClickListener(new View.OnClickListener() {
