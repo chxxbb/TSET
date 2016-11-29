@@ -80,10 +80,13 @@ public class CompileremindActivity extends MyBaseActivity implements IListener {
 
     int dataDay;
 
+    PharmacyDao db;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_compileremind);
+        db = new PharmacyDao(this);
         findView();
         sp = new SharedPsaveuser(CompileremindActivity.this);
 
@@ -294,6 +297,10 @@ public class CompileremindActivity extends MyBaseActivity implements IListener {
                                         if (response.equals("0")) {
                                             //发送广播通知诊疗页面更新
                                             ListenerManager.getInstance().sendBroadCast("更新日历页面");
+
+                                            Pharmacyremind pharmacyremind=new Pharmacyremind(sp.getTag().getId()+"",startDay,endDay,time1,content1,time2,content2,time3,content3);
+                                            db.addPharmacy(pharmacyremind);
+
                                             Toast.makeText(CompileremindActivity.this, "添加成功，你可以在用药提醒页面查看", Toast.LENGTH_SHORT).show();
                                             finish();
                                         } else {
@@ -403,7 +410,7 @@ public class CompileremindActivity extends MyBaseActivity implements IListener {
                 //设置最小设置时间只能为当前时间
 //                c1.set(myear, mmonth, mday);
 
-                c1.set(dataYears, dataMonth-1, dataDay);
+                c1.set(dataYears, dataMonth - 1, dataDay);
 
                 dialog.getDatePicker().setMinDate(c1.getTimeInMillis());
                 //判断设定的时间,不能为以前的时间
@@ -424,7 +431,7 @@ public class CompileremindActivity extends MyBaseActivity implements IListener {
                 }
 
             }
-        }, dataYears, dataMonth-1, dataDay);
+        }, dataYears, dataMonth - 1, dataDay);
         dialog.show();
     }
 

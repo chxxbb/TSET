@@ -39,6 +39,7 @@ import com.example.chen.tset.R;
 
 import com.example.chen.tset.Utils.CalendarUtil;
 import com.example.chen.tset.Utils.Lauar;
+import com.example.chen.tset.View.activity.CompileConsultingActivity;
 import com.example.chen.tset.page.view.CalendarGridView;
 import com.example.chen.tset.Utils.IListener;
 import com.example.chen.tset.Utils.ListenerManager;
@@ -117,9 +118,6 @@ public class ConsultingFragment extends Fragment implements View.OnClickListener
     List<PharmacyState> list;
 
 
-    private LinearLayout ll_consulting_popup_case;
-
-
     private LinearLayout ll_registration_info, ll_consulting_phramacy, ll_consulting_health;
 
 //    private ToggleButton tb_registration, tb_health, tb_pharmacy;
@@ -168,6 +166,8 @@ public class ConsultingFragment extends Fragment implements View.OnClickListener
     String str;
 
     String today;
+
+    private LinearLayout ll_consulting_popup_case;
 
 
     @Nullable
@@ -388,6 +388,8 @@ public class ConsultingFragment extends Fragment implements View.OnClickListener
 
         tv_chinese_era = (TextView) view.findViewById(R.id.tv_chinese_era);
 
+        ll_consulting_popup_case = (LinearLayout) view.findViewById(R.id.ll_consulting_popup_case);
+
         ll_add_medicine_remind.setOnClickListener(addlistener);
         ll_add_health_condition.setOnClickListener(addlistener);
 
@@ -437,6 +439,15 @@ public class ConsultingFragment extends Fragment implements View.OnClickListener
 
         tv_chinese_era.setText(lauar1);
         tv_lunar_calendar.setText("农历" + lunarCalendar);
+
+
+        ll_consulting_popup_case.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getContext(), CompileConsultingActivity.class);
+                startActivity(intent);
+            }
+        });
 
 
     }

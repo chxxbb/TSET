@@ -12,7 +12,7 @@ import java.util.List;
 
 /**
  * Created by Administrator on 2016/10/8 0008.
- * 用于保存用药提醒，后变更用药提醒保存在服务器中
+ * 用于保存用药提醒
  */
 public class PharmacyDao {
     private Context context;
@@ -62,5 +62,10 @@ public class PharmacyDao {
 
     public void del() {
         db.delete("pharmacy", null, null);
+    }
+
+
+    public void deleterecord(String username) {
+        db.execSQL("delete from pharmacy where username=?", new Object[]{username});
     }
 }

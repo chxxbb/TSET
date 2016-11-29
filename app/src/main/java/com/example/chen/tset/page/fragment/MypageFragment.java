@@ -178,11 +178,11 @@ public class MypageFragment extends Fragment {
     };
 
     private void send() {
-
         Intent intent = new Intent(getContext(), LeadActivity.class);
         PendingIntent pendingIntent = PendingIntent.getActivity(
                 getContext(), 0, intent,
                 PendingIntent.FLAG_CANCEL_CURRENT);
+
         Notification noti = new NotificationCompat.Builder(getContext())
                 .setSmallIcon(R.drawable.image_emoticon25)
                 .setContentText("骚年，该吃药了")
@@ -190,6 +190,7 @@ public class MypageFragment extends Fragment {
                 .setTicker("你有一包咸鱼干到了")
                 .setContentIntent(pendingIntent)
                 .build();
+
         NotificationManager mNotificationManager = (NotificationManager) getContext().getSystemService(Context.NOTIFICATION_SERVICE);
         noti.defaults = Notification.DEFAULT_ALL;
         mNotificationManager.notify(0, noti);

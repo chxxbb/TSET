@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
 import android.support.v4.view.PagerAdapter;
+import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
@@ -42,12 +43,19 @@ public class BannerViewAdapter extends PagerAdapter {
         list.get(position).setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View view) {
-                //点击banner打开浏览器
-                Intent intent = new Intent();
-                intent.setAction("android.intent.action.VIEW");
-                Uri content_url = Uri.parse(data.get(position));
-                intent.setData(content_url);
-                context.startActivity(intent);
+
+                try {
+                    //点击banner打开浏览器
+                    Intent intent = new Intent();
+                    intent.setAction("android.intent.action.VIEW");
+                    Uri content_url = Uri.parse(data.get(position % 4));
+                    intent.setData(content_url);
+                    context.startActivity(intent);
+
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+
 
             }
         });

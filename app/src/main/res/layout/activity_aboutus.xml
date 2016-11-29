@@ -61,7 +61,7 @@
             android:layout_marginTop="@dimen/y60"
             android:adjustViewBounds="true"
             android:scaleType="centerCrop"
-            android:src="@drawable/log" />
+            android:src="@drawable/sblog" />
 
         <TextView
             android:id="@+id/tv_aboutus_version_umber"

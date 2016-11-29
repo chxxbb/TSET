@@ -52,16 +52,8 @@ public class ContextUtil extends Application {
         ImageLoader.getInstance().init(config);
 
 
-
-
         JMessageClient.init(getApplicationContext());
         JPushInterface.setDebugMode(true);
-
-
-
-
-
-
 
 
     }

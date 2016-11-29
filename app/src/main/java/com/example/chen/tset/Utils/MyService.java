@@ -9,8 +9,6 @@ import android.support.annotation.Nullable;
 
 /**
  * Created by Administrator on 2016/11/2 0002.
- *
- *
  */
 public class MyService extends Service {
 
@@ -47,4 +45,6 @@ public class MyService extends Service {
             mWakeLock = null;
         }
     }
+
+
 }

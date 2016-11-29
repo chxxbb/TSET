@@ -45,13 +45,10 @@
         <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     </span>
 
-
     <uses-permission android:name="android.permission.SEND_SMS" />
     <uses-permission android:name="android.permission.READ_SMS" />
     <uses-permission android:name="android.permission.WRITE_SMS" />
     <uses-permission android:name="android.permission.RECEIVE_SMS" />
-
-
     <uses-permission android:name="android.permission.VIBRATE" />
 
     <application
@@ -59,7 +56,7 @@
         android:allowBackup="true"
         android:configChanges="orientation|screenSize|keyboardHidden|keyboard|"
         android:hardwareAccelerated="true"
-        android:icon="@drawable/image_emoticon25"
+        android:icon="@drawable/sblog"
         android:label="@string/app_name"
         android:persistent="true"
         android:screenOrientation="portrait"
@@ -70,15 +67,12 @@
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
         <activity
             android:name=".View.activity.LogActivity"
-            android:theme="@style/WelcomeStyle">
-
-        </activity>
+            android:theme="@style/WelcomeStyle"></activity>
         <activity android:name=".View.activity.RegisterActivity" />
         <activity android:name=".View.activity.SetdataActivity" />
         <activity android:name=".View.activity.FindpawActivity" />
@@ -107,7 +101,6 @@
         <activity android:name=".View.activity.InquiryrecordActivity" />
         <activity android:name=".View.activity.HomeActivity" />
         <activity android:name="com.soundcloud.android.crop.CropImageActivity" />
-
 
         <service
             android:name="cn.jpush.android.service.PushService"
@@ -229,14 +222,29 @@
         <activity android:name=".View.activity.ChatpageActivity" />
         <activity android:name=".View.activity.LoginActivity" />
         <activity android:name=".View.activity.CompilePharmacyRemindActivity" />
-
         <activity android:name=".View.activity.OnekeyLoinActivity" />
         <activity android:name=".View.activity.HealthparticularsActivity" />
         <activity android:name=".View.activity.InquiryActivity" />
         <activity android:name=".View.activity.LectureoomActivity" />
-        <activity android:name=".View.activity.MyCashCouponsActivity"></activity>
+        <activity android:name=".View.activity.MyCashCouponsActivity" />
 
-        <service android:name=".Utils.MyService"></service>
+        <service android:name=".Utils.MyService" />
+        <service
+            android:name=".Utils.ServiceOne"
+            android:process=":remote">
+            <intent-filter>
+                <action android:name="com.example.servicedemo.ServiceOne" />
+            </intent-filter>
+        </service>
+        <service
+            android:name=".Utils.ServiceTwo"
+            android:process=":remote">
+            <intent-filter>
+                <action android:name="com.example.servicedemo.ServiceTwo" />
+            </intent-filter>
+        </service>
+
+        <activity android:name=".View.activity.CompileConsultingActivity"></activity>
     </application>
 
 </manifest>

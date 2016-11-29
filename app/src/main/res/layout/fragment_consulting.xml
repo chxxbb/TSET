@@ -84,8 +84,7 @@
                         android:layout_width="@dimen/x36"
                         android:layout_height="@dimen/y36"
                         android:layout_marginRight="@dimen/x30"
-                        android:src="@drawable/cpmsulting_right_top_set"
-                        android:visibility="gone" />
+                        android:src="@drawable/cpmsulting_right_top_set" />
                 </LinearLayout>
             </RelativeLayout>
 

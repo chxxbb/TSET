@@ -1,6 +1,7 @@
 package com.example.chen.tset.View.activity;
 
 import android.annotation.TargetApi;
+import android.app.ActivityManager;
 import android.app.Dialog;
 import android.content.Context;
 import android.content.DialogInterface;
@@ -38,6 +39,8 @@ import com.example.chen.tset.Data.entity.Update;
 import com.example.chen.tset.Data.entity.User;
 import com.example.chen.tset.Data.User_Http;
 import com.example.chen.tset.Data.entity.VersionsUpdate;
+import com.example.chen.tset.Utils.ServiceOne;
+import com.example.chen.tset.Utils.ServiceTwo;
 import com.example.chen.tset.Utils.db.ChatpageDao;
 import com.example.chen.tset.Utils.IListener;
 import com.example.chen.tset.Utils.db.InquiryrecordDao;
@@ -62,6 +65,7 @@ import java.io.InputStream;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.net.URLConnection;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.Set;
 
@@ -128,6 +132,19 @@ public class HomeActivity extends MyBaseActivity implements View.OnClickListener
         super.onCreate(savedInstanceState);
 
         setContentView(R.layout.activity_home);
+
+        try {
+            Intent serviceOne = new Intent();
+            serviceOne.setClass(HomeActivity.this, ServiceOne.class);
+            startService(serviceOne);
+
+            Intent serviceTwo = new Intent();
+            serviceTwo.setClass(HomeActivity.this, ServiceTwo.class);
+            startService(serviceTwo);
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
 
 
         //注册广播
@@ -366,6 +383,18 @@ public class HomeActivity extends MyBaseActivity implements View.OnClickListener
         android.os.Message msg = new android.os.Message();
         msg.what = flag;
         handler.sendMessage(msg);
+    }
+
+
+    public static boolean isServiceWorked(Context context, String serviceName) {
+        ActivityManager myManager = (ActivityManager) context.getSystemService(Context.ACTIVITY_SERVICE);
+        ArrayList<ActivityManager.RunningServiceInfo> runningService = (ArrayList<ActivityManager.RunningServiceInfo>) myManager.getRunningServices(Integer.MAX_VALUE);
+        for (int i = 0; i < runningService.size(); i++) {
+            if (runningService.get(i).service.getClassName().toString().equals(serviceName)) {
+                return true;
+            }
+        }
+        return false;
     }
 
 

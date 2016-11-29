@@ -51,7 +51,11 @@ public class ChatpageDao {
             Chatcontent chatcontent = new Chatcontent(content, time, file, masterfile, username, myname);
             list.add(chatcontent);
         }
+
         return list;
     }
+
+
+
 
 }
