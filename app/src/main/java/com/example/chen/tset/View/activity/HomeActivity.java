@@ -48,6 +48,7 @@ import com.example.chen.tset.Utils.ListenerManager;
 import com.example.chen.tset.Utils.MyBaseActivity;
 import com.example.chen.tset.Utils.SharedPsaveuser;
 import com.example.chen.tset.Utils.Version_numberSP;
+import com.example.chen.tset.Utils.db.PharmacyDao;
 import com.example.chen.tset.page.fragment.ConsultingFragment;
 import com.example.chen.tset.page.fragment.EncyclopediaFragment;
 import com.example.chen.tset.R;
@@ -142,63 +143,64 @@ public class HomeActivity extends MyBaseActivity implements View.OnClickListener
             serviceTwo.setClass(HomeActivity.this, ServiceTwo.class);
             startService(serviceTwo);
 
+
+            //注册广播
+            ListenerManager.getInstance().registerListtener(this);
+
+            //版本号
+            version_numberSp = new Version_numberSP(this);
+
+
+            //设置版本号
+            if (version_numberSp.getversionNumber() == null || version_numberSp.getversionNumber().equals("") || (!version_numberSp.getversionNumber().trim().equals(Http_data.version_number))) {
+                version_numberSp.setspversionNumber(Http_data.version_number);
+            }
+
+
+            text_homeactivity = this;
+
+            //即时通信，用于接收消息
+            JMessageClient.registerEventReceiver(this);
+            JMessageClient.setNotificationMode(JMessageClient.NOTI_MODE_DEFAULT);
+            db = new ChatpageDao(this);
+            findView();
+            init();
+
+            //将用户的手机号保存在本地
+            Chatcontent chatcontent = new Chatcontent(null, 0L, null, null, null, User_Http.user.getPhone());
+            db.addchatcont(chatcontent);
+            sp = new SharedPsaveuser(HomeActivity.this);
+
+
+            context = getBaseContext();
+            DisplayMetrics dm = new DisplayMetrics();
+            WindowManager windowManager = (WindowManager) context.getSystemService(Context.WINDOW_SERVICE);
+            windowManager.getDefaultDisplay().getMetrics(dm);
+
+
+            //保存头像
+            if (sp.getTag().getIcon() == null && User_Http.user.getIcon() != null) {
+
+                saveicon();
+            }
+
+
+            updateaudioFile = new File(Environment.getExternalStorageDirectory().getAbsolutePath() + "/text/update/");
+            updateaudioFile.mkdirs();//创建更新文件夹
+
+            jmessage();
+
+            updatedetection();
+
+            if (Http_data.giveCashState == 2) {
+                giveCashCoupons();
+                Http_data.giveCashState = 1;
+            }
+
         } catch (Exception e) {
             e.printStackTrace();
         }
 
-
-        //注册广播
-        ListenerManager.getInstance().registerListtener(this);
-
-        //版本号
-        version_numberSp = new Version_numberSP(this);
-
-
-        //设置版本号
-        if (version_numberSp.getversionNumber() == null || version_numberSp.getversionNumber().equals("") || (!version_numberSp.getversionNumber().trim().equals(Http_data.version_number))) {
-            version_numberSp.setspversionNumber(Http_data.version_number);
-        }
-
-
-        text_homeactivity = this;
-
-        //即时通信，用于接收消息
-        JMessageClient.registerEventReceiver(this);
-        JMessageClient.setNotificationMode(JMessageClient.NOTI_MODE_DEFAULT);
-        db = new ChatpageDao(this);
-        findView();
-        init();
-
-        //将用户的手机号保存在本地
-        Chatcontent chatcontent = new Chatcontent(null, 0L, null, null, null, User_Http.user.getPhone());
-        db.addchatcont(chatcontent);
-        sp = new SharedPsaveuser(HomeActivity.this);
-
-
-        context = getBaseContext();
-        DisplayMetrics dm = new DisplayMetrics();
-        WindowManager windowManager = (WindowManager) context.getSystemService(Context.WINDOW_SERVICE);
-        windowManager.getDefaultDisplay().getMetrics(dm);
-
-
-        //保存头像
-        if (sp.getTag().getIcon() == null && User_Http.user.getIcon() != null) {
-
-            saveicon();
-        }
-
-
-        updateaudioFile = new File(Environment.getExternalStorageDirectory().getAbsolutePath() + "/text/update/");
-        updateaudioFile.mkdirs();//创建更新文件夹
-
-        jmessage();
-
-        updatedetection();
-
-        if (Http_data.giveCashState == 2) {
-            giveCashCoupons();
-            Http_data.giveCashState = 1;
-        }
 
     }
 

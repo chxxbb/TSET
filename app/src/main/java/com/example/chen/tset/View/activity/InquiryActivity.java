@@ -70,9 +70,16 @@ public class InquiryActivity extends AppCompatActivity implements IListener {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_inquiry);
         list = new ArrayList<>();
-        findView();
-        listinit(list);
-        httpinit();
+        try {
+
+            findView();
+            listinit(list);
+            httpinit();
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
     }
 
     private void findView() {

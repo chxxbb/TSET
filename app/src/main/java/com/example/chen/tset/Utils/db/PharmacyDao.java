@@ -7,7 +7,12 @@ import android.database.sqlite.SQLiteDatabase;
 
 import com.example.chen.tset.Data.entity.Pharmacyremind;
 
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -65,7 +70,40 @@ public class PharmacyDao {
     }
 
 
-    public void deleterecord(String username) {
-        db.execSQL("delete from pharmacy where username=?", new Object[]{username});
+    public void deleterecord(String username, String time) {
+        List<Pharmacyremind> list = chatfind(username);
+
+        long timeMillis = findTimeMillis(time);
+
+        for (int i = 0; i < list.size(); i++) {
+
+            long startTime = findTimeMillis(list.get(i).getStartdate());
+
+            long endTime = findTimeMillis(list.get(i).getOverdate());
+
+            if (timeMillis >= startTime && timeMillis <= endTime) {
+
+                db.execSQL("delete from pharmacy where startdate=?", new Object[]{list.get(i).getStartdate()});
+            }
+
+        }
+
+    }
+
+
+    public long findTimeMillis(String time) {
+        DateFormat df = new SimpleDateFormat("yyyy-MM-dd");
+        Date date = null;
+        try {
+            date = df.parse(time);
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+
+        Calendar cal = Calendar.getInstance();
+        cal.setTime(date);
+        long timestamp = cal.getTimeInMillis();
+
+        return timestamp;
     }
 }

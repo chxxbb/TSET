@@ -125,6 +125,8 @@ public class MycollectActivity extends MyBaseActivity implements IListener {
 
                     @Override
                     public void onResponse(String response, int id) {
+
+
                         list.clear();
                         Type listtype = new TypeToken<LinkedList<Information>>() {
                         }.getType();

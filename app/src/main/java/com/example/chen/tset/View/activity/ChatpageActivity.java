@@ -114,23 +114,31 @@ public class ChatpageActivity extends AppCompatActivity implements PtrUIHandler 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_chatpage);
-        JMessageClient.registerEventReceiver(this);
-        inquiryrecorddb = new InquiryrecordDao(this);
-
-        audioFile = new File(Environment.getExternalStorageDirectory().getAbsolutePath() + "/text/chatprint/");
-        audioFile.mkdirs();//创建文件夹
-        data = new ArrayList<>();
 
 
-        db = new ChatpageDao(this);
-        list = new ArrayList<>();
-        historylist = new ArrayList<>();
-        numberlist = new ArrayList<>();
-        findView();
-        init();
-        addMyDoctor();
-        //设置后在此页面接收此用户消息不会再通知栏中显示
-        JMessageClient.enterSingleConversation(username);
+        try {
+
+            JMessageClient.registerEventReceiver(this);
+            inquiryrecorddb = new InquiryrecordDao(this);
+
+            audioFile = new File(Environment.getExternalStorageDirectory().getAbsolutePath() + "/text/chatprint/");
+            audioFile.mkdirs();//创建文件夹
+            data = new ArrayList<>();
+
+
+            db = new ChatpageDao(this);
+            list = new ArrayList<>();
+            historylist = new ArrayList<>();
+            numberlist = new ArrayList<>();
+            findView();
+            init();
+            addMyDoctor();
+            //设置后在此页面接收此用户消息不会再通知栏中显示
+            JMessageClient.enterSingleConversation(username);
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
 
 
     }
@@ -796,34 +804,39 @@ public class ChatpageActivity extends AppCompatActivity implements PtrUIHandler 
     @Override
     protected void onPause() {
         super.onPause();
-        JPushInterface.onPause(this);
-        int j = 0;
 
-        SimpleDateFormat formatter = new SimpleDateFormat("yyyy/MM/dd  HH:mm:ss");
-        Date curDate = new Date(System.currentTimeMillis());//获取当前时间
-        String str = formatter.format(curDate);
-        //获取当前用户手机号
-        if (User_Http.user.getPhone() != null) {
-            ilist = inquiryrecorddb.chatfind(sp.getTag().getPhone());
-        } else {
-            SharedPsaveuser sp = new SharedPsaveuser(this);
-            Userinfo userinfo = sp.getTag();
-            ilist = inquiryrecorddb.chatfind(userinfo.getPhone());
-        }
+        try {
+            JPushInterface.onPause(this);
+            int j = 0;
 
-
-        //查找数据库中是否有这个医生的聊天记录
-        for (int i = 0; i < ilist.size(); i++) {
-            if (username.equals(ilist.get(i).getDoctorid())) {
-                j++;
+            SimpleDateFormat formatter = new SimpleDateFormat("yyyy/MM/dd  HH:mm:ss");
+            Date curDate = new Date(System.currentTimeMillis());//获取当前时间
+            String str = formatter.format(curDate);
+            //获取当前用户手机号
+            if (User_Http.user.getPhone() != null) {
+                ilist = inquiryrecorddb.chatfind(sp.getTag().getPhone());
+            } else {
+                SharedPsaveuser sp = new SharedPsaveuser(this);
+                Userinfo userinfo = sp.getTag();
+                ilist = inquiryrecorddb.chatfind(userinfo.getPhone());
             }
-        }
-        //如果数据库没有这个医生的聊天记录，并且chatstate大于0则保存
 
-        //chatstate用于判断是否发送过消息
-        if (j == 0 && chatstate != 0) {
-            Inquiryrecord inquiryrecord = new Inquiryrecord(sp.getTag().getPhone(), username, doctorID, doctorname, doctoricon, str, "");
-            inquiryrecorddb.addInquiryrecord(inquiryrecord);
+
+            //查找数据库中是否有这个医生的聊天记录
+            for (int i = 0; i < ilist.size(); i++) {
+                if (username.equals(ilist.get(i).getDoctorid())) {
+                    j++;
+                }
+            }
+            //如果数据库没有这个医生的聊天记录，并且chatstate大于0则保存
+
+            //chatstate用于判断是否发送过消息
+            if (j == 0 && chatstate != 0) {
+                Inquiryrecord inquiryrecord = new Inquiryrecord(sp.getTag().getPhone(), username, doctorID, doctorname, doctoricon, str, "");
+                inquiryrecorddb.addInquiryrecord(inquiryrecord);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
         }
 
 

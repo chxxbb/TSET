@@ -100,6 +100,7 @@ public class ConsultPageActivity extends MyBaseActivity implements View.OnClickL
                             @Override
                             public void onResponse(String response, int id) {
 
+
                                 if (response.equals("0")) {
                                     handler.sendEmptyMessage(1);
 
@@ -136,13 +137,13 @@ public class ConsultPageActivity extends MyBaseActivity implements View.OnClickL
 
                             @Override
                             public void onResponse(String response, int id) {
+
                                 if (response.equals("[]") || response.equals("")) {
                                     handler.sendEmptyMessage(4);
 
                                 } else {
                                     consultparticulars = gson.fromJson(response, Consultparticulars.class);
                                     handler.sendEmptyMessage(5);
-
 
                                 }
                             }

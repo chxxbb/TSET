@@ -8,16 +8,22 @@ import android.view.View;
 import android.widget.CompoundButton;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
+import android.widget.TextView;
 import android.widget.ToggleButton;
 
 import com.example.chen.tset.R;
 import com.example.chen.tset.Utils.SharedPsaveuser;
+
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 public class CompileConsultingActivity extends AppCompatActivity {
     private LinearLayout ll_return;
     private RelativeLayout ll_add_medicine_remind, ll_add_health_condition;
     ToggleButton toggleButton;
     SharedPsaveuser sp = new SharedPsaveuser(this);
+    String time;
+    private TextView tv_time;
 
 
     @Override
@@ -25,6 +31,11 @@ public class CompileConsultingActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_compile_consulting);
 
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy年MM月dd日");
+
+        Date curDate = new Date(System.currentTimeMillis());//获取当前时间
+
+        time = sdf.format(curDate);
 
         findView();
 
@@ -33,9 +44,13 @@ public class CompileConsultingActivity extends AppCompatActivity {
 
     private void findView() {
         ll_return = (LinearLayout) findViewById(R.id.ll_return);
+        tv_time = (TextView) findViewById(R.id.tv_time);
         ll_add_medicine_remind = (RelativeLayout) findViewById(R.id.ll_add_medicine_remind);
         ll_add_health_condition = (RelativeLayout) findViewById(R.id.ll_add_health_condition);
         toggleButton = (ToggleButton) findViewById(R.id.toggleButton);
+
+        tv_time.setText(time);
+
         ll_return.setOnClickListener(listener);
         ll_add_medicine_remind.setOnClickListener(listener);
         ll_add_health_condition.setOnClickListener(listener);
@@ -47,13 +62,17 @@ public class CompileConsultingActivity extends AppCompatActivity {
             toggleButton.setChecked(true);
         }
 
+
+
         toggleButton.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                 if (isChecked) {
                     sp.setRemindState(false);
+
                 } else {
                     sp.setRemindState(true);
+
                 }
             }
         });

@@ -333,8 +333,8 @@ public class HomepageFragment extends Fragment {
                             }
 
                             @Override
-                            public void onResponse(String response, int id) {
-
+                            public void onResponse(String response, int  id) {
+                                Log.e("111",response);
 
                                 Type listtype = new TypeToken<LinkedList<Consult>>() {
                                 }.getType();

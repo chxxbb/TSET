@@ -4,6 +4,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.view.ViewDebug;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -55,7 +56,11 @@ public class HealthparticularsActivity extends AppCompatActivity implements ILis
         tv_time.setText(time);
         tv_content.setText(content);
         ll_health_return.setOnClickListener(listner);
-        ll_healthcondition_delete.setOnClickListener(deltetlistener);
+        try {
+            ll_healthcondition_delete.setOnClickListener(deltetlistener);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
 
 
     }

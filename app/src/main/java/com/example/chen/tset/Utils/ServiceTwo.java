@@ -60,40 +60,49 @@ public class ServiceTwo extends Service {
                 @Override
                 public void run() {
 
-                    try {
-                        Time time = new Time();
-                        time.setToNow();
-                        String currentTime = time.format("%H:%M");
-
-                        PharmacyDao db = new PharmacyDao(getApplicationContext());
-                        SharedPsaveuser sp = new SharedPsaveuser(getApplicationContext());
-
-                        List<Pharmacyremind> list = db.chatfind(sp.getTag().getId() + "");
+                    SharedPsaveuser sp1 = new SharedPsaveuser(getApplicationContext());
 
 
-                        for (int i = 0; i < list.size(); i++) {
-                            DateFormat df = new SimpleDateFormat("yyyy-MM-dd");
-                            Date curDate = new Date(System.currentTimeMillis());//获取当前时间
-                            long timeMillis = findTimeMillis(df.format(curDate));
+                    if (sp1.getRemindState()) {
 
-                            long startTime = findTimeMillis(list.get(i).getStartdate());
+                        try {
+                            Time time = new Time();
+                            time.setToNow();
+                            String currentTime = time.format("%H:%M");
 
-                            long endTime = findTimeMillis(list.get(i).getOverdate());
+                            PharmacyDao db = new PharmacyDao(getApplicationContext());
+                            SharedPsaveuser sp = new SharedPsaveuser(getApplicationContext());
+
+                            List<Pharmacyremind> list = db.chatfind(sp.getTag().getId() + "");
 
 
-                            if (timeMillis >= startTime && timeMillis <= endTime) {
-                                if (currentTime.equals(list.get(i).getTime1())) {
-                                    send();
-                                } else if (currentTime.equals(list.get(i).getTime2())) {
-                                    send();
-                                } else if (currentTime.equals(list.get(i).getTime3())) {
-                                    send();
+                            for (int i = 0; i < list.size(); i++) {
+                                DateFormat df = new SimpleDateFormat("yyyy-MM-dd");
+                                Date curDate = new Date(System.currentTimeMillis());//获取当前时间
+                                long timeMillis = findTimeMillis(df.format(curDate));
+
+                                long startTime = findTimeMillis(list.get(i).getStartdate());
+
+                                long endTime = findTimeMillis(list.get(i).getOverdate());
+
+
+                                if (timeMillis >= startTime && timeMillis <= endTime) {
+                                    if (currentTime.equals(list.get(i).getTime1())) {
+                                        send();
+                                    } else if (currentTime.equals(list.get(i).getTime2())) {
+                                        send();
+                                    } else if (currentTime.equals(list.get(i).getTime3())) {
+                                        send();
+                                    }
                                 }
                             }
+
+                        } catch (Exception e) {
+                            e.printStackTrace();
                         }
 
-                    } catch (Exception e) {
-                        e.printStackTrace();
+                    } else {
+
                     }
 
                     boolean b = HomeActivity.isServiceWorked(ServiceTwo.this, "com.example.chen.tset.Utils.ServiceOne");

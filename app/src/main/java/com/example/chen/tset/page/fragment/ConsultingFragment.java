@@ -176,35 +176,41 @@ public class ConsultingFragment extends Fragment implements View.OnClickListener
         view = inflater.inflate(R.layout.fragment_consulting, null);
 
 
-        sp = new SharedPsaveuser(getContext());
+        try {
 
-        clist = new ArrayList<>();
-        //设置预加载页面
-        new Thread(new Runnable() {
-            @Override
-            public void run() {
-                try {
-                    Thread.sleep(1);
-                    handler.sendEmptyMessage(0);
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
+
+            sp = new SharedPsaveuser(getContext());
+
+            clist = new ArrayList<>();
+            //设置预加载页面
+            new Thread(new Runnable() {
+                @Override
+                public void run() {
+                    try {
+                        Thread.sleep(1);
+                        handler.sendEmptyMessage(0);
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
+                    }
+
                 }
-
-            }
-        }).start();
+            }).start();
 
 
-        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
-        SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM");
-        Date curDate = new Date(System.currentTimeMillis());//获取当前时间
-        str = formatter.format(curDate);
-        pharmacydate = sdf.format(curDate);
-        today = sdf.format(curDate);
-        findAllByDate(str);
-        //注册监听器
-        ListenerManager.getInstance().registerListtener(this);
+            SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+            SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM");
+            Date curDate = new Date(System.currentTimeMillis());//获取当前时间
+            str = formatter.format(curDate);
+            pharmacydate = sdf.format(curDate);
+            today = sdf.format(curDate);
+            findAllByDate(str);
+            //注册监听器
+            ListenerManager.getInstance().registerListtener(this);
 
 
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
         return view;
     }
 
@@ -297,9 +303,12 @@ public class ConsultingFragment extends Fragment implements View.OnClickListener
                     }
 
 
+
                     //健康状况
                     if (calendarinit.getTag() == null && calendarinit.getContent() == null) {
                         ll_consulting_health.setVisibility(View.GONE);
+
+
                         if (date == null || date.equals(today)) {
                             ll_add_health_condition.setVisibility(View.VISIBLE);
                         } else {
@@ -335,6 +344,7 @@ public class ConsultingFragment extends Fragment implements View.OnClickListener
                             public void onClick(View v) {
                                 Intent intent = new Intent(getContext(), CompilePharmacyRemindActivity.class);
                                 intent.putExtra("remindId", calendarinit.getRemindId() + "");
+                                intent.putExtra("time", pharmacydate);
                                 startActivity(intent);
                             }
                         });
@@ -567,10 +577,18 @@ public class ConsultingFragment extends Fragment implements View.OnClickListener
         gridView.setAdapter(calV);
         addTextToTopTextView(currentMonth); // 移动到下一月后，将当月显示在头标题中
 
+        String str1 = null;
+
+        if (calV.getShowMonth().equals("1") || calV.getShowMonth().equals("2") || calV.getShowMonth().equals("3") || calV.getShowMonth().equals("4") || calV.getShowMonth().equals("5") || calV.getShowMonth().equals("6") || calV.getShowMonth().equals("7") || calV.getShowMonth().equals("8") || calV.getShowMonth().equals("9")) {
+            str1 = calV.getShowYear() + "-0" + calV.getShowMonth();
+        } else {
+            str1 = calV.getShowYear() + "-" + calV.getShowMonth();
+        }
+
+        Log.e("11", str1);
 
         //加载滑动到的页面日期数据
-        findAllByDate(calV.getShowYear() + "-" + calV.getShowMonth());
-
+        findAllByDate(str1);
 
         gvFlag++;
         flipper.addView(gridView, gvFlag);
@@ -611,7 +629,6 @@ public class ConsultingFragment extends Fragment implements View.OnClickListener
             str = calV.getShowYear() + "-0" + calV.getShowMonth();
         } else {
             str = calV.getShowYear() + "-" + calV.getShowMonth();
-
         }
 
         //加载滑动到的页面日期数据
@@ -783,11 +800,12 @@ public class ConsultingFragment extends Fragment implements View.OnClickListener
                             @Override
                             public void onResponse(String response, int id) {
 
-                                if (response.equals("{}")) {
-                                    handler.sendEmptyMessage(3);
-                                } else {
+
+                                try {
                                     calendarinit = gson.fromJson(response, Calendarinit.class);
                                     handler.sendEmptyMessage(4);
+                                } catch (Exception e) {
+                                    e.printStackTrace();
                                 }
 
 

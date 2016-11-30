@@ -207,6 +207,7 @@ public class OnekeyLoinActivity extends AppCompatActivity {
                     .execute(new StringCallback() {
                         @Override
                         public void onError(Call call, Exception e, int id) {
+
                             runOnUiThread(new Runnable() {
                                 @Override
                                 public void run() {
@@ -214,6 +215,7 @@ public class OnekeyLoinActivity extends AppCompatActivity {
                                 }
                             });
                         }
+
 
                         @Override
                         public void onResponse(String response, int id) {
