@@ -6,16 +6,15 @@ package com.example.chen.tset.Data.entity;
  */
 public class Consultparticulars {
     private String content;
-    private String icon;
+    private String cover;
     private String title;
     private String time;
 
-    public Consultparticulars(String content, String icon, String title, String time) {
+    public Consultparticulars(String content, String cover, String title, String time) {
         this.content = content;
-        this.icon = icon;
+        this.cover = cover;
         this.title = title;
         this.time = time;
-
     }
 
     public String getContent() {
@@ -26,12 +25,12 @@ public class Consultparticulars {
         this.content = content;
     }
 
-    public String getIcon() {
-        return icon;
+    public String getCover() {
+        return cover;
     }
 
-    public void setIcon(String icon) {
-        this.icon = icon;
+    public void setCover(String cover) {
+        this.cover = cover;
     }
 
     public String getTitle() {
@@ -48,5 +47,16 @@ public class Consultparticulars {
 
     public void setTime(String time) {
         this.time = time;
+    }
+
+
+    @Override
+    public String toString() {
+        return "Consultparticulars{" +
+                "content='" + content + '\'' +
+                ", cover='" + cover + '\'' +
+                ", title='" + title + '\'' +
+                ", time='" + time + '\'' +
+                '}';
     }
 }

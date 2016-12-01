@@ -53,11 +53,18 @@ public class ReservationlistActivity extends MyBaseActivity implements View.OnCl
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_reservationlist);
-        scrollView = (ScrollView) findViewById(R.id.scrollView);
-        ListenerManager.getInstance().registerListtener(this);
-        scrollView.setVerticalScrollBarEnabled(false);
-        findView();
-        httpinit();
+
+        try {
+
+            scrollView = (ScrollView) findViewById(R.id.scrollView);
+
+            ListenerManager.getInstance().registerListtener(this);
+            scrollView.setVerticalScrollBarEnabled(false);
+            findView();
+            httpinit();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
 

@@ -22,7 +22,13 @@ public class RemindsetActivity extends MyBaseActivity implements View.OnClickLis
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_remindset);
-        findView();
+        try {
+
+            findView();
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     private void findView() {

@@ -42,8 +42,16 @@ public class EncyclopediaFragment extends Fragment {
         view = inflater.inflate(R.layout.fragment_encyclopedia, null);
 
 
-        findView();
-        init();
+        try {
+
+            findView();
+            init();
+
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
 
 
         return view;

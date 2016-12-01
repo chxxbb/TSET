@@ -56,9 +56,15 @@ public class HealthconditionActivity extends MyBaseActivity implements IListener
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_healthcondition);
-        ListenerManager.getInstance().registerListtener(this);
-        list = new ArrayList<>();
-        findView();
+        try {
+
+            ListenerManager.getInstance().registerListtener(this);
+            list = new ArrayList<>();
+            findView();
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
 

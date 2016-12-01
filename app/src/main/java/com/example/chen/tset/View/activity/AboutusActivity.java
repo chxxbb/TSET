@@ -38,7 +38,7 @@ import okhttp3.Call;
 
 //关于我们页面
 public class AboutusActivity extends MyBaseActivity {
-    private LinearLayout ll_aboutus, ll_hint_version_number;
+    private LinearLayout ll_aboutus, ll_hint_version_number, ll_user_agreement;
     private TextView tv_aboutus_version_umber;
     Version_numberSP version_numberSP;
     Update update;
@@ -66,12 +66,19 @@ public class AboutusActivity extends MyBaseActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_aboutus);
-        version_numberSP = new Version_numberSP(this);
-        updateaudioFile = new File(Environment.getExternalStorageDirectory().getAbsolutePath() + "/text/update/");
-        updateaudioFile.mkdirs();//创建更新文件夹
-        findView();
-        init();
-        updatedetection();
+
+        try {
+
+            version_numberSP = new Version_numberSP(this);
+            updateaudioFile = new File(Environment.getExternalStorageDirectory().getAbsolutePath() + "/text/update/");
+            updateaudioFile.mkdirs();//创建更新文件夹
+            findView();
+            init();
+            updatedetection();
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
 
@@ -80,7 +87,15 @@ public class AboutusActivity extends MyBaseActivity {
         tv_aboutus_version_umber = (TextView) findViewById(R.id.tv_aboutus_version_umber);
         ll_hint_version_number = (LinearLayout) findViewById(R.id.ll_hint_version_number);
         tv_hint_version_number = (TextView) findViewById(R.id.tv_hint_version_number);
+        ll_user_agreement = (LinearLayout) findViewById(R.id.ll_user_agreement);
         ll_aboutus.setOnClickListener(litener);
+        ll_user_agreement.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(AboutusActivity.this, UserAgreementActivity.class);
+                startActivity(intent);
+            }
+        });
 
     }
 

@@ -45,37 +45,44 @@ public class LogActivity extends AppCompatActivity {
 
         setContentView(R.layout.activity_log);
 
-        rl_log = (RelativeLayout) findViewById(R.id.rl_log);
+        try {
+
+            rl_log = (RelativeLayout) findViewById(R.id.rl_log);
 
 
-        //初始化
-        Animation alphaAnimation = new AlphaAnimation(0.5f, 1.0f);
-        //设置动画时间
-        alphaAnimation.setDuration(300);
+            //初始化
+            Animation alphaAnimation = new AlphaAnimation(0.5f, 1.0f);
+            //设置动画时间
+            alphaAnimation.setDuration(300);
 
-        rl_log.startAnimation(alphaAnimation);
-
-
-        alphaAnimation.setAnimationListener(new Animation.AnimationListener() {
-            @Override
-            public void onAnimationStart(Animation animation) {
-
-            }
-
-            @Override
-            public void onAnimationEnd(Animation animation) {
-                //判断是否是第一次登录，如果是则跳转到登录页面，如果不是则跳转到首页
-
-                judgeWhetherRegister();
+            rl_log.startAnimation(alphaAnimation);
 
 
-            }
+            alphaAnimation.setAnimationListener(new Animation.AnimationListener() {
+                @Override
+                public void onAnimationStart(Animation animation) {
 
-            @Override
-            public void onAnimationRepeat(Animation animation) {
+                }
 
-            }
-        });
+                @Override
+                public void onAnimationEnd(Animation animation) {
+                    //判断是否是第一次登录，如果是则跳转到登录页面，如果不是则跳转到首页
+
+                    judgeWhetherRegister();
+
+
+                }
+
+                @Override
+                public void onAnimationRepeat(Animation animation) {
+
+                }
+            });
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
 
 
     }

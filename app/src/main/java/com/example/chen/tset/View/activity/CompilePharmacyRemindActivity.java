@@ -46,8 +46,15 @@ public class CompilePharmacyRemindActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_compile_pharmacy_remind);
-        fidView();
-        init();
+
+        try {
+
+            fidView();
+            init();
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
 
     }
 

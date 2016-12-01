@@ -43,10 +43,17 @@ public class LoginActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.login_page);
 
+        try {
 
-        initview();
+            initview();
 
-        initOnclick();
+            initOnclick();
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+
 
 
         sp = new SharedPsaveuser(LoginActivity.this);

@@ -30,8 +30,14 @@ public class PhonechangeActivity extends MyBaseActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_phonechange);
-        sp=new SharedPsaveuser(this);
-        findView();
+        try {
+
+            sp=new SharedPsaveuser(this);
+            findView();
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     private void findView() {

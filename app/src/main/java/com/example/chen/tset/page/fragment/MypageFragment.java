@@ -52,9 +52,16 @@ public class MypageFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         view = inflater.inflate(R.layout.fragment_mypage, null);
 
-        findView();
+        try {
+            findView();
 
-        sp = new SharedPsaveuser(getContext());
+            sp = new SharedPsaveuser(getContext());
+
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
         return view;
     }
 
@@ -86,36 +93,44 @@ public class MypageFragment extends Fragment {
     public void onStart() {
         super.onStart();
 
-        //判断是否为联网状态，选择显示从后台获取的数据或本地数据
-        if ((User_Http.user.getIcon() == null || User_Http.user.getIcon().equals("")) && (sp.getTag().getIcon() == null || sp.getTag().getIcon().equals(""))) {
 
-            iv_ico.setImageResource(R.drawable.default_icon);
+        try {
 
 
-        } else if (User_Http.user.getIcon() == null || User_Http.user.getIcon().equals("")) {
+            //判断是否为联网状态，选择显示从后台获取的数据或本地数据
+            if ((User_Http.user.getIcon() == null || User_Http.user.getIcon().equals("")) && (sp.getTag().getIcon() == null || sp.getTag().getIcon().equals(""))) {
 
-            ImageLoader.getInstance().displayImage("file:///" + sp.getTag().getIcon(), iv_ico);
-
-
-        } else {
+                iv_ico.setImageResource(R.drawable.default_icon);
 
 
-            ImageLoader.getInstance().displayImage(User_Http.user.getIcon(), iv_ico);
+            } else if (User_Http.user.getIcon() == null || User_Http.user.getIcon().equals("")) {
+
+                ImageLoader.getInstance().displayImage("file:///" + sp.getTag().getIcon(), iv_ico);
+
+
+            } else {
+
+
+                ImageLoader.getInstance().displayImage(User_Http.user.getIcon(), iv_ico);
+            }
+
+
+            if (User_Http.user.getName() == null) {
+                tv_name.setText(sp.getTag().getName());
+            } else {
+                tv_name.setText(User_Http.user.getName());
+            }
+
+            if (sp.getTag().getPassword() != null) {
+                btn_user_login_form.setText("注册登录用户");
+
+            } else {
+                btn_user_login_form.setText("一键登录用户");
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
         }
 
-
-        if (User_Http.user.getName() == null) {
-            tv_name.setText(sp.getTag().getName());
-        } else {
-            tv_name.setText(User_Http.user.getName());
-        }
-
-        if (sp.getTag().getPassword() != null) {
-            btn_user_login_form.setText("注册登录用户");
-
-        } else {
-            btn_user_login_form.setText("一键登录用户");
-        }
 
 
     }

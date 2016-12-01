@@ -64,10 +64,17 @@ public class InquiryrecordActivity extends MyBaseActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_inquiryrecord);
-        list = new ArrayList<>();
-        db = new InquiryrecordDao(this);
-        findView();
-        init();
+
+        try {
+
+            list = new ArrayList<>();
+            db = new InquiryrecordDao(this);
+            findView();
+            init();
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
 
 
     }

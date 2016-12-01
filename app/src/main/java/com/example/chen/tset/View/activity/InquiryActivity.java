@@ -3,6 +3,7 @@ package com.example.chen.tset.View.activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.LinearLayout;
@@ -152,7 +153,7 @@ public class InquiryActivity extends AppCompatActivity implements IListener {
                 map.put(DropDownMenu.VALUE, citydialog());
                 map.put(DropDownMenu.SELECT_POSITION, 0);
             } else if (i == 1) {
-                map.put(DropDownMenu.VALUE, sectionsort());
+                map.put(DropDownMenu.VALUE,  sectionsort());
                 map.put(DropDownMenu.SELECT_POSITION, 0);
             } else {
                 map.put(DropDownMenu.VALUE, defaultsort());
@@ -382,10 +383,10 @@ public class InquiryActivity extends AppCompatActivity implements IListener {
                     @Override
                     public void onResponse(String response, int id) {
 
+                        Log.e("问诊返回", response);
 
                         Type listtype = new TypeToken<LinkedList<Inquiry>>() {
                         }.getType();
-
 
                         LinkedList<Inquiry> leclist = gson.fromJson(response, listtype);
                         for (Iterator it = leclist.iterator(); it.hasNext(); ) {

@@ -72,7 +72,7 @@
         </activity>
         <activity
             android:name=".View.activity.LogActivity"
-            android:theme="@style/WelcomeStyle"></activity>
+            android:theme="@style/WelcomeStyle" />
         <activity android:name=".View.activity.RegisterActivity" />
         <activity android:name=".View.activity.SetdataActivity" />
         <activity android:name=".View.activity.FindpawActivity" />
@@ -244,7 +244,8 @@
             </intent-filter>
         </service>
 
-        <activity android:name=".View.activity.CompileConsultingActivity"></activity>
+        <activity android:name=".View.activity.CompileConsultingActivity" />
+        <activity android:name=".View.activity.UserAgreementActivity"></activity>
     </application>
 
 </manifest>

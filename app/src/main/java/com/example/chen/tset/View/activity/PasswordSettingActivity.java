@@ -37,8 +37,14 @@ public class PasswordSettingActivity extends MyBaseActivity implements View.OnCl
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_password_setting);
-        sp = new SharedPsaveuser(this);
-        findView();
+        try {
+
+            sp = new SharedPsaveuser(this);
+            findView();
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
 

@@ -124,20 +124,27 @@ public class HomepageFragment extends Fragment {
 
         view = inflater.inflate(R.layout.fragment_homepage, null);
 
+        try {
 
-        findView();
+            findView();
 
-        //热点推荐
-        findAllHotinit();
+            //热点推荐
+            findAllHotinit();
 
-        //热门文章
-        homeEssayinit();
+            //热门文章
+            homeEssayinit();
 
-        //医生推荐
-        homeDoctorInit();
+            //医生推荐
+            homeDoctorInit();
 
 
-        init();
+            init();
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+
         return view;
     }
 
@@ -334,7 +341,7 @@ public class HomepageFragment extends Fragment {
 
                             @Override
                             public void onResponse(String response, int  id) {
-                                Log.e("111",response);
+
 
                                 Type listtype = new TypeToken<LinkedList<Consult>>() {
                                 }.getType();

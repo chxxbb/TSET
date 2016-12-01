@@ -78,8 +78,15 @@ public class DiseaseActivity extends MyBaseActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_disease);
 
-        findView();
-        httpinit();
+        try {
+
+            findView();
+            httpinit();
+
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     private void findView() {

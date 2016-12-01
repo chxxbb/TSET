@@ -45,11 +45,18 @@ public class ConsultPageActivity extends MyBaseActivity implements View.OnClickL
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_consult_page);
-        sp = new SharedPsaveuser(ConsultPageActivity.this);
 
-        //注册广播接口，点用户点击取消点赞时用于刷新 我的收藏页面
-        ListenerManager.getInstance().registerListtener(this);
-        findview();
+        try {
+
+            sp = new SharedPsaveuser(ConsultPageActivity.this);
+
+            //注册广播接口，点用户点击取消点赞时用于刷新 我的收藏页面
+            ListenerManager.getInstance().registerListtener(this);
+            findview();
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
 
     }
 
@@ -204,7 +211,7 @@ public class ConsultPageActivity extends MyBaseActivity implements View.OnClickL
                     tv_title.setText(consultparticulars.getTitle());
                     tv_time.setText("天使资讯  " + consultparticulars.getTime());
                     tv_content.setText("        " + consultparticulars.getContent() + " \n" + " \n" + "\n");
-                    ImageLoader.getInstance().displayImage(consultparticulars.getIcon(), iv_icon);
+                    ImageLoader.getInstance().displayImage(consultparticulars.getCover(), iv_icon);
                     rl_loading.setVisibility(View.GONE);
 
                     break;

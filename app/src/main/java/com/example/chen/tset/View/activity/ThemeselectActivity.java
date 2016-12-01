@@ -20,7 +20,13 @@ public class ThemeselectActivity extends MyBaseActivity implements View.OnClickL
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_themeselect);
-        finView();
+        try {
+
+            finView();
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     private void finView() {

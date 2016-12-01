@@ -89,11 +89,18 @@ public class RegistrationAtivity extends MyBaseActivity implements IListener {
         ListenerManager.getInstance().registerListtener(this);
         requestWindowFeature(Window.FEATURE_NO_TITLE);
         setContentView(R.layout.activity_registration_ativity);
-        sp = new SharedPsaveuser(this);
-        findView();
+
+        try {
+            sp = new SharedPsaveuser(this);
+            findView();
 
 
-        divisioninit();
+            divisioninit();
+
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
 

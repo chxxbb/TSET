@@ -31,13 +31,21 @@ public class CompileConsultingActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_compile_consulting);
 
-        SimpleDateFormat sdf = new SimpleDateFormat("yyyy年MM月dd日");
 
-        Date curDate = new Date(System.currentTimeMillis());//获取当前时间
+        try {
 
-        time = sdf.format(curDate);
+            SimpleDateFormat sdf = new SimpleDateFormat("yyyy年MM月dd日");
 
-        findView();
+            Date curDate = new Date(System.currentTimeMillis());//获取当前时间
+
+            time = sdf.format(curDate);
+
+            findView();
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
 
 
     }

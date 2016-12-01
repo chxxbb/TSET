@@ -28,10 +28,17 @@ public class MyCashCouponsActivity extends AppCompatActivity implements IListene
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_my_cash_coupons);
-        ListenerManager.getInstance().registerListtener(this);
-        type = getIntent().getStringExtra("type");
-        findView();
-        init();
+
+        try {
+            ListenerManager.getInstance().registerListtener(this);
+            type = getIntent().getStringExtra("type");
+            findView();
+            init();
+
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
 

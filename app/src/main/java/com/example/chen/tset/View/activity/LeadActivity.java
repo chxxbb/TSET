@@ -36,18 +36,25 @@ public class LeadActivity extends AppCompatActivity {
 
 
         setContentView(R.layout.activity_lead);
-        //打开APP时，判断是否是第一次使用APP如果是则直接跳转至首页，如果不是则显示此页面
-        SharedPreferences sp = getSharedPreferences("lead", MODE_PRIVATE);
-        boolean isclick = sp.getBoolean("isclick", true);
-        if (!isclick) {
-            Intent intent1 = new Intent(LeadActivity.this, LogActivity.class);
-            startActivity(intent1);
-            finish();
-        } else {
-            btclick();
-            imageDate();
+
+        try {
+            //打开APP时，判断是否是第一次使用APP如果是则直接跳转至首页，如果不是则显示此页面
+            SharedPreferences sp = getSharedPreferences("lead", MODE_PRIVATE);
+            boolean isclick = sp.getBoolean("isclick", true);
+            if (!isclick) {
+                Intent intent1 = new Intent(LeadActivity.this, LogActivity.class);
+                startActivity(intent1);
+                finish();
+            } else {
+                btclick();
+                imageDate();
+            }
+            fidView();
+
+
+        } catch (Exception e) {
+            e.printStackTrace();
         }
-        fidView();
 
     }
 

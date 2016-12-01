@@ -59,11 +59,17 @@ public class PersonaldataActivity extends MyBaseActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_personaldata);
-        sp = new SharedPsaveuser(PersonaldataActivity.this);
-        findView();
-        //头像的保存文件夹
-        audioFile = new File(Environment.getExternalStorageDirectory().getAbsolutePath() + "/text/icon/");
-        audioFile.mkdirs();//创建文件夹
+        try {
+
+            sp = new SharedPsaveuser(PersonaldataActivity.this);
+            findView();
+            //头像的保存文件夹
+            audioFile = new File(Environment.getExternalStorageDirectory().getAbsolutePath() + "/text/icon/");
+            audioFile.mkdirs();//创建文件夹
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     private void findView() {

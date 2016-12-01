@@ -25,9 +25,15 @@ public class SetPageActivity extends MyBaseActivity implements View.OnClickListe
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_set_page);
+        try {
 
-        sp = new SharedPsaveuser(this);
-        findView();
+
+            sp = new SharedPsaveuser(this);
+            findView();
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     private void findView() {

@@ -86,9 +86,16 @@ public class CompileremindActivity extends MyBaseActivity implements IListener {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_compileremind);
-        db = new PharmacyDao(this);
-        findView();
-        sp = new SharedPsaveuser(CompileremindActivity.this);
+
+        try {
+
+            db = new PharmacyDao(this);
+            findView();
+            sp = new SharedPsaveuser(CompileremindActivity.this);
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
 
 
     }

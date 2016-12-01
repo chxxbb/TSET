@@ -33,8 +33,14 @@ public class EvaluatepageActivity extends MyBaseActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_evaluatepage);
-        sp=new SharedPsaveuser(this);
-        findView();
+        try {
+
+            sp=new SharedPsaveuser(this);
+            findView();
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     private void findView() {

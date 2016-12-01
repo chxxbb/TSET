@@ -41,9 +41,16 @@ public class LectureoomActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.fragment_lectureroom);
-        findView();
-        init();
-        gson = new Gson();
+
+        try {
+
+            findView();
+            init();
+            gson = new Gson();
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     @Override

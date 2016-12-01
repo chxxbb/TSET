@@ -16,6 +16,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.Toast;
 
@@ -58,10 +59,18 @@ public class OnekeyLoinActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_onekey_loin);
+        try {
 
-        time = new TimeCount(60000, 1000);
+            time = new TimeCount(60000, 1000);
 
-        findView();
+            findView();
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+
+
     }
 
     private void findView() {
@@ -72,6 +81,7 @@ public class OnekeyLoinActivity extends AppCompatActivity {
         activity_onekey_Verification_code = (EditText) findViewById(R.id.activity_onekey_Verification_code);
 
         activity_onekeyr_Verification_code_button = (Button) findViewById(R.id.activity_onekeyr_Verification_code_button);
+
 
         login_button = (Button) findViewById(R.id.login_button);
 

@@ -30,10 +30,17 @@ public class SexpageActivity extends MyBaseActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_genderpage);
-        sp = new SharedPsaveuser(this);
+
+        try {
+
+            sp = new SharedPsaveuser(this);
 
 
-        findView();
+            findView();
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
 

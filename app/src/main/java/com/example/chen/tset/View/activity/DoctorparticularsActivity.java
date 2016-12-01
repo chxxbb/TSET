@@ -111,6 +111,8 @@ public class DoctorparticularsActivity extends MyBaseActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
+
+
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
             //透明状态栏
             getWindow().addFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
@@ -120,16 +122,23 @@ public class DoctorparticularsActivity extends MyBaseActivity {
 
         setContentView(R.layout.activity_doctorparticulars);
 
+        try {
 
-        doctor_id = getIntent().getStringExtra("doctot_id");
-
-
-        findView();
+            doctor_id = getIntent().getStringExtra("doctot_id");
 
 
-        doctorinit();
+            findView();
 
-        commenInit();
+
+            doctorinit();
+
+            commenInit();
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+
 
 
     }

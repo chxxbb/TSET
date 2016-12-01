@@ -64,15 +64,21 @@ public class CharactersafeFragment extends Fragment implements LoadListView.Iloa
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         view = inflater.inflate(R.layout.fragment_charactersafe, null);
 
-        findView();
+        try {
 
-        sp = new SharedPsaveuser(getContext());
-        gson = new Gson();
-        list = new ArrayList<>();
-        adapter = new CharactersafeAdapter1(getContext(), list);
-        lv_charactersafe.setAdapter(adapter);
+            findView();
 
-        init();
+            sp = new SharedPsaveuser(getContext());
+            gson = new Gson();
+            list = new ArrayList<>();
+            adapter = new CharactersafeAdapter1(getContext(), list);
+            lv_charactersafe.setAdapter(adapter);
+
+            init();
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
 
         return view;
     }
@@ -83,16 +89,12 @@ public class CharactersafeFragment extends Fragment implements LoadListView.Iloa
         rl_loading = (RelativeLayout) view.findViewById(R.id.rl_loading);
         ptrClassicFrameLayout = (PtrClassicFrameLayout) view.findViewById(R.id.ptrClassicFrameLayout);
 
-
         lv_charactersafe.setInterface(this);
 
         lv_charactersafe.setVerticalScrollBarEnabled(false);
 
-
         //2次下拉时间间隔
         ptrClassicFrameLayout.setDurationToCloseHeader(1000);
-
-
         //下拉刷新
         ptrClassicFrameLayout.setPtrHandler(new PtrDefaultHandler() {
             @Override
@@ -102,27 +104,32 @@ public class CharactersafeFragment extends Fragment implements LoadListView.Iloa
                 ptrClassicFrameLayout.postDelayed(new Runnable() {
                     @Override
                     public void run() {
+
+                        LoadListView loadListView = new LoadListView(getContext());
+
+                        loadListView.loadComplete();
+
                         page = 0;
                         list.clear();
                         init();
 
+
                     }
                     //设定加载更多聊天记录需要的时间
-                }, 2000);
-
+                }, 1000);
             }
         });
 
-
         lv_charactersafe.setOnItemClickListener(listener);
-
 
         rl_nonetwork.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
                 rl_loading.setVisibility(View.VISIBLE);
                 rl_nonetwork.setVisibility(View.GONE);
                 init();
+
 
             }
         });
@@ -130,13 +137,12 @@ public class CharactersafeFragment extends Fragment implements LoadListView.Iloa
 
     @Override
     public void onStart() {
-        super.onStart();
 
+        super.onStart();
 
     }
 
     private void init() {
-
 
         Thread thread = new Thread(new Runnable() {
             @Override
@@ -156,10 +162,8 @@ public class CharactersafeFragment extends Fragment implements LoadListView.Iloa
                             @Override
                             public void onResponse(String response, int id) {
 
-
                                 if (response.equals("1")) {
                                     Toast.makeText(getContext(), "数据获取失败", Toast.LENGTH_SHORT).show();
-
 
                                 } else if (response.equals("[]")) {
                                     Toast.makeText(getContext(), "已经没有更多数据了", Toast.LENGTH_SHORT).show();

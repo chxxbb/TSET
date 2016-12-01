@@ -55,9 +55,15 @@ public class MyDoctorActivity extends MyBaseActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_my_doctor);
-        findView();
-        init();
-        httpinit();
+        try {
+
+            findView();
+            init();
+            httpinit();
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     private void findView() {

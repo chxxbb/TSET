@@ -54,11 +54,16 @@ public class RegisterActivity extends MyBaseActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_register);
+        try {
 
-        initView();
+            initView();
 
-        time = new TimeCount(60000, 1000);
-        initOnclick();
+            time = new TimeCount(60000, 1000);
+            initOnclick();
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
 
 
         try {
@@ -66,11 +71,10 @@ public class RegisterActivity extends MyBaseActivity {
             Uri uri = Uri.parse("content://sms");
             //注册短信的监听
             getContentResolver().registerContentObserver(uri, true, mObserver);
-        }catch (Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
             Toast.makeText(RegisterActivity.this, "自动获取验证码失败，请手动开启读取短信权限", Toast.LENGTH_SHORT).show();
         }
-
 
 
     }
@@ -229,7 +233,7 @@ public class RegisterActivity extends MyBaseActivity {
         public void onTick(long millisUntilFinished) {
             activity_register_Verification_code_button.setBackgroundResource(R.drawable.verification_btn_case);
             activity_register_Verification_code_button.setClickable(false);
-            activity_register_Verification_code_button.setText(+millisUntilFinished / 1000+"秒");
+            activity_register_Verification_code_button.setText(+millisUntilFinished / 1000 + "秒");
 
         }
 

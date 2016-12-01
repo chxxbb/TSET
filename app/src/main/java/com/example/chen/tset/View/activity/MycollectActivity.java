@@ -53,10 +53,17 @@ public class MycollectActivity extends MyBaseActivity implements IListener {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_mycollect);
-        ListenerManager.getInstance().registerListtener(this);
-        findView();
-        init();
-        initHttp();
+
+        try {
+
+            ListenerManager.getInstance().registerListtener(this);
+            findView();
+            init();
+            initHttp();
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     @Override

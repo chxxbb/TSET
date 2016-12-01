@@ -68,11 +68,19 @@ public class DiseaselibFragment extends Fragment implements IListener {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         view = inflater.inflate(R.layout.fragment_diseaselib, null);
-        //注册广播
-        ListenerManager.getInstance().registerListtener(this);
-        findView();
-        listviewinit();
-        httpinit(0);
+
+
+        try {
+
+            //注册广播
+            ListenerManager.getInstance().registerListtener(this);
+            findView();
+            listviewinit();
+            httpinit(0);
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
         return view;
     }
 

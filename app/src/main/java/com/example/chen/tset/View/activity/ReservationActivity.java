@@ -51,12 +51,19 @@ public class ReservationActivity extends MyBaseActivity implements View.OnClickL
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_reservationactivity);
-        data = new ArrayList<>();
-        sp=new SharedPsaveuser(this);
-        //注册广播，用于用户取消订单后通知我的预约页面更新
-        ListenerManager.getInstance().registerListtener(this);
-        findView();
-        init();
+
+        try {
+
+            data = new ArrayList<>();
+            sp=new SharedPsaveuser(this);
+            //注册广播，用于用户取消订单后通知我的预约页面更新
+            ListenerManager.getInstance().registerListtener(this);
+            findView();
+            init();
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
 
     }
 

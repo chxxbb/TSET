@@ -33,7 +33,13 @@ public class PharmacyremindActivity extends MyBaseActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_pharmacyremind);
-        findView();
+        try {
+
+            findView();
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
 
 
     }

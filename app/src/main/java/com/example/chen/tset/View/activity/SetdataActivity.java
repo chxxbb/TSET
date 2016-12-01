@@ -44,10 +44,17 @@ public class SetdataActivity extends MyBaseActivity implements IListener{
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_setdata);
-        //注册广播
-        ListenerManager.getInstance().registerListtener(this);
-        sp=new SharedPsaveuser(this);
-        finView();
+
+        try {
+
+            //注册广播
+            ListenerManager.getInstance().registerListtener(this);
+            sp=new SharedPsaveuser(this);
+            finView();
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     private void finView() {

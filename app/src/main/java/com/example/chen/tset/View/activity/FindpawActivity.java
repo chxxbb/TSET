@@ -46,13 +46,19 @@ public class FindpawActivity extends MyBaseActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_find_pawnumber);
+        try {
+            sp=new SharedPsaveuser(this);
 
-        sp=new SharedPsaveuser(this);
+            initView();
+            //设定再次获取验证码需要的时间
+            time = new TimeCount(60000, 1000);
+            initOnClick();
 
-        initView();
-        //设定再次获取验证码需要的时间
-        time = new TimeCount(60000, 1000);
-        initOnClick();
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
 
     }
 
