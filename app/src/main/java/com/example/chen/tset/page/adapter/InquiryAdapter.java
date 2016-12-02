@@ -19,6 +19,7 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.chen.tset.Data.entity.DoctorList;
 import com.example.chen.tset.Data.entity.Inquiry;
 import com.example.chen.tset.R;
 import com.example.chen.tset.Utils.IListener;
@@ -39,7 +40,7 @@ import de.hdodenhof.circleimageview.CircleImageView;
 public class InquiryAdapter extends BaseAdapter {
 
     private Context context;
-    private List<Inquiry> list;
+    private List<DoctorList> list;
     private Dialog setHeadDialog;
     private View dialogView;
 
@@ -59,7 +60,7 @@ public class InquiryAdapter extends BaseAdapter {
     RelativeLayout rl_use_cash_coupons;
 
 
-    public InquiryAdapter(Context context, List<Inquiry> list) {
+    public InquiryAdapter(Context context, List<DoctorList> list) {
         this.context = context;
         this.list = list;
 
@@ -72,7 +73,7 @@ public class InquiryAdapter extends BaseAdapter {
     }
 
     @Override
-    public Inquiry getItem(int position) {
+    public DoctorList getItem(int position) {
         return list.get(position);
     }
 

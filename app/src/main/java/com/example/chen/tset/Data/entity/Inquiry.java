@@ -27,14 +27,6 @@ public class Inquiry {
         this.username = username;
     }
 
-    public String getUsername() {
-        return username;
-    }
-
-    public void setUsername(String username) {
-        this.username = username;
-    }
-
     public String getIcon() {
         return icon;
     }
@@ -99,18 +91,11 @@ public class Inquiry {
         this.id = id;
     }
 
-    @Override
-    public String toString() {
-        return "Inquiry{" +
-                "icon='" + icon + '\'' +
-                ", title='" + title + '\'' +
-                ", name='" + name + '\'' +
-                ", chatCost='" + chatCost + '\'' +
-                ", adept='" + adept + '\'' +
-                ", section='" + section + '\'' +
-                ", hospital='" + hospital + '\'' +
-                ", id='" + id + '\'' +
-                ", username='" + username + '\'' +
-                '}';
+    public String getUsername() {
+        return username;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
     }
 }

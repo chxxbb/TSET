@@ -219,6 +219,8 @@ public class HomepageFragment extends Fragment {
         //隐藏滚动条
         scrollView.setVerticalScrollBarEnabled(false);
 
+        //使scrollView显示在头部
+        scrollView.smoothScrollTo(0, 0);
 
         //先使用数据局库数据显示
         new Thread(new Runnable() {
@@ -226,10 +228,8 @@ public class HomepageFragment extends Fragment {
             public void run() {
                 if (db.findHomeDoctor().size() != 0 && homeEassaydb.findHomeEassay().size() != 0) {
                     inquiryList.addAll(db.findHomeDoctor());
-
                     handler.sendEmptyMessage(4);
                     handler.sendEmptyMessage(5);
-
 
                 } else {
 
@@ -237,10 +237,8 @@ public class HomepageFragment extends Fragment {
 
                 }
 
-
             }
         }).start();
-
 
         ll_patriarch_lecture_room.setOnClickListener(listener);
         ll_home_order_registration.setOnClickListener(listener);
@@ -260,7 +258,6 @@ public class HomepageFragment extends Fragment {
                 Toast.makeText(getContext(), "链接:" + findAllHotList.get(number % strings.size()).getSite(), Toast.LENGTH_SHORT).show();
             }
         });
-
 
     }
 
@@ -287,10 +284,8 @@ public class HomepageFragment extends Fragment {
                                 handler.sendEmptyMessage(7);
                             }
 
-
                             @Override
                             public void onResponse(String response, int id) {
-
 
                                 Type listtype = new TypeToken<LinkedList<FindAllHot>>() {
                                 }.getType();
@@ -320,7 +315,6 @@ public class HomepageFragment extends Fragment {
             }
         }).start();
 
-
     }
 
 
@@ -340,7 +334,7 @@ public class HomepageFragment extends Fragment {
                             }
 
                             @Override
-                            public void onResponse(String response, int  id) {
+                            public void onResponse(String response, int id) {
 
 
                                 Type listtype = new TypeToken<LinkedList<Consult>>() {

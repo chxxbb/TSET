@@ -12,6 +12,7 @@ import android.widget.RelativeLayout;
 import android.widget.Toast;
 
 import com.example.chen.tset.Data.Http_data;
+import com.example.chen.tset.Data.entity.DoctorList;
 import com.example.chen.tset.Data.entity.Inquiry;
 import com.example.chen.tset.R;
 import com.example.chen.tset.Utils.IListener;
@@ -43,13 +44,13 @@ public class InquiryActivity extends AppCompatActivity implements IListener {
     InquiryAdapter adapter;
     private ListView lv_inquiry;
     //全部医生列表
-    List<Inquiry> list;
+    List<DoctorList> list;
     //科室列表
-    List<Inquiry> selectlist;
+    List<DoctorList> selectlist;
     //城市列表
-    List<Inquiry> citylist;
+    List<DoctorList> citylist;
     //职称列表
-    List<Inquiry> titlelist;
+    List<DoctorList> titlelist;
     List<String> data;
     private LinearLayout ll_rutre_inquiry;
 
@@ -124,7 +125,7 @@ public class InquiryActivity extends AppCompatActivity implements IListener {
                 //根据所选择的排序，点击时获取所点击医生ID
                 if (tag.equals("全部地区") || tag == null || tag.equals("") || tag.equals("智能排序") || tag.equals("全部科室") || tag.equals("默认")) {
                     intent.putExtra("doctot_id", list.get(position).getId());
-                } else if (tag.equals("成都") || tag.equals("深圳")) {
+                } else if (tag.equals("成都") || tag.equals("深圳") || tag.equals("北京") || tag.equals("上海") || tag.equals("广州")) {
                     intent.putExtra("doctot_id", citylist.get(position).getId());
                 } else if (tag.equals("职称排序")) {
                     intent.putExtra("doctot_id", titlelist.get(position).getId());
@@ -153,7 +154,7 @@ public class InquiryActivity extends AppCompatActivity implements IListener {
                 map.put(DropDownMenu.VALUE, citydialog());
                 map.put(DropDownMenu.SELECT_POSITION, 0);
             } else if (i == 1) {
-                map.put(DropDownMenu.VALUE,  sectionsort());
+                map.put(DropDownMenu.VALUE, sectionsort());
                 map.put(DropDownMenu.SELECT_POSITION, 0);
             } else {
                 map.put(DropDownMenu.VALUE, defaultsort());
@@ -293,6 +294,12 @@ public class InquiryActivity extends AppCompatActivity implements IListener {
         //成都
         LinearLayout ll_city_chengdu = (LinearLayout) v.findViewById(R.id.ll_city_chengdu);
 
+        LinearLayout ll_city_beijin = (LinearLayout) v.findViewById(R.id.ll_city_beijin);
+
+        LinearLayout ll_city_shanghai = (LinearLayout) v.findViewById(R.id.ll_city_shanghai);
+
+        LinearLayout ll_city_guangdong = (LinearLayout) v.findViewById(R.id.ll_city_guangdong);
+
         ll_all_areas.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -316,13 +323,14 @@ public class InquiryActivity extends AppCompatActivity implements IListener {
                 tag = "深圳";
                 citylist.clear();
                 for (int i = 0; i < list.size(); i++) {
-                    if (list.get(i).getHospital().equals("深圳天使儿童医院")) {
+                    if (list.get(i).getCity().equals("深圳")) {
                         citylist.add(list.get(i));
                     }
                 }
                 listinit(citylist);
             }
         });
+
 
         ll_city_chengdu.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -334,7 +342,63 @@ public class InquiryActivity extends AppCompatActivity implements IListener {
                 tag = "成都";
                 citylist.clear();
                 for (int i = 0; i < list.size(); i++) {
-                    if (list.get(i).getHospital().equals("成都天使儿童医院")) {
+                    if (list.get(i).getCity().equals("成都")) {
+                        citylist.add(list.get(i));
+                    }
+                }
+                listinit(citylist);
+            }
+        });
+
+
+        ll_city_beijin.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                dropDownMenu.setTabText(0, "北京");//设置tab标签文字
+                dropDownMenu.setTabText(1, "全部科室");
+                dropDownMenu.setTabText(2, "智能排序");
+                dropDownMenu.closeMenu();//关闭menu
+                tag = "北京";
+                citylist.clear();
+                for (int i = 0; i < list.size(); i++) {
+                    if (list.get(i).getCity().equals("北京")) {
+                        citylist.add(list.get(i));
+                    }
+                }
+                listinit(citylist);
+            }
+        });
+
+
+        ll_city_shanghai.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                dropDownMenu.setTabText(0, "上海");//设置tab标签文字
+                dropDownMenu.setTabText(1, "全部科室");
+                dropDownMenu.setTabText(2, "智能排序");
+                dropDownMenu.closeMenu();//关闭menu
+                tag = "上海";
+                citylist.clear();
+                for (int i = 0; i < list.size(); i++) {
+                    if (list.get(i).getCity().equals("上海")) {
+                        citylist.add(list.get(i));
+                    }
+                }
+                listinit(citylist);
+            }
+        });
+
+        ll_city_guangdong.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                dropDownMenu.setTabText(0, "广州");//设置tab标签文字
+                dropDownMenu.setTabText(1, " 全部科室");
+                dropDownMenu.setTabText(2, "智能排序");
+                dropDownMenu.closeMenu();//关闭menu
+                tag = "广州";
+                citylist.clear();
+                for (int i = 0; i < list.size(); i++) {
+                    if (list.get(i).getCity().equals("广州")) {
                         citylist.add(list.get(i));
                     }
                 }
@@ -358,7 +422,7 @@ public class InquiryActivity extends AppCompatActivity implements IListener {
     }
 
 
-    private void listinit(List<Inquiry> list) {
+    private void listinit(List<DoctorList> list) {
         adapter = new InquiryAdapter(InquiryActivity.this, list);
         lv_inquiry.setAdapter(adapter);
     }
@@ -383,14 +447,12 @@ public class InquiryActivity extends AppCompatActivity implements IListener {
                     @Override
                     public void onResponse(String response, int id) {
 
-                        Log.e("问诊返回", response);
-
-                        Type listtype = new TypeToken<LinkedList<Inquiry>>() {
+                        Type listtype = new TypeToken<LinkedList<DoctorList>>() {
                         }.getType();
 
-                        LinkedList<Inquiry> leclist = gson.fromJson(response, listtype);
+                        LinkedList<DoctorList> leclist = gson.fromJson(response, listtype);
                         for (Iterator it = leclist.iterator(); it.hasNext(); ) {
-                            Inquiry inquiry = (Inquiry) it.next();
+                            DoctorList inquiry = (DoctorList) it.next();
                             list.add(inquiry);
                         }
 

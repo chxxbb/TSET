@@ -1,16 +1,34 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/rl_log"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:id="@+id/rl_log"
-    tools:context=".View.activity.LogActivity"
-    android:background="#fbff00">
-    <TextView
-        android:layout_width="wrap_content"
+    android:background="@drawable/log_page_background"
+    tools:context=".View.activity.LogActivity">
+
+    <LinearLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_centerInParent="true"
-        android:textColor="@color/white"
-        android:textSize="@dimen/y40"/>
+        android:layout_alignParentBottom="true"
+        android:gravity="center_horizontal"
+        android:orientation="vertical">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/y20"
+            android:text="国健医疗集团"
+            android:textColor="@color/white"
+            android:textSize="@dimen/y20" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/y40"
+            android:text="CopyRight © 2016 eryitianshi"
+            android:textColor="@color/white"
+            android:textSize="@dimen/y20" />
+    </LinearLayout>
 
 </RelativeLayout>

@@ -20,90 +20,95 @@
                 android:layout_height="match_parent"
                 android:orientation="vertical">
 
-                <LinearLayout
+                <RelativeLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:background="@drawable/doctor_top_background"
-                    android:orientation="vertical">
-
-                    <RelativeLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="@dimen/y96"
-                        android:layout_marginTop="@dimen/y48">
-
-                        <LinearLayout
-                            android:id="@+id/ll_doctor_find"
-                            android:layout_width="wrap_content"
-                            android:layout_height="match_parent">
-
-                            <ImageView
-                                android:layout_width="@dimen/x20"
-                                android:layout_height="@dimen/y36"
-                                android:layout_gravity="center_vertical"
-                                android:layout_marginLeft="@dimen/x30"
-                                android:layout_marginRight="@dimen/x30"
-                                android:src="@drawable/doctorparticulars_return" />
-                        </LinearLayout>
-
-                        <TextView
-                            android:id="@+id/tv_doctor_top_name"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_centerInParent="true"
-                            android:textColor="@color/white"
-                            android:textSize="@dimen/y32" />
-                    </RelativeLayout>
+                    android:background="@drawable/doctor_top_background">
 
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:orientation="horizontal">
+                        android:orientation="vertical">
 
-                        <de.hdodenhof.circleimageview.CircleImageView
-                            android:id="@+id/tv_doctor_icon"
-                            android:layout_width="@dimen/x148"
-                            android:layout_height="@dimen/x148"
-                            android:layout_marginBottom="@dimen/y30"
-                            android:layout_marginLeft="@dimen/x30"
-                            android:layout_marginTop="@dimen/y30"
-                            app:civ_border_color="@color/white"
-                            app:civ_border_width="@dimen/x4" />
+                        <RelativeLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="@dimen/y96"
+                            android:layout_marginTop="@dimen/y48">
 
-                        <LinearLayout
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginLeft="@dimen/x30"
-                            android:layout_marginTop="@dimen/y42"
-                            android:orientation="vertical">
+                            <LinearLayout
+                                android:id="@+id/ll_doctor_find"
+                                android:layout_width="wrap_content"
+                                android:layout_height="match_parent">
+
+                                <ImageView
+                                    android:layout_width="@dimen/x20"
+                                    android:layout_height="@dimen/y36"
+                                    android:layout_gravity="center_vertical"
+                                    android:layout_marginLeft="@dimen/x30"
+                                    android:layout_marginRight="@dimen/x30"
+                                    android:src="@drawable/doctorparticulars_return" />
+                            </LinearLayout>
 
                             <TextView
-                                android:id="@+id/tv_doctor_name"
+                                android:id="@+id/tv_doctor_top_name"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:includeFontPadding="false"
-                                android:lineSpacingMultiplier="0.9"
+                                android:layout_centerInParent="true"
                                 android:textColor="@color/white"
                                 android:textSize="@dimen/y32" />
+                        </RelativeLayout>
 
-                            <TextView
-                                android:id="@+id/tv_doctor_title"
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal">
+
+                            <de.hdodenhof.circleimageview.CircleImageView
+                                android:id="@+id/tv_doctor_icon"
+                                android:layout_width="@dimen/x148"
+                                android:layout_height="@dimen/x148"
+                                android:layout_marginBottom="@dimen/y30"
+                                android:layout_marginLeft="@dimen/x30"
+                                android:layout_marginTop="@dimen/y30"
+                                app:civ_border_color="@color/white"
+                                app:civ_border_width="@dimen/x4" />
+
+                            <LinearLayout
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:layout_marginTop="@dimen/y20"
-                                android:includeFontPadding="false"
-                                android:lineSpacingMultiplier="0.9"
-                                android:textColor="@color/white"
-                                android:textSize="@dimen/y24" />
+                                android:layout_marginLeft="@dimen/x30"
+                                android:layout_marginTop="@dimen/y42"
+                                android:orientation="vertical">
 
-                            <TextView
-                                android:id="@+id/tv_hospital_address"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_marginTop="@dimen/y16"
-                                android:includeFontPadding="false"
-                                android:lineSpacingMultiplier="0.9"
-                                android:textColor="@color/white"
-                                android:textSize="@dimen/y24" />
+                                <TextView
+                                    android:id="@+id/tv_doctor_name"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:includeFontPadding="false"
+                                    android:lineSpacingMultiplier="0.9"
+                                    android:textColor="@color/white"
+                                    android:textSize="@dimen/y32" />
+
+                                <TextView
+                                    android:id="@+id/tv_doctor_title"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginTop="@dimen/y20"
+                                    android:includeFontPadding="false"
+                                    android:lineSpacingMultiplier="0.9"
+                                    android:textColor="@color/white"
+                                    android:textSize="@dimen/y24" />
+
+                                <TextView
+                                    android:id="@+id/tv_hospital_address"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginTop="@dimen/y16"
+                                    android:includeFontPadding="false"
+                                    android:lineSpacingMultiplier="0.9"
+                                    android:textColor="@color/white"
+                                    android:textSize="@dimen/y24" />
+                            </LinearLayout>
                         </LinearLayout>
                     </LinearLayout>
 
@@ -111,6 +116,7 @@
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="@dimen/y88"
+                        android:layout_alignParentBottom="true"
                         android:background="@drawable/c"
                         android:orientation="horizontal">
 
@@ -174,9 +180,10 @@
                                     android:textSize="@dimen/y28" />
                             </LinearLayout>
                         </RelativeLayout>
-                    </LinearLayout>
 
-                </LinearLayout>
+                    </LinearLayout>
+                </RelativeLayout>
+
 
                 <TextView
                     android:id="@+id/tv_doctor_name_intro"

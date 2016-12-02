@@ -2,6 +2,7 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:ptr="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical">
 
     <FrameLayout
@@ -9,20 +10,13 @@
         android:layout_height="match_parent">
 
 
-        <in.srain.cube.views.ptr.PtrClassicFrameLayout
-            android:id="@+id/ptrClassicFrameLayout"
+        <com.handmark.pulltorefresh.library.PullToRefreshListView
+            android:id="@+id/lv_charactersafe"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:listSelector="@android:color/transparent">
-
-            <com.example.chen.tset.page.view.LoadListView
-                android:id="@+id/lv_charactersafe"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:overScrollMode="never" />
-
-        </in.srain.cube.views.ptr.PtrClassicFrameLayout>
-
+            android:overScrollMode="never"
+            ptr:ptrHeaderTextColor="#666666"
+            />
 
         <RelativeLayout
             android:id="@+id/rl_loading"

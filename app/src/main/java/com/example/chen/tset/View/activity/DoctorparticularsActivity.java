@@ -126,9 +126,7 @@ public class DoctorparticularsActivity extends MyBaseActivity {
 
             doctor_id = getIntent().getStringExtra("doctot_id");
 
-
             findView();
-
 
             doctorinit();
 
@@ -137,9 +135,6 @@ public class DoctorparticularsActivity extends MyBaseActivity {
         } catch (Exception e) {
             e.printStackTrace();
         }
-
-
-
 
     }
 

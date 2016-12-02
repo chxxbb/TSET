@@ -72,6 +72,7 @@
             android:background="@color/xmgray" />
 
         <LinearLayout
+            android:id="@+id/ll_city_beijin"
             android:layout_width="match_parent"
             android:layout_height="@dimen/y78">
 
@@ -80,7 +81,7 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_vertical"
                 android:layout_marginLeft="@dimen/x30"
-                android:text="北"
+                android:text="北京"
                 android:textColor="@color/fontcolor"
                 android:textSize="@dimen/y28" />
         </LinearLayout>
@@ -92,6 +93,7 @@
             android:background="@color/xmgray" />
 
         <LinearLayout
+            android:id="@+id/ll_city_shanghai"
             android:layout_width="match_parent"
             android:layout_height="@dimen/y78">
 
@@ -100,7 +102,7 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_vertical"
                 android:layout_marginLeft="@dimen/x30"
-                android:text="上"
+                android:text="上海"
                 android:textColor="@color/fontcolor"
                 android:textSize="@dimen/y28" />
         </LinearLayout>
@@ -112,7 +114,7 @@
             android:background="@color/xmgray" />
 
         <LinearLayout
-
+            android:id="@+id/ll_city_guangdong"
             android:layout_width="match_parent"
             android:layout_height="@dimen/y78">
 
@@ -121,7 +123,7 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_vertical"
                 android:layout_marginLeft="@dimen/x30"
-                android:text="广"
+                android:text="广州"
                 android:textColor="@color/fontcolor"
                 android:textSize="@dimen/y28" />
         </LinearLayout>

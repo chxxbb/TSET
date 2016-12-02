@@ -69,7 +69,6 @@ public class DiseaselibFragment extends Fragment implements IListener {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         view = inflater.inflate(R.layout.fragment_diseaselib, null);
 
-
         try {
 
             //注册广播

@@ -37,24 +37,26 @@ public class HomeDoctorDao {
         values.put("hospital", inquiry.getHospital());
         values.put("adept", inquiry.getAdept());
         values.put("section", inquiry.getSection());
+
         db.insert("doctor", null, values);
     }
 
 
-    public List<Inquiry> findHomeDoctor(){
-        ArrayList<Inquiry> inquiryArrayList=new ArrayList<>();
-        Cursor cursor=db.query("doctor",null,null,null,null,null,null);
-        while (cursor.moveToNext()){
-            String id=cursor.getString(cursor.getColumnIndex("id"));
-            String icon=cursor.getString(cursor.getColumnIndex("icon"));
-            String title=cursor.getString(cursor.getColumnIndex("title"));
-            String username=cursor.getString(cursor.getColumnIndex("username"));
-            String chatCost=cursor.getString(cursor.getColumnIndex("chatCost"));
-            String name=cursor.getString(cursor.getColumnIndex("name"));
-            String hospital=cursor.getString(cursor.getColumnIndex("hospital"));
-            String adept=cursor.getString(cursor.getColumnIndex("adept"));
-            String section=cursor.getString(cursor.getColumnIndex("section"));
-            Inquiry inquiry=new Inquiry(icon,title,name,chatCost,adept,section,hospital,id,username);
+    public List<Inquiry> findHomeDoctor() {
+        ArrayList<Inquiry> inquiryArrayList = new ArrayList<>();
+        Cursor cursor = db.query("doctor", null, null, null, null, null, null);
+        while (cursor.moveToNext()) {
+            String id = cursor.getString(cursor.getColumnIndex("id"));
+            String icon = cursor.getString(cursor.getColumnIndex("icon"));
+            String title = cursor.getString(cursor.getColumnIndex("title"));
+            String username = cursor.getString(cursor.getColumnIndex("username"));
+            String chatCost = cursor.getString(cursor.getColumnIndex("chatCost"));
+            String name = cursor.getString(cursor.getColumnIndex("name"));
+            String hospital = cursor.getString(cursor.getColumnIndex("hospital"));
+            String adept = cursor.getString(cursor.getColumnIndex("adept"));
+            String section = cursor.getString(cursor.getColumnIndex("section"));
+
+            Inquiry inquiry = new Inquiry(icon, title, name, chatCost, adept, section, hospital, id, username);
             inquiryArrayList.add(inquiry);
 
         }
