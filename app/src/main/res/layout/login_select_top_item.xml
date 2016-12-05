@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="@dimen/y96"
+    android:gravity="center_vertical"
+    android:orientation="horizontal">
+
+    <LinearLayout
+        android:id="@+id/ll_login_return"
+        android:layout_width="@dimen/x100"
+        android:layout_height="match_parent"
+        android:gravity="center_vertical">
+
+        <ImageView
+
+            android:layout_width="@dimen/x20"
+            android:layout_height="@dimen/y36"
+            android:layout_marginLeft="@dimen/x30"
+            android:src="@drawable/login_select_return" />
+    </LinearLayout>
+
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:layout_centerInParent="true">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:text="一键登录"
+            android:textColor="@color/red1"
+            android:textSize="@dimen/y36" />
+    </LinearLayout>
+</RelativeLayout>

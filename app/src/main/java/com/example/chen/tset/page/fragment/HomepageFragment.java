@@ -213,14 +213,13 @@ public class HomepageFragment extends Fragment {
         verticalScrollTV = (AutoVerticalScrollTextView) view.findViewById(R.id.textview_auto_roll);
 
 
-        //使scrollView显示在头部，重写了listview解决scrollview与listview冲突，但会出现默认显示listview的情况
-        scrollView.smoothScrollTo(0, 0);
-
         //隐藏滚动条
         scrollView.setVerticalScrollBarEnabled(false);
 
-        //使scrollView显示在头部
-        scrollView.smoothScrollTo(0, 0);
+
+        //使scrollView显示在头部，重写了listview解决scrollview与listview冲突，但会出现默认显示listview的情况
+        scrollView.smoothScrollTo(1, 1);
+
 
         //先使用数据局库数据显示
         new Thread(new Runnable() {
@@ -265,7 +264,7 @@ public class HomepageFragment extends Fragment {
     @Override
     public void onHiddenChanged(boolean hidden) {
         super.onHiddenChanged(hidden);
-        scrollView.smoothScrollTo(0, 0);
+        scrollView.smoothScrollTo(1, 1);
     }
 
 
@@ -464,7 +463,7 @@ public class HomepageFragment extends Fragment {
                         public void run() {
                             while (isRunning) {
                                 //每隔5秒通知滚动一次
-                                SystemClock.sleep(5000);
+                                SystemClock.sleep(3000);
                                 handler.sendEmptyMessage(0);
                             }
                         }

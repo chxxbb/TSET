@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:focusable="true"
+    android:focusableInTouchMode="true"
+    android:gravity="center_horizontal"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/y80"
+        android:layout_marginLeft="@dimen/x30"
+        android:layout_marginRight="@dimen/x30"
+        android:layout_marginTop="@dimen/y96"
+        android:background="@drawable/login_select_passlogin_case">
+
+        <EditText
+            android:id="@+id/et_login_phone"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/y80"
+            android:layout_marginLeft="@dimen/x30"
+            android:layout_marginRight="@dimen/x30"
+            android:background="@null"
+            android:hint="手机号"
+            android:inputType="number"
+            android:maxLength="11"
+            android:textColor="@color/backgroundblue"
+            android:textColorHint="@color/linegray1"
+            android:textCursorDrawable="@drawable/login_select_blue_cursor"
+            android:textSize="@dimen/y32" />
+
+    </LinearLayout>
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/y80"
+        android:layout_marginLeft="@dimen/x30"
+        android:layout_marginRight="@dimen/x30"
+        android:layout_marginTop="@dimen/y48"
+        android:background="@drawable/login_select_passlogin_case">
+
+        <EditText
+            android:id="@+id/et_login_password"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/y80"
+            android:layout_marginLeft="@dimen/x30"
+            android:layout_marginRight="@dimen/x30"
+            android:background="@null"
+            android:hint="密码"
+            android:inputType="textPassword"
+            android:maxLength="16"
+            android:textColor="@color/backgroundblue"
+            android:textColorHint="@color/linegray1"
+            android:textCursorDrawable="@drawable/login_select_blue_cursor"
+            android:textSize="@dimen/y32" />
+
+    </LinearLayout>
+
+
+    <Button
+        android:id="@+id/btn_login_pass_ok"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/y80"
+        android:layout_marginLeft="@dimen/x30"
+        android:layout_marginRight="@dimen/x30"
+        android:layout_marginTop="@dimen/y48"
+        android:background="@drawable/btn_login_case"
+        android:text="登  录"
+        android:textColor="@color/white"
+        android:textSize="@dimen/y32" />
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/x30"
+        android:layout_marginRight="@dimen/x30">
+
+        <LinearLayout
+            android:id="@+id/ll_pass_lgoin_register"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/y48"
+                android:text="快速注册"
+                android:textColor="@color/backgroundblue"
+                android:textSize="@dimen/y32" />
+        </LinearLayout>
+
+
+        <LinearLayout
+            android:id="@+id/ll_pass_lgoin_forget"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true">
+
+            <TextView
+
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+
+                android:layout_marginTop="@dimen/y48"
+                android:text="忘记密码？"
+                android:textColor="@color/backgroundblue"
+                android:textSize="@dimen/y32" />
+        </LinearLayout>
+
+    </RelativeLayout>
+
+
+</LinearLayout>

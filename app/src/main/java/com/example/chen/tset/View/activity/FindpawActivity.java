@@ -200,7 +200,7 @@ public class FindpawActivity extends MyBaseActivity {
 
         @Override
         public void onTick(long millisUntilFinished) {
-            activity_find_password_getcode_button.setBackgroundResource(R.drawable.verification_btn_case);
+            activity_find_password_getcode_button.setBackgroundResource(R.drawable.btn_login_case);
             activity_find_password_getcode_button.setClickable(false);
             activity_find_password_getcode_button.setText(millisUntilFinished / 1000 +"秒");
 
@@ -210,7 +210,7 @@ public class FindpawActivity extends MyBaseActivity {
         public void onFinish() {
             activity_find_password_getcode_button.setText("获取验证码");
             activity_find_password_getcode_button.setClickable(true);
-            activity_find_password_getcode_button.setBackgroundResource(R.drawable.verification_btn_case);
+            activity_find_password_getcode_button.setBackgroundResource(R.drawable.btn_login_case);
 
         }
     }

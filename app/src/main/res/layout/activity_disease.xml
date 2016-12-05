@@ -178,7 +178,6 @@
                                     android:layout_height="wrap_content"
                                     android:layout_marginLeft="@dimen/x20"
                                     android:layout_marginTop="@dimen/y36"
-
                                     android:textColor="@color/xmgray"
                                     android:textSize="@dimen/y24" />
 
@@ -268,6 +267,7 @@
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:layout_marginLeft="@dimen/x20"
+                                android:layout_marginRight="@dimen/x20"
                                 android:layout_marginTop="@dimen/y20"
                                 android:lineSpacingExtra="@dimen/y12"
                                 android:textColor="@color/fontcolor"

@@ -231,7 +231,7 @@ public class RegisterActivity extends MyBaseActivity {
 
         @Override
         public void onTick(long millisUntilFinished) {
-            activity_register_Verification_code_button.setBackgroundResource(R.drawable.verification_btn_case);
+            activity_register_Verification_code_button.setBackgroundResource(R.drawable.btn_login_case);
             activity_register_Verification_code_button.setClickable(false);
             activity_register_Verification_code_button.setText(+millisUntilFinished / 1000 + "秒");
 
@@ -241,7 +241,7 @@ public class RegisterActivity extends MyBaseActivity {
         public void onFinish() {
             activity_register_Verification_code_button.setText("获取验证码");
             activity_register_Verification_code_button.setClickable(true);
-            activity_register_Verification_code_button.setBackgroundResource(R.drawable.verification_btn_case);
+            activity_register_Verification_code_button.setBackgroundResource(R.drawable.btn_login_case);
 
         }
     }

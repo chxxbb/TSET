@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:gravity="center_horizontal"
+    android:orientation="vertical">
+
+
+    <Button
+        android:id="@+id/btn_onekey_login"
+        android:layout_width="@dimen/x520"
+        android:layout_height="@dimen/y80"
+        android:layout_marginTop="@dimen/y96"
+        android:background="@drawable/login_select_oneketlogin_case"
+        android:text="一键登录"
+        android:textColor="#fb6165"
+        android:textSize="@dimen/y32" />
+
+
+    <Button
+        android:id="@+id/btn_password_login"
+        android:layout_width="@dimen/x520"
+        android:layout_height="@dimen/y80"
+        android:layout_marginTop="@dimen/y48"
+        android:background="@drawable/login_select_passwordlogin_case"
+        android:text="密码登录"
+        android:textColor="@color/backgroundblue"
+        android:textSize="@dimen/y32" />
+
+</LinearLayout>

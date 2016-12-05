@@ -78,7 +78,6 @@ public class HomeBannerView extends LinearLayout {
             }
         };
 
-
         if (db.findHomebanner().size() != 0) {
 
             new Thread(new Runnable() {
@@ -246,7 +245,7 @@ public class HomeBannerView extends LinearLayout {
             if (bannerTimerTask != null)
                 bannerTimerTask.cancel();
             bannerTimerTask = new BannerTimerTask();
-            bannerTimer.schedule(bannerTimerTask, 3000, 3000);//3秒后执行，每隔3秒执行一次
+            bannerTimer.schedule(bannerTimerTask, 5000, 5000);//3秒后执行，每隔3秒执行一次
         }
     }
 

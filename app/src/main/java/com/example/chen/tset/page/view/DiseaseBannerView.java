@@ -35,9 +35,9 @@ import okhttp3.Call;
 
 
 /**
- *疾病库banner
+ * 疾病库banner
  */
-public class DiseaseBannerView extends LinearLayout implements IListener{
+public class DiseaseBannerView extends LinearLayout implements IListener {
     private ViewPager adViewPager;
     private List<ImageView> bannerViewList = new ArrayList<ImageView>();
     private Timer bannerTimer;
@@ -50,8 +50,6 @@ public class DiseaseBannerView extends LinearLayout implements IListener{
     List<String> pics;
 
     List<String> data;
-
-
 
 
     public DiseaseBannerView(Context context) {
@@ -163,7 +161,7 @@ public class DiseaseBannerView extends LinearLayout implements IListener{
         }
 
 
-        BannerViewAdapter adapter = new BannerViewAdapter(context, bannerViewList,data);
+        BannerViewAdapter adapter = new BannerViewAdapter(context, bannerViewList, data);
         adViewPager.setAdapter(adapter);
         adViewPager.addOnPageChangeListener(new OnPageChangeListener() {
             @Override
@@ -211,7 +209,7 @@ public class DiseaseBannerView extends LinearLayout implements IListener{
             if (bannerTimerTask != null)
                 bannerTimerTask.cancel();
             bannerTimerTask = new BannerTimerTask();
-            bannerTimer.schedule(bannerTimerTask, 3000, 3000);//3秒后执行，每隔3秒执行一次
+            bannerTimer.schedule(bannerTimerTask, 5000, 5000);//3秒后执行，每隔3秒执行一次
         }
     }
 
@@ -223,7 +221,7 @@ public class DiseaseBannerView extends LinearLayout implements IListener{
 
     @Override
     public void notifyAllActivity(String str) {
-        if(str.equals("banner重新加载数据")){
+        if (str.equals("banner重新加载数据")) {
             init();
 
         }

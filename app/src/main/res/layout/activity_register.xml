@@ -3,7 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/login_background"
+    android:background="@drawable/login_select_background"
     android:focusable="true"
     android:focusableInTouchMode="true"
     android:orientation="vertical">
@@ -13,19 +13,20 @@
         android:layout_height="@dimen/y96"
         android:gravity="center_vertical"
         android:orientation="horizontal">
+
         <LinearLayout
             android:id="@+id/activity_register_exit"
             android:layout_width="@dimen/x100"
             android:layout_height="match_parent"
             android:gravity="center_vertical">
+
             <ImageView
 
                 android:layout_width="@dimen/x20"
                 android:layout_height="@dimen/y36"
                 android:layout_marginLeft="@dimen/x30"
-                android:src="@drawable/doctorparticulars_return" />
+                android:src="@drawable/register_03" />
         </LinearLayout>
-
 
 
         <LinearLayout
@@ -37,8 +38,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_vertical"
-                android:text="注册账号"
-                android:textColor="@color/white"
+                android:text="注册"
+                android:textColor="@color/backgroundblue"
                 android:textSize="@dimen/y36" />
         </LinearLayout>
     </RelativeLayout>
@@ -49,29 +50,26 @@
         android:layout_marginLeft="@dimen/x30"
         android:layout_marginRight="@dimen/x30"
         android:layout_marginTop="@dimen/y40"
-        android:background="@drawable/register_et_case"
+        android:background="@drawable/login_select_passlogin_case"
         android:gravity="center_vertical"
         android:orientation="horizontal">
-
-        <ImageView
-            android:layout_width="@dimen/x32"
-            android:layout_height="@dimen/y44"
-            android:layout_marginLeft="@dimen/x20"
-            android:src="@drawable/register_04" />
 
         <EditText
             android:id="@+id/activity_register_phone"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="@dimen/x20"
+            android:layout_marginLeft="@dimen/x30"
+            android:layout_marginRight="@dimen/x30"
             android:background="@null"
             android:hint="请输入手机号"
             android:inputType="phone"
             android:maxLength="11"
-            android:textColorHint="@color/white"
-            android:textCursorDrawable="@drawable/deittext_cursor_white_style"
+            android:textColor="@color/backgroundblue"
+            android:textColorHint="@color/linegray1"
+            android:textCursorDrawable="@drawable/login_select_blue_cursor"
             android:textSize="@dimen/y32" />
     </LinearLayout>
+
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -79,27 +77,23 @@
         android:layout_marginLeft="@dimen/x30"
         android:layout_marginRight="@dimen/x30"
         android:layout_marginTop="@dimen/y40"
-        android:background="@drawable/register_et_case"
+        android:background="@drawable/login_select_passlogin_case"
         android:gravity="center_vertical"
         android:orientation="horizontal">
-
-        <ImageView
-            android:layout_width="@dimen/x32"
-            android:layout_height="@dimen/y44"
-            android:layout_marginLeft="@dimen/x20"
-            android:src="@drawable/register_06" />
 
         <EditText
             android:id="@+id/activity_register_password"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="@dimen/x20"
+            android:layout_marginLeft="@dimen/x30"
+            android:layout_marginRight="@dimen/x30"
             android:background="@null"
             android:hint="请输入密码"
             android:inputType="textPassword"
             android:maxLength="16"
-            android:textColorHint="@color/white"
-            android:textCursorDrawable="@drawable/deittext_cursor_white_style"
+            android:textColor="@color/backgroundblue"
+            android:textColorHint="@color/linegray1"
+            android:textCursorDrawable="@drawable/login_select_blue_cursor"
             android:textSize="@dimen/y32" />
     </LinearLayout>
 
@@ -109,15 +103,10 @@
         android:layout_marginLeft="@dimen/x30"
         android:layout_marginRight="@dimen/x30"
         android:layout_marginTop="@dimen/y40"
-        android:background="@drawable/register_et_case"
+        android:background="@drawable/login_select_passlogin_case"
         android:gravity="center_vertical"
         android:orientation="horizontal">
 
-        <ImageView
-            android:layout_width="@dimen/x32"
-            android:layout_height="@dimen/y44"
-            android:layout_marginLeft="@dimen/x20"
-            android:src="@drawable/register_06" />
 
         <EditText
             android:id="@+id/activity_register_password2"
@@ -128,8 +117,9 @@
             android:hint="请确认密码"
             android:inputType="textPassword"
             android:maxLength="16"
-            android:textColorHint="@color/white"
-            android:textCursorDrawable="@drawable/deittext_cursor_white_style"
+            android:textColor="@color/backgroundblue"
+            android:textColorHint="@color/linegray1"
+            android:textCursorDrawable="@drawable/login_select_blue_cursor"
             android:textSize="@dimen/y32" />
     </LinearLayout>
 
@@ -143,14 +133,9 @@
         <LinearLayout
             android:layout_width="@dimen/x420"
             android:layout_height="@dimen/y80"
-            android:background="@drawable/register_et_case"
+            android:background="@drawable/login_select_passlogin_case"
             android:gravity="center_vertical">
 
-            <ImageView
-                android:layout_width="@dimen/x32"
-                android:layout_height="@dimen/y44"
-                android:layout_marginLeft="@dimen/x20"
-                android:src="@drawable/register_07" />
 
             <EditText
                 android:id="@+id/activity_register_Verification_code"
@@ -161,8 +146,9 @@
                 android:hint="输入验证码"
                 android:inputType="phone"
                 android:maxLength="6"
-                android:textColorHint="@color/white"
-                android:textCursorDrawable="@drawable/deittext_cursor_white_style"
+                android:textColor="@color/backgroundblue"
+                android:textColorHint="@color/linegray1"
+                android:textCursorDrawable="@drawable/login_select_blue_cursor"
                 android:textSize="@dimen/y32" />
         </LinearLayout>
 
@@ -171,7 +157,7 @@
             android:layout_width="@dimen/x220"
             android:layout_height="@dimen/y80"
             android:layout_marginLeft="@dimen/x20"
-            android:background="@drawable/verification_btn_case"
+            android:background="@drawable/btn_login_case"
             android:text="获取验证码"
             android:textColor="@color/white"
             android:textSize="@dimen/x32" />
@@ -184,9 +170,10 @@
         android:layout_marginLeft="@dimen/x30"
         android:layout_marginRight="@dimen/x30"
         android:layout_marginTop="@dimen/y40"
-        android:background="@drawable/countersign_btn_case"
+        android:background="@drawable/btn_login_case"
         android:text="完  成"
         android:textColor="@color/white"
+        android:textSize="@dimen/y32"
         android:textStyle="bold" />
 
 </LinearLayout>

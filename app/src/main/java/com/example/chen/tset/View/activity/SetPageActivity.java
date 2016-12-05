@@ -43,7 +43,7 @@ public class SetPageActivity extends MyBaseActivity implements View.OnClickListe
         rl_setpass = (RelativeLayout) findViewById(R.id.rl_setpass);
         ll_return = (LinearLayout) findViewById(R.id.ll_return);
         rl_exit = (RelativeLayout) findViewById(R.id.rl_exit);
-        tv_pass_set= (TextView) findViewById(R.id.tv_pass_set);
+        tv_pass_set = (TextView) findViewById(R.id.tv_pass_set);
         ll_return.setOnClickListener(this);
         rl_exit.setOnClickListener(this);
         rl_feedback.setOnClickListener(this);
@@ -52,9 +52,9 @@ public class SetPageActivity extends MyBaseActivity implements View.OnClickListe
         rl_setpass.setOnClickListener(this);
 
 
-        if(sp.getTag().getPassword()!=null){
+        if (sp.getTag().getPassword() != null) {
             tv_pass_set.setText("密码修改");
-        }else {
+        } else {
             tv_pass_set.setText("密码设置");
         }
     }
@@ -88,7 +88,7 @@ public class SetPageActivity extends MyBaseActivity implements View.OnClickListe
 
                 //清除本地用户信息，重新跳转到登录页面
                 sp.clearinit();
-                Intent intent5 = new Intent(SetPageActivity.this, OnekeyLoinActivity.class);
+                Intent intent5 = new Intent(SetPageActivity.this, LoginSelectActivity.class);
                 startActivity(intent5);
                 Toast.makeText(SetPageActivity.this, "请重新登录", Toast.LENGTH_SHORT).show();
                 HomeActivity.text_homeactivity.finish();

@@ -84,7 +84,6 @@ public class LogActivity extends AppCompatActivity {
         }
 
 
-
     }
 
 
@@ -104,7 +103,7 @@ public class LogActivity extends AppCompatActivity {
 
         } else {
 
-            Intent intent = new Intent(LogActivity.this, OnekeyLoinActivity.class);
+            Intent intent = new Intent(LogActivity.this, LoginSelectActivity.class);
             startActivity(intent);
             finish();
 
@@ -136,7 +135,7 @@ public class LogActivity extends AppCompatActivity {
                             Toast.makeText(HomeActivity.text_homeactivity, "密码被修改请重新登录", Toast.LENGTH_SHORT).show();
 
 
-                            Intent i = new Intent(HomeActivity.text_homeactivity, OnekeyLoinActivity.class);
+                            Intent i = new Intent(HomeActivity.text_homeactivity, LoginSelectActivity.class);
 
                             startActivity(i);
 
@@ -152,7 +151,7 @@ public class LogActivity extends AppCompatActivity {
 
                             sp.clearinit();
 
-                            Intent i = new Intent(HomeActivity.text_homeactivity, OnekeyLoinActivity.class);
+                            Intent i = new Intent(HomeActivity.text_homeactivity, LoginSelectActivity.class);
 
                             startActivity(i);
 
