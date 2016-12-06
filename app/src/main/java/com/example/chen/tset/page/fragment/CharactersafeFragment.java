@@ -273,6 +273,7 @@ public class CharactersafeFragment extends Fragment {
         public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
             Intent intent = new Intent(getContext(), ConsultPageActivity.class);
             intent.putExtra("information", list.get(position - 1).getId() + "");
+
             //根据点击页面判断是否为收藏页面，如果为隐藏赞
             intent.putExtra("collect", "0");
             startActivity(intent);

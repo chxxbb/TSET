@@ -1,6 +1,7 @@
 package com.example.chen.tset.page.adapter;
 
 import android.content.Context;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -55,6 +56,7 @@ public class DoctorparticularsAdapter extends BaseAdapter {
         viewHolder.tv_user_name.setText(list.get(position).getUserName());
         viewHolder.tv_comment_time.setText(list.get(position).getTime());
         viewHolder.tv_comment_content.setText(list.get(position).getContent());
+
         if (list.get(position).getUserIcon() == null || list.get(position).getUserIcon().equals("")) {
             viewHolder.iv_user_icon.setImageResource(R.drawable.default_icon);
         } else {

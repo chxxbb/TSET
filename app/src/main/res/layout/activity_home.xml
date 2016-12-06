@@ -113,14 +113,13 @@
 
     <FrameLayout
         android:layout_width="@dimen/x120"
-        android:layout_height="@dimen/y122"
+        android:layout_height="@dimen/y135"
         android:layout_alignParentBottom="true"
-        android:layout_centerInParent="true"
-        android:layout_marginBottom="@dimen/y12">
+        android:layout_centerInParent="true">
 
         <FrameLayout
             android:layout_width="@dimen/x120"
-            android:layout_height="@dimen/y122"
+            android:layout_height="@dimen/y124"
             android:layout_centerInParent="true">
 
             <LinearLayout
@@ -142,7 +141,7 @@
                     android:layout_gravity="center"
                     android:text="服务"
                     android:textColor="#9fa5a8"
-                    android:textSize="@dimen/x24" />
+                    android:textSize="@dimen/y24" />
             </LinearLayout>
 
 

@@ -446,7 +446,6 @@ public class InquiryActivity extends AppCompatActivity implements IListener {
 
                     @Override
                     public void onResponse(String response, int id) {
-
                         Type listtype = new TypeToken<LinkedList<DoctorList>>() {
                         }.getType();
 

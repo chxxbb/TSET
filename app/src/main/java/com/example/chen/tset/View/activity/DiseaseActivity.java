@@ -324,11 +324,25 @@ public class DiseaseActivity extends MyBaseActivity {
                         view.setVisibility(View.GONE);
                     } else {
                         tv_name.setText(inquiry.getName());
+
                         tv_dactor_title.setText(inquiry.getTitle());
+
                         tv_dactor_section.setText(inquiry.getSection());
+
                         btn_money.setText("￥" + inquiry.getChatCost());
-                        tv_intro.setText("擅长:" + inquiry.getAdept());
-                        ImageLoader.getInstance().displayImage(inquiry.getIcon(), iv_dactor_icon);
+
+                        if (inquiry.getAdept() == null || inquiry.getAdept().equals("")) {
+                            tv_intro.setText("");
+                        } else {
+                            tv_intro.setText("擅长：" + inquiry.getAdept());
+                        }
+
+                        if (inquiry.getIcon() == null || inquiry.getIcon().equals("")) {
+                            iv_dactor_icon.setImageResource(R.drawable.default_icon);
+                        } else {
+                            ImageLoader.getInstance().displayImage(inquiry.getIcon(), iv_dactor_icon);
+                        }
+
                     }
 
 

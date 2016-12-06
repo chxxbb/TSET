@@ -93,9 +93,18 @@ public class InquiryAdapter extends BaseAdapter {
         viewHolder.textView.setText(list.get(position).getTitle());
         viewHolder.tv_name.setText(list.get(position).getName());
         viewHolder.btn_money.setText("￥" + list.get(position).getChatCost());
-        viewHolder.tv_intro.setText(list.get(position).getAdept());
+        if (list.get(position).getAdept() == null || list.get(position).getAdept().equals("")) {
+            viewHolder.tv_intro.setText("");
+        } else {
+            viewHolder.tv_intro.setText("擅长：" + list.get(position).getAdept());
+        }
+
         viewHolder.tv_section.setText(list.get(position).getSection());
-        ImageLoader.getInstance().displayImage(list.get(position).getIcon(), viewHolder.iv_icon);
+        if (list.get(position).getIcon() == null || list.get(position).getIcon().equals("")) {
+            viewHolder.iv_icon.setImageResource(R.drawable.default_icon);
+        } else {
+            ImageLoader.getInstance().displayImage(list.get(position).getIcon(), viewHolder.iv_icon);
+        }
 
 
         viewHolder.fl_chat.setOnClickListener(new View.OnClickListener() {

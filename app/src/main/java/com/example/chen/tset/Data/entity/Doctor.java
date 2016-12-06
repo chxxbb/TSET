@@ -16,8 +16,9 @@ public class Doctor {
     private int commentCount;
     private String seniority;
     private String username;
+    private String bio;
 
-    public Doctor(String icon, String title, String name, String chatCost, String callCost, String adept, String hospital, String section, int commentCount, String seniority, String username) {
+    public Doctor(String icon, String title, String name, String chatCost, String callCost, String adept, String hospital, String section, int commentCount, String seniority, String username, String bio) {
         this.icon = icon;
         this.title = title;
         this.name = name;
@@ -29,7 +30,9 @@ public class Doctor {
         this.commentCount = commentCount;
         this.seniority = seniority;
         this.username = username;
+        this.bio = bio;
     }
+
 
     public String getIcon() {
         return icon;
@@ -117,5 +120,13 @@ public class Doctor {
 
     public void setUsername(String username) {
         this.username = username;
+    }
+
+    public String getBio() {
+        return bio;
+    }
+
+    public void setBio(String bio) {
+        this.bio = bio;
     }
 }

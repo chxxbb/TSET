@@ -133,8 +133,8 @@ public class ServiceTwo extends Service {
                 getApplicationContext(), 0, intent,
                 PendingIntent.FLAG_CANCEL_CURRENT);
         Notification noti = new NotificationCompat.Builder(getApplicationContext())
-                .setSmallIcon(R.drawable.image_emoticon25)
-                .setContentText("骚年，该吃药了")
+                .setSmallIcon(R.drawable.app_log)
+                .setContentText("亲，该吃药了")
                 .setContentTitle("一条咸鱼干")
                 .setContentIntent(pendingIntent)
                 .build();

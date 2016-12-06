@@ -106,11 +106,12 @@ public class DoctorparticularsActivity extends MyBaseActivity {
 
     RelativeLayout rl_use_cash_coupons;
 
+    TextView tv_doctor_bio;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
 
 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
@@ -185,7 +186,6 @@ public class DoctorparticularsActivity extends MyBaseActivity {
                             @Override
                             public void onError(Call call, Exception e, int id) {
                                 handler.sendEmptyMessage(0);
-
                             }
 
                             @Override
@@ -222,13 +222,15 @@ public class DoctorparticularsActivity extends MyBaseActivity {
 
                     tv_doctor_name_intro.setText(doctor.getName() + "简介");
 
-                    tv_doctor_intro.setText(doctor.getAdept());
+                    tv_doctor_intro.setText(doctor.getBio());
 
                     tv_doctor_name_aptitude.setText(doctor.getName() + "资历");
 
                     String a = doctor.getSeniority().replace(",", "\n");
 
                     tv_doctor_aptitude.setText(a);
+
+                    tv_doctor_bio.setText(doctor.getAdept());
 
                     ImageLoader.getInstance().displayImage(doctor.getIcon(), tv_doctor_icon);
 
@@ -260,6 +262,7 @@ public class DoctorparticularsActivity extends MyBaseActivity {
         tv_doctor_name_aptitude = (TextView) findViewById(R.id.tv_doctor_name_aptitude);
         tv_doctor_icon = (CircleImageView) findViewById(R.id.tv_doctor_icon);
         tv_doctor_commenCount = (TextView) findViewById(R.id.tv_doctor_commenCount);
+        tv_doctor_bio = (TextView) findViewById(R.id.tv_doctor_bio);
 
 
         rl_nonetwork = (RelativeLayout) findViewById(R.id.rl_nonetwork);
@@ -270,7 +273,7 @@ public class DoctorparticularsActivity extends MyBaseActivity {
         lv_doctor_particulars_assess = (ListViewForScrollView) findViewById(R.id.lv_doctor_particulars_assess);
 
         //使scrollView显示在头部，重写了listview解决scrollview与listview冲突，但会出现默认显示listview的情况
-        scrovView.smoothScrollTo(0, 0);
+        scrovView.smoothScrollTo(1, 1);
 
         lv_doctor_particulars_assess.setVerticalScrollBarEnabled(false);
         scrovView.setVerticalScrollBarEnabled(false);

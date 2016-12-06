@@ -186,38 +186,13 @@
 
 
                 <TextView
-                    android:id="@+id/tv_doctor_name_intro"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="@dimen/x30"
-                    android:layout_marginTop="@dimen/y44"
-                    android:includeFontPadding="false"
-                    android:lineSpacingMultiplier="0.9"
-                    android:textColor="@color/fontcolor"
-                    android:textSize="@dimen/y30" />
-
-                <TextView
-                    android:id="@+id/tv_doctor_intro"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="@dimen/x30"
-                    android:layout_marginRight="@dimen/x30"
-                    android:layout_marginTop="@dimen/y20"
-                    android:includeFontPadding="false"
-                    android:lineSpacingExtra="@dimen/y16"
-                    android:lineSpacingMultiplier="0.9"
-                    android:textColor="@color/xmgray"
-                    android:textSize="@dimen/y26" />
-
-
-                <TextView
                     android:id="@+id/tv_doctor_name_aptitude"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="@dimen/y20"
                     android:layout_marginLeft="@dimen/x30"
                     android:layout_marginRight="@dimen/x30"
-                    android:layout_marginTop="@dimen/y24"
+                    android:layout_marginTop="@dimen/y44"
                     android:includeFontPadding="false"
                     android:lineSpacingMultiplier="0.9"
                     android:textColor="@color/fontcolor"
@@ -265,6 +240,58 @@
                     </LinearLayout>
 
                 </RelativeLayout>
+
+
+                <TextView
+                    android:id="@+id/tv_doctor_name_intro"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/x30"
+                    android:layout_marginTop="@dimen/y24"
+                    android:includeFontPadding="false"
+                    android:lineSpacingMultiplier="0.9"
+                    android:textColor="@color/fontcolor"
+                    android:textSize="@dimen/y30" />
+
+                <TextView
+                    android:id="@+id/tv_doctor_intro"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/x30"
+                    android:layout_marginRight="@dimen/x30"
+                    android:layout_marginTop="@dimen/y20"
+                    android:includeFontPadding="false"
+                    android:lineSpacingExtra="@dimen/y16"
+                    android:lineSpacingMultiplier="0.9"
+                    android:textColor="@color/xmgray"
+                    android:textSize="@dimen/y26" />
+
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/x30"
+                    android:layout_marginTop="@dimen/y24"
+                    android:includeFontPadding="false"
+                    android:lineSpacingMultiplier="0.9"
+                    android:text="擅长"
+                    android:textColor="@color/fontcolor"
+                    android:textSize="@dimen/y30" />
+
+
+                <TextView
+                    android:id="@+id/tv_doctor_bio"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/x30"
+                    android:layout_marginRight="@dimen/x30"
+                    android:layout_marginTop="@dimen/y20"
+                    android:includeFontPadding="false"
+                    android:lineSpacingExtra="@dimen/y16"
+                    android:lineSpacingMultiplier="0.9"
+                    android:textColor="@color/xmgray"
+                    android:textSize="@dimen/y26" />
+
 
                 <View
                     android:layout_width="match_parent"

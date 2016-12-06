@@ -246,7 +246,8 @@
 
         <activity android:name=".View.activity.CompileConsultingActivity" />
         <activity android:name=".View.activity.UserAgreementActivity" />
-        <activity android:name=".View.activity.LoginSelectActivity"></activity>
+        <activity android:name=".View.activity.LoginSelectActivity" />
+        <activity android:name=".View.activity.WebActivity"></activity>
     </application>
 
 </manifest>

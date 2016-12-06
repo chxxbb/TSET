@@ -90,6 +90,8 @@ public class HomeBannerView extends LinearLayout {
 
                     data.clear();
 
+                    bannerViewList.clear();
+
                     for (int i = 0; i < list.size(); i++) {
                         pics.add(list.get(i).getCover());
                         data.add(list.get(i).getSite());
@@ -176,6 +178,8 @@ public class HomeBannerView extends LinearLayout {
 
 
         adViewPager = (ViewPager) this.findViewById(R.id.viewPager1);
+
+
         iv_lead_spot1 = (ImageView) this.findViewById(R.id.iv_lead_spot1);
         iv_lead_spot2 = (ImageView) this.findViewById(R.id.iv_lead_spot2);
         iv_lead_spot3 = (ImageView) this.findViewById(R.id.iv_lead_spot3);
@@ -184,6 +188,7 @@ public class HomeBannerView extends LinearLayout {
 
         ImageView imageView;
 
+        bannerViewList.clear();
 
         //初始化数据,改变图片
         for (int i = 0; i < pics.size(); i++) {
@@ -245,7 +250,7 @@ public class HomeBannerView extends LinearLayout {
             if (bannerTimerTask != null)
                 bannerTimerTask.cancel();
             bannerTimerTask = new BannerTimerTask();
-            bannerTimer.schedule(bannerTimerTask, 5000, 5000);//3秒后执行，每隔3秒执行一次
+            bannerTimer.schedule(bannerTimerTask, 10000, 10000);//3秒后执行，每隔3秒执行一次
         }
     }
 

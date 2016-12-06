@@ -3,6 +3,7 @@ package com.example.chen.tset.page.fragment;
 
 import android.content.Context;
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
@@ -38,6 +39,7 @@ import com.example.chen.tset.View.activity.HealthconditionActivity;
 import com.example.chen.tset.View.activity.InquiryActivity;
 import com.example.chen.tset.View.activity.LectureoomActivity;
 import com.example.chen.tset.View.activity.RegistrationAtivity;
+import com.example.chen.tset.View.activity.WebActivity;
 import com.example.chen.tset.page.view.AutoVerticalScrollTextView;
 import com.example.chen.tset.page.view.HomeBannerView;
 import com.example.chen.tset.page.adapter.HomeDoctorRecommendAdapter;
@@ -254,7 +256,21 @@ public class HomepageFragment extends Fragment {
         verticalScrollTV.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(getContext(), "链接:" + findAllHotList.get(number % strings.size()).getSite(), Toast.LENGTH_SHORT).show();
+//                try {
+//                    //点击打开浏览器
+//                    Intent intent = new Intent();
+//                    intent.setAction("android.intent.action.VIEW");
+//                    Uri content_url = Uri.parse(findAllHotList.get(number % strings.size()).getSite());
+//                    intent.setData(content_url);
+//                    startActivity(intent);
+//
+//                } catch (Exception e) {
+//                    e.printStackTrace();
+//                }
+
+                Intent intent = new Intent(getContext(), WebActivity.class);
+                intent.putExtra("url", findAllHotList.get(number % strings.size()).getSite());
+                startActivity(intent);
             }
         });
 
@@ -463,7 +479,7 @@ public class HomepageFragment extends Fragment {
                         public void run() {
                             while (isRunning) {
                                 //每隔5秒通知滚动一次
-                                SystemClock.sleep(3000);
+                                SystemClock.sleep(5000);
                                 handler.sendEmptyMessage(0);
                             }
                         }

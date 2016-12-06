@@ -80,13 +80,26 @@ public class MyDoctorAdapter extends BaseAdapter {
             convertView = inflater.inflate(R.layout.inquiry_list_item, parent, false);
             convertView.setTag(new ViewHolder(convertView));
         }
+
         final ViewHolder viewHolder = (ViewHolder) convertView.getTag();
         viewHolder.textView.setText(list.get(position).getDoctorTitle());
         viewHolder.tv_name.setText(list.get(position).getDoctorName());
         viewHolder.btn_money.setText("￥" + list.get(position).getChatCost());
-        viewHolder.tv_intro.setText("擅长：" + list.get(position).getAdept());
+
+        if (list.get(position).getAdept().equals("") || list.get(position).getAdept() == null) {
+            viewHolder.tv_intro.setText("");
+        } else {
+            viewHolder.tv_intro.setText("擅长：" + list.get(position).getAdept());
+        }
+
         viewHolder.tv_section.setText(list.get(position).getDoctorSection());
-        ImageLoader.getInstance().displayImage(list.get(position).getDoctorIcon(), viewHolder.iv_icon);
+
+        if (list.get(position).getDoctorIcon() == null || list.get(position).getDoctorIcon().equals("")) {
+            viewHolder.iv_icon.setImageResource(R.drawable.default_icon);
+        } else {
+            ImageLoader.getInstance().displayImage(list.get(position).getDoctorIcon(), viewHolder.iv_icon);
+        }
+
 
         //跳转到聊天页面
         viewHolder.fl_chat.setOnClickListener(new View.OnClickListener() {

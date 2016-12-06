@@ -146,7 +146,7 @@ public class DiseaseBannerView extends LinearLayout implements IListener {
 
 
         ImageView imageView;
-
+        bannerViewList.clear();
 
         //初始化数据,改变图片
 

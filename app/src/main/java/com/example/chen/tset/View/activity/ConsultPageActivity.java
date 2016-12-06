@@ -107,7 +107,7 @@ public class ConsultPageActivity extends MyBaseActivity implements View.OnClickL
                             @Override
                             public void onResponse(String response, int id) {
 
-
+                                Log.e("111",response);
                                 if (response.equals("0")) {
                                     handler.sendEmptyMessage(1);
 

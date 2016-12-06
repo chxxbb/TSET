@@ -132,7 +132,6 @@ public class MypageFragment extends Fragment {
         }
 
 
-
     }
 
     private View.OnClickListener listerer = new View.OnClickListener() {
@@ -184,7 +183,6 @@ public class MypageFragment extends Fragment {
                     break;
 
                 case R.id.rl_mypage_share:
-                    send();
                     break;
 
             }

@@ -4,8 +4,11 @@
     android:id="@+id/rl_log"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/log_page_background"
+    android:background="@drawable/yoxi"
     tools:context=".View.activity.LogActivity">
+
+
+    <!--android:background="@drawable/log_page_background"-->
 
     <LinearLayout
         android:layout_width="match_parent"

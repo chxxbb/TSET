@@ -86,9 +86,19 @@ public class HomeDoctorRecommendAdapter extends BaseAdapter {
         viewHolder.tv_name.setText(list.get(position).getName());
         viewHolder.tv_home_docotor_title.setText(list.get(position).getTitle());
         viewHolder.tv_home_doctor_section.setText(list.get(position).getSection());
-        viewHolder.tv_home_doctor_adept.setText(list.get(position).getAdept());
+        if (list.get(position).getAdept() == null || list.get(position).getAdept().equals("")) {
+            viewHolder.tv_home_doctor_adept.setText("");
+        } else {
+            viewHolder.tv_home_doctor_adept.setText("擅长：" + list.get(position).getAdept());
+        }
+
         viewHolder.btn_home_doctor_chatCost.setText("￥" + list.get(position).getChatCost());
-        ImageLoader.getInstance().displayImage(list.get(position).getIcon(), viewHolder.iv_home_doctor_icon);
+        if (list.get(position).getIcon() == null || list.get(position).getIcon().equals("")) {
+            viewHolder.iv_home_doctor_icon.setImageResource(R.drawable.default_icon);
+        } else {
+            ImageLoader.getInstance().displayImage(list.get(position).getIcon(), viewHolder.iv_home_doctor_icon);
+        }
+
 
         //点击进入聊天页面
         viewHolder.btn_home_doctor_chatCost.setOnClickListener(new View.OnClickListener() {
@@ -221,7 +231,7 @@ public class HomeDoctorRecommendAdapter extends BaseAdapter {
                     intent.putExtra("icon", list.get(pos).getIcon());
                     intent.putExtra("doctorID", list.get(pos).getId());
                     intent.putExtra("username", list.get(pos).getUsername());
-                    intent.putExtra("page","2");
+                    intent.putExtra("page", "2");
                     context.startActivity(intent);
                     setHeadDialog.dismiss();
                 }
