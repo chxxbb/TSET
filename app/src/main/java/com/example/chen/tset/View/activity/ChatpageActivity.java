@@ -8,6 +8,7 @@ import android.net.Uri;
 import android.os.Environment;
 import android.os.Handler;
 import android.provider.MediaStore;
+import android.support.annotation.NonNull;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
@@ -117,6 +118,7 @@ public class ChatpageActivity extends AppCompatActivity implements PtrUIHandler 
 
 
         try {
+
 
             JMessageClient.registerEventReceiver(this);
             inquiryrecorddb = new InquiryrecordDao(this);
@@ -384,7 +386,7 @@ public class ChatpageActivity extends AppCompatActivity implements PtrUIHandler 
     private View.OnClickListener btnlistener = new View.OnClickListener() {
         @Override
         public void onClick(View v) {
-            //先判断发送的消息是否为空，或者是否全部未空格
+            //先判断发送的消息是否为空，或者是否全部为空格
             if (et_chat.getText().length() == 0 || et_chat.getText().toString().trim().equals("")) {
 
             } else {
@@ -405,36 +407,36 @@ public class ChatpageActivity extends AppCompatActivity implements PtrUIHandler 
     //文本消息
     private void sendmessage() {
         try {
-            //发送文本消息
+            new Thread(new Runnable() {
+                @Override
+                public void run() {
+                    //发送文本消息
 
-            Conversation c = JMessageClient.getSingleConversation(username);
-            if (c == null) {
-                c = Conversation.createSingleConversation(username);
+                    Conversation c = JMessageClient.getSingleConversation(username);
+                    if (c == null) {
+                        c = Conversation.createSingleConversation(username);
 
-            }
-            TextContent textContent = new TextContent(et_chat.getText().toString());
+                    }
+                    TextContent textContent = new TextContent(et_chat.getText().toString());
 
 
-            Message message = c.createSendMessage(textContent);
+                    Message message = c.createSendMessage(textContent);
 
-            JMessageClient.sendMessage(message);
+                    JMessageClient.sendMessage(message);
 
-            //获取发送时间
-            Date dt = new Date();
-            Long time = dt.getTime();
-            //存取到数据库中，+1用于判断是发送的消息还是接收的消息,1为自己发送的消息,2为接送到的消息
-            String content = "1" + et_chat.getText().toString();
-            chatcontent = new Chatcontent(content, time, null, null, username, sp.getTag().getPhone());
-            //保存在list集合中，清空输入框，并刷新页面
-            list.add(chatcontent);
+                    //获取发送时间
+                    Date dt = new Date();
+                    Long time = dt.getTime();
+                    //存取到数据库中，+1用于判断是发送的消息还是接收的消息,1为自己发送的消息,2为接送到的消息
+                    String content = "1" + et_chat.getText().toString();
+                    chatcontent = new Chatcontent(content, time, null, null, username, sp.getTag().getPhone());
+                    //保存在list集合中，清空输入框，并刷新页面
+                    list.add(chatcontent);
 
-            adapter.notifyDataSetChanged();
+                    handler.sendEmptyMessage(6);
+                }
+            }).start();
 
-            et_chat.setText("");
-
-            db.addchatcont(chatcontent);
-
-            chatstate++;
 
         } catch (Exception e) {
             e.printStackTrace();
@@ -487,6 +489,16 @@ public class ChatpageActivity extends AppCompatActivity implements PtrUIHandler 
                     Toast.makeText(ChatpageActivity.this, "已经没有消息记录了", Toast.LENGTH_SHORT).show();
                     break;
 
+                case 6:
+                    adapter.notifyDataSetChanged();
+
+                    et_chat.setText("");
+
+                    db.addchatcont(chatcontent);
+
+                    chatstate++;
+                    break;
+
 
             }
         }
@@ -507,8 +519,13 @@ public class ChatpageActivity extends AppCompatActivity implements PtrUIHandler 
                     break;
 
                 case R.id.iv_chat:
-                    //发送图片
-                    sendpictureDialog();
+                    try {
+                        //发送图片
+                        sendpictureDialog();
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
+
                     break;
             }
 
@@ -725,7 +742,7 @@ public class ChatpageActivity extends AppCompatActivity implements PtrUIHandler 
                 //获取发送消息时间
                 Date dt1 = new Date();
                 Long time1 = dt1.getTime();
-                //判断是否为当前聊天对象，如果是则保存在数据库中并在listview中显示，如果不是则保存在数据库中（保存到数据库方法写在了HomeActivity中），并且发送到通知栏
+                //判断是否为当前聊天对象，如果是则保存在数据库中并在listview中显示，如果不是则保存在数据库中（保存到数据库方法写在了HomeActivity中），并且发送到通知栏shadiao
                 chatcontent = new Chatcontent("2*2", time1, file, file, msg.getTargetID(), sp.getTag().getPhone());
                 if (msg.getTargetID().equals(username)) {
                     list.add(chatcontent);
@@ -744,9 +761,14 @@ public class ChatpageActivity extends AppCompatActivity implements PtrUIHandler 
             beginCrop(result.getData());
             //获取到从图库选择的图片，进行截取
         } else if (requestCode == Crop.REQUEST_CROP) {
+            try {
 
-            handleCrop(resultCode, result);
-            //拍照，点击确定发送图片
+                handleCrop(resultCode, result);
+                //拍照，点击确定发送图片
+            } catch (Exception e) {
+                Toast.makeText(ChatpageActivity.this, "发送图片失败，请稍后再试", Toast.LENGTH_SHORT).show();
+            }
+
         } else if (resultCode == RESULT_OK && requestCode == 1) {
 
 
@@ -800,6 +822,10 @@ public class ChatpageActivity extends AppCompatActivity implements PtrUIHandler 
         }
     }
 
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+    }
 
     @Override
     protected void onPause() {
@@ -856,6 +882,15 @@ public class ChatpageActivity extends AppCompatActivity implements PtrUIHandler 
 
             //申请WRITE_EXTERNAL_STORAGE权限
             ActivityCompat.requestPermissions(this, new String[]{android.Manifest.permission.CAMERA}, 1);
+        }
+
+
+        if (ContextCompat.checkSelfPermission(this,
+                android.Manifest.permission.WRITE_EXTERNAL_STORAGE)
+                != PackageManager.PERMISSION_GRANTED) {
+            ActivityCompat.requestPermissions(this,
+                    new String[]{android.Manifest.permission.WRITE_EXTERNAL_STORAGE}, 7);
+
         }
 
 

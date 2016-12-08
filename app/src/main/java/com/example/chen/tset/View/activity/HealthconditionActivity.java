@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.support.v7.widget.CardView;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.util.Log;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.CompoundButton;
@@ -384,8 +385,11 @@ public class HealthconditionActivity extends MyBaseActivity implements IListener
 
                     @Override
                     public void onResponse(String response, int id) {
+
                         if (response.equals("1")) {
                             Toast.makeText(HealthconditionActivity.this, "今天你已经添加过你的健康状况了", Toast.LENGTH_SHORT).show();
+                        } else if (response.equals("2")) {
+                            Toast.makeText(HealthconditionActivity.this, "添加健康状况失败", Toast.LENGTH_SHORT).show();
                         } else {
                             //发送广播通知诊疗页面更新
                             ListenerManager.getInstance().sendBroadCast("更新日历页面");

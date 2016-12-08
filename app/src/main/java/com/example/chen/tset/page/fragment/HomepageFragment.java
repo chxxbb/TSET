@@ -24,10 +24,13 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.chen.tset.Data.entity.Consult;
+import com.example.chen.tset.Data.entity.DiseaseBanner;
 import com.example.chen.tset.Data.entity.FindAllHot;
 import com.example.chen.tset.Data.Http_data;
 import com.example.chen.tset.Data.entity.Inquiry;
 import com.example.chen.tset.R;
+import com.example.chen.tset.Utils.BannerImageLoader;
+import com.example.chen.tset.Utils.db.HomeBannerDao;
 import com.example.chen.tset.Utils.db.HomeDoctorDao;
 import com.example.chen.tset.Utils.db.HomeEassayDao;
 import com.example.chen.tset.Utils.db.HomeFindAllHotDao;
@@ -41,13 +44,14 @@ import com.example.chen.tset.View.activity.LectureoomActivity;
 import com.example.chen.tset.View.activity.RegistrationAtivity;
 import com.example.chen.tset.View.activity.WebActivity;
 import com.example.chen.tset.page.view.AutoVerticalScrollTextView;
-import com.example.chen.tset.page.view.HomeBannerView;
 import com.example.chen.tset.page.adapter.HomeDoctorRecommendAdapter;
 import com.example.chen.tset.page.view.ListViewForScrollView;
 import com.example.chen.tset.page.view.RoundCornerImageView;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import com.nostra13.universalimageloader.core.ImageLoader;
+import com.youth.banner.Banner;
+import com.youth.banner.listener.OnBannerClickListener;
 import com.zhy.http.okhttp.OkHttpUtils;
 import com.zhy.http.okhttp.callback.StringCallback;
 
@@ -72,7 +76,7 @@ public class HomepageFragment extends Fragment {
     private AutoVerticalScrollTextView verticalScrollTV;
     private int number = 0;
     private boolean isRunning = true;
-    private HomeBannerView diseaseBannerView;
+    private Banner diseaseBannerView;
     private ScrollView scrollView;
     private LinearLayout ll_patriarch_lecture_room, ll_home_order_registration, ll_home_health_record, ll_diagnosistreat_manage, ll_home_article_more, ll_home_doctor_more;
 
@@ -118,6 +122,10 @@ public class HomepageFragment extends Fragment {
     RelativeLayout rl_loading;
 
     Context c;
+    HomeBannerDao homeBannerdb;
+
+    List<DiseaseBanner> bannerList = new ArrayList<>();
+    List<String> bannerData = new ArrayList<>();
 
 
     @Nullable
@@ -127,7 +135,7 @@ public class HomepageFragment extends Fragment {
         view = inflater.inflate(R.layout.fragment_homepage, null);
 
         try {
-
+            homeBannerdb = new HomeBannerDao(getContext());
             findView();
 
             //热点推荐
@@ -135,6 +143,8 @@ public class HomepageFragment extends Fragment {
 
             //热门文章
             homeEssayinit();
+
+            bannerinit();
 
             //医生推荐
             homeDoctorInit();
@@ -150,6 +160,55 @@ public class HomepageFragment extends Fragment {
         return view;
     }
 
+    private void bannerinit() {
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+
+                OkHttpUtils
+                        .post()
+                        .url(Http_data.http_data + "/FindBannerListByCategoryCode1")
+                        .build()
+                        .execute(new StringCallback() {
+
+                            @Override
+                            public void onError(Call call, Exception e, int id) {
+
+                            }
+
+                            @Override
+                            public void onResponse(String response, int id) {
+
+                                Type listtype = new TypeToken<LinkedList<DiseaseBanner>>() {
+                                }.getType();
+                                LinkedList<DiseaseBanner> leclist = gson.fromJson(response, listtype);
+                                homeBannerdb.delbanner();
+
+                                bannerList.clear();
+
+                                bannerData.clear();
+
+                                for (Iterator it = leclist.iterator(); it.hasNext(); ) {
+                                    DiseaseBanner diseaseBanner = (DiseaseBanner) it.next();
+                                    //将banner数据添加到数据库中
+                                    homeBannerdb.addbanner(diseaseBanner);
+
+                                    bannerList.add(diseaseBanner);
+
+                                    bannerData.add(diseaseBanner.getCover());
+                                }
+
+
+                                handler.sendEmptyMessage(10);
+
+                            }
+
+                        });
+
+            }
+        }).start();
+    }
+
 
     private void findView() {
         db = new HomeDoctorDao(getContext());
@@ -160,8 +219,13 @@ public class HomepageFragment extends Fragment {
 
         findAllHotList = new ArrayList<>();
         //疾病库banner
-        diseaseBannerView = (HomeBannerView) view.findViewById(R.id.bannerView);
+        diseaseBannerView = (Banner) view.findViewById(R.id.bannerView);
+
+        diseaseBannerView.setDelayTime(10000);
         scrollView = (ScrollView) view.findViewById(R.id.scrollView);
+
+        //使scrollView显示在头部，重写了listview解决scrollview与listview冲突，但会出现默认显示listview的情况
+        scrollView.smoothScrollTo(1, 1);
 
         tv_home_essay_title = (TextView) view.findViewById(R.id.tv_home_essay_title);
 
@@ -219,18 +283,16 @@ public class HomepageFragment extends Fragment {
         scrollView.setVerticalScrollBarEnabled(false);
 
 
-        //使scrollView显示在头部，重写了listview解决scrollview与listview冲突，但会出现默认显示listview的情况
-        scrollView.smoothScrollTo(1, 1);
-
-
         //先使用数据局库数据显示
         new Thread(new Runnable() {
             @Override
             public void run() {
-                if (db.findHomeDoctor().size() != 0 && homeEassaydb.findHomeEassay().size() != 0) {
+                if (db.findHomeDoctor().size() != 0 && homeEassaydb.findHomeEassay().size() != 0 && homeBannerdb.findHomebanner().size() != 0) {
                     inquiryList.addAll(db.findHomeDoctor());
                     handler.sendEmptyMessage(4);
                     handler.sendEmptyMessage(5);
+                    handler.sendEmptyMessage(11);
+
 
                 } else {
 
@@ -256,17 +318,6 @@ public class HomepageFragment extends Fragment {
         verticalScrollTV.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-//                try {
-//                    //点击打开浏览器
-//                    Intent intent = new Intent();
-//                    intent.setAction("android.intent.action.VIEW");
-//                    Uri content_url = Uri.parse(findAllHotList.get(number % strings.size()).getSite());
-//                    intent.setData(content_url);
-//                    startActivity(intent);
-//
-//                } catch (Exception e) {
-//                    e.printStackTrace();
-//                }
 
                 Intent intent = new Intent(getContext(), WebActivity.class);
                 intent.putExtra("url", findAllHotList.get(number % strings.size()).getSite());
@@ -274,9 +325,19 @@ public class HomepageFragment extends Fragment {
             }
         });
 
+
+        diseaseBannerView.setOnBannerClickListener(new OnBannerClickListener() {
+            @Override
+            public void OnBannerClick(int position) {
+                Intent intent = new Intent(getContext(), WebActivity.class);
+                intent.putExtra("url", bannerList.get(position - 1).getSite());
+                startActivity(intent);
+            }
+        });
+
     }
 
-    //使首页一直保持在头部，当fragment处于暂停或显示状态时都会调用此方法
+    //使首页一直保持在头部，当fragment处于暂停或显示状态时都会调用此方法nmlgb
     @Override
     public void onHiddenChanged(boolean hidden) {
         super.onHiddenChanged(hidden);
@@ -326,12 +387,10 @@ public class HomepageFragment extends Fragment {
                                 handler.sendEmptyMessage(3);
                             }
                         });
-
             }
         }).start();
 
     }
-
 
     //文章数据
     private void homeEssayinit() {
@@ -350,7 +409,6 @@ public class HomepageFragment extends Fragment {
 
                             @Override
                             public void onResponse(String response, int id) {
-
 
                                 Type listtype = new TypeToken<LinkedList<Consult>>() {
                                 }.getType();
@@ -455,6 +513,8 @@ public class HomepageFragment extends Fragment {
 
                     //隐藏加载中
                     rl_loading.setVisibility(View.GONE);
+
+                    scrollView.smoothScrollTo(1, 1);
                     break;
                 //设置医生推荐数据
                 case 2:
@@ -506,7 +566,7 @@ public class HomepageFragment extends Fragment {
                             handler.sendEmptyMessage(1);
 
 
-//                            ???????????
+//                            ???????????  fuck
 
 
                         }
@@ -543,6 +603,28 @@ public class HomepageFragment extends Fragment {
 
                     rl_loading.setVisibility(View.GONE);
 
+                    break;
+
+                case 10:
+                    diseaseBannerView.setImageLoader(new BannerImageLoader());
+                    //设置图片集合
+                    diseaseBannerView.setImages(bannerData);
+                    //banner设置方法全部调用完毕时最后调用
+                    diseaseBannerView.start();
+                    break;
+
+                case 11:
+                    bannerList.clear();
+
+                    bannerData.clear();
+
+                    bannerList = homeBannerdb.findHomebanner();
+
+                    for (int i = 0; i < bannerList.size(); i++) {
+                        bannerData.add(bannerList.get(i).getCover());
+                    }
+
+                    handler.sendEmptyMessage(10);
                     break;
 
             }
@@ -624,21 +706,6 @@ public class HomepageFragment extends Fragment {
         }
     };
 
-
-    //banner开始滑动
-    public void onResume() {
-        super.onResume();
-        diseaseBannerView.bannerStopPlay();
-        diseaseBannerView.bannerStartPlay();
-    }
-
-
-    //banner停止滑动
-    @Override
-    public void onPause() {
-        super.onPause();
-        diseaseBannerView.bannerStopPlay();
-    }
 
     @Override
     public void onDetach() {

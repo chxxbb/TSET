@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/scrollView"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -15,8 +16,10 @@
             android:layout_height="match_parent"
             android:orientation="vertical">
 
-            <com.example.chen.tset.page.view.HomeBannerView
+            <com.youth.banner.Banner
                 android:id="@+id/bannerView"
+                app:indicator_drawable_selected="@drawable/lead_slide_sign"
+                app:indicator_drawable_unselected="@drawable/lead_slide_sign1"
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/y350"
                 android:orientation="vertical" />

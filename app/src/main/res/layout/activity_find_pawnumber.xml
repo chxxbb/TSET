@@ -131,7 +131,7 @@
             android:layout_marginRight="@dimen/x30"
             android:background="@null"
             android:hint="请输入密码"
-            android:inputType="numberPassword"
+            android:inputType="textPassword"
             android:maxLength="16"
             android:textColor="@color/backgroundblue"
             android:textColorHint="@color/linegray1"

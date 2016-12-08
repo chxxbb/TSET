@@ -2,6 +2,7 @@ package com.example.chen.tset.page.fragment;
 
 
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
@@ -17,18 +18,21 @@ import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.RelativeLayout;
 
+import com.example.chen.tset.Data.entity.DiseaseBanner;
 import com.example.chen.tset.Data.entity.DiseaseDepartment;
 import com.example.chen.tset.Data.Http_data;
 import com.example.chen.tset.R;
+import com.example.chen.tset.Utils.BannerImageLoader;
 import com.example.chen.tset.Utils.IListener;
 import com.example.chen.tset.Utils.ListenerManager;
-import com.example.chen.tset.Utils.MyBaseActivity;
-import com.example.chen.tset.page.view.DiseaseBannerView;
+import com.example.chen.tset.View.activity.WebActivity;
 import com.example.chen.tset.page.adapter.DiseaseliblistvAdapter;
 import com.example.chen.tset.page.adapter.DiseaselibrecyvAdapter;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import com.nostra13.universalimageloader.core.ImageLoader;
+import com.youth.banner.Banner;
+import com.youth.banner.listener.OnBannerClickListener;
 import com.zhy.http.okhttp.OkHttpUtils;
 import com.zhy.http.okhttp.callback.StringCallback;
 
@@ -61,7 +65,10 @@ public class DiseaselibFragment extends Fragment implements IListener {
     int mSelect = 0;
     int pos = 0;
 
-    private DiseaseBannerView diseaseBannerView;
+    private Banner diseaseBannerView;
+
+    List<DiseaseBanner> bannerList = new ArrayList<>();
+    List<String> data = new ArrayList<>();
 
 
     @Nullable
@@ -75,12 +82,53 @@ public class DiseaselibFragment extends Fragment implements IListener {
             ListenerManager.getInstance().registerListtener(this);
             findView();
             listviewinit();
+            bannerinit();
             httpinit(0);
 
         } catch (Exception e) {
             e.printStackTrace();
         }
         return view;
+    }
+
+    private void bannerinit() {
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+
+                final Gson gson = new Gson();
+                OkHttpUtils
+                        .post()
+                        .url(Http_data.http_data + "/FindBannerListByCategoryCode2")
+                        .build()
+                        .execute(new StringCallback() {
+
+                            @Override
+                            public void onError(Call call, Exception e, int id) {
+
+                            }
+
+                            @Override
+                            public void onResponse(String response, int id) {
+
+
+                                Type listtype = new TypeToken<LinkedList<DiseaseBanner>>() {
+                                }.getType();
+                                LinkedList<DiseaseBanner> leclist = gson.fromJson(response, listtype);
+                                for (Iterator it = leclist.iterator(); it.hasNext(); ) {
+                                    DiseaseBanner diseaseBanner = (DiseaseBanner) it.next();
+                                    bannerList.add(diseaseBanner);
+
+                                }
+                                handler.sendEmptyMessage(3);
+
+                            }
+
+
+                        });
+
+            }
+        }).start();
     }
 
 
@@ -90,7 +138,9 @@ public class DiseaselibFragment extends Fragment implements IListener {
         view1 = view.findViewById(R.id.view1);
         rl_nonetwork = (RelativeLayout) view.findViewById(R.id.rl_nonetwork);
         rl_loading = (RelativeLayout) view.findViewById(R.id.rl_loading);
-        diseaseBannerView = (DiseaseBannerView) view.findViewById(R.id.bannerView);
+        diseaseBannerView = (Banner) view.findViewById(R.id.bannerView);
+
+        diseaseBannerView.setDelayTime(100000);
         listview_dise.setOnItemClickListener(listener);
         listview_dise.setOnItemSelectedListener(slistener);
         recyv_dise.setHasFixedSize(true);
@@ -115,16 +165,22 @@ public class DiseaselibFragment extends Fragment implements IListener {
 
                 rl_loading.setVisibility(View.VISIBLE);
 
-                ListenerManager.getInstance().sendBroadCast("banner重新加载数据");
-
-                diseaseBannerView.bannerStartPlay();
-
 
                 httpinit(0);
-
+                bannerinit();
                 listviewinit();
 
 
+            }
+        });
+
+
+        diseaseBannerView.setOnBannerClickListener(new OnBannerClickListener() {
+            @Override
+            public void OnBannerClick(int position) {
+                Intent intent = new Intent(getContext(), WebActivity.class);
+                intent.putExtra("url", bannerList.get(position - 1).getSite());
+                startActivity(intent);
             }
         });
 
@@ -176,7 +232,6 @@ public class DiseaselibFragment extends Fragment implements IListener {
                     diseaseBannerView.setVisibility(View.VISIBLE);
                     recyv_dise.setVisibility(View.VISIBLE);
                     adapter.notifyDataSetChanged();
-
                     view1.setVisibility(View.VISIBLE);
                     break;
                 case 1:
@@ -194,6 +249,18 @@ public class DiseaselibFragment extends Fragment implements IListener {
 
                     rl_nonetwork.setVisibility(View.GONE);
                     rl_loading.setVisibility(View.GONE);
+                    break;
+                case 3:
+
+                    for (int i = 0; i < bannerList.size(); i++) {
+                        data.add(bannerList.get(i).getCover());
+                    }
+
+                    diseaseBannerView.setImageLoader(new BannerImageLoader());
+                    //设置图片集合
+                    diseaseBannerView.setImages(data);
+                    //banner设置方法全部调用完毕时最后调用
+                    diseaseBannerView.start();
                     break;
 
             }
@@ -245,7 +312,6 @@ public class DiseaselibFragment extends Fragment implements IListener {
                             public void onResponse(String response, int id) {
 
 
-
                                 list1 = gson.fromJson(response, new TypeToken<List<String>>() {
                                 }.getType());
 
@@ -259,16 +325,6 @@ public class DiseaselibFragment extends Fragment implements IListener {
 
     }
 
-    public void onResume() {
-        super.onResume();
-        diseaseBannerView.bannerStartPlay();
-    }
-
-    @Override
-    public void onPause() {
-        super.onPause();
-        diseaseBannerView.bannerStopPlay();
-    }
 
     @Override
     public void notifyAllActivity(String str) {

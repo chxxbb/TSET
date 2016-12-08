@@ -66,4 +66,5 @@ dependencies {
     compile 'com.github.fg2q1q3q:DropDownMenu:1.1.1'
     compile 'com.qiniu:qiniu-android-sdk:7.3.1'
     compile project(':listviewlibrary')
+    compile 'com.youth.banner:banner:1.4.5'
 }

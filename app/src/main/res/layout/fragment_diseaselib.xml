@@ -2,6 +2,7 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:background="@color/white"
     android:orientation="horizontal">
 
@@ -38,8 +39,10 @@
                 android:layout_height="wrap_content"
                 android:orientation="vertical">
 
-                <com.example.chen.tset.page.view.DiseaseBannerView
+                <com.youth.banner.Banner
                     android:id="@+id/bannerView"
+                    app:indicator_drawable_selected="@drawable/lead_slide_sign"
+                    app:indicator_drawable_unselected="@drawable/lead_slide_sign1"
                     android:layout_width="match_parent"
                     android:layout_height="@dimen/y160"
                     android:layout_marginBottom="@dimen/y20"

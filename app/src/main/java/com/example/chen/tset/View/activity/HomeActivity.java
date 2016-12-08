@@ -492,7 +492,20 @@ public class HomeActivity extends MyBaseActivity implements View.OnClickListener
     protected void onStart() {
         super.onStart();
 
-        spStorage();
+        try {
+
+            spStorage();
+
+            final ActivityManager activityManager = (ActivityManager) getSystemService(ACTIVITY_SERVICE);
+
+            ActivityManager.MemoryInfo info = new ActivityManager.MemoryInfo();
+
+            activityManager.getMemoryInfo(info);
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
 
     }
 
@@ -510,6 +523,7 @@ public class HomeActivity extends MyBaseActivity implements View.OnClickListener
             name = User_Http.user.getName();
             phone = User_Http.user.getPhone();
             gender = User_Http.user.getGender();
+
             sp.setspUser(id, phone, name, gender);
         }
 
