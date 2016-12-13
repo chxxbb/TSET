@@ -40,16 +40,13 @@
     <uses-feature android:name="android.hardware.camera" />
     <uses-feature android:name="android.hardware.camera.autofocus" />
 
-    <span style="font-size:14px;">
-        <uses-permission android:name="android.permission.CAMERA" />
-        <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
-    </span>
-
     <uses-permission android:name="android.permission.SEND_SMS" />
     <uses-permission android:name="android.permission.READ_SMS" />
     <uses-permission android:name="android.permission.WRITE_SMS" />
     <uses-permission android:name="android.permission.RECEIVE_SMS" />
     <uses-permission android:name="android.permission.VIBRATE" />
+
+
 
     <application
         android:name=".Utils.ContextUtil"

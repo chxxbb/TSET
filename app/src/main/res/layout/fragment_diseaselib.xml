@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:background="@color/white"
     android:orientation="horizontal">
 
@@ -41,15 +41,15 @@
 
                 <com.youth.banner.Banner
                     android:id="@+id/bannerView"
-                    app:indicator_drawable_selected="@drawable/lead_slide_sign"
-                    app:indicator_drawable_unselected="@drawable/lead_slide_sign1"
-                    android:layout_width="match_parent"
-                    android:layout_height="@dimen/y160"
+                    android:layout_width="@dimen/x480"
+                    android:layout_height="@dimen/y200"
                     android:layout_marginBottom="@dimen/y20"
                     android:layout_marginLeft="@dimen/x30"
                     android:layout_marginRight="@dimen/x30"
                     android:layout_marginTop="@dimen/y20"
-                    android:orientation="vertical" />
+                    android:orientation="vertical"
+                    app:indicator_drawable_selected="@drawable/lead_slide_sign"
+                    app:indicator_drawable_unselected="@drawable/lead_slide_sign1" />
 
 
                 <android.support.v7.widget.RecyclerView

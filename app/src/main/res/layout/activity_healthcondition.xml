@@ -269,7 +269,8 @@
                     android:paddingRight="@dimen/x20"
                     android:textColor="@drawable/healthcondition_font_red"
                     android:textOff="腹胀"
-                    android:textOn="腹胀" />
+                    android:textOn="腹胀"
+                     />
 
                 <ToggleButton
                     android:id="@+id/tb14"
@@ -287,13 +288,17 @@
         </LinearLayout>
 
 
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/y62"/>
+
+
         <LinearLayout
             android:id="@+id/cv_healthcondition_condition_describe"
             android:layout_width="match_parent"
             android:layout_height="@dimen/y94"
             android:layout_marginLeft="@dimen/x30"
             android:layout_marginRight="@dimen/x30"
-            android:layout_marginTop="@dimen/y62"
             android:background="@drawable/health_backgroud">
 
 

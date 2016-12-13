@@ -5,6 +5,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
+import android.widget.CheckBox;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -61,6 +62,7 @@ public class CharactersafeAdapter extends BaseAdapter {
         private TextView tv_title, tv_content, tv_time;
         private ImageView iv_img;
         private TextView tv_characersafe_collectCount;
+
 
         ViewHolder(View v) {
             tv_title = (TextView) v.findViewById(R.id.tv_title);

@@ -91,7 +91,6 @@ public class CharactersafeFragment extends Fragment {
         rl_nonetwork = (RelativeLayout) view.findViewById(R.id.rl_nonetwork);
         rl_loading = (RelativeLayout) view.findViewById(R.id.rl_loading);
 
-
         lv_charactersafe.setVerticalScrollBarEnabled(false);
 
         lv_charactersafe.setMode(PullToRefreshBase.Mode.BOTH);
@@ -139,6 +138,8 @@ public class CharactersafeFragment extends Fragment {
     public void onStart() {
 
         super.onStart();
+
+        lv_charactersafe.setVerticalScrollBarEnabled(false);
 
     }
 
@@ -195,11 +196,9 @@ public class CharactersafeFragment extends Fragment {
 
 
     private void init1() {
-
         Thread thread = new Thread(new Runnable() {
             @Override
             public void run() {
-
                 OkHttpUtils
                         .post()
                         .url(Http_data.http_data + "/FindCyclopediaList")
@@ -218,13 +217,11 @@ public class CharactersafeFragment extends Fragment {
                                     new FinishRefresh().execute();
                                     Toast.makeText(getContext(), "数据获取失败", Toast.LENGTH_SHORT).show();
 
-
                                 } else if (response.equals("[]")) {
                                     new FinishRefresh().execute();
                                     Toast.makeText(getContext(), "已经没有更多数据了", Toast.LENGTH_SHORT).show();
 
                                 } else {
-
                                     Type listtype = new TypeToken<LinkedList<Consult>>() {
                                     }.getType();
 
@@ -246,12 +243,14 @@ public class CharactersafeFragment extends Fragment {
 
     }
 
+
     Handler handler = new Handler() {
         @Override
         public void handleMessage(Message msg) {
             switch (msg.what) {
                 case 0:
                     lv_charactersafe.setVisibility(View.VISIBLE);
+                    lv_charactersafe.setVerticalScrollBarEnabled(false);
                     new FinishRefresh().execute();
                     adapter.notifyDataSetChanged();
                     rl_loading.setVisibility(View.GONE);
@@ -272,11 +271,13 @@ public class CharactersafeFragment extends Fragment {
         @Override
         public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
             Intent intent = new Intent(getContext(), ConsultPageActivity.class);
+
             intent.putExtra("information", list.get(position - 1).getId() + "");
 
-            //根据点击页面判断是否为收藏页面，如果为隐藏赞
             intent.putExtra("collect", "0");
             startActivity(intent);
+
+            //大屌萌妹  冯狗蛋
         }
     };
 

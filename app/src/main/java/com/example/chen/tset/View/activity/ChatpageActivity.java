@@ -142,13 +142,11 @@ public class ChatpageActivity extends AppCompatActivity implements PtrUIHandler 
             e.printStackTrace();
         }
 
-
     }
 
 
     //添加我的医生
     private void addMyDoctor() {
-
         Thread thread = new Thread(new Runnable() {
             @Override
             public void run() {
@@ -400,6 +398,7 @@ public class ChatpageActivity extends AppCompatActivity implements PtrUIHandler 
 
             }
 
+
         }
     };
 
@@ -418,7 +417,6 @@ public class ChatpageActivity extends AppCompatActivity implements PtrUIHandler 
 
                     }
                     TextContent textContent = new TextContent(et_chat.getText().toString());
-
 
                     Message message = c.createSendMessage(textContent);
 
@@ -520,10 +518,14 @@ public class ChatpageActivity extends AppCompatActivity implements PtrUIHandler 
 
                 case R.id.iv_chat:
                     try {
-                        //发送图片
-                        sendpictureDialog();
+//                        //发送图片
+//                        sendpictureDialog();
+
+                        selectPrintDialog();
+
                     } catch (Exception e) {
                         e.printStackTrace();
+                        Toast.makeText(ChatpageActivity.this, "打开图库失败，请检查是否开启权限或稍后再试", Toast.LENGTH_SHORT).show();
                     }
 
                     break;
@@ -531,6 +533,55 @@ public class ChatpageActivity extends AppCompatActivity implements PtrUIHandler 
 
         }
     };
+
+    private void selectPrintDialog() {
+        jmessage();
+
+        //为dialog设置主题为透明，
+        setHeadDialog = new Dialog(this, R.style.CustomDialog);
+
+        setHeadDialog.show();
+
+        dialogView = View.inflate(getApplicationContext(), R.layout.chat_select_print, null);
+
+        //设置弹窗的布局
+        setHeadDialog.getWindow().setContentView(dialogView);
+
+        WindowManager.LayoutParams lp = setHeadDialog.getWindow().getAttributes();
+
+        setHeadDialog.getWindow().setAttributes(lp);
+
+        RelativeLayout rl_confirm = (RelativeLayout) dialogView.findViewById(R.id.rl_confirm);
+
+        RelativeLayout lr_cancel = (RelativeLayout) dialogView.findViewById(R.id.lr_cancel);
+
+        rl_confirm.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                try {
+                    setHeadDialog.dismiss();
+
+                    Crop.pickImage(ChatpageActivity.this);
+
+                } catch (Exception e) {
+
+                    e.printStackTrace();
+
+                }
+
+            }
+        });
+
+        lr_cancel.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                setHeadDialog.dismiss();
+            }
+        });
+
+    }
+
 
     @Override
     protected void onStop() {
@@ -540,10 +591,11 @@ public class ChatpageActivity extends AppCompatActivity implements PtrUIHandler 
 
     }
 
+
     //图片发送弹出框
     private void sendpictureDialog() {
-        jmessage();
 
+        jmessage();
         //为dialog设置主题为透明，
         setHeadDialog = new Dialog(this, R.style.CustomDialog);
         setHeadDialog.show();
@@ -877,12 +929,12 @@ public class ChatpageActivity extends AppCompatActivity implements PtrUIHandler 
         JPushInterface.onResume(this);
 
 
-        //动态获取相机权限
-        if (ContextCompat.checkSelfPermission(this, android.Manifest.permission.CAMERA) != PackageManager.PERMISSION_GRANTED) {
-
-            //申请WRITE_EXTERNAL_STORAGE权限
-            ActivityCompat.requestPermissions(this, new String[]{android.Manifest.permission.CAMERA}, 1);
-        }
+//        //动态获取相机权限
+//        if (ContextCompat.checkSelfPermission(this, android.Manifest.permission.CAMERA) != PackageManager.PERMISSION_GRANTED) {
+//
+//            //申请WRITE_EXTERNAL_STORAGE权限
+//            ActivityCompat.requestPermissions(this, new String[]{android.Manifest.permission.CAMERA}, 1);
+//        }
 
 
         if (ContextCompat.checkSelfPermission(this,

@@ -325,7 +325,6 @@ public class HomepageFragment extends Fragment {
             }
         });
 
-
         diseaseBannerView.setOnBannerClickListener(new OnBannerClickListener() {
             @Override
             public void OnBannerClick(int position) {
@@ -334,7 +333,6 @@ public class HomepageFragment extends Fragment {
                 startActivity(intent);
             }
         });
-
     }
 
     //使首页一直保持在头部，当fragment处于暂停或显示状态时都会调用此方法nmlgb
@@ -435,7 +433,6 @@ public class HomepageFragment extends Fragment {
 
     //推荐医生数据
     private void homeDoctorInit() {
-
         OkHttpUtils
                 .post()
                 .url(Http_data.http_data + "/FindDoctorRandomFive")
@@ -449,31 +446,32 @@ public class HomepageFragment extends Fragment {
                     @Override
                     public void onResponse(String response, int id) {
 
-
                         inquiryList.clear();
 
                         Type listtype = new TypeToken<LinkedList<Inquiry>>() {
                         }.getType();
-                        LinkedList<Inquiry> leclist = gson.fromJson(response, listtype);
-                        for (Iterator it = leclist.iterator(); it.hasNext(); ) {
-                            Inquiry inquiry = (Inquiry) it.next();
-                            inquiryList.add(inquiry);
 
+                        LinkedList<Inquiry> leclist = gson.fromJson(response, listtype);
+
+                        for (Iterator it = leclist.iterator(); it.hasNext(); ) {
+
+                            Inquiry inquiry = (Inquiry) it.next();
+
+                            inquiryList.add(inquiry);
                         }
+
                         handler.sendEmptyMessage(2);
 
                     }
                 });
     }
 
-
     private void init() {
-
 
         //实例化适配器
         adapter = new HomeDoctorRecommendAdapter(getContext(), inquiryList);
-        home_listView.setAdapter(adapter);
 
+        home_listView.setAdapter(adapter);
 
     }
 
@@ -481,7 +479,6 @@ public class HomepageFragment extends Fragment {
     private Handler handler = new Handler() {
         @Override
         public void handleMessage(Message msg) {
-
             switch (msg.what) {
                 //设置热点推荐滑动数据
                 case 0:
@@ -497,12 +494,15 @@ public class HomepageFragment extends Fragment {
                     //设置文章标题
                     tv_home_essay_title.setText(consultList.get(0).getTitle());
                     tv_home_essay_title1.setText(consultList.get(1).getTitle());
+
                     //设置文章内容
                     tv_home_essay_content.setText(consultList.get(0).getContent());
                     tv_home_essay_content1.setText(consultList.get(1).getContent());
+
                     //设置文章时间
                     tv_home_essay_time.setText(consultList.get(0).getTime());
                     tv_home_essay_time1.setText(consultList.get(1).getTime());
+
                     //设置文章图片
                     ImageLoader.getInstance().displayImage(consultList.get(0).getIcon(), tv_home_essay_icon);
                     ImageLoader.getInstance().displayImage(consultList.get(1).getIcon(), tv_home_essay_icon1);
@@ -529,7 +529,6 @@ public class HomepageFragment extends Fragment {
                     break;
                 //设置热点推荐滑动时间
                 case 3:
-
                     //设置第一次显示的数据
                     verticalScrollTV.setText(strings.get(0));
 

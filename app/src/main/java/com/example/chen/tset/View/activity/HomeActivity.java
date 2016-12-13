@@ -655,18 +655,22 @@ public class HomeActivity extends MyBaseActivity implements View.OnClickListener
 
     private void init() {
         fm = getSupportFragmentManager();
+
         rb_encyclopedia.performClick();
     }
 
 
     private void hideAllFragment(FragmentTransaction fragmentTransaction) {
         if (encyclopediaFragment != null) fragmentTransaction.hide(encyclopediaFragment);
+
         if (homepageFragment != null) fragmentTransaction.hide(homepageFragment);
+
         if (mypageFragment != null) fragmentTransaction.hide(mypageFragment);
+
         if (consultingFragment != null) fragmentTransaction.hide(consultingFragment);
     }
 
-    //viewpage中fragment的show,hide
+
     @Override
     public void onClick(View v) {
         ft = fm.beginTransaction();
