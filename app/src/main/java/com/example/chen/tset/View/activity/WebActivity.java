@@ -11,8 +11,10 @@ import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 
 import com.example.chen.tset.R;
+import com.example.chen.tset.Utils.MyBaseActivity;
+import com.example.chen.tset.Utils.MyBaseActivity1;
 
-public class WebActivity extends AppCompatActivity {
+public class WebActivity extends MyBaseActivity1 {
     private WebView webView;
     String url;
     LinearLayout ll_close;

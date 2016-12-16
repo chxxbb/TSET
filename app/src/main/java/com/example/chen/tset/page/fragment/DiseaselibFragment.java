@@ -124,7 +124,6 @@ public class DiseaselibFragment extends Fragment implements IListener {
 
                             }
 
-
                         });
 
             }
@@ -178,9 +177,9 @@ public class DiseaselibFragment extends Fragment implements IListener {
         diseaseBannerView.setOnBannerClickListener(new OnBannerClickListener() {
             @Override
             public void OnBannerClick(int position) {
-                Intent intent = new Intent(getContext(), WebActivity.class);
-                intent.putExtra("url", bannerList.get(position - 1).getSite());
-                startActivity(intent);
+//                Intent intent = new Intent(getContext(), WebActivity.class);
+//                intent.putExtra("url", bannerList.get(position - 1).getSite());
+//                startActivity(intent);
             }
         });
 

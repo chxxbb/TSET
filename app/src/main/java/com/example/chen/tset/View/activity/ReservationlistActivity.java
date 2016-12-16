@@ -21,6 +21,7 @@ import com.example.chen.tset.R;
 import com.example.chen.tset.Utils.IListener;
 import com.example.chen.tset.Utils.ListenerManager;
 import com.example.chen.tset.Utils.MyBaseActivity;
+import com.example.chen.tset.Utils.MyBaseActivity1;
 import com.google.gson.Gson;
 import com.zhy.http.okhttp.OkHttpUtils;
 import com.zhy.http.okhttp.callback.StringCallback;
@@ -31,7 +32,7 @@ import okhttp3.Call;
 /**
  * 预约订单详情
  */
-public class ReservationlistActivity extends MyBaseActivity implements View.OnClickListener, IListener {
+public class ReservationlistActivity extends MyBaseActivity1 implements View.OnClickListener, IListener {
     private LinearLayout ll_myreservationg, ll_order_remind;
     private ScrollView scrollView;
     private TextView tv_content, tv_title, tv_appointment_time, tv_valid_time, tv_address, tv_patient_name, tv_money, tv_patient_phone, tv_order_no, tv_hospital, tv_section;

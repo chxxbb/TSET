@@ -126,8 +126,6 @@ public class ServiceTwo extends Service {
 
 
     private void send() {
-
-
         Intent intent = new Intent(getApplicationContext(), LeadActivity.class);
         PendingIntent pendingIntent = PendingIntent.getActivity(
                 getApplicationContext(), 0, intent,
@@ -135,7 +133,7 @@ public class ServiceTwo extends Service {
         Notification noti = new NotificationCompat.Builder(getApplicationContext())
                 .setSmallIcon(R.drawable.app_log)
                 .setContentText("亲，该吃药了")
-                .setContentTitle("一条咸鱼干")
+                .setContentTitle("儿医天使")
                 .setContentIntent(pendingIntent)
                 .build();
 

@@ -67,4 +67,5 @@ dependencies {
     compile 'com.qiniu:qiniu-android-sdk:7.3.1'
     compile project(':listviewlibrary')
     compile 'com.youth.banner:banner:1.4.5'
+    compile 'me.imid.swipebacklayout.lib:library:1.0.0'
 }

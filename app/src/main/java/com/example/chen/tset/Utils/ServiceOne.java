@@ -133,7 +133,7 @@ public class ServiceOne extends Service {
         Notification noti = new NotificationCompat.Builder(getApplicationContext())
                 .setSmallIcon(R.drawable.app_log)
                 .setContentText("亲，该吃药了")
-                .setContentTitle("一条咸鱼干")
+                .setContentTitle("儿医天使")
                 .setContentIntent(pendingIntent)
                 .build();
 

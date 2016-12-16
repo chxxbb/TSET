@@ -22,6 +22,7 @@ import com.example.chen.tset.Data.Http_data;
 import com.example.chen.tset.Data.entity.Update;
 import com.example.chen.tset.R;
 import com.example.chen.tset.Utils.MyBaseActivity;
+import com.example.chen.tset.Utils.MyBaseActivity1;
 import com.example.chen.tset.Utils.Version_numberSP;
 import com.google.gson.Gson;
 import com.zhy.http.okhttp.OkHttpUtils;

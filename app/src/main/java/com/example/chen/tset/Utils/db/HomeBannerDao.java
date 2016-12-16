@@ -29,6 +29,7 @@ public class HomeBannerDao {
         values.put("site", banner.getSite());
         values.put("id", banner.getId());
         values.put("cover", banner.getCover());
+        values.put("cyclopediaId", banner.getCyclopediaId());
         db.insert("banner", null, values);
     }
 
@@ -39,7 +40,8 @@ public class HomeBannerDao {
             String site = cursor.getString(cursor.getColumnIndex("site"));
             int id = cursor.getInt(cursor.getColumnIndex("id"));
             String cover = cursor.getString(cursor.getColumnIndex("cover"));
-            DiseaseBanner banner = new DiseaseBanner(site,id,cover);
+            String cyclopediaId = cursor.getString(cursor.getColumnIndex("cyclopediaId"));
+            DiseaseBanner banner = new DiseaseBanner(site, id, cover, cyclopediaId);
             bannerArrayList.add(banner);
 
         }

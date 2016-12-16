@@ -341,6 +341,7 @@ public class HealthconditionActivity extends MyBaseActivity implements IListener
                     imm.toggleSoftInput(0, InputMethodManager.HIDE_NOT_ALWAYS);
                     cv_healthcondition_condition_describe.setVisibility(View.GONE);
                     cv_healthcondition_condition_import.setVisibility(View.VISIBLE);
+                    et_healthcondition.setCursorVisible(false);
                     break;
 
                 case R.id.tv_heath_save:

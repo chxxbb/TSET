@@ -35,6 +35,7 @@ import com.example.chen.tset.R;
 import com.example.chen.tset.Utils.IListener;
 import com.example.chen.tset.Utils.ListenerManager;
 import com.example.chen.tset.Utils.MyBaseActivity;
+import com.example.chen.tset.Utils.MyBaseActivity1;
 import com.example.chen.tset.page.adapter.DoctorparticularsAdapter;
 import com.example.chen.tset.page.view.ListViewForScrollView;
 import com.google.gson.Gson;
@@ -55,7 +56,7 @@ import okhttp3.Call;
 /**
  * 医生详情页面，与我的医生详情，问诊详情共用同一个接口
  */
-public class DoctorparticularsActivity extends MyBaseActivity {
+public class DoctorparticularsActivity extends MyBaseActivity1 {
     /**
      * 华丽的分割线
      */

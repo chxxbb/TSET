@@ -269,8 +269,7 @@
                     android:paddingRight="@dimen/x20"
                     android:textColor="@drawable/healthcondition_font_red"
                     android:textOff="腹胀"
-                    android:textOn="腹胀"
-                     />
+                    android:textOn="腹胀" />
 
                 <ToggleButton
                     android:id="@+id/tb14"
@@ -290,7 +289,7 @@
 
         <View
             android:layout_width="match_parent"
-            android:layout_height="@dimen/y62"/>
+            android:layout_height="@dimen/y62" />
 
 
         <LinearLayout
@@ -338,7 +337,9 @@
             android:visibility="gone"
             app:cardBackgroundColor="@color/white"
             app:cardCornerRadius="@dimen/y15"
-            app:cardElevation="@dimen/y8">
+            app:cardElevation="@dimen/y8"
+            app:cardPreventCornerOverlap="true"
+            app:cardUseCompatPadding="true">
 
             <LinearLayout
                 android:layout_width="match_parent"

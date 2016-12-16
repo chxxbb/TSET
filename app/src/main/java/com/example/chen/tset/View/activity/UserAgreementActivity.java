@@ -7,8 +7,9 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.example.chen.tset.R;
+import com.example.chen.tset.Utils.MyBaseActivity;
 
-public class UserAgreementActivity extends AppCompatActivity {
+public class UserAgreementActivity extends MyBaseActivity {
     private LinearLayout ll_return;
     private TextView tv;
 

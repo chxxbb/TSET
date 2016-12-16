@@ -17,6 +17,7 @@ import com.google.gson.Gson;
 import com.zhy.http.okhttp.OkHttpUtils;
 import com.zhy.http.okhttp.callback.StringCallback;
 
+import me.imid.swipebacklayout.lib.app.SwipeBackActivity;
 import okhttp3.Call;
 
 /**

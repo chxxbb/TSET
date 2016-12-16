@@ -62,6 +62,13 @@ public class LoginSelectActivity extends AppCompatActivity {
         setContentView(R.layout.activity_login_select);
 
         try {
+
+            if (ContextCompat.checkSelfPermission(this, Manifest.permission.READ_SMS) != PackageManager.PERMISSION_GRANTED) {
+
+                ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.READ_SMS, Manifest.permission.SEND_SMS, Manifest.permission.RECEIVE_SMS, Manifest.permission.BROADCAST_SMS}, 1);
+
+            }
+
             time = new OneKeyTimeCount(60000, 1000);
 
             findView();
@@ -81,7 +88,6 @@ public class LoginSelectActivity extends AppCompatActivity {
             e.printStackTrace();
             Toast.makeText(LoginSelectActivity.this, "自动获取验证码失败，请手动开启读取短信权限", Toast.LENGTH_SHORT).show();
         }
-
 
     }
 
@@ -269,6 +275,7 @@ public class LoginSelectActivity extends AppCompatActivity {
             super(millisInFuture, countDownInterval);
         }
 
+
         @Override
         public void onTick(long millisUntilFinished) {
             btn_gain_code.setBackgroundResource(R.drawable.btn_login_case);
@@ -309,7 +316,6 @@ public class LoginSelectActivity extends AppCompatActivity {
                             });
                         }
 
-
                         @Override
                         public void onResponse(String response, int id) {
 
@@ -346,32 +352,35 @@ public class LoginSelectActivity extends AppCompatActivity {
 
                     @Override
                     public void onResponse(String response, int id) {
-                        Log.e("一键登录返回", response);
 
                         if (response.equals("2")) {
 
                             btn_confirm_onekey_login.setClickable(true);
                             btn_confirm_onekey_login.setText("登录");
                             Toast.makeText(LoginSelectActivity.this, "登录失败", Toast.LENGTH_SHORT).show();
+
                         } else if (response.equals("1")) {
 
                             btn_confirm_onekey_login.setClickable(true);
                             btn_confirm_onekey_login.setText("登录");
                             Toast.makeText(LoginSelectActivity.this, "验证码错误", Toast.LENGTH_SHORT).show();
+
                         } else {
 
                             User user = gson.fromJson(response, User.class);
 
                             User_Http.user.setUser(user);
 
-
                             if (user.getName() != null && !"".equals(user.getName())) {
+
                                 Intent intent = new Intent(LoginSelectActivity.this, HomeActivity.class);
                                 startActivity(intent);
 
                             } else {
+
                                 Intent intent = new Intent(LoginSelectActivity.this, SetdataActivity.class);
                                 startActivity(intent);
+
                             }
 
                             finish();
@@ -401,12 +410,7 @@ public class LoginSelectActivity extends AppCompatActivity {
 
                     @Override
                     public void onResponse(String response, int id) {
-
-                        Log.e("登录返回", response);
-
-
                         if (response.equals("1")) {
-
                             btn_login_pass_ok.setClickable(true);
                             btn_login_pass_ok.setText("登录");
                             Toast.makeText(LoginSelectActivity.this, "账号或密码错误", Toast.LENGTH_SHORT).show();
@@ -419,11 +423,9 @@ public class LoginSelectActivity extends AppCompatActivity {
 
                             User_Http.user.setUser(user);
 
-
                             //第一次登陆保存用户密码
                             SharedPsaveuser sp = new SharedPsaveuser(LoginSelectActivity.this);
                             sp.setUserpassworde(et_login_password.getText().toString());
-
 
                             if (user.getName() != null && !"".equals(user.getName())) {
                                 Intent intent = new Intent(LoginSelectActivity.this, HomeActivity.class);
@@ -435,11 +437,9 @@ public class LoginSelectActivity extends AppCompatActivity {
                             }
                             finish();
                         }
-
                     }
                 });
     }
-
 
     public boolean isMobileNO(String mobiles) {
         Pattern p = Pattern.compile("^((13[0-9])|(15[^4,\\D])|(18[0-9]))\\d{8}$");
@@ -452,11 +452,7 @@ public class LoginSelectActivity extends AppCompatActivity {
     protected void onResume() {
         super.onResume();
         JPushInterface.onResume(this);
-        if (ContextCompat.checkSelfPermission(this, Manifest.permission.READ_SMS) != PackageManager.PERMISSION_GRANTED) {
 
-            ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.READ_SMS, Manifest.permission.SEND_SMS, Manifest.permission.RECEIVE_SMS, Manifest.permission.BROADCAST_SMS}, 1);
-
-        }
     }
 
     @Override

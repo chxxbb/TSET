@@ -53,16 +53,11 @@ public class LoginActivity extends AppCompatActivity {
             e.printStackTrace();
         }
 
-
-
-
         sp = new SharedPsaveuser(LoginActivity.this);
-
 
     }
 
     private void initOnclick() {
-
         login_button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {           //点击登录后的触发
@@ -84,12 +79,7 @@ public class LoginActivity extends AppCompatActivity {
 
                             @Override
                             public void onResponse(String response, int id) {
-
-                                Log.e("登录返回", response);
-
-
                                 if (response.equals("1")) {
-
                                     login_button.setClickable(true);
                                     login_button.setText("登录");
                                     Toast.makeText(LoginActivity.this, "账号或密码错误", Toast.LENGTH_SHORT).show();
@@ -102,11 +92,9 @@ public class LoginActivity extends AppCompatActivity {
 
                                     User_Http.user.setUser(user);
 
-
                                     //第一次登陆保存用户密码
                                     SharedPsaveuser sp = new SharedPsaveuser(LoginActivity.this);
                                     sp.setUserpassworde(login_password_edittext.getText().toString());
-
 
                                     if (user.getName() != null && !"".equals(user.getName())) {
                                         Intent intent = new Intent(activity, HomeActivity.class);

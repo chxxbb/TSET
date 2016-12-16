@@ -35,6 +35,8 @@ import com.example.chen.tset.Data.User_Http;
 import com.example.chen.tset.Data.entity.Userinfo;
 import com.example.chen.tset.Manifest;
 import com.example.chen.tset.R;
+import com.example.chen.tset.Utils.MyBaseActivity;
+import com.example.chen.tset.Utils.MyBaseActivity1;
 import com.example.chen.tset.Utils.db.ChatpageDao;
 import com.example.chen.tset.Utils.db.InquiryrecordDao;
 import com.example.chen.tset.Utils.SharedPsaveuser;
@@ -68,7 +70,7 @@ import in.srain.cube.views.ptr.indicator.PtrIndicator;
 import okhttp3.Call;
 
 
-public class ChatpageActivity extends AppCompatActivity implements PtrUIHandler {
+public class ChatpageActivity extends MyBaseActivity implements PtrUIHandler {
     private EditText et_chat;
     private ImageView iv_chat;
     private ListView listView;

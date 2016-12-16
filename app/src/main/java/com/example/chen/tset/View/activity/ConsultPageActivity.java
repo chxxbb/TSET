@@ -17,18 +17,20 @@ import com.example.chen.tset.R;
 import com.example.chen.tset.Utils.IListener;
 import com.example.chen.tset.Utils.ListenerManager;
 import com.example.chen.tset.Utils.MyBaseActivity;
+import com.example.chen.tset.Utils.MyBaseActivity1;
 import com.example.chen.tset.Utils.SharedPsaveuser;
 import com.google.gson.Gson;
 import com.nostra13.universalimageloader.core.ImageLoader;
 import com.zhy.http.okhttp.OkHttpUtils;
 import com.zhy.http.okhttp.callback.StringCallback;
 
+import me.imid.swipebacklayout.lib.app.SwipeBackActivity;
 import okhttp3.Call;
 
 /**
  * 资讯详情页面与收藏详情页面公用同一个接口
  */
-public class ConsultPageActivity extends MyBaseActivity implements View.OnClickListener, IListener {
+public class ConsultPageActivity extends MyBaseActivity1 implements View.OnClickListener, IListener {
     private ScrollView scrollview;
     private LinearLayout ll_consult_return, ll_consult_collect;
     private TextView tv_title, tv_time, tv_content, tv_collsult, tv;
@@ -144,7 +146,8 @@ public class ConsultPageActivity extends MyBaseActivity implements View.OnClickL
 
                             @Override
                             public void onResponse(String response, int id) {
-                                Log.e("111", response);
+
+
                                 if (response.equals("[]") || response.equals("")) {
                                     handler.sendEmptyMessage(4);
 
@@ -205,6 +208,7 @@ public class ConsultPageActivity extends MyBaseActivity implements View.OnClickL
                     rl_loading.setVisibility(View.GONE);
                     rl_nonetwork.setVisibility(View.VISIBLE);
                     ll_consult_collect.setVisibility(View.GONE);
+
                     break;
                 case 5:
 
@@ -255,7 +259,6 @@ public class ConsultPageActivity extends MyBaseActivity implements View.OnClickL
                                         handler.sendEmptyMessage(6);
 
                                     }
-
                                 }
                             });
                 }

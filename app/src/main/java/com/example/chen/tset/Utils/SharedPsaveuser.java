@@ -80,4 +80,20 @@ public class SharedPsaveuser {
         boolean b = sp.getBoolean("state", true);
         return b;
     }
+
+
+    //保存启动页
+    public void getStartPage(String str) {
+        SharedPreferences sp = context.getSharedPreferences("startPage", Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = sp.edit();
+        editor.putString("page", str);
+        editor.commit();
+    }
+
+
+    public String setStartPage() {
+        SharedPreferences sp = context.getSharedPreferences("startPage", Context.MODE_PRIVATE);
+        String str = sp.getString("page", null);
+        return str;
+    }
 }

@@ -7,11 +7,22 @@ public class DiseaseBanner {
     private String site;
     private int id;
     private String cover;
+    private String cyclopediaId;
 
-    public DiseaseBanner(String site, int id, String cover) {
+    public DiseaseBanner(String site, int id, String cover, String cyclopediaId) {
         this.site = site;
         this.id = id;
         this.cover = cover;
+        this.cyclopediaId = cyclopediaId;
+    }
+
+
+    public String getSite() {
+        return site;
+    }
+
+    public void setSite(String site) {
+        this.site = site;
     }
 
     public int getId() {
@@ -22,14 +33,6 @@ public class DiseaseBanner {
         this.id = id;
     }
 
-    public String getSite() {
-        return site;
-    }
-
-    public void setSite(String site) {
-        this.site = site;
-    }
-
     public String getCover() {
         return cover;
     }
@@ -38,12 +41,22 @@ public class DiseaseBanner {
         this.cover = cover;
     }
 
+    public String getCyclopediaId() {
+        return cyclopediaId;
+    }
+
+    public void setCyclopediaId(String cyclopediaId) {
+        this.cyclopediaId = cyclopediaId;
+    }
+
+
     @Override
     public String toString() {
         return "DiseaseBanner{" +
                 "site='" + site + '\'' +
                 ", id=" + id +
                 ", cover='" + cover + '\'' +
+                ", cyclopediaId='" + cyclopediaId + '\'' +
                 '}';
     }
 }

@@ -47,7 +47,6 @@
     <uses-permission android:name="android.permission.VIBRATE" />
 
 
-
     <application
         android:name=".Utils.ContextUtil"
         android:allowBackup="true"
@@ -73,7 +72,9 @@
         <activity android:name=".View.activity.RegisterActivity" />
         <activity android:name=".View.activity.SetdataActivity" />
         <activity android:name=".View.activity.FindpawActivity" />
-        <activity android:name=".View.activity.ReservationlistActivity" />
+        <activity
+            android:name=".View.activity.ReservationlistActivity"
+            android:theme="@style/lucency" />
         <activity android:name=".View.activity.MycollectActivity" />
         <activity android:name=".View.activity.ReservationActivity" />
         <activity android:name=".View.activity.PasswordSettingActivity" />
@@ -84,16 +85,23 @@
         <activity android:name=".View.activity.EvaluatepageActivity" />
         <activity android:name=".View.activity.NamepageActivity" />
         <activity android:name=".View.activity.HealthconditionActivity" />
-        <activity android:name=".View.activity.DiseaseActivity" />
+        <activity
+            android:name=".View.activity.DiseaseActivity"
+            android:theme="@style/lucency" />
         <activity android:name=".View.activity.SexpageActivity" />
         <activity android:name=".View.activity.PhonechangeActivity" />
-        <activity android:name=".View.activity.ConsultPageActivity" />
+
+        <activity
+            android:name=".View.activity.ConsultPageActivity"
+            android:theme="@style/lucency" />
         <activity android:name=".View.activity.PersonaldataActivity" />
         <activity android:name=".View.activity.RegistrationAtivity" />
         <activity android:name=".View.activity.PharmacyremindActivity" />
         <activity android:name=".View.activity.CompileremindActivity" />
         <activity android:name=".View.activity.RemindsetActivity" />
-        <activity android:name=".View.activity.DoctorparticularsActivity" />
+        <activity
+            android:name=".View.activity.DoctorparticularsActivity"
+            android:theme="@style/lucency" />
         <activity android:name=".View.activity.MyDoctorActivity" />
         <activity android:name=".View.activity.InquiryrecordActivity" />
         <activity android:name=".View.activity.HomeActivity" />
@@ -229,14 +237,14 @@
         <service
             android:name=".Utils.ServiceOne"
             android:process=":remote">
-            <intent-filter>
+            <intent-filter android:priority="1000">
                 <action android:name="com.example.servicedemo.ServiceOne" />
             </intent-filter>
         </service>
         <service
             android:name=".Utils.ServiceTwo"
             android:process=":remote">
-            <intent-filter>
+            <intent-filter android:priority="1000">
                 <action android:name="com.example.servicedemo.ServiceTwo" />
             </intent-filter>
         </service>
@@ -244,7 +252,9 @@
         <activity android:name=".View.activity.CompileConsultingActivity" />
         <activity android:name=".View.activity.UserAgreementActivity" />
         <activity android:name=".View.activity.LoginSelectActivity" />
-        <activity android:name=".View.activity.WebActivity"></activity>
+        <activity
+            android:name=".View.activity.WebActivity"
+            android:theme="@style/lucency"></activity>
     </application>
 
 </manifest>

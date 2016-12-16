@@ -109,14 +109,30 @@ public class CharactersafeFragment extends Fragment {
         lv_charactersafe.setOnRefreshListener(new PullToRefreshBase.OnRefreshListener2<ListView>() {
             @Override
             public void onPullDownToRefresh(PullToRefreshBase<ListView> refreshView) {
-                page = 0;
-                init1();
+
+                new Handler().postDelayed(new Runnable() {
+                    public void run() {
+
+                        page = 0;
+                        init1();
+
+                    }
+                }, 1500);
+
             }
 
             @Override
             public void onPullUpToRefresh(PullToRefreshBase<ListView> refreshView) {
-                page = page + 20;
-                init();
+
+
+                new Handler().postDelayed(new Runnable() {
+                    public void run() {
+
+                        page = page + 20;
+                        init();
+
+                    }
+                }, 1500);
             }
         });
 
@@ -144,11 +160,9 @@ public class CharactersafeFragment extends Fragment {
     }
 
     private void init() {
-
         Thread thread = new Thread(new Runnable() {
             @Override
             public void run() {
-
                 OkHttpUtils
                         .post()
                         .url(Http_data.http_data + "/FindCyclopediaList")
@@ -162,12 +176,9 @@ public class CharactersafeFragment extends Fragment {
 
                             @Override
                             public void onResponse(String response, int id) {
-
                                 if (response.equals("1")) {
                                     new FinishRefresh().execute();
                                     Toast.makeText(getContext(), "数据获取失败", Toast.LENGTH_SHORT).show();
-
-
                                 } else if (response.equals("[]")) {
                                     new FinishRefresh().execute();
                                     Toast.makeText(getContext(), "已经没有更多数据了", Toast.LENGTH_SHORT).show();
@@ -182,11 +193,9 @@ public class CharactersafeFragment extends Fragment {
                                         Consult consult = (Consult) it.next();
                                         list.add(consult);
                                     }
-
                                     handler.sendEmptyMessage(0);
 
                                 }
-
                             }
                         });
             }
@@ -230,19 +239,14 @@ public class CharactersafeFragment extends Fragment {
                                         Consult consult = (Consult) it.next();
                                         list.add(consult);
                                     }
-
                                     handler.sendEmptyMessage(0);
-
                                 }
-
                             }
                         });
             }
         });
         thread.start();
-
     }
-
 
     Handler handler = new Handler() {
         @Override

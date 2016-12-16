@@ -39,6 +39,7 @@ import com.example.chen.tset.Data.entity.Update;
 import com.example.chen.tset.Data.entity.User;
 import com.example.chen.tset.Data.User_Http;
 import com.example.chen.tset.Data.entity.VersionsUpdate;
+import com.example.chen.tset.Utils.MyBaseActivity1;
 import com.example.chen.tset.Utils.ServiceOne;
 import com.example.chen.tset.Utils.ServiceTwo;
 import com.example.chen.tset.Utils.db.ChatpageDao;
@@ -449,7 +450,6 @@ public class HomeActivity extends MyBaseActivity implements View.OnClickListener
     };
 
     private void saveicon() {
-
         new Thread() {
             public void run() {
                 try {
@@ -552,7 +552,6 @@ public class HomeActivity extends MyBaseActivity implements View.OnClickListener
                     Log.e("jmessage", "注册失败");
                 }
 
-
             }
         });
 
@@ -600,7 +599,6 @@ public class HomeActivity extends MyBaseActivity implements View.OnClickListener
                 ImageContent imageContent = (ImageContent) msg.getContent();
                 String mfile = imageContent.getLocalPath();//图片本地地址 无效
 
-
                 String file = imageContent.getLocalThumbnailPath();//图片对应缩略图的本地地址
 
                 Date dt1 = new Date();
@@ -609,15 +607,12 @@ public class HomeActivity extends MyBaseActivity implements View.OnClickListener
                 chatcontent = new Chatcontent("2*2", time1, file, file, msg.getTargetID(), sp.getTag().getPhone());
                 db.addchatcont(chatcontent);
 
-
         }
-
     }
 
 
     //接送到的消息显示到通知栏，点击后跳转到对应的聊天页面
     public void onEvent(NotificationClickEvent event) {
-
         InquiryrecordDao db = new InquiryrecordDao(this);
         Message msg = event.getMessage();
         Inquiryrecord inquiryrecord = db.chatfinddoctor(msg.getTargetID());
@@ -758,8 +753,8 @@ public class HomeActivity extends MyBaseActivity implements View.OnClickListener
         //设置弹出框视图
         dialogView = View.inflate(this, R.layout.inquiry_popup_dialog, null);
         setHeadDialog.getWindow().setContentView(dialogView);
-        WindowManager.LayoutParams lp = setHeadDialog.getWindow()
-                .getAttributes();
+        WindowManager.LayoutParams lp = setHeadDialog.getWindow().getAttributes();
+
         Window window = setHeadDialog.getWindow();
 
         window.setWindowAnimations(0);

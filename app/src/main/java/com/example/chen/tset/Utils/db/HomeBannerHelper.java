@@ -14,7 +14,7 @@ public class HomeBannerHelper extends SQLiteOpenHelper{
 
     @Override
     public void onCreate(SQLiteDatabase db) {
-        db.execSQL("create table banner(site text,id text,cover text)");
+        db.execSQL("create table banner(site text,id text,cover text,cyclopediaId text)");
     }
 
     @Override
