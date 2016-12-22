@@ -227,7 +227,6 @@ public class ConsultingFragment extends Fragment implements View.OnClickListener
     public void notifyAllActivity(String str) {
         if (str.equals("更新日历页面")) {
 
-
             handler.sendEmptyMessage(0);
             SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
             SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM");
@@ -239,7 +238,6 @@ public class ConsultingFragment extends Fragment implements View.OnClickListener
             ListenerManager.getInstance().registerListtener(this);
 
         }
-
 
     }
 
@@ -256,6 +254,7 @@ public class ConsultingFragment extends Fragment implements View.OnClickListener
                 case 1:
                     calV.notifyDataSetChanged();
                     break;
+
                 case 2:
 //                    Toast.makeText(getContext(), "网络连接失败", Toast.LENGTH_SHORT).show();
                     break;
@@ -263,7 +262,6 @@ public class ConsultingFragment extends Fragment implements View.OnClickListener
                     ll_registration_info.setVisibility(View.GONE);
                     ll_consulting_phramacy.setVisibility(View.GONE);
                     ll_consulting_health.setVisibility(View.GONE);
-
 
                     tv_registration_info = (TextView) view.findViewById(R.id.tv_registration_info);
 
@@ -289,8 +287,6 @@ public class ConsultingFragment extends Fragment implements View.OnClickListener
                         ll_registration_info.setVisibility(View.VISIBLE);
                         tv_registration_info.setText("有挂号" + ",请于" + pharmacydate + "准时就诊");
 
-                        SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMdd");
-
 
                         ll_registration_info.setOnClickListener(new View.OnClickListener() {
                             @Override
@@ -301,7 +297,6 @@ public class ConsultingFragment extends Fragment implements View.OnClickListener
                             }
                         });
                     }
-
 
 
                     //健康状况
@@ -381,7 +376,6 @@ public class ConsultingFragment extends Fragment implements View.OnClickListener
 
         tv_lunar_calendar = (TextView) view.findViewById(R.id.tv_lunar_calendar);
 
-
         ll_consulting_phramacy = (LinearLayout) view.findViewById(R.id.ll_consulting_phramacy);
         ll_consulting_phramacy.setOnClickListener(remindlistener);
 
@@ -421,15 +415,11 @@ public class ConsultingFragment extends Fragment implements View.OnClickListener
         int m = Integer.parseInt(str2);
         int d = Integer.parseInt(str3);
 
-        String festival;
-
         String lunarCalendar = c.getChineseMonth(y, m, d) + c.getChineseDay(y, m, d);
-
 
         c.setGregorian(y, m, d);
         c.computeChineseFields();
         c.computeSolarTerms();
-
 
         String lauar1 = lauar.getLunar(str1, str2, str3);
 
@@ -439,17 +429,14 @@ public class ConsultingFragment extends Fragment implements View.OnClickListener
             tv_solar_terms.setText(c.judgefestival(m, d, lunarCalendar).trim());
         }
 
-
         if (tv_solar_terms.getText().toString().equals("")) {
             tv_solar_terms.setVisibility(View.GONE);
         } else {
             tv_solar_terms.setVisibility(View.VISIBLE);
         }
 
-
         tv_chinese_era.setText(lauar1);
         tv_lunar_calendar.setText("农历" + lunarCalendar);
-
 
         ll_consulting_popup_case.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -458,7 +445,6 @@ public class ConsultingFragment extends Fragment implements View.OnClickListener
                 startActivity(intent);
             }
         });
-
 
     }
 
@@ -477,9 +463,7 @@ public class ConsultingFragment extends Fragment implements View.OnClickListener
         flipper = (ViewFlipper) view.findViewById(R.id.flipper);
         flipper.removeAllViews();
 
-
         list = new ArrayList<>();
-
 
         calV = new CalendarAdapter(getContext(), getResources(), jumpMonth, jumpYear, year_c, month_c, day_c, data);
         addGridView();
@@ -545,27 +529,20 @@ public class ConsultingFragment extends Fragment implements View.OnClickListener
             int gvFlag = 0; // 每次添加gridview到viewflipper中时给的标记
             if (e1.getX() - e2.getX() > 60) {
 
-
                 // 像左滑动
                 enterNextMonth(gvFlag);
-
 
                 return true;
             } else if (e1.getX() - e2.getX() < -60) {
 
-
                 // 向右滑动
                 enterPrevMonth(gvFlag);
 
-
                 return true;
             }
-
-
             return false;
         }
     }
-
 
     //移动到下一个月
     private void enterNextMonth(int gvFlag) {
@@ -585,14 +562,11 @@ public class ConsultingFragment extends Fragment implements View.OnClickListener
             str1 = calV.getShowYear() + "-" + calV.getShowMonth();
         }
 
-        Log.e("11", str1);
-
         //加载滑动到的页面日期数据
         findAllByDate(str1);
 
         gvFlag++;
         flipper.addView(gridView, gvFlag);
-
 
         //设置滑动动画
         flipper.setInAnimation(AnimationUtils.loadAnimation(getContext(), R.anim.push_left_in));
@@ -609,12 +583,10 @@ public class ConsultingFragment extends Fragment implements View.OnClickListener
         cal_toggleBtn1.setChecked(false);
         cal_toggleBtn2.setChecked(false);
 
-
     }
 
     //移动到上一个月
     private void enterPrevMonth(int gvFlag) {
-
 
         addGridView(); // 添加一个gridView
         jumpMonth--; // 上一个月
@@ -649,9 +621,7 @@ public class ConsultingFragment extends Fragment implements View.OnClickListener
         cal_toggleBtn1.setChecked(false);
         cal_toggleBtn2.setChecked(false);
 
-
     }
-
 
     /**
      * 添加头部的年份 闰哪月等信息
@@ -664,14 +634,11 @@ public class ConsultingFragment extends Fragment implements View.OnClickListener
         view.setText(textDate);
     }
 
-
     private void addGridView() {
         LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(AbsListView.LayoutParams.MATCH_PARENT, AbsListView.LayoutParams.MATCH_PARENT);
         // 取得屏幕的宽度和高度
 
-        WindowManager windowManager = (WindowManager) getContext()
-                .getSystemService(Context.WINDOW_SERVICE);
-
+        WindowManager windowManager = (WindowManager) getContext().getSystemService(Context.WINDOW_SERVICE);
 
         Display display = windowManager.getDefaultDisplay();
         int Width = display.getWidth();
@@ -680,7 +647,7 @@ public class ConsultingFragment extends Fragment implements View.OnClickListener
         gridView = new CalendarGridView(getContext());
         gridView.setNumColumns(7);
         gridView.setColumnWidth(40);
-        // gridView.setStretchMode(GridView.STRETCH_COLUMN_WIDTH);
+
         if (Width == 720 && Height == 1280) {
             gridView.setColumnWidth(40);
         }
@@ -707,7 +674,6 @@ public class ConsultingFragment extends Fragment implements View.OnClickListener
             public void onItemClick(AdapterView<?> arg0, View arg1, int position, long arg3) {
                 // TODO Auto-generated method stub
 
-
                 calV.changeSelected(position);
 
                 int startPosition = calV.getStartPositon();
@@ -733,15 +699,12 @@ public class ConsultingFragment extends Fragment implements View.OnClickListener
                         day = scheduleDay;
                     }
 
-
                     date = scheduleYear + "-" + month + "-" + day;
                     pharmacydate = scheduleYear + "-" + month + "-" + day;
-
 
                     findCalendar(date);
 
                     CalendarUtil c = new CalendarUtil();
-
 
                     int y = Integer.parseInt(scheduleYear);
                     int m = Integer.parseInt(month);
@@ -771,7 +734,6 @@ public class ConsultingFragment extends Fragment implements View.OnClickListener
 
                     tv_lunar_calendar.setText("农历" + lunarCalendar);
 
-
                 }
             }
         });
@@ -780,8 +742,6 @@ public class ConsultingFragment extends Fragment implements View.OnClickListener
 
     //点击日期获取当天信息
     public void findCalendar(final String date1) {
-
-
         Thread thread = new Thread(new Runnable() {
             @Override
             public void run() {
@@ -799,15 +759,12 @@ public class ConsultingFragment extends Fragment implements View.OnClickListener
 
                             @Override
                             public void onResponse(String response, int id) {
-
-
                                 try {
                                     calendarinit = gson.fromJson(response, Calendarinit.class);
                                     handler.sendEmptyMessage(4);
                                 } catch (Exception e) {
                                     e.printStackTrace();
                                 }
-
 
                             }
                         });
@@ -838,7 +795,6 @@ public class ConsultingFragment extends Fragment implements View.OnClickListener
 
                             @Override
                             public void onResponse(String response, int id) {
-
 
                                 Type listtype = new TypeToken<LinkedList<ConsultingRemindState>>() {
                                 }.getType();
@@ -872,7 +828,6 @@ public class ConsultingFragment extends Fragment implements View.OnClickListener
 
             default:
                 break;
-
 
         }
     }

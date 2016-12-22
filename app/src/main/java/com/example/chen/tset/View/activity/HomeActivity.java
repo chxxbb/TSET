@@ -560,7 +560,6 @@ public class HomeActivity extends MyBaseActivity implements View.OnClickListener
             public void gotResult(int i, String s) {
                 if (i == 0) {
                     Log.e("jmessage", "登录成功");
-
                 } else {
                     Log.e("jmessage", "登录失败");
                 }
@@ -682,9 +681,7 @@ public class HomeActivity extends MyBaseActivity implements View.OnClickListener
                     ft.show(homepageFragment);
                 }
 
-
                 break;
-
 
             //讲堂页面，更改为百科页面，讲堂改为一个单独的Activity
             case R.id.rb_lectureroom:

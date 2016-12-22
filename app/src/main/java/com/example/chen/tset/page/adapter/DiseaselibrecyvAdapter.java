@@ -50,7 +50,6 @@ public class DiseaselibrecyvAdapter extends RecyclerView.Adapter {
             view = itemView.findViewById(R.id.view);
             linearLayout = (LinearLayout) itemView.findViewById(R.id.linearLayout);
             //设置点击事件
-
         }
     }
 
@@ -60,6 +59,7 @@ public class DiseaselibrecyvAdapter extends RecyclerView.Adapter {
         view = LayoutInflater.from(parent.getContext()).inflate(R.layout.disease_recyv_item, parent, false);
 
         return new Viewholder(view);
+
     }
 
     @Override

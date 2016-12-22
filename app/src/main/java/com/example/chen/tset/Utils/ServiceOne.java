@@ -57,11 +57,10 @@ public class ServiceOne extends Service {
                 @Override
                 public void run() {
 
-                    SharedPsaveuser sp1=new SharedPsaveuser(getApplicationContext());
+                    SharedPsaveuser sp1 = new SharedPsaveuser(getApplicationContext());
 
 
-
-                    if(sp1.getRemindState()){
+                    if (sp1.getRemindState()) {
 
                         try {
                             Time time = new Time();
@@ -98,10 +97,9 @@ public class ServiceOne extends Service {
                             e.printStackTrace();
                         }
 
-                    }else {
+                    } else {
 
                     }
-
 
 
                     boolean b = HomeActivity.isServiceWorked(ServiceOne.this, "com.example.chen.tset.Utils.ServiceTwo");

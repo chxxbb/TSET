@@ -176,7 +176,6 @@ public class HomepageFragment extends Fragment {
 
                             @Override
                             public void onResponse(String response, int id) {
-                                Log.e("首页banner返回", response);
 
                                 Type listtype = new TypeToken<LinkedList<DiseaseBanner>>() {
                                 }.getType();
@@ -427,6 +426,7 @@ public class HomepageFragment extends Fragment {
                                     consultList.add(consult);
                                     //将数据添加到数据库中
                                     homeEassaydb.addHomeEassay(consult);
+
                                 }
 
                                 handler.sendEmptyMessage(1);
@@ -533,7 +533,6 @@ public class HomepageFragment extends Fragment {
                     for (int i = 0; i < inquiryList.size(); i++) {
                         db.addHomeDoctor(inquiryList.get(i));
                     }
-
                     break;
                 //设置热点推荐滑动时间
                 case 3:

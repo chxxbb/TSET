@@ -571,7 +571,6 @@ public class ChatpageActivity extends MyBaseActivity implements PtrUIHandler {
                     e.printStackTrace();
 
                 }
-
             }
         });
 
@@ -590,13 +589,11 @@ public class ChatpageActivity extends MyBaseActivity implements PtrUIHandler {
         super.onStop();
         //关闭聊天页面，再次收到这个医生消息会显示到通知栏
         JMessageClient.exitConversation();
-
     }
 
 
     //图片发送弹出框
     private void sendpictureDialog() {
-
         jmessage();
         //为dialog设置主题为透明，
         setHeadDialog = new Dialog(this, R.style.CustomDialog);
@@ -622,15 +619,11 @@ public class ChatpageActivity extends MyBaseActivity implements PtrUIHandler {
         btn_camera.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
-
                 try {
-
                     //开启相机
                     Intent intent1 = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
                     startActivityForResult(intent1, 1);
                     setHeadDialog.dismiss();
-
 
                 } catch (Exception e) {
                     e.printStackTrace();
@@ -676,16 +669,12 @@ public class ChatpageActivity extends MyBaseActivity implements PtrUIHandler {
             Toast.makeText(ChatpageActivity.this, "选择图片失败，请稍后再试", Toast.LENGTH_SHORT).show();
 
         }
-
-
     }
 
 
     //保存发送图片
     private void handleCrop(int resultCode, Intent result) {
         if (resultCode == RESULT_OK) {
-
-
             if (sdcardTempFile != null) {
                 try {
                     Conversation c = JMessageClient.getSingleConversation(username);
@@ -707,7 +696,6 @@ public class ChatpageActivity extends MyBaseActivity implements PtrUIHandler {
                 } catch (Exception e) {
                     e.printStackTrace();
                     Toast.makeText(ChatpageActivity.this, "发送图片失败，请重新发送", Toast.LENGTH_SHORT).show();
-
 
                 }
             } else {
@@ -825,7 +813,6 @@ public class ChatpageActivity extends MyBaseActivity implements PtrUIHandler {
 
         } else if (resultCode == RESULT_OK && requestCode == 1) {
 
-
             //获取拍照返回的对象，获得bitmap，将图片保存在本地
             Bundle bundle = result.getExtras();
             Bitmap bitmap = (Bitmap) bundle.get("data");
@@ -872,7 +859,6 @@ public class ChatpageActivity extends MyBaseActivity implements PtrUIHandler {
 
             chatstate++;
 
-
         }
     }
 
@@ -900,7 +886,6 @@ public class ChatpageActivity extends MyBaseActivity implements PtrUIHandler {
                 Userinfo userinfo = sp.getTag();
                 ilist = inquiryrecorddb.chatfind(userinfo.getPhone());
             }
-
 
             //查找数据库中是否有这个医生的聊天记录
             for (int i = 0; i < ilist.size(); i++) {

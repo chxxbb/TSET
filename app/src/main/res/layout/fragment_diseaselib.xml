@@ -43,13 +43,12 @@
                     android:id="@+id/bannerView"
                     android:layout_width="@dimen/x480"
                     android:layout_height="@dimen/y200"
-                    android:layout_marginBottom="@dimen/y20"
                     android:layout_marginLeft="@dimen/x30"
                     android:layout_marginRight="@dimen/x30"
                     android:layout_marginTop="@dimen/y20"
                     android:orientation="vertical"
                     app:indicator_drawable_selected="@drawable/lead_slide_sign"
-                    app:indicator_drawable_unselected="@drawable/lead_slide_sign1" />
+                    app:indicator_drawable_unselected="@drawable/lead_slide_sign1" />  
 
 
                 <android.support.v7.widget.RecyclerView
@@ -58,6 +57,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="@dimen/x38"
                     android:layout_marginRight="@dimen/x30"
+                    android:paddingTop="@dimen/y20"
                     android:divider="@color/linegray"
                     android:dividerHeight="1dp"
                     android:overScrollMode="never" />

@@ -184,11 +184,11 @@ public class CharactersafeFragment extends Fragment {
                                     Toast.makeText(getContext(), "已经没有更多数据了", Toast.LENGTH_SHORT).show();
 
                                 } else {
-
                                     Type listtype = new TypeToken<LinkedList<Consult>>() {
                                     }.getType();
 
                                     LinkedList<Consult> leclist = gson.fromJson(response, listtype);
+
                                     for (Iterator it = leclist.iterator(); it.hasNext(); ) {
                                         Consult consult = (Consult) it.next();
                                         list.add(consult);
@@ -233,7 +233,6 @@ public class CharactersafeFragment extends Fragment {
                                 } else {
                                     Type listtype = new TypeToken<LinkedList<Consult>>() {
                                     }.getType();
-
                                     LinkedList<Consult> leclist = gson.fromJson(response, listtype);
                                     for (Iterator it = leclist.iterator(); it.hasNext(); ) {
                                         Consult consult = (Consult) it.next();
