@@ -15,12 +15,15 @@ import android.widget.RelativeLayout;
 import android.widget.Toast;
 
 import com.example.chen.tset.Data.Http_data;
+import com.example.chen.tset.Data.entity.Launch;
 import com.example.chen.tset.Data.entity.User;
 import com.example.chen.tset.Data.User_Http;
 import com.example.chen.tset.R;
+import com.example.chen.tset.Utils.Lauar;
 import com.example.chen.tset.Utils.SharedPsaveuser;
 import com.google.gson.Gson;
 import com.nostra13.universalimageloader.core.ImageLoader;
+import com.nostra13.universalimageloader.utils.L;
 import com.zhy.http.okhttp.OkHttpUtils;
 import com.zhy.http.okhttp.callback.StringCallback;
 
@@ -68,7 +71,7 @@ public class LogActivity extends AppCompatActivity {
 //                    } else {
 //                        ImageLoader.getInstance().displayImage(sp.setStartPage(), iv_log);
 //                    }
-//                    pageInit();
+                    pageInit();
 
                     //判断是否是第一次登录，如果是则跳转到登录页面，如果不是则跳转到首页
                     judgeWhetherRegister();
@@ -84,7 +87,6 @@ public class LogActivity extends AppCompatActivity {
 
     //判断是否登录过
     private void judgeWhetherRegister() {
-
         if ((sp.getTag().getPhone() != null && sp.getTag().getPassword() != null)) {
 
             Intent intent = new Intent(LogActivity.this, HomeActivity.class);
@@ -133,8 +135,8 @@ public class LogActivity extends AppCompatActivity {
 
                             sp.clearinit();
 
-
                         } else if (response.equals("2")) {
+
                             Toast.makeText(HomeActivity.text_homeactivity, "登录异常，请重新登录", Toast.LENGTH_SHORT).show();
 
                             sp.clearinit();
@@ -144,7 +146,9 @@ public class LogActivity extends AppCompatActivity {
                             startActivity(i);
 
                             HomeActivity.text_homeactivity.finish();
+
                         } else if (response.length() != 1) {
+
                             Gson gson = new Gson();
 
                             User user = gson.fromJson(response, User.class);
@@ -169,21 +173,27 @@ public class LogActivity extends AppCompatActivity {
                         .execute(new StringCallback() {
                             @Override
                             public void onError(Call call, Exception e, int id) {
-                                Log.e("失败", "失败");
+
                             }
 
                             @Override
                             public void onResponse(String response, int id) {
-                                if (response.equals("") || response == null) {
-                                    sp.getStartPage("");
-                                } else {
-                                    sp.getStartPage(response);
 
-                                    startUrl = response;
+                                Gson gson = new Gson();
 
-                                    handler.sendEmptyMessage(0);
+                                Launch launch = gson.fromJson(response, Launch.class);
 
-                                }
+                                Log.e("11", launch.toString());
+//                                if (response.equals("") || response == null) {
+//                                    sp.getStartPage("");
+//                                } else {
+//                                    sp.getStartPage(response);
+//
+//                                    startUrl = response;
+//
+//                                    handler.sendEmptyMessage(0);
+//
+//                                }
                             }
                         });
             }

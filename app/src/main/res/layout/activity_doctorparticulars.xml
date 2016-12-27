@@ -296,6 +296,7 @@
                 <View
                     android:layout_width="match_parent"
                     android:layout_height="@dimen/y20"
+                    android:layout_marginTop="@dimen/y20"
                     android:background="@color/backgroundgray" />
 
                 <LinearLayout
@@ -324,9 +325,7 @@
                     android:layout_marginBottom="@dimen/y80" />
             </LinearLayout>
 
-
         </ScrollView>
-
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -342,7 +341,6 @@
             <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/y80"
-
                 android:background="@color/white"
                 android:gravity="center_horizontal"
                 android:orientation="horizontal">

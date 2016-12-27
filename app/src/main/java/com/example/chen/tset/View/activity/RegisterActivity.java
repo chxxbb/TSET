@@ -175,7 +175,7 @@ public class RegisterActivity extends MyBaseActivity {
                                     if ("1".equals(response)) {
                                         Toast.makeText(activity, "用户已注册", Toast.LENGTH_LONG).show();
                                     } else if ("2".equals(response)) {
-                                        Toast.makeText(activity, "请发送验证码", Toast.LENGTH_LONG).show();
+                                         Toast.makeText(activity, "请发送验证码", Toast.LENGTH_LONG).show();
                                     } else {
                                         Toast.makeText(activity, "注册成功", Toast.LENGTH_LONG).show();
                                         Intent intent = new Intent(RegisterActivity.this, LoginActivity.class);
@@ -210,7 +210,9 @@ public class RegisterActivity extends MyBaseActivity {
     };
 
     public boolean isMobileNO(String mobiles) {
-        Pattern p = Pattern.compile("^((13[0-9])|(15[^4,\\D])|(18[0-9]))\\d{8}$");
+//        Pattern p = Pattern.compile("^((13[0-9])|(15[^4,\\D])|(18[0-9]))\\d{8}$");
+
+        Pattern p=Pattern.compile("[1][3458]\\d{9}");
         Matcher m = p.matcher(mobiles);
         return m.matches();
     }

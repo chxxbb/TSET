@@ -106,4 +106,8 @@ public class PharmacyDao {
 
         return timestamp;
     }
+
+    public void closedb() {
+        db.close();
+    }
 }

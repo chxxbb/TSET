@@ -27,7 +27,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center_vertical"
-            android:text="密码登陆"
+            android:text="密码登录"
             android:textColor="@color/backgroundblue"
             android:textSize="@dimen/y36" />
     </LinearLayout>

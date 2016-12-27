@@ -223,9 +223,15 @@ public class LoginSelectActivity extends AppCompatActivity {
         btn_confirm_onekey_login.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                btn_confirm_onekey_login.setClickable(false);
-                btn_confirm_onekey_login.setText("登录中，请稍等...");
-                login();
+                
+                if(et_onekey_login.getText().toString().equals("")||et_onekey_login.getText().toString()==null||et_et_onekey_login_code.getText().toString().equals("")||et_et_onekey_login_code.getText().toString()==null){
+                    Toast.makeText(LoginSelectActivity.this, "账号或验证码不能为空", Toast.LENGTH_SHORT).show();
+                }else {
+                    btn_confirm_onekey_login.setClickable(false);
+                    btn_confirm_onekey_login.setText("登录中，请稍等...");
+                    login();
+                }
+               
             }
         });
 
@@ -263,7 +269,12 @@ public class LoginSelectActivity extends AppCompatActivity {
         btn_login_pass_ok.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                passLogin();
+                if(et_login_phone.getText().toString().equals("")||et_login_phone.getText().toString()==null||et_login_password.getText().toString().equals("")||et_login_password.getText().toString()==null){
+                    Toast.makeText(LoginSelectActivity.this, "账号或密码不能为空", Toast.LENGTH_SHORT).show();
+                }else {
+                    passLogin();
+                }
+
             }
         });
     }
@@ -442,7 +453,7 @@ public class LoginSelectActivity extends AppCompatActivity {
     }
 
     public boolean isMobileNO(String mobiles) {
-        Pattern p = Pattern.compile("^((13[0-9])|(15[^4,\\D])|(18[0-9]))\\d{8}$");
+        Pattern p=Pattern.compile("[1][3458]\\d{9}");
         Matcher m = p.matcher(mobiles);
         return m.matches();
     }

@@ -25,8 +25,9 @@ import java.util.regex.Pattern;
 
 import okhttp3.Call;
 import okhttp3.Response;
+
 /**
- * 修改密码
+ * 忘记密码
  */
 public class FindpawActivity extends MyBaseActivity {
 
@@ -41,13 +42,12 @@ public class FindpawActivity extends MyBaseActivity {
     private TimeCount time;
 
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_find_pawnumber);
         try {
-            sp=new SharedPsaveuser(this);
+            sp = new SharedPsaveuser(this);
 
             initView();
             //设定再次获取验证码需要的时间
@@ -63,7 +63,6 @@ public class FindpawActivity extends MyBaseActivity {
     }
 
     private void initOnClick() {
-
 
 
         activity_find_password_getcode_button.setOnClickListener(new View.OnClickListener() {
@@ -148,7 +147,6 @@ public class FindpawActivity extends MyBaseActivity {
                                 @Override
                                 public void onResponse(Object response, int id) {
                                     int t = (int) response;
-
                                     if (ASCII(t) == 1) {
                                         Toast.makeText(activity, "修改失败", Toast.LENGTH_LONG).show();
                                     } else if (ASCII(t) == 2) {
@@ -159,14 +157,11 @@ public class FindpawActivity extends MyBaseActivity {
                                     } else {
                                         Toast.makeText(activity, "未知错误", Toast.LENGTH_LONG).show();
                                     }
-
                                 }
                             });
                 }
-
             }
         });
-
     }
 
     private void initView() {
@@ -174,21 +169,19 @@ public class FindpawActivity extends MyBaseActivity {
         activity_find_password_code = (EditText) findViewById(R.id.find_password_code);
         activity_find_password_password = (EditText) findViewById(R.id.find_password_password);
         activity_find_password_password2 = (EditText) findViewById(R.id.find_password_password2);
-
         activity_find_password_getcode_button = (Button) findViewById(R.id.find_password_getcode_button);
         activity_find_password_button = (Button) findViewById(R.id.find_password_button);
-        iv_ret= (LinearLayout) findViewById(R.id.iv_ret);
+        iv_ret = (LinearLayout) findViewById(R.id.iv_ret);
         iv_ret.setOnClickListener(listener);
 
     }
-    private View.OnClickListener listener=new View.OnClickListener() {
+
+    private View.OnClickListener listener = new View.OnClickListener() {
         @Override
         public void onClick(View v) {
             finish();
         }
     };
-
-
 
 
     //再次获取验证码
@@ -202,7 +195,7 @@ public class FindpawActivity extends MyBaseActivity {
         public void onTick(long millisUntilFinished) {
             activity_find_password_getcode_button.setBackgroundResource(R.drawable.btn_login_case);
             activity_find_password_getcode_button.setClickable(false);
-            activity_find_password_getcode_button.setText(millisUntilFinished / 1000 +"秒");
+            activity_find_password_getcode_button.setText(millisUntilFinished / 1000 + "秒");
 
         }
 
@@ -216,7 +209,7 @@ public class FindpawActivity extends MyBaseActivity {
     }
 
     public boolean isMobileNO(String mobiles) {
-        Pattern p = Pattern.compile("^((13[0-9])|(15[^4,\\D])|(18[0-9]))\\d{8}$");
+        Pattern p = Pattern.compile("[1][3458]\\d{9}");
         Matcher m = p.matcher(mobiles);
         return m.matches();
     }

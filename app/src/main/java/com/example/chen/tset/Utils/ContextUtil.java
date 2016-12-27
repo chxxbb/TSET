@@ -55,6 +55,8 @@ public class ContextUtil extends Application {
         JMessageClient.init(getApplicationContext());
         JPushInterface.setDebugMode(true);
 
-
     }
+
+
+
 }

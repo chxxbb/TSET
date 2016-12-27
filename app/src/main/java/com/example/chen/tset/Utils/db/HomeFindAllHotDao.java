@@ -49,4 +49,8 @@ public class HomeFindAllHotDao {
     public void delHomeFindAllHot() {
         db.delete("findallht", null, null);
     }
+
+    public void closedb(){
+        db.close();
+    }
 }

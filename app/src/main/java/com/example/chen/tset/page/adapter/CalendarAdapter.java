@@ -188,10 +188,8 @@ public class CalendarAdapter extends BaseAdapter {
             ll_calendar.setVisibility(View.GONE);
         }
 
-
         if (currentFlag == position) {
             // 设置当天的背景
-
             textView.setText("今");
 
         }
@@ -201,7 +199,6 @@ public class CalendarAdapter extends BaseAdapter {
         } else {
             scheduleDay = getDateByClickItem(position);
         }
-
 
         String scheduleYear = getShowYear();
         String scheduleMonth = getShowMonth();
@@ -237,12 +234,9 @@ public class CalendarAdapter extends BaseAdapter {
                         } else {
                             textView.setBackgroundResource(R.drawable.consulting9);
                         }
-
                     }
                 }
-
             }
-
         }
         //只有健康提醒被选中
         else if (pharmacy == 2 && registration == 2 && health == 1) {
@@ -399,6 +393,9 @@ public class CalendarAdapter extends BaseAdapter {
             }
         }
 
+        if (position == 0) {
+            textView.setBackgroundColor(android.graphics.Color.parseColor("#ffffff"));
+        }
 
         return convertView;
     }
@@ -410,21 +407,15 @@ public class CalendarAdapter extends BaseAdapter {
         daysOfMonth = sc.getDaysOfMonth(isLeapyear, month); // 某月的总天数
         dayOfWeek = sc.getWeekdayOfMonth(year, month); // 某月第一天为星期几
         lastDaysOfMonth = sc.getDaysOfMonth(isLeapyear, month - 1); // 上一个月的总天数
-
         getweek(year, month);
     }
 
     // 将一个月中的每一天的值添加入数组dayNuber中
     private void getweek(int year, int month) {
-
-
         // 得到当前月的所有日程日期(这些日期需要标记)
-
         for (int i = 0; i < dayNumber.length; i++) {
-
             if (i < daysOfMonth + dayOfWeek) { // 本月
                 String day = String.valueOf(i - dayOfWeek + 1); // 得到的日期
-
                 dayNumber[i] = day;
                 // 对于当前月才去标记当前日期
                 if (sys_year.equals(String.valueOf(year)) && sys_month.equals(String.valueOf(month)) && sys_day.equals(day)) {
@@ -434,11 +425,9 @@ public class CalendarAdapter extends BaseAdapter {
                 setShowYear(String.valueOf(year));
                 setShowMonth(String.valueOf(month));
             } else { // 下一个月
-
                 dayNumber[i] = "";
             }
         }
-
     }
 
     /**

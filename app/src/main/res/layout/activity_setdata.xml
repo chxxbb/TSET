@@ -33,6 +33,7 @@
             android:layout_height="wrap_content"
             android:layout_marginLeft="@dimen/x60"
             android:background="@null"
+            android:maxLength="6"
             android:textCursorDrawable="@drawable/deittext_cursor_blue_style"
             android:hint="请填写您的昵称"
             android:textColor="@color/fontcolor"

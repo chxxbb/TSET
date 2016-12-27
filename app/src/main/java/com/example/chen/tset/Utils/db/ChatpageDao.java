@@ -52,10 +52,14 @@ public class ChatpageDao {
             list.add(chatcontent);
         }
 
+
         return list;
+
     }
 
-
+    public void closedb() {
+        db.close();
+    }
 
 
 }

@@ -217,16 +217,12 @@ public class ConsultingFragment extends Fragment implements View.OnClickListener
     @Override
     public void onStart() {
         super.onStart();
-
-
     }
-
 
     //更新诊疗页面
     @Override
     public void notifyAllActivity(String str) {
         if (str.equals("更新日历页面")) {
-
             handler.sendEmptyMessage(0);
             SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
             SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM");
@@ -236,9 +232,7 @@ public class ConsultingFragment extends Fragment implements View.OnClickListener
             findAllByDate(str1);
             //注册监听器
             ListenerManager.getInstance().registerListtener(this);
-
         }
-
     }
 
 
@@ -400,7 +394,6 @@ public class ConsultingFragment extends Fragment implements View.OnClickListener
         ll_left.setOnClickListener(this);
         ll_right.setOnClickListener(this);
 
-
         SimpleDateFormat s1 = new SimpleDateFormat("yyyy");
         SimpleDateFormat s2 = new SimpleDateFormat("MM");
         SimpleDateFormat s3 = new SimpleDateFormat("dd");
@@ -448,7 +441,6 @@ public class ConsultingFragment extends Fragment implements View.OnClickListener
 
     }
 
-
     private void init() {
         data = new ArrayList<>();
         Date date = new Date();
@@ -457,7 +449,6 @@ public class ConsultingFragment extends Fragment implements View.OnClickListener
         year_c = Integer.parseInt(currentDate.split("-")[0]);
         month_c = Integer.parseInt(currentDate.split("-")[1]);
         day_c = Integer.parseInt(currentDate.split("-")[2]);
-
 
         gestureDetector = new GestureDetector(getContext(), new MyGestureListener());
         flipper = (ViewFlipper) view.findViewById(R.id.flipper);
@@ -471,12 +462,10 @@ public class ConsultingFragment extends Fragment implements View.OnClickListener
         flipper.addView(gridView, 0);
         addTextToTopTextView(currentMonth);
 
-
         //默认提醒设置为圈选中
         calV.pharmacyremind(1);
         calV.registrationremind(1);
         calV.healthremind(1);
-
 
         //判断提醒设置是否被选中，选中则改变健康日历上面的标记
         cal_toggleBtn1.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
@@ -489,7 +478,6 @@ public class ConsultingFragment extends Fragment implements View.OnClickListener
                 }
             }
         });
-
 
         cal_toggleBtn.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
@@ -764,6 +752,7 @@ public class ConsultingFragment extends Fragment implements View.OnClickListener
                                     handler.sendEmptyMessage(4);
                                 } catch (Exception e) {
                                     e.printStackTrace();
+
                                 }
 
                             }
@@ -773,14 +762,11 @@ public class ConsultingFragment extends Fragment implements View.OnClickListener
         thread.start();
     }
 
-
     //获取健康日历页面数据
     public void findAllByDate(final String str) {
-
         Thread thread = new Thread(new Runnable() {
             @Override
             public void run() {
-
                 OkHttpUtils
                         .post()
                         .url(Http_data.http_data + "/FindCalendarList")
@@ -795,7 +781,6 @@ public class ConsultingFragment extends Fragment implements View.OnClickListener
 
                             @Override
                             public void onResponse(String response, int id) {
-
                                 Type listtype = new TypeToken<LinkedList<ConsultingRemindState>>() {
                                 }.getType();
                                 LinkedList<ConsultingRemindState> leclist = gson.fromJson(response, listtype);

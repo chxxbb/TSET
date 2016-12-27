@@ -23,7 +23,6 @@ public class DoctorparticularsAdapter extends BaseAdapter {
     private Context context;
     private List<Doctorcomment> list;
 
-//    Doctorcomment
 
     public DoctorparticularsAdapter(Context context, List<Doctorcomment> list) {
         this.context = context;

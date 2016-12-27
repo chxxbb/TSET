@@ -144,7 +144,6 @@ public class HomeActivity extends MyBaseActivity implements View.OnClickListener
             serviceTwo.setClass(HomeActivity.this, ServiceTwo.class);
             startService(serviceTwo);
 
-
             //注册广播
             ListenerManager.getInstance().registerListtener(this);
 
@@ -156,7 +155,6 @@ public class HomeActivity extends MyBaseActivity implements View.OnClickListener
             if (version_numberSp.getversionNumber() == null || version_numberSp.getversionNumber().equals("") || (!version_numberSp.getversionNumber().trim().equals(Http_data.version_number))) {
                 version_numberSp.setspversionNumber(Http_data.version_number);
             }
-
 
             text_homeactivity = this;
 
@@ -220,12 +218,10 @@ public class HomeActivity extends MyBaseActivity implements View.OnClickListener
                             @Override
                             public void onError(Call call, Exception e, int id) {
 
-
                             }
 
                             @Override
                             public void onResponse(String response, int id) {
-
                                 update = gson.fromJson(response, Update.class);
                                 //检查当前版本与获取的版本是否一致,如果不一致则弹出更新框提示更新
                                 if (update.getVersion().trim().equals(version_numberSp.getversionNumber().trim())) {
@@ -233,16 +229,13 @@ public class HomeActivity extends MyBaseActivity implements View.OnClickListener
                                 } else {
                                     updatedialog();
                                 }
-
                             }
                         });
             }
         });
 
         thread.start();
-
     }
-
 
     //更新弹出框
     private void updatedialog() {
@@ -512,6 +505,9 @@ public class HomeActivity extends MyBaseActivity implements View.OnClickListener
     @Override
     protected void onDestroy() {
         JMessageClient.unRegisterEventReceiver(this);
+
+        db.closedb();
+
         super.onDestroy();
     }
 
@@ -533,7 +529,6 @@ public class HomeActivity extends MyBaseActivity implements View.OnClickListener
 
     //登录jmeeage
     private void jmessage() {
-
 
         String username = null;
         if (User_Http.user.getPhone() == null) {

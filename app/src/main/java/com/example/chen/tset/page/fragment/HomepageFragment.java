@@ -160,6 +160,13 @@ public class HomepageFragment extends Fragment {
         return view;
     }
 
+
+    @Override
+    public void onDestroyView() {
+        super.onDestroyView();
+        homeBannerdb.closedb();
+    }
+
     private void bannerinit() {
         new Thread(new Runnable() {
             @Override
@@ -176,7 +183,6 @@ public class HomepageFragment extends Fragment {
 
                             @Override
                             public void onResponse(String response, int id) {
-
                                 Type listtype = new TypeToken<LinkedList<DiseaseBanner>>() {
                                 }.getType();
                                 LinkedList<DiseaseBanner> leclist = gson.fromJson(response, listtype);
@@ -316,7 +322,6 @@ public class HomepageFragment extends Fragment {
         verticalScrollTV.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
                 Intent intent = new Intent(getContext(), WebActivity.class);
                 intent.putExtra("url", findAllHotList.get(number % strings.size()).getSite());
                 startActivity(intent);
@@ -326,7 +331,8 @@ public class HomepageFragment extends Fragment {
         diseaseBannerView.setOnBannerClickListener(new OnBannerClickListener() {
             @Override
             public void OnBannerClick(int position) {
-                if (bannerList.get(position - 1).getCyclopediaId().equals("") || bannerList.get(position - 1).getCyclopediaId() == null) {
+
+                if (bannerList.get(position - 1).getCyclopediaId() == null || bannerList.get(position - 1).getCyclopediaId().equals("")) {
                     Intent intent = new Intent(getContext(), WebActivity.class);
                     intent.putExtra("url", bannerList.get(position - 1).getSite());
                     startActivity(intent);
@@ -336,7 +342,6 @@ public class HomepageFragment extends Fragment {
                     intent.putExtra("collect", "0");
                     startActivity(intent);
                 }
-
             }
         });
     }
@@ -366,6 +371,7 @@ public class HomepageFragment extends Fragment {
 
                             @Override
                             public void onResponse(String response, int id) {
+
                                 Type listtype = new TypeToken<LinkedList<FindAllHot>>() {
                                 }.getType();
 
@@ -443,7 +449,7 @@ public class HomepageFragment extends Fragment {
     private void homeDoctorInit() {
         OkHttpUtils
                 .post()
-                .url(Http_data.http_data + "/FindDoctorRandomFive")
+                .url(Http_data.http_data + "/FindDoctorRandom")
                 .build()
                 .execute(new StringCallback() {
                     @Override
@@ -570,9 +576,7 @@ public class HomepageFragment extends Fragment {
 
                             handler.sendEmptyMessage(1);
 
-
 //                            ???????????  fuck
-
 
                         }
                     }).start();
@@ -653,6 +657,12 @@ public class HomepageFragment extends Fragment {
         super.onDestroy();
         //关闭滚动
         isRunning = false;
+
+        db.closedb();
+
+        homeEassaydb.closedb();
+
+        findAllHotdb.closedb();
     }
 
 

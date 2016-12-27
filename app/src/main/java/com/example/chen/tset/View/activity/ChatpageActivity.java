@@ -32,6 +32,7 @@ import com.example.chen.tset.Data.Http_data;
 import com.example.chen.tset.Data.entity.Inquiryrecord;
 import com.example.chen.tset.Data.User_Http;
 
+import com.example.chen.tset.Data.entity.User;
 import com.example.chen.tset.Data.entity.Userinfo;
 import com.example.chen.tset.Manifest;
 import com.example.chen.tset.R;
@@ -53,6 +54,7 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.Objects;
 
 import cn.jpush.android.api.JPushInterface;
 import cn.jpush.im.android.api.JMessageClient;
@@ -182,6 +184,14 @@ public class ChatpageActivity extends MyBaseActivity implements PtrUIHandler {
 
     }
 
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        db.closedb();
+
+        inquiryrecorddb.closedb();
+    }
 
     //登录jmeeage
     private void jmessage() {
@@ -440,7 +450,7 @@ public class ChatpageActivity extends MyBaseActivity implements PtrUIHandler {
 
         } catch (Exception e) {
             e.printStackTrace();
-
+            Toast.makeText(ChatpageActivity.this, "发送失败，请稍后再试", Toast.LENGTH_SHORT).show();
             //发送失败，重新登录
             jmessage();
             handler.sendEmptyMessage(2);
@@ -870,11 +880,9 @@ public class ChatpageActivity extends MyBaseActivity implements PtrUIHandler {
     @Override
     protected void onPause() {
         super.onPause();
-
         try {
             JPushInterface.onPause(this);
             int j = 0;
-
             SimpleDateFormat formatter = new SimpleDateFormat("yyyy/MM/dd  HH:mm:ss");
             Date curDate = new Date(System.currentTimeMillis());//获取当前时间
             String str = formatter.format(curDate);
@@ -904,11 +912,9 @@ public class ChatpageActivity extends MyBaseActivity implements PtrUIHandler {
             e.printStackTrace();
         }
 
-
     }
 
     int l = 0;
-
 
     @Override
     protected void onResume() {

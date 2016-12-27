@@ -204,7 +204,6 @@ public class DiseaselibFragment extends Fragment implements IListener {
                             @Override
                             public void onResponse(String response, int id) {
 
-
                                 view1.setVisibility(View.GONE);
                                 Type listtype = new TypeToken<LinkedList<DiseaseDepartment>>() {
                                 }.getType();
@@ -245,23 +244,19 @@ public class DiseaselibFragment extends Fragment implements IListener {
                     recyv_dise.setVisibility(View.VISIBLE);
                     diseaselibrecyvAdapter.setList(list1);
                     diseaselibrecyvAdapter.notifyDataSetChanged();
-
                     rl_nonetwork.setVisibility(View.GONE);
                     rl_loading.setVisibility(View.GONE);
                     break;
                 case 3:
-
                     for (int i = 0; i < bannerList.size(); i++) {
                         data.add(bannerList.get(i).getCover());
                     }
-
                     diseaseBannerView.setImageLoader(new BannerImageLoader());
                     //设置图片集合
                     diseaseBannerView.setImages(data);
                     //banner设置方法全部调用完毕时最后调用
                     diseaseBannerView.start();
                     break;
-
             }
         }
     };
@@ -276,7 +271,6 @@ public class DiseaselibFragment extends Fragment implements IListener {
             }
 
             pos = position;
-
 
         }
 

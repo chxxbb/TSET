@@ -100,6 +100,12 @@ public class CompileremindActivity extends MyBaseActivity implements IListener {
 
     }
 
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        db.closedb();
+    }
+
     private void findView() {
 
         //选择结束时间
@@ -276,7 +282,6 @@ public class CompileremindActivity extends MyBaseActivity implements IListener {
                         content3 = et_compile_remind_content3.getText().toString();
                     }
 
-
                     if (!tv_time1.getText().toString().equals("") && !et_compile_remind_content1.getText().toString().trim().equals("")) {
 
                         OkHttpUtils
@@ -300,12 +305,11 @@ public class CompileremindActivity extends MyBaseActivity implements IListener {
 
                                     @Override
                                     public void onResponse(String response, int id) {
-
                                         if (response.equals("0")) {
                                             //发送广播通知诊疗页面更新
                                             ListenerManager.getInstance().sendBroadCast("更新日历页面");
 
-                                            Pharmacyremind pharmacyremind=new Pharmacyremind(sp.getTag().getId()+"",startDay,endDay,time1,content1,time2,content2,time3,content3);
+                                            Pharmacyremind pharmacyremind = new Pharmacyremind(sp.getTag().getId() + "", startDay, endDay, time1, content1, time2, content2, time3, content3);
                                             db.addPharmacy(pharmacyremind);
 
                                             Toast.makeText(CompileremindActivity.this, "添加成功，你可以在用药提醒页面查看", Toast.LENGTH_SHORT).show();
@@ -316,7 +320,6 @@ public class CompileremindActivity extends MyBaseActivity implements IListener {
                                     }
                                 });
 
-
                     } else {
 
                         Toast.makeText(CompileremindActivity.this, "你还未添加至少一条用药提醒", Toast.LENGTH_SHORT).show();
@@ -324,7 +327,6 @@ public class CompileremindActivity extends MyBaseActivity implements IListener {
                     }
 
                     break;
-
 
                 case R.id.ll_rutname:
                     finish();

@@ -51,4 +51,8 @@ public class HomeBannerDao {
     public void delbanner() {
         db.delete("banner", null, null);
     }
+
+    public void closedb(){
+        db.close();
+    }
 }

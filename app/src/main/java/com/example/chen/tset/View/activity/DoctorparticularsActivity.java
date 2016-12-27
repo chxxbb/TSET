@@ -119,7 +119,7 @@ public class DoctorparticularsActivity extends MyBaseActivity1 {
             //透明状态栏
             getWindow().addFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
             //透明导航栏
-            getWindow().addFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_NAVIGATION);
+//            getWindow().addFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_NAVIGATION);
         }
 
         setContentView(R.layout.activity_doctorparticulars);
@@ -174,7 +174,6 @@ public class DoctorparticularsActivity extends MyBaseActivity1 {
     }
 
     private void doctorinit() {
-
         new Thread(new Runnable() {
             @Override
             public void run() {
@@ -193,14 +192,11 @@ public class DoctorparticularsActivity extends MyBaseActivity1 {
                             public void onResponse(String response, int id) {
                                 doctor = gson.fromJson(response, Doctor.class);
                                 handler.sendEmptyMessage(1);
-
                             }
                         });
             }
         }).start();
-
     }
-
 
     Handler handler = new Handler() {
         @Override
@@ -233,7 +229,11 @@ public class DoctorparticularsActivity extends MyBaseActivity1 {
 
                     tv_doctor_bio.setText(doctor.getAdept());
 
-                    ImageLoader.getInstance().displayImage(doctor.getIcon(), tv_doctor_icon);
+                    if (doctor.getIcon() == null || doctor.getIcon().equals("")) {
+                        tv_doctor_icon.setImageResource(R.drawable.default_icon);
+                    } else {
+                        ImageLoader.getInstance().displayImage(doctor.getIcon(), tv_doctor_icon);
+                    }
 
                     tv_doctor_commenCount.setText("用户评价(" + doctor.getCommentCount() + "人)");
 
@@ -279,7 +279,6 @@ public class DoctorparticularsActivity extends MyBaseActivity1 {
         lv_doctor_particulars_assess.setVerticalScrollBarEnabled(false);
         scrovView.setVerticalScrollBarEnabled(false);
 
-
         expandView = (ImageView) findViewById(R.id.expand_view);
         tv_doctor_aptitude.setHeight(tv_doctor_aptitude.getLineHeight() * maxDescripLine);
 
@@ -289,7 +288,6 @@ public class DoctorparticularsActivity extends MyBaseActivity1 {
                 finish();
             }
         });
-
 
         btn_pay.setOnClickListener(listener);
     }
@@ -336,7 +334,6 @@ public class DoctorparticularsActivity extends MyBaseActivity1 {
 
     //支付弹出框
     private void payDialog() {
-
         setHeadDialog = new Dialog(this, R.style.CustomDialog);
         setHeadDialog.show();
         WindowManager windowManager = (WindowManager) this.getSystemService(Context.WINDOW_SERVICE);

@@ -55,4 +55,8 @@ public class HomeEassayDao {
     public void delHomeEassay() {
         db.delete("essay", null, null);
     }
+
+    public void closedb(){
+        db.close();
+    }
 }

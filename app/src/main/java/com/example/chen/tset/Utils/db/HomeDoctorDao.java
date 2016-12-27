@@ -68,4 +68,9 @@ public class HomeDoctorDao {
         db.delete("doctor", null, null);
     }
 
+
+    public void closedb(){
+        db.close();
+    }
+
 }

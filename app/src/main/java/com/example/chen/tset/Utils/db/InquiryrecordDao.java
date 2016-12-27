@@ -73,4 +73,8 @@ public class InquiryrecordDao {
         return inquiryrecord;
     }
 
+    public void closedb()
+    {
+        db.close();
+    }
 }
