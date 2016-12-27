@@ -3,6 +3,7 @@ package com.example.chen.tset.Utils;
 import android.content.Context;
 import android.content.SharedPreferences;
 
+import com.example.chen.tset.Data.entity.Launch;
 import com.example.chen.tset.Data.entity.Userinfo;
 
 /**
@@ -83,17 +84,20 @@ public class SharedPsaveuser {
 
 
     //保存启动页
-    public void getStartPage(String str) {
+    public void getStartPage(String str, String data) {
         SharedPreferences sp = context.getSharedPreferences("startPage", Context.MODE_PRIVATE);
         SharedPreferences.Editor editor = sp.edit();
         editor.putString("page", str);
+        editor.putString("data", data);
         editor.commit();
     }
 
 
-    public String setStartPage() {
+    public Launch setStartPage() {
         SharedPreferences sp = context.getSharedPreferences("startPage", Context.MODE_PRIVATE);
         String str = sp.getString("page", null);
-        return str;
+        String data = sp.getString("data", null);
+        Launch launch = new Launch(str, data);
+        return launch;
     }
 }

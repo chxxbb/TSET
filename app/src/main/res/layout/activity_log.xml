@@ -9,9 +9,10 @@
         android:id="@+id/iv_log"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@drawable/shendan"/>
+        android:background="@drawable/app_log_page" />
+
     <ImageView
+        android:id="@+id/iv_page"
         android:layout_width="@dimen/x1"
-        android:layout_height="@dimen/x1"
-        android:id="@+id/iv_page"/>
+        android:layout_height="@dimen/x1" />
 </RelativeLayout>

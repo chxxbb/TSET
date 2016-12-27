@@ -2,6 +2,7 @@ package com.example.chen.tset.View.activity;
 
 import android.content.Intent;
 import android.os.Build;
+import android.os.Environment;
 import android.os.Handler;
 import android.os.Message;
 import android.support.v7.app.AppCompatActivity;
@@ -27,6 +28,15 @@ import com.nostra13.universalimageloader.utils.L;
 import com.zhy.http.okhttp.OkHttpUtils;
 import com.zhy.http.okhttp.callback.StringCallback;
 
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.InputStream;
+import java.net.HttpURLConnection;
+import java.net.URL;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
 import cn.jpush.android.api.JPushInterface;
 import okhttp3.Call;
 
@@ -38,7 +48,11 @@ public class LogActivity extends AppCompatActivity {
 
     ImageView iv_page, iv_log;
 
-    String startUrl;
+
+    File sdcardTempFile;
+    File audioFile;
+
+    Launch launch;
 
 
     @Override
@@ -49,8 +63,8 @@ public class LogActivity extends AppCompatActivity {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
             //透明状态栏
             getWindow().addFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
-            //透明导航栏
-            getWindow().addFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_NAVIGATION);
+//            //透明导航栏
+//            getWindow().addFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_NAVIGATION);
         }
 
         setContentView(R.layout.activity_log);
@@ -62,19 +76,37 @@ public class LogActivity extends AppCompatActivity {
         iv_log = (ImageView) findViewById(R.id.iv_log);
 
         try {
+
+            SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+
+            Date curDate = new Date(System.currentTimeMillis());//获取当前时间
+            String str1 = sdf.format(curDate);
+
+
+            if (sp.setStartPage().getDate() == null || sp.setStartPage().getDate().equals("")) {
+                iv_log.setBackgroundResource(R.drawable.app_log_page);
+            } else if (getTimeStamp(sp.setStartPage().getDate(), "yyyy-MM-dd") >= getTimeStamp(str1, "yyyy-MM-dd")) {
+                ImageLoader.getInstance().displayImage("file:///" + sp.setStartPage().getImg(), iv_log);
+            } else {
+                iv_log.setBackgroundResource(R.drawable.app_log_page);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+
+            iv_log.setBackgroundResource(R.drawable.app_log_page);
+        }
+
+
+        try {
             //延迟2秒
             new Handler().postDelayed(new Runnable() {
                 public void run() {
 
-//                    if (sp.setStartPage().equals("") || sp.setStartPage() == null) {
-//                        iv_log.setBackgroundResource(R.drawable.app_log_page);
-//                    } else {
-//                        ImageLoader.getInstance().displayImage(sp.setStartPage(), iv_log);
-//                    }
-                    pageInit();
 
                     //判断是否是第一次登录，如果是则跳转到登录页面，如果不是则跳转到首页
                     judgeWhetherRegister();
+
+                    pageInit();
 
                 }
             }, 2000);
@@ -82,6 +114,19 @@ public class LogActivity extends AppCompatActivity {
         } catch (Exception e) {
             e.printStackTrace();
         }
+    }
+
+    public static long getTimeStamp(String timeStr, String format) {
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat(format);
+        Date date = null;
+        try {
+            date = simpleDateFormat.parse(timeStr);
+            long timeStamp = date.getTime();
+            return timeStamp;
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+        return 0;
     }
 
 
@@ -181,19 +226,23 @@ public class LogActivity extends AppCompatActivity {
 
                                 Gson gson = new Gson();
 
-                                Launch launch = gson.fromJson(response, Launch.class);
+                                launch = gson.fromJson(response, Launch.class);
 
                                 Log.e("11", launch.toString());
-//                                if (response.equals("") || response == null) {
-//                                    sp.getStartPage("");
-//                                } else {
-//                                    sp.getStartPage(response);
-//
-//                                    startUrl = response;
-//
-//                                    handler.sendEmptyMessage(0);
-//
-//                                }
+
+                                if (sp.setStartPage().getDate() == null || sp.setStartPage().getDate().equals("")) {
+                                    handler.sendEmptyMessage(0);
+                                } else {
+
+                                    if (!sp.setStartPage().getDate().equals(launch.getDate())) {
+                                        handler.sendEmptyMessage(0);
+
+                                    } else {
+
+                                    }
+                                }
+
+
                             }
                         });
             }
@@ -203,11 +252,51 @@ public class LogActivity extends AppCompatActivity {
     }
 
 
+    private void saveicon() {
+        new Thread() {
+            public void run() {
+                try {
+                    audioFile = new File(Environment.getExternalStorageDirectory().getAbsolutePath() + "/text/launch/");
+                    audioFile.mkdirs();//创建文件夹
+                    sdcardTempFile = File.createTempFile(".launchPage", ".jpg", audioFile);
+                    URL url = new URL(launch.getImg());
+                    HttpURLConnection conn = (HttpURLConnection) url.openConnection();
+                    conn.setConnectTimeout(6 * 1000);  // 设置时间不要超过10秒，避免被android系统回收
+                    if (conn.getResponseCode() != 200) throw new RuntimeException("请求url失败");
+                    InputStream inSream = conn.getInputStream();
+                    //把图片保存到项目的根目录
+                    readAsFile(inSream, new File(String.valueOf(sdcardTempFile)));
+                    String launchImg = sdcardTempFile.getAbsolutePath();
+                    //将更改过的头像保存在本地
+                    sp.getStartPage(launchImg, launch.getDate());
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+        }.start();
+    }
+
+
+    //将获取的头像转换成流
+    public static void readAsFile(InputStream inSream, File file) throws Exception {
+        FileOutputStream outStream = new FileOutputStream(file);
+        byte[] buffer = new byte[1024];
+        int len = -1;
+        while ((len = inSream.read(buffer)) != -1) {
+            outStream.write(buffer, 0, len);
+        }
+        outStream.close();
+        inSream.close();
+
+    }
+
+
     Handler handler = new Handler() {
         @Override
         public void handleMessage(Message msg) {
             super.handleMessage(msg);
-            ImageLoader.getInstance().displayImage(startUrl, iv_page);
+            saveicon();
+
         }
     };
 

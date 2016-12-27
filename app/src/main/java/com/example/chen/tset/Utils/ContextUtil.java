@@ -34,7 +34,7 @@ public class ContextUtil extends Application {
         super.onCreate();
         instance = this;
         DisplayImageOptions options = new DisplayImageOptions.Builder()
-                .showImageOnLoading(R.color.a) //加载中图片
+//                .showImageOnLoading(R.color.a) //加载中图片
                 .showImageOnFail(R.drawable.defeated_picture) //加载失败图片
                 .showImageForEmptyUri(R.drawable.defeated_picture)  //图片地址失效图片
                 .cacheInMemory(true) // 打开内存缓存
@@ -51,12 +51,10 @@ public class ContextUtil extends Application {
         // 初始化ImageLoad
         ImageLoader.getInstance().init(config);
 
-
         JMessageClient.init(getApplicationContext());
         JPushInterface.setDebugMode(true);
 
     }
-
 
 
 }
