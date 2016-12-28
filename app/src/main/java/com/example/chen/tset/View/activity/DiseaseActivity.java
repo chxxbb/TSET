@@ -287,7 +287,7 @@ public class DiseaseActivity extends MyBaseActivity1 {
                     if (disease.getDoctorAnswerQuestion() == null) {
                         tv_dcontent.setText("无");
                     } else {
-                        tv_dcontent.setText("        " + disease.getDoctorAnswerQuestion());
+                        tv_dcontent.setText("" + disease.getDoctorAnswerQuestion());
                     }
 
                     if (disease.getDoctorName() == null) {
@@ -314,7 +314,7 @@ public class DiseaseActivity extends MyBaseActivity1 {
                     if (disease.getUserPutQuestion() == null) {
                         tv_ucontent.setText("无");
                     } else {
-                        tv_ucontent.setText("        " + disease.getUserPutQuestion());
+                        tv_ucontent.setText("" + disease.getUserPutQuestion());
                     }
 
 

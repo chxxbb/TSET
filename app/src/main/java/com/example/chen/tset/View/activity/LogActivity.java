@@ -76,12 +76,10 @@ public class LogActivity extends AppCompatActivity {
         iv_log = (ImageView) findViewById(R.id.iv_log);
 
         try {
-
             SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
 
             Date curDate = new Date(System.currentTimeMillis());//获取当前时间
             String str1 = sdf.format(curDate);
-
 
             if (sp.setStartPage().getDate() == null || sp.setStartPage().getDate().equals("")) {
                 iv_log.setBackgroundResource(R.drawable.app_log_page);
@@ -92,16 +90,13 @@ public class LogActivity extends AppCompatActivity {
             }
         } catch (Exception e) {
             e.printStackTrace();
-
             iv_log.setBackgroundResource(R.drawable.app_log_page);
         }
-
 
         try {
             //延迟2秒
             new Handler().postDelayed(new Runnable() {
                 public void run() {
-
 
                     //判断是否是第一次登录，如果是则跳转到登录页面，如果不是则跳转到首页
                     judgeWhetherRegister();

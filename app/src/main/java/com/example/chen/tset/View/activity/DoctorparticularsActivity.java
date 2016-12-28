@@ -3,10 +3,16 @@ package com.example.chen.tset.View.activity;
 import android.app.Dialog;
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Build;
 import android.os.Handler;
 import android.os.Message;
 import android.os.Bundle;
+import android.text.Spannable;
+import android.text.SpannableStringBuilder;
+import android.text.style.BackgroundColorSpan;
+import android.text.style.ForegroundColorSpan;
+import android.text.style.RelativeSizeSpan;
 import android.util.Log;
 import android.view.Display;
 import android.view.View;
@@ -62,11 +68,11 @@ public class DoctorparticularsActivity extends MyBaseActivity1 {
      */
     ImageView expandView;
 
-    int maxDescripLine = 1;
+    int maxDescripLine = 12;
 
     RelativeLayout rl_look_full_introduce, rl_loading, rl_nonetwork;
 
-    TextView tv_doctor_look_all, tv_doctor_top_name, tv_doctor_name, tv_doctor_title, tv_hospital_address, tv_doctor_name_intro, tv_doctor_intro, tv_doctor_name_aptitude, tv_doctor_aptitude, tv_doctor_commenCount;
+    TextView tv_doctor_look_all, tv_doctor_top_name, tv_doctor_name, tv_doctor_title, tv_hospital_address, tv_doctor_aptitude, tv_doctor_commenCount;
 
     CircleImageView tv_doctor_icon;
 
@@ -106,8 +112,6 @@ public class DoctorparticularsActivity extends MyBaseActivity1 {
     TextView tv_cash_coupons_stater;
 
     RelativeLayout rl_use_cash_coupons;
-
-    TextView tv_doctor_bio;
 
 
     @Override
@@ -217,17 +221,31 @@ public class DoctorparticularsActivity extends MyBaseActivity1 {
 
                     tv_hospital_address.setText(doctor.getHospital());
 
-                    tv_doctor_name_intro.setText(doctor.getName() + "简介");
-
-                    tv_doctor_intro.setText(doctor.getBio());
-
-                    tv_doctor_name_aptitude.setText(doctor.getName() + "资历");
-
                     String a = doctor.getSeniority().replace(",", "\n");
 
-                    tv_doctor_aptitude.setText(a);
+                    String particulars = doctor.getName() + "资历  " + "\n" + a + "\n\n" + doctor.getName() + "简介  " + "\n" + doctor.getBio() + "\n\n" + "擅长  " + "\n" + doctor.getAdept();
 
-                    tv_doctor_bio.setText(doctor.getAdept());
+                    int fstart = particulars.indexOf(doctor.getName() + "资历  ");
+                    int fend = fstart + (doctor.getName() + "资历  ").length();
+
+                    int intro = particulars.indexOf(doctor.getName() + "简介  ");
+                    int introfend = intro + (doctor.getName() + "简介  ").length();
+
+                    int good = particulars.indexOf("擅长  ");
+                    int goodfend = good + "擅长  ".length();
+
+                    SpannableStringBuilder style = new SpannableStringBuilder(particulars);
+                    style.setSpan(new RelativeSizeSpan((float) 1.2), fstart, fend, Spannable.SPAN_INCLUSIVE_INCLUSIVE);
+                    style.setSpan(new ForegroundColorSpan(android.graphics.Color.parseColor("#323232")), fstart, fend, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
+
+                    style.setSpan(new RelativeSizeSpan((float) 1.2), intro, introfend, Spannable.SPAN_INCLUSIVE_INCLUSIVE);
+                    style.setSpan(new ForegroundColorSpan(android.graphics.Color.parseColor("#323232")), intro, introfend, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
+
+                    style.setSpan(new RelativeSizeSpan((float) 1.2), good, goodfend, Spannable.SPAN_INCLUSIVE_INCLUSIVE);
+                    style.setSpan(new ForegroundColorSpan(android.graphics.Color.parseColor("#323232")), good, goodfend, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
+
+
+                    tv_doctor_aptitude.setText(style);
 
                     if (doctor.getIcon() == null || doctor.getIcon().equals("")) {
                         tv_doctor_icon.setImageResource(R.drawable.default_icon);
@@ -258,13 +276,9 @@ public class DoctorparticularsActivity extends MyBaseActivity1 {
         tv_doctor_name = (TextView) findViewById(R.id.tv_doctor_name);
         tv_doctor_title = (TextView) findViewById(R.id.tv_doctor_title);
         tv_hospital_address = (TextView) findViewById(R.id.tv_hospital_address);
-        tv_doctor_name_intro = (TextView) findViewById(R.id.tv_doctor_name_intro);
-        tv_doctor_intro = (TextView) findViewById(R.id.tv_doctor_intro);
-        tv_doctor_name_aptitude = (TextView) findViewById(R.id.tv_doctor_name_aptitude);
+
         tv_doctor_icon = (CircleImageView) findViewById(R.id.tv_doctor_icon);
         tv_doctor_commenCount = (TextView) findViewById(R.id.tv_doctor_commenCount);
-        tv_doctor_bio = (TextView) findViewById(R.id.tv_doctor_bio);
-
 
         rl_nonetwork = (RelativeLayout) findViewById(R.id.rl_nonetwork);
         rl_loading = (RelativeLayout) findViewById(R.id.rl_loading);
@@ -494,22 +508,4 @@ public class DoctorparticularsActivity extends MyBaseActivity1 {
 
     }
 
-
-//    @Override
-//    public void notifyAllActivity(String str) {
-//        if (str.equals("更新问诊支付弹出框")) {
-//            try {
-//                tv_cash_coupons_stater.setText("快速问诊劵 ￥25");
-//                btn_confirm_payment.setText("确认支付 ￥0");
-//            } catch (Exception e) {
-//                e.printStackTrace();
-//            } finally {
-//                dialogView = View.inflate(this, R.layout.payment_dialog, null);
-//                tv_cash_coupons_stater = (TextView) dialogView.findViewById(R.id.tv_cash_coupons_stater);
-//                btn_confirm_payment = (Button) dialogView.findViewById(R.id.btn_confirm_payment);
-//                tv_cash_coupons_stater.setText("快速问诊劵 ￥25");
-//                btn_confirm_payment.setText("确认支付 ￥0");
-//            }
-//        }
-//    }
 }

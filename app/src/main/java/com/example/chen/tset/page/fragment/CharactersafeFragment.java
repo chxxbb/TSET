@@ -182,7 +182,6 @@ public class CharactersafeFragment extends Fragment {
                                 } else if (response.equals("[]")) {
                                     new FinishRefresh().execute();
                                     Toast.makeText(getContext(), "已经没有更多数据了", Toast.LENGTH_SHORT).show();
-
                                 } else {
                                     Type listtype = new TypeToken<LinkedList<Consult>>() {
                                     }.getType();
